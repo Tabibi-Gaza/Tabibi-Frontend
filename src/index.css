@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+    /* تعريف اللون الأساسي للمشروع */
+    --color-primary: #5f6FFF;
+    /* يمكنك تغيير الكود هنا لأي لون تريده */
+
+    /* يمكنك أيضاً إضافة درجات أخرى إذا أردت */
+    --color-primary-dark: #4e5adb;
+
+    --grid-template-columns-auto: repeat(auto-fill, minmax(200px, 1fr));
+
+    /* تعريف التوقيت والحركة */
+    --animate-fade-in: fadeIn 0.4s ease-in-out;
+
+    /* تعريف الـ Keyframes للحركة */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+}
+
+.active hr {
+    @apply block
+}
+
+::-webkit-scrollbar {
+    @apply hidden
+}
