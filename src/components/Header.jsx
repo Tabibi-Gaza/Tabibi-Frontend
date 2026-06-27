@@ -39,11 +39,11 @@ const Header = () => {
   return (
     <div 
       className='relative w-full rounded-2xl md:rounded-3xl overflow-visible bg-cover bg-center py-16 md:py-24 lg:py-28 px-4 sm:px-8 md:px-16 flex flex-col items-center justify-center border border-gray-100 shadow-xs mb-16' 
-      style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${assets.header_bg || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80'})` }}
+      style={{ backgroundImage: ` url(${assets.header_bg || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80'})` }}
       dir='rtl'
     >
       
-      <div className='w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20'>
+      <div className='w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 linear-gradient(rgba(255, 255, 255, 0.85)rgba(255, 255, 255))'>
         
         <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight select-none font-["Cairo"]'>
           رعاية طبية متميزة وخدمات صحية موثوقة لجميع أفراد الأسرة.

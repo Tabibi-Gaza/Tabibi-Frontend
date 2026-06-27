@@ -10,21 +10,28 @@ import Myprofile from './pages/Myprofile'
 import Appointment from './pages/Appointment'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import PrivacyPolicy from './pages/privacyPolicy'
+import TermsOfService from './pages/TermsOfService'
+import FAQs from './pages/FAQs'
 
 const App = () => {
   return (
     <div className='mx-4 sm:mx-2'>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />}  />
-        <Route path='/doctors' element={<Doctors />}  />
-        <Route path='/doctors/:speciality' element={<Doctors />}  />
-        <Route path='/login' element={<Login />}  />
-        <Route path='/about' element={<About />}  />
-        <Route path='/contact' element={<Contact />}  />
-        <Route path='/my-appointment' element={<MyAppointment />}  />
-        <Route path='/my-profile' element={<Myprofile />}  />
-        <Route path='/appointment/:docId' element={<Appointment />}  />
+        <Route path='/' element={<Home />} />
+        <Route path='/doctors' element={<Doctors />} />
+        <Route path='/doctors/:speciality' element={<Doctors />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='/terms' element={<TermsOfService />} />
+        <Route path='/faqs' element={<FAQs />} />
+
+        <Route path='/my-appointment' element={<MyAppointment />} />
+        <Route path='/my-profile' element={<Myprofile />} />
+        <Route path='/appointment/:docId' element={<Appointment />} />
 
       </Routes>
       <Footer />
