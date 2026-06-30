@@ -56,15 +56,7 @@ const Contact = () => {
                             </p>
                         </div>
 
-                        {/* Card 2 */}
-                        <div className="flex-1 bg-white border border-[#E5E7EB] rounded-[10px] p-5.5 text-center">
-                            <div className="w-15 h-15 flex items-center justify-center mx-auto mb-3.75 rounded-full bg-[#E8F4F8] border border-[#D5EAF0]">
-                                <FontAwesomeIcon icon={faLocationDot} className="text-[#138C9F] text-[22px]" />
-                            </div>
-                            <h2 className="text-[15px] font-bold text-[#1F2937] mb-1.5">العنوان</h2>
-                            <p className="text-[#6B7280] text-[13px]">غزة - فلسطين</p>
-                        </div>
-
+                        
                         {/* Card 3 */}
                         <div className="flex-1 bg-white border border-[#E5E7EB] rounded-[10px] p-5.5 text-center">
                             <div className="w-15 h-15 flex items-center justify-center mx-auto mb-3.75 rounded-full bg-[#E8F4F8] border border-[#D5EAF0]">

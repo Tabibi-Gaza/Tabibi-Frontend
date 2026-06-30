@@ -13,6 +13,9 @@ import Footer from './components/Footer'
 import PrivacyPolicy from './pages/privacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import FAQs from './pages/FAQs'
+import Notifications from './components/Notifications'
+import MedicalHistory from './pages/MedicalHistory'
+import FinancialTransactions from './pages/FinancialTransactions'
 
 const App = () => {
   return (
@@ -28,6 +31,10 @@ const App = () => {
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/terms' element={<TermsOfService />} />
         <Route path='/faqs' element={<FAQs />} />
+        <Route path='/notifications' element={<Notifications />} />
+        <Route path='/medical-history' element={<MedicalHistory />} />
+        <Route path='/financial-transactions' element={<FinancialTransactions />} />
+
 
         <Route path='/my-appointment' element={<MyAppointment />} />
         <Route path='/my-profile' element={<Myprofile />} />

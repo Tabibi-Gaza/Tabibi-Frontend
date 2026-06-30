@@ -38,12 +38,15 @@ const Header = () => {
 
   return (
     <div 
-      className='relative w-full rounded-2xl md:rounded-3xl overflow-visible bg-cover bg-center py-16 md:py-24 lg:py-28 px-4 sm:px-8 md:px-16 flex flex-col items-center justify-center border border-gray-100 shadow-xs mb-16' 
-      style={{ backgroundImage: ` url(${assets.header_bg || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80'})` }}
+      className='relative w-full rounded-2xl md:rounded-3xl overflow-visible bg-cover bg-center bg-no-repeat py-20 sm:py-18 md:py-26 lg:py-34 px-4 sm:px-6 md:px-12 flex flex-col items-center justify-center border border-gray-100 shadow-sm mb-16 image-render-auto' 
+      style={{ 
+        backgroundImage: `url(${assets.header_img})`, 
+      }}
       dir='rtl'
     >
       
-      <div className='w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 linear-gradient(rgba(255, 255, 255, 0.85)rgba(255, 255, 255))'>
+      {/* حاوية الصندوق الزجاجي (Glassmorphism) المتناسق مع الهوية الجديدة */}
+      <div className='w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 bg-white/40 backdrop-blur-md p-6 sm:p-10 rounded-2xl md:rounded-3xl border border-white/40 shadow-lg animate-fadeIn'>
         
         <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight select-none font-["Cairo"]'>
           رعاية طبية متميزة وخدمات صحية موثوقة لجميع أفراد الأسرة.
@@ -61,14 +64,14 @@ const Header = () => {
                 ${isOpen ? 'bg-slate-50' : 'bg-transparent hover:bg-slate-50/50'}`}
             >
               <div className='flex items-center gap-3 select-none'>
-                <span className='text-lg filter drop-shadow-xs text-slate-700 shrink-0'>
+                <span className='text-lg filter drop-shadow-sm text-slate-700 shrink-0'>
                   {options.find(opt => opt.id === speciality)?.icon || (
-                    <svg className='w-5 h-5 text-slate-800 font-black' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <svg className='w-5 h-5 text-slate-400 font-black' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2.5' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
                     </svg>
                   )}
                 </span>
-                <span className={`font-extrabold text-right tracking-wide ${speciality ? 'text-slate-900' : 'text-slate-400'}`}>
+                <span className={`font-extrabold text-right tracking-wide text-sm md:text-base ${speciality ? 'text-slate-900' : 'text-slate-400'}`}>
                   {options.find(opt => opt.id === speciality)?.label || 'ابحث عن تخصص الطبيب المطلوب...'}
                 </span>
               </div>
@@ -82,6 +85,25 @@ const Header = () => {
 
             {isOpen && (
               <div className='absolute top-[125%] left-0 right-0 bg-white border border-slate-100 rounded-2xl p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1.5 animate-fadeIn min-w-70'>
+                
+                {/* خيار إضافي مرن: لتصفح كافة الأطباء والغاء الفلترة */}
+                <div
+                  onClick={() => {
+                    setSpeciality('');
+                    setIsOpen(false);
+                  }}
+                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all duration-150 select-none border border-transparent sm:col-span-2
+                    ${speciality === '' 
+                      ? 'bg-slate-100 text-slate-900 font-black' 
+                      : 'text-slate-500 hover:bg-slate-50'}`}
+                >
+                  <div className='flex items-center gap-2.5'>
+                    <span className='text-base'>🌐</span>
+                    <span className='tracking-tight whitespace-nowrap'>جميع التخصصات الطبية</span>
+                  </div>
+                  {speciality === '' && <span className='text-slate-900 font-black text-xs ml-1'>✓</span>}
+                </div>
+
                 {options.map((option) => (
                   <div
                     key={option.id}
@@ -91,8 +113,8 @@ const Header = () => {
                     }}
                     className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all duration-150 select-none border border-transparent
                       ${speciality === option.id 
-                        ? 'bg-[#3a96b7] text-white' 
-                        : 'text-slate-700 hover:bg-slate-50 hover:text-[#3a96b7]'}`}
+                        ? 'bg-[#138C9F] text-white' 
+                        : 'text-slate-700 hover:bg-slate-50 hover:text-[#138C9F]'}`}
                   >
                     <div className='flex items-center gap-2.5'>
                       <span className='text-base'>{option.icon}</span>
@@ -110,7 +132,7 @@ const Header = () => {
           
           <button 
             type="submit" 
-            className='bg-[#3a96b7] text-white font-extrabold text-sm md:text-base px-6 sm:px-9 py-2.5 sm:py-3 rounded-full hover:bg-[#2d7792] transition-all duration-200 active:scale-[0.97] whitespace-nowrap shadow-xs'
+            className='bg-[#138C9F] text-white font-extrabold text-sm md:text-base px-6 sm:px-9 py-2.5 sm:py-3 rounded-full hover:bg-[#0f7282] hover:shadow-md transition-all duration-200 active:scale-[0.97] whitespace-nowrap shadow-sm'
           >
             بحث سريع
           </button>
