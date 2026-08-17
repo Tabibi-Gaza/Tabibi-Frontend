@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#1a2744"/>
+  <text x="100" y="80" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="22" direction="rtl">بنك الأردن</text>
+  <text x="100" y="110" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="16">Bank of Jordan</text>
+  <circle cx="60" cy="150" r="5" fill="#F5A623"/>
+  <circle cx="80" cy="145" r="5" fill="#F5A623"/>
+  <circle cx="100" cy="150" r="5" fill="#F5A623"/>
+  <circle cx="120" cy="145" r="5" fill="#E74C3C"/>
+  <circle cx="140" cy="150" r="5" fill="#F5A623"/>
+  <circle cx="70" cy="160" r="5" fill="#F5A623"/>
+  <circle cx="90" cy="155" r="5" fill="#E74C3C"/>
+  <circle cx="110" cy="160" r="5" fill="#F5A623"/>
+  <circle cx="130" cy="155" r="5" fill="#F5A623"/>
+  <circle cx="150" cy="160" r="5" fill="#E74C3C"/>
+</svg>

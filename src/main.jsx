@@ -1,0 +1,31 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import 'react-toastify/dist/ReactToastify.css'
+import './index.css'
+import App from './App.jsx'
+import { BrowserRouter } from 'react-router-dom'
+import AppContextProvider from './context/AppContextProvider.jsx'
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faQuestion,
+  faCheck,
+  faArrowLeft,
+  faStethoscope,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faQuestion, faCheck, faArrowLeft, faStethoscope, faChevronDown);
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById("root")).render(
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <AppContextProvider>
+        <App />
+        <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+      </AppContextProvider>
+    </BrowserRouter>
+  </QueryClientProvider>,
+);

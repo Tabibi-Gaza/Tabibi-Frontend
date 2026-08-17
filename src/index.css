@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-primary: #138C9F;
+    --color-primary-dark: #0f6c7a;
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8fafc;
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #64748b;
+    --color-border: #e2e8f0;
+    --grid-template-columns-auto: repeat(auto-fill, minmax(200px, 1fr));
+    --animate-fade-in: fadeIn 0.4s ease-in-out;
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    --animate-whatsapp-bubble: whatsappBubble 1.6s ease-in-out infinite;
+    @keyframes whatsappBubble {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+}
+
+.dark {
+    color-scheme: dark;
+}
+
+.active hr { @apply block }
+::-webkit-scrollbar { @apply hidden }
+
+.terms-card p,
+.terms-card h2 {
+    text-align: right !important;
+}
