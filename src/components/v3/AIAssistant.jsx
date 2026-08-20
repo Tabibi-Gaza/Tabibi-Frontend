@@ -89,6 +89,12 @@ const AIAssistant = () => {
   const handleSend = () => {
     if (!input.trim()) return;
 
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
     const userMsg = { type: "user", text: input.trim() };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");

@@ -70,7 +70,14 @@ const JoiningAsDoctor = () => {
           {/* الجانب الأيسر: زر الانتقال لصفحة التسجيل */}
           <div className="w-full md:w-1/3 flex justify-start md:justify-end items-center">
             <button
-              onClick={() => navigate("/register-doctor")} // المسار المؤدي لصفحة استمارة التسجيل الجديدة
+              onClick={() => {
+                const user = JSON.parse(localStorage.getItem("user") || "null");
+                if (!user) {
+                  navigate("/login");
+                } else {
+                  navigate("/register-doctor");
+                }
+              }}
               className="w-full sm:w-auto bg-white text-[#118fa6] font-extrabold text-lg px-8 py-4 rounded-xl shadow-md hover:bg-cyan-50 transition-all duration-200 flex items-center justify-center gap-3 group"
             >
               {" "}

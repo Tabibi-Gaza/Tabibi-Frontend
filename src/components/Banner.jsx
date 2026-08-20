@@ -56,7 +56,7 @@ const Banner = () => {
 
           <div className='w-full flex justify-start mt-2'>
             <button 
-              onClick={() => { navigate('/login'); window.scrollTo(0, 0); }}
+              onClick={() => { navigate('/login?view=register'); window.scrollTo(0, 0); }}
               className='bg-[#138C9F] text-white font-black text-base px-14 py-3.5 rounded-2xl hover:bg-[#2c7a96] hover:shadow-xl hover:shadow-[#138C9F]/20 transition-all duration-300 transform active:scale-95 cursor-pointer select-none'
             >
               أنشئ حسابك الآن

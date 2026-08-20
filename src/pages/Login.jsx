@@ -76,6 +76,12 @@ const Login = () => {
   }, [resetEmail, resetToken]);
 
   useEffect(() => {
+    if (searchParams.get('view') === 'register') {
+      setState("RegisterPatient");
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest('.country-dropdown')) setShowCountries(false);
       if (!e.target.closest('.location-dropdown')) { setShowLocations(false); setLocationSearch(''); }
