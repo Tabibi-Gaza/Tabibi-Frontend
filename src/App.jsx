@@ -1,66 +1,72 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense, lazy } from 'react'
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom'
-import Home from './pages/Home'
-import HomeV3 from './pages/HomeV3'
-import Doctors from './pages/Doctors'
-import Login from './pages/Login'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import MyAppointment from './pages/MyAppointment'
-import MyPrescriptions from './pages/MyPrescriptions'
-import Myprofile from './pages/Myprofile'
-import Appointment from './pages/Appointment'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import PrivacyPolicy from './pages/privacyPolicy'
-import TermsOfService from './pages/TermsOfService'
-import FAQs from './pages/FAQs'
 import Notifications from './components/Notifications'
-import PaymentPage from './pages/PaymentPage'
-import MedicalHistory from './pages/MedicalHistory'
-import FinancialTransactions from './pages/FinancialTransactions'
-import Chats from './pages/Chats'
 import AdminLayout from './components/Admin/AdminLayout'
-import AdminDashboard from './pages/Admin pages/AdminDashboard'
-import AdminProfile from './pages/Admin pages/AdminProfile'
-import AdminNotifications from './components/Admin/AdminNotifications'
-import AdminUserManagement from './pages/Admin pages/AdminUserManagement'
-import AdminDepartmentsManagement from './pages/Admin pages/AdminDepartmentsManagement'
-import AdminJoinRequests from './pages/Admin pages/AdminJoinRequests'
-import AdminChats from './pages/Admin pages/AdminChats'
-import AdminFinancialTransactions from './pages/Admin pages/AdminFinancialTransactions'
-import AdminPaymentMethods from './pages/Admin pages/AdminPaymentMethods'
-import AdminContactUs from './pages/Admin pages/AdminContactUs'
-
 import DoctorLayout from './components/Doctor/DoctorLayout';
 import SecretaryProtectedRoute from './components/Doctor/SecretaryProtectedRoute';
-import DoctorDashboard from './pages/Doctor pages/DoctorDashboard';
-import DoctorNotifications from './components/Doctor/DoctorNotifications'
-import DoctorProfile from './pages/Doctor pages/DoctorProfile'
-import MedicalExamination from './pages/Doctor pages/MedicalExamination'
-import MedicalFile from './pages/Doctor pages/MedicalFile'
-import DoctorSchedule from './pages/Doctor pages/DoctorSchedule'
-import PatientManagement from './pages/Doctor pages/PatientManagement'
-import PatientFile from './pages/Doctor pages/PatientFile'
-import DoctorChats from './pages/Doctor pages/DoctorChats'
-import DoctorPayment from './pages/Doctor pages/DoctorPayment '
-import FinancialFiles from './pages/Doctor pages/FinancialFiles'
-import PatientMedicalFile from './pages/PatientMedicalFile'
-import AppointmentManagement from './pages/Doctor pages/Appointment Management'
-import SecretaryManagement from './pages/Doctor pages/SecretaryManagement'
-import DoctorSubscription from './pages/Doctor pages/DoctorSubscription'
-import RegisterAsDoctor from './pages/RegisterAsDoctor'
-import Pharmacies from './pages/Pharmacies'
-import MedicalCenters from './pages/MedicalCenters'
-import Labs from './pages/Labs'
-import Favorites from './pages/Favorites'
-import Cart from './pages/Cart'
 import { useNotificationSignalR } from './hooks/notifications/useNotificationSignalR'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ThemeProvider } from './context/ThemeContext';
 import './i18n';
 
+const HomeV3 = lazy(() => import('./pages/HomeV3'))
+const Home = lazy(() => import('./pages/Home'))
+const Doctors = lazy(() => import('./pages/Doctors'))
+const Login = lazy(() => import('./pages/Login'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const MyAppointment = lazy(() => import('./pages/MyAppointment'))
+const MyPrescriptions = lazy(() => import('./pages/MyPrescriptions'))
+const Myprofile = lazy(() => import('./pages/Myprofile'))
+const Appointment = lazy(() => import('./pages/Appointment'))
+const PrivacyPolicy = lazy(() => import('./pages/privacyPolicy'))
+const TermsOfService = lazy(() => import('./pages/TermsOfService'))
+const FAQs = lazy(() => import('./pages/FAQs'))
+const PaymentPage = lazy(() => import('./pages/PaymentPage'))
+const MedicalHistory = lazy(() => import('./pages/MedicalHistory'))
+const FinancialTransactions = lazy(() => import('./pages/FinancialTransactions'))
+const Chats = lazy(() => import('./pages/Chats'))
+const AdminDashboard = lazy(() => import('./pages/Admin pages/AdminDashboard'))
+const AdminProfile = lazy(() => import('./pages/Admin pages/AdminProfile'))
+const AdminNotifications = lazy(() => import('./components/Admin/AdminNotifications'))
+const AdminUserManagement = lazy(() => import('./pages/Admin pages/AdminUserManagement'))
+const AdminDepartmentsManagement = lazy(() => import('./pages/Admin pages/AdminDepartmentsManagement'))
+const AdminJoinRequests = lazy(() => import('./pages/Admin pages/AdminJoinRequests'))
+const AdminChats = lazy(() => import('./pages/Admin pages/AdminChats'))
+const AdminFinancialTransactions = lazy(() => import('./pages/Admin pages/AdminFinancialTransactions'))
+const AdminPaymentMethods = lazy(() => import('./pages/Admin pages/AdminPaymentMethods'))
+const AdminContactUs = lazy(() => import('./pages/Admin pages/AdminContactUs'))
+const DoctorDashboard = lazy(() => import('./pages/Doctor pages/DoctorDashboard'))
+const DoctorNotifications = lazy(() => import('./components/Doctor/DoctorNotifications'))
+const DoctorProfile = lazy(() => import('./pages/Doctor pages/DoctorProfile'))
+const MedicalExamination = lazy(() => import('./pages/Doctor pages/MedicalExamination'))
+const MedicalFile = lazy(() => import('./pages/Doctor pages/MedicalFile'))
+const DoctorSchedule = lazy(() => import('./pages/Doctor pages/DoctorSchedule'))
+const PatientManagement = lazy(() => import('./pages/Doctor pages/PatientManagement'))
+const PatientFile = lazy(() => import('./pages/Doctor pages/PatientFile'))
+const DoctorChats = lazy(() => import('./pages/Doctor pages/DoctorChats'))
+const DoctorPayment = lazy(() => import('./pages/Doctor pages/DoctorPayment '))
+const FinancialFiles = lazy(() => import('./pages/Doctor pages/FinancialFiles'))
+const PatientMedicalFile = lazy(() => import('./pages/PatientMedicalFile'))
+const AppointmentManagement = lazy(() => import('./pages/Doctor pages/Appointment Management'))
+const SecretaryManagement = lazy(() => import('./pages/Doctor pages/SecretaryManagement'))
+const DoctorSubscription = lazy(() => import('./pages/Doctor pages/DoctorSubscription'))
+const RegisterAsDoctor = lazy(() => import('./pages/RegisterAsDoctor'))
+const Pharmacies = lazy(() => import('./pages/Pharmacies'))
+const MedicalCenters = lazy(() => import('./pages/MedicalCenters'))
+const Labs = lazy(() => import('./pages/Labs'))
+const Favorites = lazy(() => import('./pages/Favorites'))
+const Cart = lazy(() => import('./pages/Cart'))
+
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="w-10 h-10 border-4 border-[#138C9F] border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -96,33 +102,35 @@ const UserLayout = () => {
     <div dir='rtl' className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <ScrollToTop />
       <Navbar />
-      <Routes>
-        <Route path='/' element={<HomeV3 />} />
-        <Route path='/home-v2' element={<Home />} />
-        <Route path='/doctors' element={<Doctors />} />
-        <Route path='/doctors/:speciality' element={<Doctors />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-        <Route path='/terms' element={<TermsOfService />} />
-        <Route path='/faqs' element={<FAQs />} />
-        <Route path='/pharmacies' element={<Pharmacies />} />
-        <Route path='/medical-centers' element={<MedicalCenters />} />
-        <Route path='/labs' element={<Labs />} />
-        <Route path='/favorites' element={<Favorites />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/notifications' element={<Notifications />} />
-        <Route path='/medical-history' element={<MedicalHistory />} />
-        <Route path='/chats' element={<Chats />} />
-        <Route path='/financial-transactions' element={<FinancialTransactions />} />
-        <Route path='/my-appointment' element={<MyAppointment />} />
-        <Route path='/my-profile' element={<Myprofile />} />
-        <Route path='/register-doctor' element={<RegisterAsDoctor />} />
-        <Route path='/medical-files' element={<PatientMedicalFile />} />
-        <Route path='/my-prescriptions' element={<MyPrescriptions />} />
-        <Route path='/appointment/:docId' element={<Appointment />} />
-        <Route path='/payment/:appointmentId' element={<PaymentPage />} />
-      </Routes>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path='/' element={<HomeV3 />} />
+          <Route path='/home-v2' element={<Home />} />
+          <Route path='/doctors' element={<Doctors />} />
+          <Route path='/doctors/:speciality' element={<Doctors />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+          <Route path='/terms' element={<TermsOfService />} />
+          <Route path='/faqs' element={<FAQs />} />
+          <Route path='/pharmacies' element={<Pharmacies />} />
+          <Route path='/medical-centers' element={<MedicalCenters />} />
+          <Route path='/labs' element={<Labs />} />
+          <Route path='/favorites' element={<Favorites />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/notifications' element={<Notifications />} />
+          <Route path='/medical-history' element={<MedicalHistory />} />
+          <Route path='/chats' element={<Chats />} />
+          <Route path='/financial-transactions' element={<FinancialTransactions />} />
+          <Route path='/my-appointment' element={<MyAppointment />} />
+          <Route path='/my-profile' element={<Myprofile />} />
+          <Route path='/register-doctor' element={<RegisterAsDoctor />} />
+          <Route path='/medical-files' element={<PatientMedicalFile />} />
+          <Route path='/my-prescriptions' element={<MyPrescriptions />} />
+          <Route path='/appointment/:docId' element={<Appointment />} />
+          <Route path='/payment/:appointmentId' element={<PaymentPage />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </div>
   )
@@ -133,42 +141,44 @@ const App = () => {
   return (
     <ThemeProvider>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <Routes>
-        <Route element={<AdminLayout />}>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/profile" element={<AdminProfile />} />
-          <Route path="/admin/notifications" element={<AdminNotifications />} />
-          <Route path="/admin/users-management" element={<AdminUserManagement />} />
-          <Route path="/admin/departments-management" element={<AdminDepartmentsManagement />} />
-          <Route path="/admin/join-requests" element={<AdminJoinRequests />} />
-          <Route path="/admin/chats" element={<AdminChats />} />
-          <Route path="/admin/financial-transactions" element={<AdminFinancialTransactions />} />
-          <Route path="/admin/payment-methods" element={<AdminPaymentMethods />} />
-          <Route path="/admin/contact-us" element={<AdminContactUs />} />
-        </Route>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/profile" element={<AdminProfile />} />
+            <Route path="/admin/notifications" element={<AdminNotifications />} />
+            <Route path="/admin/users-management" element={<AdminUserManagement />} />
+            <Route path="/admin/departments-management" element={<AdminDepartmentsManagement />} />
+            <Route path="/admin/join-requests" element={<AdminJoinRequests />} />
+            <Route path="/admin/chats" element={<AdminChats />} />
+            <Route path="/admin/financial-transactions" element={<AdminFinancialTransactions />} />
+            <Route path="/admin/payment-methods" element={<AdminPaymentMethods />} />
+            <Route path="/admin/contact-us" element={<AdminContactUs />} />
+          </Route>
 
-        <Route element={<DoctorLayout />}>
-          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-          <Route path="/doctor/notifications" element={<DoctorNotifications />} />
-          <Route path="/doctor/profile" element={<SecretaryProtectedRoute><DoctorProfile /></SecretaryProtectedRoute>} />
-          <Route path="/doctor/medical-examination/:id" element={<SecretaryProtectedRoute><MedicalExamination /></SecretaryProtectedRoute>} />
-          <Route path="/doctor/medical-file/:id" element={<SecretaryProtectedRoute><MedicalFile /></SecretaryProtectedRoute>} />
-          <Route path="/doctor/patient-file/:id" element={<PatientFile />} />
-          <Route path="/doctor/schedule" element={<DoctorSchedule />} />
-          <Route path="/doctor/patients" element={<PatientManagement />} />
-          <Route path="/doctor/chats" element={<SecretaryProtectedRoute><DoctorChats /></SecretaryProtectedRoute>} />
-          <Route path="/doctor/payments" element={<DoctorPayment />} />
-          <Route path="/doctor/financials" element={<FinancialFiles />} />
-          <Route path="/doctor/appointments" element={<AppointmentManagement />} />
-          <Route path="/doctor/secretary-management" element={<SecretaryManagement />} />
-          <Route path="/doctor/subscription" element={<DoctorSubscription />} />
-        </Route>
+          <Route element={<DoctorLayout />}>
+            <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+            <Route path="/doctor/notifications" element={<DoctorNotifications />} />
+            <Route path="/doctor/profile" element={<SecretaryProtectedRoute><DoctorProfile /></SecretaryProtectedRoute>} />
+            <Route path="/doctor/medical-examination/:id" element={<SecretaryProtectedRoute><MedicalExamination /></SecretaryProtectedRoute>} />
+            <Route path="/doctor/medical-file/:id" element={<SecretaryProtectedRoute><MedicalFile /></SecretaryProtectedRoute>} />
+            <Route path="/doctor/patient-file/:id" element={<PatientFile />} />
+            <Route path="/doctor/schedule" element={<DoctorSchedule />} />
+            <Route path="/doctor/patients" element={<PatientManagement />} />
+            <Route path="/doctor/chats" element={<SecretaryProtectedRoute><DoctorChats /></SecretaryProtectedRoute>} />
+            <Route path="/doctor/payments" element={<DoctorPayment />} />
+            <Route path="/doctor/financials" element={<FinancialFiles />} />
+            <Route path="/doctor/appointments" element={<AppointmentManagement />} />
+            <Route path="/doctor/secretary-management" element={<SecretaryManagement />} />
+            <Route path="/doctor/subscription" element={<DoctorSubscription />} />
+          </Route>
 
-        <Route path='/login' element={<Login />} />
-        <Route path='/reset-password' element={<Login />} />
-        
-        <Route path="/*" element={<UserLayout />} />
-      </Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/reset-password' element={<Login />} />
+          
+          <Route path="/*" element={<UserLayout />} />
+        </Routes>
+      </Suspense>
     </GoogleOAuthProvider>
     </ThemeProvider>
   )

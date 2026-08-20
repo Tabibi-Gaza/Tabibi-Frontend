@@ -6,7 +6,8 @@ import { faSearch, faChevronDown, faAngleDown, faGlobe } from "@fortawesome/free
 
 const TOTAL_FRAMES = 342;
 const FRAME_PATH = "/frames/frame_";
-const FPS = 24;
+const FPS = 15;
+const BATCH_SIZE = 30;
 
 function FramesSection() {
   const imgRef = useRef(null);
@@ -18,6 +19,7 @@ function FramesSection() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { data: specs, isLoading } = useSpecializations();
+  const loadedRef = useRef(new Set());
 
   const options = specs?.map((s) => ({ id: s.id, label: s.name })) || [];
   const selected = options.find((o) => o.id === speciality);
@@ -35,37 +37,45 @@ function FramesSection() {
     return () => document.removeEventListener("mousedown", close);
   }, []);
 
-  useEffect(() => {
-    let mounted = true;
-    const images = [];
-
-    const firstImg = new Image();
-    firstImg.src = `${FRAME_PATH}0000.webp`;
-    firstImg.onload = firstImg.onerror = () => {
-      if (!mounted) return;
-      images[0] = firstImg;
-      if (imgRef.current && images[0]) {
-        imgRef.current.src = images[0].src;
-      }
-    };
-    images.push(firstImg);
-
-    for (let i = 1; i < TOTAL_FRAMES; i++) {
+  const preloadBatch = useCallback((startIdx) => {
+    const end = Math.min(startIdx + BATCH_SIZE, TOTAL_FRAMES);
+    for (let i = startIdx; i < end; i++) {
+      if (loadedRef.current.has(i)) continue;
       const img = new Image();
       const num = String(i).padStart(4, "0");
       img.src = `${FRAME_PATH}${num}.webp`;
-      images.push(img);
+      imagesRef.current[i] = img;
+      loadedRef.current.add(i);
+    }
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    preloadBatch(0);
+
+    const firstImg = imagesRef.current[0];
+    if (firstImg) {
+      if (firstImg.complete) {
+        if (imgRef.current) imgRef.current.src = firstImg.src;
+      } else {
+        firstImg.onload = firstImg.onerror = () => {
+          if (!mounted) return;
+          if (imgRef.current && imagesRef.current[0]) {
+            imgRef.current.src = imagesRef.current[0].src;
+          }
+        };
+      }
     }
 
-    imagesRef.current = images;
-
     return () => { mounted = false; };
-  }, []);
+  }, [preloadBatch]);
 
   const showFrame = useCallback((index) => {
     if (index === currentFrameRef.current) return;
     const img = imagesRef.current[index];
     if (!imgRef.current || !img) return;
+    if (!img.complete) return;
     currentFrameRef.current = index;
     imgRef.current.src = img.src;
   }, []);
@@ -76,12 +86,19 @@ function FramesSection() {
     let last = performance.now();
     let frame = 0;
     const interval = 1000 / FPS;
+    let batchStart = 0;
 
     const loop = (now) => {
       if (!mounted) return;
       if (now - last >= interval) {
         last = now - ((now - last) % interval);
         frame = (frame + 1) % TOTAL_FRAMES;
+
+        if (frame % BATCH_SIZE === 0 && frame < TOTAL_FRAMES) {
+          batchStart = frame;
+          preloadBatch(batchStart);
+        }
+
         showFrame(frame);
         setProgress(frame / (TOTAL_FRAMES - 1));
       }
@@ -90,7 +107,7 @@ function FramesSection() {
 
     rafId = requestAnimationFrame(loop);
     return () => { mounted = false; cancelAnimationFrame(rafId); };
-  }, [showFrame]);
+  }, [showFrame, preloadBatch]);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black" dir="rtl">
@@ -98,6 +115,8 @@ function FramesSection() {
         ref={imgRef}
         alt=""
         className="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/50 via-[#138C9F]/30 to-[#138C9F]/70" />
 
@@ -114,7 +133,6 @@ function FramesSection() {
           </p>
         </div>
 
-        {/* Search card */}
         <div className="w-full max-w-3xl bg-white/95 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-2.5 sm:p-3 border border-white/20">
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center gap-2">
             <div className="w-full flex-1 relative" ref={dropdownRef}>
