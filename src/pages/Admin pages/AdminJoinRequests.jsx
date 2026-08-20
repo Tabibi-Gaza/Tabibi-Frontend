@@ -235,15 +235,15 @@ export default function AdminJoinRequests() {
                     </div>
 
                     <div className="overflow-x-auto w-full">
-                        <table className="w-full border-collapse text-right min-w-[700px]">
+                        <table className="w-full border-collapse text-right">
                             <thead>
                                 <tr className="bg-white border-b border-[#C3C6D6] h-[60px] text-[#434654] text-[14px] font-bold">
-                                    <th className="p-4 ps-8">اسم الطبيب</th>
-                                    <th className="p-4">التخصص</th>
-                                    <th className="p-4 text-center">الخبرة (سنوات)</th>
-                                    <th className="p-4">الحالة</th>
-                                    <th className="p-4">تاريخ الطلب</th>
-                                    <th className="p-4 text-center">الإجراءات</th>
+                                    <th className="p-3 md:p-4 ps-8">اسم الطبيب</th>
+                                    <th className="p-3 md:p-4">التخصص</th>
+                                    <th className="p-3 md:p-4 text-center hidden md:table-cell">الخبرة (سنوات)</th>
+                                    <th className="p-3 md:p-4">الحالة</th>
+                                    <th className="p-3 md:p-4 hidden md:table-cell">تاريخ الطلب</th>
+                                    <th className="p-3 md:p-4 text-center">الإجراءات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -256,7 +256,7 @@ export default function AdminJoinRequests() {
                                 ) : filteredRequests.length > 0 ? (
                                     filteredRequests.map((req) => (
                                         <tr key={req.id} className="h-[75px] border-b border-[#C3C6D6] bg-white hover:bg-slate-50 transition-colors">
-                                            <td className="p-4 ps-8">
+                                            <td className="p-3 md:p-4 ps-8">
                                                 <div className="flex flex-row items-center gap-3">
                                                     <div className="w-[36px] h-[36px] bg-[#138C9F]/10 text-[#138C9F] rounded-full flex items-center justify-center font-bold text-[14px] shrink-0">
                                                         {req.avatarInitials}
@@ -267,16 +267,16 @@ export default function AdminJoinRequests() {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="p-4 text-[#138C9F] font-bold">{req.specialty}</td>
-                                            <td className="p-4 text-center text-[#138C9F] font-semibold">{req.experience}</td>
-                                            <td className="p-4">
+                                            <td className="p-3 md:p-4 text-[#138C9F] font-bold">{req.specialty}</td>
+                                            <td className="p-3 md:p-4 text-center text-[#138C9F] font-semibold hidden md:table-cell">{req.experience}</td>
+                                            <td className="p-3 md:p-4">
                                                 <span className={`inline-flex items-center justify-between w-[100px] h-[24px] rounded-full px-3 text-[12px] font-bold ${req.status === 'accepted' ? 'bg-[#DCFCE7] text-[#15803D]' : req.status === 'rejected' ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#FEF3C7] text-[#92400E]'}`}>
                                                     <span>{req.status === 'accepted' ? 'تم القبول' : req.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة'}</span>
                                                     <span className={`w-1.5 h-1.5 rounded-full ${req.status === 'accepted' ? 'bg-[#16A34A]' : req.status === 'rejected' ? 'bg-[#DC2626]' : 'bg-[#D97706]'}`}></span>
                                                 </span>
                                             </td>
-                                            <td className="p-4 text-[14px] text-[#434654]">{req.date}</td>
-                                            <td className="p-4 text-center">
+                                            <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date}</td>
+                                            <td className="p-3 md:p-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
                                                     {req.status === 'pending' ? (
                                                         <>
@@ -358,7 +358,7 @@ export default function AdminJoinRequests() {
             {/* Advanced Filter Modal */}
             {showAdvancedFilterModal && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all">
-                    <div className="w-full max-w-[460px] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 flex flex-col text-right">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[460px] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 flex flex-col text-right">
                         <div className="h-[60px] bg-[#e2f4f7] px-6 flex items-center justify-between border-b border-[#C3C6D6]">
                             <h3 className="text-[16px] font-extrabold text-[#434654]">التصفية المتقدمة للطلبات</h3>
                             <button onClick={() => setShowAdvancedFilterModal(false)} className="text-[#434654] hover:text-black">
@@ -399,7 +399,7 @@ export default function AdminJoinRequests() {
             {/* Detail Modal */}
             {selectedRequest && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-                    <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
                         <div className="w-full h-[110px] bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
@@ -437,7 +437,7 @@ export default function AdminJoinRequests() {
                                         </p>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4 text-center">
                                             <span className="text-[13px] font-bold text-[#737685] block mb-1">سنوات الخبرة</span>
                                             <span className="text-[16px] md:text-[18px] font-extrabold text-[#138C9F]">{selectedRequest.experience}+ سنة</span>
@@ -516,7 +516,7 @@ export default function AdminJoinRequests() {
             {/* Reject Modal */}
             {showRejectModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="w-full max-w-[440px] bg-white rounded-[16px] p-6 shadow-2xl border border-gray-100 text-center text-right">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 text-center text-right">
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
                             <AlertTriangle className="w-7 h-7" />
                         </div>

@@ -187,28 +187,28 @@ export default function AdminUserManagement() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-['Cairo'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي الأطباء</span>
                         <span className="font-['Cairo'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Users size={16} /></div>
                 </div>
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-['Cairo'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">الأطباء النشطون</span>
                         <span className="font-['Cairo'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalActiveDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#6BFF8F]/30 rounded-full flex items-center justify-center text-[#004F20]"><UserCheck size={16} /></div>
                 </div>
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-['Cairo'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي المستخدمين</span>
                         <span className="font-['Cairo'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069]"><UserPlus size={16} /></div>
                 </div>
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-['Cairo'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">حسابات معطلة</span>
                         <span className="font-['Cairo'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalInactiveUsers}</span>
@@ -218,18 +218,18 @@ export default function AdminUserManagement() {
             </div>
 
             <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl w-full flex flex-col overflow-hidden">
-                <div className="border-b border-[#C3C6D6] px-6 h-[58px] flex items-center justify-start">
+                <div className="border-b border-[#C3C6D6] px-6 py-4 flex items-center justify-start">
                     <button className="h-full border-b-2 border-[#003D9B] px-4 font-['Cairo'] font-semibold text-[16px] text-[#003D9B] flex items-center justify-center cursor-pointer">الكل</button>
                 </div>
 
                 <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-right">
                         <thead>
-                            <tr className="bg-[#e2f4f7] h-[48px]">
+                            <tr className="bg-[#e2f4f7] py-3">
                                 <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px]">المستخدم</th>
                                 <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px]">نوع الحساب</th>
-                                <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px]">تاريخ الانضمام</th>
-                                <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px]">الحالة</th>
+                                <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden md:table-cell">تاريخ الانضمام</th>
+                                <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden sm:table-cell">الحالة</th>
                                 <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] tracking-[0.6px] text-center w-[120px]">التحكم</th>
                             </tr>
                         </thead>
@@ -237,7 +237,7 @@ export default function AdminUserManagement() {
                             {loading ? (
                                 <tr><td colSpan="5" className="px-6 py-10 text-center font-['Cairo'] text-[#526069]">جاري تحميل البيانات...</td></tr>
                             ) : users.map((user) => (
-                                <tr key={user.id} className="h-[80px] hover:bg-slate-50 transition-colors">
+                                <tr key={user.id} className="hover:bg-slate-50 transition-colors">
                                     <td className="px-6 py-3 whitespace-nowrap">
                                         <div className="flex items-center gap-3">
                                             {showImg(user) ? (
@@ -258,8 +258,8 @@ export default function AdminUserManagement() {
                                             {user.userType === 'Doctor' ? 'طبيب' : user.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-3 whitespace-nowrap font-['Cairo'] font-medium text-[14px] text-[#434654]">{user.createdAt}</td>
-                                    <td className="px-6 py-3 whitespace-nowrap">
+                                    <td className="px-6 py-3 whitespace-nowrap font-['Cairo'] font-medium text-[14px] text-[#434654] hidden md:table-cell">{user.createdAt}</td>
+                                    <td className="px-6 py-3 whitespace-nowrap hidden sm:table-cell">
                                         <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-['Cairo'] font-bold ${user.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
                                             {user.isActive ? 'نشط' : 'معطل'}
                                         </span>

@@ -25,8 +25,6 @@ const Header = () => {
   // جلب البيانات من الـ API عبر الـ Hook الخاص بك
   const { data: serverSpecializations, isLoading } = useSpecializations();
 
-console.log("Server Specializations:", serverSpecializations); // تحقق من البيانات القادمة من السيرفر
-
   // تحويل البيانات القادمة من السيرفر للهيكل المطلوب داخل الكومبوننت
   // افترضنا أن السيرفر يعيد id و name (أو يمكنك تعديل المسميات حسب الـ API لديك)
   const options =

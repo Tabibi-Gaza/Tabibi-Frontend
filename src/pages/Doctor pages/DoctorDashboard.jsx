@@ -147,7 +147,7 @@ const DoctorDashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 w-full">
-        <div className="bg-[#138C9F] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-36 md:h-40 text-white relative overflow-hidden shadow-sm">
+        <div className="bg-[#138C9F] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-24 md:h-[15vh] text-white relative overflow-hidden shadow-sm">
           <div className="flex justify-between items-start w-full">
             <svg className="w-6 h-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -159,7 +159,7 @@ const DoctorDashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white border border-[#C3C6D6] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-36 md:h-40 shadow-xs">
+        <div className="bg-white border border-[#C3C6D6] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-24 md:h-[15vh] shadow-xs">
           <div className="text-left">
             <svg className="w-6 h-6 text-[#526069]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -171,7 +171,7 @@ const DoctorDashboard = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFF0EE] border border-[#FFDAD6] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-36 md:h-40 shadow-xs">
+        <div className="bg-[#FFF0EE] border border-[#FFDAD6] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-24 md:h-[15vh] shadow-xs">
           <div className="text-2xl text-[#BA1A1A] font-light">!</div>
           <div className="text-left">
             <h4 className="text-3xl font-black text-[#BA1A1A]">{paymentRequests.length}</h4>
@@ -196,13 +196,13 @@ const DoctorDashboard = () => {
           {todayAppointments.length === 0 ? (
             <p className="text-center text-gray-400 py-8 text-sm">لا توجد مواعيد اليوم</p>
           ) : (
-            <table className="w-full text-right border-collapse min-w-[600px]">
+            <table className="w-full text-right border-collapse max-w-full">
               <thead>
                 <tr className="bg-white border-b border-[#C3C6D6] text-[#526069]">
-                  <th className="px-6 py-3.5 text-xs font-bold">المريض</th>
-                  <th className="px-6 py-3.5 text-xs font-bold">التوقيت</th>
-                  <th className="px-6 py-3.5 text-xs font-bold">الحالة</th>
-                  <th className="px-6 py-3.5 text-xs font-bold text-center">الإجراءات</th>
+                  <th className="p-3 md:p-4 text-xs font-bold">المريض</th>
+                  <th className="p-3 md:p-4 text-xs font-bold">التوقيت</th>
+                  <th className="hidden md:table-cell p-3 md:p-4 text-xs font-bold">الحالة</th>
+                  <th className="p-3 md:p-4 text-xs font-bold text-center">الإجراءات</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#C3C6D6]/40">
@@ -211,7 +211,7 @@ const DoctorDashboard = () => {
                   const patientImage = appt.patientImage || appt.patientImageUrl || "";
                   return (
                   <tr key={appt.id} className="hover:bg-slate-50/40 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="p-3 md:p-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         {patientImage && patientImage !== "undefined" ? (
                           <img
@@ -226,13 +226,13 @@ const DoctorDashboard = () => {
                         >
                           {getInitials(patientName)}
                         </div>
-                        <span className="font-bold text-[#0B1C30] text-sm">{patientName}</span>
+                        <span className="font-bold text-[#0B1C30] text-xs md:text-sm">{patientName}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#0B1C30]">
+                    <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30]">
                       {appt.startTime} - {appt.endTime}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="hidden md:table-cell p-3 md:p-4 whitespace-nowrap">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                         appt.status === "مؤكد" ? "bg-[#D1F7EC] text-[#00875A]"
                           : appt.status === "قيد الانتظار" ? "bg-[#FFF0EE] text-[#BA1A1A]"
@@ -241,10 +241,10 @@ const DoctorDashboard = () => {
                         {appt.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                    <td className="p-3 md:p-4 whitespace-nowrap text-center">
                       <button
                         onClick={() => handleStartConsultation(appt.id, appt.patientId || appt.id)}
-                        className="bg-[#138C9F] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer hover:bg-[#0f7282]"
+                        className="bg-[#138C9F] text-white text-xs font-bold px-4 py-3 rounded-xl min-h-[44px] transition-all cursor-pointer hover:bg-[#0f7282]"
                       >
                         بدء الكشف
                       </button>
@@ -267,29 +267,29 @@ const DoctorDashboard = () => {
             <h3 className="text-base md:text-lg font-black text-[#138C9F]">طلبات بانتظار تأكيد الدفع</h3>
           </div>
           <span className="bg-[#FFF0EE] text-[#BA1A1A] text-xs font-bold px-3 py-1 rounded-full">
-            {paymentRequests.length} طلبات معلقة
+            {paymentRequests.length} مدفوعات بانتظار الدفع
           </span>
         </div>
         <div className="w-full overflow-x-auto">
           {paymentRequests.length === 0 ? (
-            <p className="text-center text-gray-400 py-8 text-sm">لا توجد طلبات معلقة</p>
+            <p className="text-center text-gray-400 py-8 text-sm">لا توجد مدفوعات بانتظار التأكيد</p>
           ) : (
-            <table className="w-full text-right border-collapse min-w-[600px]">
+            <table className="w-full text-right border-collapse max-w-full">
               <thead>
                 <tr className="bg-white border-b border-[#C3C6D6] text-[#526069]">
-                  <th className="px-6 py-3.5 text-xs font-bold">المريض</th>
-                  <th className="px-6 py-3.5 text-xs font-bold">التوقيت</th>
-                  <th className="px-6 py-3.5 text-xs font-bold">الحالة</th>
-                  <th className="px-6 py-3.5 text-xs font-bold text-center">الإجراء</th>
+                  <th className="p-3 md:p-4 text-xs font-bold">Patient</th>
+                  <th className="p-3 md:p-4 text-xs font-bold">Time</th>
+                  <th className="hidden md:table-cell p-3 md:p-4 text-xs font-bold">Status</th>
+                  <th className="p-3 md:p-4 text-xs font-bold text-center">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#C3C6D6]/40">
                 {paymentRequests.map((req) => {
-                  const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || "مريض";
+                  const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || "Patient";
                   const imgUrl = req.patientImageUrl || "";
                   return (
                   <tr key={req.appointmentId} className="hover:bg-slate-50/40 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="p-3 md:p-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         {imgUrl && imgUrl !== "undefined" ? (
                           <img
@@ -304,23 +304,23 @@ const DoctorDashboard = () => {
                         >
                           {getInitials(cleanName)}
                         </div>
-                        <span className="font-bold text-[#0B1C30] text-sm">{cleanName}</span>
+                        <span className="font-bold text-[#0B1C30] text-xs md:text-sm">{cleanName}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#0B1C30]">
+                    <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30]">
                       {new Date(req.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="hidden md:table-cell p-3 md:p-4 whitespace-nowrap">
                       <span className="bg-[#FFF0EE] text-[#BA1A1A] px-2.5 py-0.5 rounded-full text-xs font-bold">
-                        {req.status === "PendingVerification" ? "بانتظار التأكيد" : req.status}
+                        {req.status === "PendingVerification" ? "Pending Confirmation" : req.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                    <td className="p-3 md:p-4 whitespace-nowrap text-center">
                       <button
                         onClick={() => handleReviewPayment(req.appointmentId)}
-                        className="bg-[#138C9F] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer hover:bg-[#0f7282]"
+                        className="bg-[#138C9F] text-white text-xs font-bold px-4 py-3 rounded-xl min-h-[44px] transition-all cursor-pointer hover:bg-[#0f7282]"
                       >
-                        مراجعة وتأكيد الدفع
+                        Review & Confirm
                       </button>
                     </td>
                   </tr>
@@ -333,10 +333,10 @@ const DoctorDashboard = () => {
       </div>
 
       {isPaymentModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B1C30]/40 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-[500px] border border-[#C3C6D6] overflow-hidden shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pb-14 bg-[#0B1C30]/40 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] border border-[#C3C6D6] overflow-hidden shadow-xl">
             <div className="bg-[#ecf8fa] px-6 py-4 border-b border-[#C3C6D6]/50 flex justify-between items-center">
-              <h3 className="text-base font-black text-[#0B1C30]">تفاصيل الفاتورة ومراجعة الدفع</h3>
+              <h3 className="text-base font-black text-[#0B1C30]">Invoice Details & Payment Review</h3>
               <button onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }} className="text-gray-400 hover:text-gray-600 font-bold text-lg cursor-pointer">✕</button>
             </div>
 
@@ -362,20 +362,20 @@ const DoctorDashboard = () => {
                     <div>
                       <h4 className="font-black text-[#0B1C30] text-base">{selectedPayment.patientName}</h4>
                       <p className="text-xs font-bold text-[#526069] mt-0.5">
-                        وقت الموعد: {new Date(selectedPayment.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
+                        Appointment time: {new Date(selectedPayment.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
                       </p>
                     </div>
                   </div>
 
                   <div className="space-y-3 border-b border-gray-100 pb-4">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="font-bold text-[#526069]">المبلغ:</span>
+                      <span className="font-bold text-[#526069]">Amount:</span>
                       <span className="font-black text-[#0B1C30]">{selectedPayment.amount} ILS</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
-                      <span className="font-bold text-[#526069]">حالة السند المرفق:</span>
+                      <span className="font-bold text-[#526069]">حالة المستند المرفق:</span>
                       <span className="bg-[#FFF0EE] text-[#BA1A1A] px-2.5 py-0.5 rounded-full text-xs font-bold">
-                        {selectedPayment.status === "PendingVerification" ? "بانتظار التأكيد" : selectedPayment.status}
+                        {selectedPayment.status === "PendingVerification" ? "بانتظار التأكيد" : selectedPayment.status === "Approved" ? "تم التأكيد" : selectedPayment.status === "Rejected" ? "مرفوض" : selectedPayment.status}
                       </span>
                     </div>
                   </div>
@@ -393,29 +393,29 @@ const DoctorDashboard = () => {
                           </svg>
                         )}
                         <span className="font-black text-[#0B1C30] text-sm">
-                          {selectedPayment.paymentMethodType === "Bank" ? "تحويل بنكي" : "محفظة إلكترونية"}
+                          {selectedPayment.paymentMethodType === "Bank" ? "Bank Transfer" : "Electronic Wallet"}
                         </span>
                       </div>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">الاسم:</span>
+                          <span className="font-bold text-[#526069]">Name:</span>
                           <span className="font-bold text-[#0B1C30]">{selectedPayment.paymentMethodName}</span>
                         </div>
                         {selectedPayment.accountHolderName && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">اسم صاحب الحساب:</span>
+                            <span className="font-bold text-[#526069]">Account Holder:</span>
                             <span className="font-bold text-[#0B1C30]">{selectedPayment.accountHolderName}</span>
                           </div>
                         )}
                         {selectedPayment.phoneNumber && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">رقم الجوال:</span>
+                            <span className="font-bold text-[#526069]">Phone:</span>
                             <span className="font-bold text-[#0B1C30]">{selectedPayment.phoneNumber}</span>
                           </div>
                         )}
                         {selectedPayment.iban && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">رقم الآيبان:</span>
+                            <span className="font-bold text-[#526069]">IBAN:</span>
                             <span className="font-bold text-[#0B1C30] font-mono text-xs">{selectedPayment.iban}</span>
                           </div>
                         )}
@@ -428,12 +428,12 @@ const DoctorDashboard = () => {
                       <span className="font-black text-[#0B1C30] text-sm">بيانات المرسل</span>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">اسم صاحب الحساب:</span>
+                          <span className="font-bold text-[#526069]">Account Holder:</span>
                           <span className="font-bold text-[#0B1C30]">{selectedPayment.senderAccountHolderName}</span>
                         </div>
                         {selectedPayment.senderPhoneNumber && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">رقم الجوال:</span>
+                            <span className="font-bold text-[#526069]">Phone:</span>
                             <span className="font-bold text-[#0B1C30]">{selectedPayment.senderPhoneNumber}</span>
                           </div>
                         )}
@@ -443,16 +443,16 @@ const DoctorDashboard = () => {
 
                   {selectedPayment.attachmentUrl && (
                     <div className="space-y-2">
-                      <span className="font-bold text-[#526069] text-sm">صورة الإيصال المرفوع:</span>
+                      <span className="font-bold text-[#526069] text-sm">صورة الإيصال المرفوعة:</span>
                       <div className="border border-[#C3C6D6] rounded-xl overflow-hidden">
                         <img
                           src={`${FILES_URL}/${selectedPayment.attachmentUrl}`}
-                          alt="صورة الإيصال"
-                          className="w-full max-h-[300px] object-contain bg-gray-50"
+                          alt="Receipt image"
+                          className="w-full max-h-[20vh] object-contain bg-gray-50"
                           onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                         />
                         <div className="hidden items-center justify-center p-8 bg-gray-50 text-gray-400 text-sm">
-                          لا يمكن تحميل صورة الإيصال
+                          Unable to load receipt image
                         </div>
                       </div>
                     </div>
@@ -460,42 +460,42 @@ const DoctorDashboard = () => {
 
                   {!selectedPayment.attachmentUrl && (
                     <div className="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-6 text-center text-gray-400 text-sm">
-                      لم يتم رفع صورة إيصال بعد
+                      No receipt image uploaded yet
                     </div>
-                  )}
+                  )} 
                 </>
               ) : null}
-            </div>
 
-            <div className="px-6 py-4 bg-[#ecf8fa] border-t border-[#C3C6D6]/40 flex items-center gap-3">
-              <button
-                onClick={handleConfirmPayment}
-                disabled={actionLoading || !selectedPayment}
-                className="flex-1 h-11 bg-[#138C9F] hover:bg-[#0f7282] active:scale-[0.98] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
-              >
-                {actionLoading ? "جاري التأكيد..." : "تأكيد واستلام الدفع 👍"}
-              </button>
-              <button
-                onClick={() => setRejectModalOpen(true)}
-                disabled={actionLoading || !selectedPayment}
-                className="px-4 h-11 border border-[#BA1A1A] bg-white hover:bg-[#FFF0EE] text-[#BA1A1A] font-bold rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
-              >
-                رفض
-              </button>
-              <button
-                onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }}
-                className="px-4 h-11 border border-gray-300 bg-white hover:bg-gray-50 text-[#526069] font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
-              >
-                إلغاء
-              </button>
+              <div className="px-6 py-4 bg-[#ecf8fa] border-t border-[#C3C6D6]/40 flex items-center gap-3">
+                <button
+                  onClick={handleConfirmPayment}
+                  disabled={actionLoading || !selectedPayment}
+                  className="flex-1 h-[3vh] bg-[#138C9F] hover:bg-[#0f7282] active:scale-[0.98] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
+                >
+                  {actionLoading ? "Confirming..." : "Confirm & Receive Payment 👍"}
+                </button>
+                <button
+                  onClick={() => setRejectModalOpen(true)}
+                  disabled={actionLoading || !selectedPayment}
+                  className="px-4 h-[3vh] border border-[#BA1A1A] bg-white hover:bg-[#FFF0EE] text-[#BA1A1A] font-bold rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
+                >
+                  Reject
+                </button>
+                <button
+                  onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }}
+                  className="px-4 h-[3vh] border border-gray-300 bg-white hover:bg-gray-50 text-[#526069] font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
       {rejectModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#0B1C30]/60 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl w-full max-w-[400px] border border-[#C3C6D6] overflow-hidden shadow-xl">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-14 bg-[#0B1C30]/60 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl w-full max-w-[calc(100%-2rem)] sm:max-w-[400px] border border-[#C3C6D6] overflow-hidden shadow-xl">
             <div className="px-6 py-4 border-b border-[#C3C6D6]/50">
               <h3 className="text-base font-black text-[#BA1A1A]">رفض الدفع</h3>
             </div>
@@ -504,23 +504,23 @@ const DoctorDashboard = () => {
               <textarea
                 value={rejectionReason}
                 onChange={(e) => setRejectionReason(e.target.value)}
-                placeholder="سبب الرفض (اختياري)"
-                className="w-full border border-[#C3C6D6] rounded-xl p-3 text-sm text-right resize-none h-24 focus:outline-none focus:border-[#138C9F]"
+                placeholder="Rejection reason (optional)"
+                className="w-full border border-[#C3C6D6] rounded-xl p-3 text-sm text-right resize-none h-[6vh] focus:outline-none focus:border-[#138C9F]"
               />
             </div>
             <div className="px-6 py-4 bg-gray-50 border-t border-[#C3C6D6]/40 flex items-center gap-3">
               <button
                 onClick={handleRejectPayment}
                 disabled={actionLoading}
-                className="flex-1 h-11 bg-[#BA1A1A] hover:bg-[#9a1515] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
+                className="flex-1 h-[3vh] bg-[#BA1A1A] hover:bg-[#9a1515] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
               >
-                {actionLoading ? "جاري الرفض..." : "تأكيد الرفض"}
+                {actionLoading ? "Rejecting..." : "Confirm Rejection"}
               </button>
               <button
                 onClick={() => { setRejectModalOpen(false); setRejectionReason(""); }}
-                className="px-4 h-11 border border-gray-300 bg-white hover:bg-gray-50 text-[#526069] font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
+                className="px-4 h-[3vh] border border-gray-300 bg-white hover:bg-gray-50 text-[#526069] font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
               >
-                إلغاء
+                Cancel
               </button>
             </div>
           </div>

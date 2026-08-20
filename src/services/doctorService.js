@@ -5,7 +5,5 @@ export const getDoctors = async (params = {}) => {
     params,
   });
 
-  console.log("Doctors API:", response.data);
-
   return response.data.data;
 };

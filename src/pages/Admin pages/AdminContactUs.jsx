@@ -236,12 +236,12 @@ export default function AdminContactUs() {
                     <table className="w-full border-collapse text-right">
                         <thead>
                             <tr className="bg-[#E5EEFF] border-b border-[#C3C6D6]">
-                                <th className="p-4 font-['Cairo'] font-bold text-base text-[#434654]">اسم المرسل</th>
-                                <th className="p-4 font-['Cairo'] font-bold text-base text-[#434654]">البريد الإلكتروني</th>
-                                <th className="p-4 font-['Cairo'] font-bold text-base text-[#434654]">الموضوع</th>
-                                <th className="p-4 font-['Cairo'] font-bold text-base text-[#434654]">التاريخ</th>
-                                <th className="p-4 font-['Cairo'] font-bold text-base text-[#434654]">الحالة</th>
-                                <th className="p-4 font-['Cairo'] font-bold text-base text-[#434654] text-center">الإجراءات</th>
+                                <th className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#434654]">اسم المرسل</th>
+                                <th className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#434654]">البريد الإلكتروني</th>
+                                <th className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#434654]">الموضوع</th>
+                                <th className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#434654] hidden md:table-cell">التاريخ</th>
+                                <th className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#434654] hidden sm:table-cell">الحالة</th>
+                                <th className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#434654] text-center">الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -253,16 +253,16 @@ export default function AdminContactUs() {
                                 const badge = getStatusBadge(msg.isReplied);
                                 return (
                                 <tr key={msg.id} className="border-b border-[#C3C6D6] last:border-none hover:bg-slate-50 transition-colors">
-                                    <td className="p-4 font-['Cairo'] font-bold text-base text-[#138C9F]">{msg.fullName}</td>
-                                    <td className="p-4 font-['Cairo'] font-semibold text-sm text-[#434654]">{msg.email}</td>
-                                    <td className="p-4 font-['Cairo'] font-semibold text-sm text-[#0B1C30]">{msg.subject || 'بدون موضوع'}</td>
-                                    <td className="p-4 font-['Cairo'] font-bold text-sm text-[#434654]">{msg.createdAt}</td>
-                                    <td className="p-4">
+                                    <td className="p-3 md:p-4 font-['Cairo'] font-bold text-base text-[#138C9F]">{msg.fullName}</td>
+                                    <td className="p-3 md:p-4 font-['Cairo'] font-semibold text-sm text-[#434654]">{msg.email}</td>
+                                    <td className="p-3 md:p-4 font-['Cairo'] font-semibold text-sm text-[#0B1C30]">{msg.subject || 'بدون موضوع'}</td>
+                                    <td className="p-3 md:p-4 font-['Cairo'] font-bold text-sm text-[#434654] hidden md:table-cell">{msg.createdAt}</td>
+                                    <td className="p-3 md:p-4 hidden sm:table-cell">
                                         <span className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold font-['Cairo'] ${badge.className}`}>
                                             {badge.label}
                                         </span>
                                     </td>
-                                    <td className="p-4 flex justify-center items-center gap-2">
+                                    <td className="p-3 md:p-4 flex justify-center items-center gap-2">
                                         <button onClick={() => handleOpenReply(msg)} className="p-2 text-[#138C9F] hover:bg-[#138C9F]/10 rounded-lg transition-colors" title="رد سريع">
                                             <FiCornerUpLeft size={18} />
                                         </button>

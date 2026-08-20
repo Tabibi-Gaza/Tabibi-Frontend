@@ -58,7 +58,7 @@ const Contact = () => {
         className="min-h-screen pt-30 font-['Cairo'] dark:bg-gray-900 dark:text-gray-200"
         style={{ direction: "rtl" }}
       >
-        <div className="w-[85%] mx-auto">
+        <div className="w-full max-w-[85%] mx-auto px-4">
           <div className="py-10 px-7.5 mt-0">
             {/* ===== Heading ===== */}
             <div className="mb-12.5">

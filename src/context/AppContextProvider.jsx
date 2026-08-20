@@ -325,6 +325,44 @@ const AppContextProvider = (props) => {
     }, []);
 
     useEffect(() => {
+        const validateToken = async () => {
+            const savedToken = localStorage.getItem("accessToken");
+            const savedUser = localStorage.getItem("user");
+            if (!savedToken || !savedUser) return;
+            try {
+                const { data } = await axiosInstance.get("/patient/profile");
+                if (!data.succeeded) throw new Error();
+            } catch {
+                try {
+                    const { data } = await axiosInstance.get("/doctor/profile");
+                    if (!data.succeeded) throw new Error();
+                } catch {
+                    try {
+                        const { data } = await axiosInstance.get("/admin/profile");
+                        if (!data.succeeded) throw new Error();
+                    } catch {
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("user");
+                        localStorage.removeItem("doctorId");
+                        setToken("");
+                        setUserData({
+                            firstname: "",
+                            lastname: "",
+                            email: "",
+                            phone: "",
+                            gender: "",
+                            dob: "",
+                            address: { line1: "" },
+                            image: null,
+                        });
+                    }
+                }
+            }
+        };
+        validateToken();
+    }, []);
+
+    useEffect(() => {
         const fetchInitialData = async () => {
             if (token) {
                 const userStr = localStorage.getItem("user");

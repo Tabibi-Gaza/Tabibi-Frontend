@@ -398,7 +398,7 @@ const FinancialFiles = () => {
                       </div>
                       <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full ${tx.status === "مكتمل" ? "bg-green-50 text-green-600" : tx.status === "مكتمل جزئياً" ? "bg-amber-50 text-amber-600" : "bg-slate-100 text-gray-500"}`}>{tx.status}</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs">
                       <div><p className="text-[10px] text-gray-400">التاريخ والوقت</p><p className="font-semibold text-gray-700 mt-0.5">{tx.date}</p></div>
                       <div><p className="text-[10px] text-gray-400">طريقة الدفع</p><p className="font-semibold text-gray-700 mt-0.5">{tx.method}</p></div>
                     </div>

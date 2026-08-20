@@ -88,7 +88,7 @@ export default function AdminPharmaceutical() {
         <div className="w-full  font-['Cairo'] flex flex-col gap-[32px] text-right relative" dir="rtl">
 
             {/* SECTION 1: Summary Statistics Card */}
-            <div className="w-full  bg-white/80 border border-[#C3C6D6] backdrop-blur-[4px] rounded-[12px] p-6 flex flex-row justify-between items-center shadow-sm">
+                <div className="w-full bg-white/80 border border-[#C3C6D6] backdrop-blur-[4px] rounded-[12px] p-4 md:p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
 
                 {/* معلومات إجمالي الأدوية */}
                 <div className="flex flex gap-3 items-center justify-center gap-1">
@@ -103,7 +103,7 @@ export default function AdminPharmaceutical() {
                 {/* زر إضافة دواء جديد المقوس */}
                 <button
                     onClick={openAddModal}
-                    className="flex flex-row items-center justify-center gap-3 w-[182px] h-[44px] bg-[#138C9F] text-white rounded-full font-bold text-[15px] transition-all hover:bg-[#0f7282] shadow-[0px_10px_15px_-3px_rgba(0,61,155,0.2),0px_4px_6px_-4px_rgba(0,61,155,0.2)]"
+                    className="flex flex-row items-center justify-center gap-3 px-6 h-[44px] bg-[#138C9F] text-white rounded-full font-bold text-[15px] transition-all hover:bg-[#0f7282] shadow-[0px_10px_15px_-3px_rgba(0,61,155,0.2),0px_4px_6px_-4px_rgba(0,61,155,0.2)]"
                 >
                     <span>إضافة دواء جديد</span>
                     <Plus className="w-3.5 h-3.5 text-white" />
@@ -122,16 +122,16 @@ export default function AdminPharmaceutical() {
                 </div>
 
                 {/* جدول عرض البيانات */}
-                <div className="flex-1 overflow-y-auto">
+                <div className="flex-1 overflow-y-auto overflow-x-auto">
                     <table className="w-full border-collapse">
 
                         {/* رأس الجدول الخفيف */}
                         <thead>
                             <tr className="bg-[#ecf8fa] border-b border-[#C3C6D6] h-[49px]">
-                                <th className="p-4 text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-right w-1/2 pe-12">
+                                <th className="p-3 md:p-4 text-sm md:text-[14px] md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-right w-1/2 pe-2 md:pe-12">
                                     اسم الدواء
                                 </th>
-                                <th className="p-4 text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-center w-1/2">
+                                <th className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-center w-1/2">
                                     الإجراءات
                                 </th>
                             </tr>
@@ -144,7 +144,7 @@ export default function AdminPharmaceutical() {
                                     <tr key={med.id} className="h-[60px] border-b border-[#C3C6D6] last:border-0 hover:bg-[#ecf8fa]/50 transition-colors">
 
                                         {/* عمود اسم الدواء مع الباتش كمعلومات ثانوية عمودية */}
-                                        <td className="p-2 text-right pe-12">
+                                        <td className="p-2 text-right pe-2 md:pe-12">
                                             <div className="flex flex-col justify-center">
                                                 <span className="text-[14px] font-bold text-[#138C9F] leading-[24px]">
                                                     {med.name}
@@ -242,7 +242,7 @@ export default function AdminPharmaceutical() {
             {/* INTERACTIVE MODAL: نافذة إضافة وتعديل الدواء */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity">
-                    <div className="bg-white w-full max-w-[500px] rounded-2xl shadow-xl border border-gray-100 p-6 mx-4 relative text-right">
+                    <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-6 mx-4 relative text-right">
 
                         {/* إغلاق المودال من الإكس العلوي */}
                         <button

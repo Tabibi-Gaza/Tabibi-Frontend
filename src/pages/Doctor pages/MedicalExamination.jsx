@@ -295,7 +295,7 @@ const MedicalExamination = () => {
                                     <label className="text-xs font-black text-[#0B1C30]">اسم الدواء</label>
                                     <input type="text" name="name" value={currentMed.name} onChange={handleMedInputChange} placeholder="مثلاً: بنادول..." className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl font-semibold text-sm focus:outline-hidden" />
                                 </div>
-                                <div className="grid grid-cols-2 gap-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div className="space-y-1.5 text-right">
                                         <label className="text-xs font-black text-[#0B1C30]">الجرعة</label>
                                         <input type="text" name="dosage" value={currentMed.dosage} onChange={handleMedInputChange} placeholder="500 ملغ" className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-center text-sm focus:outline-hidden" />
@@ -401,23 +401,23 @@ const MedicalExamination = () => {
                                     <table className="w-full text-sm">
                                         <thead>
                                             <tr className="border-b border-gray-100">
-                                                <th className="py-3 px-4 text-right font-black text-[#0B1C30]">اسم الدواء/العلمي</th>
-                                                <th className="py-3 px-4 text-right font-black text-[#0B1C30]">الجرعة</th>
-                                                <th className="py-3 px-4 text-right font-black text-[#0B1C30]">التكرار</th>
-                                                <th className="py-3 px-4 text-right font-black text-[#0B1C30]">المدة</th>
+                                                <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">اسم الدواء/العلمي</th>
+                                                <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">الجرعة</th>
+                                                <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">التكرار</th>
+                                                <th className="hidden md:table-cell p-3 md:p-4 text-right font-black text-[#0B1C30]">المدة</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {medicalHistoryData?.currentMedicines?.filter(m => m.name !== "لا يوجد").length > 0
                                                 ? medicalHistoryData.currentMedicines.filter(m => m.name !== "لا يوجد").map((med, idx) => (
                                                     <tr key={idx} className="border-b border-gray-50 last:border-0">
-                                                        <td className="py-3 px-4 font-bold text-[#0B1C30]">{med.name}</td>
-                                                        <td className="py-3 px-4 font-bold text-gray-600">{med.dosage || "—"}</td>
-                                                        <td className="py-3 px-4 font-bold text-gray-600">{med.frequency || "—"}</td>
-                                                        <td className="py-3 px-4 font-bold text-gray-600">{med.duration || "—"}</td>
+                                                        <td className="p-3 md:p-4 font-bold text-[#0B1C30]">{med.name}</td>
+                                                        <td className="p-3 md:p-4 font-bold text-gray-600">{med.dosage || "—"}</td>
+                                                        <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
+                                                        <td className="hidden md:table-cell p-3 md:p-4 font-bold text-gray-600">{med.duration || "—"}</td>
                                                     </tr>
                                                 ))
-                                                : <tr><td colSpan="4" className="py-4 text-center text-gray-400 font-bold">لا يوجد أدوية مسجلة</td></tr>
+                                                : <tr><td colSpan="4" className="p-3 md:p-4 text-center text-gray-400 font-bold">لا يوجد أدوية مسجلة</td></tr>
                                             }
                                         </tbody>
                                     </table>

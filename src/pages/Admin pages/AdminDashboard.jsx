@@ -220,7 +220,7 @@ const AdminDashboard = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {cards.map((stat) => (
-                    <div key={stat.id} className={`bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col justify-between h-[130px] shadow-xs transition-all duration-300 ${stat.borderHover}`}>
+                    <div key={stat.id} className={`bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col justify-between shadow-xs transition-all duration-300 ${stat.borderHover}`}>
                         <div className="flex justify-between items-start">
                             <div className="flex items-center gap-1.5">
                                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 ${stat.badgeBg} ${stat.badgeText}`}>
@@ -243,7 +243,7 @@ const AdminDashboard = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-6 items-start">
 
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col h-[440px] shadow-xs">
+                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
                     <div className="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
                         <h3 className="font-bold text-[15px] text-[#138C9F]">طلبات الأطباء الجديدة</h3>
                         <span className="text-[10px] font-bold bg-[#138C9F]/10 text-[#138C9F] px-2 py-0.5 rounded-full">
@@ -274,7 +274,7 @@ const AdminDashboard = () => {
                                             <FiEye size={14} />
                                         </button>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-2">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         <button
                                             disabled={actionLoading === req.id}
                                             onClick={() => handleAction(req.id, 'approved')}
@@ -311,7 +311,7 @@ const AdminDashboard = () => {
                     </button>
                 </div>
 
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col h-[440px] shadow-xs">
+                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
                     <div className="flex justify-between items-center mb-4">
                         <div>
                             <h3 className="font-bold text-[15px] text-[#138C9F]">إحصائيات المواعيد</h3>
@@ -363,13 +363,13 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="overflow-x-auto w-full custom-scrollbar">
-                    <table className="w-full text-right border-collapse text-sm min-w-[700px]">
+                    <table className="w-full text-right border-collapse text-sm">
                         <thead>
                             <tr className="bg-[#f0fafb] text-[#138C9F] font-bold h-11 border-b border-[#C3C6D6]/60">
                                 <th className="px-4 rounded-r-xl text-[12px]">المريض</th>
                                 <th className="px-4 text-[12px]">الطبيب</th>
-                                <th className="px-4 text-[12px]">التخصص</th>
-                                <th className="px-4 text-[12px]">المبلغ</th>
+                                <th className="px-4 text-[12px] hidden md:table-cell">التخصص</th>
+                                <th className="px-4 text-[12px] hidden md:table-cell">المبلغ</th>
                                 <th className="px-4 text-[12px]">التاريخ والوقت</th>
                                 <th className="px-4 rounded-l-xl text-[12px]">الحالة</th>
                             </tr>
@@ -382,8 +382,8 @@ const AdminDashboard = () => {
                                         <tr key={appt.id || index} className="hover:bg-slate-50/50 transition-colors h-12">
                                             <td className="px-4 text-[#0B1C30] font-bold text-[13px]">{appt.patient}</td>
                                             <td className="px-4 text-[#138C9F] font-semibold text-[13px]">{appt.doctor}</td>
-                                            <td className="px-4 text-slate-500 text-[12px]">{appt.specialty || '-'}</td>
-                                            <td className="px-4 text-[#0B1C30] font-bold text-[12px]" dir="ltr" style={{ textAlign: 'right' }}>
+                                            <td className="px-4 text-slate-500 text-[12px] hidden md:table-cell">{appt.specialty || '-'}</td>
+                                            <td className="px-4 text-[#0B1C30] font-bold text-[12px] hidden md:table-cell" dir="ltr" style={{ textAlign: 'right' }}>
                                                 {appt.amount ? `${appt.amount} د.ع` : '-'}
                                             </td>
                                             <td className="px-4 text-slate-500 text-[11px]" dir="ltr" style={{ textAlign: 'right' }}>
@@ -429,12 +429,10 @@ const AdminDashboard = () => {
                 )}
             </div>
 
-            {/* ── Modal تفاصيل طلب الطبيب ── */}
             {selectedRequest && (
-                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-                    <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
+            <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
                         {/* Header */}
-                        <div className="w-full h-[110px] bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
+                        <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
                                 className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30"
@@ -473,7 +471,7 @@ const AdminDashboard = () => {
                                         </div>
                                     )}
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4 text-center">
                                             <span className="text-[13px] font-bold text-[#737685] block mb-1">سنوات الخبرة</span>
                                             <span className="text-[16px] md:text-[18px] font-extrabold text-[#138C9F]">{selectedDetails.yearsOfExperience || selectedRequest.experience}+ سنة</span>
@@ -484,7 +482,7 @@ const AdminDashboard = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4">
                                             <span className="text-[13px] font-bold text-[#737685] block mb-1">البريد الإلكتروني</span>
                                             <span className="text-[13px] font-semibold text-[#434654] block truncate">{selectedDetails.email || '-'}</span>
@@ -495,7 +493,7 @@ const AdminDashboard = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4">
                                             <span className="text-[13px] font-bold text-[#737685] block mb-1">اسم العيادة</span>
                                             <span className="text-[13px] font-semibold text-[#434654] block">{selectedDetails.clinicName || '-'}</span>
@@ -506,7 +504,7 @@ const AdminDashboard = () => {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4">
                                             <span className="text-[13px] font-bold text-[#737685] block mb-1">رقم الهاتف</span>
                                             <span className="text-[13px] font-semibold text-[#434654] block">{selectedDetails.phoneNumber || '-'}</span>
@@ -579,13 +577,11 @@ const AdminDashboard = () => {
                             </button>
                         </div>
                     </div>
-                </div>
             )}
-
             {/* ── Modal تأكيد الرفض ── */}
             {showRejectModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="w-full max-w-[440px] bg-white rounded-[16px] p-6 shadow-2xl border border-gray-100 text-center text-right">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 text-center text-right">
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
                             <FiAlertTriangle size={28} />
                         </div>
@@ -623,5 +619,4 @@ const AdminDashboard = () => {
         </div>
     );
 };
-
 export default AdminDashboard;

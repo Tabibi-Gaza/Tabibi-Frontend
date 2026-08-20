@@ -308,7 +308,7 @@ const AppointmentManagement = () => {
                             {mapStatusLabel(appt.status)}
                           </span>
                         </div>
-                        <div className="grid grid-cols-2 gap-2 pt-1 text-xs bg-slate-50/60 p-3 rounded-xl border border-slate-100">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs bg-slate-50/60 p-3 rounded-xl border border-slate-100">
                           <div>
                             <p className="text-[10px] text-gray-400">الوقت والتاريخ</p>
                             <p className="font-bold text-gray-800 mt-0.5">{dt.time} <span className="text-[10px] text-gray-400 font-medium">({dt.date})</span></p>

@@ -325,8 +325,8 @@ export default function DoctorChats() {
       {/* Delete Confirmation Modal */}
       {deleteConfirmId && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white w-full max-w-[400px] rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-            <div className="p-6 text-center">
+          <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[400px] rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+            <div className="p-4 sm:p-6 text-center">
               <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trash2 className="w-7 h-7 text-red-500" />
               </div>

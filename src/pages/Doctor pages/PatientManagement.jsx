@@ -256,7 +256,7 @@ export default function PatientManagement() {
                     {patient.isActive ? "نشط" : "غير نشط"}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 gap-2 bg-gray-50 p-3 rounded-xl text-xs font-bold text-slate-700">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-gray-50 p-3 rounded-xl text-xs font-bold text-slate-700">
                   <div>
                     <span className="text-gray-400 block mb-0.5">
                       العمر / الجنس

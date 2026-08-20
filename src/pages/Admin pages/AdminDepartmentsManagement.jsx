@@ -120,13 +120,13 @@ export default function AdminDepartmentsManagement() {
 
         <div className="bg-white border border-[#C3C6D6] rounded-xl overflow-hidden shadow-sm flex flex-col">
           <div className="overflow-x-auto">
-            <table className="w-full text-right border-collapse min-w-[500px]">
+            <table className="w-full text-right border-collapse">
               <thead>
                 <tr className="bg-[#e2f4f7] border-b border-[#C3C6D6]">
-                  <th className="p-4 text-[16px] md:text-[18px] font-bold text-[#434654] w-1/4">اسم القسم</th>
-                  <th className="p-4 text-[16px] md:text-[18px] font-bold text-[#434654] w-1/4 text-center">عدد الأطباء</th>
-                  <th className="p-4 text-[16px] md:text-[18px] font-bold text-[#434654] w-1/4 text-center">الحالة</th>
-                  <th className="p-4 text-[16px] md:text-[18px] font-bold text-[#434654] w-1/4 text-center">الإجراءات</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654]">اسم القسم</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden md:table-cell">عدد الأطباء</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden sm:table-cell">الحالة</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center">الإجراءات</th>
                 </tr>
               </thead>
               <tbody>
@@ -135,18 +135,18 @@ export default function AdminDepartmentsManagement() {
                 ) : departments.length > 0 ? (
                   departments.map((dept) => (
                     <tr key={dept.id} className="border-b border-[#C3C6D6] last:border-0 hover:bg-[#f1f4ff] transition-colors">
-                      <td className="p-4 text-[15px] md:text-[16px] font-bold text-[#0B1C30]">{dept.name}</td>
-                      <td className="p-4 text-center">
+                      <td className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#0B1C30]">{dept.name}</td>
+                      <td className="p-3 md:p-4 text-center hidden md:table-cell">
                         <span className="inline-block bg-[#E5EEFF] text-[#0B1C30] text-[13px] md:text-[14px] font-semibold px-3 md:px-4 py-1 rounded-full">
                           {dept.doctorCount || 0} {(dept.doctorCount || 0) === 1 ? "طبيب" : (dept.doctorCount || 0) >= 2 && (dept.doctorCount || 0) <= 10 ? "أطباء" : "طبيب"}
                         </span>
                       </td>
-                      <td className="p-4 text-center">
+                      <td className="p-3 md:p-4 text-center hidden sm:table-cell">
                         <span className={`inline-block text-[13px] md:text-[14px] font-bold px-3 md:px-4 py-1 rounded-full ${dept.isActive ? "bg-[rgba(0,79,32,0.1)] text-[#004F20]" : "bg-[rgba(195,198,214,0.3)] text-[#434654]"}`}>
                           {dept.isActive ? "نشط" : "غير نشط"}
                         </span>
                       </td>
-                      <td className="p-4 text-center">
+                      <td className="p-3 md:p-4 text-center">
                         <div className="flex justify-center items-center gap-2">
                           <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 hover:bg-gray-50'}`} title={dept.isActive ? "تعطيل" : "تفعيل"}>
                             {dept.isActive ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
@@ -190,7 +190,7 @@ export default function AdminDepartmentsManagement() {
 
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-            <div className="bg-white w-full max-w-[550px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 p-6 mx-4 relative text-right">
+            <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[550px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 p-4 sm:p-6 mx-4 relative text-right">
               <button onClick={() => setIsModalOpen(false)} className="absolute top-6 left-6 text-gray-400 hover:text-gray-600 transition-colors"><X className="w-6 h-6" /></button>
               <div className="flex items-center justify-start gap-3 mb-6 mt-2">
                 <Plus className="w-6 h-6 bg-[#138C9F] text-white rounded-full p-0.5" />

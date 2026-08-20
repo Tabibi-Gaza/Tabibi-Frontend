@@ -3,8 +3,17 @@ import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { FiFileText, FiDownload, FiEye, FiX, FiUser, FiCalendar, FiTrash2 } from 'react-icons/fi';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+let html2canvas, jsPDF;
+const loadPdfLibs = async () => {
+  if (!html2canvas) {
+    const mod1 = await import('html2canvas');
+    html2canvas = mod1.default;
+  }
+  if (!jsPDF) {
+    const mod2 = await import('jspdf');
+    jsPDF = mod2.default;
+  }
+};
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 
@@ -53,6 +62,7 @@ const MyPrescriptions = () => {
     const handleDownloadPDF = async () => {
         if (!printRef.current) return;
         try {
+            await loadPdfLibs();
             const element = printRef.current;
             const canvas = await html2canvas(element, { scale: 2, useCORS: true, logging: false });
             const imgData = canvas.toDataURL('image/png');

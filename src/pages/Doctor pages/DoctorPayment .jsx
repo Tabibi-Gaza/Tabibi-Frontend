@@ -163,9 +163,7 @@ const DoctorPayment = () => {
                 bankId: bankForm.bankId,
                 iban: formatIban(bankForm.iban),
             };
-            console.log('Adding bank:', payload);
             const res = await axiosInstance.post('/doctor/payment-methods', payload);
-            console.log('Add bank success:', res.data);
             setViewMode('list');
             setBankForm({ bankId: BANKS[0].id, accountHolderName: '', phoneNumber: '', accountNumber: '', iban: '' });
             setIbanError('');
@@ -363,7 +361,7 @@ const DoctorPayment = () => {
                                             <span className="bg-white/20 text-white text-[11px] font-bold px-3 py-1 rounded-full">نشط</span>
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-y-3 gap-x-2 pt-2">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-2 pt-2">
                                             <div>
                                                 <p className="text-sm text-white/70 font-bold">اسم الحساب</p>
                                                 <p className="text-lg font-bold truncate">{bankDetail.accountHolderName}</p>

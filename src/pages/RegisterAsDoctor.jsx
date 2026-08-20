@@ -321,39 +321,6 @@ const RegisterAsDoctor = () => {
                                     className="w-full h-14 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6]"
                                 />
                             </div>
-                            <div className="border-t border-[#e8edf5] pt-4">
-                                <label className="block text-sm font-bold text-slate-600 mb-3">هل لديك سكرتير؟</label>
-                                <div className="flex gap-4">
-                                    <button
-                                        type="button"
-                                        onClick={() => setFormData(prev => ({ ...prev, hasSecretary: true }))}
-                                        className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${formData.hasSecretary ? 'bg-[#118fa6] text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
-                                    >
-                                        نعم
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setFormData(prev => ({ ...prev, hasSecretary: false, secretaryEmail: '' }))}
-                                        className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${!formData.hasSecretary ? 'bg-[#118fa6] text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
-                                    >
-                                        لا
-                                    </button>
-                                </div>
-                                {formData.hasSecretary && (
-                                    <div className="mt-4">
-                                        <label className="block text-xs font-bold text-slate-500 mb-2">أدخل بريد السكرتير الإلكتروني</label>
-                                        <input
-                                            type="email"
-                                            name="secretaryEmail"
-                                            value={formData.secretaryEmail}
-                                            onChange={handleChange}
-                                            placeholder="secretary@example.com"
-                                            dir="ltr"
-                                            className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
-                                        />
-                                    </div>
-                                )}
-                            </div>
                         </div>
                     </div>
 

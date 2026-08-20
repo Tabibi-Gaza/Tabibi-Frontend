@@ -274,8 +274,8 @@ export default function AdminPaymentMethods() {
                                     <thead><tr className="bg-[#e2f4f7] h-[48px]">
                                         <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069]">الطبيب</th>
                                         <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069]">المبلغ</th>
-                                        <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069]">طريقة الدفع</th>
-                                        <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069]">التاريخ</th>
+                                        <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] hidden md:table-cell">طريقة الدفع</th>
+                                        <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069] hidden md:table-cell">التاريخ</th>
                                         <th className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#526069]">الإجراءات</th>
                                     </tr></thead>
                                     <tbody className="divide-y divide-[#C3C6D6]">
@@ -283,8 +283,8 @@ export default function AdminPaymentMethods() {
                                             <tr key={payment.id} className="h-[60px] hover:bg-slate-50">
                                                 <td className="px-6 py-3 font-['Cairo'] font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
                                                 <td className="px-6 py-3 font-['Cairo'] font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
-                                                <td className="px-6 py-3 font-['Cairo'] text-[13px] text-[#526069]">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
-                                                <td className="px-6 py-3 font-['Cairo'] text-[13px] text-[#526069]">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
+                                                <td className="px-6 py-3 font-['Cairo'] text-[13px] text-[#526069] hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
+                                                <td className="px-6 py-3 font-['Cairo'] text-[13px] text-[#526069] hidden md:table-cell">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
                                                 <td className="px-6 py-3">
                                                     <div className="flex items-center gap-2 justify-center">
                                                         {payment.receiptImageUrl && (

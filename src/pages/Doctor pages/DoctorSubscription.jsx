@@ -151,7 +151,7 @@ export default function DoctorSubscription() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-6 pt-5 border-t border-gray-100">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-5 border-t border-gray-100">
                     <div className="text-center">
                         <span className="font-['Cairo'] text-[12px] text-[#526069] block mb-1">تاريخ البدء</span>
                         <span className="font-['Cairo'] font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.startDate)}</span>
@@ -243,7 +243,7 @@ export default function DoctorSubscription() {
                             </label>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="block font-['Cairo'] font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
                                 <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl font-['Cairo'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم كما في الحساب" required />

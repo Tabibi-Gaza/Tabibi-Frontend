@@ -158,21 +158,21 @@ const MedicalFile = () => {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="border-b border-gray-100">
-                                    <th className="py-3 px-4 text-right font-black text-[#0B1C30]">اسم الدواء/العلمي</th>
-                                    <th className="py-3 px-4 text-right font-black text-[#0B1C30]">الجرعة اليومية</th>
-                                    <th className="py-3 px-4 text-right font-black text-[#0B1C30]">التكرار والاستخدام</th>
+                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">اسم الدواء/العلمي</th>
+                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">الجرعة اليومية</th>
+                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">التكرار والاستخدام</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {medicalHistoryData?.currentMedicines?.filter(m => m.name !== "لا يوجد").length > 0
                                     ? medicalHistoryData.currentMedicines.filter(m => m.name !== "لا يوجد").map((med, idx) => (
                                         <tr key={idx} className="border-b border-gray-50 last:border-0">
-                                            <td className="py-3 px-4 font-bold text-[#0B1C30]">{med.name}</td>
-                                            <td className="py-3 px-4 font-bold text-gray-600">{med.dosage || "—"}</td>
-                                            <td className="py-3 px-4 font-bold text-gray-600">{med.frequency || "—"}</td>
+                                            <td className="p-3 md:p-4 font-bold text-[#0B1C30]">{med.name}</td>
+                                            <td className="p-3 md:p-4 font-bold text-gray-600">{med.dosage || "—"}</td>
+                                            <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
                                         </tr>
                                     ))
-                                    : <tr><td colSpan="3" className="py-4 text-center text-gray-400 font-bold">لا يوجد أدوية مسجلة</td></tr>
+                                    : <tr><td colSpan="3" className="p-3 md:p-4 text-center text-gray-400 font-bold">لا يوجد أدوية مسجلة</td></tr>
                                 }
                             </tbody>
                         </table>

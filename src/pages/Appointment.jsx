@@ -196,7 +196,7 @@ const Appointment = () => {
   };
 
   return (
-    <div className="w-full font-['Cairo'] p-4 pt-40 max-w-6xl mx-auto text-right" dir="rtl">
+    <div className="w-full font-['Cairo'] p-4 pt-40 px-3 text-right" dir="rtl">
       <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative flex flex-col md:flex-row gap-6 mb-6">
         <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
           <button onClick={handleMessageClick} className="flex items-center gap-2 bg-[#138c9f] hover:bg-[#3f9cb1] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all shadow-sm">
@@ -262,7 +262,7 @@ const Appointment = () => {
                 <div
                   key={day.date}
                   onClick={() => { setSlotIndex(calendarData.indexOf(day)); setSlotTime(''); setSelectedSlot(null); }}
-                  className={`text-center py-3 px-4 min-w-[70px] rounded-xl cursor-pointer transition-all duration-150 border flex flex-col gap-1 ${slotIndex === calendarData.indexOf(day) ? "bg-[#138c9f] text-white border-[#138c9f]" : "border-gray-200 text-gray-500 hover:border-teal-200"}`}
+                  className={`text-center py-3 px-4 rounded-lg rounded-xl cursor-pointer transition-all duration-150 border flex flex-col gap-1 ${slotIndex === calendarData.indexOf(day) ? "bg-[#138c9f] text-white border-[#138c9f]" : "border-gray-200 text-gray-500 hover:border-teal-200"}`}
                 >
                   <p className="text-[15px]">{day.dayNameAr}</p>
                   <p className="text-base font-bold">{day.dayNumber}</p>
@@ -327,7 +327,7 @@ function formatTime(timeOnly) {
   const parts = timeOnly.split(':');
   let h = parseInt(parts[0]);
   const m = parts[1] || '00';
-  const period = h >= 12 ? 'PM' : 'AM';
+  const period = h >= 12 ? 'م' : 'ص';
   if (h > 12) h -= 12;
   if (h === 0) h = 12;
   return `${h}:${m} ${period}`;

@@ -242,7 +242,7 @@ if (isError)
                     <div className="h-3 bg-gray-200 rounded w-8 dark:bg-gray-600" />
                   </div>
                   <div className="h-3 bg-gray-200 rounded w-1/3 dark:bg-gray-600" />
-                  <div className="border-t border-gray-100 pt-3 grid grid-cols-2 gap-2 dark:border-gray-600">
+                  <div className="border-t border-gray-100 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 dark:border-gray-600">
                     <div className="h-3 bg-gray-200 rounded w-3/4 dark:bg-gray-600" />
                     <div className="h-3 bg-gray-200 rounded w-3/4 justify-self-end dark:bg-gray-600" />
                   </div>
@@ -302,9 +302,7 @@ if (isError)
               <button
                 key={pageNumber}
                 onClick={() => {
-                  console.log("Navigating to page:", pageNumber); // Debugging log
                   setCurrentPage(pageNumber);
-                  console.log("Navigating to page:", currentPage); // Debugging log
                 }}
                 className={`w-7 h-7 flex items-center justify-center rounded-lg transition-all cursor-pointer ${
                   activePage === pageNumber

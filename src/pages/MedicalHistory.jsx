@@ -347,10 +347,10 @@ const MedicalHistory = () => {
                     <table className="w-full text-right text-xs border-collapse">
                       <thead>
                         <tr className="bg-slate-50 text-gray-500 font-black border-b border-gray-100">
-                          <th className="p-3">اسم الدواء العلمي/التجاري</th>
-                          <th className="p-3">الجرعة المقررة</th>
-                          <th className="p-3">التكرار والمواعيد</th>
-                          <th className="p-3">الحالة</th>
+                          <th className="p-3 md:p-4">اسم الدواء العلمي/التجاري</th>
+                          <th className="p-3 md:p-4">الجرعة المقررة</th>
+                          <th className="p-3 md:p-4">التكرار والمواعيد</th>
+                          <th className="hidden sm:table-cell p-3 md:p-4">الحالة</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -361,16 +361,16 @@ const MedicalHistory = () => {
                               key={idx}
                               className="hover:bg-slate-50/40 border-b border-gray-50/60 transition-colors"
                             >
-                              <td className="p-3 font-extrabold text-[#138C9F]">
+                              <td className="p-3 md:p-4 font-extrabold text-[#138C9F]">
                                 {med.name}
                               </td>
-                              <td className="p-3 text-gray-700 font-bold">
+                              <td className="p-3 md:p-4 text-gray-700 font-bold">
                                 {med.dosage}
                               </td>
-                              <td className="p-3 text-gray-600 font-medium">
+                              <td className="p-3 md:p-4 text-gray-600 font-medium">
                                 {med.frequency}
                               </td>
-                              <td className="p-3">
+                              <td className="hidden sm:table-cell p-3 md:p-4">
                                 <span className="bg-teal-50 text-teal-600 font-black text-[10px] px-2.5 py-1 rounded-md border border-teal-100">
                                   نشط حالياً
                                 </span>
@@ -381,7 +381,7 @@ const MedicalHistory = () => {
                           <tr>
                             <td
                               colSpan="4"
-                              className="p-5 text-center text-gray-400 italic"
+                              className="p-3 md:p-5 text-center text-gray-400 italic"
                             >
                               لا توجد أدوية مدرجة بالسجل حالياً.
                             </td>
@@ -668,11 +668,11 @@ const MedicalHistory = () => {
                     <table className="w-full text-right text-xs border-collapse">
                       <thead>
                         <tr className="bg-slate-50 text-gray-500 font-bold border-b border-gray-100">
-                          <th className="p-2.5">الدواء</th>
-                          <th className="p-2.5">الجرعة</th>
-                          <th className="p-2.5">التكرار المجدول</th>
+                          <th className="p-3 md:p-4">الدواء</th>
+                          <th className="p-3 md:p-4">الجرعة</th>
+                          <th className="p-3 md:p-4">التكرار المجدول</th>
                           <th
-                            className="p-2.5 text-center"
+                            className="p-3 md:p-4 text-center"
                             style={{ width: "60px" }}
                           >
                             حذف
@@ -685,12 +685,12 @@ const MedicalHistory = () => {
                             key={idx}
                             className="border-b border-gray-50/60 font-bold text-gray-700"
                           >
-                            <td className="p-2.5 text-[#138C9F]">{med.name}</td>
-                            <td className="p-2.5">{med.dosage}</td>
-                            <td className="p-2.5 text-gray-500">
+                            <td className="p-3 md:p-4 text-[#138C9F]">{med.name}</td>
+                            <td className="p-3 md:p-4">{med.dosage}</td>
+                            <td className="p-3 md:p-4 text-gray-500">
                               {med.frequency}
                             </td>
-                            <td className="p-2.5 text-center">
+                            <td className="p-3 md:p-4 text-center">
                               <button
                                 type="button"
                                 onClick={() => removeMedicine(idx)}

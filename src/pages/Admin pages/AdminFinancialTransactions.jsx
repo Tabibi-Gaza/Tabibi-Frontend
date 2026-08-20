@@ -163,14 +163,14 @@ export default function AdminFinancialTransactions() {
                     </div>
 
                     <div className="w-full overflow-x-auto">
-                        <table className="w-full text-right border-collapse min-w-[800px]">
+                        <table className="w-full text-right border-collapse">
                             <thead className="bg-[rgba(239,244,255,0.5)]">
                                 <tr>
-                                    <th className="p-4 px-6 text-[12px] font-bold text-[#434654] tracking-[0.6px]">اسم الطبيب</th>
-                                    <th className="p-4 px-6 text-[12px] font-bold text-[#434654] tracking-[0.6px]">المبلغ</th>
-                                    <th className="p-4 px-6 text-[12px] font-bold text-[#434654] tracking-[0.6px]">التاريخ</th>
-                                    <th className="p-4 px-6 text-[12px] font-bold text-[#434654] tracking-[0.6px]">النوع</th>
-                                    <th className="p-4 px-6 text-[12px] font-bold text-[#434654] tracking-[0.6px]">الحالة</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">اسم الطبيب</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">المبلغ</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px] hidden md:table-cell">التاريخ</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px] hidden md:table-cell">النوع</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">الحالة</th>
                                 </tr>
                             </thead>
 
@@ -183,15 +183,15 @@ export default function AdminFinancialTransactions() {
                                     </tr>
                                 ) : displayedTransactions.map((item) => (
                                     <tr key={item.id} className="border-t border-[#C3C6D6] hover:bg-slate-50/50 transition-colors h-[65px]">
-                                        <td className="p-4 px-6 text-[14px] font-semibold text-black">{item.doctorName}</td>
-                                        <td className="p-4 px-6 text-[14px] font-semibold text-black">{item.amount} ₪</td>
-                                        <td className="p-4 px-6 text-[14px] font-normal text-[#434654]">{formatDate(item.date)}</td>
-                                        <td className="p-4 px-6">
+                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.doctorName}</td>
+                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.amount} ₪</td>
+                                        <td className="p-3 md:p-4 px-6 text-[14px] font-normal text-[#434654] hidden md:table-cell">{formatDate(item.date)}</td>
+                                        <td className="p-3 md:p-4 px-6 hidden md:table-cell">
                                             <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#e2f4f7] text-[12px] font-bold text-[#138C9F]">
                                                 {item.type || 'اشتراك'}
                                             </span>
                                         </td>
-                                        <td className="p-4 px-6">
+                                        <td className="p-3 md:p-4 px-6">
                                             {item.status === 'مكتمل' && (
                                                 <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[rgba(107,255,143,0.2)] text-[12px] font-bold text-[#006A2D]">مكتمل</span>
                                             )}

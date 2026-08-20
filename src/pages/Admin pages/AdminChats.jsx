@@ -18,7 +18,7 @@ export default function AdminChats() {
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [newMessage, setNewMessage] = useState("");
-  const [showChatOnMobile, setShowChatOnMobile] = useState(true);
+  const [showChatOnMobile, setShowChatOnMobile] = useState(false);
   const [showNewChatModal, setShowNewChatModal] = useState(false);
   const [doctorSearchQuery, setDoctorSearchQuery] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -233,10 +233,10 @@ export default function AdminChats() {
 
   return (
     <div
-      className="w-full md:min-h-[700px] min-h-[calc(100vh-86px)] bg-[#ecf8fa] font-['Cairo'] flex flex-col items-start p-0 relative text-right"
+      className="w-full flex font-['Cairo'] flex flex-col items-start p-0 relative text-right"
       dir="rtl"
     >
-      <div className="w-full flex-1 p-2 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-4 md:gap-6 h-[calc(100vh-100px)] md:h-[calc(909px-70px)]">
+      <div className="w-full flex-1 p-2 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-4 md:gap-6">
         {/* Sidebar */}
         <div className={`bg-white border border-[#e9eff6] rounded-2xl shadow-sm flex flex-col overflow-hidden h-full ${showChatOnMobile ? "hidden md:flex" : "flex"}`}>
           <div className="p-4 flex flex-col gap-3 border-b border-[#e9eff6]">
@@ -342,7 +342,7 @@ export default function AdminChats() {
               </div>
 
               {/* Messages */}
-              <div className="flex-1 p-4 md:p-6 overflow-y-auto bg-slate-50/30 flex flex-col gap-4">
+              <div className="flex-1 overflow-y-auto bg-slate-50/30 flex flex-col gap-4 pb-24">
                 {messagesLoading ? (
                   <div className="flex items-center justify-center py-12"><Loader2 className="w-6 h-6 text-[#138C9F] animate-spin" /></div>
                 ) : messages.length === 0 ? (
@@ -353,7 +353,7 @@ export default function AdminChats() {
                 ) : (
                   messages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.isMine ? "justify-start" : "justify-end"}`}>
-                      <div className={`max-w-[85%] md:max-w-[70%] py-2.5 px-4 md:py-3 md:px-5 rounded-2xl text-[13px] md:text-[14px] font-medium ${msg.isMine ? "bg-[#0052cc] text-white rounded-br-none" : "bg-[#e5eeff] text-gray-800 rounded-bl-none"}`}>
+                      <div className={`py-2.5 px-4 md:py-3 md:px-5 rounded-2xl text-sm md:text-[14px] font-medium ${msg.isMine ? "bg-[#0052cc] text-white rounded-br-none" : "bg-[#e5eeff] text-gray-800 rounded-bl-none"}`}>
                         {renderMessageContent(msg)}
                       </div>
                     </div>
@@ -376,8 +376,8 @@ export default function AdminChats() {
               )}
 
               {/* Input */}
-              <form onSubmit={handleSendMessage} className="p-3 md:p-4 border-t border-[#e9eff6] bg-white shrink-0">
-                <div className="flex items-center border border-[#e9eff6] rounded-xl bg-slate-50 px-3 h-12 gap-2 md:gap-3 focus-within:border-[#138C9F] transition-colors">
+<form onSubmit={handleSendMessage} className="p-3 md:p-4 border-t pb-20 border-[#e9eff6] bg-white shrink-0 max-w-full">
+                  <div className="flex items-center border border-[#e9eff6] rounded-xl bg-slate-50 px-3 h-12 md:h-14 gap-2 md:gap-3 focus-within:border-[#138C9F] transition-colors">
                   <button type="submit" disabled={sendMutation.isPending || uploadMutation.isPending || (!newMessage.trim() && !selectedFile)} className="w-8 h-8 rounded-full bg-[#0052cc] flex items-center justify-center text-white hover:bg-[#0041a3] transition-colors cursor-pointer shrink-0 disabled:opacity-50">
                     {sendMutation.isPending || uploadMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 rotate-180" />}
                   </button>
@@ -408,7 +408,7 @@ export default function AdminChats() {
       {/* New Chat Modal */}
       {showNewChatModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white w-full max-w-[500px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col max-h-[80vh]">
+          <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col max-h-[80vh]">
             <div className="p-4 border-b border-[#e9eff6] flex items-center justify-between shrink-0">
               <h3 className="text-[18px] font-bold text-[#0B1C30]">محادثة جديدة مع طبيب</h3>
               <button onClick={() => { setShowNewChatModal(false); setDoctorSearchQuery(""); }} className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
@@ -455,8 +455,8 @@ export default function AdminChats() {
       {/* Delete Confirmation Modal */}
       {deleteConfirmId && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white w-full max-w-[400px] rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-            <div className="p-6 text-center">
+          <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[400px] rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+            <div className="p-4 sm:p-6 text-center">
               <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trash2 className="w-7 h-7 text-red-500" />
               </div>

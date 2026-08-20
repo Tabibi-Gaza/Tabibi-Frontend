@@ -148,8 +148,8 @@ const DoctorProfile = () => {
                 <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 
                     {/* 📸 جزء الصورة ومعاينتها */}
-                    <div className="w-[220px] flex flex-col items-center shrink-0 mx-auto md:mx-0">
-                        <div className="w-[220px] h-[260px] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-[#C3C6D6] mb-5">
+                    <div className="w-full max-w-[220px] flex flex-col items-center shrink-0 mx-auto md:mx-0">
+                        <div className="w-full max-w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-[#C3C6D6] mb-5">
                             <img
                                 className="w-full h-full object-cover"
                                 src={image ? URL.createObjectURL(image) : doctorData.image || '/images/default-doctor.png'}
@@ -170,7 +170,7 @@ const DoctorProfile = () => {
                             type="button"
                             disabled={!isEdit}
                             onClick={() => fileInputRef.current.click()}
-                            className={`bg-[#138C9F] hover:bg-[#0f6f7f] text-white py-2.5 px-5 rounded-lg text-sm font-medium w-[220px] flex items-center justify-center gap-2 transition-all ${!isEdit ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
+                            className={`bg-[#138C9F] hover:bg-[#0f6f7f] text-white py-2.5 px-5 rounded-lg text-sm font-medium w-full max-w-[220px] flex items-center justify-center gap-2 transition-all ${!isEdit ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
                         >
                             رفع صورة
                         </button>

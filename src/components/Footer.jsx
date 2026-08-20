@@ -102,7 +102,7 @@ const Footer = () => {
             >
               <img src='https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg' className='h-6 md:h-7 w-auto object-contain shrink-0' alt='App Store' />
               <div className='flex flex-col text-left leading-tight font-sans select-none'>
-                <span className='text-[9px] text-gray-300 block font-light tracking-wide'>Download on the</span>
+                <span className='text-[9px] text-gray-300 block font-light tracking-wide'>حمّل من</span>
                 <span className='text-xs font-semibold block text-left mt-0.5 tracking-tight'>App Store</span>
               </div>
             </a>
