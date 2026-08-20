@@ -1,18 +1,11 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faChevronDown, faAngleDown, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
-const TOTAL_FRAMES = 342;
-const FRAME_PATH = "/frames/frame_";
-const FPS = 24;
-
 function FramesSection() {
-  const imgRef = useRef(null);
-  const imagesRef = useRef([]);
-  const currentFrameRef = useRef(-1);
-  const [progress, setProgress] = useState(0);
+  const videoRef = useRef(null);
   const [speciality, setSpeciality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -35,70 +28,18 @@ function FramesSection() {
     return () => document.removeEventListener("mousedown", close);
   }, []);
 
-  useEffect(() => {
-    let mounted = true;
-    const images = [];
-
-    const firstImg = new Image();
-    firstImg.src = `${FRAME_PATH}0000.webp`;
-    firstImg.onload = firstImg.onerror = () => {
-      if (!mounted) return;
-      images[0] = firstImg;
-      if (imgRef.current && images[0]) {
-        imgRef.current.src = images[0].src;
-      }
-    };
-    images.push(firstImg);
-
-    for (let i = 1; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      const num = String(i).padStart(4, "0");
-      img.src = `${FRAME_PATH}${num}.webp`;
-      images.push(img);
-    }
-
-    imagesRef.current = images;
-
-    return () => { mounted = false; };
-  }, []);
-
-  const showFrame = useCallback((index) => {
-    if (index === currentFrameRef.current) return;
-    const img = imagesRef.current[index];
-    if (!imgRef.current || !img) return;
-    currentFrameRef.current = index;
-    imgRef.current.src = img.src;
-  }, []);
-
-  useEffect(() => {
-    let mounted = true;
-    let rafId;
-    let last = performance.now();
-    let frame = 0;
-    const interval = 1000 / FPS;
-
-    const loop = (now) => {
-      if (!mounted) return;
-      if (now - last >= interval) {
-        last = now - ((now - last) % interval);
-        frame = (frame + 1) % TOTAL_FRAMES;
-        showFrame(frame);
-        setProgress(frame / (TOTAL_FRAMES - 1));
-      }
-      rafId = requestAnimationFrame(loop);
-    };
-
-    rafId = requestAnimationFrame(loop);
-    return () => { mounted = false; cancelAnimationFrame(rafId); };
-  }, [showFrame]);
-
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black" dir="rtl">
-      <img
-        ref={imgRef}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      >
+        <source src="/hero-bg.webm" type="video/webm" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/50 via-[#138C9F]/30 to-[#138C9F]/70" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6">
@@ -114,7 +55,6 @@ function FramesSection() {
           </p>
         </div>
 
-        {/* Search card */}
         <div className="w-full max-w-3xl bg-white/95 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-2.5 sm:p-3 border border-white/20">
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center gap-2">
             <div className="w-full flex-1 relative" ref={dropdownRef}>
@@ -169,13 +109,6 @@ function FramesSection() {
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 w-full max-w-xs px-4">
         <FontAwesomeIcon icon={faAngleDown} className="text-white/40 text-lg animate-bounce" />
-        <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-white transition-all duration-100 ease-out rounded-full"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
-        <p className="text-white/40 text-[11px] font-bold">{Math.round(progress * 100)}%</p>
       </div>
     </section>
   );

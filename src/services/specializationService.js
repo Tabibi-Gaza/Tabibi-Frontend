@@ -1,7 +1,7 @@
 import axiosInstance from "../api/axiosInstance";
 
 export const getSpecializations = async () => {
-  const { data } = await axiosInstance.get("/Specializations/lookup");
+  const { data } = await axiosInstance.get("/specializations/lookup");
   return data.data;
 };
 

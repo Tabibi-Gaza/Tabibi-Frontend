@@ -26,7 +26,7 @@ const RegisterAsDoctor = () => {
     useEffect(() => {
         const fetchSpecializations = async () => {
             try {
-                const { data } = await axiosInstance.get('/Specializations/lookup');
+                const { data } = await axiosInstance.get('/specializations/lookup');
                 if (data.succeeded && data.data) {
                     setSpecializations(data.data);
                 }

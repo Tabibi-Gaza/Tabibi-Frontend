@@ -13,6 +13,7 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('react-router') || id.includes('react-dom') || id.includes('react/')) {
+<<<<<<< HEAD
               return 'react-vendor';
             }
             if (id.includes('fontawesome') || id.includes('@fortawesome')) {
@@ -32,10 +33,25 @@ export default defineConfig({
             }
             if (id.includes('axios') || id.includes('@tanstack') || id.includes('signalr')) {
               return 'data-fetching';
+=======
+              return 'react-core';
+            }
+            if (id.includes('@tanstack/react-query')) {
+              return 'react-query';
+            }
+            if (id.includes('axios') || id.includes('signalr')) {
+              return 'networking';
+>>>>>>> c2862d0 (Replace frame-by-frame animation with hero-bg.webm video, fix specializations lookup API 404 (case-sensitive URL), optimize QueryClient defaults and vite chunk splitting)
             }
             if (id.includes('i18next') || id.includes('react-i18next')) {
               return 'i18n';
             }
+<<<<<<< HEAD
+=======
+            if (id.includes('framer-motion')) {
+              return 'animation';
+            }
+>>>>>>> c2862d0 (Replace frame-by-frame animation with hero-bg.webm video, fix specializations lookup API 404 (case-sensitive URL), optimize QueryClient defaults and vite chunk splitting)
             return 'vendor';
           }
         }
