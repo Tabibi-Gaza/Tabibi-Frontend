@@ -12,6 +12,7 @@ dist
 dist-ssr
 build
 *.local
+hero-bg.webm
 
 # Environment variables
 .env
