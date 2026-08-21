@@ -6,6 +6,7 @@ import { faSearch, faChevronDown, faAngleDown, faGlobe } from "@fortawesome/free
 
 function FramesSection() {
   const videoRef = useRef(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const [speciality, setSpeciality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -28,19 +29,35 @@ function FramesSection() {
     return () => document.removeEventListener("mousedown", close);
   }, []);
 
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const handleCanPlay = () => setVideoLoaded(true);
+    v.addEventListener("canplay", handleCanPlay);
+    return () => v.removeEventListener("canplay", handleCanPlay);
+  }, []);
+
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black" dir="rtl">
+    <section className="relative h-screen w-full overflow-hidden bg-[#0d1b2a]" dir="rtl">
+      <img
+        src="/frames/frame_0050.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover hero-ken-burns"
+        loading="eager"
+        fetchPriority="high"
+      />
       <video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        preload="auto"
+        className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
       >
         <source src="/hero-bg.webm" type="video/webm" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/50 via-[#138C9F]/30 to-[#138C9F]/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6">
         <div className="w-full max-w-4xl text-center mb-8 md:mb-10">

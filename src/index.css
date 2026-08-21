@@ -39,6 +39,15 @@
     text-align: right !important;
 }
 
+.hero-ken-burns {
+  animation: kenBurns 25s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes kenBurns {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
+}
+
 @layer utilities {
   .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
   .safe-area-top { padding-top: env(safe-area-inset-top, 0); }
