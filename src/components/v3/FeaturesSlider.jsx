@@ -40,7 +40,6 @@ const features = [
 ];
 
 const TOTAL = features.length;
-const DURATION = 6000;
 
 function FeaturesSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,17 +47,16 @@ function FeaturesSlider() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % TOTAL);
-    }, DURATION);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
   const current = features[currentIndex];
-  const next = features[(currentIndex + 1) % TOTAL];
 
   return (
     <section className="relative bg-white min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
       <div className="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-16">
-        <div className="w-full md:w-1/2 text-center md:text-right" key={currentIndex}>
+        <div className="w-full md:w-1/2 text-center md:text-right">
           <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black select-none leading-none block mb-1" style={{ color: `${current.accent}15` }}>
             {current.number}
           </span>
@@ -73,12 +71,15 @@ function FeaturesSlider() {
           </p>
         </div>
 
-        <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative">
-          <div className="absolute rounded-2xl border-2" style={{ inset: '3px', borderColor: `${current.accent}40` }} />
-          <div className="absolute inset-2 rounded-2xl overflow-hidden shadow-xl">
-            <img src={current.image} alt="" className="w-full h-full object-cover" loading="lazy" width="480" height="480" />
-            <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${current.accent}20 0%, transparent 100%)` }} />
-          </div>
+        <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl">
+          <img
+            src={current.image}
+            alt={current.title}
+            className="w-full h-full object-cover"
+            width="480"
+            height="480"
+          />
+          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${current.accent}20 0%, transparent 100%)` }} />
         </div>
       </div>
 

@@ -19,20 +19,20 @@ function FramesSection() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#0d1b2a]" dir="rtl">
+    <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir="rtl">
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover -z-10"
-        poster=""
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
       >
         <source src="/hero-bg.webm" type="video/webm" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60 -z-[5]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" style={{ zIndex: 1 }} />
 
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6">
+      <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6" style={{ zIndex: 2 }}>
         <div className="w-full max-w-4xl text-center mb-8 md:mb-10">
           <span className="text-white/60 text-xs sm:text-sm font-bold tracking-widest block mb-4 font-['Cairo'] drop-shadow">
             — منصة طبيبي للخدمات الصحية —
@@ -97,7 +97,7 @@ function FramesSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 w-full max-w-xs px-4">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 w-full max-w-xs px-4" style={{ zIndex: 2 }}>
         <FontAwesomeIcon icon={faAngleDown} className="text-white/40 text-lg animate-bounce" />
       </div>
     </section>
