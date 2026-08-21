@@ -43,11 +43,16 @@ const TOTAL = features.length;
 
 function FeaturesSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % TOTAL);
-    }, 6000);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % TOTAL);
+        setIsAnimating(false);
+      }, 500);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
@@ -56,7 +61,7 @@ function FeaturesSlider() {
   return (
     <section className="relative bg-white min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
       <div className="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-16">
-        <div className="w-full md:w-1/2 text-center md:text-right">
+        <div className={`w-full md:w-1/2 text-center md:text-right transition-all duration-500 ${isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
           <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black select-none leading-none block mb-1" style={{ color: `${current.accent}15` }}>
             {current.number}
           </span>
@@ -71,11 +76,11 @@ function FeaturesSlider() {
           </p>
         </div>
 
-        <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl">
+        <div className={`shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
           <img
             src={current.image}
             alt={current.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover hero-ken-burns"
             width="480"
             height="480"
           />
@@ -87,7 +92,13 @@ function FeaturesSlider() {
         {features.map((_, i) => (
           <button
             key={i}
-            onClick={() => setCurrentIndex(i)}
+            onClick={() => {
+              setIsAnimating(true);
+              setTimeout(() => {
+                setCurrentIndex(i);
+                setIsAnimating(false);
+              }, 300);
+            }}
             className={`h-2 md:h-2.5 rounded-full transition-all duration-500 cursor-pointer ${i === currentIndex ? "w-6 md:w-8" : "w-2 md:w-2.5 hover:opacity-80"}`}
             style={{ backgroundColor: i === currentIndex ? current.accent : "rgba(0,0,0,0.15)" }}
             aria-label={`الانتقال للميزة ${i + 1}`}
