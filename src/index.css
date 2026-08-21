@@ -48,6 +48,17 @@
   100% { transform: scale(1.08); }
 }
 
+.hero-gradient {
+  background: linear-gradient(135deg, #0a2540 0%, #0d4f6b 30%, #138C9F 60%, #0a2540 100%);
+  background-size: 400% 400%;
+  animation: heroShimmer 15s ease-in-out infinite;
+}
+@keyframes heroShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 @layer utilities {
   .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
   .safe-area-top { padding-top: env(safe-area-inset-top, 0); }
