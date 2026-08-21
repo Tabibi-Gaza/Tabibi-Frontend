@@ -1,15 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faChevronDown, faAngleDown, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 function FramesSection() {
-  const videoRef = useRef(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const [speciality, setSpeciality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const { data: specs, isLoading } = useSpecializations();
 
@@ -21,39 +18,19 @@ function FramesSection() {
     navigate(speciality ? `/doctors/${speciality}` : "/doctors");
   };
 
-  useEffect(() => {
-    const close = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsOpen(false);
-    };
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
-  }, []);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const handleCanPlay = () => setVideoLoaded(true);
-    v.addEventListener("canplay", handleCanPlay);
-    v.load();
-    return () => v.removeEventListener("canplay", handleCanPlay);
-  }, []);
-
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0d1b2a]" dir="rtl">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a2540] via-[#0d3b5e] to-[#138C9F] hero-ken-burns" />
-
       <video
-        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
-        className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+        poster=""
       >
         <source src="/hero-bg.webm" type="video/webm" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60 -z-[5]" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6">
         <div className="w-full max-w-4xl text-center mb-8 md:mb-10">
@@ -70,7 +47,7 @@ function FramesSection() {
 
         <div className="w-full max-w-3xl bg-white/95 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.25)] rounded-2xl p-2.5 sm:p-3 border border-white/20">
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center gap-2">
-            <div className="w-full flex-1 relative" ref={dropdownRef}>
+            <div className="w-full flex-1 relative">
               <div
                 onClick={() => !isLoading && setIsOpen(!isOpen)}
                 className={`w-full text-slate-900 text-sm md:text-base px-5 py-3 md:py-3.5 rounded-xl md:rounded-full cursor-pointer flex items-center justify-between transition-all duration-200 ${
