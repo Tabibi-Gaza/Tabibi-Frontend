@@ -19,20 +19,18 @@ function FramesSection() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden hero-gradient" dir="rtl">
+    <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir="rtl">
       <video
         autoPlay
         loop
         muted
         playsInline
-        preload="none"
-        className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[2000ms]"
-        style={{ zIndex: 1 }}
-        onLoadedData={(e) => { e.target.style.opacity = '1'; }}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
       >
         <source src="/hero-bg.webm" type="video/webm" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" style={{ zIndex: 2 }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" style={{ zIndex: 1 }} />
 
       <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6" style={{ zIndex: 2 }}>
         <div className="w-full max-w-4xl text-center mb-8 md:mb-10">
