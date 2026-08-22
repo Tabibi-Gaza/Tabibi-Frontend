@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faVideo, faCalendarCheck, faHeartbeat, faPrescriptionBottle,
@@ -40,49 +40,48 @@ const features = [
 ];
 
 const TOTAL = features.length;
-const SLIDE_DURATION = 6000;
+const SLIDE_INTERVAL = 5000;
+const REVEAL_DURATION = 900;
 
 function FeaturesSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [revealing, setRevealing] = useState(false);
   const [nextIndex, setNextIndex] = useState(1);
-  const [progress, setProgress] = useState(0);
-  const startTimeRef = useRef(null);
-  const rafRef = useRef(null);
+  const [textVisible, setTextVisible] = useState(true);
+  const timerRef = useRef(null);
 
-  const animate = useCallback((timestamp) => {
-    if (!startTimeRef.current) startTimeRef.current = timestamp;
-    const elapsed = timestamp - startTimeRef.current;
-    const slideProgress = (elapsed % SLIDE_DURATION) / SLIDE_DURATION;
+  const advance = useCallback(() => {
+    const next = (currentIndex + 1) % TOTAL;
+    setNextIndex(next);
+    setTextVisible(false);
+    setRevealing(true);
 
-    if (elapsed >= SLIDE_DURATION) {
-      const cycles = Math.floor(elapsed / SLIDE_DURATION);
-      const newIndex = cycles % TOTAL;
-      setCurrentIndex(newIndex);
-      setNextIndex((newIndex + 1) % TOTAL);
-      startTimeRef.current = timestamp;
-      setProgress(0);
-    } else {
-      setProgress(slideProgress * 100);
-    }
-
-    rafRef.current = requestAnimationFrame(animate);
-  }, []);
+    setTimeout(() => {
+      setCurrentIndex(next);
+      setRevealing(false);
+      setTextVisible(true);
+    }, REVEAL_DURATION);
+  }, [currentIndex]);
 
   useEffect(() => {
-    startTimeRef.current = null;
-    rafRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [animate]);
+    timerRef.current = setInterval(advance, SLIDE_INTERVAL);
+    return () => clearInterval(timerRef.current);
+  }, [advance]);
 
   const jumpTo = (index) => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    setCurrentIndex(index);
-    setNextIndex((index + 1) % TOTAL);
-    startTimeRef.current = null;
-    setProgress(0);
-    rafRef.current = requestAnimationFrame(animate);
+    if (index === currentIndex) return;
+    clearInterval(timerRef.current);
+    setNextIndex(index);
+    setTextVisible(false);
+    setRevealing(true);
+
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setRevealing(false);
+      setTextVisible(true);
+    }, REVEAL_DURATION);
+
+    timerRef.current = setInterval(advance, SLIDE_INTERVAL);
   };
 
   const current = features[currentIndex];
@@ -92,7 +91,7 @@ function FeaturesSlider() {
     <section className="relative bg-white min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
       <div className="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-16">
         {/* Text Side */}
-        <div className="w-full md:w-1/2 text-center md:text-right">
+        <div className={`w-full md:w-1/2 text-center md:text-right transition-all duration-300 ${textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
           <span
             className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black select-none leading-none block mb-1"
             style={{ color: `${current.accent}15` }}
@@ -117,18 +116,15 @@ function FeaturesSlider() {
         <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl">
           {/* Decorative border frame */}
           <div
-            className="absolute rounded-2xl border-2 pointer-events-none"
+            className="absolute rounded-2xl border-2 pointer-events-none z-20"
             style={{
               inset: "3px",
               borderColor: `${current.accent}40`,
             }}
           />
 
-          {/* Current slide */}
-          <div
-            className="absolute inset-2 rounded-2xl overflow-hidden"
-            style={{ clipPath: "circle(100%)" }}
-          >
+          {/* Base layer - current slide (always visible underneath) */}
+          <div className="absolute inset-2 rounded-2xl overflow-hidden">
             <img
               src={current.image}
               alt={current.title}
@@ -142,23 +138,29 @@ function FeaturesSlider() {
             />
           </div>
 
-          {/* Next slide reveal */}
-          <div
-            className="absolute inset-2 rounded-2xl overflow-hidden z-10"
-            style={{ clipPath: `circle(${progress}%)` }}
-          >
-            <img
-              src={next.image}
-              alt={next.title}
-              className="w-full h-full object-cover hero-ken-burns"
-              width="480"
-              height="480"
-            />
+          {/* Reveal overlay - next slide expanding circle */}
+          {revealing && (
             <div
-              className="absolute inset-0"
-              style={{ background: `linear-gradient(135deg, ${next.accent}20 0%, transparent 100%)` }}
-            />
-          </div>
+              className="absolute inset-2 rounded-2xl overflow-hidden z-10"
+              style={{
+                clipPath: "circle(0% at 50% 50%)",
+                animation: `circleReveal ${REVEAL_DURATION}ms ease-in-out forwards`,
+                willChange: "clip-path",
+              }}
+            >
+              <img
+                src={next.image}
+                alt={next.title}
+                className="w-full h-full object-cover hero-ken-burns"
+                width="480"
+                height="480"
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: `linear-gradient(135deg, ${next.accent}20 0%, transparent 100%)` }}
+              />
+            </div>
+          )}
         </div>
       </div>
 
