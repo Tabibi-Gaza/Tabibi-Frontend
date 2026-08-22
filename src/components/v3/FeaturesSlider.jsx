@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faVideo, faCalendarCheck, faHeartbeat, faPrescriptionBottle,
@@ -40,58 +40,46 @@ const features = [
 ];
 
 const TOTAL = features.length;
-const SLIDE_INTERVAL = 5000;
-const REVEAL_DURATION = 900;
+const SLIDE_DURATION = 6000;
 
 function FeaturesSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [revealing, setRevealing] = useState(false);
-  const [nextIndex, setNextIndex] = useState(1);
-  const [textVisible, setTextVisible] = useState(true);
-  const timerRef = useRef(null);
-
-  const advance = useCallback(() => {
-    const next = (currentIndex + 1) % TOTAL;
-    setNextIndex(next);
-    setTextVisible(false);
-    setRevealing(true);
-
-    setTimeout(() => {
-      setCurrentIndex(next);
-      setRevealing(false);
-      setTextVisible(true);
-    }, REVEAL_DURATION);
-  }, [currentIndex]);
+  const startTimeRef = useRef(null);
+  const rafRef = useRef(null);
+  const [state, setState] = useState({ progress: 0, currentIndex: 0 });
 
   useEffect(() => {
-    timerRef.current = setInterval(advance, SLIDE_INTERVAL);
-    return () => clearInterval(timerRef.current);
-  }, [advance]);
+    const animate = (timestamp) => {
+      startTimeRef.current ??= timestamp;
+      const elapsed = timestamp - startTimeRef.current;
+      const rawIndex = elapsed / SLIDE_DURATION;
+      const currentIndex = Math.min(TOTAL - 1, Math.max(0, Math.floor(rawIndex)));
+      const progress = rawIndex - currentIndex;
+
+      setState({
+        progress,
+        currentIndex: currentIndex % TOTAL,
+      });
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
 
   const jumpTo = (index) => {
-    if (index === currentIndex) return;
-    clearInterval(timerRef.current);
-    setNextIndex(index);
-    setTextVisible(false);
-    setRevealing(true);
-
-    setTimeout(() => {
-      setCurrentIndex(index);
-      setRevealing(false);
-      setTextVisible(true);
-    }, REVEAL_DURATION);
-
-    timerRef.current = setInterval(advance, SLIDE_INTERVAL);
+    startTimeRef.current = performance.now() - index * SLIDE_DURATION;
   };
 
+  const { progress, currentIndex } = state;
   const current = features[currentIndex];
-  const next = features[nextIndex];
+  const next = features[(currentIndex + 1) % TOTAL];
 
   return (
     <section className="relative bg-white min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
       <div className="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-16">
         {/* Text Side */}
-        <div className={`w-full md:w-1/2 text-center md:text-right transition-all duration-300 ${textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
+        <div className="w-full md:w-1/2 text-center md:text-right">
           <span
             className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black select-none leading-none block mb-1"
             style={{ color: `${current.accent}15` }}
@@ -113,41 +101,36 @@ function FeaturesSlider() {
         </div>
 
         {/* Image Side */}
-        <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl">
-          {/* Decorative border frame */}
+        <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative">
+          {/* Decorative Frame Border */}
           <div
-            className="absolute rounded-2xl border-2 pointer-events-none z-20"
-            style={{
-              inset: "3px",
-              borderColor: `${current.accent}40`,
-            }}
+            className="absolute rounded-2xl border-2"
+            style={{ inset: "3px", borderColor: `${current.accent}40` }}
           />
 
-          {/* Base layer - current slide (always visible underneath) */}
-          <div className="absolute inset-2 rounded-2xl overflow-hidden">
-            <img
-              src={current.image}
-              alt={current.title}
-              className="w-full h-full object-cover hero-ken-burns"
-              width="480"
-              height="480"
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: `linear-gradient(135deg, ${current.accent}20 0%, transparent 100%)` }}
-            />
+          {/* Current Image - Full Circle */}
+          <div className="absolute inset-2" style={{ clipPath: "circle(100%)" }}>
+            <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={current.image}
+                alt={current.title}
+                className="w-full h-full object-cover hero-ken-burns"
+                width="480"
+                height="480"
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: `linear-gradient(135deg, ${current.accent}20 0%, transparent 100%)` }}
+              />
+            </div>
           </div>
 
-          {/* Reveal overlay - next slide expanding circle */}
-          {revealing && (
-            <div
-              className="absolute inset-2 rounded-2xl overflow-hidden z-10"
-              style={{
-                clipPath: "circle(0% at 50% 50%)",
-                animation: `circleReveal ${REVEAL_DURATION}ms ease-in-out forwards`,
-                willChange: "clip-path",
-              }}
-            >
+          {/* Next Image - Animated Circle Reveal */}
+          <div
+            className="absolute inset-2 z-10"
+            style={{ clipPath: `circle(${progress * 100}%)` }}
+          >
+            <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl">
               <img
                 src={next.image}
                 alt={next.title}
@@ -160,11 +143,11 @@ function FeaturesSlider() {
                 style={{ background: `linear-gradient(135deg, ${next.accent}20 0%, transparent 100%)` }}
               />
             </div>
-          )}
+          </div>
         </div>
       </div>
 
-      {/* Dot navigation */}
+      {/* Dot Navigation */}
       <div className="flex items-center gap-2 md:gap-3 z-20 mt-10 md:mt-14">
         {features.map((_, i) => (
           <button

@@ -44,15 +44,6 @@
   100% { transform: scale(1.05); }
 }
 
-@keyframes circleReveal {
-  0% { clip-path: circle(0% at 50% 50%); }
-  100% { clip-path: circle(150% at 50% 50%); }
-}
-
-.circle-reveal-active {
-  will-change: clip-path;
-}
-
 @layer utilities {
   .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
   .safe-area-top { padding-top: env(safe-area-inset-top, 0); }
