@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,21 +7,8 @@ import { faSearch, faChevronDown, faAngleDown, faGlobe } from "@fortawesome/free
 function FramesSection() {
   const [speciality, setSpeciality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const videoRef = useRef(null);
   const navigate = useNavigate();
   const { data: specs, isLoading } = useSpecializations();
-
-  useEffect(() => {
-    const timer = setTimeout(() => setVideoLoaded(true), 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (videoLoaded && videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  }, [videoLoaded]);
 
   const options = specs?.map((s) => ({ id: s.id, label: s.name })) || [];
   const selected = options.find((o) => o.id === speciality);
@@ -34,15 +21,14 @@ function FramesSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir="rtl">
       <video
-        ref={videoRef}
+        autoPlay
         loop
         muted
         playsInline
-        preload="none"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ zIndex: 0 }}
       >
-        {videoLoaded && <source src="/hero-bg.webm" type="video/webm" />}
+        <source src="/hero-bg.webm" type="video/webm" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" style={{ zIndex: 1 }} />
 
