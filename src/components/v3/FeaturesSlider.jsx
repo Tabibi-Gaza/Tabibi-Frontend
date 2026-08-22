@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faVideo, faCalendarCheck, faHeartbeat, faPrescriptionBottle,
@@ -40,32 +40,69 @@ const features = [
 ];
 
 const TOTAL = features.length;
+const SLIDE_DURATION = 6000;
 
 function FeaturesSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [nextIndex, setNextIndex] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const startTimeRef = useRef(null);
+  const rafRef = useRef(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % TOTAL);
-        setIsAnimating(false);
-      }, 500);
-    }, 5000);
-    return () => clearInterval(timer);
+  const animate = useCallback((timestamp) => {
+    if (!startTimeRef.current) startTimeRef.current = timestamp;
+    const elapsed = timestamp - startTimeRef.current;
+    const slideProgress = (elapsed % SLIDE_DURATION) / SLIDE_DURATION;
+
+    if (elapsed >= SLIDE_DURATION) {
+      const cycles = Math.floor(elapsed / SLIDE_DURATION);
+      const newIndex = cycles % TOTAL;
+      setCurrentIndex(newIndex);
+      setNextIndex((newIndex + 1) % TOTAL);
+      startTimeRef.current = timestamp;
+      setProgress(0);
+    } else {
+      setProgress(slideProgress * 100);
+    }
+
+    rafRef.current = requestAnimationFrame(animate);
   }, []);
 
+  useEffect(() => {
+    startTimeRef.current = null;
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [animate]);
+
+  const jumpTo = (index) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setCurrentIndex(index);
+    setNextIndex((index + 1) % TOTAL);
+    startTimeRef.current = null;
+    setProgress(0);
+    rafRef.current = requestAnimationFrame(animate);
+  };
+
   const current = features[currentIndex];
+  const next = features[nextIndex];
 
   return (
     <section className="relative bg-white min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
       <div className="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-16">
-        <div className={`w-full md:w-1/2 text-center md:text-right transition-all duration-500 ${isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-          <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black select-none leading-none block mb-1" style={{ color: `${current.accent}15` }}>
+        {/* Text Side */}
+        <div className="w-full md:w-1/2 text-center md:text-right">
+          <span
+            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black select-none leading-none block mb-1"
+            style={{ color: `${current.accent}15` }}
+          >
             {current.number}
           </span>
-          <span className="text-[10px] sm:text-xs font-black tracking-widest mb-2 inline-block" style={{ color: current.accent }}>
+          <span
+            className="text-[10px] sm:text-xs font-black tracking-widest mb-2 inline-block"
+            style={{ color: current.accent }}
+          >
             {current.title.split(" ")[0]}
           </span>
           <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 mb-3 md:mb-4 font-['Cairo'] leading-tight">
@@ -76,31 +113,67 @@ function FeaturesSlider() {
           </p>
         </div>
 
-        <div className={`shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-          <img
-            src={current.image}
-            alt={current.title}
-            className="w-full h-full object-cover hero-ken-burns"
-            width="480"
-            height="480"
+        {/* Image Side */}
+        <div className="shrink-0 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[30rem] lg:h-[30rem] relative overflow-hidden rounded-2xl shadow-xl">
+          {/* Decorative border frame */}
+          <div
+            className="absolute rounded-2xl border-2 pointer-events-none"
+            style={{
+              inset: "3px",
+              borderColor: `${current.accent}40`,
+            }}
           />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${current.accent}20 0%, transparent 100%)` }} />
+
+          {/* Current slide */}
+          <div
+            className="absolute inset-2 rounded-2xl overflow-hidden"
+            style={{ clipPath: "circle(100%)" }}
+          >
+            <img
+              src={current.image}
+              alt={current.title}
+              className="w-full h-full object-cover hero-ken-burns"
+              width="480"
+              height="480"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: `linear-gradient(135deg, ${current.accent}20 0%, transparent 100%)` }}
+            />
+          </div>
+
+          {/* Next slide reveal */}
+          <div
+            className="absolute inset-2 rounded-2xl overflow-hidden z-10"
+            style={{ clipPath: `circle(${progress}%)` }}
+          >
+            <img
+              src={next.image}
+              alt={next.title}
+              className="w-full h-full object-cover hero-ken-burns"
+              width="480"
+              height="480"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: `linear-gradient(135deg, ${next.accent}20 0%, transparent 100%)` }}
+            />
+          </div>
         </div>
       </div>
 
+      {/* Dot navigation */}
       <div className="flex items-center gap-2 md:gap-3 z-20 mt-10 md:mt-14">
         {features.map((_, i) => (
           <button
             key={i}
-            onClick={() => {
-              setIsAnimating(true);
-              setTimeout(() => {
-                setCurrentIndex(i);
-                setIsAnimating(false);
-              }, 300);
+            onClick={() => jumpTo(i)}
+            className={`h-2 md:h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
+              i === currentIndex ? "w-6 md:w-8" : "w-2 md:w-2.5 hover:opacity-80"
+            }`}
+            style={{
+              backgroundColor: i === currentIndex ? current.accent : "rgba(0,0,0,0.15)",
             }}
-            className={`h-2 md:h-2.5 rounded-full transition-all duration-500 cursor-pointer ${i === currentIndex ? "w-6 md:w-8" : "w-2 md:w-2.5 hover:opacity-80"}`}
-            style={{ backgroundColor: i === currentIndex ? current.accent : "rgba(0,0,0,0.15)" }}
             aria-label={`الانتقال للميزة ${i + 1}`}
           />
         ))}
