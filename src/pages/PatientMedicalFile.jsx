@@ -385,6 +385,7 @@ const PatientMedicalFile = () => {
                                     <div className="w-12 h-12 rounded-full bg-slate-200 border border-white shadow-xs overflow-hidden flex items-center justify-center text-gray-400 shrink-0">
                                         {selectedVisit.doctorImageUrl ? (
                                             <img
+                                                loading="lazy"
                                                 src={`${FILES_BASE}${selectedVisit.doctorImageUrl}`}
                                                 alt={selectedVisit.doctorName}
                                                 className="w-full h-full object-cover"

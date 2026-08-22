@@ -10,18 +10,18 @@ const BANKS = [
     { id: '11111111-1111-1111-1111-111111111111', name: 'بنك فلسطين', logo: '/images/payment/bank-of-palestine.webp' },
     { id: '22222222-2222-2222-2222-222222222222', name: 'بنك الأردن', logo: '/images/payment/bank-of-jordan.svg' },
     { id: '33333333-3333-3333-3333-333333333333', name: 'بنك القدس', logo: '/images/payment/quds-bank.jpg' },
-    { id: '66666666-6666-6666-6666-666666666666', name: 'البنك الوطني', logo: '/images/payment/national-bank.png' },
+    { id: '66666666-6666-6666-6666-666666666666', name: 'البنك الوطني', logo: '/images/payment/national-bank.webp' },
     { id: '77777777-7777-7777-7777-777777777777', name: 'البنك الإسلامي الفلسطيني', logo: '/images/payment/islamic-bank-palestine.png' },
-    { id: '88888888-8888-8888-8888-888888888888', name: 'البنك الإسلامي العربي', logo: '/images/payment/arab-islamic-bank.png' },
-    { id: '99999999-9999-9999-9999-999999999999', name: 'البنك الأهلي الفلسطيني', logo: '/images/payment/national-bank.png' },
+    { id: '88888888-8888-8888-8888-888888888888', name: 'البنك الإسلامي العربي', logo: '/images/payment/arab-islamic-bank.webp' },
+    { id: '99999999-9999-9999-9999-999999999999', name: 'البنك الأهلي الفلسطيني', logo: '/images/payment/national-bank.webp' },
     { id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', name: 'البنك التجاري الفلسطيني', logo: '/images/payment/bank-of-palestine.webp' },
     { id: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', name: 'بنك الاستثمار الفلسطيني', logo: '/images/payment/quds-bank.jpg' },
-    { id: 'cccccccc-cccc-cccc-cccc-cccccccccccc', name: 'البنك الإسلامي العربي - فرع رام الله', logo: '/images/payment/arab-islamic-bank.png' },
+    { id: 'cccccccc-cccc-cccc-cccc-cccccccccccc', name: 'البنك الإسلامي العربي - فرع رام الله', logo: '/images/payment/arab-islamic-bank.webp' },
 ];
 
 const WALLET_PROVIDERS = [
     { id: '44444444-4444-4444-4444-444444444444', name: 'Jawwal Pay', logo: '/images/payment/jawwal-pay.png' },
-    { id: '55555555-5555-5555-5555-555555555555', name: 'PalPay', logo: '/images/payment/palpay.png' },
+    { id: '55555555-5555-5555-5555-555555555555', name: 'PalPay', logo: '/images/payment/palpay.webp' },
 ];
 
 const BANK_IBAN_CODES = {

@@ -231,7 +231,7 @@ export default function DoctorSubscription() {
                             <label className="block font-['Cairo'] font-bold text-[13px] text-[#526069] mb-1.5">صورة الإيصال / التحويل</label>
                             <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-[#C3C6D6] rounded-xl cursor-pointer hover:border-[#138C9F] transition-colors">
                                 {receiptPreview ? (
-                                    <img src={receiptPreview} alt="receipt" className="w-full h-full object-contain rounded-xl p-2" />
+                                    <img loading="lazy" src={receiptPreview} alt="receipt" className="w-full h-full object-contain rounded-xl p-2" />
                                 ) : (
                                     <div className="flex flex-col items-center gap-2 text-[#526069]">
                                         <Upload size={28} />

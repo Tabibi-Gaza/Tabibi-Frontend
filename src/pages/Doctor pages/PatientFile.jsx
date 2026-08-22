@@ -33,7 +33,7 @@ const PatientFile = () => {
                 {/* كارت المريض العلوي */}
                 <div className="bg-white border border-[#C3C6D6]/70 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs"> 
                     <div className="flex items-center gap-5 text-right w-full md:w-auto"> 
-                        <img src={patientData.avatar} alt={patientData.name} className="w-20 h-20 rounded-2xl object-cover border border-[#C3C6D6]" /> 
+                        <img loading="lazy" src={patientData.avatar} alt={patientData.name} className="w-20 h-20 rounded-2xl object-cover border border-[#C3C6D6]" /> 
                         <h2 className="text-2xl font-black text-[#0B1C30]">{patientData.name}</h2> 
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3 w-full md:w-auto"> 

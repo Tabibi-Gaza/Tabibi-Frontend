@@ -257,6 +257,7 @@ const AdminDashboard = () => {
                                 <div key={req.id || index} className="bg-[#ecf8fa] border border-[#C3C6D6] rounded-xl p-3.5 flex flex-col gap-2.5 transition-all hover:shadow-xs">
                                     <div className="flex items-center gap-3">
                                         <img
+                                            loading="lazy"
                                             className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
                                             src={req.image || req.img}
                                             alt={req.name}
@@ -442,7 +443,7 @@ const AdminDashboard = () => {
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
                                 <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.img ? (
-                                        <img src={selectedRequest.img} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
+                                        <img loading="lazy" src={selectedRequest.img} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
                                     ) : (
                                         <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                             {selectedRequest.name ? selectedRequest.name.split(' ').map(n => n[0]).join('').slice(0, 2) : '??'}

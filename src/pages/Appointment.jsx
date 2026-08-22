@@ -211,7 +211,7 @@ const Appointment = () => {
         </div>
 
         <div className="w-full md:w-56 shrink-0 bg-[#f4faff] rounded-xl flex items-center justify-center overflow-hidden p-2">
-          <img className="w-full h-56 md:h-auto object-contain" src={docInfo.image} alt={docInfo.name} />
+          <img loading="lazy" className="w-full h-56 md:h-auto object-contain" src={docInfo.image} alt={docInfo.name} />
         </div>
 
         <div className="flex-1 flex flex-col justify-between pt-10 md:pt-0 text-5xl">

@@ -171,6 +171,7 @@ export default function PatientManagement() {
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <img
+                            loading="lazy"
                             src={patient.avatar}
                             alt={patient.name}
                             className="w-10 h-10 rounded-full object-cover border"
@@ -239,6 +240,7 @@ export default function PatientManagement() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <img
+                      loading="lazy"
                       src={patient.avatar}
                       alt={patient.name}
                       className="w-11 h-11 rounded-full object-cover border"

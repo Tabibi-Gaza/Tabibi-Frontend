@@ -56,7 +56,7 @@ const Cart = () => {
                 <div key={item.id} className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center gap-4 hover:shadow-md transition-all">
                   <div className="w-16 h-16 rounded-xl bg-[#138C9F]/10 flex items-center justify-center shrink-0 overflow-hidden">
                     {item.image ? (
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <img loading="lazy" src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
                       <span className="text-[#138C9F] text-lg font-bold">{item.name?.[0]}</span>
                     )}

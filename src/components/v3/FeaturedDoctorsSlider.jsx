@@ -14,7 +14,7 @@ function FeaturedDoctorsSlider() {
   const renderDoctor = (doctor, index, isActive) => (
     <div className={`bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30 scale-[1.02]" : ""}`}>
       <div className="relative h-56 md:h-64 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
-        <img src={doctor.image} alt={doctor.name} className="w-full h-full object-cover" />
+        <img loading="lazy" src={doctor.image} alt={doctor.name} className="w-full h-full object-cover" />
         <div className="absolute top-3 right-3 bg-green-500/90 text-white text-[10px] font-black px-2.5 py-1 rounded-lg flex items-center gap-1">
           <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
           متاح

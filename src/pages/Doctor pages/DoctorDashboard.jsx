@@ -215,6 +215,7 @@ const DoctorDashboard = () => {
                       <div className="flex items-center gap-3">
                         {patientImage && patientImage !== "undefined" ? (
                           <img
+                            loading="lazy"
                             src={patientImage.startsWith("http") ? patientImage : `${FILES_URL}/${patientImage}`}
                             alt={patientName}
                             className="w-9 h-9 rounded-full object-cover"
@@ -293,6 +294,7 @@ const DoctorDashboard = () => {
                       <div className="flex items-center gap-3">
                         {imgUrl && imgUrl !== "undefined" ? (
                           <img
+                            loading="lazy"
                             src={imgUrl.startsWith("http") ? imgUrl : `${FILES_URL}/${imgUrl}`}
                             alt={cleanName}
                             className="w-9 h-9 rounded-full object-cover"
@@ -348,6 +350,7 @@ const DoctorDashboard = () => {
                   <div className="flex items-center gap-3 bg-[#F4F6FC] p-4 rounded-xl">
                     {selectedPayment.patientImageUrl && selectedPayment.patientImageUrl !== "undefined" ? (
                       <img
+                        loading="lazy"
                         src={selectedPayment.patientImageUrl.startsWith("http") ? selectedPayment.patientImageUrl : `${FILES_URL}/${selectedPayment.patientImageUrl}`}
                         alt={selectedPayment.patientName}
                         className="w-10 h-10 rounded-full object-cover"
@@ -446,6 +449,7 @@ const DoctorDashboard = () => {
                       <span className="font-bold text-[#526069] text-sm">صورة الإيصال المرفوعة:</span>
                       <div className="border border-[#C3C6D6] rounded-xl overflow-hidden">
                         <img
+                          loading="lazy"
                           src={`${FILES_URL}/${selectedPayment.attachmentUrl}`}
                           alt="Receipt image"
                           className="w-full max-h-[20vh] object-contain bg-gray-50"

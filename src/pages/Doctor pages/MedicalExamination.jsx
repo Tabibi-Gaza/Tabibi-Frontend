@@ -251,7 +251,7 @@ const MedicalExamination = () => {
                         <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 md:gap-12 w-full lg:w-auto">
                             <div className="flex items-center gap-4">
                                 {patientImage ? (
-                                    <img src={patientImage} alt={patient.fullName} className="w-16 h-16 rounded-2xl object-cover border border-[#C3C6D6]" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                    <img loading="lazy" src={patientImage} alt={patient.fullName} className="w-16 h-16 rounded-2xl object-cover border border-[#C3C6D6]" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                                 ) : null}
                                 <div className={`w-16 h-16 rounded-2xl bg-[#C4D2FF] text-[#0B1C30] items-center justify-center font-black text-lg ${patientImage ? 'hidden' : 'flex'}`}>
                                     {(patient.fullName || "م").charAt(0)}

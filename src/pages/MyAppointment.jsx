@@ -155,7 +155,7 @@ const MyAppointment = () => {
                     <div key={item.id} className="bg-white border border-gray-100 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
                       <div className="flex items-center gap-4 w-full md:w-auto">
                         <div className="w-12 h-12 bg-gray-100 rounded-full overflow-hidden shrink-0 border border-gray-200">
-                          <img className="w-full h-full object-cover" src={item.doctorImageUrl ? `${FILES_BASE}/${item.doctorImageUrl}` : 'https://ui-avatars.com/api/?name=Doctor&background=138C9F&color=fff'} alt="" />
+                          <img loading="lazy" className="w-full h-full object-cover" src={item.doctorImageUrl ? `${FILES_BASE}/${item.doctorImageUrl}` : 'https://ui-avatars.com/api/?name=Doctor&background=138C9F&color=fff'} alt="" />
                         </div>
                         <div>
                           <h4 className="text-sm font-bold text-gray-800">{item.doctorName}</h4>
@@ -207,7 +207,7 @@ const MyAppointment = () => {
                     <div key={item.id} className="bg-white border border-gray-100 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm opacity-85">
                       <div className="flex items-center gap-4 w-full md:w-auto">
                         <div className="w-12 h-12 bg-gray-100 rounded-full overflow-hidden shrink-0 border border-gray-200 grayscale">
-                          <img className="w-full h-full object-cover" src={item.doctorImageUrl ? `${FILES_BASE}/${item.doctorImageUrl}` : 'https://ui-avatars.com/api/?name=Doctor&background=138C9F&color=fff'} alt="" />
+                          <img loading="lazy" className="w-full h-full object-cover" src={item.doctorImageUrl ? `${FILES_BASE}/${item.doctorImageUrl}` : 'https://ui-avatars.com/api/?name=Doctor&background=138C9F&color=fff'} alt="" />
                         </div>
                         <div>
                           <h4 className="text-sm font-bold text-gray-700">{item.doctorName}</h4>

@@ -148,6 +148,7 @@ function ReviewsGrid() {
                   <div className="flex items-center justify-between gap-3 pt-4 border-t border-slate-100">
                     <div className="flex items-center gap-3">
                       <img
+                        loading="lazy"
                         src={
                           review.patientImage
                             ? `${FILES_URL}/${review.patientImage.startsWith("/") ? "" : "/"}${review.patientImage}`
@@ -201,6 +202,7 @@ function ReviewsGrid() {
             </button>
             <div className="flex items-center gap-3 mb-4">
               <img
+                loading="lazy"
                 src={
                   popupReview.patientImage
                     ? `${FILES_URL}/${popupReview.patientImage.startsWith("/") ? "" : "/"}${popupReview.patientImage}`

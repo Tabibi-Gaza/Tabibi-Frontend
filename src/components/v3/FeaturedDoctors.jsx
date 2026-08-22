@@ -73,6 +73,7 @@ function FeaturedDoctors() {
             >
               <div className="bg-linear-to-b from-slate-50 to-white overflow-hidden w-28 sm:w-36 md:w-full aspect-square md:h-56 shrink-0 flex items-center justify-center relative border-l border-slate-100 md:border-l-0 md:border-b">
                 <img
+                  loading="lazy"
                   src={
                     item.profileImageUrl
                       ? `${FILES_URL}/${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}`

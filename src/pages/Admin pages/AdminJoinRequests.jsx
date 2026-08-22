@@ -410,7 +410,7 @@ export default function AdminJoinRequests() {
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
                                 <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.photoPath ? (
-                                        <img src={`${FILES_URL}/${selectedRequest.photoPath}`} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
+                                        <img loading="lazy" src={`${FILES_URL}/${selectedRequest.photoPath}`} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
                                     ) : (
                                         <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                             {selectedRequest.avatarInitials}

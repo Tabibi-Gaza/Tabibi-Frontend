@@ -95,6 +95,7 @@ const AdminProfile = () => {
               {image || userData?.image ? (
                 // 1. إذا كانت هناك صورة جديدة مرفوعة أو صورة قديمة مخزنة، نعرض الصورة
                 <img
+                  loading="lazy"
                   className="w-full h-full object-cover"
                   src={image ? URL.createObjectURL(image) : userData.image}
                   alt="صورة شخصية"

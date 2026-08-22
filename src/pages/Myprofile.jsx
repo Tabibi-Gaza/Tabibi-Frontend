@@ -127,6 +127,7 @@ const Myprofile = () => {
               {currentData?.image ? (
                 // إذا كانت هناك صورة جديدة مرفوعة أو صورة قديمة مخزنة، نعرض الصورة
                 <img
+                  loading="lazy"
                   className="w-full h-full object-cover"
                   src={currentData.image}
                   alt="صورة شخصية"

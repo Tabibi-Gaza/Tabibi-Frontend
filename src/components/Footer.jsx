@@ -31,7 +31,7 @@ const Footer = () => {
             to='/' 
             onClick={() => window.scrollTo(0, 0)}
           >
-            <img className='h-16 md:h-20 lg:h-24 object-contain' alt="شعار طبيبي" src={assets.logo} />
+            <img loading="lazy" className='h-16 md:h-20 lg:h-24 object-contain' alt="شعار طبيبي" src={assets.logo} />
           </Link>
 
           <div className='space-y-2 mt-4'>
@@ -90,7 +90,7 @@ const Footer = () => {
               rel='noopener noreferrer' 
               className='inline-flex items-center justify-center transition-all hover:opacity-90 h-14 w-52 cursor-pointer shadow-sm hover:shadow-md rounded-xl overflow-hidden bg-black shrink-0'
             >
-              <img src='https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg' className='h-full w-full object-cover' alt='Google Play' />
+              <img loading="lazy" src='https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg' className='h-full w-full object-cover' alt='Google Play' />
             </a>
 
             {/* زر App Store */}
@@ -100,7 +100,7 @@ const Footer = () => {
               rel='noopener noreferrer' 
               className='inline-flex items-center justify-center gap-2 sm:gap-3 bg-black text-white px-3 sm:px-4 rounded-xl hover:bg-gray-900 transition-all shadow-sm hover:shadow-md h-14 w-52 cursor-pointer border border-neutral-800 shrink-0'
             >
-              <img src='https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg' className='h-6 md:h-7 w-auto object-contain shrink-0' alt='App Store' />
+              <img loading="lazy" src='https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg' className='h-6 md:h-7 w-auto object-contain shrink-0' alt='App Store' />
               <div className='flex flex-col text-left leading-tight font-sans select-none'>
                 <span className='text-[9px] text-gray-300 block font-light tracking-wide'>حمّل من</span>
                 <span className='text-xs font-semibold block text-left mt-0.5 tracking-tight'>App Store</span>

@@ -326,6 +326,7 @@ const PaymentPage = () => {
                 {receiptPreview ? (
                   <div className="space-y-3">
                     <img
+                      loading="lazy"
                       src={receiptPreview}
                       alt="إيصال الدفع"
                       className="max-h-48 mx-auto rounded-lg object-contain shadow-sm"

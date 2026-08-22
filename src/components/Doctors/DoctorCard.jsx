@@ -135,6 +135,7 @@ const DoctorCard = ({ item }) => {
       {/* صورة الطبيب */}
       <div className="bg-gray-50/50 h-52 w-full flex items-center justify-center relative border-b border-gray-100">
         <img
+          loading="lazy"
           src={
             item.profileImageUrl
               ? `${import.meta.env.VITE_Files_URL}${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}`

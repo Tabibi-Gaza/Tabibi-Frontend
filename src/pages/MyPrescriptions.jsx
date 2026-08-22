@@ -194,7 +194,7 @@ const MyPrescriptions = () => {
                                 <div className="bg-[#EBF3F5] px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#C3C6D6]/40">
                                     <div className="flex items-center gap-3">
                                         {getDoctorImageSrc(rx.doctorImage) ? (
-                                            <img src={getDoctorImageSrc(rx.doctorImage)} alt={rx.doctorName} className="w-11 h-11 rounded-xl object-cover shrink-0" />
+                                            <img loading="lazy" src={getDoctorImageSrc(rx.doctorImage)} alt={rx.doctorName} className="w-11 h-11 rounded-xl object-cover shrink-0" />
                                         ) : (
                                             <div className="w-11 h-11 rounded-xl bg-[#138C9F] text-white flex items-center justify-center shrink-0 text-sm font-black">
                                                 {getDoctorInitials(rx.doctorName)}
@@ -285,7 +285,7 @@ const MyPrescriptions = () => {
                         <div className="px-6 py-5">
                             <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                                 {getDoctorImageSrc(selectedRx.doctorImage) ? (
-                                    <img src={getDoctorImageSrc(selectedRx.doctorImage)} alt={selectedRx.doctorName} className="w-12 h-12 rounded-xl object-cover shrink-0" />
+                                    <img loading="lazy" src={getDoctorImageSrc(selectedRx.doctorImage)} alt={selectedRx.doctorName} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                                 ) : (
                                     <div className="w-12 h-12 rounded-xl bg-[#138C9F] text-white flex items-center justify-center shrink-0 text-base font-black">
                                         {getDoctorInitials(selectedRx.doctorName)}
@@ -380,7 +380,7 @@ const MyPrescriptions = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', padding: '15px', background: '#f8fafb', borderRadius: '12px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 {getDoctorImageSrc(selectedRx.doctorImage) ? (
-                                    <img src={getDoctorImageSrc(selectedRx.doctorImage)} alt="" style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'cover' }} />
+                                    <img loading="lazy" src={getDoctorImageSrc(selectedRx.doctorImage)} alt="" style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'cover' }} />
                                 ) : (
                                     <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#138C9F', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontWeight: '800' }}>
                                         {getDoctorInitials(selectedRx.doctorName)}

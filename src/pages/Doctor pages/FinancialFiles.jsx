@@ -350,7 +350,7 @@ const FinancialFiles = () => {
                         <td className="px-6">
                           <div className="flex items-center gap-3">
                             {tx.patientImageUrl ? (
-                              <img src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-9 h-9 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                              <img loading="lazy" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-9 h-9 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                             ) : null}
                             <div className={`w-9 h-9 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
                             <span className="font-bold text-gray-800">{tx.patientName}</span>
@@ -391,7 +391,7 @@ const FinancialFiles = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         {tx.patientImageUrl ? (
-                          <img src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-8 h-8 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                          <img loading="lazy" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-8 h-8 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                         ) : null}
                         <div className={`w-8 h-8 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
                         <span className="font-bold text-gray-800 text-sm">{tx.patientName}</span>

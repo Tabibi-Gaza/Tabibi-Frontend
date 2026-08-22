@@ -241,7 +241,7 @@ export default function AdminUserManagement() {
                                     <td className="px-6 py-3 whitespace-nowrap">
                                         <div className="flex items-center gap-3">
                                             {showImg(user) ? (
-                                                <img src={imgSrc(user)} onError={() => handleImgError(user.id)} alt={user.name} className="w-10 h-10 rounded-full border border-[#138C9F] object-cover" />
+                                                <img loading="lazy" src={imgSrc(user)} onError={() => handleImgError(user.id)} alt={user.name} className="w-10 h-10 rounded-full border border-[#138C9F] object-cover" />
                                             ) : (
                                                 <div className="w-10 h-10 rounded-full border border-[#138C9F] bg-[#e2f4f7] flex items-center justify-center text-[#138C9F] font-bold text-[14px]">
                                                     {user.name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '??'}
@@ -327,7 +327,7 @@ export default function AdminUserManagement() {
                                     </div>
                                 </div>
                                 {showImg(selectedUser) ? (
-                                    <img src={imgSrc(selectedUser)} onError={() => handleImgError(selectedUser.id)} alt={selectedUser.name} className="w-[84px] h-[84px] rounded-full object-cover border-2 border-[#138C9F] shadow-sm" />
+                                    <img loading="lazy" src={imgSrc(selectedUser)} onError={() => handleImgError(selectedUser.id)} alt={selectedUser.name} className="w-[84px] h-[84px] rounded-full object-cover border-2 border-[#138C9F] shadow-sm" />
                                 ) : (
                                     <div className="w-[84px] h-[84px] rounded-full border-2 border-[#138C9F] bg-[#e2f4f7] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                         {selectedUser.name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '??'}

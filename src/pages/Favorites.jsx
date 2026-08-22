@@ -112,7 +112,7 @@ const Favorites = () => {
                 {/* الصورة */}
                 <div className="bg-gray-50/50 h-52 w-full flex items-center justify-center relative border-b border-gray-100">
                   {item.image ? (
-                    <img src={item.image} alt={item.name} className="h-full object-contain object-bottom pt-2" />
+                    <img loading="lazy" src={item.image} alt={item.name} className="h-full object-contain object-bottom pt-2" />
                   ) : (
                     <div className="w-24 h-24 rounded-full bg-[#138C9F]/10 flex items-center justify-center">
                       <span className="text-[#138C9F] text-3xl font-bold">{item.name?.[0]}</span>

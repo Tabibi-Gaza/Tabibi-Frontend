@@ -151,8 +151,9 @@ const DoctorProfile = () => {
                     <div className="w-full max-w-[220px] flex flex-col items-center shrink-0 mx-auto md:mx-0">
                         <div className="w-full max-w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-[#C3C6D6] mb-5">
                             <img
+                                loading="lazy"
                                 className="w-full h-full object-cover"
-                                src={image ? URL.createObjectURL(image) : doctorData.image || '/images/default-doctor.png'}
+                                src={image ? URL.createObjectURL(image) : doctorData.image || '/images/default-doctor.webp'}
                                 alt="صورة الطبيب الشخصية"
                             />
                         </div>

@@ -15,11 +15,7 @@
         from { opacity: 0; transform: translateY(4px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    --animate-whatsapp-bubble: whatsappBubble 1.6s ease-in-out infinite;
-    @keyframes whatsappBubble {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
-    }
+
     --spacing-fluid: clamp(1rem, 2vw, 2rem);
     --text-fluid-sm: clamp(0.875rem, 0.875rem + 0.2vw, 1rem);
     --text-fluid-base: clamp(1rem, 1rem + 0.3vw, 1.125rem);
@@ -40,17 +36,21 @@
 }
 
 .hero-ken-burns {
-  animation: kenBurns 25s ease-in-out infinite alternate;
-  will-change: transform;
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  will-change: auto;
 }
 @keyframes kenBurns {
   0% { transform: scale(1.0); }
-  100% { transform: scale(1.08); }
+  100% { transform: scale(1.05); }
 }
 
 @keyframes circleReveal {
   0% { clip-path: circle(0% at 50% 50%); }
   100% { clip-path: circle(150% at 50% 50%); }
+}
+
+.circle-reveal-active {
+  will-change: clip-path;
 }
 
 @layer utilities {

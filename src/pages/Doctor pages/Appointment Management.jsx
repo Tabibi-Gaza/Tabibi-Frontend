@@ -253,7 +253,7 @@ const AppointmentManagement = () => {
                               <div className="flex items-center gap-3">
                                 <div className="relative shrink-0">
                                   {appt.patientImage ? (
-                                    <img src={appt.patientImage.startsWith("http") ? appt.patientImage : `${FILES_URL}/${appt.patientImage}`} alt={appt.patientName} className="w-10 h-10 rounded-full object-cover" />
+                                    <img loading="lazy" src={appt.patientImage.startsWith("http") ? appt.patientImage : `${FILES_URL}/${appt.patientImage}`} alt={appt.patientName} className="w-10 h-10 rounded-full object-cover" />
                                   ) : (
                                     <div className="w-10 h-10 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs border border-slate-200">{getInitials(appt.patientName)}</div>
                                   )}
@@ -297,7 +297,7 @@ const AppointmentManagement = () => {
                           <div className="flex items-center gap-3">
                             <div className="relative shrink-0">
                               {appt.patientImage ? (
-                                <img src={appt.patientImage.startsWith("http") ? appt.patientImage : `${FILES_URL}/${appt.patientImage}`} alt={appt.patientName} className="w-10 h-10 rounded-full object-cover" />
+                                <img loading="lazy" src={appt.patientImage.startsWith("http") ? appt.patientImage : `${FILES_URL}/${appt.patientImage}`} alt={appt.patientName} className="w-10 h-10 rounded-full object-cover" />
                               ) : (
                                 <div className="w-10 h-10 rounded-full bg-slate-100 text-gray-500 font-bold flex items-center justify-center text-xs">{getInitials(appt.patientName)}</div>
                               )}

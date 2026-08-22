@@ -35,7 +35,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
                                 <span className='w-1.5 h-1.5 rounded-full bg-gray-400'></span>
                                 غير متاح
                             </span>
-                            <img className='h-full object-contain' src={item.image} alt={item.name} />
+                            <img loading="lazy" className='h-full object-contain' src={item.image} alt={item.name} />
                         </div>
 
                         {/* معلومات الكرت السفلي */}
