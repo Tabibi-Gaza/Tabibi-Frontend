@@ -1,15 +1,49 @@
-import React, { useEffect, Suspense, lazy } from 'react'
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom'
+import React, { useEffect, Suspense, lazy, Component } from 'react'
+import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Notifications from './components/Notifications'
-import AdminLayout from './components/Admin/AdminLayout'
-import DoctorLayout from './components/Doctor/DoctorLayout';
-import SecretaryProtectedRoute from './components/Doctor/SecretaryProtectedRoute';
 import { useNotificationSignalR } from './hooks/notifications/useNotificationSignalR'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ThemeProvider } from './context/ThemeContext';
+import { setOnAuthFailure } from './api/axiosInstance';
 import './i18n';
+
+const AdminLayout = lazy(() => import('./components/Admin/AdminLayout'));
+const DoctorLayout = lazy(() => import('./components/Doctor/DoctorLayout'));
+const SecretaryProtectedRoute = lazy(() => import('./components/Doctor/SecretaryProtectedRoute'));
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error('ErrorBoundary caught:', error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
+          <div className="text-center max-w-md">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2 font-['Cairo']">حدث خطأ غير متوقع</h1>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 font-['Cairo']">يرجى تحميل الصفحة مرة أخرى</p>
+            <button
+              onClick={() => { this.setState({ hasError: false }); window.location.reload(); }}
+              className="bg-[#138C9F] text-white px-6 py-2 rounded-lg hover:bg-[#0f7282] transition font-['Cairo']"
+            >
+              إعادة تحميل
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 const HomeV3 = lazy(() => import('./pages/HomeV3'))
 const Home = lazy(() => import('./pages/Home'))
@@ -138,7 +172,14 @@ const UserLayout = () => {
 
 const App = () => {
   useNotificationSignalR();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    setOnAuthFailure(() => navigate('/login'));
+  }, [navigate]);
+  
   return (
+    <ErrorBoundary>
     <ThemeProvider>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <Suspense fallback={<LoadingFallback />}>
@@ -181,6 +222,7 @@ const App = () => {
       </Suspense>
     </GoogleOAuthProvider>
     </ThemeProvider>
+    </ErrorBoundary>
   )
 }
 

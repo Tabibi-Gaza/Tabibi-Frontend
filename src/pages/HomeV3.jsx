@@ -1,12 +1,19 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
 import FramesSection from "../components/v3/FramesSection";
 import FeaturesSlider from "../components/v3/FeaturesSlider";
-import FeaturedDoctors from "../components/v3/FeaturedDoctors";
 import AIAssistant from "../components/v3/AIAssistant";
-import JoiningAsDoctor from "./JoiningAsDoctor";
-import ReviewsGrid from "../components/v3/ReviewsGrid";
-import BannerV2 from "../components/v2/BannerV2";
+
+const FeaturedDoctors = lazy(() => import("../components/v3/FeaturedDoctors"));
+const JoiningAsDoctor = lazy(() => import("./JoiningAsDoctor"));
+const ReviewsGrid = lazy(() => import("../components/v3/ReviewsGrid"));
+const BannerV2 = lazy(() => import("../components/v2/BannerV2"));
+
+const SectionFallback = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="w-8 h-8 border-4 border-[#138C9F] border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 const HomeV3 = () => {
   const { t } = useTranslation();
@@ -15,10 +22,12 @@ const HomeV3 = () => {
       <FramesSection />
       <FeaturesSlider />
       <AIAssistant />
-      <FeaturedDoctors />
-      <JoiningAsDoctor />
-      <ReviewsGrid />
-      <BannerV2 />
+      <Suspense fallback={<SectionFallback />}>
+        <FeaturedDoctors />
+        <JoiningAsDoctor />
+        <ReviewsGrid />
+        <BannerV2 />
+      </Suspense>
     </div>
   );
 };

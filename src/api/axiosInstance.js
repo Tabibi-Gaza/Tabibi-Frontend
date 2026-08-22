@@ -8,6 +8,9 @@ const axiosInstance = axios.create({
   },
 });
 
+let onAuthFailure = null;
+export const setOnAuthFailure = (cb) => { onAuthFailure = cb; };
+
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
   if (token) {
@@ -65,12 +68,16 @@ axiosInstance.interceptors.response.use(
         }
         processQueue(error, null);
         localStorage.removeItem("accessToken");
-        window.location.href = "/login";
+        localStorage.removeItem("user");
+        if (onAuthFailure) onAuthFailure();
+        else window.location.href = "/login";
         return Promise.reject(error);
       } catch (refreshError) {
         processQueue(refreshError, null);
         localStorage.removeItem("accessToken");
-        window.location.href = "/login";
+        localStorage.removeItem("user");
+        if (onAuthFailure) onAuthFailure();
+        else window.location.href = "/login";
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
