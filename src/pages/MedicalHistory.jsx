@@ -72,7 +72,7 @@ const MedicalHistory = () => {
                     setRecordData(null);
                 }
             } catch (error) {
-                console.error("خطأ أثناء جلب السجل الطبي:", error);
+
                 setRecordData(null);
             } finally {
                 setLoading(false);
@@ -156,7 +156,7 @@ const MedicalHistory = () => {
                 toast.error(data.errors?.[0]?.message || data.message);
             }
         } catch (error) {
-            console.error(error);
+
             toast.error(error.response?.data?.errors?.[0]?.message || "حدث خطأ أثناء حفظ البيانات");
         } finally {
             setSubmitting(false);
@@ -165,7 +165,7 @@ const MedicalHistory = () => {
 
     if (loading) {
         return (
-            <div className='flex justify-center items-center min-h-100 font-["Cairo"] pt-40' dir='rtl'>
+            <div className='flex justify-center items-center min-h-100 font-["Tajawal"] pt-40' dir='rtl'>
                 <div className='animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#138C9F]'></div>
                 <p className='mr-3 text-sm font-bold text-gray-500'>جاري تحميل السجل الطبي الذكي...</p>
             </div>
@@ -174,7 +174,7 @@ const MedicalHistory = () => {
 
     return (
       <div
-        className='max-w-5xl mx-auto p-4 sm:p-6 font-["Cairo"] mt-40'
+        className='max-w-5xl mx-auto p-4 sm:p-6 font-["Tajawal"] mt-40'
         dir="rtl"
       >
         {/* واجهة العرض الافتراضية (View Mode) */}

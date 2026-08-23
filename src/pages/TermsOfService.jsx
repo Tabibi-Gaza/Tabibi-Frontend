@@ -49,7 +49,7 @@ const TermsOfService = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-white font-['Cairo'] antialiased text-[#1e293b] pb-16" dir="rtl">
+        <div className="min-h-screen bg-white font-['Tajawal'] antialiased text-[#1e293b] pb-16" dir="rtl">
             <main className="max-w-[935px] w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white">
 
                 {/* زر العودة للرئيسية */}

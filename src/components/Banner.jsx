@@ -5,7 +5,7 @@ const Banner = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-["Cairo"]' dir='rtl'>
+    <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-["Tajawal"]' dir='rtl'>
       <div className='bg-[#eef7fa] rounded-[2.5rem] flex flex-col md:flex-row items-stretch justify-between overflow-hidden relative min-h-105'>
         
         <div className='w-full md:w-1/2 p-8 sm:p-12 md:p-16 flex flex-col justify-center items-start text-right z-10'>
@@ -68,6 +68,10 @@ const Banner = () => {
         <div className='w-full md:w-1/2 h-80 md:h-auto min-h-87.5 relative flex items-stretch'>
           <div className='w-full h-full md:rounded-l-none md:rounded-tr-[16rem] overflow-hidden relative'>
             <img 
+              loading="lazy"
+              decoding="async"
+              width="480"
+              height="480"
               src='https://artedivinoeg.com/wp-content/uploads/2025/07/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA-%D8%B7%D8%A8%D9%8A%D8%A9.png' 
               alt="تصميم عيادات طبيبي المتميزة" 
               className='w-full h-full object-cover object-center scale-100' 

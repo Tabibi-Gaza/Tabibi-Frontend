@@ -27,7 +27,7 @@ const TestimonialsSlider = () => {
     if (reviews.length === 0) return null;
 
     return (
-        <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 font-["Cairo"]' dir='rtl'>
+        <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 font-["Tajawal"]' dir='rtl'>
             <div className='bg-white border border-slate-100 rounded-3xl p-8 lg:p-12 shadow-[0_4px_25px_rgba(0,0,0,0.01)] relative overflow-hidden'>
 
                 <div className='absolute inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(58,150,183,0.03),transparent_35%)] pointer-events-none'></div>

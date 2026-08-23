@@ -32,7 +32,7 @@ const MedicalExamination = () => {
                 if (patientRes.data.succeeded && patientRes.data.data) {
                     setPatient(patientRes.data.data);
                 } else {
-                    console.error("لم يتم العثور على بيانات المريض");
+
                 }
 
                 try {
@@ -47,7 +47,7 @@ const MedicalExamination = () => {
                         localStorage.setItem('doctorId', recordsRes.data.currentDoctorId);
                     }
                 } catch (e) {
-                    console.error("Error fetching medical records:", e);
+
                 }
 
                 try {
@@ -56,10 +56,10 @@ const MedicalExamination = () => {
                         setMedicalHistoryData(historyRes.data.data);
                     }
                 } catch (e) {
-                    console.error("Error fetching medical history:", e);
+
                 }
             } catch (err) {
-                console.error("Error fetching patient data:", err);
+
             } finally {
                 setLoading(false);
             }
@@ -205,14 +205,14 @@ const MedicalExamination = () => {
                 toast.error(res.data.message || "لم يتم الحفظ");
             }
         } catch (err) {
-            console.error("Error saving examination:", err);
+
             toast.error("حدث خطأ أثناء حفظ البيانات");
         }
     };
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex items-center justify-center" dir="rtl">
                 <p className="text-gray-400 font-bold text-lg">جاري تحميل بيانات المريض...</p>
             </div>
         );
@@ -220,7 +220,7 @@ const MedicalExamination = () => {
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex items-center justify-center" dir="rtl">
                 <p className="text-gray-400 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
             </div>
         );
@@ -230,7 +230,7 @@ const MedicalExamination = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] flex" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex" dir="rtl">
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="p-4 md:p-8 max-w-[1240px] w-full mx-auto space-y-6 overflow-y-auto">
 
@@ -251,7 +251,7 @@ const MedicalExamination = () => {
                         <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 md:gap-12 w-full lg:w-auto">
                             <div className="flex items-center gap-4">
                                 {patientImage ? (
-                                    <img loading="lazy" src={patientImage} alt={patient.fullName} className="w-16 h-16 rounded-2xl object-cover border border-[#C3C6D6]" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                    <img loading="lazy" decoding="async" width="64" height="64" src={patientImage} alt={patient.fullName} className="w-16 h-16 rounded-2xl object-cover border border-[#C3C6D6]" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                                 ) : null}
                                 <div className={`w-16 h-16 rounded-2xl bg-[#C4D2FF] text-[#0B1C30] items-center justify-center font-black text-lg ${patientImage ? 'hidden' : 'flex'}`}>
                                     {(patient.fullName || "م").charAt(0)}

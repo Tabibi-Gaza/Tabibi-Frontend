@@ -130,7 +130,7 @@ const DoctorProfile = () => {
             setIsEdit(false); 
             setImage(false);  
         } catch (error) {
-            console.error(error);
+
             toast.error("فشل حفظ التعديلات");
         } finally {
             setLoading(false);
@@ -143,7 +143,7 @@ const DoctorProfile = () => {
     };
 
     return doctorData && (
-        <div className="w-full min-h-screen bg-[#ecf8fa] py-5 font-['Cairo']" dir="rtl">
+        <div className="w-full min-h-screen bg-[#ecf8fa] py-5 font-['Tajawal']" dir="rtl">
             <div className=" mx-auto px-6">
                 <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 
@@ -152,6 +152,9 @@ const DoctorProfile = () => {
                         <div className="w-full max-w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-[#C3C6D6] mb-5">
                             <img
                                 loading="lazy"
+                                decoding="async"
+                                width="220"
+                                height="293"
                                 className="w-full h-full object-cover"
                                 src={image ? URL.createObjectURL(image) : doctorData.image || '/images/default-doctor.webp'}
                                 alt="صورة الطبيب الشخصية"

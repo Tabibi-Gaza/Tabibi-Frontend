@@ -39,7 +39,6 @@ const MyPrescriptions = () => {
                 setPrescriptions(data.data);
             }
         } catch (err) {
-            console.error(err);
             toast.error('فشل تحميل الوصفات الطبية');
         } finally {
             setLoading(false);
@@ -73,7 +72,6 @@ const MyPrescriptions = () => {
             pdf.save(`prescription-${selectedRx.doctorName.replace(/\s+/g, '_')}-${new Date().toISOString().split('T')[0]}.pdf`);
             toast.success('تم تحميل الوصفة بنجاح');
         } catch (err) {
-            console.error(err);
             toast.error('فشل تحميل ملف PDF');
         }
     };
@@ -110,7 +108,6 @@ const MyPrescriptions = () => {
             if (selectedRx?.id === id) setSelectedRx(null);
             toast.success('تم حذف الوصفة الطبية بنجاح');
         } catch (err) {
-            console.error(err);
             toast.error('فشل حذف الوصفة الطبية');
         }
     };
@@ -194,7 +191,7 @@ const MyPrescriptions = () => {
                                 <div className="bg-[#EBF3F5] px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#C3C6D6]/40">
                                     <div className="flex items-center gap-3">
                                         {getDoctorImageSrc(rx.doctorImage) ? (
-                                            <img loading="lazy" src={getDoctorImageSrc(rx.doctorImage)} alt={rx.doctorName} className="w-11 h-11 rounded-xl object-cover shrink-0" />
+                                            <img loading="lazy" decoding="async" width="44" height="44" src={getDoctorImageSrc(rx.doctorImage)} alt={rx.doctorName} className="w-11 h-11 rounded-xl object-cover shrink-0" />
                                         ) : (
                                             <div className="w-11 h-11 rounded-xl bg-[#138C9F] text-white flex items-center justify-center shrink-0 text-sm font-black">
                                                 {getDoctorInitials(rx.doctorName)}
@@ -285,7 +282,7 @@ const MyPrescriptions = () => {
                         <div className="px-6 py-5">
                             <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                                 {getDoctorImageSrc(selectedRx.doctorImage) ? (
-                                    <img loading="lazy" src={getDoctorImageSrc(selectedRx.doctorImage)} alt={selectedRx.doctorName} className="w-12 h-12 rounded-xl object-cover shrink-0" />
+                                    <img loading="lazy" decoding="async" width="48" height="48" src={getDoctorImageSrc(selectedRx.doctorImage)} alt={selectedRx.doctorName} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                                 ) : (
                                     <div className="w-12 h-12 rounded-xl bg-[#138C9F] text-white flex items-center justify-center shrink-0 text-base font-black">
                                         {getDoctorInitials(selectedRx.doctorName)}
@@ -371,7 +368,7 @@ const MyPrescriptions = () => {
             {/* Hidden div for PDF generation */}
             {selectedRx && (
                 <div className="fixed -left-[9999px] top-0" dir="rtl">
-                    <div ref={printRef} style={{ width: '794px', padding: '40px', fontFamily: 'Cairo, Arial, sans-serif', background: '#fff', color: '#0B1C30' }}>
+                    <div ref={printRef} style={{ width: '794px', padding: '40px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30' }}>
                         <div style={{ textAlign: 'center', borderBottom: '3px solid #138C9F', paddingBottom: '20px', marginBottom: '25px' }}>
                             <h1 style={{ fontSize: '26px', fontWeight: '900', color: '#138C9F', margin: 0 }}>وصفة طبية</h1>
                             <p style={{ fontSize: '12px', color: '#888', margin: '5px 0 0' }}>Tabibi Platform - Medical Prescription</p>
@@ -380,7 +377,7 @@ const MyPrescriptions = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', padding: '15px', background: '#f8fafb', borderRadius: '12px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 {getDoctorImageSrc(selectedRx.doctorImage) ? (
-                                    <img loading="lazy" src={getDoctorImageSrc(selectedRx.doctorImage)} alt="" style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'cover' }} />
+                                    <img loading="lazy" decoding="async" width="48" height="48" src={getDoctorImageSrc(selectedRx.doctorImage)} alt="" style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'cover' }} />
                                 ) : (
                                     <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#138C9F', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontWeight: '800' }}>
                                         {getDoctorInitials(selectedRx.doctorName)}

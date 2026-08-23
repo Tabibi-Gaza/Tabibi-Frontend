@@ -37,7 +37,7 @@ export default function PatientManagement() {
                     })));
                 }
             } catch (err) {
-                console.error("Error fetching patients:", err);
+
             } finally {
                 setLoading(false);
             }
@@ -88,17 +88,17 @@ export default function PatientManagement() {
 
     if (loading) {
         return (
-            <div className="w-full bg-gray-50/50 pb-8 pr-4 font-['Cairo'] flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full bg-gray-50/50 pb-8 pr-4 font-['Tajawal'] flex items-center justify-center h-64" dir="rtl">
                 <p className="text-gray-400 font-bold">جاري تحميل بيانات المرضى...</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full bg-gray-50/50  pb-8 pr-4 font-['Cairo']" dir="rtl">
+      <div className="w-full bg-gray-50/50  pb-8 pr-4 font-['Tajawal']" dir="rtl">
         {/* العناوين والإحصائيات */}
         {/*    <div
-        className="font-['Cairo'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"
+        className="font-['Tajawal'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"
         dir="rtl"
       >
         {/* قسم الترحيب - تم ضبط المسافة الجانبية هنا لمنع التداخل 
@@ -172,6 +172,9 @@ export default function PatientManagement() {
                         <div className="flex items-center gap-3">
                           <img
                             loading="lazy"
+                            decoding="async"
+                            width="40"
+                            height="40"
                             src={patient.avatar}
                             alt={patient.name}
                             className="w-10 h-10 rounded-full object-cover border"
@@ -241,6 +244,9 @@ export default function PatientManagement() {
                   <div className="flex items-center gap-3">
                     <img
                       loading="lazy"
+                      decoding="async"
+                      width="44"
+                      height="44"
                       src={patient.avatar}
                       alt={patient.name}
                       className="w-11 h-11 rounded-full object-cover border"

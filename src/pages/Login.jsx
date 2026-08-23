@@ -250,7 +250,7 @@ const Login = () => {
   });
 
   return (
-    <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center font-['Cairo']" dir="rtl">
+    <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center font-['Tajawal']" dir="rtl">
       <div className="w-full h-screen flex flex-row overflow-hidden shadow-xl">
         
         {/* النصف الأيمن: النماذج */}
@@ -263,6 +263,9 @@ const Login = () => {
                 <div className="text-center space-y-2 mb-4">
                   <div className="flex justify-center mb-5 items-center w-full">
                     <img
+                      decoding="async"
+                      width="80"
+                      height="80"
                       onClick={() => navigate('/')}
                       className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
@@ -342,6 +345,9 @@ const Login = () => {
               <div className="space-y-4 overflow-y-scroll px-1 scrollbar-thin">
                 <div className="text-center">
                   <img
+                    decoding="async"
+                    width="80"
+                    height="80"
                     className="h-20 w-auto mx-auto object-contain mb-3"
                     src={assets.logo}
                     alt="شعار طبيبي"
@@ -427,6 +433,10 @@ const Login = () => {
                         className="flex items-center gap-1.5 px-3 border-l border-slate-200 text-sm font-medium text-slate-700 bg-slate-50 shrink-0 cursor-pointer"
                       >
                         <img
+                          loading="lazy"
+                          decoding="async"
+                          width="20"
+                          height="15"
                           src={`https://flagcdn.com/24x18/${selectedCountry.iso}.png`}
                           alt={selectedCountry.name}
                           className="w-5 h-[15px] rounded-sm object-cover"
@@ -463,6 +473,10 @@ const Login = () => {
                                 className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive ? 'bg-[#e6f4f6] text-[#138C9F] font-bold' : 'text-slate-700 hover:bg-slate-50'}`}
                               >
                                 <img
+                                  loading="lazy"
+                                  decoding="async"
+                                  width="20"
+                                  height="15"
                                   src={`https://flagcdn.com/24x18/${c.iso}.png`}
                                   alt={c.name}
                                   className="w-5 h-[15px] rounded-sm object-cover"
@@ -573,6 +587,9 @@ const Login = () => {
                 <div className="text-center space-y-2 mb-4">
                   <div className="flex justify-center mb-5 items-center w-full">
                     <img
+                      decoding="async"
+                      width="80"
+                      height="80"
                       onClick={() => navigate('/')}
                       className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
@@ -623,6 +640,9 @@ const Login = () => {
                 <div className="text-center space-y-2 mb-4">
                   <div className="flex justify-center mb-5 items-center w-full">
                     <img
+                      decoding="async"
+                      width="80"
+                      height="80"
                       onClick={() => navigate('/')}
                       className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
@@ -676,6 +696,9 @@ const Login = () => {
                 <div className="text-center space-y-2 mb-4">
                   <div className="flex justify-center mb-5 items-center w-full">
                     <img
+                      decoding="async"
+                      width="80"
+                      height="80"
                       onClick={() => navigate('/')}
                       className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
@@ -745,6 +768,10 @@ const Login = () => {
         {/* النصف الأيسر */}
         <div className="hidden md:flex w-1/2 min-h-screen bg-[#0f7282] p-12 flex-col justify-between text-white relative overflow-hidden">
           <img
+            loading="lazy"
+            decoding="async"
+            width="1024"
+            height="1024"
             src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2070&auto=format&fit=crop"
             alt="Medical Clinic Design"
             className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"

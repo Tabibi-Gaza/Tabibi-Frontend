@@ -136,6 +136,9 @@ const DoctorCard = ({ item }) => {
       <div className="bg-gray-50/50 h-52 w-full flex items-center justify-center relative border-b border-gray-100">
         <img
           loading="lazy"
+          decoding="async"
+          width="200"
+          height="208"
           src={
             item.profileImageUrl
               ? `${import.meta.env.VITE_Files_URL}${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}`

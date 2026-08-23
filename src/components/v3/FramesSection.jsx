@@ -34,13 +34,13 @@ function FramesSection() {
 
       <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6" style={{ zIndex: 2 }}>
         <div className="w-full max-w-4xl text-center mb-8 md:mb-10">
-          <span className="text-white/60 text-xs sm:text-sm font-bold tracking-widest block mb-4 font-['Cairo'] drop-shadow">
+          <span className="text-white/60 text-xs sm:text-sm font-bold tracking-widest block mb-4 font-['Tajawal'] drop-shadow">
             — منصة طبيبي للخدمات الصحية —
           </span>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight font-['Cairo'] drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight font-['Tajawal'] drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
             رحلة صحتك تبدأ
           </h2>
-          <p className="text-base sm:text-xl md:text-2xl text-[#b3e5e8] font-bold mt-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] font-['Cairo']">
+          <p className="text-base sm:text-xl md:text-2xl text-[#b3e5e8] font-bold mt-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] font-['Tajawal']">
             من هنا — أحدث التقنيات وأمهر الأطباء
           </p>
         </div>
@@ -56,7 +56,7 @@ function FramesSection() {
               >
                 <div className="flex items-center gap-3 select-none overflow-hidden">
                   <FontAwesomeIcon icon={faSearch} className="text-[#138C9F] text-lg shrink-0" />
-                  <span className={`font-extrabold text-right tracking-wide text-xs sm:text-sm md:text-base truncate font-['Cairo'] ${
+                  <span className={`font-extrabold text-right tracking-wide text-xs sm:text-sm md:text-base truncate font-['Tajawal'] ${
                     speciality ? "text-slate-900" : "text-slate-400"
                   }`}>
                     {isLoading ? "جاري تحميل التخصصات..." : selected?.label || "ابحث عن تخصص الطبيب المطلوب..."}
@@ -68,7 +68,7 @@ function FramesSection() {
               {isOpen && (
                 <div className="absolute top-[115%] left-0 right-0 bg-white border border-slate-100 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-72 overflow-y-auto">
                   <div onClick={() => { setSpeciality(""); setIsOpen(false); }}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none sm:col-span-2 font-['Cairo'] ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none sm:col-span-2 font-['Tajawal'] ${
                       speciality === "" ? "bg-slate-100 text-slate-900 font-black" : "text-slate-500 hover:bg-slate-50"
                     }`}>
                     <div className="flex items-center gap-2.5">
@@ -79,7 +79,7 @@ function FramesSection() {
                   </div>
                   {options.map((opt) => (
                     <div key={opt.id} onClick={() => { setSpeciality(opt.id); setIsOpen(false); }}
-                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none font-['Cairo'] ${
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none font-['Tajawal'] ${
                         speciality === opt.id ? "bg-[#138C9F] text-white" : "text-slate-700 hover:bg-slate-50 hover:text-[#138C9F]"
                       }`}>
                       <span className="font-extrabold truncate">{opt.label}</span>
@@ -90,7 +90,7 @@ function FramesSection() {
               )}
             </div>
             <button type="submit" disabled={isLoading}
-              className="w-full md:w-auto bg-[#138C9F] text-white font-black text-sm md:text-base px-10 py-3.5 rounded-xl md:rounded-full hover:bg-[#0f7282] hover:shadow-lg hover:shadow-[#138C9F]/20 transition-all duration-200 active:scale-[0.98] whitespace-nowrap shrink-0 disabled:opacity-50 cursor-pointer font-['Cairo']">
+              className="w-full md:w-auto bg-[#138C9F] text-white font-black text-sm md:text-base px-10 py-3.5 rounded-xl md:rounded-full hover:bg-[#0f7282] hover:shadow-lg hover:shadow-[#138C9F]/20 transition-all duration-200 active:scale-[0.98] whitespace-nowrap shrink-0 disabled:opacity-50 cursor-pointer font-['Tajawal']">
               بحث سريع
             </button>
           </form>

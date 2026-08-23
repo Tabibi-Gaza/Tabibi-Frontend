@@ -70,7 +70,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
         setUnreadCount(data.data || 0);
       }
     } catch (err) {
-      console.error('Error fetching unread count:', err);
+
     }
   };
 
@@ -81,7 +81,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
         setRecentNotifications(data.data || []);
       }
     } catch (err) {
-      console.error('Error fetching notifications:', err);
+
     }
   };
 
@@ -91,7 +91,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
       setRecentNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
       setUnreadCount(0);
     } catch (err) {
-      console.error('Error marking all as read:', err);
+
     }
   };
 
@@ -124,7 +124,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
 
   return (
     <div
-      className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 sm:px-6 sticky top-0 z-45 font-['Cairo'] w-full"
+      className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 sm:px-6 sticky top-0 z-45 font-['Tajawal'] w-full"
       dir="rtl"
     >
       <div className="flex items-center gap-3 shrink-0">
@@ -140,6 +140,9 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
           )}
         </button>
         <img
+          decoding="async"
+          width="40"
+          height="40"
           src={assets.logo}
           alt="شعار طبيبي غزة"
           className="h-7 md:h-10 w-auto cursor-pointer object-contain"
@@ -292,12 +295,16 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
           >
             {doctorData && getDoctorImageUrl(doctorData.image) ? (
               <img
+                loading="lazy"
+                decoding="async"
+                width="44"
+                height="44"
                 className="w-full h-full object-cover"
                 src={getDoctorImageUrl(doctorData.image)}
                 alt="Profile"
               />
             ) : (
-              <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none font-['Cairo']">
+              <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none font-['Tajawal']">
                 {doctorData ? `${doctorData.firstname.slice(0, 2) || ""}` : "?"}
               </div>
             )}

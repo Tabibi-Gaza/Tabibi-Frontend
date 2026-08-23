@@ -67,7 +67,7 @@ const Appointment = () => {
           });
         }
       } catch (err) {
-        console.error('Failed to load doctor', err);
+
       } finally {
         setLoadingFallback(false);
       }
@@ -91,7 +91,7 @@ const Appointment = () => {
           setCalendarData([]);
         }
       } catch (err) {
-        console.error('Failed to load calendar', err);
+
         setCalendarData([]);
       } finally {
         setLoadingCalendar(false);
@@ -196,7 +196,7 @@ const Appointment = () => {
   };
 
   return (
-    <div className="w-full font-['Cairo'] p-4 pt-40 px-3 text-right" dir="rtl">
+    <div className="w-full font-['Tajawal'] p-4 pt-40 px-3 text-right" dir="rtl">
       <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative flex flex-col md:flex-row gap-6 mb-6">
         <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
           <button onClick={handleMessageClick} className="flex items-center gap-2 bg-[#138c9f] hover:bg-[#3f9cb1] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all shadow-sm">
@@ -211,14 +211,14 @@ const Appointment = () => {
         </div>
 
         <div className="w-full md:w-56 shrink-0 bg-[#f4faff] rounded-xl flex items-center justify-center overflow-hidden p-2">
-          <img loading="lazy" className="w-full h-56 md:h-auto object-contain" src={docInfo.image} alt={docInfo.name} />
+          <img loading="lazy" decoding="async" width="224" height="224" className="w-full h-56 md:h-auto object-contain" src={docInfo.image} alt={docInfo.name} />
         </div>
 
         <div className="flex-1 flex flex-col justify-between pt-10 md:pt-0 text-5xl">
           <div>
             <div className="flex items-center gap-2 text-xl font-bold text-gray-800">
               <h2>{docInfo.name}</h2>
-              <img className="w-4 h-4" src={assets.verified_icon} alt="Verified" />
+              <img loading="lazy" decoding="async" width="16" height="16" className="w-4 h-4" src={assets.verified_icon} alt="Verified" />
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-[15px] text-gray-500">
               <span className="text-[#138c9f] bg-[#e6f6f5] px-3 py-1 rounded-md font-medium">{docInfo.speciality}</span>
@@ -228,7 +228,7 @@ const Appointment = () => {
             </div>
             <div className="mt-4">
               <p className="flex items-center gap-1.5 text-sm font-bold text-gray-800">
-                <img className="w-3.5 h-3.5" src={assets.info_icon} alt="" /> عن الطبيب
+                <img loading="lazy" decoding="async" width="14" height="14" className="w-3.5 h-3.5" src={assets.info_icon} alt="" /> عن الطبيب
               </p>
               <p className="text-[15px] text-gray-500 leading-relaxed mt-1 max-w-2xl">{docInfo.about}</p>
             </div>

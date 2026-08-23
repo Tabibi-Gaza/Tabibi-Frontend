@@ -72,7 +72,7 @@ const AdminProfile = () => {
             setIsEdit(false); 
             setImage(false);  
         } catch (error) {
-            console.error("حدث خطأ أثناء حفظ البيانات:", error);
+
             toast.error("فشل حفظ التعديلات");
         } finally {
             setLoading(false);
@@ -85,7 +85,7 @@ const AdminProfile = () => {
     };
 
     return userData && (
-        <div className="w-full min-h-screen bg-[#ecf8fa] py-10 font-['Cairo']" dir="rtl">
+        <div className="w-full min-h-screen bg-[#ecf8fa] py-10 font-['Tajawal']" dir="rtl">
             <div className=" ">
                 <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 
@@ -96,13 +96,16 @@ const AdminProfile = () => {
                 // 1. إذا كانت هناك صورة جديدة مرفوعة أو صورة قديمة مخزنة، نعرض الصورة
                 <img
                   loading="lazy"
+                  decoding="async"
+                  width="220"
+                  height="220"
                   className="w-full h-full object-cover"
                   src={image ? URL.createObjectURL(image) : userData.image}
                   alt="صورة شخصية"
                 />
               ) : (
                 // 2. إذا لم تكن هناك أي صورة، نعرض أول حرفين بشكل عريض ومناسب للحجم الكبير
-                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-black text-4xl select-none font-['Cairo']">
+                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-black text-4xl select-none font-['Tajawal']">
                   {userData
                     ? `${userData.firstname.slice(0, 2) || ""}`
                     : "?"}

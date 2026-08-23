@@ -16,7 +16,7 @@ const MedicalCenters = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 font-['Cairo'] pt-28 pb-16 px-4" dir="rtl">
+    <div className="min-h-screen bg-gray-50 font-['Tajawal'] pt-28 pb-16 px-4" dir="rtl">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-black text-[#1e293b] mb-3">المراكز الطبية</h1>

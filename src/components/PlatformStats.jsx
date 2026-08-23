@@ -49,7 +49,7 @@ const PlatformStats = () => {
     return (
       <div
         id="speciality"
-        className='py-16 bg-[#ecf8fa] border-y border-slate-200/60 font-["Cairo"]'
+        className='py-16 bg-[#ecf8fa] border-y border-slate-200/60 font-["Tajawal"]'
         dir="rtl"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

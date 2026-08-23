@@ -48,7 +48,7 @@ const DoctorNotifications = () => {
         setNotifications(data.data || []);
       }
     } catch (err) {
-      console.error('خطأ في جلب الإشعارات:', err);
+
     } finally {
       setLoading(false);
     }
@@ -65,7 +65,7 @@ const DoctorNotifications = () => {
         prev.map(n => n.id === id ? { ...n, isRead: true } : n)
       );
     } catch (err) {
-      console.error('خطأ في تحديد الإشعار كمقروء:', err);
+
     }
   };
 
@@ -74,7 +74,7 @@ const DoctorNotifications = () => {
       await axiosInstance.put('/notifications/read-all');
       setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
     } catch (err) {
-      console.error('خطأ في تحديد الكل كمقروء:', err);
+
     }
   };
 
@@ -83,7 +83,7 @@ const DoctorNotifications = () => {
       await axiosInstance.delete(`/notifications/${id}`);
       setNotifications(prev => prev.filter(n => n.id !== id));
     } catch (err) {
-      console.error('خطأ في حذف الإشعار:', err);
+
     }
   };
 
@@ -95,7 +95,7 @@ const DoctorNotifications = () => {
       }
       setNotifications(prev => prev.filter(n => n.type !== type));
     } catch (err) {
-      console.error('خطأ في حذف المجموعة:', err);
+
     }
   };
 
@@ -109,7 +109,7 @@ const DoctorNotifications = () => {
         prev.map(n => n.type === type ? { ...n, isRead: true } : n)
       );
     } catch (err) {
-      console.error('خطأ في تحديد المجموعة كمقروءة:', err);
+
     }
   };
 
@@ -147,7 +147,7 @@ const DoctorNotifications = () => {
   const grouped = groupNotifications(notifications);
 
   return (
-    <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] p-4 md:p-8" dir="rtl">
+    <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] p-4 md:p-8" dir="rtl">
       <div className="max-w-[900px] mx-auto bg-white border border-[#C3C6D6] rounded-2xl shadow-xs overflow-hidden">
 
         {/* Header */}

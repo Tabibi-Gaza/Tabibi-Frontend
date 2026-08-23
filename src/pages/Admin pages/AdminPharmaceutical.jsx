@@ -85,7 +85,7 @@ export default function AdminPharmaceutical() {
     };
 
     return (
-        <div className="w-full  font-['Cairo'] flex flex-col gap-[32px] text-right relative" dir="rtl">
+        <div className="w-full  font-['Tajawal'] flex flex-col gap-[32px] text-right relative" dir="rtl">
 
             {/* SECTION 1: Summary Statistics Card */}
                 <div className="w-full bg-white/80 border border-[#C3C6D6] backdrop-blur-[4px] rounded-[12px] p-4 md:p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">

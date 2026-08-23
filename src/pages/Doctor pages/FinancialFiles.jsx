@@ -88,7 +88,7 @@ const FinancialFiles = () => {
                     setExpenses(JSON.parse(savedExpenses));
                 }
             } catch (err) {
-                console.error("Error fetching financial data:", err);
+
             } finally {
                 setLoading(false);
             }
@@ -164,7 +164,7 @@ const FinancialFiles = () => {
             <head>
                 <title>فاتورة - طبيبي</title>
                 <style>
-                    body { font-family: 'Cairo', Arial, sans-serif; padding: 40px; color: #333; }
+                    body { font-family: 'Tajawal', Arial, sans-serif; padding: 40px; color: #333; }
                     .header { text-align: center; border-bottom: 2px solid #1b8b99; padding-bottom: 20px; margin-bottom: 20px; }
                     .header h1 { color: #1b8b99; margin: 0; font-size: 24px; }
                     .header p { color: #666; margin: 5px 0 0; font-size: 12px; }
@@ -200,14 +200,14 @@ const FinancialFiles = () => {
 
     if (loading) {
         return (
-            <div className="w-full pr-4 font-['Cairo'] bg-slate-50/30 flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full pr-4 font-['Tajawal'] bg-slate-50/30 flex items-center justify-center h-64" dir="rtl">
                 <p className="text-gray-400 font-bold">جاري تحميل البيانات المالية...</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full pr-4 font-['Cairo'] bg-slate-50/30 space-y-6" dir="rtl">
+      <div className="w-full pr-4 font-['Tajawal'] bg-slate-50/30 space-y-6" dir="rtl">
           <div className="text-right">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">السجلات المالية</h1>
             <p className="text-xs sm:text-sm text-gray-500">تتبع أرباحك وإدارة معاملاتك المالية بكل سهولة.</p>
@@ -350,7 +350,7 @@ const FinancialFiles = () => {
                         <td className="px-6">
                           <div className="flex items-center gap-3">
                             {tx.patientImageUrl ? (
-                              <img loading="lazy" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-9 h-9 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                              <img loading="lazy" decoding="async" width="36" height="36" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-9 h-9 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                             ) : null}
                             <div className={`w-9 h-9 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
                             <span className="font-bold text-gray-800">{tx.patientName}</span>
@@ -391,7 +391,7 @@ const FinancialFiles = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         {tx.patientImageUrl ? (
-                          <img loading="lazy" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-8 h-8 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                            <img loading="lazy" decoding="async" width="32" height="32" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-8 h-8 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                         ) : null}
                         <div className={`w-8 h-8 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
                         <span className="font-bold text-gray-800 text-sm">{tx.patientName}</span>

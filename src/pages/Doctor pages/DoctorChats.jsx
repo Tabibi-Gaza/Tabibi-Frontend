@@ -152,6 +152,9 @@ export default function DoctorChats() {
       return (
         <img
           loading="lazy"
+          decoding="async"
+          width="250"
+          height="250"
           src={`${FILES_BASE}/${msg.filePath}`}
           alt="صورة"
           className="max-w-[250px] max-h-[250px] rounded-lg object-cover cursor-pointer"
@@ -179,7 +182,7 @@ export default function DoctorChats() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #9fb0b8; }
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
       `}</style>
-      <div className="w-full pr-4 font-['Cairo'] bg-slate-50/30 flex justify-center items-start" dir="rtl">
+      <div className="w-full pr-4 font-['Tajawal'] bg-slate-50/30 flex justify-center items-start" dir="rtl">
         <div className="w-full bg-white border border-[#e9eff6] rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] min-h-[600px] h-[calc(100vh-180px)] md:h-[700px] overflow-hidden">
 
           {/* Sidebar */}
@@ -201,7 +204,7 @@ export default function DoctorChats() {
                     <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50/50'}`}>
                       <div className="relative shrink-0">
                         {conv.participantImageUrl ? (
-                          <img loading="lazy" className="w-11 h-11 md:w-12 h-12 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${conv.participantImageUrl}`} alt={conv.participantName} />
+                            <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 h-12 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${conv.participantImageUrl}`} alt={conv.participantName} />
                         ) : (
                           <div className="w-11 h-11 md:w-12 h-12 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-extrabold flex items-center justify-center text-sm md:text-base">{getInitials(conv.participantName)}</div>
                         )}
@@ -254,7 +257,7 @@ export default function DoctorChats() {
                     </button>
                     <div className="relative">
                       {activeConversation.participantImageUrl ? (
-                        <img loading="lazy" className="w-10 h-10 md:w-11 h-11 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${activeConversation.participantImageUrl}`} alt={activeConversation.participantName} />
+                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 h-11 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${activeConversation.participantImageUrl}`} alt={activeConversation.participantName} />
                       ) : (
                         <div className="w-10 h-10 md:w-11 h-11 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-bold flex items-center justify-center text-sm md:text-base">{getInitials(activeConversation.participantName)}</div>
                       )}
@@ -294,7 +297,7 @@ export default function DoctorChats() {
 
                 {selectedFile && (
                   <div className="px-4 py-2 border-t border-[#e9eff6] bg-slate-50 flex items-center gap-3">
-                    {filePreview ? <img loading="lazy" src={filePreview} alt="معاينة" className="w-12 h-12 rounded-lg object-cover" /> : <FileText className="w-8 h-8 text-[#1b8b99]" />}
+                    {filePreview ? <img loading="lazy" decoding="async" width="48" height="48" src={filePreview} alt="معاينة" className="w-12 h-12 rounded-lg object-cover" /> : <FileText className="w-8 h-8 text-[#1b8b99]" />}
                     <span className="text-xs text-gray-600 truncate flex-1">{selectedFile.name}</span>
                     <button onClick={clearFile} className="text-gray-400 hover:text-red-500"><X className="w-4 h-4" /></button>
                   </div>

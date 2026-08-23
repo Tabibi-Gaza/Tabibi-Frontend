@@ -54,10 +54,10 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
         <div className="sticky top-0 h-screen w-full bg-white flex flex-col">
           <div className="flex-1 flex flex-col items-center justify-center px-4 pt-24 pb-8">
             <div className="text-center max-w-3xl mb-10">
-              <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide font-['Cairo'] mb-4">
+              <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide font-['Tajawal'] mb-4">
                 {title}
               </span>
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 font-['Cairo'] leading-tight">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 font-['Tajawal'] leading-tight">
                 {subtitle}
               </h2>
             </div>

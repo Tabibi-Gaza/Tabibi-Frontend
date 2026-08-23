@@ -80,7 +80,7 @@ const AIAssistant = () => {
         setMatchedDoctors(filtered.slice(0, 5));
       }
     } catch (error) {
-      console.error("خطأ في جلب الأطباء:", error);
+
     } finally {
       setLoadingDoctors(false);
     }
@@ -141,7 +141,7 @@ const AIAssistant = () => {
   };
 
   return (
-    <div className="relative font-['Cairo'] py-16 px-4" dir="rtl">
+    <div className="relative font-['Tajawal'] py-16 px-4" dir="rtl">
       <div className="max-w-6xl mx-auto">
         <div className="bg-[#0B1437] rounded-3xl overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
@@ -264,7 +264,7 @@ const AIAssistant = () => {
                         >
                           <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0 overflow-hidden">
                             {doc.profileImageUrl ? (
-                              <img src={`${import.meta.env.VITE_Files_URL}/${doc.profileImageUrl}`} alt="" className="w-full h-full object-cover" />
+                              <img loading="lazy" decoding="async" width="40" height="40" src={`${import.meta.env.VITE_Files_URL}/${doc.profileImageUrl}`} alt="" className="w-full h-full object-cover" />
                             ) : (
                               <span className="text-white text-sm font-bold">{doc.fullName?.[0]}</span>
                             )}

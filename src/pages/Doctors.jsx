@@ -90,7 +90,7 @@ const Doctors = () => {
 if (isError)
   return (
     <div
-      className="min-h-[60vh] flex items-center justify-center px-4 pt-40 font-['Cairo'] dark:bg-gray-900 dark:text-gray-200"
+      className="min-h-[60vh] flex items-center justify-center px-4 pt-40 font-['Tajawal'] dark:bg-gray-900 dark:text-gray-200"
       dir="rtl"
     >
       <div className="bg-white border border-red-100 shadow-sm rounded-3xl p-8 max-w-md w-full text-center dark:bg-gray-800 dark:border-gray-700">
@@ -121,7 +121,7 @@ if (isError)
   );
   return (
     <div
-      className="px-4 sm:px-6 lg:px-8 pt-30 my-8 text-gray-800 font-['Cairo'] dark:bg-gray-900 dark:text-gray-200"
+      className="px-4 sm:px-6 lg:px-8 pt-30 my-8 text-gray-800 font-['Tajawal'] dark:bg-gray-900 dark:text-gray-200"
       dir="rtl"
     >
       {/* الجزء العلوي */}

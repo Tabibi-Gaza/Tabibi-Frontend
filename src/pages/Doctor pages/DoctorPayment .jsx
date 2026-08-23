@@ -169,7 +169,7 @@ const DoctorPayment = () => {
             setIbanError('');
             await fetchData();
         } catch (err) {
-            console.error('Add bank error:', err.response?.data || err.message);
+
             setError(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || 'فشل في إضافة الحساب البنكي');
         } finally {
             setSaving(false);
@@ -287,7 +287,7 @@ const DoctorPayment = () => {
 
     if (loading) {
         return (
-            <div className="w-full bg-slate-50/50 font-['Cairo']" dir="rtl">
+            <div className="w-full bg-slate-50/50 font-['Tajawal']" dir="rtl">
                 <div className="bg-white rounded-2xl border border-slate-100 shadow-xs p-8">
                     <div className="flex items-center justify-center gap-3 text-[#1b8b99]">
                         <FiLoader className="w-6 h-6 animate-spin" />
@@ -299,7 +299,7 @@ const DoctorPayment = () => {
     }
 
     return (
-        <div className="w-full bg-slate-50/50 space-y-6 md:space-y-8 pb-8 pr-4 font-['Cairo']" dir="rtl">
+        <div className="w-full bg-slate-50/50 space-y-6 md:space-y-8 pb-8 pr-4 font-['Tajawal']" dir="rtl">
             <div className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
 
                 {error && (
@@ -447,7 +447,7 @@ const DoctorPayment = () => {
                                             <div className="relative z-10 flex items-center justify-between w-full">
                                                 <div className="flex items-center gap-2.5 text-right">
                                                     <div className="w-11 h-11 rounded-lg flex items-center justify-center shadow-sm bg-white p-1">
-                                                        <img src={getWalletLogo(wallet.providerName)} alt={wallet.providerName} className="h-full w-auto object-contain" onError={(e)=>{e.target.style.display='none'}} />
+                                                        <img loading="lazy" decoding="async" width="40" height="24" src={getWalletLogo(wallet.providerName)} alt={wallet.providerName} className="h-full w-auto object-contain" onError={(e)=>{e.target.style.display='none'}} />
                                                     </div>
                                                     <div>
                                                         <p className="text-base font-bold text-white">{wallet.accountHolderName}</p>

@@ -39,7 +39,7 @@ const TopDoctors = () => {
     };
 
     return (
-        <div className='flex flex-col items-center gap-4 my-24 text-slate-900 font-["Cairo"]' dir='rtl'>
+        <div className='flex flex-col items-center gap-4 my-24 text-slate-900 font-["Tajawal"]' dir='rtl'>
             
             <span className='text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full tracking-widest border border-[#138C9F]/10 select-none'>
                 نخبة الأطباء
@@ -68,6 +68,9 @@ const TopDoctors = () => {
                             <div className='bg-linear-to-b from-slate-50 to-white overflow-hidden w-28 sm:w-36 md:w-full aspect-square md:h-56 shrink-0 flex items-center justify-center relative border-l border-slate-100 md:border-l-0 md:border-b'>
                                 <img
                                     loading="lazy"
+                                    decoding="async"
+                                    width="224"
+                                    height="224"
                                     src={item.image}
                                     alt={item.name}
                                     className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 object-center'
@@ -84,7 +87,7 @@ const TopDoctors = () => {
                                     <h3 className='text-slate-900 font-black text-sm md:text-base flex items-center gap-1.5 group-hover:text-[#138C9F] transition-colors truncate'>
                                         <span className='truncate'>{item.name}</span>
                                         {assets.verified_icon && (
-                                            <img src={assets.verified_icon} alt="موثق" className='w-4 h-4 shrink-0' />
+                                            <img loading="lazy" decoding="async" width="16" height="16" src={assets.verified_icon} alt="موثق" className='w-4 h-4 shrink-0' />
                                         )}
                                     </h3>
 

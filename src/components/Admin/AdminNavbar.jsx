@@ -13,7 +13,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
 
     return (
       <div
-        className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 font-['Cairo'] shadow-sm"
+        className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 font-['Tajawal'] shadow-sm"
         dir="rtl"
       >
         {/* 🟦 جهة اليمين: زر القائمة، الشعار ووسم الإدارة */}
@@ -32,6 +32,9 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
           </button>
 
           <img
+            decoding="async"
+            width="40"
+            height="40"
             src={assets.logo}
             alt="شعار طبيبي غزة"
             className="h-7 md:h-10 w-auto cursor-pointer object-contain"
@@ -134,13 +137,17 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
               {userData && userData.image ? (
                 // 1. إذا كانت الصورة موجودة، تملأ الدائرة بالكامل بدون حدود داخلية مكررة
                 <img
+                  loading="lazy"
+                  decoding="async"
+                  width="44"
+                  height="44"
                   className="w-full h-full object-cover"
                   src={userData.image}
                   alt="Profile"
                 />
               ) : (
                 // 2. إذا لم تكن الصورة موجودة، تملأ الدائرة بلون متناسق وحروف واضحة متجاوبة مع حجم الأب
-                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none font-['Cairo']">
+                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none font-['Tajawal']">
                   {userData ? `${userData.firstname.slice(0, 2) || ""}` : "?"}
                 </div>
               )}

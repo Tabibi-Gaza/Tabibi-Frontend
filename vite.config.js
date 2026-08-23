@@ -39,6 +39,12 @@ export default defineConfig({
             if (id.includes('framer-motion')) {
               return 'animation';
             }
+            if (id.includes('react-toastify')) {
+              return 'toastify';
+            }
+            if (id.includes('@react-oauth') || id.includes('jwt-decode')) {
+              return 'auth';
+            }
             return 'vendor';
           }
         }

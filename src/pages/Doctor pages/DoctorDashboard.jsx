@@ -49,7 +49,7 @@ const DoctorDashboard = () => {
         });
       }
     } catch (error) {
-      console.error("خطأ في جلب بيانات لوحة التحكم:", error);
+
     } finally {
       setLoading(false);
     }
@@ -136,7 +136,7 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="font-['Cairo'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
+    <div className="font-['Tajawal'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
       <div className="space-y-1 text-right md:pl-4">
         <h2 className="text-2xl md:text-4xl font-black text-[#0B1C30] tracking-tight">
           {new Date().getHours() < 12 ? 'صباح الخير' : 'مساء الخير'} دكتور، {doctorData?.firstname || ''} {doctorData?.lastname || ''}
@@ -216,6 +216,9 @@ const DoctorDashboard = () => {
                         {patientImage && patientImage !== "undefined" ? (
                           <img
                             loading="lazy"
+                            decoding="async"
+                            width="36"
+                            height="36"
                             src={patientImage.startsWith("http") ? patientImage : `${FILES_URL}/${patientImage}`}
                             alt={patientName}
                             className="w-9 h-9 rounded-full object-cover"
@@ -295,6 +298,9 @@ const DoctorDashboard = () => {
                         {imgUrl && imgUrl !== "undefined" ? (
                           <img
                             loading="lazy"
+                            decoding="async"
+                            width="36"
+                            height="36"
                             src={imgUrl.startsWith("http") ? imgUrl : `${FILES_URL}/${imgUrl}`}
                             alt={cleanName}
                             className="w-9 h-9 rounded-full object-cover"
@@ -351,6 +357,9 @@ const DoctorDashboard = () => {
                     {selectedPayment.patientImageUrl && selectedPayment.patientImageUrl !== "undefined" ? (
                       <img
                         loading="lazy"
+                        decoding="async"
+                        width="40"
+                        height="40"
                         src={selectedPayment.patientImageUrl.startsWith("http") ? selectedPayment.patientImageUrl : `${FILES_URL}/${selectedPayment.patientImageUrl}`}
                         alt={selectedPayment.patientName}
                         className="w-10 h-10 rounded-full object-cover"
@@ -450,6 +459,9 @@ const DoctorDashboard = () => {
                       <div className="border border-[#C3C6D6] rounded-xl overflow-hidden">
                         <img
                           loading="lazy"
+                          decoding="async"
+                          width="480"
+                          height="160"
                           src={`${FILES_URL}/${selectedPayment.attachmentUrl}`}
                           alt="Receipt image"
                           className="w-full max-h-[20vh] object-contain bg-gray-50"

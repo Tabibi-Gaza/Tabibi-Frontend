@@ -55,7 +55,7 @@ function ReviewsGrid() {
           setReviews(data.data);
         }
       } catch (err) {
-        console.error("Failed to fetch platform reviews:", err);
+
       } finally {
         setLoading(false);
       }
@@ -96,10 +96,10 @@ function ReviewsGrid() {
     <section className="bg-gradient-to-b from-white to-slate-50 py-14 md:py-28" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide font-['Cairo'] mb-4">
+          <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide font-['Tajawal'] mb-4">
             ماذا يقول مرضانا
           </span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 font-['Cairo'] leading-tight">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 font-['Tajawal'] leading-tight">
             قصص نجاح حقيقية من <span className="text-[#138C9F]">مرضانا</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-base mt-4 max-w-2xl mx-auto font-bold">
@@ -149,6 +149,9 @@ function ReviewsGrid() {
                     <div className="flex items-center gap-3">
                       <img
                         loading="lazy"
+                        decoding="async"
+                        width="44"
+                        height="44"
                         src={
                           review.patientImage
                             ? `${FILES_URL}/${review.patientImage.startsWith("/") ? "" : "/"}${review.patientImage}`
@@ -203,6 +206,9 @@ function ReviewsGrid() {
             <div className="flex items-center gap-3 mb-4">
               <img
                 loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
                 src={
                   popupReview.patientImage
                     ? `${FILES_URL}/${popupReview.patientImage.startsWith("/") ? "" : "/"}${popupReview.patientImage}`

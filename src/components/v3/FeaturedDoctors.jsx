@@ -30,7 +30,7 @@ function FeaturedDoctors() {
           setDoctors(data.data.slice(0, 4));
         }
       } catch (err) {
-        console.error("Failed to fetch top doctors:", err);
+
       } finally {
         setLoading(false);
       }
@@ -39,7 +39,7 @@ function FeaturedDoctors() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-4 py-20 md:py-28 text-slate-900 font-['Cairo']" dir="rtl">
+    <div className="flex flex-col items-center gap-4 py-20 md:py-28 text-slate-900 font-['Tajawal']" dir="rtl">
       <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full tracking-widest border border-[#138C9F]/10 select-none">
         نخبة الأطباء
       </span>
@@ -74,6 +74,9 @@ function FeaturedDoctors() {
               <div className="bg-linear-to-b from-slate-50 to-white overflow-hidden w-28 sm:w-36 md:w-full aspect-square md:h-56 shrink-0 flex items-center justify-center relative border-l border-slate-100 md:border-l-0 md:border-b">
                 <img
                   loading="lazy"
+                  decoding="async"
+                  width="224"
+                  height="224"
                   src={
                     item.profileImageUrl
                       ? `${FILES_URL}/${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}`

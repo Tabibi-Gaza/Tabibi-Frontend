@@ -133,7 +133,7 @@ const AppContextProvider = (props) => {
                 });
             }
         } catch (error) {
-            console.error("خطأ في جلب بيانات لوحة التحكم:", error);
+
         }
     };
 
@@ -156,7 +156,7 @@ const AppContextProvider = (props) => {
                 return false;
             }
         } catch (error) {
-            console.error("خطأ في تغيير حالة الطبيب:", error);
+
             toast.error(error.response?.data?.errors?.[0]?.message || error.message);
             return false;
         }
@@ -185,7 +185,7 @@ const AppContextProvider = (props) => {
                 });
             }
         } catch (error) {
-            console.error("خطأ في جلب بيانات الطبيب:", error);
+
         }
     };
 
@@ -205,7 +205,7 @@ const AppContextProvider = (props) => {
             }
             return true;
         } catch (error) {
-            console.error("خطأ في تحديث بيانات الطبيب:", error);
+
             const msg = error?.response?.data?.message || error?.message || "فشل تحديث بيانات الطبيب";
             toast.error(msg);
             return false;
@@ -238,7 +238,7 @@ const AppContextProvider = (props) => {
                         return;
                     }
                 } catch (e) {
-                    console.error("خطأ في جلب بيانات المسؤول:", e);
+
                 }
             }
 
@@ -263,7 +263,7 @@ const AppContextProvider = (props) => {
                         return;
                     }
                 } catch (e) {
-                    console.error("خطأ في جلب بيانات المريض:", e);
+
                 }
             }
 
@@ -280,7 +280,7 @@ const AppContextProvider = (props) => {
                 });
             }
         } catch (error) {
-            console.error("خطأ في جلب بيانات الملف الشخصي:", error);
+
         }
     };
 
@@ -300,7 +300,7 @@ const AppContextProvider = (props) => {
             }
             return true;
         } catch (error) {
-            console.error(error);
+
             toast.error(error.response?.data?.errors?.[0]?.message || error.message || "حدث خطأ أثناء الحفظ");
             return true;
         }
@@ -316,7 +316,7 @@ const AppContextProvider = (props) => {
                 setDoctors(items.map(mapBackendDoctor));
             }
         } catch (error) {
-            console.error("خطأ في جلب بيانات الأطباء:", error);
+
         }
     };
 
@@ -402,7 +402,7 @@ const AppContextProvider = (props) => {
                 });
             }
         } catch (error) {
-            console.error("خطأ في جلب صلاحيات السكرتير:", error);
+
         } finally {
             setSecretaryPermsLoaded(true);
         }
@@ -438,7 +438,7 @@ const AppContextProvider = (props) => {
                 setNotifications(data.data.items);
             }
         } catch (error) {
-            console.error("خطأ في جلب الإشعارات:", error);
+
         }
     }, []);
 
@@ -447,7 +447,7 @@ const AppContextProvider = (props) => {
             await axiosInstance.put("/notifications/read-all");
             setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
         } catch (error) {
-            console.error("خطأ في تعيين الإشعارات كمقروءة:", error);
+
         }
     }, []);
 
@@ -456,7 +456,7 @@ const AppContextProvider = (props) => {
             await axiosInstance.delete(`/notifications/${id}`);
             setNotifications(prev => prev.filter(n => n.id !== id));
         } catch (error) {
-            console.error("خطأ في حذف الإشعار:", error);
+
         }
     }, []);
 

@@ -15,7 +15,7 @@ const JoiningAsDoctor = () => {
 
     return (
       <section
-        className="relative  bg-[#118fa6]  mx-2 sm:mx-4 md:mx-6 lg:mx-8 text-white py-12 md:py-30 px-6 md:px-16 overflow-hidden rounded-4xl font-['Cairo']"
+        className="relative  bg-[#118fa6]  mx-2 sm:mx-4 md:mx-6 lg:mx-8 text-white py-12 md:py-30 px-6 md:px-16 overflow-hidden rounded-4xl font-['Tajawal']"
         dir="rtl"
       >
         {/* الخلفية المائية الخفيفة (أيقونة البطاقة الطبية المدمجة أسفل اليسار كعلامة مائية) */}

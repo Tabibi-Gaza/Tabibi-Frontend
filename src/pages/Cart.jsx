@@ -27,7 +27,7 @@ const Cart = () => {
   const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 font-['Cairo'] pt-28 pb-16 px-4" dir="rtl">
+    <div className="min-h-screen bg-gray-50 font-['Tajawal'] pt-28 pb-16 px-4" dir="rtl">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-black text-[#1e293b] mb-3">السلة</h1>
@@ -56,7 +56,7 @@ const Cart = () => {
                 <div key={item.id} className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center gap-4 hover:shadow-md transition-all">
                   <div className="w-16 h-16 rounded-xl bg-[#138C9F]/10 flex items-center justify-center shrink-0 overflow-hidden">
                     {item.image ? (
-                      <img loading="lazy" src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <img loading="lazy" decoding="async" width="120" height="120" src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
                       <span className="text-[#138C9F] text-lg font-bold">{item.name?.[0]}</span>
                     )}

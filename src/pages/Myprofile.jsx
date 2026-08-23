@@ -85,7 +85,7 @@ const Myprofile = () => {
             localStorage.setItem("user", JSON.stringify({ ...u, fullName, email: localUserData.email }))
           }
         } catch (err) {
-          console.error("خطأ في تحديث بيانات المستخدم المحلية:", err)
+
         }
 
         // إعادة جلب الصورة الحقيقية من الـ Backend بعد الرفع
@@ -98,7 +98,7 @@ const Myprofile = () => {
         toast.error(data.errors?.[0]?.message || data.message || "حدث خطأ أثناء تحديث البيانات")
       }
     } catch (error) {
-      console.error(error)
+
       toast.error(error.response?.data?.errors?.[0]?.message || error.message || "حدث خطأ أثناء تحديث البيانات")
     }
   }
@@ -117,7 +117,7 @@ const Myprofile = () => {
   return (
     currentData && (
       <div
-        className="w-full bg-white p-6 md:pb-10 md:pr-10 md:pl-10 pt-40  font-['Cairo']"
+        className="w-full bg-white p-6 md:pb-10 md:pr-10 md:pl-10 pt-40  font-['Tajawal']"
         dir="rtl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-4  items-start">
@@ -128,13 +128,16 @@ const Myprofile = () => {
                 // إذا كانت هناك صورة جديدة مرفوعة أو صورة قديمة مخزنة، نعرض الصورة
                 <img
                   loading="lazy"
+                  decoding="async"
+                  width="220"
+                  height="220"
                   className="w-full h-full object-cover"
                   src={currentData.image}
                   alt="صورة شخصية"
                 />
               ) : (
                 // 2. إذا لم تكن هناك أي صورة، نعرض أول حرفين بشكل عريض ومناسب للحجم الكبير
-                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-black text-4xl select-none font-['Cairo']">
+                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-black text-4xl select-none font-['Tajawal']">
                   {currentData
                     ? `${currentData.firstname.slice(0, 2) || ""}`
                     : "?"}
@@ -267,6 +270,10 @@ const Myprofile = () => {
                       className="flex items-center gap-1.5 px-3 py-2 border-l border-gray-200 text-sm font-medium text-gray-700 bg-[#fcfcfc] shrink-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       <img
+                        loading="lazy"
+                        decoding="async"
+                        width="24"
+                        height="18"
                         src={`https://flagcdn.com/24x18/${selectedCountry.iso}.png`}
                         alt={selectedCountry.name}
                         className="w-6 h-[18px] rounded-sm object-cover"
@@ -320,6 +327,10 @@ const Myprofile = () => {
                           >
                             <span className="text-lg leading-none">
                               <img
+                                loading="lazy"
+                                decoding="async"
+                                width="24"
+                                height="18"
                                 src={`https://flagcdn.com/24x18/${c.iso}.png`}
                                 alt={c.name}
                                 className="w-6 h-[18px] rounded-sm object-cover"

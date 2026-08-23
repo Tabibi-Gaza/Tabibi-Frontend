@@ -54,12 +54,15 @@ const Navbar = () => {
   return (
     <>
       <div
-        className='fixed left-1/2 -translate-x-1/2 top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-1rem)]  font-["Cairo"] z-[50] flex items-center justify-between text-base py-5 px-4 sm:px-6 md:px-10 bg-white/75 dark:bg-gray-900/75 border border-white/40 dark:border-gray-700/40 rounded-2xl shadow-xl shadow-black/[0.03] select-none backdrop-blur-md'
+        className='fixed left-1/2 -translate-x-1/2 top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-1rem)]  font-["Tajawal"] z-[50] flex items-center justify-between text-base py-5 px-4 sm:px-6 md:px-10 bg-white/75 dark:bg-gray-900/75 border border-white/40 dark:border-gray-700/40 rounded-2xl shadow-xl shadow-black/[0.03] select-none backdrop-blur-md'
         dir="rtl"
       >
         {/* ---- اللوجو ---- */}
         <div className="shrink-0 z-50">
           <img
+            decoding="async"
+            width="44"
+            height="44"
             onClick={() => {
               navigate("/");
               setShowMenu(false);
@@ -260,19 +263,23 @@ const Navbar = () => {
                 >
                   {userData && userData.image ? (
                     <img
+                      loading="lazy"
+                      decoding="async"
+                      width="40"
+                      height="40"
                       className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover object-top bg-gray-100 ring-2 ring-[#138C9F]/25 ring-offset-2 ring-offset-white shadow-sm shrink-0"
                       src={userData.image}
                       alt="Profile"
                     />
                   ) : (
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-b from-[#138C9F] to-[#0f7282] text-white flex items-center justify-center font-bold text-sm select-none font-['Cairo'] ring-2 ring-[#138C9F]/25 ring-offset-2 ring-offset-white shadow-sm shrink-0">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-b from-[#138C9F] to-[#0f7282] text-white flex items-center justify-center font-bold text-sm select-none font-['Tajawal'] ring-2 ring-[#138C9F]/25 ring-offset-2 ring-offset-white shadow-sm shrink-0">
                       {userData
                         ? `${userData.firstname.slice(0, 1) || ""}`
                         : "?"}
                     </div>
                   )}
                   {userData && (
-                    <div className="hidden lg:flex flex-col text-right font-['Cairo'] leading-tight select-none">
+                    <div className="hidden lg:flex flex-col text-right font-['Tajawal'] leading-tight select-none">
                       <span className="text-xs sm:text-sm font-black text-gray-800 dark:text-gray-200 max-w-[130px] truncate">
                         {userData.firstname} {userData.lastname}
                       </span>
@@ -437,6 +444,10 @@ const Navbar = () => {
             className="p-1.5 rounded-xl md:hidden hover:bg-gray-100 dark:hover:bg-gray-700 active:scale-95 transition-all focus:outline-none shrink-0 flex items-center justify-center"
           >
             <img
+              loading="lazy"
+              decoding="async"
+              width="24"
+              height="24"
               className="w-5 h-5 sm:w-6 sm:h-6 opacity-85 block"
               src={assets.menu_icon}
               alt="Menu"
@@ -466,6 +477,9 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between px-5 py-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shrink-0 w-full">
           <img
+            decoding="async"
+            width="36"
+            height="36"
             className="h-9 w-auto object-contain"
             src={assets.logo1 || assets.logo}
             alt="شعار طبيبي"
@@ -475,6 +489,10 @@ const Navbar = () => {
             className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none flex items-center justify-center"
           >
             <img
+              loading="lazy"
+              decoding="async"
+              width="24"
+              height="24"
               className="w-6 h-6 hover:rotate-90 transition-transform duration-200"
               src={assets.cross_icon}
               alt="Close"

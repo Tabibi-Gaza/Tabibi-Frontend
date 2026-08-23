@@ -65,7 +65,7 @@ const Header = () => {
     >
       {/* حاوية الصندوق الزجاجي */}
       <div className="w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 bg-white/40 backdrop-blur-md p-4 sm:p-10 rounded-2xl md:rounded-3xl border border-white/40 shadow-lg animate-fadeIn">
-        <h1 className='text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-snug select-none font-["Cairo"] px-2'>
+        <h1 className='text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-snug select-none font-["Tajawal"] px-2'>
           رعاية طبية متميزة وخدمات صحية موثوقة لجميع أفراد الأسرة.
         </h1>
 
@@ -91,7 +91,7 @@ const Header = () => {
                   )}
                 </span>
                 <span
-                  className={`font-extrabold font-["Cairo"] text-right tracking-wide text-xs sm:text-sm md:text-base truncate ${speciality ? "text-slate-900" : "text-slate-400"}`}
+                  className={`font-extrabold font-["Tajawal"] text-right tracking-wide text-xs sm:text-sm md:text-base truncate ${speciality ? "text-slate-900" : "text-slate-400"}`}
                 >
                   {isLoading
                     ? "جاري تحميل التخصصات..."

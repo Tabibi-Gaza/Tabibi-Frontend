@@ -28,7 +28,7 @@ const MedicalFile = () => {
                     setMedicalHistoryData(historyRes.data.data);
                 }
             } catch (err) {
-                console.error("Error fetching data:", err);
+
             } finally {
                 setLoading(false);
             }
@@ -54,7 +54,7 @@ const MedicalFile = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex items-center justify-center" dir="rtl">
                 <p className="text-gray-400 font-bold text-lg">جاري تحميل السجل المرضي...</p>
             </div>
         );
@@ -62,7 +62,7 @@ const MedicalFile = () => {
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex items-center justify-center" dir="rtl">
                 <p className="text-gray-400 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
             </div>
         );
@@ -72,7 +72,7 @@ const MedicalFile = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] pr-6" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] pr-6" dir="rtl">
             <div className="space-y-6">
 
                 <div className="flex flex-col gap-1 text-right">

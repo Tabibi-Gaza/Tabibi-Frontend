@@ -65,7 +65,7 @@ const FAQs = () => {
 
     return (
       <div
-        className="min-h-screen bg-white pt-30 font-['Cairo'] antialiased text-[#1e293b]"
+        className="min-h-screen bg-white pt-30 font-['Tajawal'] antialiased text-[#1e293b]"
         dir="rtl"
       >
         <main className="max-w-233.75 w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white pb-10">

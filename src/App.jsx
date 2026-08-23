@@ -22,18 +22,18 @@ class ErrorBoundary extends Component {
     return { hasError: true };
   }
   componentDidCatch(error, errorInfo) {
-    console.error('ErrorBoundary caught:', error, errorInfo);
+
   }
   render() {
     if (this.state.hasError) {
       return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
           <div className="text-center max-w-md">
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2 font-['Cairo']">حدث خطأ غير متوقع</h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-4 font-['Cairo']">يرجى تحميل الصفحة مرة أخرى</p>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2 font-['Tajawal']">حدث خطأ غير متوقع</h1>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 font-['Tajawal']">يرجى تحميل الصفحة مرة أخرى</p>
             <button
               onClick={() => { this.setState({ hasError: false }); window.location.reload(); }}
-              className="bg-[#138C9F] text-white px-6 py-2 rounded-lg hover:bg-[#0f7282] transition font-['Cairo']"
+              className="bg-[#138C9F] text-white px-6 py-2 rounded-lg hover:bg-[#0f7282] transition font-['Tajawal']"
             >
               إعادة تحميل
             </button>

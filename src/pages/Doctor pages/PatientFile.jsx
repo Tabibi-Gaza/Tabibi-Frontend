@@ -18,7 +18,7 @@ const PatientFile = () => {
     const patientData = database[id] || database["3"]; // استرجاع المريض حسب المعرف أو افتراضي سلطان العبدالله 
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] font-['Cairo'] p-6" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] p-6" dir="rtl">
             <main className="max-w-[1000px] mx-auto space-y-6">
                 <div className="flex justify-between items-center">
                     <div className="text-right">
@@ -33,7 +33,7 @@ const PatientFile = () => {
                 {/* كارت المريض العلوي */}
                 <div className="bg-white border border-[#C3C6D6]/70 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs"> 
                     <div className="flex items-center gap-5 text-right w-full md:w-auto"> 
-                        <img loading="lazy" src={patientData.avatar} alt={patientData.name} className="w-20 h-20 rounded-2xl object-cover border border-[#C3C6D6]" /> 
+                        <img loading="lazy" decoding="async" width="80" height="80" src={patientData.avatar} alt={patientData.name} className="w-20 h-20 rounded-2xl object-cover border border-[#C3C6D6]" /> 
                         <h2 className="text-2xl font-black text-[#0B1C30]">{patientData.name}</h2> 
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3 w-full md:w-auto"> 

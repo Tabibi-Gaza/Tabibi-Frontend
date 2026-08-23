@@ -68,7 +68,7 @@ export default function AdminJoinRequests() {
                 setTotalCount(data.data.totalCount || 0);
             }
         } catch (error) {
-            console.error('خطأ في جلب طلبات الانضمام:', error);
+
             toast.error('فشل في جلب بيانات الطلبات');
         } finally {
             setLoading(false);
@@ -143,7 +143,7 @@ export default function AdminJoinRequests() {
                 setSelectedDetails(null);
             }
         } catch (error) {
-            console.error('خطأ في جلب تفاصيل الطلب:', error);
+
             setSelectedDetails(null);
         }
         setSelectedRequest(req);
@@ -167,7 +167,7 @@ export default function AdminJoinRequests() {
             window.URL.revokeObjectURL(url);
             toast.success('تم تحميل الملف بنجاح');
         } catch (error) {
-            console.error('خطأ في تحميل الملف:', error);
+
             toast.error('فشل في تحميل الملف');
         }
     };
@@ -180,7 +180,7 @@ export default function AdminJoinRequests() {
     const totalPending = activeFilter === 'pending' ? totalCount : requests.length;
 
     return (
-        <div className="w-full bg-[#ecf8fa] font-['Cairo'] flex flex-col items-start relative text-right" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] font-['Tajawal'] flex flex-col items-start relative text-right" dir="rtl">
             <div className="w-full flex flex-col gap-6 md:gap-8">
                 <div className="text-right">
                     <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#138C9F] leading-tight">طلبات انضمام الأطباء</h2>
@@ -410,7 +410,7 @@ export default function AdminJoinRequests() {
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
                                 <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.photoPath ? (
-                                        <img loading="lazy" src={`${FILES_URL}/${selectedRequest.photoPath}`} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
+                                            <img loading="lazy" decoding="async" width="480" height="480" src={`${FILES_URL}/${selectedRequest.photoPath}`} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
                                     ) : (
                                         <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                             {selectedRequest.avatarInitials}

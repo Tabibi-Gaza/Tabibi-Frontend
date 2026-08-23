@@ -105,7 +105,7 @@ const PatientMedicalFile = () => {
 
     if (loading) {
         return (
-            <div className="w-full min-h-screen p-3 pt-40 font-['Cairo']" dir="rtl">
+            <div className="w-full min-h-screen p-3 pt-40 font-['Tajawal']" dir="rtl">
                 <div className="max-w-5xl mx-auto flex items-center justify-center h-64">
                     <Loader2 className="w-8 h-8 animate-spin text-[#1b8b99]" />
                 </div>
@@ -115,14 +115,14 @@ const PatientMedicalFile = () => {
 
     if (error) {
         return (
-            <div className="w-full min-h-screen p-3 pt-40 font-['Cairo']" dir="rtl">
+            <div className="w-full min-h-screen p-3 pt-40 font-['Tajawal']" dir="rtl">
                 <div className="max-w-5xl mx-auto text-center text-red-500 py-20 text-sm font-bold">{error}</div>
             </div>
         );
     }
 
     return (
-        <div className="w-full min-h-screen p-3 pt-40 font-['Cairo']" dir="rtl">
+        <div className="w-full min-h-screen p-3 pt-40 font-['Tajawal']" dir="rtl">
             <div className="max-w-5xl mx-auto space-y-6">
 
                 {/* الهيدر العلوي للسجل الطبي */}
@@ -386,6 +386,9 @@ const PatientMedicalFile = () => {
                                         {selectedVisit.doctorImageUrl ? (
                                             <img
                                                 loading="lazy"
+                                                decoding="async"
+                                                width="48"
+                                                height="48"
                                                 src={`${FILES_BASE}${selectedVisit.doctorImageUrl}`}
                                                 alt={selectedVisit.doctorName}
                                                 className="w-full h-full object-cover"

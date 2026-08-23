@@ -92,10 +92,10 @@ function FeaturesSlider() {
           >
             {current.title.split(" ")[0]}
           </span>
-          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 mb-3 md:mb-4 font-['Cairo'] leading-tight">
+          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 mb-3 md:mb-4 font-['Tajawal'] leading-tight">
             {current.title}
           </h3>
-          <p className="text-slate-500 text-xs sm:text-sm md:text-base leading-relaxed font-bold font-['Cairo']">
+          <p className="text-slate-500 text-xs sm:text-sm md:text-base leading-relaxed font-bold font-['Tajawal']">
             {current.desc}
           </p>
         </div>
@@ -112,6 +112,8 @@ function FeaturesSlider() {
           <div className="absolute inset-2" style={{ clipPath: "circle(100%)" }}>
             <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl">
               <img
+                loading="lazy"
+                decoding="async"
                 src={current.image}
                 alt={current.title}
                 className="w-full h-full object-cover hero-ken-burns"
@@ -132,6 +134,8 @@ function FeaturesSlider() {
           >
             <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl">
               <img
+                loading="lazy"
+                decoding="async"
                 src={next.image}
                 alt={next.title}
                 className="w-full h-full object-cover hero-ken-burns"
