@@ -117,7 +117,7 @@ const Myprofile = () => {
   return (
     currentData && (
       <div
-        className="w-full bg-white p-6 md:pb-10 md:pr-10 md:pl-10 pt-40  font-['Tajawal']"
+        className="w-full bg-white p-6 md:pb-10 md:pr-10 md:pl-10 pt-40 "
         dir="rtl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-4  items-start">
@@ -137,7 +137,7 @@ const Myprofile = () => {
                 />
               ) : (
                 // 2. إذا لم تكن هناك أي صورة، نعرض أول حرفين بشكل عريض ومناسب للحجم الكبير
-                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-black text-4xl select-none font-['Tajawal']">
+                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-black text-4xl select-none">
                   {currentData
                     ? `${currentData.firstname.slice(0, 2) || ""}`
                     : "?"}

@@ -88,7 +88,7 @@ export default function AdminDepartmentsManagement() {
     const handleSearch = (e) => { setSearchQuery(e.target.value); setCurrentPage(1); };
 
     return (
-      <div className="w-full font-['Tajawal'] relative" dir="rtl">
+      <div className="w-full relative" dir="rtl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div className="flex flex-col gap-1.5 text-right w-full md:w-auto">
             <h2 className="text-[26px] md:text-[32px] font-extrabold leading-tight text-[#138C9F]">إدارة الأقسام</h2>

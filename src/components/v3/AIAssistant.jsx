@@ -141,7 +141,7 @@ const AIAssistant = () => {
   };
 
   return (
-    <div className="relative font-['Tajawal'] py-16 px-4" dir="rtl">
+    <div className="relative py-16 px-4" dir="rtl">
       <div className="max-w-6xl mx-auto">
         <div className="bg-[#0B1437] rounded-3xl overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">

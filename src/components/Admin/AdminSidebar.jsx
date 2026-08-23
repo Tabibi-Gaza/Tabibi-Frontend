@@ -107,7 +107,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <aside
       className={`
         fixed top-16 right-0 bottom-0 w-[288px] h-[calc(100vh-64px)] bg-[#e2f4f7] border-l border-slate-200
-        flex flex-col justify-between font-['Tajawal'] z-50 transition-transform duration-300
+        flex flex-col justify-between z-50 transition-transform duration-300
         ${sidebarOpen ? 'translate-x-0 shadow-2xl' : 'translate-x-full'}
         md:static md:translate-x-0 md:flex md:w-[288px] md:min-h-[calc(100vh-86px)] md:h-auto md:sticky md:top-21.5 md:shadow-none md:z-10
       `}

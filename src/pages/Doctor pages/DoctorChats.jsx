@@ -182,7 +182,7 @@ export default function DoctorChats() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #9fb0b8; }
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
       `}</style>
-      <div className="w-full pr-4 font-['Tajawal'] bg-slate-50/30 flex justify-center items-start" dir="rtl">
+      <div className="w-full pr-4 bg-slate-50/30 flex justify-center items-start" dir="rtl">
         <div className="w-full bg-white border border-[#e9eff6] rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] min-h-[600px] h-[calc(100vh-180px)] md:h-[700px] overflow-hidden">
 
           {/* Sidebar */}

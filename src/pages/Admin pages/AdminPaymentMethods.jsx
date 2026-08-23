@@ -189,10 +189,10 @@ export default function AdminPaymentMethods() {
             </div>
 
             <div className="flex gap-2 bg-white border border-[#C3C6D6] rounded-xl p-1 w-fit">
-                <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold font-['Tajawal'] transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] hover:bg-gray-50'}`}>
+                <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] hover:bg-gray-50'}`}>
                     طرق الدفع
                 </button>
-                <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold font-['Tajawal'] transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] hover:bg-gray-50'}`}>
+                <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] hover:bg-gray-50'}`}>
                     مدفوعات الاشتراكات
                     {pendingPayments.length > 0 && (
                         <span className="mr-2 bg-red-500 text-white text-[11px] px-2 py-0.5 rounded-full">{pendingPayments.length}</span>
@@ -203,7 +203,7 @@ export default function AdminPaymentMethods() {
             {activeTab === 'methods' ? (
                 <>
                     <div className="flex justify-end">
-                        <button onClick={() => { resetForm(); setIsModalOpen(true); }} className="flex items-center gap-2 px-5 py-2.5 bg-[#138C9F] text-white rounded-xl font-bold text-[14px] font-['Tajawal'] hover:bg-[#0f7282] transition-colors cursor-pointer">
+                        <button onClick={() => { resetForm(); setIsModalOpen(true); }} className="flex items-center gap-2 px-5 py-2.5 bg-[#138C9F] text-white rounded-xl font-bold text-[14px] hover:bg-[#0f7282] transition-colors cursor-pointer">
                             <Plus size={18} />
                             إضافة طريقة دفع
                         </button>
@@ -224,23 +224,23 @@ export default function AdminPaymentMethods() {
                                             {method.isActive ? 'نشط' : 'معطل'}
                                         </span>
                                     </div>
-                                    <div className="space-y-2 text-[13px] font-['Tajawal']">
+                                    <div className="space-y-2 text-[13px]">
                                         <div className="flex justify-between"><span className="text-[#526069]">صاحب الحساب:</span><span className="font-bold text-[#0B1C30]">{method.accountHolderName}</span></div>
                                         <div className="flex justify-between"><span className="text-[#526069]">الهاتف:</span><span className="font-bold text-[#0B1C30]" dir="ltr">{method.phoneNumber}</span></div>
                                         {method.iban && <div className="flex justify-between"><span className="text-[#526069]">الآيبان:</span><span className="font-bold text-[#0B1C30] text-[11px]" dir="ltr">{method.iban}</span></div>}
                                     </div>
                                     <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-100">
-                                        <button onClick={() => openEdit(method)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-[13px] font-bold font-['Tajawal'] text-[#003D9B] hover:bg-blue-50 transition-colors cursor-pointer">
+                                        <button onClick={() => openEdit(method)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-[13px] font-bold text-[#003D9B] hover:bg-blue-50 transition-colors cursor-pointer">
                                             <Edit2 size={14} /> تعديل
                                         </button>
-                                        <button onClick={() => handleDelete(method.id)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-[13px] font-bold font-['Tajawal'] text-red-500 hover:bg-red-50 transition-colors cursor-pointer">
+                                        <button onClick={() => handleDelete(method.id)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-[13px] font-bold text-red-500 hover:bg-red-50 transition-colors cursor-pointer">
                                             <Trash2 size={14} /> حذف
                                         </button>
                                     </div>
                                 </div>
                             ))}
                             {paymentMethods.length === 0 && (
-                                <div className="col-span-full text-center py-12 text-[#526069] font-['Tajawal']">لا توجد طرق دفع مضافة</div>
+                                <div className="col-span-full text-center py-12 text-[#526069]">لا توجد طرق دفع مضافة</div>
                             )}
                         </div>
                     )}
@@ -272,19 +272,19 @@ export default function AdminPaymentMethods() {
                             <div className="overflow-x-auto">
                                 <table className="w-full border-collapse text-right">
                                     <thead><tr className="bg-[#e2f4f7] h-[48px]">
-                                        <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">الطبيب</th>
-                                        <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">المبلغ</th>
-                                        <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] hidden md:table-cell">طريقة الدفع</th>
-                                        <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] hidden md:table-cell">التاريخ</th>
-                                        <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">الإجراءات</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الطبيب</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">المبلغ</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] hidden md:table-cell">طريقة الدفع</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] hidden md:table-cell">التاريخ</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الإجراءات</th>
                                     </tr></thead>
                                     <tbody className="divide-y divide-[#C3C6D6]">
                                         {pendingPayments.map((payment) => (
                                             <tr key={payment.id} className="h-[60px] hover:bg-slate-50">
-                                                <td className="px-6 py-3 font-['Tajawal'] font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
-                                                <td className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
-                                                <td className="px-6 py-3 font-['Tajawal'] text-[13px] text-[#526069] hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
-                                                <td className="px-6 py-3 font-['Tajawal'] text-[13px] text-[#526069] hidden md:table-cell">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
+                                                <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
+                                                <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
+                                                <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
+                                                <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
                                                 <td className="px-6 py-3">
                                                     <div className="flex items-center gap-2 justify-center">
                                                         {payment.receiptImageUrl && (
@@ -309,26 +309,26 @@ export default function AdminPaymentMethods() {
                         <div className="overflow-x-auto">
                             <table className="w-full border-collapse text-right">
                                 <thead><tr className="bg-[#e2f4f7] h-[48px]">
-                                    <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">الطبيب</th>
-                                    <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">المبلغ</th>
-                                    <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">الحالة</th>
-                                    <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069]">التاريخ</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الطبيب</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">المبلغ</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الحالة</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">التاريخ</th>
                                 </tr></thead>
                                 <tbody className="divide-y divide-[#C3C6D6]">
                                     {allPayments.map((payment) => (
                                         <tr key={payment.id} className="h-[55px] hover:bg-slate-50">
-                                            <td className="px-6 py-3 font-['Tajawal'] font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
-                                            <td className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
+                                            <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
+                                            <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
                                             <td className="px-6 py-3">
-                                                <span className={`px-3 py-1 rounded-full text-[12px] font-['Tajawal'] font-bold ${payment.status === 'Approved' ? 'bg-[#DCFCE7] text-[#166534]' : payment.status === 'Rejected' ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#FFF7E6] text-[#B45309]'}`}>
+                                                <span className={`px-3 py-1 rounded-full text-[12px] font-bold ${payment.status === 'Approved' ? 'bg-[#DCFCE7] text-[#166534]' : payment.status === 'Rejected' ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#FFF7E6] text-[#B45309]'}`}>
                                                     {payment.status === 'Approved' ? 'مقبول' : payment.status === 'Rejected' ? 'مرفوض' : 'قيد الانتظار'}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-3 font-['Tajawal'] text-[13px] text-[#526069]">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
+                                            <td className="px-6 py-3 text-[13px] text-[#526069]">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
                                         </tr>
                                     ))}
                                     {allPayments.length === 0 && (
-                                        <tr><td colSpan="4" className="px-6 py-10 text-center font-['Tajawal'] text-[#526069]">لا توجد مدفوعات</td></tr>
+                                        <tr><td colSpan="4" className="px-6 py-10 text-center text-[#526069]">لا توجد مدفوعات</td></tr>
                                     )}
                                 </tbody>
                             </table>
@@ -344,43 +344,43 @@ export default function AdminPaymentMethods() {
                         <h3 className="font-['Tajawal'] font-extrabold text-[20px] text-[#0B1C30] mb-6">{editMode ? 'تعديل طريقة الدفع' : 'إضافة طريقة دفع جديدة'}</h3>
                         <form onSubmit={handleSave} className="space-y-4">
                             <div className="flex gap-3">
-                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Bank', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-['Tajawal'] font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Bank' ? 'border-[#003D9B] bg-[#003D9B]/5 text-[#003D9B]' : 'border-gray-200 text-gray-500'}`}>
+                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Bank', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Bank' ? 'border-[#003D9B] bg-[#003D9B]/5 text-[#003D9B]' : 'border-gray-200 text-gray-500'}`}>
                                     <Building2 size={16} className="inline ml-2" /> حساب بنكي
                                 </button>
-                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Wallet', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-['Tajawal'] font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Wallet' ? 'border-[#138C9F] bg-[#138C9F]/5 text-[#138C9F]' : 'border-gray-200 text-gray-500'}`}>
+                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Wallet', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Wallet' ? 'border-[#138C9F] bg-[#138C9F]/5 text-[#138C9F]' : 'border-gray-200 text-gray-500'}`}>
                                     <Wallet size={16} className="inline ml-2" /> محفظة إلكترونية
                                 </button>
                             </div>
 
                             <div>
-                                <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">{formData.methodType === 'Bank' ? 'البنك' : 'مقدم الخدمة'}</label>
-                                <select value={formData.providerName} onChange={e => setFormData(p => ({ ...p, providerName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl font-['Tajawal'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" required>
+                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">{formData.methodType === 'Bank' ? 'البنك' : 'مقدم الخدمة'}</label>
+                                <select value={formData.providerName} onChange={e => setFormData(p => ({ ...p, providerName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" required>
                                     <option value="">اختر...</option>
                                     {(formData.methodType === 'Bank' ? bankOptions : walletOptions).map(b => <option key={b} value={b}>{b}</option>)}
                                 </select>
                             </div>
 
                             <div>
-                                <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
-                                <input type="text" value={formData.accountHolderName} onChange={e => setFormData(p => ({ ...p, accountHolderName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl font-['Tajawal'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم الكامل" required />
+                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
+                                <input type="text" value={formData.accountHolderName} onChange={e => setFormData(p => ({ ...p, accountHolderName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم الكامل" required />
                             </div>
 
                             <div>
-                                <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">رقم الهاتف</label>
-                                <input type="text" value={formData.phoneNumber} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setFormData(p => ({ ...p, phoneNumber: val })); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl font-['Tajawal'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
+                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">رقم الهاتف</label>
+                                <input type="text" value={formData.phoneNumber} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setFormData(p => ({ ...p, phoneNumber: val })); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
 
                             {formData.methodType === 'Bank' && (
                                 <div>
-                                    <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">رقم الآيبان (IBAN)</label>
-                                    <input type="text" value={formData.iban} onChange={e => { const cleaned = formatIban(e.target.value); setFormData(p => ({ ...p, iban: cleaned })); const err = validateIban(cleaned, formData.providerName); setIbanError(err); }} onBlur={() => { const err = validateIban(formData.iban, formData.providerName); setIbanError(err); }} placeholder={getBankPlaceholder(formData.providerName)} maxLength={29} className={`w-full h-[44px] px-4 border rounded-xl font-['Tajawal'] text-[14px] focus:outline-none text-[#0B1C30] ${ibanError ? 'border-red-300 focus:border-red-400' : 'border-[#C3C6D6] focus:border-[#138C9F]'}`} dir="ltr" required />
+                                    <label className="block font-bold text-[13px] text-[#526069] mb-1.5">رقم الآيبان (IBAN)</label>
+                                    <input type="text" value={formData.iban} onChange={e => { const cleaned = formatIban(e.target.value); setFormData(p => ({ ...p, iban: cleaned })); const err = validateIban(cleaned, formData.providerName); setIbanError(err); }} onBlur={() => { const err = validateIban(formData.iban, formData.providerName); setIbanError(err); }} placeholder={getBankPlaceholder(formData.providerName)} maxLength={29} className={`w-full h-[44px] px-4 border rounded-xl text-[14px] focus:outline-none text-[#0B1C30] ${ibanError ? 'border-red-300 focus:border-red-400' : 'border-[#C3C6D6] focus:border-[#138C9F]'}`} dir="ltr" required />
                                     {ibanError && <p className="text-[11px] text-red-500 mt-1">{ibanError}</p>}
                                 </div>
                             )}
 
                             <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={resetForm} className="flex-1 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-['Tajawal'] font-bold hover:bg-gray-50 transition-colors cursor-pointer">إلغاء</button>
-                                <button type="submit" disabled={submitting} className="flex-1 h-[46px] bg-[#138C9F] text-white rounded-xl font-['Tajawal'] font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50">
+                                <button type="button" onClick={resetForm} className="flex-1 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 transition-colors cursor-pointer">إلغاء</button>
+                                <button type="submit" disabled={submitting} className="flex-1 h-[46px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50">
                                     {submitting && <Loader2 size={16} className="animate-spin" />}
                                     {editMode ? 'حفظ التعديلات' : 'إضافة'}
                                 </button>
@@ -395,10 +395,10 @@ export default function AdminPaymentMethods() {
                     <div className="bg-white border border-[#C3C6D6] shadow-2xl rounded-2xl w-full max-w-md p-8 relative">
                         <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="absolute top-4 left-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
                         <h3 className="font-['Tajawal'] font-extrabold text-[20px] text-[#0B1C30] mb-4">رفض الدفع</h3>
-                        <textarea value={rejectModal.reason} onChange={e => setRejectModal(p => ({ ...p, reason: e.target.value }))} className="w-full h-24 px-4 py-3 border border-[#C3C6D6] rounded-xl font-['Tajawal'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] resize-none" placeholder="سبب الرفض..." required />
+                        <textarea value={rejectModal.reason} onChange={e => setRejectModal(p => ({ ...p, reason: e.target.value }))} className="w-full h-24 px-4 py-3 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] resize-none" placeholder="سبب الرفض..." required />
                         <div className="flex gap-3 mt-4">
-                            <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 rounded-xl font-['Tajawal'] font-bold hover:bg-gray-50 cursor-pointer">إلغاء</button>
-                            <button onClick={handleReject} className="flex-1 h-[42px] bg-red-500 text-white rounded-xl font-['Tajawal'] font-bold hover:bg-red-600 cursor-pointer">رفض الدفع</button>
+                            <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 rounded-xl font-bold hover:bg-gray-50 cursor-pointer">إلغاء</button>
+                            <button onClick={handleReject} className="flex-1 h-[42px] bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 cursor-pointer">رفض الدفع</button>
                         </div>
                     </div>
                 </div>

@@ -219,23 +219,23 @@ export default function AdminUserManagement() {
 
             <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl w-full flex flex-col overflow-hidden">
                 <div className="border-b border-[#C3C6D6] px-6 py-4 flex items-center justify-start">
-                    <button className="h-full border-b-2 border-[#003D9B] px-4 font-['Tajawal'] font-semibold text-[16px] text-[#003D9B] flex items-center justify-center cursor-pointer">الكل</button>
+                    <button className="h-full border-b-2 border-[#003D9B] px-4 font-semibold text-[16px] text-[#003D9B] flex items-center justify-center cursor-pointer">الكل</button>
                 </div>
 
                 <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-right">
                         <thead>
                             <tr className="bg-[#e2f4f7] py-3">
-                                <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] tracking-[0.6px]">المستخدم</th>
-                                <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] tracking-[0.6px]">نوع الحساب</th>
-                                <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden md:table-cell">تاريخ الانضمام</th>
-                                <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden sm:table-cell">الحالة</th>
-                                <th className="px-6 py-3 font-['Tajawal'] font-bold text-[14px] text-[#526069] tracking-[0.6px] text-center w-[120px]">التحكم</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px]">المستخدم</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px]">نوع الحساب</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden md:table-cell">تاريخ الانضمام</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden sm:table-cell">الحالة</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px] text-center w-[120px]">التحكم</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#C3C6D6]">
                             {loading ? (
-                                <tr><td colSpan="5" className="px-6 py-10 text-center font-['Tajawal'] text-[#526069]">جاري تحميل البيانات...</td></tr>
+                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">جاري تحميل البيانات...</td></tr>
                             ) : users.map((user) => (
                                 <tr key={user.id} className="hover:bg-slate-50 transition-colors">
                                     <td className="px-6 py-3 whitespace-nowrap">
@@ -254,13 +254,13 @@ export default function AdminUserManagement() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-3 whitespace-nowrap">
-                                        <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-['Tajawal'] font-bold ${user.userType === 'Doctor' ? 'bg-[#138C9F]/20 text-[#138C9F]' : user.userType === 'Secretary' ? 'bg-purple-100 text-purple-700' : 'bg-[#003D9B]/20 text-[#003D9B]'}`}>
+                                        <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-bold ${user.userType === 'Doctor' ? 'bg-[#138C9F]/20 text-[#138C9F]' : user.userType === 'Secretary' ? 'bg-purple-100 text-purple-700' : 'bg-[#003D9B]/20 text-[#003D9B]'}`}>
                                             {user.userType === 'Doctor' ? 'طبيب' : user.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-3 whitespace-nowrap font-['Tajawal'] font-medium text-[14px] text-[#434654] hidden md:table-cell">{user.createdAt}</td>
+                                    <td className="px-6 py-3 whitespace-nowrap font-medium text-[14px] text-[#434654] hidden md:table-cell">{user.createdAt}</td>
                                     <td className="px-6 py-3 whitespace-nowrap hidden sm:table-cell">
-                                        <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-['Tajawal'] font-bold ${user.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
+                                        <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-bold ${user.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
                                             {user.isActive ? 'نشط' : 'معطل'}
                                         </span>
                                     </td>
@@ -280,7 +280,7 @@ export default function AdminUserManagement() {
                                 </tr>
                             ))}
                             {!loading && users.length === 0 && (
-                                <tr><td colSpan="5" className="px-6 py-10 text-center font-['Tajawal'] text-[#526069]">لا يوجد مستخدمين لعرضهم.</td></tr>
+                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">لا يوجد مستخدمين لعرضهم.</td></tr>
                             )}
                         </tbody>
                     </table>
@@ -296,7 +296,7 @@ export default function AdminUserManagement() {
                             {[...Array(totalPages)].map((_, index) => {
                                 const pageNumber = index + 1;
                                 return (
-                                    <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)} className={`w-8 h-8 rounded flex items-center justify-center font-['Tajawal'] text-[14px] cursor-pointer transition-colors ${currentPage === pageNumber ? 'bg-[#003D9B] text-white font-bold' : 'border border-transparent hover:border-gray-200 text-[#0b1c30] font-semibold'}`}>{pageNumber}</button>
+                                    <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)} className={`w-8 h-8 rounded flex items-center justify-center text-[14px] cursor-pointer transition-colors ${currentPage === pageNumber ? 'bg-[#003D9B] text-white font-bold' : 'border border-transparent hover:border-gray-200 text-[#0b1c30] font-semibold'}`}>{pageNumber}</button>
                                 );
                             })}
                             <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="w-8 h-8 rounded border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronRight size={16} /></button>
@@ -313,14 +313,14 @@ export default function AdminUserManagement() {
                         </button>
 
                         <div className="bg-white border border-[#D3E2ED] shadow-sm rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
-                            <button onClick={() => { handleDeleteUser(selectedUser); setIsModalOpen(false); }} className="border border-red-200 text-red-600 font-['Tajawal'] font-semibold px-4 py-2 rounded-xl hover:bg-red-50 transition-colors cursor-pointer order-3 md:order-1">
+                            <button onClick={() => { handleDeleteUser(selectedUser); setIsModalOpen(false); }} className="border border-red-200 text-red-600 font-semibold px-4 py-2 rounded-xl hover:bg-red-50 transition-colors cursor-pointer order-3 md:order-1">
                                 حذف الحساب
                             </button>
 
                             <div className="flex items-center gap-4 order-1 md:order-3">
                                 <div className="text-right flex flex-col items-end">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <span className={`text-white text-[13px] font-['Tajawal'] font-bold px-3 py-1 rounded-md ${selectedUser.userType === 'Doctor' ? 'bg-[#138C9F]' : selectedUser.userType === 'Secretary' ? 'bg-purple-600' : 'bg-[#003D9B]'}`}>
+                                        <span className={`text-white text-[13px] font-bold px-3 py-1 rounded-md ${selectedUser.userType === 'Doctor' ? 'bg-[#138C9F]' : selectedUser.userType === 'Secretary' ? 'bg-purple-600' : 'bg-[#003D9B]'}`}>
                                             {selectedUser.userType === 'Doctor' ? 'طبيب' : selectedUser.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
                                         </span>
                                         <h3 className="font-['Tajawal'] font-extrabold text-[24px] text-[#0B1C30]">{selectedUser.name}</h3>
@@ -337,7 +337,7 @@ export default function AdminUserManagement() {
                         </div>
 
                         {detailsLoading ? (
-                            <div className="text-center py-8 font-['Tajawal'] text-[#526069]">جاري تحميل التفاصيل...</div>
+                            <div className="text-center py-8 text-[#526069]">جاري تحميل التفاصيل...</div>
                         ) : userDetails ? (
                             selectedUser.userType === 'Doctor' ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full">
@@ -346,7 +346,7 @@ export default function AdminUserManagement() {
                                             <Briefcase size={20} />
                                             <h4 className="font-['Tajawal'] font-bold text-[17px]">التفاصيل المهنية</h4>
                                         </div>
-                                        <div className="flex flex-col gap-5 font-['Tajawal'] w-full">
+                                        <div className="flex flex-col gap-5 w-full">
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="font-bold text-[#0B1C30] text-[16px]">التخصص</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.specializationName || '-'}</span>
@@ -389,7 +389,7 @@ export default function AdminUserManagement() {
                                             <User size={20} />
                                             <h4 className="font-['Tajawal'] font-bold text-[17px]">المعلومات الشخصية</h4>
                                         </div>
-                                        <div className="flex flex-col gap-5 font-['Tajawal'] w-full">
+                                        <div className="flex flex-col gap-5 w-full">
                                             <div className="flex flex-col gap-0.5 w-full">
                                                 <span className="font-bold text-[#0B1C30] text-[16px]">البريد الإلكتروني</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr" style={{ textAlign: 'right' }}>{userDetails.email || selectedUser.email}</span>
@@ -412,11 +412,11 @@ export default function AdminUserManagement() {
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full mt-2 md:col-span-2">
-                                        <button onClick={() => handleDownload(selectedUser.id, 'id')} className="bg-[#003D9B]/10 text-[#003D9B] font-['Tajawal'] font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003D9B]/20 transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
+                                        <button onClick={() => handleDownload(selectedUser.id, 'id')} className="bg-[#003D9B]/10 text-[#003D9B] font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003D9B]/20 transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
                                             <Download size={20} />
                                             صورة الهوية / مزاولة المهنة
                                         </button>
-                                        <button onClick={() => handleDownload(selectedUser.id, 'cv')} className="bg-[#138C9F] text-white font-['Tajawal'] font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#0f7282] transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
+                                        <button onClick={() => handleDownload(selectedUser.id, 'cv')} className="bg-[#138C9F] text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#0f7282] transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
                                             <Award size={20} />
                                             تنزيل السيرة الذاتية (CV)
                                         </button>
@@ -428,7 +428,7 @@ export default function AdminUserManagement() {
                                         <User size={20} />
                                         <h4 className="font-['Tajawal'] font-bold text-[17px]">معلومات السكرتير</h4>
                                     </div>
-                                    <div className="flex flex-col gap-5 font-['Tajawal'] w-full">
+                                    <div className="flex flex-col gap-5 w-full">
                                         <div className="flex flex-col gap-0.5 w-full">
                                             <span className="font-bold text-[#0B1C30] text-[16px]">البريد الإلكتروني</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr" style={{ textAlign: 'right' }}>{selectedUser.email}</span>
@@ -444,7 +444,7 @@ export default function AdminUserManagement() {
                                         <User size={20} />
                                         <h4 className="font-['Tajawal'] font-bold text-[17px]">المعلومات الشخصية</h4>
                                     </div>
-                                    <div className="flex flex-col gap-5 font-['Tajawal'] w-full">
+                                    <div className="flex flex-col gap-5 w-full">
                                         <div className="flex flex-col gap-0.5 w-full">
                                             <span className="font-bold text-[#0B1C30] text-[16px]">البريد الإلكتروني</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr" style={{ textAlign: 'right' }}>{userDetails.email || selectedUser.email}</span>
@@ -475,7 +475,7 @@ export default function AdminUserManagement() {
                                 </div>
                             )
                         ) : (
-                            <div className="text-center py-8 font-['Tajawal'] text-[#526069]">لا توجد تفاصيل</div>
+                            <div className="text-center py-8 text-[#526069]">لا توجد تفاصيل</div>
                         )}
                     </div>
                 </div>

@@ -18,7 +18,7 @@ const SectionFallback = () => (
 const HomeV3 = () => {
   const { t } = useTranslation();
   return (
-    <div className="relative font-['Tajawal'] dark:bg-gray-900 dark:text-gray-200">
+    <div className="relative dark:bg-gray-900 dark:text-gray-200">
       <FramesSection />
       <FeaturesSlider />
       <AIAssistant />

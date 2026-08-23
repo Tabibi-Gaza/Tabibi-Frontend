@@ -88,14 +88,14 @@ export default function PatientManagement() {
 
     if (loading) {
         return (
-            <div className="w-full bg-gray-50/50 pb-8 pr-4 font-['Tajawal'] flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full bg-gray-50/50 pb-8 pr-4 flex items-center justify-center h-64" dir="rtl">
                 <p className="text-gray-400 font-bold">جاري تحميل بيانات المرضى...</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full bg-gray-50/50  pb-8 pr-4 font-['Tajawal']" dir="rtl">
+      <div className="w-full bg-gray-50/50  pb-8 pr-4" dir="rtl">
         {/* العناوين والإحصائيات */}
         {/*    <div
         className="font-['Tajawal'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"

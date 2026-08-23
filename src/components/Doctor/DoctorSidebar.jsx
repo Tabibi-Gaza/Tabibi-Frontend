@@ -137,7 +137,7 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
         className={`
           fixed top-[86.26px] right-0 z-48
           w-72 h-[calc(100vh-86.26px)] bg-[#e2f4f7] border-l border-slate-200
-          flex flex-col justify-between font-['Tajawal']
+          flex flex-col justify-between
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
         `}

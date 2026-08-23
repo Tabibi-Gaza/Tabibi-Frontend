@@ -168,7 +168,7 @@ export default function DoctorSubscription() {
             </div>
 
             {(isExpired || isTrial || !subscription) && (
-                <button onClick={() => { setShowPaymentForm(true); fetchAdminMethods(); }} className="flex items-center justify-center gap-2 w-full py-4 bg-[#138C9F] text-white rounded-xl font-['Tajawal'] font-bold text-[16px] hover:bg-[#0f7282] transition-colors cursor-pointer shadow-sm">
+                <button onClick={() => { setShowPaymentForm(true); fetchAdminMethods(); }} className="flex items-center justify-center gap-2 w-full py-4 bg-[#138C9F] text-white rounded-xl font-bold text-[16px] hover:bg-[#0f7282] transition-colors cursor-pointer shadow-sm">
                     <CreditCard size={20} />
                     {isTrial ? 'اشترك الآن بعد انتهاء الفترة التجريبية' : 'تجديد الاشتراك'}
                 </button>
@@ -220,7 +220,7 @@ export default function DoctorSubscription() {
                     )}
 
                     {adminMethods.length === 0 && (
-                        <div className="text-center py-8 text-[#526069] font-['Tajawal']">
+                        <div className="text-center py-8 text-[#526069]">
                             <AlertCircle size={32} className="mx-auto mb-2 text-gray-300" />
                             لا توجد طرق دفع متاحة حالياً. يرجى المحاولة لاحقاً.
                         </div>
@@ -228,7 +228,7 @@ export default function DoctorSubscription() {
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">صورة الإيصال / التحويل</label>
+                            <label className="block font-bold text-[13px] text-[#526069] mb-1.5">صورة الإيصال / التحويل</label>
                             <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-[#C3C6D6] rounded-xl cursor-pointer hover:border-[#138C9F] transition-colors">
                                 {receiptPreview ? (
                                     <img loading="lazy" decoding="async" width="480" height="480" src={receiptPreview} alt="receipt" className="w-full h-full object-contain rounded-xl p-2" />
@@ -245,16 +245,16 @@ export default function DoctorSubscription() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
-                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl font-['Tajawal'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم كما في الحساب" required />
+                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
+                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم كما في الحساب" required />
                             </div>
                             <div>
-                                <label className="block font-['Tajawal'] font-bold text-[13px] text-[#526069] mb-1.5">رقم الهاتف</label>
-                                <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl font-['Tajawal'] text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
+                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">رقم الهاتف</label>
+                                <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
                         </div>
 
-                        <button onClick={handleSubmitPayment} disabled={submitting || !selectedMethod || !receiptFile} className="w-full py-4 bg-[#138C9F] text-white rounded-xl font-['Tajawal'] font-bold text-[16px] hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button onClick={handleSubmitPayment} disabled={submitting || !selectedMethod || !receiptFile} className="w-full py-4 bg-[#138C9F] text-white rounded-xl font-bold text-[16px] hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                             {submitting ? <><Loader2 size={18} className="animate-spin" /> جاري الإرسال...</> : <><FileText size={18} /> إرسال طلب الدفع</>}
                         </button>
                     </div>

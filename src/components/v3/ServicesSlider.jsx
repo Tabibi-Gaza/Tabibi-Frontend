@@ -20,8 +20,8 @@ function ServicesSlider() {
       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110`}>
         <FontAwesomeIcon icon={service.icon} className="text-white text-xl" />
       </div>
-      <h3 className="text-base md:text-lg font-black text-slate-900 mb-2 font-['Tajawal']">{service.title}</h3>
-      <p className="text-sm text-slate-500 font-bold leading-relaxed font-['Tajawal']">{service.desc}</p>
+      <h3 className="text-base md:text-lg font-black text-slate-900 mb-2">{service.title}</h3>
+      <p className="text-sm text-slate-500 font-bold leading-relaxed">{service.desc}</p>
     </div>
   );
 

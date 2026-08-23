@@ -10,7 +10,7 @@ const About = () => {
 
     return (
       <main
-        className="min-h-screen pt-30 font-['Tajawal'] dark:bg-gray-900 dark:text-gray-200"
+        className="min-h-screen pt-30 dark:bg-gray-900 dark:text-gray-200"
         style={{ direction: "rtl" }}
       >
         <div className="w-full max-w-[85%] mx-auto px-4">

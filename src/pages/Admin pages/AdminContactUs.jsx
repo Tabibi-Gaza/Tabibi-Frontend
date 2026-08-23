@@ -202,7 +202,7 @@ export default function AdminContactUs() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(); }}
-                        className="w-full h-[38px] bg-[#ecf8fa] border border-[#C3C6D6] rounded-lg pr-10 pl-4 font-['Tajawal'] font-medium text-sm text-[#0B1C30] focus:outline-none focus:border-[#138C9F]"
+                        className="w-full h-[38px] bg-[#ecf8fa] border border-[#C3C6D6] rounded-lg pr-10 pl-4 font-medium text-sm text-[#0B1C30] focus:outline-none focus:border-[#138C9F]"
                     />
                     <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-[#737685]" size={18} />
                 </div>
@@ -211,7 +211,7 @@ export default function AdminContactUs() {
                     <select
                         value={statusFilter}
                         onChange={handleStatusFilterChange}
-                        className="w-full h-[38px] bg-[#ecf8fa] border border-[#C3C6D6] rounded-lg px-3 font-['Tajawal'] font-medium text-sm text-[#0B1C30] appearance-none focus:outline-none"
+                        className="w-full h-[38px] bg-[#ecf8fa] border border-[#C3C6D6] rounded-lg px-3 font-medium text-sm text-[#0B1C30] appearance-none focus:outline-none"
                     >
                         <option>جميع الحالات</option>
                         <option>غير مقروءة</option>
@@ -221,11 +221,11 @@ export default function AdminContactUs() {
                     <FiChevronDown className="absolute left-3 top-1/2 -translate-y-1/2 text-[#0B1C30] pointer-events-none" />
                 </div>
 
-                <button onClick={handleSearch} className="bg-[#138C9F] text-white px-6 h-[36px] rounded-lg font-['Tajawal'] font-semibold text-sm flex items-center justify-center gap-2 w-full md:w-auto hover:bg-[#117a8c] transition-colors">
+                <button onClick={handleSearch} className="bg-[#138C9F] text-white px-6 h-[36px] rounded-lg font-semibold text-sm flex items-center justify-center gap-2 w-full md:w-auto hover:bg-[#117a8c] transition-colors">
                     <span>بحث</span>
                     <FiSearch size={14} />
                 </button>
-                <button onClick={handleDeleteAll} className="bg-[#BA1A1A] text-white px-6 h-[36px] rounded-lg font-['Tajawal'] font-semibold text-sm flex items-center justify-center gap-2 w-full md:w-auto hover:bg-[#a01515] transition-colors">
+                <button onClick={handleDeleteAll} className="bg-[#BA1A1A] text-white px-6 h-[36px] rounded-lg font-semibold text-sm flex items-center justify-center gap-2 w-full md:w-auto hover:bg-[#a01515] transition-colors">
                     <FiTrash2 size={14} />
                     <span>مسح الكل</span>
                 </button>
@@ -236,29 +236,29 @@ export default function AdminContactUs() {
                     <table className="w-full border-collapse text-right">
                         <thead>
                             <tr className="bg-[#E5EEFF] border-b border-[#C3C6D6]">
-                                <th className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#434654]">اسم المرسل</th>
-                                <th className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#434654]">البريد الإلكتروني</th>
-                                <th className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#434654]">الموضوع</th>
-                                <th className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#434654] hidden md:table-cell">التاريخ</th>
-                                <th className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#434654] hidden sm:table-cell">الحالة</th>
-                                <th className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#434654] text-center">الإجراءات</th>
+                                <th className="p-3 md:p-4 font-bold text-base text-[#434654]">اسم المرسل</th>
+                                <th className="p-3 md:p-4 font-bold text-base text-[#434654]">البريد الإلكتروني</th>
+                                <th className="p-3 md:p-4 font-bold text-base text-[#434654]">الموضوع</th>
+                                <th className="p-3 md:p-4 font-bold text-base text-[#434654] hidden md:table-cell">التاريخ</th>
+                                <th className="p-3 md:p-4 font-bold text-base text-[#434654] hidden sm:table-cell">الحالة</th>
+                                <th className="p-3 md:p-4 font-bold text-base text-[#434654] text-center">الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
                             {loading ? (
-                                <tr><td colSpan={6} className="text-center p-8 font-['Tajawal'] text-[#434654]">جاري التحميل...</td></tr>
+                                <tr><td colSpan={6} className="text-center p-8 text-[#434654]">جاري التحميل...</td></tr>
                             ) : filteredMessages.length === 0 ? (
-                                <tr><td colSpan={6} className="text-center p-8 font-['Tajawal'] text-[#434654]">لا توجد رسائل</td></tr>
+                                <tr><td colSpan={6} className="text-center p-8 text-[#434654]">لا توجد رسائل</td></tr>
                             ) : filteredMessages.map((msg) => {
                                 const badge = getStatusBadge(msg.isReplied);
                                 return (
                                 <tr key={msg.id} className="border-b border-[#C3C6D6] last:border-none hover:bg-slate-50 transition-colors">
-                                    <td className="p-3 md:p-4 font-['Tajawal'] font-bold text-base text-[#138C9F]">{msg.fullName}</td>
-                                    <td className="p-3 md:p-4 font-['Tajawal'] font-semibold text-sm text-[#434654]">{msg.email}</td>
-                                    <td className="p-3 md:p-4 font-['Tajawal'] font-semibold text-sm text-[#0B1C30]">{msg.subject || 'بدون موضوع'}</td>
-                                    <td className="p-3 md:p-4 font-['Tajawal'] font-bold text-sm text-[#434654] hidden md:table-cell">{msg.createdAt}</td>
+                                    <td className="p-3 md:p-4 font-bold text-base text-[#138C9F]">{msg.fullName}</td>
+                                    <td className="p-3 md:p-4 font-semibold text-sm text-[#434654]">{msg.email}</td>
+                                    <td className="p-3 md:p-4 font-semibold text-sm text-[#0B1C30]">{msg.subject || 'بدون موضوع'}</td>
+                                    <td className="p-3 md:p-4 font-bold text-sm text-[#434654] hidden md:table-cell">{msg.createdAt}</td>
                                     <td className="p-3 md:p-4 hidden sm:table-cell">
-                                        <span className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold font-['Tajawal'] ${badge.className}`}>
+                                        <span className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold ${badge.className}`}>
                                             {badge.label}
                                         </span>
                                     </td>
@@ -281,13 +281,13 @@ export default function AdminContactUs() {
             {totalPages > 1 && (
                 <div className="flex justify-center items-center gap-2 mt-4" style={{ direction: 'ltr' }}>
                     <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
-                        className="px-3 py-1 rounded border border-[#C3C6D6] text-[#434654] disabled:opacity-50 hover:bg-[#ecf8fa] font-['Tajawal'] text-sm">السابق</button>
+                        className="px-3 py-1 rounded border border-[#C3C6D6] text-[#434654] disabled:opacity-50 hover:bg-[#ecf8fa] text-sm">السابق</button>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
                         <button key={p} onClick={() => setPage(p)}
-                            className={`px-3 py-1 rounded font-['Tajawal'] text-sm ${p === page ? 'bg-[#138C9F] text-white' : 'border border-[#C3C6D6] text-[#434654] hover:bg-[#ecf8fa]'}`}>{p}</button>
+                            className={`px-3 py-1 rounded text-sm ${p === page ? 'bg-[#138C9F] text-white' : 'border border-[#C3C6D6] text-[#434654] hover:bg-[#ecf8fa]'}`}>{p}</button>
                     ))}
                     <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
-                        className="px-3 py-1 rounded border border-[#C3C6D6] text-[#434654] disabled:opacity-50 hover:bg-[#ecf8fa] font-['Tajawal'] text-sm">التالي</button>
+                        className="px-3 py-1 rounded border border-[#C3C6D6] text-[#434654] disabled:opacity-50 hover:bg-[#ecf8fa] text-sm">التالي</button>
                 </div>
             )}
 
@@ -301,7 +301,7 @@ export default function AdminContactUs() {
                         <div className="p-6 flex flex-col gap-6">
                             <div className="flex justify-between items-start">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center text-[#138C9F] font-bold font-['Tajawal'] text-lg">
+                                    <div className="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center text-[#138C9F] font-bold text-lg">
                                         {selectedMessage.fullName.split(' ').map(n => n[0]).join(' ')}
                                     </div>
                                     <div>
@@ -310,8 +310,8 @@ export default function AdminContactUs() {
                                     </div>
                                 </div>
                                 <div className="text-left">
-                                    <p className="text-xs text-gray-400 font-['Tajawal'] font-medium">تاريخ الإرسال</p>
-                                    <p className="text-sm font-semibold text-gray-700 font-['Tajawal']">{selectedMessage.createdAt}</p>
+                                    <p className="text-xs text-gray-400 font-medium">تاريخ الإرسال</p>
+                                    <p className="text-sm font-semibold text-gray-700">{selectedMessage.createdAt}</p>
                                 </div>
                             </div>
                             <div className="border border-gray-200 rounded-xl p-4 bg-[#ecf8fa] flex flex-col gap-3">
@@ -324,11 +324,11 @@ export default function AdminContactUs() {
                         </div>
                         <div className="p-4 border-t border-gray-100 flex justify-between bg-gray-50">
                             <button onClick={() => handleOpenReply(selectedMessage)}
-                                className="bg-[#138C9F] text-white px-6 py-2 rounded-lg font-['Tajawal'] font-bold text-sm flex items-center gap-2 hover:bg-[#117a8c] transition-colors">
+                                className="bg-[#138C9F] text-white px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-[#117a8c] transition-colors">
                                 <FiCornerUpLeft size={16} /><span>الرد الآن</span>
                             </button>
                             <button onClick={() => handleDeleteMessage(selectedMessage.id)}
-                                className="border border-[#BA1A1A] text-[#BA1A1A] px-4 py-2 rounded-lg font-['Tajawal'] font-bold text-sm flex items-center gap-2 hover:bg-[#BA1A1A]/5 transition-colors">
+                                className="border border-[#BA1A1A] text-[#BA1A1A] px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-[#BA1A1A]/5 transition-colors">
                                 <FiTrash2 size={16} /><span>حذف</span>
                             </button>
                         </div>
@@ -345,11 +345,11 @@ export default function AdminContactUs() {
                         </div>
                         <div className="p-6 flex flex-col gap-4">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-[#138C9F] font-bold font-['Tajawal'] text-sm">
+                                <div className="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-[#138C9F] font-bold text-sm">
                                     {selectedMessage.fullName.split(' ').map(n => n[0]).join(' ')}
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-400 font-['Tajawal'] font-medium">إلى:</p>
+                                    <p className="text-xs text-gray-400 font-medium">إلى:</p>
                                     <h4 className="font-['Tajawal'] font-bold text-[#138C9F] text-sm">{selectedMessage.fullName}</h4>
                                     <p className="text-xs text-gray-500">{selectedMessage.email}</p>
                                 </div>
@@ -357,14 +357,14 @@ export default function AdminContactUs() {
                             <div className="flex flex-col gap-1">
                                 <textarea required rows={6} value={replyText} onChange={(e) => setReplyText(e.target.value)}
                                     placeholder="اكتب ردك هنا..."
-                                    className="w-full border border-gray-200 rounded-xl p-4 font-['Tajawal'] text-sm text-[#0B1C30] focus:outline-none focus:border-[#138C9F] bg-[#ecf8fa] resize-none" />
+                                    className="w-full border border-gray-200 rounded-xl p-4 text-sm text-[#0B1C30] focus:outline-none focus:border-[#138C9F] bg-[#ecf8fa] resize-none" />
                             </div>
                         </div>
                         <div className="p-4 border-t border-gray-100 flex items-center justify-end gap-3 bg-gray-50">
                             <button type="button" onClick={() => setIsReplyOpen(false)}
-                                className="px-5 py-2 border border-gray-300 rounded-lg text-gray-600 font-['Tajawal'] font-semibold text-sm hover:bg-gray-100 transition-colors">إلغاء</button>
+                                className="px-5 py-2 border border-gray-300 rounded-lg text-gray-600 font-semibold text-sm hover:bg-gray-100 transition-colors">إلغاء</button>
                             <button type="submit"
-                                className="bg-[#138C9F] text-white px-6 py-2 rounded-lg font-['Tajawal'] font-bold text-sm flex items-center gap-2 hover:bg-[#117a8c] transition-colors">
+                                className="bg-[#138C9F] text-white px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-[#117a8c] transition-colors">
                                 <FiSend size={14} /><span>إرسال الرد</span>
                             </button>
                         </div>

@@ -200,14 +200,14 @@ const FinancialFiles = () => {
 
     if (loading) {
         return (
-            <div className="w-full pr-4 font-['Tajawal'] bg-slate-50/30 flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full pr-4 bg-slate-50/30 flex items-center justify-center h-64" dir="rtl">
                 <p className="text-gray-400 font-bold">جاري تحميل البيانات المالية...</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full pr-4 font-['Tajawal'] bg-slate-50/30 space-y-6" dir="rtl">
+      <div className="w-full pr-4 bg-slate-50/30 space-y-6" dir="rtl">
           <div className="text-right">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">السجلات المالية</h1>
             <p className="text-xs sm:text-sm text-gray-500">تتبع أرباحك وإدارة معاملاتك المالية بكل سهولة.</p>

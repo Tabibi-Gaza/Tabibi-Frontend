@@ -237,7 +237,7 @@ export default function AdminChats() {
 
   return (
     <div
-      className="w-full flex font-['Tajawal'] flex flex-col items-start p-0 relative text-right"
+      className="w-full flex flex flex-col items-start p-0 relative text-right"
       dir="rtl"
     >
       <div className="w-full flex-1 p-2 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-4 md:gap-6">

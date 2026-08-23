@@ -59,8 +59,8 @@ function SpecialtiesSlider() {
       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${specialty.color} flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110`}>
         <FontAwesomeIcon icon={specialty.icon} className="text-white text-xl" />
       </div>
-      <h3 className="text-base md:text-lg font-black text-slate-900 mb-2 font-['Tajawal']">{specialty.title}</h3>
-      <p className="text-xs text-slate-400 font-bold font-['Tajawal']">{specialty.desc}</p>
+      <h3 className="text-base md:text-lg font-black text-slate-900 mb-2">{specialty.title}</h3>
+      <p className="text-xs text-slate-400 font-bold">{specialty.desc}</p>
     </div>
   );
 

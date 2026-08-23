@@ -272,14 +272,14 @@ const Navbar = () => {
                       alt="Profile"
                     />
                   ) : (
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-b from-[#138C9F] to-[#0f7282] text-white flex items-center justify-center font-bold text-sm select-none font-['Tajawal'] ring-2 ring-[#138C9F]/25 ring-offset-2 ring-offset-white shadow-sm shrink-0">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-b from-[#138C9F] to-[#0f7282] text-white flex items-center justify-center font-bold text-sm select-none ring-2 ring-[#138C9F]/25 ring-offset-2 ring-offset-white shadow-sm shrink-0">
                       {userData
                         ? `${userData.firstname.slice(0, 1) || ""}`
                         : "?"}
                     </div>
                   )}
                   {userData && (
-                    <div className="hidden lg:flex flex-col text-right font-['Tajawal'] leading-tight select-none">
+                    <div className="hidden lg:flex flex-col text-right leading-tight select-none">
                       <span className="text-xs sm:text-sm font-black text-gray-800 dark:text-gray-200 max-w-[130px] truncate">
                         {userData.firstname} {userData.lastname}
                       </span>

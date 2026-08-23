@@ -180,7 +180,7 @@ export default function AdminJoinRequests() {
     const totalPending = activeFilter === 'pending' ? totalCount : requests.length;
 
     return (
-        <div className="w-full bg-[#ecf8fa] font-['Tajawal'] flex flex-col items-start relative text-right" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] flex flex-col items-start relative text-right" dir="rtl">
             <div className="w-full flex flex-col gap-6 md:gap-8">
                 <div className="text-right">
                     <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#138C9F] leading-tight">طلبات انضمام الأطباء</h2>

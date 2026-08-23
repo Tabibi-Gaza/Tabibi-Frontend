@@ -104,7 +104,7 @@ const MyAppointment = () => {
 
   return (
     <div className="w-full p-4 pt-40 max-w-5xl mx-auto text-right mb-16" dir="rtl">
-      <div className="flex font-['Tajawal'] justify-between items-center mb-8 pb-4">
+      <div className="flex justify-between items-center mb-8 pb-4">
         <div>
           <h1 className="text-2xl mb-3 font-bold text-gray-800">حجوزاتي</h1>
           <p className="text-sm text-gray-500">قائمة مواعيدك الطبية</p>
@@ -123,7 +123,7 @@ const MyAppointment = () => {
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#138C9F]"></div>
         </div>
       ) : appointments.length === 0 ? (
-        <div className="bg-white font-['Tajawal'] border border-gray-100 rounded-2xl shadow-sm p-12 flex flex-col items-center justify-center text-center my-6">
+        <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-12 flex flex-col items-center justify-center text-center my-6">
           <div className="w-40 h-40 bg-[#f4faff] rounded-full flex items-center justify-center relative mb-6">
             <span className="absolute top-4 right-4 bg-[#138c9f] text-white p-1 rounded-md text-sm">
               <FontAwesomeIcon icon={faCalendarDays} />

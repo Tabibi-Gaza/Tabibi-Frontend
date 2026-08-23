@@ -196,7 +196,7 @@ const Appointment = () => {
   };
 
   return (
-    <div className="w-full font-['Tajawal'] p-4 pt-40 px-3 text-right" dir="rtl">
+    <div className="w-full p-4 pt-40 px-3 text-right" dir="rtl">
       <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative flex flex-col md:flex-row gap-6 mb-6">
         <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
           <button onClick={handleMessageClick} className="flex items-center gap-2 bg-[#138c9f] hover:bg-[#3f9cb1] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all shadow-sm">

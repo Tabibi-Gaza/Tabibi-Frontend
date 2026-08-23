@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
     ]
 
     return (
-        <div className="min-h-screen bg-white text-[#1E293B] font-['Tajawal'] antialiased" dir="rtl">
+        <div className="min-h-screen bg-white text-[#1E293B] antialiased" dir="rtl">
             <main className="max-w-152.5 w-full mx-auto px-5 sm:px-0 py-10 md:py-11 pb-15">
 
                 {/* صف زر العودة */}

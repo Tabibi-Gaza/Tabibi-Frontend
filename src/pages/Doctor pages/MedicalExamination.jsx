@@ -212,7 +212,7 @@ const MedicalExamination = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] flex items-center justify-center" dir="rtl">
                 <p className="text-gray-400 font-bold text-lg">جاري تحميل بيانات المريض...</p>
             </div>
         );
@@ -220,7 +220,7 @@ const MedicalExamination = () => {
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] flex items-center justify-center" dir="rtl">
                 <p className="text-gray-400 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
             </div>
         );
@@ -230,7 +230,7 @@ const MedicalExamination = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] flex" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] flex" dir="rtl">
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="p-4 md:p-8 max-w-[1240px] w-full mx-auto space-y-6 overflow-y-auto">
 

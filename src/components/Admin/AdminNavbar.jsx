@@ -13,7 +13,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
 
     return (
       <div
-        className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 font-['Tajawal'] shadow-sm"
+        className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 shadow-sm"
         dir="rtl"
       >
         {/* 🟦 جهة اليمين: زر القائمة، الشعار ووسم الإدارة */}
@@ -147,7 +147,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
                 />
               ) : (
                 // 2. إذا لم تكن الصورة موجودة، تملأ الدائرة بلون متناسق وحروف واضحة متجاوبة مع حجم الأب
-                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none font-['Tajawal']">
+                <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none">
                   {userData ? `${userData.firstname.slice(0, 2) || ""}` : "?"}
                 </div>
               )}

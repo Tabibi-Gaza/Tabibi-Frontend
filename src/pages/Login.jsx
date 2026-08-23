@@ -250,7 +250,7 @@ const Login = () => {
   });
 
   return (
-    <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center font-['Tajawal']" dir="rtl">
+    <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center" dir="rtl">
       <div className="w-full h-screen flex flex-row overflow-hidden shadow-xl">
         
         {/* النصف الأيمن: النماذج */}

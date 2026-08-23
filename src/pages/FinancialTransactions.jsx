@@ -107,14 +107,14 @@ const FinancialTransactions = () => {
 
     if (loading) {
         return (
-            <div className="bg-[#ecf8fa] min-h-screen font-['Tajawal'] flex items-center justify-center" dir="rtl">
+            <div className="bg-[#ecf8fa] min-h-screen flex items-center justify-center" dir="rtl">
                 <Loader2 className="w-8 h-8 text-[#138C9F] animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="bg-[#ecf8fa] min-h-screen font-['Tajawal'] py-6 px-4" dir="rtl">
+        <div className="bg-[#ecf8fa] min-h-screen py-6 px-4" dir="rtl">
             <div className="max-w-6xl mx-auto">
                 <section className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-8">
                     <div className="text-right mb-8">
@@ -133,7 +133,7 @@ const FinancialTransactions = () => {
                                 placeholder="ابحث باسم الطبيب أو التخصص..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-sm bg-white text-[#0B1C30] outline-none focus:border-[#138C9F] placeholder-gray-400 font-['Tajawal']"
+                                className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-sm bg-white text-[#0B1C30] outline-none focus:border-[#138C9F] placeholder-gray-400"
                             />
                         </div>
                         <div className="lg:col-span-2 flex flex-col sm:flex-row items-center gap-3 w-full justify-end" dir="ltr">

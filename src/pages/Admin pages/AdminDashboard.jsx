@@ -211,7 +211,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="w-full flex flex-col gap-7 text-right font-['Tajawal']" dir="rtl">
+        <div className="w-full flex flex-col gap-7 text-right" dir="rtl">
 
             <div>
                 <h1 className="text-2xl md:text-[28px] font-extrabold text-[#138C9F] tracking-tight">لوحة التحكم</h1>

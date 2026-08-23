@@ -143,7 +143,7 @@ const DoctorProfile = () => {
     };
 
     return doctorData && (
-        <div className="w-full min-h-screen bg-[#ecf8fa] py-5 font-['Tajawal']" dir="rtl">
+        <div className="w-full min-h-screen bg-[#ecf8fa] py-5" dir="rtl">
             <div className=" mx-auto px-6">
                 <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 

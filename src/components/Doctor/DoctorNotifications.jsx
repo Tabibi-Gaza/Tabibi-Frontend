@@ -147,7 +147,7 @@ const DoctorNotifications = () => {
   const grouped = groupNotifications(notifications);
 
   return (
-    <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] p-4 md:p-8" dir="rtl">
+    <div className="min-h-screen bg-[#ecf8fa] p-4 md:p-8" dir="rtl">
       <div className="max-w-[900px] mx-auto bg-white border border-[#C3C6D6] rounded-2xl shadow-xs overflow-hidden">
 
         {/* Header */}

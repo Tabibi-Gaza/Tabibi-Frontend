@@ -35,10 +35,10 @@ function FeaturesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
-          <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide font-['Tajawal'] mb-5">
+          <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide mb-5">
             مميزات طبيبي
           </span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 font-['Tajawal'] leading-tight">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
             كل ما تحتاجه في <span className="text-[#138C9F]">منصة واحدة</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-base mt-4 max-w-2xl mx-auto font-bold">
@@ -64,10 +64,10 @@ function FeaturesSection() {
               </div>
 
               {/* Content */}
-              <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-3 font-['Tajawal']">
+              <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-3">
                 {feature.title}
               </h3>
-              <p className="text-slate-500 leading-relaxed font-bold text-sm md:text-base font-['Tajawal']">
+              <p className="text-slate-500 leading-relaxed font-bold text-sm md:text-base">
                 {feature.desc}
               </p>
             </div>

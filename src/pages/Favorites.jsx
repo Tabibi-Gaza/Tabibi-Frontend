@@ -34,7 +34,7 @@ const Favorites = () => {
   const currentItems = favorites[activeTab] || [];
 
   return (
-    <div className="min-h-screen bg-gray-50 font-['Tajawal'] pt-28 pb-16 px-4" dir="rtl">
+    <div className="min-h-screen bg-gray-50 pt-28 pb-16 px-4" dir="rtl">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">

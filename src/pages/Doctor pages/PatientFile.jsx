@@ -18,7 +18,7 @@ const PatientFile = () => {
     const patientData = database[id] || database["3"]; // استرجاع المريض حسب المعرف أو افتراضي سلطان العبدالله 
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] font-['Tajawal'] p-6" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] p-6" dir="rtl">
             <main className="max-w-[1000px] mx-auto space-y-6">
                 <div className="flex justify-between items-center">
                     <div className="text-right">

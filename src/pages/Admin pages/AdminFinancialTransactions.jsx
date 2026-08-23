@@ -86,7 +86,7 @@ export default function AdminFinancialTransactions() {
     };
 
     return (
-        <div className="w-full bg-[#ecf8fa] font-['Tajawal']" dir="rtl">
+        <div className="w-full bg-[#ecf8fa]" dir="rtl">
             <div className="mx-auto flex flex-col gap-6">
                 <div className="text-right">
                     <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">

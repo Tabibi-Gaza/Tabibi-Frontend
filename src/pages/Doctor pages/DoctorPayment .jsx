@@ -287,7 +287,7 @@ const DoctorPayment = () => {
 
     if (loading) {
         return (
-            <div className="w-full bg-slate-50/50 font-['Tajawal']" dir="rtl">
+            <div className="w-full bg-slate-50/50" dir="rtl">
                 <div className="bg-white rounded-2xl border border-slate-100 shadow-xs p-8">
                     <div className="flex items-center justify-center gap-3 text-[#1b8b99]">
                         <FiLoader className="w-6 h-6 animate-spin" />
@@ -299,7 +299,7 @@ const DoctorPayment = () => {
     }
 
     return (
-        <div className="w-full bg-slate-50/50 space-y-6 md:space-y-8 pb-8 pr-4 font-['Tajawal']" dir="rtl">
+        <div className="w-full bg-slate-50/50 space-y-6 md:space-y-8 pb-8 pr-4" dir="rtl">
             <div className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
 
                 {error && (

@@ -20,7 +20,7 @@ const AdminNotifications = () => {
     };
 
     return (
-        <main className="w-full min-h-screen bg-[#ecf8fa] p-4 md:p-10 font-['Tajawal']" dir="rtl">
+        <main className="w-full min-h-screen bg-[#ecf8fa] p-4 md:p-10" dir="rtl">
             <div className="max-w-4xl mx-auto">
 
                 <div className="flex justify-start mb-6">

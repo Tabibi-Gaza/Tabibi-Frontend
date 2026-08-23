@@ -105,7 +105,7 @@ const RegisterAsDoctor = () => {
 
     return (
         // تم إضافة pt-24 لضمان عدم تداخل هيدر الصفحة مع الـ Navbar الثابت علوياً
-        <div className="min-h-screen bg-[#f7f9fc] text-slate-800 font-['Tajawal'] pt-24 pb-16" dir="rtl">
+        <div className="min-h-screen bg-[#f7f9fc] text-slate-800 pt-24 pb-16" dir="rtl">
 
             {/* رأس الصفحة - العناوين الرئيسية */}
             <header className="text-center py-10 px-4">

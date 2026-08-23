@@ -317,7 +317,7 @@ export default function Chats() {
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
         .msg-swipe { transition: transform 0.15s ease; touch-action: pan-y; user-select: none; }
       `}</style>
-      <div className="w-full pt-16 px-3 pb-20 font-['Tajawal'] bg-slate-50/30 flex justify-center items-start min-h-screen">
+      <div className="w-full pt-16 px-3 pb-20 bg-slate-50/30 flex justify-center items-start min-h-screen">
         <div className="w-full max-w-5xl bg-white border border-[#e9eff6] rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] overflow-hidden relative">
 
           {/* Sidebar: drawer transition using translate3d */}

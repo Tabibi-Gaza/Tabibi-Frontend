@@ -124,7 +124,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
 
   return (
     <div
-      className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 sm:px-6 sticky top-0 z-45 font-['Tajawal'] w-full"
+      className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 sm:px-6 sticky top-0 z-45 w-full"
       dir="rtl"
     >
       <div className="flex items-center gap-3 shrink-0">
@@ -304,7 +304,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                 alt="Profile"
               />
             ) : (
-              <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none font-['Tajawal']">
+              <div className="w-full h-full bg-[#138C9F] text-white flex items-center justify-center font-bold text-sm md:text-base select-none">
                 {doctorData ? `${doctorData.firstname.slice(0, 2) || ""}` : "?"}
               </div>
             )}
