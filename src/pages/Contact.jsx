@@ -73,7 +73,7 @@ const Contact = () => {
                   />
                 </div>
                 <h1 className="text-[#1F2937] dark:text-white font-bold text-[28px]">
-                  {t('contact.title')}
+                  تواصل معنا
                 </h1>
               </div>
               <p className="text-[#6B7280] dark:text-gray-200 text-[14px] leading-[1.9] max-w-175 mt-3.75">
