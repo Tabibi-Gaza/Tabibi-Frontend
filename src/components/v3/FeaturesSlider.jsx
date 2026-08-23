@@ -52,8 +52,8 @@ function FeaturesSlider() {
       startTimeRef.current ??= timestamp;
       const elapsed = timestamp - startTimeRef.current;
       const rawIndex = elapsed / SLIDE_DURATION;
-      const currentIndex = Math.min(TOTAL - 1, Math.max(0, Math.floor(rawIndex)));
-      const progress = rawIndex - currentIndex;
+      const currentIndex = Math.floor(rawIndex) % TOTAL;
+      const progress = rawIndex - Math.floor(rawIndex);
 
       setState({
         progress,
