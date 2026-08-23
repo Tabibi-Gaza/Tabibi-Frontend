@@ -110,7 +110,7 @@ const About = () => {
                 onClick={() => navigate("/contact")}
                 className="inline-flex items-center justify-center h-10.5 px-5.5 bg-white dark:bg-gray-800 text-[#138C9F] dark:text-gray-200 rounded-lg text-[14px] font-bold border border-[#138C9F] dark:border-gray-600 transition-transform duration-300 hover:-translate-y-0.5 cursor-pointer"
               >
-                {t('contact.title')}
+                تواصل معنا
               </button>
             </div>
 
