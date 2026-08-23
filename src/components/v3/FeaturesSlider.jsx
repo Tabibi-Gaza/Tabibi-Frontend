@@ -92,10 +92,10 @@ function FeaturesSlider() {
           >
             {current.title.split(" ")[0]}
           </span>
-          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 mb-3 md:mb-4 font-['Cairo'] leading-tight">
+          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 mb-3 md:mb-4 leading-tight">
             {current.title}
           </h3>
-          <p className="text-slate-500 text-xs sm:text-sm md:text-base leading-relaxed font-bold font-['Cairo']">
+          <p className="text-slate-500 text-xs sm:text-sm md:text-base leading-relaxed font-bold">
             {current.desc}
           </p>
         </div>
