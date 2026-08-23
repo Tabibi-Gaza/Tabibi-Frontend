@@ -1,12 +1,6 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-family: 'Tajawal';
-  font-display: swap;
-  src: local('Tajawal');
-}
-
 @theme {
     --color-primary: #138C9F;
     --color-primary-dark: #0f6c7a;
