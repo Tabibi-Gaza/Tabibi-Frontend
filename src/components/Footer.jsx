@@ -75,10 +75,10 @@ const Footer = () => {
       <div className='col-span-1 lg:col-span-8 p-6 md:p-12 lg:p-16 flex flex-col justify-between z-20 text-right'>
         {/* حاوية العنوان والأزرار - تتحول من عمودي في الموبايل إلى أفقي متباعد في الشاشات الكبيرة */}
         <div className='flex flex-col lg:flex-row justify-between items-center lg:items-start gap-8 w-full text-center lg:text-right'>
-          <h2 className='text-2xl md:text-3xl xl:text-4xl font-black text-gray-900 dark:text-white leading-relaxed max-w-xl'>
+          <h2 className='text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white leading-relaxed max-w-xl'>
             احصل على استشارتك الطبية في
             <span className='block'> أي وقت ومن أي مكان مع تطبيق</span>
-            <span className='text-[#138C9F] block mt-2 md:mt-3 font-black animate-pulse'>طبيبي!</span>
+            <span className='text-[#138C9F] block mt-2 md:mt-3 font-bold animate-pulse'>طبيبي!</span>
           </h2>
 
           {/* حاوية أزرار المتاجر الموحدة العرض تماماً والمصطفة بذكاء */}
