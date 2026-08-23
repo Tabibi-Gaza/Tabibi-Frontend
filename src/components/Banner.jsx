@@ -5,7 +5,7 @@ const Banner = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-["Tajawal"]' dir='rtl'>
+    <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10' dir='rtl'>
       <div className='bg-[#eef7fa] rounded-[2.5rem] flex flex-col md:flex-row items-stretch justify-between overflow-hidden relative min-h-105'>
         
         <div className='w-full md:w-1/2 p-8 sm:p-12 md:p-16 flex flex-col justify-center items-start text-right z-10'>

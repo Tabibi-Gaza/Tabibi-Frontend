@@ -22,7 +22,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className='w-full bg-[#f3f4f6] dark:bg-gray-900 grid grid-cols-1 lg:grid-cols-12 font-["Tajawal"] border-gray-100 dark:border-gray-700 mt-20' dir='rtl'>
+    <div className='w-full bg-[#f3f4f6] dark:bg-gray-900 grid grid-cols-1 lg:grid-cols-12 border-gray-100 dark:border-gray-700 mt-20' dir='rtl'>
       {/* الجزء الأيمن (الشعار والتعريف) - متجاوب بالكامل في الانحناءات والمساحات */}
       <div className='col-span-1 lg:col-span-4 bg-white dark:bg-gray-800 p-8 md:p-12 lg:p-16 flex flex-col justify-between items-center lg:items-start relative z-10 border-none rounded-b-[100px] sm:rounded-b-[100px] lg:rounded-b-none lg:rounded-l-[150px] xl:rounded-l-[250px] shadow-sm'>
         <div className='flex flex-col gap-6 w-full mt-4 text-center lg:text-right'>

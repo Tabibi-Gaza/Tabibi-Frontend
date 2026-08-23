@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <>
       <div
-        className='fixed left-1/2 -translate-x-1/2 top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-1rem)]  font-["Tajawal"] z-[50] flex items-center justify-between text-base py-5 px-4 sm:px-6 md:px-10 bg-white/75 dark:bg-gray-900/75 border border-white/40 dark:border-gray-700/40 rounded-2xl shadow-xl shadow-black/[0.03] select-none backdrop-blur-md'
+        className='fixed left-1/2 -translate-x-1/2 top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-1rem)]  z-[50] flex items-center justify-between text-base py-5 px-4 sm:px-6 md:px-10 bg-white/75 dark:bg-gray-900/75 border border-white/40 dark:border-gray-700/40 rounded-2xl shadow-xl shadow-black/[0.03] select-none backdrop-blur-md'
         dir="rtl"
       >
         {/* ---- اللوجو ---- */}
