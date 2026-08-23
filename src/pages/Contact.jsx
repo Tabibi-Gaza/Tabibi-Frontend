@@ -186,7 +186,7 @@ const Contact = () => {
                 </h2>
                 <form
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-3.75"
+                  className="flex flex-col gap-5"
                 >
                   <input
                     type="text"
@@ -194,7 +194,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder={t('contact.address')}
-                    className="w-full p-3 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
                     required
                   />
                   <input
@@ -203,7 +203,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder={t('contact.email')}
-                    className="w-full p-3 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
                     required
                   />
                   <input
@@ -212,7 +212,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder={t('contact.title')}
-                    className="w-full p-3 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
                     required
                   />
                   <textarea
@@ -220,7 +220,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder={t('contact.message')}
-                    className="w-full p-3 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors resize-none h-30"
+                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors resize-none h-30"
                     required
                   ></textarea>
 
