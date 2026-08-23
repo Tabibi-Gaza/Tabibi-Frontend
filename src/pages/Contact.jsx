@@ -16,6 +16,7 @@ const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        subject: '',
         message: ''
     });
 
@@ -36,12 +37,12 @@ const Contact = () => {
             const { data } = await axiosInstance.post('/contact', {
                 fullName: formData.name,
                 email: formData.email,
-                subject: 'تواصل معنا',
+                subject: formData.subject,
                 message: formData.message
             });
             if (data.succeeded) {
                 toast.success('تم إرسال رسالتك بنجاح');
-                setFormData({ name: '', email: '', message: '' });
+                setFormData({ name: '', email: '', subject: '', message: '' });
             } else {
                 toast.error(data.errors?.[0]?.message || 'فشل الإرسال');
             }
@@ -205,6 +206,15 @@ const Contact = () => {
                     className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
                     required
                   />
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder={t('contact.title')}
+                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    required
+                  />
                   <textarea
                     name="message"
                     value={formData.message}
@@ -239,7 +249,7 @@ const Contact = () => {
                     />
                   </div>
                   <h3 className="mb-2.5 font-bold text-[#1F2937] dark:text-white text-[18px]">
-                    {t('contact.phone')}
+                    تواصل معنا
                   </h3>
                   <p className="text-[#6B7280] dark:text-gray-200 leading-[1.8] text-[14px]">
                     {t('contact.message')}
