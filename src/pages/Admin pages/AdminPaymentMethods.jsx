@@ -183,7 +183,7 @@ export default function AdminPaymentMethods() {
     return (
         <div className="w-full bg-[#ecf8fa] flex flex-col gap-6" dir="rtl">
             <div className="flex justify-between items-center">
-                <h2 className="font-['Tajawal'] font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
+                <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                     إدارة طرق الدفع والاشتراكات
                 </h2>
             </div>
@@ -218,7 +218,7 @@ export default function AdminPaymentMethods() {
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-2">
                                             {method.methodType === 'Bank' ? <Building2 size={20} className="text-[#003D9B]" /> : <Wallet size={20} className="text-[#138C9F]" />}
-                                            <span className="font-['Tajawal'] font-bold text-[15px] text-[#0B1C30]">{method.providerName}</span>
+                                            <span className="font-bold text-[15px] text-[#0B1C30]">{method.providerName}</span>
                                         </div>
                                         <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${method.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
                                             {method.isActive ? 'نشط' : 'معطل'}
@@ -249,26 +249,26 @@ export default function AdminPaymentMethods() {
                 <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-['Tajawal'] font-semibold text-[12px] text-[#526069]">اشتراكات نشطة</span><span className="font-['Tajawal'] font-semibold text-[20px] text-[#0B1C30]">{stats.totalActiveSubscriptions}</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">اشتراكات نشطة</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalActiveSubscriptions}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#DCFCE7] rounded-full flex items-center justify-center text-[#166534]"><CheckCircle size={16} /></div>
                         </div>
                         <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-['Tajawal'] font-semibold text-[12px] text-[#526069]">فترات تجريبية</span><span className="font-['Tajawal'] font-semibold text-[20px] text-[#0B1C30]">{stats.totalTrialSubscriptions}</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">فترات تجريبية</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalTrialSubscriptions}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#FFF7E6] rounded-full flex items-center justify-center text-[#B45309]"><Clock size={16} /></div>
                         </div>
                         <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-['Tajawal'] font-semibold text-[12px] text-[#526069]">مدفوعات معلقة</span><span className="font-['Tajawal'] font-semibold text-[20px] text-[#0B1C30]">{stats.pendingPayments}</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">مدفوعات معلقة</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.pendingPayments}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#FFF7E6] rounded-full flex items-center justify-center text-[#B45309]"><AlertCircle size={16} /></div>
                         </div>
                         <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-['Tajawal'] font-semibold text-[12px] text-[#526069]">إجمالي الإيرادات</span><span className="font-['Tajawal'] font-semibold text-[20px] text-[#0B1C30]">{stats.totalRevenue} ₪</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">إجمالي الإيرادات</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalRevenue} ₪</span></div>
                             <div className="w-[30px] h-[30px] bg-[#E5EEFF] rounded-full flex items-center justify-center text-[#003D9B]"><DollarSign size={16} /></div>
                         </div>
                     </div>
 
                     {pendingPayments.length > 0 && (
                         <div className="bg-white border border-[#C3C6D6] rounded-xl overflow-hidden">
-                            <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-['Tajawal'] font-bold text-[16px] text-[#0B1C30]">مدفوعات معلقة - تحتاج مراجعة</h3></div>
+                            <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30]">مدفوعات معلقة - تحتاج مراجعة</h3></div>
                             <div className="overflow-x-auto">
                                 <table className="w-full border-collapse text-right">
                                     <thead><tr className="bg-[#e2f4f7] h-[48px]">
@@ -305,7 +305,7 @@ export default function AdminPaymentMethods() {
                     )}
 
                     <div className="bg-white border border-[#C3C6D6] rounded-xl overflow-hidden">
-                        <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-['Tajawal'] font-bold text-[16px] text-[#0B1C30]">جميع المدفوعات</h3></div>
+                        <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30]">جميع المدفوعات</h3></div>
                         <div className="overflow-x-auto">
                             <table className="w-full border-collapse text-right">
                                 <thead><tr className="bg-[#e2f4f7] h-[48px]">
@@ -341,7 +341,7 @@ export default function AdminPaymentMethods() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
                     <div className="bg-white border border-[#C3C6D6] shadow-2xl rounded-2xl w-full max-w-lg p-8 relative">
                         <button onClick={resetForm} className="absolute top-4 left-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
-                        <h3 className="font-['Tajawal'] font-extrabold text-[20px] text-[#0B1C30] mb-6">{editMode ? 'تعديل طريقة الدفع' : 'إضافة طريقة دفع جديدة'}</h3>
+                        <h3 className="font-extrabold text-[20px] text-[#0B1C30] mb-6">{editMode ? 'تعديل طريقة الدفع' : 'إضافة طريقة دفع جديدة'}</h3>
                         <form onSubmit={handleSave} className="space-y-4">
                             <div className="flex gap-3">
                                 <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Bank', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Bank' ? 'border-[#003D9B] bg-[#003D9B]/5 text-[#003D9B]' : 'border-gray-200 text-gray-500'}`}>
@@ -394,7 +394,7 @@ export default function AdminPaymentMethods() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
                     <div className="bg-white border border-[#C3C6D6] shadow-2xl rounded-2xl w-full max-w-md p-8 relative">
                         <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="absolute top-4 left-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
-                        <h3 className="font-['Tajawal'] font-extrabold text-[20px] text-[#0B1C30] mb-4">رفض الدفع</h3>
+                        <h3 className="font-extrabold text-[20px] text-[#0B1C30] mb-4">رفض الدفع</h3>
                         <textarea value={rejectModal.reason} onChange={e => setRejectModal(p => ({ ...p, reason: e.target.value }))} className="w-full h-24 px-4 py-3 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] resize-none" placeholder="سبب الرفض..." required />
                         <div className="flex gap-3 mt-4">
                             <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 rounded-xl font-bold hover:bg-gray-50 cursor-pointer">إلغاء</button>

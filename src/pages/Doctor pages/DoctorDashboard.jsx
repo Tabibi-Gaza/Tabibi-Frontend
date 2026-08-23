@@ -136,7 +136,7 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="font-['Tajawal'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
+    <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
       <div className="space-y-1 text-right md:pl-4">
         <h2 className="text-2xl md:text-4xl font-black text-[#0B1C30] tracking-tight">
           {new Date().getHours() < 12 ? 'صباح الخير' : 'مساء الخير'} دكتور، {doctorData?.firstname || ''} {doctorData?.lastname || ''}

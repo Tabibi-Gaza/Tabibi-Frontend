@@ -267,7 +267,7 @@ const Login = () => {
                       width="80"
                       height="80"
                       onClick={() => navigate('/')}
-                      className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
+                      className="h-28 w-auto cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
                       alt="شعار طبيبي"
                     />
@@ -348,7 +348,7 @@ const Login = () => {
                     decoding="async"
                     width="80"
                     height="80"
-                    className="h-20 w-auto mx-auto object-contain mb-3"
+                    className="h-28 w-auto mx-auto object-contain mb-3"
                     src={assets.logo}
                     alt="شعار طبيبي"
                   />
@@ -591,7 +591,7 @@ const Login = () => {
                       width="80"
                       height="80"
                       onClick={() => navigate('/')}
-                      className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
+                      className="h-28 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
                       alt="شعار طبيبي"
                     />
@@ -644,7 +644,7 @@ const Login = () => {
                       width="80"
                       height="80"
                       onClick={() => navigate('/')}
-                      className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
+                      className="h-28 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
                       alt="شعار طبيبي"
                     />
@@ -700,7 +700,7 @@ const Login = () => {
                       width="80"
                       height="80"
                       onClick={() => navigate('/')}
-                      className="h-20 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
+                      className="h-28 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
                       alt="شعار طبيبي"
                     />

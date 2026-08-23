@@ -181,7 +181,7 @@ export default function AdminUserManagement() {
     return (
         <div className="w-full bg-[#ecf8fa] flex flex-col gap-6" dir="rtl">
             <div className="flex justify-between items-center w-full flex-wrap gap-2">
-                <h2 className="font-['Tajawal'] font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
+                <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                     إدارة المستخدمين
                 </h2>
             </div>
@@ -189,29 +189,29 @@ export default function AdminUserManagement() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                 <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-['Tajawal'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي الأطباء</span>
-                        <span className="font-['Tajawal'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalDoctors}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي الأطباء</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Users size={16} /></div>
                 </div>
                 <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-['Tajawal'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">الأطباء النشطون</span>
-                        <span className="font-['Tajawal'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalActiveDoctors}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">الأطباء النشطون</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalActiveDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#6BFF8F]/30 rounded-full flex items-center justify-center text-[#004F20]"><UserCheck size={16} /></div>
                 </div>
                 <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-['Tajawal'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي المستخدمين</span>
-                        <span className="font-['Tajawal'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalUsers}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي المستخدمين</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069]"><UserPlus size={16} /></div>
                 </div>
                 <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-['Tajawal'] font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">حسابات معطلة</span>
-                        <span className="font-['Tajawal'] font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalInactiveUsers}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">حسابات معطلة</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalInactiveUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#FFDAD6] rounded-full flex items-center justify-center text-[#BA1A1A]"><Ban size={16} /></div>
                 </div>
@@ -248,8 +248,8 @@ export default function AdminUserManagement() {
                                                 </div>
                                             )}
                                             <div className="flex flex-col">
-                                                <span className="font-['Tajawal'] font-semibold text-[16px] text-[#0B1C30]">{user.name}</span>
-                                                <span className="font-['Tajawal'] font-medium text-[14px] text-[#526069]">{user.email}</span>
+                                                <span className="font-semibold text-[16px] text-[#0B1C30]">{user.name}</span>
+                                                <span className="font-medium text-[14px] text-[#526069]">{user.email}</span>
                                             </div>
                                         </div>
                                     </td>
@@ -287,7 +287,7 @@ export default function AdminUserManagement() {
                 </div>
 
                 <div className="border-t border-[#C3C6D6] px-6 py-4 flex items-center justify-between flex-wrap gap-4 bg-white">
-                    <span className="font-['Tajawal'] text-[14px] text-[#526069]">
+                    <span className="text-[14px] text-[#526069]">
                         عرض <strong className="text-[#0B1C30]">{users.length}</strong> من أصل <strong className="text-[#0B1C30]">{totalCountDisplay}</strong> مستخدم
                     </span>
                     {totalPages > 1 && (
@@ -323,7 +323,7 @@ export default function AdminUserManagement() {
                                         <span className={`text-white text-[13px] font-bold px-3 py-1 rounded-md ${selectedUser.userType === 'Doctor' ? 'bg-[#138C9F]' : selectedUser.userType === 'Secretary' ? 'bg-purple-600' : 'bg-[#003D9B]'}`}>
                                             {selectedUser.userType === 'Doctor' ? 'طبيب' : selectedUser.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
                                         </span>
-                                        <h3 className="font-['Tajawal'] font-extrabold text-[24px] text-[#0B1C30]">{selectedUser.name}</h3>
+                                        <h3 className="font-extrabold text-[24px] text-[#0B1C30]">{selectedUser.name}</h3>
                                     </div>
                                 </div>
                                 {showImg(selectedUser) ? (
@@ -344,7 +344,7 @@ export default function AdminUserManagement() {
                                     <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full">
                                         <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-[#138C9F] w-full">
                                             <Briefcase size={20} />
-                                            <h4 className="font-['Tajawal'] font-bold text-[17px]">التفاصيل المهنية</h4>
+                                            <h4 className="font-bold text-[17px]">التفاصيل المهنية</h4>
                                         </div>
                                         <div className="flex flex-col gap-5 w-full">
                                             <div className="flex flex-col gap-0.5">
@@ -387,7 +387,7 @@ export default function AdminUserManagement() {
                                     <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full">
                                         <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-[#138C9F] w-full">
                                             <User size={20} />
-                                            <h4 className="font-['Tajawal'] font-bold text-[17px]">المعلومات الشخصية</h4>
+                                            <h4 className="font-bold text-[17px]">المعلومات الشخصية</h4>
                                         </div>
                                         <div className="flex flex-col gap-5 w-full">
                                             <div className="flex flex-col gap-0.5 w-full">
@@ -426,7 +426,7 @@ export default function AdminUserManagement() {
                                 <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full mb-6">
                                     <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-purple-600 w-full">
                                         <User size={20} />
-                                        <h4 className="font-['Tajawal'] font-bold text-[17px]">معلومات السكرتير</h4>
+                                        <h4 className="font-bold text-[17px]">معلومات السكرتير</h4>
                                     </div>
                                     <div className="flex flex-col gap-5 w-full">
                                         <div className="flex flex-col gap-0.5 w-full">
@@ -442,7 +442,7 @@ export default function AdminUserManagement() {
                                 <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full mb-6">
                                     <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-[#003D9B] w-full">
                                         <User size={20} />
-                                        <h4 className="font-['Tajawal'] font-bold text-[17px]">المعلومات الشخصية</h4>
+                                        <h4 className="font-bold text-[17px]">المعلومات الشخصية</h4>
                                     </div>
                                     <div className="flex flex-col gap-5 w-full">
                                         <div className="flex flex-col gap-0.5 w-full">

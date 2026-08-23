@@ -141,10 +141,10 @@ export default function AdminContactUs() {
         <div className="w-full  bg-[#ecf8fa]/20 flex flex-col gap-6" style={{ direction: 'rtl' }}>
             <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 w-full">
                 <div className="flex flex-col gap-1">
-                    <h2 className="font-['Tajawal'] font-extrabold text-[32px] leading-10 text-[#138C9F]">
+                    <h2 className="font-extrabold text-[32px] leading-10 text-[#138C9F]">
                         رسائل تواصل معنا
                     </h2>
-                    <p className="font-['Tajawal'] font-semibold text-[16px] leading-6 text-[#434654]">
+                    <p className="font-semibold text-[16px] leading-6 text-[#434654]">
                         إدارة ومتابعة استفسارات المرضى والزوار وطلبات المساعدة.
                     </p>
                 </div>
@@ -153,8 +153,8 @@ export default function AdminContactUs() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
                 <div className="bg-white/70 border-r-4 border-y border-l border-[#004F20] backdrop-blur-[5px] p-6 rounded-xl flex justify-between items-center">
                     <div className="flex flex-col gap-1">
-                        <span className="font-['Tajawal'] font-bold text-sm text-[#434654] uppercase tracking-wider">تمت معالجتها</span>
-                        <span className="font-['Tajawal'] font-bold text-3xl text-[#004F20]">{stats.processedMessages}</span>
+                        <span className="font-bold text-sm text-[#434654] uppercase tracking-wider">تمت معالجتها</span>
+                        <span className="font-bold text-3xl text-[#004F20]">{stats.processedMessages}</span>
                         <div className="flex items-center gap-1 text-[#004F20] text-sm font-semibold mt-1">
                             <FiTrendingUp size={14} />
                             <span>{stats.totalMessages > 0 ? Math.round(stats.processedMessages / stats.totalMessages * 100) : 0}% معدل الإغلاق</span>
@@ -167,8 +167,8 @@ export default function AdminContactUs() {
 
                 <div className="bg-white/70 border-r-4 border-y border-l border-[#BA1A1A] backdrop-blur-[5px] p-6 rounded-xl flex justify-between items-center">
                     <div className="flex flex-col gap-1">
-                        <span className="font-['Tajawal'] font-bold text-sm text-[#434654] uppercase tracking-wider">غير مقروءة</span>
-                        <span className="font-['Tajawal'] font-bold text-3xl text-[#BA1A1A]">{stats.unprocessedMessages}</span>
+                        <span className="font-bold text-sm text-[#434654] uppercase tracking-wider">غير مقروءة</span>
+                        <span className="font-bold text-3xl text-[#BA1A1A]">{stats.unprocessedMessages}</span>
                         <div className="flex items-center gap-1 text-[#BA1A1A] text-sm font-semibold mt-1">
                             <FiAlertCircle size={14} />
                             <span>تتطلب استجابة فورية</span>
@@ -181,8 +181,8 @@ export default function AdminContactUs() {
 
                 <div className="bg-white/70 border border-[#E2E8F0]/80 backdrop-blur-[5px] p-6 rounded-xl flex justify-between items-center">
                     <div className="flex flex-col gap-1">
-                        <span className="font-['Tajawal'] font-bold text-sm text-[#434654] uppercase tracking-wider">إجمالي الرسائل</span>
-                        <span className="font-['Tajawal'] font-bold text-3xl text-[#138C9F]">{stats.totalMessages}</span>
+                        <span className="font-bold text-sm text-[#434654] uppercase tracking-wider">إجمالي الرسائل</span>
+                        <span className="font-bold text-3xl text-[#138C9F]">{stats.totalMessages}</span>
                         <div className="flex items-center gap-1 text-[#138C9F] text-sm font-semibold mt-1">
                             <FiMessageSquare size={14} />
                             <span>إجمالي الرسائل</span>
@@ -295,7 +295,7 @@ export default function AdminContactUs() {
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
                         <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-white">
-                            <h3 className="font-['Tajawal'] font-bold text-lg text-[#0B1C30]">تفاصيل الرسالة</h3>
+                            <h3 className="font-bold text-lg text-[#0B1C30]">تفاصيل الرسالة</h3>
                             <button onClick={() => setIsDetailsOpen(false)} className="text-gray-400 hover:text-gray-600"><FiX size={20} /></button>
                         </div>
                         <div className="p-6 flex flex-col gap-6">
@@ -305,7 +305,7 @@ export default function AdminContactUs() {
                                         {selectedMessage.fullName.split(' ').map(n => n[0]).join(' ')}
                                     </div>
                                     <div>
-                                        <h4 className="font-['Tajawal'] font-bold text-[#138C9F] text-base">{selectedMessage.fullName}</h4>
+                                        <h4 className="font-bold text-[#138C9F] text-base">{selectedMessage.fullName}</h4>
                                         <p className="text-xs text-gray-500 font-medium">{selectedMessage.email}</p>
                                     </div>
                                 </div>
@@ -315,11 +315,11 @@ export default function AdminContactUs() {
                                 </div>
                             </div>
                             <div className="border border-gray-200 rounded-xl p-4 bg-[#ecf8fa] flex flex-col gap-3">
-                                <h5 className="font-['Tajawal'] font-bold text-[#138C9F] text-sm">
+                                <h5 className="font-bold text-[#138C9F] text-sm">
                                     الموضوع: <span className="text-[#0B1C30]">{selectedMessage.subject || 'بدون موضوع'}</span>
                                 </h5>
                                 <hr className="border-gray-200" />
-                                <p className="font-['Tajawal'] font-medium text-sm text-[#434654] leading-relaxed whitespace-pre-line">{selectedMessage.message}</p>
+                                <p className="font-medium text-sm text-[#434654] leading-relaxed whitespace-pre-line">{selectedMessage.message}</p>
                             </div>
                         </div>
                         <div className="p-4 border-t border-gray-100 flex justify-between bg-gray-50">
@@ -340,7 +340,7 @@ export default function AdminContactUs() {
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <form onSubmit={handleSendReply} className="bg-white w-full max-w-xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
                         <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-white">
-                            <h3 className="font-['Tajawal'] font-bold text-lg text-[#0B1C30]">رد سريع</h3>
+                            <h3 className="font-bold text-lg text-[#0B1C30]">رد سريع</h3>
                             <button type="button" onClick={() => setIsReplyOpen(false)} className="text-gray-400 hover:text-gray-600"><FiX size={20} /></button>
                         </div>
                         <div className="p-6 flex flex-col gap-4">
@@ -350,7 +350,7 @@ export default function AdminContactUs() {
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-400 font-medium">إلى:</p>
-                                    <h4 className="font-['Tajawal'] font-bold text-[#138C9F] text-sm">{selectedMessage.fullName}</h4>
+                                    <h4 className="font-bold text-[#138C9F] text-sm">{selectedMessage.fullName}</h4>
                                     <p className="text-xs text-gray-500">{selectedMessage.email}</p>
                                 </div>
                             </div>

@@ -98,7 +98,7 @@ export default function PatientManagement() {
       <div className="w-full bg-gray-50/50  pb-8 pr-4" dir="rtl">
         {/* العناوين والإحصائيات */}
         {/*    <div
-        className="font-['Tajawal'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"
+        className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"
         dir="rtl"
       >
         {/* قسم الترحيب - تم ضبط المسافة الجانبية هنا لمنع التداخل 

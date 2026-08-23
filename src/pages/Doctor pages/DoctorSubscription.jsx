@@ -118,7 +118,7 @@ export default function DoctorSubscription() {
 
     return (
         <div className="w-full bg-[#ecf8fa] flex flex-col gap-6" dir="rtl">
-            <h2 className="font-['Tajawal'] font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
+            <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                 اشتراكي
             </h2>
 
@@ -130,39 +130,39 @@ export default function DoctorSubscription() {
                         </div>
                         <div>
                             <div className="flex items-center gap-2 mb-1">
-                                <span className={`font-['Tajawal'] font-bold text-[13px] px-3 py-1 rounded-md text-white ${isTrial ? 'bg-yellow-500' : isActive ? 'bg-green-600' : 'bg-red-500'}`}>
+                                <span className={`font-bold text-[13px] px-3 py-1 rounded-md text-white ${isTrial ? 'bg-yellow-500' : isActive ? 'bg-green-600' : 'bg-red-500'}`}>
                                     {isTrial ? 'فترة تجريبية' : isActive ? 'اشتراك نشط' : 'اشتراك منتهي'}
                                 </span>
                             </div>
-                            <h3 className="font-['Tajawal'] font-extrabold text-[22px] text-[#0B1C30]">
+                            <h3 className="font-extrabold text-[22px] text-[#0B1C30]">
                                 {isTrial ? 'فترة تجريبية مجانية' : isActive ? 'الاشتراك الشهري' : 'الاشتراك منتهي الصلاحية'}
                             </h3>
-                            <p className="font-['Tajawal'] text-[14px] text-[#526069] mt-0.5">
+                            <p className="text-[14px] text-[#526069] mt-0.5">
                                 {isTrial ? 'استمتع بالمنصة لمدة 7 أيام مجاناً' : isActive ? `ينتهي في ${formatDate(subscription?.endDate)}` : 'يجب تجديد الاشتراك للاستمرار في استخدام المنصة'}
                             </p>
                         </div>
                     </div>
 
                     <div className="text-center">
-                        <div className={`font-['Tajawal'] font-extrabold text-[42px] leading-none ${remainingDays <= 2 && !isTrial ? 'text-red-500' : 'text-[#138C9F]'}`}>
+                        <div className={`font-extrabold text-[42px] leading-none ${remainingDays <= 2 && !isTrial ? 'text-red-500' : 'text-[#138C9F]'}`}>
                             {remainingDays}
                         </div>
-                        <span className="font-['Tajawal'] text-[13px] text-[#526069] font-semibold">يوم متبقي</span>
+                        <span className="text-[13px] text-[#526069] font-semibold">يوم متبقي</span>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-5 border-t border-gray-100">
                     <div className="text-center">
-                        <span className="font-['Tajawal'] text-[12px] text-[#526069] block mb-1">تاريخ البدء</span>
-                        <span className="font-['Tajawal'] font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.startDate)}</span>
+                        <span className="text-[12px] text-[#526069] block mb-1">تاريخ البدء</span>
+                        <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.startDate)}</span>
                     </div>
                     <div className="text-center">
-                        <span className="font-['Tajawal'] text-[12px] text-[#526069] block mb-1">تاريخ الانتهاء</span>
-                        <span className="font-['Tajawal'] font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.endDate)}</span>
+                        <span className="text-[12px] text-[#526069] block mb-1">تاريخ الانتهاء</span>
+                        <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.endDate)}</span>
                     </div>
                     <div className="text-center">
-                        <span className="font-['Tajawal'] text-[12px] text-[#526069] block mb-1">المبلغ</span>
-                        <span className="font-['Tajawal'] font-bold text-[14px] text-[#138C9F]">{subscription?.isTrial ? 'مجاني' : `${subscription?.amount || 0} ₪`}</span>
+                        <span className="text-[12px] text-[#526069] block mb-1">المبلغ</span>
+                        <span className="font-bold text-[14px] text-[#138C9F]">{subscription?.isTrial ? 'مجاني' : `${subscription?.amount || 0} ₪`}</span>
                     </div>
                 </div>
             </div>
@@ -177,27 +177,27 @@ export default function DoctorSubscription() {
             {showPaymentForm && (
                 <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-['Tajawal'] font-bold text-[20px] text-[#0B1C30]">تأكيد ودفع الاشتراك</h3>
+                        <h3 className="font-bold text-[20px] text-[#0B1C30]">تأكيد ودفع الاشتراك</h3>
                         <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
                     </div>
 
                     <div className="bg-[#ecf8fa] rounded-xl p-4 mb-6 border border-[#C3C6D6]">
                         <div className="flex justify-between items-center">
-                            <span className="font-['Tajawal'] font-bold text-[15px] text-[#0B1C30]">المبلغ المطلوب:</span>
-                            <span className="font-['Tajawal'] font-extrabold text-[24px] text-[#138C9F]">50 ₪</span>
+                            <span className="font-bold text-[15px] text-[#0B1C30]">المبلغ المطلوب:</span>
+                            <span className="font-extrabold text-[24px] text-[#138C9F]">50 ₪</span>
                         </div>
-                        <span className="font-['Tajawal'] text-[12px] text-[#526069]">اشتراك شهري - 30 يوم</span>
+                        <span className="text-[12px] text-[#526069]">اشتراك شهري - 30 يوم</span>
                     </div>
 
                     {banks.length > 0 && (
                         <div className="mb-6">
-                            <h4 className="font-['Tajawal'] font-bold text-[15px] text-[#0B1C30] mb-3 flex items-center gap-2"><Building2 size={18} className="text-[#003D9B]" /> تحويل بنكي</h4>
+                            <h4 className="font-bold text-[15px] text-[#0B1C30] mb-3 flex items-center gap-2"><Building2 size={18} className="text-[#003D9B]" /> تحويل بنكي</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {banks.map(method => (
                                     <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 hover:border-gray-300'}`}>
-                                        <div className="font-['Tajawal'] font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
-                                        <div className="font-['Tajawal'] text-[12px] text-[#526069] mt-1">{method.accountHolderName}</div>
-                                        {method.iban && <div className="font-['Tajawal'] text-[11px] text-[#526069] mt-0.5" dir="ltr">{method.iban}</div>}
+                                        <div className="font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
+                                        <div className="text-[12px] text-[#526069] mt-1">{method.accountHolderName}</div>
+                                        {method.iban && <div className="text-[11px] text-[#526069] mt-0.5" dir="ltr">{method.iban}</div>}
                                     </button>
                                 ))}
                             </div>
@@ -206,13 +206,13 @@ export default function DoctorSubscription() {
 
                     {wallets.length > 0 && (
                         <div className="mb-6">
-                            <h4 className="font-['Tajawal'] font-bold text-[15px] text-[#0B1C30] mb-3 flex items-center gap-2"><Wallet size={18} className="text-[#138C9F]" /> محفظة إلكترونية</h4>
+                            <h4 className="font-bold text-[15px] text-[#0B1C30] mb-3 flex items-center gap-2"><Wallet size={18} className="text-[#138C9F]" /> محفظة إلكترونية</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {wallets.map(method => (
                                     <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 hover:border-gray-300'}`}>
-                                        <div className="font-['Tajawal'] font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
-                                        <div className="font-['Tajawal'] text-[12px] text-[#526069] mt-1">{method.accountHolderName}</div>
-                                        <div className="font-['Tajawal'] text-[11px] text-[#526069] mt-0.5" dir="ltr">{method.phoneNumber}</div>
+                                        <div className="font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
+                                        <div className="text-[12px] text-[#526069] mt-1">{method.accountHolderName}</div>
+                                        <div className="text-[11px] text-[#526069] mt-0.5" dir="ltr">{method.phoneNumber}</div>
                                     </button>
                                 ))}
                             </div>
@@ -235,8 +235,8 @@ export default function DoctorSubscription() {
                                 ) : (
                                     <div className="flex flex-col items-center gap-2 text-[#526069]">
                                         <Upload size={28} />
-                                        <span className="font-['Tajawal'] font-bold text-[13px]">اضغط لرفع صورة الإيصال</span>
-                                        <span className="font-['Tajawal'] text-[11px]">PNG, JPG (حد أقصى 5MB)</span>
+                                        <span className="font-bold text-[13px]">اضغط لرفع صورة الإيصال</span>
+                                        <span className="text-[11px]">PNG, JPG (حد أقصى 5MB)</span>
                                     </div>
                                 )}
                                 <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />

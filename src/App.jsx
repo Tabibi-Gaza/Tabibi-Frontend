@@ -128,6 +128,8 @@ const UserLayout = () => {
   const userStr = localStorage.getItem("user");
   const user = userStr ? JSON.parse(userStr) : null;
   const roles = user?.roles || [];
+  const { pathname } = useLocation();
+  const isAuthPage = pathname === '/login' || pathname === '/reset-password';
 
   if (roles.includes("Doctor") || roles.includes("Secretary")) return <Navigate to="/doctor-dashboard" />;
   if (roles.includes("Admin")) return <Navigate to="/admin-dashboard" />;
@@ -135,11 +137,13 @@ const UserLayout = () => {
   return (
     <div dir='rtl' className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <ScrollToTop />
-      <Navbar />
+      {!isAuthPage && <Navbar />}
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path='/' element={<HomeV3 />} />
           <Route path='/home-v2' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/reset-password' element={<Login />} />
           <Route path='/doctors' element={<Doctors />} />
           <Route path='/doctors/:speciality' element={<Doctors />} />
           <Route path='/about' element={<About />} />
@@ -165,7 +169,7 @@ const UserLayout = () => {
           <Route path='/payment/:appointmentId' element={<PaymentPage />} />
         </Routes>
       </Suspense>
-      <Footer />
+      {!isAuthPage && <Footer />}
     </div>
   )
 }
@@ -214,9 +218,6 @@ const App = () => {
             <Route path="/doctor/subscription" element={<DoctorSubscription />} />
           </Route>
 
-          <Route path='/login' element={<Login />} />
-          <Route path='/reset-password' element={<Login />} />
-          
           <Route path="/*" element={<UserLayout />} />
         </Routes>
       </Suspense>

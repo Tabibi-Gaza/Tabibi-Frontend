@@ -150,7 +150,7 @@ const AppointmentManagement = () => {
     };
 
     return (
-      <div className="font-['Tajawal'] space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
+      <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
         <div className="space-y-6 text-right">
           <div className="text-right space-y-1">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#112240]">إدارة المواعيد</h1>
