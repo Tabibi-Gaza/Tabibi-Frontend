@@ -16,7 +16,6 @@ const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        subject: '',
         message: ''
     });
 
@@ -37,12 +36,12 @@ const Contact = () => {
             const { data } = await axiosInstance.post('/contact', {
                 fullName: formData.name,
                 email: formData.email,
-                subject: formData.subject,
+                subject: 'تواصل معنا',
                 message: formData.message
             });
             if (data.succeeded) {
                 toast.success('تم إرسال رسالتك بنجاح');
-                setFormData({ name: '', email: '', subject: '', message: '' });
+                setFormData({ name: '', email: '', message: '' });
             } else {
                 toast.error(data.errors?.[0]?.message || 'فشل الإرسال');
             }
@@ -203,15 +202,6 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder={t('contact.email')}
-                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder={t('contact.title')}
                     className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
                     required
                   />
