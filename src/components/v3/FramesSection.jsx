@@ -37,10 +37,10 @@ function FramesSection() {
           <span className="text-white/60 text-xs sm:text-sm font-bold tracking-widest block mb-4 drop-shadow">
             — منصة طبيبي للخدمات الصحية —
           </span>
-          <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
             رحلة صحتك تبدأ
           </h2>
-          <p className="text-xs sm:text-base md:text-lg text-[#b3e5e8] font-bold mt-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+          <p className="text-sm sm:text-lg md:text-xl text-[#b3e5e8] font-bold mt-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
             من هنا — أحدث التقنيات وأمهر الأطباء
           </p>
         </div>
