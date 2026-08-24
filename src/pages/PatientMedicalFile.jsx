@@ -5,6 +5,7 @@ import {
 } from 'react-icons/fi';
 import { Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
+import { resolveImageUrl } from '../utils/imageUrl';
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 
@@ -389,7 +390,7 @@ const PatientMedicalFile = () => {
                                                 decoding="async"
                                                 width="48"
                                                 height="48"
-                                                src={`${FILES_BASE}${selectedVisit.doctorImageUrl}`}
+                                                src={resolveImageUrl(selectedVisit.doctorImageUrl)}
                                                 alt={selectedVisit.doctorName}
                                                 className="w-full h-full object-cover"
                                             />

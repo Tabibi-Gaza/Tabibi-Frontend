@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../../api/axiosInstance";
+import { resolveImageUrl } from "../../utils/imageUrl";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -78,9 +79,8 @@ function FeaturedDoctors() {
                   width="224"
                   height="224"
                   src={
-                    item.profileImageUrl
-                      ? `${FILES_URL}/${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}`
-                      : "https://via.placeholder.com/150"
+                    resolveImageUrl(item.profileImageUrl)
+                      || "https://via.placeholder.com/150"
                   }
                   alt={item.fullName}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 object-center"

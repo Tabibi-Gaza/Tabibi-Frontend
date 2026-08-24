@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets_frontend/assets'
 import RelatedDoctors from '../components/RelatedDoctors'
+import { resolveImageUrl } from '../utils/imageUrl'
 import { toast } from 'react-toastify'
 import axiosInstance from '../api/axiosInstance'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,9 +51,7 @@ const Appointment = () => {
             _id: doc.id,
             userId: doc.userId,
             name: doc.fullName,
-            image: doc.profileImageUrl
-              ? `${import.meta.env.VITE_Files_URL}/${doc.profileImageUrl}`
-              : "",
+            image: resolveImageUrl(doc.profileImageUrl) || "",
             speciality: doc.specializationName || "",
             degree: doc.specializationName || "",
             experience: doc.yearsOfExperience ? `${doc.yearsOfExperience} سنوات` : "",

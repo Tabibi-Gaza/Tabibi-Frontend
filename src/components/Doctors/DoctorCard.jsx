@@ -5,6 +5,7 @@ import { faMapMarkerAlt, faClock, faStar, faXmark } from "@fortawesome/free-soli
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import { submitDoctorReview, getMyReviewForDoctor } from "../../services/patientService";
+import { resolveImageUrl } from "../../utils/imageUrl";
 
 const DoctorCard = ({ item }) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const DoctorCard = ({ item }) => {
       favs.push({
         id: item.id || item._id,
         name: item.fullName,
-        image: item.profileImageUrl ? `${import.meta.env.VITE_Files_URL}${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}` : "",
+        image: resolveImageUrl(item.profileImageUrl) || "",
         specialty: item.specializationName || "طبيب متخصص",
         fees: item.sessionPrice || 50,
         rating: item.averageRating || 4.8,
@@ -140,9 +141,8 @@ const DoctorCard = ({ item }) => {
           width="200"
           height="208"
           src={
-            item.profileImageUrl
-              ? `${import.meta.env.VITE_Files_URL}${item.profileImageUrl.startsWith("/") ? "" : "/"}${item.profileImageUrl}`
-              : "https://via.placeholder.com/150"
+            resolveImageUrl(item.profileImageUrl)
+              || "https://via.placeholder.com/150"
           }
           alt={item.fullName}
           className="h-full object-contain object-bottom pt-2"

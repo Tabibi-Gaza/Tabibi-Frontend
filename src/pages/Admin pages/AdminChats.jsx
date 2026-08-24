@@ -11,6 +11,7 @@ import {
   useDeleteConversation,
 } from "../../queries/chat/chatQueries";
 import { useDoctorsQuery } from "../../queries/doctors/doctorQueries";
+import { resolveImageUrl } from '../../utils/imageUrl';
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || "";
 
@@ -212,17 +213,17 @@ export default function AdminChats() {
           decoding="async"
           width="250"
           height="250"
-          src={`${FILES_BASE}/${msg.filePath}`}
+          src={resolveImageUrl(msg.filePath)}
           alt="صورة"
           className="max-w-[250px] max-h-[250px] rounded-lg object-cover cursor-pointer"
-          onClick={() => window.open(`${FILES_BASE}/${msg.filePath}`, "_blank")}
+          onClick={() => window.open(resolveImageUrl(msg.filePath), "_blank")}
         />
       );
     }
     if (msg.filePath && msg.fileType === "document") {
       return (
         <a
-          href={`${FILES_BASE}/${msg.filePath}`}
+          href={resolveImageUrl(msg.filePath)}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 underline"
@@ -288,7 +289,7 @@ export default function AdminChats() {
                     <div className="flex items-center gap-3 min-w-0 text-right">
                       <div className="relative shrink-0">
                         {conv.participantImageUrl ? (
-                                <img loading="lazy" decoding="async" width="44" height="44" className="w-11 h-11 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${conv.participantImageUrl}`} alt={conv.participantName} />
+                                <img loading="lazy" decoding="async" width="44" height="44" className="w-11 h-11 rounded-full object-cover border border-gray-100" src={resolveImageUrl(conv.participantImageUrl)} alt={conv.participantName} />
                         ) : (
                           <div className="w-11 h-11 rounded-full bg-[#138C9F]/10 text-[#138C9F] font-bold flex items-center justify-center text-sm">{getInitials(conv.participantName)}</div>
                         )}
@@ -333,7 +334,7 @@ export default function AdminChats() {
                 <div className="flex items-center gap-3 text-right ml-auto">
                   <div className="relative">
                     {activeConversation.participantImageUrl ? (
-                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${activeConversation.participantImageUrl}`} alt={activeConversation.participantName} />
+                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover border border-gray-100" src={resolveImageUrl(activeConversation.participantImageUrl)} alt={activeConversation.participantName} />
                     ) : (
                       <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#138C9F]/10 text-[#138C9F] font-bold flex items-center justify-center text-sm md:text-base">{getInitials(activeConversation.participantName)}</div>
                     )}
@@ -437,7 +438,7 @@ export default function AdminChats() {
                     <div key={doc.id} onClick={() => handleStartChatWithDoctor(doc)} className="p-4 flex items-center gap-3 border-b border-gray-50 cursor-pointer hover:bg-slate-50/50 transition-all duration-200">
                       <div className="relative shrink-0">
                         {doc.profileImageUrl ? (
-                            <img loading="lazy" decoding="async" width="44" height="44" className="w-11 h-11 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${doc.profileImageUrl}`} alt={doc.fullName} />
+                            <img loading="lazy" decoding="async" width="44" height="44" className="w-11 h-11 rounded-full object-cover border border-gray-100" src={resolveImageUrl(doc.profileImageUrl)} alt={doc.fullName} />
                         ) : (
                           <div className="w-11 h-11 rounded-full bg-[#138C9F]/10 text-[#138C9F] font-bold flex items-center justify-center text-sm">{getInitials(doc.fullName)}</div>
                         )}

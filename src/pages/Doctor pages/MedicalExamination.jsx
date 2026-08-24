@@ -3,6 +3,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FiSliders } from 'react-icons/fi';
 import axiosInstance from "../../api/axiosInstance";
+import { resolveImageUrl } from "../../utils/imageUrl";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -81,9 +82,7 @@ const MedicalExamination = () => {
     }, [medicalHistory, historyFilter]);
 
     const getPatientImage = () => {
-        if (!patient?.profileImageUrl) return null;
-        if (patient.profileImageUrl.startsWith("http")) return patient.profileImageUrl;
-        return `${FILES_URL}/${patient.profileImageUrl}`;
+        return resolveImageUrl(patient?.profileImageUrl);
     };
 
     const calculateAge = (dob) => {

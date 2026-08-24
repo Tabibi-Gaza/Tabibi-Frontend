@@ -13,6 +13,7 @@ import {
   useCreateConversation,
   useDeleteMessage,
 } from '../queries/chat/chatQueries';
+import { resolveImageUrl } from '../utils/imageUrl';
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 const SWIPE_THRESHOLD = 80;
@@ -289,16 +290,16 @@ export default function Chats() {
           decoding="async"
           width="250"
           height="250"
-          src={`${FILES_BASE}/${msg.filePath}`}
+          src={resolveImageUrl(msg.filePath)}
           alt="صورة"
           className="max-w-[250px] max-h-[250px] rounded-lg object-cover cursor-pointer"
-          onClick={() => window.open(`${FILES_BASE}/${msg.filePath}`, '_blank')}
+          onClick={() => window.open(resolveImageUrl(msg.filePath), '_blank')}
         />
       );
     }
     if (msg.filePath && msg.fileType === 'document') {
       return (
-        <a href={`${FILES_BASE}/${msg.filePath}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 underline">
+        <a href={resolveImageUrl(msg.filePath)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 underline">
           <FileText className="w-4 h-4" />
           <span>{msg.content || 'مستند'}</span>
         </a>
@@ -339,7 +340,7 @@ export default function Chats() {
                     <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50/50'}`}>
                       <div className="relative shrink-0">
                         {conv.participantImageUrl ? (
-                            <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 h-12 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${conv.participantImageUrl}`} alt={conv.participantName} />
+                            <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 h-12 rounded-full object-cover border border-gray-100" src={resolveImageUrl(conv.participantImageUrl)} alt={conv.participantName} />
                         ) : (
                           <div className="w-11 h-11 md:w-12 h-12 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-extrabold flex items-center justify-center text-sm md:text-base">{getInitials(conv.participantName)}</div>
                         )}
@@ -389,7 +390,7 @@ export default function Chats() {
                     </button>
                     <div className="relative">
                       {activeConversation.participantImageUrl ? (
-                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 h-11 rounded-full object-cover border border-gray-100" src={`${FILES_BASE}/${activeConversation.participantImageUrl}`} alt={activeConversation.participantName} />
+                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 h-11 rounded-full object-cover border border-gray-100" src={resolveImageUrl(activeConversation.participantImageUrl)} alt={activeConversation.participantName} />
                       ) : (
                         <div className="w-10 h-10 md:w-11 h-11 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-bold flex items-center justify-center text-sm md:text-base">{getInitials(activeConversation.participantName)}</div>
                       )}

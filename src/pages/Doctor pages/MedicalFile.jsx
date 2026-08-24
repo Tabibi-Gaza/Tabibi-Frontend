@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from "../../api/axiosInstance";
+import { resolveImageUrl } from "../../utils/imageUrl";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -37,9 +38,7 @@ const MedicalFile = () => {
     }, [id]);
 
     const getPatientImage = () => {
-        if (!patient?.profileImageUrl) return null;
-        if (patient.profileImageUrl.startsWith("http")) return patient.profileImageUrl;
-        return `${FILES_URL}/${patient.profileImageUrl}`;
+        return resolveImageUrl(patient?.profileImageUrl);
     };
 
     const calculateAge = (dob) => {

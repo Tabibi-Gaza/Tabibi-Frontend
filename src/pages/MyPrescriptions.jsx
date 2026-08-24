@@ -3,6 +3,7 @@ import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { FiFileText, FiDownload, FiEye, FiX, FiUser, FiCalendar, FiTrash2 } from 'react-icons/fi';
+import { resolveImageUrl } from '../utils/imageUrl';
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
   if (!html2canvas) {
@@ -53,9 +54,7 @@ const MyPrescriptions = () => {
 
     const getDoctorImageSrc = (img) => {
         if (!img || img.trim() === '') return null;
-        if (img.startsWith('http')) return img;
-        const path = img.startsWith('/') ? img : `/${img}`;
-        return `${FILES_BASE}${path}`;
+        return resolveImageUrl(img);
     };
 
     const handleDownloadPDF = async () => {

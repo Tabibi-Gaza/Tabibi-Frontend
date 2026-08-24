@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { AppContext } from "../../context/AppContext";
 import axiosInstance from "../../api/axiosInstance";
+import { resolveImageUrl } from "../../utils/imageUrl";
 
 const keywordMap = [
   { keywords: ["جلد", "بشرة", "حبوب", "احمرار", "حكة", "تساقط", "صدفية", "ندبات", "بشره", "طفح", "بثور", "رؤوس سودا", "حب شباب", "اكزيما", "حساسية جلد", "فطريات", "ثعلبة", "ورم جلدي", "تشقق", "جفاف جلد", "تحسس", "حروق", "كدمات", "تبييض", "تقشير", "ليزر", "تجميل"], specialty: "جلدية وتجميل", icon: "🩺" },
@@ -264,7 +265,7 @@ const AIAssistant = () => {
                         >
                           <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0 overflow-hidden">
                             {doc.profileImageUrl ? (
-                              <img loading="lazy" decoding="async" width="40" height="40" src={`${import.meta.env.VITE_Files_URL}/${doc.profileImageUrl}`} alt="" className="w-full h-full object-cover" />
+                              <img loading="lazy" decoding="async" width="40" height="40" src={resolveImageUrl(doc.profileImageUrl)} alt="" className="w-full h-full object-cover" />
                             ) : (
                               <span className="text-white text-sm font-bold">{doc.fullName?.[0]}</span>
                             )}

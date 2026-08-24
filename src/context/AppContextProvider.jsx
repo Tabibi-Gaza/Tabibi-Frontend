@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AppContext } from "./AppContext";
 import axiosInstance from "../api/axiosInstance";
 import { toast } from "react-toastify";
+import { resolveImageUrl } from "../utils/imageUrl";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -30,7 +31,7 @@ const mapBackendDoctor = (doc) => ({
     _id: doc.id,
     userId: doc.userId,
     name: doc.fullName,
-    image: doc.profileImageUrl ? `${FILES_URL}/${doc.profileImageUrl}` : "",
+    image: resolveImageUrl(doc.profileImageUrl) || "",
     speciality: doc.specializationName || "",
     degree: doc.specializationName || "",
     experience: doc.yearsOfExperience ? `${doc.yearsOfExperience} سنوات` : "",
@@ -176,7 +177,7 @@ const AppContextProvider = (props) => {
                     dob: d.dateOfBirth || "",
                     experienceYears: d.yearsOfExperience || "",
                     specialization: d.specialization || "",
-                    image: d.profileImageUrl ? `${FILES_URL}/${d.profileImageUrl}` : "",
+                    image: resolveImageUrl(d.profileImageUrl) || "",
                     clinicName: d.clinicName || "",
                     clinicAddress: d.clinicAddress || "",
                     detailedAddress: d.detailedAddress || "",
@@ -231,9 +232,7 @@ const AppContextProvider = (props) => {
                             phone: d.phoneNumber || "",
                             gender: d.gender || "",
                             dob: d.dateOfBirth || "",
-                            image: d.profileImageUrl
-                                ? `${FILES_URL}/${d.profileImageUrl}`
-                                : null,
+                            image: resolveImageUrl(d.profileImageUrl),
                         });
                         return;
                     }
@@ -256,9 +255,7 @@ const AppContextProvider = (props) => {
                             gender: mapBackendGender(d.gender),
                             dob: arabicDateToIso(d.dateOfBirth),
                             address: d.address ? { line1: d.address } : { line1: "" },
-                            image: d.profileImageUrl
-                                ? `${FILES_URL}/${d.profileImageUrl}`
-                                : null,
+                            image: resolveImageUrl(d.profileImageUrl),
                         });
                         return;
                     }
