@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import AdminSidebar from './AdminSidebar';
 
 const AdminLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const userStr = localStorage.getItem('user');
+    const user = userStr ? JSON.parse(userStr) : null;
+    const roles = user?.roles || [];
+    const isAdmin = roles.includes('Admin');
+
+    if (!user || !isAdmin) {
+        if (roles.includes('Doctor') || roles.includes('Secretary')) return <Navigate to="/doctor-dashboard" />;
+        return <Navigate to="/" />;
+    }
 
     return (
       <div
@@ -22,7 +32,6 @@ const AdminLayout = () => {
             setSidebarOpen={setSidebarOpen}
           />
 
-          {/* الخلفية المعتمة */}
           {sidebarOpen && (
             <div
               className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity"
@@ -30,7 +39,6 @@ const AdminLayout = () => {
             />
           )}
 
-          {/* المحتوى الرئيسي (تمت إضافة md:w-auto لإعطاء مرونة كاملة لـ flex-1) */}
           <main className="flex-1 p-4 md:p-8 overflow-y-auto md:max-h-[calc(100vh-86px)] text-right w-full md:w-auto">
             <Outlet />
           </main>

@@ -231,7 +231,7 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify(user));
         setToken(accessToken);
         toast.success('تم تسجيل الدخول بنجاح!');
-        navigateByRole(user.roles);
+        navigateByRole(user.roles, user);
       } else {
         toast.error(data.errors?.[0]?.message || data.message || 'فشل تسجيل الدخول بجوجل');
       }
