@@ -34,7 +34,7 @@ const AdminDashboard = () => {
                 if (typeof loadDashboardData === 'function') {
                     await loadDashboardData();
                 }
-                setTimeout(() => setLoading(false), 600);
+                setLoading(false);
             } else {
                 setLoading(false);
             }

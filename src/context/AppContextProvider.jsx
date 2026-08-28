@@ -327,33 +327,28 @@ const AppContextProvider = (props) => {
             const savedUser = localStorage.getItem("user");
             if (!savedToken || !savedUser) return;
             try {
-                const { data } = await axiosInstance.get("/patient/profile");
+                const user = JSON.parse(savedUser);
+                const roles = user?.roles || [];
+                let endpoint = "/patient/profile";
+                if (roles.includes("Doctor") || roles.includes("Secretary")) endpoint = "/doctor/profile";
+                else if (roles.includes("Admin")) endpoint = "/admin/profile";
+                const { data } = await axiosInstance.get(endpoint);
                 if (!data.succeeded) throw new Error();
             } catch {
-                try {
-                    const { data } = await axiosInstance.get("/doctor/profile");
-                    if (!data.succeeded) throw new Error();
-                } catch {
-                    try {
-                        const { data } = await axiosInstance.get("/admin/profile");
-                        if (!data.succeeded) throw new Error();
-                    } catch {
-                        localStorage.removeItem("accessToken");
-                        localStorage.removeItem("user");
-                        localStorage.removeItem("doctorId");
-                        setToken("");
-                        setUserData({
-                            firstname: "",
-                            lastname: "",
-                            email: "",
-                            phone: "",
-                            gender: "",
-                            dob: "",
-                            address: { line1: "" },
-                            image: null,
-                        });
-                    }
-                }
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("user");
+                localStorage.removeItem("doctorId");
+                setToken("");
+                setUserData({
+                    firstname: "",
+                    lastname: "",
+                    email: "",
+                    phone: "",
+                    gender: "",
+                    dob: "",
+                    address: { line1: "" },
+                    image: null,
+                });
             }
         };
         validateToken();

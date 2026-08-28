@@ -4,23 +4,10 @@ import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { specializationKeys } from '../../queries/specializations/specializationKeys';
+import { resolveImageUrl } from '../../utils/imageUrl';
 
-const FILES_URL = import.meta.env.VITE_Files_URL || '';
 const ADMIN_EMAILS = ['admin@tabibi.com', 'Mazen@gmail.com'];
 
-const seedImages = {};
-const seedCtx = import.meta.glob('../../assets/assets_frontend/doc*.png', { eager: true, query: '?url' });
-Object.entries(seedCtx).forEach(([key, val]) => {
-    const match = key.match(/doc(\d+)\.png/);
-    if (match) seedImages[`doc${match[1]}.png`] = val.default || val;
-});
-const getDoctorImg = (path) => {
-    if (!path) return '';
-    const parts = path.split('/');
-    const filename = parts[parts.length - 1];
-    if (seedImages[filename]) return seedImages[filename];
-    return `${FILES_URL}/${path}`;
-};
 const genderMap = { Male: 'ذكر', Female: 'أنثى', PreferNotToSay: 'يفضل عدم القول' };
 
 export default function AdminUserManagement() {
@@ -174,7 +161,7 @@ export default function AdminUserManagement() {
     const [imgErrors, setImgErrors] = useState({});
     const handleImgError = (id) => setImgErrors(prev => ({ ...prev, [id]: true }));
     const showImg = (user) => user.profileImageUrl && !imgErrors[user.id];
-    const imgSrc = (user) => showImg(user) ? getDoctorImg(user.profileImageUrl) : '';
+    const imgSrc = (user) => showImg(user) ? resolveImageUrl(user.profileImageUrl) : '';
 
     const totalCountDisplay = totalCount;
 
