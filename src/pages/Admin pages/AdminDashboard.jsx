@@ -5,8 +5,7 @@ import { FiUserCheck, FiUsers, FiClock, FiDollarSign, FiTrendingUp, FiTrendingDo
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
-
-const FILES_URL = import.meta.env.VITE_Files_URL || '';
+import { resolveImageUrl } from '../../utils/imageUrl';
 
 const STATUS_BADGES = {
     مكتمل: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
@@ -262,7 +261,7 @@ const AdminDashboard = () => {
                                             width="40"
                                             height="40"
                                             className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
-                                            src={req.image || req.img}
+                                            src={resolveImageUrl(req.image || req.img) || 'https://via.placeholder.com/150'}
                                             alt={req.name}
                                             onError={(e) => { e.target.src = 'https://via.placeholder.com/150' }}
                                         />
@@ -446,7 +445,7 @@ const AdminDashboard = () => {
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
                                 <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.img ? (
-                                        <img loading="lazy" decoding="async" width="480" height="480" src={selectedRequest.img} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
+                                        <img loading="lazy" decoding="async" width="480" height="480" src={resolveImageUrl(selectedRequest.img)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
                                     ) : (
                                         <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                             {selectedRequest.name ? selectedRequest.name.split(' ').map(n => n[0]).join('').slice(0, 2) : '??'}

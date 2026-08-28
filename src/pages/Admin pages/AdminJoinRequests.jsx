@@ -5,8 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { specializationKeys } from '../../queries/specializations/specializationKeys';
 import { doctorKeys } from '../../queries/doctors/doctorKeys';
-
-const FILES_URL = import.meta.env.VITE_Files_URL || '';
+import { resolveImageUrl } from '../../utils/imageUrl';
 
 const STATUS_MAP = {
     'Pending': 'pending',
@@ -275,7 +274,7 @@ export default function AdminJoinRequests() {
                                                     <span className={`w-1.5 h-1.5 rounded-full ${req.status === 'accepted' ? 'bg-[#16A34A]' : req.status === 'rejected' ? 'bg-[#DC2626]' : 'bg-[#D97706]'}`}></span>
                                                 </span>
                                             </td>
-                                            <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date}</td>
+                                            <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date ? new Date(req.date).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'short', day: 'numeric' }) : '-'}</td>
                                             <td className="p-3 md:p-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
                                                     {req.status === 'pending' ? (
@@ -410,7 +409,7 @@ export default function AdminJoinRequests() {
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
                                 <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.photoPath ? (
-                                            <img loading="lazy" decoding="async" width="480" height="480" src={`${FILES_URL}/${selectedRequest.photoPath}`} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
+                                            <img loading="lazy" decoding="async" width="480" height="480" src={resolveImageUrl(selectedRequest.photoPath)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
                                     ) : (
                                         <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                             {selectedRequest.avatarInitials}

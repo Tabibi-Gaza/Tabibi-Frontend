@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faArrowLeft, faArrowRight, faQuoteRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../../api/axiosInstance";
+import { resolveImageUrl } from "../../utils/imageUrl";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -153,9 +154,8 @@ function ReviewsGrid() {
                         width="44"
                         height="44"
                         src={
-                          review.patientImage
-                            ? `${FILES_URL}/${review.patientImage.startsWith("/") ? "" : "/"}${review.patientImage}`
-                            : `https://ui-avatars.com/api/?name=${encodeURIComponent(review.patientName)}&background=138C9F&color=fff&size=80`
+                          resolveImageUrl(review.patientImage) ||
+                          `https://ui-avatars.com/api/?name=${encodeURIComponent(review.patientName)}&background=138C9F&color=fff&size=80`
                         }
                         alt={review.patientName}
                         className="w-10 h-10 md:w-11 md:h-11 rounded-xl object-cover shrink-0"
@@ -210,9 +210,8 @@ function ReviewsGrid() {
                 width="48"
                 height="48"
                 src={
-                  popupReview.patientImage
-                    ? `${FILES_URL}/${popupReview.patientImage.startsWith("/") ? "" : "/"}${popupReview.patientImage}`
-                    : `https://ui-avatars.com/api/?name=${encodeURIComponent(popupReview.patientName)}&background=138C9F&color=fff&size=96`
+                  resolveImageUrl(popupReview.patientImage) ||
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(popupReview.patientName)}&background=138C9F&color=fff&size=96`
                 }
                 alt={popupReview.patientName}
                 className="w-12 h-12 rounded-xl object-cover shrink-0"

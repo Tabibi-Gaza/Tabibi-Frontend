@@ -258,7 +258,7 @@ export default function AdminUserManagement() {
                                             {user.userType === 'Doctor' ? 'طبيب' : user.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-3 whitespace-nowrap font-medium text-[14px] text-[#434654] hidden md:table-cell">{user.createdAt}</td>
+                                    <td className="px-6 py-3 whitespace-nowrap font-medium text-[14px] text-[#434654] hidden md:table-cell">{user.createdAt ? new Date(user.createdAt).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'short', day: 'numeric' }) : '-'}</td>
                                     <td className="px-6 py-3 whitespace-nowrap hidden sm:table-cell">
                                         <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-bold ${user.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
                                             {user.isActive ? 'نشط' : 'معطل'}
@@ -361,7 +361,7 @@ export default function AdminUserManagement() {
                                             </div>
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="font-bold text-[#0B1C30] text-[16px]">سعر الكشفية</span>
-                                                <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.sessionPrice || 0} ₪</span>
+                                                <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.sessionPrice || 0} د.ع</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="font-bold text-[#0B1C30] text-[16px]">العيادة</span>
