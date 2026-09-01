@@ -1,8 +1,11 @@
 [phases.setup]
-nixPkgs = ["nodejs"]
+nixPkgs = ["nodejs_22"]
+
+[phases.install]
+cmds = ["npm install --include=dev"]
 
 [phases.build]
-cmds = ["npm install --include=dev", "npm run build"]
+cmds = ["npm run build"]
 
 [phases.run]
-cmd = "npx serve dist -s -l $PORT"
+cmd = "npx serve dist -s -l 3000"
