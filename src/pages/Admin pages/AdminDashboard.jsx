@@ -192,6 +192,7 @@ const AdminDashboard = () => {
     const chartData = appointmentTrend.map(item => ({
         name: new Date(item.date).toLocaleDateString('ar-IQ', { weekday: 'short' }),
         مكتمل: item.completed || 0,
+        مؤكد: Math.max(0, (item.totalAppointments || 0) - (item.completed || 0) - (item.cancelled || 0)),
         ملغي: item.cancelled || 0,
     }));
 
@@ -326,6 +327,10 @@ const AdminDashboard = () => {
                                 <span className="text-slate-500">مكتمل</span>
                             </div>
                             <div className="flex items-center gap-1.5">
+                                <span className="w-2.5 h-2.5 bg-[#60a5fa] rounded-sm"></span>
+                                <span className="text-slate-500">مؤكد</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
                                 <span className="w-2.5 h-2.5 bg-red-300 rounded-sm"></span>
                                 <span className="text-slate-500">ملغي</span>
                             </div>
@@ -342,6 +347,9 @@ const AdminDashboard = () => {
                                     <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(19,140,159,0.04)' }} />
                                     <Bar dataKey="مكتمل" radius={[6, 6, 0, 0]} maxBarSize={32}>
                                         {chartData.map((_, idx) => <Cell key={idx} fill="#138C9F" />)}
+                                    </Bar>
+                                    <Bar dataKey="مؤكد" radius={[6, 6, 0, 0]} maxBarSize={32}>
+                                        {chartData.map((_, idx) => <Cell key={idx} fill="#60a5fa" />)}
                                     </Bar>
                                     <Bar dataKey="ملغي" radius={[6, 6, 0, 0]} maxBarSize={32}>
                                         {chartData.map((_, idx) => <Cell key={idx} fill="#fca5a5" />)}
