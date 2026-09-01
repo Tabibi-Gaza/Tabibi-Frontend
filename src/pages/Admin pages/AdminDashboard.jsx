@@ -337,9 +337,9 @@ const AdminDashboard = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 min-h-0">
+                    <div className="flex-1" style={{ minHeight: 220 }}>
                         {chartData.length > 0 ? (
-                            <ResponsiveContainer width="100%" height="100%">
+                            <ResponsiveContainer width="100%" height={220}>
                                 <BarChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }} barGap={4}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
                                     <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#526069', fontWeight: 600 }} axisLine={false} tickLine={false} />
