@@ -155,7 +155,18 @@ export default function AdminJoinRequests() {
                 : `/admin/doctor-applications/${applicationId}/download-id-document`;
 
             const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
-            const blob = new Blob([response.data]);
+            const blob = response.data;
+
+            if (blob.type === 'application/json') {
+                const text = await blob.text();
+                const json = JSON.parse(text);
+                if (json.url) {
+                    window.open(json.url, '_blank');
+                    toast.success('تم فتح الملف في نافذة جديدة');
+                    return;
+                }
+            }
+
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
@@ -398,7 +409,7 @@ export default function AdminJoinRequests() {
             {selectedRequest && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
                     <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
-                        <div className="w-full h-[110px] bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
+                        <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
                                 className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30"
@@ -406,11 +417,11 @@ export default function AdminJoinRequests() {
                                 <X className="w-4 h-4" />
                             </button>
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
-                                <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md">
+                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md overflow-hidden">
                                     {selectedRequest.photoPath ? (
-                                            <img loading="lazy" decoding="async" width="480" height="480" src={resolveImageUrl(selectedRequest.photoPath)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" />
+                                        <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.photoPath)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" />
                                     ) : (
-                                        <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
+                                        <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[28px]">
                                             {selectedRequest.avatarInitials}
                                         </div>
                                     )}
@@ -418,54 +429,101 @@ export default function AdminJoinRequests() {
                             </div>
                         </div>
 
-                        <div className="pt-12 px-6 md:px-8 pb-4 flex flex-col gap-5 md:gap-6 overflow-y-auto flex-1">
-                            <div className="flex flex-col items-start">
+                        <div className="pt-12 px-6 md:px-8 pb-4 flex flex-col gap-5 overflow-y-auto flex-1">
+                            <div className="flex items-center gap-3">
                                 <h3 className="text-[20px] md:text-[22px] font-extrabold text-[#434654]">{selectedRequest.name}</h3>
-                                <span className="bg-[#E5EEFF] text-[#138C9F] text-[13px] font-bold px-3 py-1 rounded-md mt-1">
-                                    {selectedRequest.specialty}
+                                <span className="bg-[#E5EEFF] text-[#138C9F] text-[13px] font-bold px-3 py-1 rounded-md">
+                                    طبيب
                                 </span>
                             </div>
 
                             {selectedDetails && (
-                                <>
-                                    <div className="flex flex-col gap-1">
-                                        <h4 className="text-[14px] font-bold text-[#737685]">النبذة المهنية</h4>
-                                        <p className="text-[14px] text-[#434654] bg-[#ecf8fa] p-3 rounded-[8px] border border-gray-100 leading-relaxed">
-                                            {selectedDetails.bio || 'لا توجد نبذة مهنية'}
-                                        </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
+                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
+                                            <FileText className="w-4 h-4" />
+                                            التفاصيل المهنية
+                                        </h4>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">التخصص</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.specialization || selectedRequest.specialty || '-'}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">سنوات الخبرة</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedRequest.experience || selectedDetails.yearsOfExperience || '-'} سنة</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">رقم الترخيص</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedRequest.licenseNumber || selectedDetails.licenseNumber || '-'}</span>
+                                        </div>
+                                        {selectedDetails.sessionPrice && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
+                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice} د.ع</span>
+                                            </div>
+                                        )}
+                                        {selectedDetails.clinicName && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[12px] font-bold text-[#737685]">العيادة</span>
+                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicName}</span>
+                                            </div>
+                                        )}
+                                        {selectedDetails.clinicAddress && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[12px] font-bold text-[#737685]">عنوان العيادة</span>
+                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicAddress}</span>
+                                            </div>
+                                        )}
+                                        {(selectedDetails.bio || selectedRequest.bio) && (
+                                            <div className="pt-2 border-t border-gray-100">
+                                                <span className="text-[12px] font-bold text-[#737685] block mb-1">النبذة المهنية</span>
+                                                <p className="text-[12px] text-[#434654] leading-relaxed">{selectedDetails.bio || selectedRequest.bio}</p>
+                                            </div>
+                                        )}
                                     </div>
 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4 text-center">
-                                            <span className="text-[13px] font-bold text-[#737685] block mb-1">سنوات الخبرة</span>
-                                            <span className="text-[16px] md:text-[18px] font-extrabold text-[#138C9F]">{selectedRequest.experience}+ سنة</span>
-                                        </div>
-                                        <div className="bg-[#ecf8fa] border border-gray-200 rounded-[12px] p-4 text-center">
-                                            <span className="text-[13px] font-bold text-[#737685] block mb-1">رقم الترخيص</span>
-                                            <span className="text-[16px] md:text-[18px] font-extrabold text-[#138C9F]">{selectedRequest.licenseNumber}</span>
-                                        </div>
+                                    <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
+                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
+                                            <Eye className="w-4 h-4" />
+                                            المعلومات الشخصية
+                                        </h4>
+                                        {selectedDetails.email && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[12px] font-bold text-[#737685]">البريد الإلكتروني</span>
+                                                <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.email}</span>
+                                            </div>
+                                        )}
+                                        {selectedDetails.phoneNumber && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[12px] font-bold text-[#737685]">رقم الهاتف</span>
+                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.phoneNumber}</span>
+                                            </div>
+                                        )}
+                                        {selectedDetails.secretaryEmail && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[12px] font-bold text-[#737685]">بريد السكرتير</span>
+                                                <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.secretaryEmail}</span>
+                                            </div>
+                                        )}
                                     </div>
-                                </>
+                                </div>
                             )}
 
-                            <div className="flex flex-col gap-2">
-                                <h4 className="text-[14px] font-bold text-[#737685]">الشهادات والوثائق</h4>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <button
-                                        onClick={() => handleDownload(selectedRequest.id, 'id')}
-                                        className="border border-gray-200 rounded-[8px] p-3 flex flex-row-reverse items-center justify-between bg-white text-[13px] font-medium text-[#434654] hover:bg-slate-50 transition-colors cursor-pointer"
-                                    >
-                                        <Download className="w-4 h-4 text-[#138C9F]" />
-                                        <span className="truncate max-w-[180px]">مزاولة المهنة / الهوية</span>
-                                    </button>
-                                    <button
-                                        onClick={() => handleDownload(selectedRequest.id, 'cv')}
-                                        className="border border-gray-200 rounded-[8px] p-3 flex flex-row-reverse items-center justify-between bg-white text-[13px] font-medium text-[#434654] hover:bg-slate-50 transition-colors cursor-pointer"
-                                    >
-                                        <Download className="w-4 h-4 text-[#138C9F]" />
-                                        <span className="truncate max-w-[180px]">السيرة الذاتية (CV)</span>
-                                    </button>
-                                </div>
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => handleDownload(selectedRequest.id, 'cv')}
+                                    className="flex-1 h-12 bg-[#138C9F] text-white rounded-[8px] text-[13px] font-bold hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    تحميل السيرة الذاتية (CV)
+                                </button>
+                                <button
+                                    onClick={() => handleDownload(selectedRequest.id, 'id')}
+                                    className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    صورة الهوية / مزاولة المهنة
+                                </button>
                             </div>
 
                             {selectedRequest.status === 'rejected' && selectedRequest.rejectionReason && (
@@ -484,7 +542,7 @@ export default function AdminJoinRequests() {
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
                                 className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 w-full sm:w-auto"
                             >
-                                إلغاء
+                                إغلاق
                             </button>
                             {selectedRequest.status !== 'rejected' && (
                                 <button

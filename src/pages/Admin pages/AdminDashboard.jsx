@@ -97,7 +97,18 @@ const AdminDashboard = () => {
                 : `/admin/doctor-applications/${applicationId}/download-id-document`;
 
             const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
-            const blob = new Blob([response.data]);
+            const blob = response.data;
+
+            if (blob.type === 'application/json') {
+                const text = await blob.text();
+                const json = JSON.parse(text);
+                if (json.url) {
+                    window.open(json.url, '_blank');
+                    toast.success('تم فتح الملف في نافذة جديدة');
+                    return;
+                }
+            }
+
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
@@ -468,11 +479,11 @@ const AdminDashboard = () => {
                                 <FiX size={16} />
                             </button>
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
-                                <div className="w-[84px] h-[84px] bg-white rounded-[12px] p-1 shadow-md overflow-hidden">
+                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md overflow-hidden">
                                     {selectedRequest.img ? (
-                                        <img loading="lazy" decoding="async" width="80" height="80" src={resolveImageUrl(selectedRequest.img)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-cover" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                        <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.img)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                     ) : null}
-                                    <div className={`w-full h-full bg-[#E5EEFF] rounded-[10px] items-center justify-center text-[#138C9F] font-bold text-[24px] ${selectedRequest.img ? 'hidden' : 'flex'}`}>
+                                    <div className={`w-full h-full bg-[#E5EEFF] rounded-[10px] items-center justify-center text-[#138C9F] font-bold text-[28px] ${selectedRequest.img ? 'hidden' : 'flex'}`}>
                                         {selectedRequest.name ? selectedRequest.name.split(' ').map(n => n[0]).join('').slice(0, 2) : '??'}
                                     </div>
                                 </div>

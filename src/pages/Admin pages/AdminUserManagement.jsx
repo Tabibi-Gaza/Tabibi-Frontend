@@ -142,7 +142,18 @@ export default function AdminUserManagement() {
                 ? `/admin/users/doctors/${doctorId}/download-cv`
                 : `/admin/users/doctors/${doctorId}/download-id`;
             const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
-            const blob = new Blob([response.data]);
+            const blob = response.data;
+
+            if (blob.type === 'application/json') {
+                const text = await blob.text();
+                const json = JSON.parse(text);
+                if (json.url) {
+                    window.open(json.url, '_blank');
+                    toast.success('تم فتح الملف في نافذة جديدة');
+                    return;
+                }
+            }
+
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
