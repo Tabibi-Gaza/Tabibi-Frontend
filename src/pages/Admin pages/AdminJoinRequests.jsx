@@ -161,8 +161,11 @@ export default function AdminJoinRequests() {
                 const text = await blob.text();
                 const json = JSON.parse(text);
                 if (json.url) {
-                    window.open(json.url, '_blank');
-                    toast.success('تم فتح الملف في نافذة جديدة');
+                    const link = document.createElement('a');
+                    link.href = json.url;
+                    link.download = type === 'cv' ? 'CV.pdf' : 'ID_Document.jpg';
+                    link.click();
+                    toast.success('تم تحميل الملف بنجاح');
                     return;
                 }
             }

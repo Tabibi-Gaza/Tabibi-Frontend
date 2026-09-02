@@ -103,8 +103,11 @@ const AdminDashboard = () => {
                 const text = await blob.text();
                 const json = JSON.parse(text);
                 if (json.url) {
-                    window.open(json.url, '_blank');
-                    toast.success('تم فتح الملف في نافذة جديدة');
+                    const link = document.createElement('a');
+                    link.href = json.url;
+                    link.download = type === 'cv' ? 'CV.pdf' : 'ID_Document.jpg';
+                    link.click();
+                    toast.success('تم تحميل الملف بنجاح');
                     return;
                 }
             }
@@ -469,7 +472,7 @@ const AdminDashboard = () => {
 
             {selectedRequest && (
             <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
+            <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] shadow-2xl border border-gray-100 text-right flex flex-col">
                         {/* Header */}
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
@@ -478,8 +481,8 @@ const AdminDashboard = () => {
                             >
                                 <FiX size={16} />
                             </button>
-                            <div className="absolute -bottom-8 right-6 flex items-center gap-4">
-                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md overflow-hidden">
+                                <div className="absolute -bottom-8 right-6 flex items-center gap-4">
+                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.img ? (
                                         <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.img)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                     ) : null}
