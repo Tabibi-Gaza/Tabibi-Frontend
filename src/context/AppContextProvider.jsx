@@ -99,7 +99,7 @@ const AppContextProvider = (props) => {
                     id: app.id,
                     name: app.fullName,
                     specialty: app.specialization,
-                    img: app.photoPath ? `${FILES_URL}/${app.photoPath}` : null,
+                    img: resolveImageUrl(app.photoPath),
                 }));
             }
 
