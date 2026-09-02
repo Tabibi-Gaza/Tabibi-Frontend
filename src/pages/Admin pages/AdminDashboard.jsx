@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
-import { FiUserCheck, FiUsers, FiClock, FiDollarSign, FiTrendingUp, FiTrendingDown, FiChevronDown, FiChevronUp, FiExternalLink, FiEye, FiX, FiDownload, FiAlertTriangle } from 'react-icons/fi';
+import { FiUserCheck, FiUsers, FiClock, FiDollarSign, FiTrendingUp, FiTrendingDown, FiChevronDown, FiChevronUp, FiExternalLink, FiEye, FiX, FiDownload, FiAlertTriangle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
