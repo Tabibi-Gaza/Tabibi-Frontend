@@ -441,6 +441,7 @@ const AdminDashboard = () => {
             </div>
 
             {selectedRequest && (
+            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
             <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
                         {/* Header */}
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
@@ -588,6 +589,7 @@ const AdminDashboard = () => {
                             </button>
                         </div>
                     </div>
+            </div>
             )}
             {/* ── Modal تأكيد الرفض ── */}
             {showRejectModal && (
