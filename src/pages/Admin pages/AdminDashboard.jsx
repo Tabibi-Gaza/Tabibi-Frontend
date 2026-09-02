@@ -31,8 +31,12 @@ const AdminDashboard = () => {
         const fetchDashboard = async () => {
             if (token) {
                 setLoading(true);
-                if (typeof loadDashboardData === 'function') {
-                    await loadDashboardData();
+                try {
+                    if (typeof loadDashboardData === 'function') {
+                        await loadDashboardData();
+                    }
+                } catch (error) {
+                    // silently handle dashboard load error
                 }
                 setLoading(false);
             } else {
@@ -58,13 +62,18 @@ const AdminDashboard = () => {
 
     const handleAction = async (doctorId, status) => {
         setActionLoading(doctorId);
-        setProcessedDoctorIds(prev => [...prev, doctorId]);
-        if (typeof changeDoctorStatus === 'function') {
-            await changeDoctorStatus(doctorId, status);
-        } else {
-            await new Promise(resolve => setTimeout(resolve, 600));
+        try {
+            if (typeof changeDoctorStatus === 'function') {
+                await changeDoctorStatus(doctorId, status);
+            } else {
+                await new Promise(resolve => setTimeout(resolve, 600));
+            }
+            setProcessedDoctorIds(prev => [...prev, doctorId]);
+        } catch (error) {
+            // silently handle action error
+        } finally {
+            setActionLoading(null);
         }
-        setActionLoading(null);
     };
 
     const fetchDetails = async (req) => {
@@ -108,11 +117,13 @@ const AdminDashboard = () => {
             toast.error("يرجى كتابة سبب الرفض أولاً");
             return;
         }
-        setActionLoading(selectedRequest.id);
-        setProcessedDoctorIds(prev => [...prev, selectedRequest.id]);
+        const currentId = selectedRequest?.id;
+        const currentName = selectedRequest?.name;
+        if (!currentId) return;
+        setActionLoading(currentId);
         try {
             const { data } = await axiosInstance.post('/admin/doctor-applications/reject', {
-                Id: selectedRequest.id,
+                Id: currentId,
                 Reason: rejectReasonInput
             });
             if (data.succeeded) {
@@ -120,7 +131,12 @@ const AdminDashboard = () => {
                 setShowRejectModal(false);
                 setSelectedRequest(null);
                 setSelectedDetails(null);
-                await loadDashboardData();
+                setProcessedDoctorIds(prev => [...prev, currentId]);
+                try {
+                    await loadDashboardData();
+                } catch (e) {
+                    // silently handle refresh error
+                }
             } else {
                 toast.error(data.errors?.[0]?.message || data.message || 'فشل في رفض الطلب');
             }
@@ -179,9 +195,9 @@ const AdminDashboard = () => {
         },
         {
             id: 4, title: 'إجمالي أرباح المنصة', value: (statsData.totalRevenue || 0) + subscriptionRevenue,
-            badge: statsData.revenueGrowth >= 0 ? `+${statsData.revenueGrowth}%` : `${statsData.revenueGrowth}%`,
-            badgeBg: statsData.revenueGrowth >= 0 ? 'bg-emerald-50' : 'bg-red-50',
-            badgeText: statsData.revenueGrowth >= 0 ? 'text-emerald-700' : 'text-red-700',
+            badge: statsData.revenueGrowth != null ? (statsData.revenueGrowth >= 0 ? `+${statsData.revenueGrowth}%` : `${statsData.revenueGrowth}%`) : '0%',
+            badgeBg: statsData.revenueGrowth != null ? (statsData.revenueGrowth >= 0 ? 'bg-emerald-50' : 'bg-red-50') : 'bg-emerald-50',
+            badgeText: statsData.revenueGrowth != null ? (statsData.revenueGrowth >= 0 ? 'text-emerald-700' : 'text-red-700') : 'text-emerald-700',
             icon: <FiDollarSign size={20} />, iconBg: 'bg-amber-50', iconColor: 'text-amber-600',
             valueColor: 'text-amber-600', borderHover: 'hover:border-amber-400/40',
             isRevenue: true,
@@ -581,7 +597,6 @@ const AdminDashboard = () => {
                             <button
                                 onClick={async () => {
                                     setActionLoading(selectedRequest.id);
-                                    setProcessedDoctorIds(prev => [...prev, selectedRequest.id]);
                                     await handleAction(selectedRequest.id, 'approved');
                                     setSelectedRequest(null);
                                     setSelectedDetails(null);

@@ -86,7 +86,7 @@ const RegisterAsDoctor = () => {
             if (data.succeeded) {
                 toast.success('تم إرسال طلب الانضمام بنجاح! سيتم مراجعة طلبك خلال 48 ساعة.');
                 setFormData({
-                    clinicName: '', clinicAddress: '',
+                    clinicName: '', clinicAddress: '', detailedAddress: '',
                     licenseNumber: '', specializationId: '', experienceYears: '',
                     consultationFee: '', bio: '', idCard: null, cv: null, additionalNotes: '',
                     hasSecretary: false, secretaryEmail: ''
