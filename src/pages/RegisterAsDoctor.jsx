@@ -267,6 +267,7 @@ const RegisterAsDoctor = () => {
                                     <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50/40 text-center relative hover:bg-slate-50 cursor-pointer">
                                         <input
                                             type="file"
+                                            accept="image/*"
                                             onChange={(e) => handleFileChange(e, 'idCard')}
                                             className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                                         />
@@ -285,6 +286,7 @@ const RegisterAsDoctor = () => {
                                     <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50/40 text-center relative hover:bg-slate-50 cursor-pointer">
                                         <input
                                             type="file"
+                                            accept=".pdf,application/pdf"
                                             onChange={(e) => handleFileChange(e, 'cv')}
                                             className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                                         />

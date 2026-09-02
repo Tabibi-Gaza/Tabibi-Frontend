@@ -79,8 +79,12 @@ const FinancialTransactions = () => {
 
     const handleDownloadInvoice = (invoiceUrl) => {
         if (invoiceUrl) {
-            const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '') || '';
-            window.open(`${baseUrl}/${invoiceUrl}`, '_blank');
+            if (invoiceUrl.startsWith('http://') || invoiceUrl.startsWith('https://')) {
+                window.open(invoiceUrl, '_blank');
+            } else {
+                const baseUrl = import.meta.env.VITE_API_URL?.replace('/api', '') || '';
+                window.open(`${baseUrl}/${invoiceUrl}`, '_blank');
+            }
         }
     };
 
@@ -114,7 +118,7 @@ const FinancialTransactions = () => {
     }
 
     return (
-        <div className="bg-[#ecf8fa] min-h-screen py-6 px-4" dir="rtl">
+        <div className="bg-[#ecf8fa] min-h-screen pt-24 pb-6 px-4" dir="rtl">
             <div className="max-w-6xl mx-auto">
                 <section className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-8">
                     <div className="text-right mb-8">

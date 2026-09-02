@@ -277,7 +277,14 @@ export default function AdminJoinRequests() {
                                             <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date ? new Date(req.date).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'short', day: 'numeric' }) : '-'}</td>
                                             <td className="p-3 md:p-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
-                                                    {req.status === 'pending' ? (
+                                                    <button
+                                                        onClick={() => fetchDetails(req)}
+                                                        className="p-2 text-[#138C9F] bg-[#138C9F]/10 rounded-full hover:bg-[#138C9F]/20 transition-colors"
+                                                        title="عرض تفاصيل الطلب كاملة"
+                                                    >
+                                                        <Eye className="w-4 h-4" />
+                                                    </button>
+                                                    {req.status === 'pending' && (
                                                         <>
                                                             <button
                                                                 onClick={() => handleAccept(req.id)}
@@ -294,14 +301,6 @@ export default function AdminJoinRequests() {
                                                                 رفض
                                                             </button>
                                                         </>
-                                                    ) : (
-                                                        <button
-                                                            onClick={() => fetchDetails(req)}
-                                                            className="p-2 text-[#138C9F] bg-[#138C9F]/10 rounded-full hover:bg-[#138C9F]/20 transition-colors"
-                                                            title="عرض تفاصيل الطلب كاملة"
-                                                        >
-                                                            <Eye className="w-4 h-4" />
-                                                        </button>
                                                     )}
                                                 </div>
                                             </td>

@@ -155,7 +155,7 @@ const AdminDashboard = () => {
     const formatRevenue = (value) => {
         if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
         if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
-        return value?.toLocaleString('ar-IQ') || '0';
+        return value?.toLocaleString('en-US') || '0';
     };
 
     const cards = [

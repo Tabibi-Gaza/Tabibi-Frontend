@@ -281,15 +281,15 @@ const DoctorDashboard = () => {
             <table className="w-full text-right border-collapse max-w-full">
               <thead>
                 <tr className="bg-white border-b border-[#C3C6D6] text-[#526069]">
-                  <th className="p-3 md:p-4 text-xs font-bold">Patient</th>
-                  <th className="p-3 md:p-4 text-xs font-bold">Time</th>
-                  <th className="hidden md:table-cell p-3 md:p-4 text-xs font-bold">Status</th>
-                  <th className="p-3 md:p-4 text-xs font-bold text-center">Action</th>
+                  <th className="p-3 md:p-4 text-xs font-bold">المريض</th>
+                  <th className="p-3 md:p-4 text-xs font-bold">الوقت</th>
+                  <th className="hidden md:table-cell p-3 md:p-4 text-xs font-bold">الحالة</th>
+                  <th className="p-3 md:p-4 text-xs font-bold text-center">الإجراء</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#C3C6D6]/40">
                 {paymentRequests.map((req) => {
-                  const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || "Patient";
+                  const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || "مريض";
                   const imgUrl = req.patientImageUrl || "";
                   return (
                   <tr key={req.appointmentId} className="hover:bg-slate-50/40 transition-colors">
@@ -320,7 +320,7 @@ const DoctorDashboard = () => {
                     </td>
                     <td className="hidden md:table-cell p-3 md:p-4 whitespace-nowrap">
                       <span className="bg-[#FFF0EE] text-[#BA1A1A] px-2.5 py-0.5 rounded-full text-xs font-bold">
-                        {req.status === "PendingVerification" ? "Pending Confirmation" : req.status}
+                        {req.status === "PendingVerification" ? "بانتظار التأكيد" : req.status === "Completed" ? "مكتمل" : req.status === "Confirmed" ? "مؤكد" : req.status === "Cancelled" ? "ملغي" : req.status}
                       </span>
                     </td>
                     <td className="p-3 md:p-4 whitespace-nowrap text-center">
@@ -328,7 +328,7 @@ const DoctorDashboard = () => {
                         onClick={() => handleReviewPayment(req.appointmentId)}
                         className="bg-[#138C9F] text-white text-xs font-bold px-4 py-3 rounded-xl min-h-[44px] transition-all cursor-pointer hover:bg-[#0f7282]"
                       >
-                        Review & Confirm
+                        مراجعة وتأكيد
                       </button>
                     </td>
                   </tr>
@@ -344,7 +344,7 @@ const DoctorDashboard = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pb-14 bg-[#0B1C30]/40 backdrop-blur-xs">
           <div className="bg-white rounded-2xl w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] border border-[#C3C6D6] overflow-hidden shadow-xl">
             <div className="bg-[#ecf8fa] px-6 py-4 border-b border-[#C3C6D6]/50 flex justify-between items-center">
-              <h3 className="text-base font-black text-[#0B1C30]">Invoice Details & Payment Review</h3>
+              <h3 className="text-base font-black text-[#0B1C30]">تفاصيل الفاتورة ومراجعة الدفع</h3>
               <button onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }} className="text-gray-400 hover:text-gray-600 font-bold text-lg cursor-pointer">✕</button>
             </div>
 
@@ -374,7 +374,7 @@ const DoctorDashboard = () => {
                     <div>
                       <h4 className="font-black text-[#0B1C30] text-base">{selectedPayment.patientName}</h4>
                       <p className="text-xs font-bold text-[#526069] mt-0.5">
-                        Appointment time: {new Date(selectedPayment.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
+                        موعد المقابلة: {new Date(selectedPayment.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
                       </p>
                     </div>
                   </div>
@@ -405,29 +405,29 @@ const DoctorDashboard = () => {
                           </svg>
                         )}
                         <span className="font-black text-[#0B1C30] text-sm">
-                          {selectedPayment.paymentMethodType === "Bank" ? "Bank Transfer" : "Electronic Wallet"}
+                          {selectedPayment.paymentMethodType === "Bank" ? "تحويل بنكي" : "محفظة إلكترونية"}
                         </span>
                       </div>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">Name:</span>
+                          <span className="font-bold text-[#526069]">الاسم:</span>
                           <span className="font-bold text-[#0B1C30]">{selectedPayment.paymentMethodName}</span>
                         </div>
                         {selectedPayment.accountHolderName && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">Account Holder:</span>
+                          <span className="font-bold text-[#526069]">اسم حامل الحساب:</span>
                             <span className="font-bold text-[#0B1C30]">{selectedPayment.accountHolderName}</span>
                           </div>
                         )}
                         {selectedPayment.phoneNumber && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">Phone:</span>
+                            <span className="font-bold text-[#526069]">الهاتف:</span>
                             <span className="font-bold text-[#0B1C30]">{selectedPayment.phoneNumber}</span>
                           </div>
                         )}
                         {selectedPayment.iban && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">IBAN:</span>
+                            <span className="font-bold text-[#526069]">الآيبان:</span>
                             <span className="font-bold text-[#0B1C30] font-mono text-xs">{selectedPayment.iban}</span>
                           </div>
                         )}
@@ -440,12 +440,12 @@ const DoctorDashboard = () => {
                       <span className="font-black text-[#0B1C30] text-sm">بيانات المرسل</span>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">Account Holder:</span>
+                          <span className="font-bold text-[#526069]">اسم حامل الحساب:</span>
                           <span className="font-bold text-[#0B1C30]">{selectedPayment.senderAccountHolderName}</span>
                         </div>
                         {selectedPayment.senderPhoneNumber && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">Phone:</span>
+                            <span className="font-bold text-[#526069]">الهاتف:</span>
                             <span className="font-bold text-[#0B1C30]">{selectedPayment.senderPhoneNumber}</span>
                           </div>
                         )}
@@ -462,13 +462,13 @@ const DoctorDashboard = () => {
                           decoding="async"
                           width="480"
                           height="160"
-                          src={`${FILES_URL}/${selectedPayment.attachmentUrl}`}
-                          alt="Receipt image"
+                          src={selectedPayment.attachmentUrl?.startsWith("http") ? selectedPayment.attachmentUrl : `${FILES_URL}/${selectedPayment.attachmentUrl}`}
+                          alt="صورة الإيصال"
                           className="w-full max-h-[20vh] object-contain bg-gray-50"
                           onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                         />
                         <div className="hidden items-center justify-center p-8 bg-gray-50 text-gray-400 text-sm">
-                          Unable to load receipt image
+                          تعذر تحميل صورة الإيصال
                         </div>
                       </div>
                     </div>
@@ -476,7 +476,7 @@ const DoctorDashboard = () => {
 
                   {!selectedPayment.attachmentUrl && (
                     <div className="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-6 text-center text-gray-400 text-sm">
-                      No receipt image uploaded yet
+                      لم يتم رفع صورة إيصال بعد
                     </div>
                   )} 
                 </>
@@ -488,20 +488,20 @@ const DoctorDashboard = () => {
                   disabled={actionLoading || !selectedPayment}
                   className="flex-1 h-[3vh] bg-[#138C9F] hover:bg-[#0f7282] active:scale-[0.98] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
                 >
-                  {actionLoading ? "Confirming..." : "Confirm & Receive Payment 👍"}
+                  {actionLoading ? "جاري التأكيد..." : "تأكيد واستلام الدفع 👍"}
                 </button>
                 <button
                   onClick={() => setRejectModalOpen(true)}
                   disabled={actionLoading || !selectedPayment}
                   className="px-4 h-[3vh] border border-[#BA1A1A] bg-white hover:bg-[#FFF0EE] text-[#BA1A1A] font-bold rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
                 >
-                  Reject
+                  رفض
                 </button>
                 <button
                   onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }}
                   className="px-4 h-[3vh] border border-gray-300 bg-white hover:bg-gray-50 text-[#526069] font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
                 >
-                  Cancel
+                  إلغاء
                 </button>
               </div>
             </div>
