@@ -148,11 +148,16 @@ export default function AdminUserManagement() {
                 const text = await blob.text();
                 const json = JSON.parse(text);
                 if (json.url) {
-                    const link = document.createElement('a');
-                    link.href = json.url;
-                    link.download = type === 'cv' ? 'CV.pdf' : 'ID_Document.jpg';
-                    link.click();
-                    toast.success('تم تحميل الملف بنجاح');
+                    if (type === 'cv') {
+                        const link = document.createElement('a');
+                        link.href = json.url;
+                        link.download = 'CV.pdf';
+                        link.click();
+                        toast.success('تم تحميل الملف بنجاح');
+                    } else {
+                        window.open(json.url, '_blank');
+                        toast.success('تم فتح الملف في نافذة جديدة');
+                    }
                     return;
                 }
             }
