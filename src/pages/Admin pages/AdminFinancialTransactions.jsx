@@ -111,7 +111,7 @@ export default function AdminFinancialTransactions() {
                     <div className="bg-white border border-[#C3C6D6] rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
                             <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">إجمالي الإيرادات</span>
-                            <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.totalRevenue} د.ع</span>
+                            <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.totalRevenue} ₪</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[rgba(107,255,143,0.3)] flex items-center justify-center text-[#006A2D]">
                             <DollarSign className="w-5 h-5" />
@@ -184,7 +184,7 @@ export default function AdminFinancialTransactions() {
                                 ) : displayedTransactions.map((item) => (
                                     <tr key={item.id} className="border-t border-[#C3C6D6] hover:bg-slate-50/50 transition-colors h-[65px]">
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.doctorName}</td>
-                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.amount} د.ع</td>
+                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.amount} ₪</td>
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-normal text-[#434654] hidden md:table-cell">{formatDate(item.date)}</td>
                                         <td className="p-3 md:p-4 px-6 hidden md:table-cell">
                                             <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#e2f4f7] text-[12px] font-bold text-[#138C9F]">

@@ -422,7 +422,7 @@ const AdminDashboard = () => {
                                             <td className="px-4 text-[#138C9F] font-semibold text-[13px]">{appt.doctor}</td>
                                             <td className="px-4 text-slate-500 text-[12px] hidden md:table-cell">{appt.specialty || '-'}</td>
                                             <td className="px-4 text-[#0B1C30] font-bold text-[12px] hidden md:table-cell" dir="ltr" style={{ textAlign: 'right' }}>
-                                                {appt.amount ? `${appt.amount} د.ع` : '-'}
+                                                {appt.amount ? `${appt.amount} ₪` : '-'}
                                             </td>
                                             <td className="px-4 text-slate-500 text-[11px]" dir="ltr" style={{ textAlign: 'right' }}>
                                                 {appt.slotDate} — {appt.slotTime}
@@ -520,7 +520,7 @@ const AdminDashboard = () => {
                                         </div>
                                         <div className="flex justify-between items-center">
                                             <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
-                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice ? `${selectedDetails.sessionPrice} د.ع` : '-'}</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice ? `${selectedDetails.sessionPrice} ₪` : '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
                                             <span className="text-[12px] font-bold text-[#737685]">العيادة</span>

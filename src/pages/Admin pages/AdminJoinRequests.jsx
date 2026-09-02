@@ -459,7 +459,7 @@ export default function AdminJoinRequests() {
                                         {selectedDetails.sessionPrice && (
                                             <div className="flex justify-between items-center">
                                                 <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
-                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice} د.ع</span>
+                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice} ₪</span>
                                             </div>
                                         )}
                                         {selectedDetails.clinicName && (

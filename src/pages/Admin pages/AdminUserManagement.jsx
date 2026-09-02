@@ -359,7 +359,7 @@ export default function AdminUserManagement() {
                                             </div>
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="font-bold text-[#0B1C30] text-[16px]">سعر الكشفية</span>
-                                                <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.sessionPrice || 0} د.ع</span>
+                                                <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.sessionPrice || 0} ₪</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
                                                 <span className="font-bold text-[#0B1C30] text-[16px]">العيادة</span>
