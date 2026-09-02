@@ -312,10 +312,10 @@ const Login = () => {
                         />
                         <button
                           type="button"
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] text-sm hover:text-slate-600"
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 transition-colors"
                           onClick={() => setShowPassword(!showPassword)}
                         >
-                          {showPassword ? "إخفاء" : "إظهار"}
+                          <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                         </button>
                       </div>
                     </div>
