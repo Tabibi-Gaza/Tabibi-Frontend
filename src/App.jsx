@@ -93,6 +93,7 @@ const MedicalCenters = lazy(() => import('./pages/MedicalCenters'))
 const Labs = lazy(() => import('./pages/Labs'))
 const Favorites = lazy(() => import('./pages/Favorites'))
 const Cart = lazy(() => import('./pages/Cart'))
+const QrScanPage = lazy(() => import('./pages/QrScanPage'))
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 
@@ -217,6 +218,8 @@ const App = () => {
             <Route path="/doctor/secretary-management" element={<SecretaryManagement />} />
             <Route path="/doctor/subscription" element={<DoctorSubscription />} />
           </Route>
+
+          <Route path="/qr/:token" element={<QrScanPage />} />
 
           <Route path="/*" element={<UserLayout />} />
         </Routes>

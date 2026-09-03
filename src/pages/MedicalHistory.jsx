@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
+import { QRCodeCanvas } from 'qrcode.react';
 import {
   faFileMedical,
   faPenToSquare,
@@ -16,6 +17,7 @@ import {
   faFloppyDisk,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { faQrcode, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const MedicalHistory = () => {
     const { token } = useContext(AppContext);
@@ -25,6 +27,16 @@ const MedicalHistory = () => {
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false); 
     const [submitting, setSubmitting] = useState(false);
+
+    // QR Code
+    const [showQrModal, setShowQrModal] = useState(false);
+    const [qrToken, setQrToken] = useState('');
+    const [qrExpiry, setQrExpiry] = useState('');
+    const [generatingQr, setGeneratingQr] = useState(false);
+
+    // PDF Download
+    const pdfRef = useRef(null);
+    const [generatingPdf, setGeneratingPdf] = useState(false);
 
     // --- الستيت الخاصة بحقول النموذج (Form States) ---
     const [bloodType, setBloodType] = useState('');
@@ -163,6 +175,48 @@ const MedicalHistory = () => {
         }
     };
 
+    const handleGenerateQr = async () => {
+        try {
+            setGeneratingQr(true);
+            const { data } = await axiosInstance.post('/qr/generate');
+            if (data.succeeded && data.data) {
+                setQrToken(data.data.token);
+                setQrExpiry(data.data.expiresAt);
+                setShowQrModal(true);
+            } else {
+                toast.error('فشل إنشاء رمز QR');
+            }
+        } catch {
+            toast.error('حدث خطأ أثناء إنشاء رمز QR');
+        } finally {
+            setGeneratingQr(false);
+        }
+    };
+
+    const handleDownloadPdf = async () => {
+        if (!recordData) return;
+        try {
+            setGeneratingPdf(true);
+            const { default: html2canvas } = await import('html2canvas');
+            const { jsPDF } = await import('jspdf');
+            if (!pdfRef.current) return;
+            const canvas = await html2canvas(pdfRef.current, { scale: 2, useCORS: true, logging: false });
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save(`medical-record-${new Date().toISOString().split('T')[0]}.pdf`);
+            toast.success('تم تحميل السجل الطبي بنجاح');
+        } catch {
+            toast.error('فشل تحميل ملف PDF');
+        } finally {
+            setGeneratingPdf(false);
+        }
+    };
+
+    const qrUrl = qrToken ? `${window.location.origin}/qr/${encodeURIComponent(qrToken)}` : '';
+
     if (loading) {
         return (
             <div className='flex justify-center items-center min-h-100 pt-40' dir='rtl'>
@@ -199,13 +253,31 @@ const MedicalHistory = () => {
                     : "غير محدد"}
                 </p>
               </div>
-              <button
-                onClick={() => setIsEditing(true)}
-                className="self-start sm:self-center bg-[#138C9F] hover:bg-[#0f7282] text-white px-5 py-2.5 rounded-xl text-xs font-black transition-all duration-200 shadow-xs flex items-center gap-2"
-              >
-                تعديل السجل المرضي
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </button>
+              <div className="flex items-center gap-2 self-start sm:self-center flex-wrap">
+                <button
+                  onClick={handleDownloadPdf}
+                  disabled={generatingPdf || !recordData}
+                  className="bg-white border-2 border-[#138C9F] text-[#138C9F] px-4 py-2.5 rounded-xl text-xs font-black transition-all duration-200 shadow-xs flex items-center gap-2 hover:bg-[#138C9F]/5 disabled:opacity-50"
+                >
+                  {generatingPdf ? 'جاري التحميل...' : 'تنزيل السجل الشخصي'}
+                  <FontAwesomeIcon icon={faDownload} />
+                </button>
+                <button
+                  onClick={handleGenerateQr}
+                  disabled={generatingQr}
+                  className="bg-white border-2 border-[#138C9F] text-[#138C9F] px-4 py-2.5 rounded-xl text-xs font-black transition-all duration-200 shadow-xs flex items-center gap-2 hover:bg-[#138C9F]/5 disabled:opacity-50"
+                >
+                  {generatingQr ? 'جاري الإنشاء...' : 'رمز QR للسجل'}
+                  <FontAwesomeIcon icon={faQrcode} />
+                </button>
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="bg-[#138C9F] hover:bg-[#0f7282] text-white px-5 py-2.5 rounded-xl text-xs font-black transition-all duration-200 shadow-xs flex items-center gap-2"
+                >
+                  تعديل السجل المرضي
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </button>
+              </div>
             </div>
 
             {!recordData ? (
@@ -730,6 +802,113 @@ const MedicalHistory = () => {
                 </button>
               </div>
             </form>
+          </div>
+        )}
+        {/* QR Modal */}
+        {showQrModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 text-center">
+              <h3 className="text-lg font-black text-gray-800 mb-2">رمز QR للسجل الطبي</h3>
+              <p className="text-xs text-gray-400 mb-4">امسح هذا الرمز للوصول السريع للسجل المرضي</p>
+              <div className="flex justify-center mb-4 p-4 bg-white rounded-2xl border-2 border-gray-100 inline-block mx-auto">
+                <QRCodeCanvas value={qrUrl} size={200} level="H" includeMargin={true} />
+              </div>
+              <p className="text-[10px] text-gray-400 mb-1">صالح حتى: {new Date(qrExpiry).toLocaleString('ar-EG')}</p>
+              <p className="text-[10px] text-gray-300 break-all mb-4 max-h-12 overflow-hidden">{qrUrl}</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { navigator.clipboard.writeText(qrUrl); toast.success('تم نسخ الرابط'); }}
+                  className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-black transition-colors"
+                >
+                  نسخ الرابط
+                </button>
+                <button
+                  onClick={() => setShowQrModal(false)}
+                  className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors"
+                >
+                  إغلاق
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Hidden PDF template */}
+        {recordData && (
+          <div className="fixed -left-[9999px] top-0" dir="rtl">
+            <div ref={pdfRef} style={{ width: '794px', padding: '40px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30' }}>
+              <div style={{ textAlign: 'center', borderBottom: '3px solid #138C9F', paddingBottom: '20px', marginBottom: '25px' }}>
+                <h1 style={{ fontSize: '22px', fontWeight: '900', color: '#138C9F', margin: 0 }}>السجل المرضي الشخصي</h1>
+                <p style={{ fontSize: '11px', color: '#888', margin: '5px 0 0' }}>Tabibi Platform - Personal Medical Record</p>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '20px' }}>
+                {[
+                  ['فصيلة الدم', recordData.bloodType || '--'],
+                  ['ضغط الدم', recordData.vitals?.bloodPressure || '--/--'],
+                  ['سكر الدم', recordData.vitals?.bloodSugar ? `${recordData.vitals.bloodSugar} mg/dL` : '--'],
+                  ['الوزن', recordData.vitals?.weight ? `${recordData.vitals.weight} كجم` : '--'],
+                  ['الطول', recordData.vitals?.height ? `${recordData.vitals.height} سم` : '--'],
+                  ['حالة التدخين', recordData.isSmoker ? 'مدخن' : 'غير مدخن']
+                ].map(([label, value], i) => (
+                  <div key={i} style={{ background: '#f8fafb', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '10px', fontWeight: '700', color: '#888', margin: 0 }}>{label}</p>
+                    <p style={{ fontSize: '13px', fontWeight: '800', color: '#333', margin: '4px 0 0' }}>{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {recordData.chronicDiseases?.length > 0 && (
+                <div style={{ marginBottom: '15px' }}>
+                  <p style={{ fontSize: '12px', fontWeight: '800', color: '#138C9F', marginBottom: '6px' }}>الأمراض المزمنة</p>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    {recordData.chronicDiseases.map((d, i) => (
+                      <span key={i} style={{ background: '#eff6ff', color: '#2563eb', fontSize: '10px', fontWeight: '700', padding: '4px 10px', borderRadius: '6px' }}>{d}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {recordData.allergies?.length > 0 && (
+                <div style={{ marginBottom: '15px' }}>
+                  <p style={{ fontSize: '12px', fontWeight: '800', color: '#138C9F', marginBottom: '6px' }}>الحساسية</p>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    {recordData.allergies.map((a, i) => (
+                      <span key={i} style={{ background: '#fef2f2', color: '#dc2626', fontSize: '10px', fontWeight: '700', padding: '4px 10px', borderRadius: '6px' }}>{a}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {recordData.currentMedicines?.length > 0 && (
+                <div>
+                  <p style={{ fontSize: '12px', fontWeight: '800', color: '#138C9F', marginBottom: '8px' }}>الأدوية الحالية</p>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10px' }}>
+                    <thead>
+                      <tr style={{ background: '#f8fafb', borderBottom: '1px solid #e5e7eb' }}>
+                        <th style={{ padding: '8px', textAlign: 'right', fontWeight: '700', color: '#666' }}>الدواء</th>
+                        <th style={{ padding: '8px', textAlign: 'right', fontWeight: '700', color: '#666' }}>الجرعة</th>
+                        <th style={{ padding: '8px', textAlign: 'right', fontWeight: '700', color: '#666' }}>التكرار</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {recordData.currentMedicines.map((med, i) => (
+                        <tr key={i} style={{ borderBottom: '1px solid #f3f4f6' }}>
+                          <td style={{ padding: '8px', fontWeight: '700', color: '#138C9F' }}>{med.name}</td>
+                          <td style={{ padding: '8px', color: '#555' }}>{med.dosage}</td>
+                          <td style={{ padding: '8px', color: '#555' }}>{med.frequency}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              <div style={{ borderTop: '2px solid #C3C6D6', marginTop: '30px', paddingTop: '15px', textAlign: 'center' }}>
+                <p style={{ fontSize: '10px', color: '#999' }}>تم إنشاء هذا السجل عبر منصة طبيبي</p>
+                <p style={{ fontSize: '9px', color: '#bbb', marginTop: '2px' }}>Tabibi Platform</p>
+              </div>
+            </div>
           </div>
         )}
       </div>
