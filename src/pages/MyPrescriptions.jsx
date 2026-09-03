@@ -431,8 +431,28 @@ const MyPrescriptions = () => {
                             ))}
                         </div>
 
-                        <div style={{ borderTop: '1px solid #C3C6D6', marginTop: '30px', paddingTop: '15px', textAlign: 'center' }}>
-                            <p style={{ fontSize: '11px', color: '#999' }}>تم إنشاء هذه الوصفة عبر منصة طبيبي - Tabibi Platform</p>
+                        <div style={{ borderTop: '2px solid #C3C6D6', marginTop: '30px', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                            <div style={{ textAlign: 'right' }}>
+                                <p style={{ fontSize: '12px', fontWeight: '700', color: '#138C9F', marginBottom: '10px' }}>توقيع الطبيب المعالج</p>
+                                {selectedRx.doctorSignatureUrl ? (
+                                    <img
+                                        crossOrigin="anonymous"
+                                        src={selectedRx.doctorSignatureUrl}
+                                        alt="توقيع الطبيب"
+                                        style={{ height: '50px', objectFit: 'contain' }}
+                                    />
+                                ) : (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <div style={{ width: '120px', borderBottom: '1px solid #333', marginBottom: '4px' }}></div>
+                                    </div>
+                                )}
+                                <p style={{ fontSize: '12px', fontWeight: '700', color: '#333', marginTop: '5px' }}>د. {selectedRx.doctorName}</p>
+                                <p style={{ fontSize: '11px', color: '#666' }}>{selectedRx.doctorSpecialization || ""}</p>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <p style={{ fontSize: '11px', color: '#999' }}>تم إنشاء هذه الوصفة عبر منصة طبيبي</p>
+                                <p style={{ fontSize: '10px', color: '#bbb', marginTop: '2px' }}>Tabibi Platform</p>
+                            </div>
                         </div>
                     </div>
                 </div>

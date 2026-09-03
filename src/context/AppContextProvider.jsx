@@ -71,7 +71,8 @@ const AppContextProvider = (props) => {
         dob: "",
         experienceYears: "",
         specialization: "",
-        image: ""
+        image: "",
+        signatureUrl: ""
     });
 
     const [dashboardData, setDashboardData] = useState({
@@ -183,6 +184,7 @@ const AppContextProvider = (props) => {
                     detailedAddress: d.detailedAddress || "",
                     bio: d.bio || "",
                     sessionPrice: d.sessionPrice || 0,
+                    signatureUrl: d.signatureUrl || "",
                 });
             }
         } catch (error) {

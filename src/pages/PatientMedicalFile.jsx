@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     FiSearch, FiCalendar, FiUser, FiActivity, FiFileText,
-    FiSliders, FiRotateCcw, FiStar, FiArrowLeft, FiArrowRight, FiSend, FiX
+    FiSliders, FiRotateCcw, FiStar, FiArrowLeft, FiArrowRight, FiSend, FiX, FiDownload
 } from 'react-icons/fi';
 import { Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
 import { resolveImageUrl } from '../utils/imageUrl';
+
+let html2canvas, jsPDF;
+const loadPdfLibs = async () => {
+    if (!html2canvas) {
+        const mod1 = await import('html2canvas');
+        html2canvas = mod1.default;
+    }
+    if (!jsPDF) {
+        const mod2 = await import('jspdf');
+        jsPDF = mod2.default;
+    }
+};
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 
@@ -45,6 +57,8 @@ const PatientMedicalFile = () => {
     const [visits, setVisits] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [pdfVisit, setPdfVisit] = useState(null);
+    const printRef = useRef(null);
 
     useEffect(() => {
         const fetchVisits = async () => {
@@ -102,6 +116,31 @@ const PatientMedicalFile = () => {
         } catch (err) {
             alert('حدث خطأ أثناء الحذف');
         }
+    };
+
+    const handleDownloadVisitPDF = async (visit) => {
+        setPdfVisit(visit);
+        await new Promise(r => setTimeout(r, 100));
+        if (!printRef.current) return;
+        try {
+            await loadPdfLibs();
+            const element = printRef.current;
+            const canvas = await html2canvas(element, { scale: 2, useCORS: true, logging: false });
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save(`visit-${visit.doctorName?.replace(/\s+/g, '_')}-${new Date(visit.visitDate).toISOString().split('T')[0]}.pdf`);
+        } catch (err) {
+            console.error('PDF error:', err);
+        }
+    };
+
+    const formatDateFull = (dateStr) => {
+        if (!dateStr) return "";
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     };
 
     if (loading) {
@@ -206,6 +245,13 @@ const PatientMedicalFile = () => {
                                         <span className="bg-teal-50 text-[#1b8b99] text-xs font-bold px-3 py-1 rounded-full">
                                             {STATUS_MAP[visit.appointmentStatus] || visit.appointmentStatus}
                                         </span>
+                                        <button
+                                            onClick={() => handleDownloadVisitPDF(visit)}
+                                            className="bg-[#1b8b99] hover:bg-[#15727e] text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs flex items-center gap-1"
+                                        >
+                                            <FiDownload className="w-3.5 h-3.5" />
+                                            PDF
+                                        </button>
                                         <button
                                             onClick={() => openModal(visit)}
                                             className="bg-[#1b8b99] hover:bg-[#15727e] text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
@@ -450,6 +496,96 @@ const PatientMedicalFile = () => {
                                 </div>
                             </div>
                         )}
+                    </div>
+                </div>
+            )}
+
+            {/* Hidden div for visit PDF generation */}
+            {pdfVisit && (
+                <div className="fixed -left-[9999px] top-0" dir="rtl">
+                    <div ref={printRef} style={{ width: '794px', padding: '40px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30' }}>
+                        <div style={{ textAlign: 'center', borderBottom: '3px solid #1b8b99', paddingBottom: '20px', marginBottom: '25px' }}>
+                            <h1 style={{ fontSize: '24px', fontWeight: '900', color: '#1b8b99', margin: 0 }}>تفاصيل زيارة طبية</h1>
+                            <p style={{ fontSize: '12px', color: '#888', margin: '5px 0 0' }}>Tabibi Platform - Medical Visit Record</p>
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', padding: '15px', background: '#f8fafb', borderRadius: '12px' }}>
+                            <div>
+                                <p style={{ fontSize: '13px', fontWeight: '700', color: '#1b8b99' }}>الطبيب المعالج</p>
+                                <p style={{ fontSize: '15px', fontWeight: '800', margin: '4px 0' }}>{pdfVisit.doctorName}</p>
+                                <p style={{ fontSize: '12px', color: '#666' }}>{pdfVisit.specializationName || ""}</p>
+                            </div>
+                            <div style={{ textAlign: 'left' }}>
+                                <p style={{ fontSize: '13px', fontWeight: '700', color: '#1b8b99' }}>التاريخ</p>
+                                <p style={{ fontSize: '13px', fontWeight: '700', margin: '4px 0' }}>{formatDateFull(pdfVisit.visitDate)}</p>
+                            </div>
+                        </div>
+
+                        {pdfVisit.symptoms && (
+                            <div style={{ marginBottom: '15px' }}>
+                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>الأعراض</p>
+                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f8f8f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.symptoms}</p>
+                            </div>
+                        )}
+                        {pdfVisit.diagnosis && (
+                            <div style={{ marginBottom: '15px' }}>
+                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>التشخيص</p>
+                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f0f7f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.diagnosis}</p>
+                            </div>
+                        )}
+                        {pdfVisit.visitNotes && (
+                            <div style={{ marginBottom: '15px' }}>
+                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>ملاحظات الزيارة</p>
+                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f8f8f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.visitNotes}</p>
+                            </div>
+                        )}
+                        {pdfVisit.recommendations && (
+                            <div style={{ marginBottom: '15px' }}>
+                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>التوصيات</p>
+                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f8f8f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.recommendations}</p>
+                            </div>
+                        )}
+
+                        {pdfVisit.prescriptionMedications && pdfVisit.prescriptionMedications.length > 0 && (
+                            <div style={{ borderTop: '2px solid #C3C6D6', paddingTop: '15px', marginTop: '15px' }}>
+                                <p style={{ fontSize: '15px', fontWeight: '800', color: '#1b8b99', marginBottom: '12px' }}>الأدوية الموصوفة</p>
+                                {pdfVisit.prescriptionMedications.map((med, i) => (
+                                    <div key={i} style={{ background: '#f8fafb', border: '1px solid #e8ecf0', borderRadius: '10px', padding: '12px 15px', marginBottom: '8px' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                                            <span style={{ fontSize: '14px', fontWeight: '800' }}>{i + 1}. {med.medicationName}</span>
+                                            <span style={{ fontSize: '12px', fontWeight: '700', color: '#1b8b99', background: '#fff', padding: '2px 8px', borderRadius: '6px' }}>{med.dosage}</span>
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: '#666', fontWeight: '600' }}>
+                                            <span>{med.frequency} مرات</span>
+                                            {med.duration && <><span style={{ margin: '0 8px' }}>|</span><span>المدة: {med.duration}</span></>}
+                                            {med.instructions && <><span style={{ margin: '0 8px' }}>|</span><span>{med.instructions}</span></>}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        <div style={{ borderTop: '2px solid #C3C6D6', marginTop: '30px', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                            <div style={{ textAlign: 'right' }}>
+                                <p style={{ fontSize: '12px', fontWeight: '700', color: '#1b8b99', marginBottom: '10px' }}>توقيع الطبيب المعالج</p>
+                                {pdfVisit.doctorSignatureUrl ? (
+                                    <img
+                                        crossOrigin="anonymous"
+                                        src={pdfVisit.doctorSignatureUrl}
+                                        alt="توقيع الطبيب"
+                                        style={{ height: '50px', objectFit: 'contain' }}
+                                    />
+                                ) : (
+                                    <div style={{ width: '120px', borderBottom: '1px solid #333', marginBottom: '4px' }}></div>
+                                )}
+                                <p style={{ fontSize: '12px', fontWeight: '700', color: '#333', marginTop: '5px' }}>{pdfVisit.doctorName}</p>
+                                <p style={{ fontSize: '11px', color: '#666' }}>{pdfVisit.specializationName || ""}</p>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <p style={{ fontSize: '11px', color: '#999' }}>تم إنشاء هذا السجل عبر منصة طبيبي</p>
+                                <p style={{ fontSize: '10px', color: '#bbb', marginTop: '2px' }}>Tabibi Platform</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
