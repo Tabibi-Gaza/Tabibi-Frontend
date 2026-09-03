@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { QRCodeCanvas } from 'qrcode.react';
 import { FiSliders } from 'react-icons/fi';
+import { faQrcode } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from "../../api/axiosInstance";
 import { resolveImageUrl } from "../../utils/imageUrl";
 
@@ -24,6 +27,10 @@ const MedicalExamination = () => {
     const [currentMed, setCurrentMed] = useState({ name: '', dosage: '', frequency: '', duration: '' });
     const [addedMedicines, setAddedMedicines] = useState([]);
     const [historyFilter, setHistoryFilter] = useState({ date: '', diagnosis: '' });
+    const [showQrModal, setShowQrModal] = useState(false);
+    const [qrToken, setQrToken] = useState('');
+    const [qrExpiry, setQrExpiry] = useState('');
+    const [generatingQr, setGeneratingQr] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -100,6 +107,26 @@ const MedicalExamination = () => {
         const d = new Date(dateStr);
         return d.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
     };
+
+    const generateQrForPatient = async () => {
+        try {
+            setGeneratingQr(true);
+            const { data } = await axiosInstance.post(`/doctor/medical-records/patients/${id}/qr-token`);
+            if (data.succeeded && data.data) {
+                setQrToken(data.data.token);
+                setQrExpiry(data.data.expiresAt);
+                setShowQrModal(true);
+            } else {
+                toast.error('فشل إنشاء رمز QR');
+            }
+        } catch {
+            toast.error('حدث خطأ أثناء إنشاء رمز QR');
+        } finally {
+            setGeneratingQr(false);
+        }
+    };
+
+    const qrUrl = qrToken ? `${window.location.origin}/qr/${encodeURIComponent(qrToken)}` : '';
 
     const handleDeleteRecord = async (recordId) => {
         if (!window.confirm('هل أنت متأكد من حذف هذا السجل الطبي؟')) return;
@@ -268,6 +295,10 @@ const MedicalExamination = () => {
                             <button onClick={() => setActiveTab('examination')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'examination' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>شاشة الكشف الحالية</button>
                             <button onClick={() => setActiveTab('patient_record')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'patient_record' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>السجل المرضي الشخصي</button>
                             <button onClick={() => setActiveTab('medical_file')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'medical_file' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>التاريخ الطبي</button>
+                            <button onClick={generateQrForPatient} disabled={generatingQr} className="h-10 px-4 rounded-xl border border-[#138C9F] text-[#138C9F] hover:bg-[#138C9F] hover:text-white disabled:opacity-50 transition-colors flex items-center justify-center gap-2 font-bold text-xs md:text-sm" title="إنشاء رمز QR للسجل الطبي">
+                                <FontAwesomeIcon icon={faQrcode} className="text-base" />
+                                {generatingQr ? 'جاري الإنشاء...' : 'رمز QR للسجل'}
+                            </button>
                         </div>
                     </div>
 
@@ -576,6 +607,26 @@ const MedicalExamination = () => {
                         </div>
                     )}
 
+                    {showQrModal && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+                            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 text-center">
+                                <h3 className="text-lg font-black text-gray-800 mb-2">رمز QR للسجل الطبي</h3>
+                                <p className="text-xs text-gray-400 mb-4">امسح هذا الرمز للوصول السريع للسجل المرضي</p>
+                                <div className="flex justify-center mb-4 p-4 bg-white rounded-2xl border-2 border-gray-100 inline-block mx-auto">
+                                    <QRCodeCanvas value={qrUrl} size={200} level="H" includeMargin={true} />
+                                </div>
+                                <p className="text-[10px] text-gray-400 mb-4">صالح حتى: {new Date(qrExpiry).toLocaleString('ar-EG')}</p>
+                                <div className="flex gap-2">
+                                    <button onClick={() => window.open(qrUrl, '_blank')} className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors">
+                                        فتح الرابط
+                                    </button>
+                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-black transition-colors">
+                                        إغلاق
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </main>
             </div>
         </div>
