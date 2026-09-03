@@ -6,6 +6,7 @@ import {
 import { Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
 import { resolveImageUrl } from '../utils/imageUrl';
+import { toast } from 'react-toastify';
 
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
@@ -120,8 +121,8 @@ const PatientMedicalFile = () => {
 
     const handleDownloadVisitPDF = async (visit) => {
         setPdfVisit(visit);
-        await new Promise(r => setTimeout(r, 100));
-        if (!printRef.current) return;
+        await new Promise(r => setTimeout(r, 150));
+        if (!printRef.current) { setPdfVisit(null); return; }
         try {
             await loadPdfLibs();
             const element = printRef.current;
@@ -131,9 +132,12 @@ const PatientMedicalFile = () => {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save(`visit-${visit.doctorName?.replace(/\s+/g, '_')}-${new Date(visit.visitDate).toISOString().split('T')[0]}.pdf`);
+            pdf.save(`visit-${(visit.doctorName || 'doctor').replace(/\s+/g, '_')}-${new Date(visit.visitDate).toISOString().split('T')[0]}.pdf`);
+            toast.success('تم تحميل الزيارة بنجاح');
         } catch (err) {
-            console.error('PDF error:', err);
+            toast.error('فشل تحميل ملف PDF');
+        } finally {
+            setPdfVisit(null);
         }
     };
 

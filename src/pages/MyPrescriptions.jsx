@@ -68,7 +68,7 @@ const MyPrescriptions = () => {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save(`prescription-${selectedRx.doctorName.replace(/\s+/g, '_')}-${new Date().toISOString().split('T')[0]}.pdf`);
+            pdf.save(`prescription-${(selectedRx.doctorName || 'doctor').replace(/\s+/g, '_')}-${new Date().toISOString().split('T')[0]}.pdf`);
             toast.success('تم تحميل الوصفة بنجاح');
         } catch (err) {
             toast.error('فشل تحميل ملف PDF');
