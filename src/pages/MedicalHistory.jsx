@@ -817,21 +817,14 @@ const MedicalHistory = () => {
               <p className="text-[10px] text-gray-300 break-all mb-4 max-h-12 overflow-hidden">{qrUrl}</p>
               <div className="flex gap-2">
                 <button
-                  onClick={async () => {
-                    try {
-                      await navigator.clipboard.writeText(qrUrl);
-                      toast.success('تم نسخ الرابط');
-                    } catch {
-                      toast.error('فشل نسخ الرابط');
-                    }
-                  }}
-                  className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-black transition-colors"
+                  onClick={() => window.open(qrUrl, '_blank')}
+                  className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors"
                 >
-                  نسخ الرابط
+                  فتح الرابط
                 </button>
                 <button
                   onClick={() => setShowQrModal(false)}
-                  className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors"
+                  className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-black transition-colors"
                 >
                   إغلاق
                 </button>
