@@ -129,7 +129,9 @@ const AIAssistant = () => {
   };
 
   const handleBook = () => {
-    if (result) {
+    if (matchedDoctors.length > 0) {
+      navigate(`/appointment/${matchedDoctors[0].id}`);
+    } else if (result) {
       navigate(`/doctors/${result.id}`);
     }
   };
@@ -260,8 +262,7 @@ const AIAssistant = () => {
                       {matchedDoctors.map((doc) => (
                         <div
                           key={doc.id}
-                          onClick={() => navigate(`/doctors/get-doctor-by-id/${doc.id}`)}
-                          className="bg-white/10 hover:bg-white/15 rounded-xl p-3 flex items-center gap-3 cursor-pointer transition-all"
+                          className="bg-white/10 hover:bg-white/15 rounded-xl p-3 flex items-center gap-3 transition-all"
                         >
                           <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0 overflow-hidden">
                             {doc.profileImageUrl ? (
@@ -274,11 +275,19 @@ const AIAssistant = () => {
                             <p className="text-white text-sm font-bold truncate">{doc.fullName}</p>
                             <p className="text-white/50 text-xs truncate">{doc.clinicAddress || doc.clinicName}</p>
                           </div>
-                          <div className="text-left shrink-0">
-                            <p className="text-[#4FC3F7] text-xs font-bold">{doc.sessionPrice} ₪</p>
-                            {doc.averageRating > 0 && (
-                              <p className="text-yellow-400 text-[10px]">★ {doc.averageRating}</p>
-                            )}
+                          <div className="flex items-center gap-2 shrink-0">
+                            <div className="text-left">
+                              <p className="text-[#4FC3F7] text-xs font-bold">{doc.sessionPrice} ₪</p>
+                              {doc.averageRating > 0 && (
+                                <p className="text-yellow-400 text-[10px]">★ {doc.averageRating}</p>
+                              )}
+                            </div>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); navigate(`/appointment/${doc.id}`); window.scrollTo(0, 0); }}
+                              className="bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-all cursor-pointer whitespace-nowrap"
+                            >
+                              احجز الآن
+                            </button>
                           </div>
                         </div>
                       ))}
