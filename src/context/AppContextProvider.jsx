@@ -13,6 +13,14 @@ const AR_MONTHS = {
 };
 
 const arabicDateToIso = (str = "") => {
+    if (!str) return "";
+    // Handle DD/MM/YYYY format (new backend format)
+    const slashMatch = String(str).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (slashMatch) {
+        const [, day, month, year] = slashMatch;
+        return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    }
+    // Handle old Arabic format "15 يناير 2025"
     const normalized = String(str).replace(/[٠-٩]/g, (d) => AR_DIGITS[d] || d);
     const match = normalized.match(/(\d+)\s+(\S+)\s+(\d+)/);
     if (!match) return "";
