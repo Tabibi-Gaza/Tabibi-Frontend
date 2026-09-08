@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Filter, RefreshCw, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Filter, RefreshCw, ChevronRight, ChevronLeft, FileText } from 'lucide-react';
 import { FiEye, FiX, FiDownload, FiAlertTriangle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
@@ -190,7 +190,7 @@ export default function AdminJoinRequests() {
                 <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6">
                     <div className="flex-1 bg-white border border-[#C3C6D6] rounded-[12px] p-4 md:p-6 flex flex-row-reverse justify-between items-center shadow-sm">
                         <div className="w-[48px] h-[48px] bg-blue-50 rounded-[8px] flex items-center justify-center text-[#138C9F] shrink-0">
-                            <FileText className="w-5 h-5" />
+                            <FiFileText className="w-5 h-5" />
                         </div>
                         <div className="flex flex-col items-start text-right">
                             <span className="text-[13px] md:text-[14px] font-bold text-[#434654]">إجمالي الطلبات المعلقة</span>
@@ -365,7 +365,7 @@ export default function AdminJoinRequests() {
                         <div className="h-[60px] bg-[#e2f4f7] px-6 flex items-center justify-between border-b border-[#C3C6D6]">
                             <h3 className="text-[16px] font-extrabold text-[#434654]">التصفية المتقدمة للطلبات</h3>
                             <button onClick={() => setShowAdvancedFilterModal(false)} className="text-[#434654] hover:text-black">
-                                <X className="w-5 h-5" />
+                                <FiX className="w-5 h-5" />
                             </button>
                         </div>
                         <div className="p-6 flex flex-col gap-4">
