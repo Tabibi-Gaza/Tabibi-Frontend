@@ -12,6 +12,9 @@ export const useNotificationSignalR = () => {
     if (!token) return;
 
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5135/api";
+    const isProduction = API_URL.includes("taqat.academy");
+    if (isProduction) return;
+
     const hubUrl = API_URL.replace("/api", "") + "/hubs/notifications";
 
     if (connection && connection.state === signalR.HubConnectionState.Connected) {
