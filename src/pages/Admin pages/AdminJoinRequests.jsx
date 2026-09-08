@@ -255,11 +255,15 @@ export default function AdminJoinRequests() {
                                 ) : filteredRequests.length > 0 ? (
                                     filteredRequests.map((req) => (
                                         <tr key={req.id} className="h-[75px] border-b border-[#C3C6D6] bg-white hover:bg-slate-50 transition-colors">
-                                            <td className="p-3 md:p-4 ps-8">
+                                             <td className="p-3 md:p-4 ps-8">
                                                 <div className="flex flex-row items-center gap-3">
-                                                    <div className="w-[36px] h-[36px] bg-[#138C9F]/10 text-[#138C9F] rounded-full flex items-center justify-center font-bold text-[14px] shrink-0">
-                                                        {req.avatarInitials}
-                                                    </div>
+                                                    {req.photoPath ? (
+                                                        <img src={resolveImageUrl(req.photoPath)} alt={req.name} className="w-[36px] h-[36px] rounded-full object-cover shrink-0" />
+                                                    ) : (
+                                                        <div className="w-[36px] h-[36px] bg-[#138C9F]/10 text-[#138C9F] rounded-full flex items-center justify-center font-bold text-[14px] shrink-0">
+                                                            {req.avatarInitials}
+                                                        </div>
+                                                    )}
                                                     <div className="flex flex-col text-right">
                                                         <span className="text-[15px] font-bold text-[#138C9F]">{req.name}</span>
                                                         <span className="text-[13px] text-[#737685] truncate max-w-[150px]">{req.email}</span>
@@ -274,7 +278,7 @@ export default function AdminJoinRequests() {
                                                     <span className={`w-1.5 h-1.5 rounded-full ${req.status === 'accepted' ? 'bg-[#16A34A]' : req.status === 'rejected' ? 'bg-[#DC2626]' : 'bg-[#D97706]'}`}></span>
                                                 </span>
                                             </td>
-                                            <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date ? new Date(req.date).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'short', day: 'numeric' }) : '-'}</td>
+                                             <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date || '-'}</td>
                                             <td className="p-3 md:p-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
                                                     <button
