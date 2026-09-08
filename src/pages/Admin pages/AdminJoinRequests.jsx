@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Filter, Check, X, Eye, FileText, Download, AlertTriangle, RefreshCw, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Filter, RefreshCw, ChevronRight, ChevronLeft } from 'lucide-react';
+import { FiEye, FiX, FiDownload, FiAlertTriangle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../../api/axiosInstance';
@@ -281,12 +282,12 @@ export default function AdminJoinRequests() {
                                              <td className="p-3 md:p-4 text-[14px] text-[#434654] hidden md:table-cell">{req.date || '-'}</td>
                                             <td className="p-3 md:p-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
-                                                    <button
+                                                     <button
                                                         onClick={() => fetchDetails(req)}
-                                                        className="p-2 text-[#138C9F] bg-[#138C9F]/10 rounded-full hover:bg-[#138C9F]/20 transition-colors"
-                                                        title="عرض تفاصيل الطلب كاملة"
+                                                        className="w-8 h-8 rounded-lg bg-[#138C9F]/10 text-[#138C9F] flex items-center justify-center hover:bg-[#138C9F]/20 transition-colors shrink-0"
+                                                        title="عرض التفاصيل"
                                                     >
-                                                        <Eye className="w-4 h-4" />
+                                                        <FiEye size={14} />
                                                     </button>
                                                     {req.status === 'pending' && (
                                                         <>
@@ -398,26 +399,26 @@ export default function AdminJoinRequests() {
                 </div>
             )}
 
-            {/* Detail Modal */}
+            {/* Detail Modal — identical to AdminDashboard */}
             {selectedRequest && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[650px] max-h-[90vh] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 text-right flex flex-col">
+                    <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] shadow-2xl border border-gray-100 text-right flex flex-col">
+                        {/* Header */}
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
                                 className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30"
                             >
-                                <X className="w-4 h-4" />
+                                <FiX size={16} />
                             </button>
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
-                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md overflow-hidden">
+                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.photoPath ? (
-                                        <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.photoPath)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" />
-                                    ) : (
-                                        <div className="w-full h-full bg-[#E5EEFF] rounded-[10px] flex items-center justify-center text-[#138C9F] font-bold text-[28px]">
-                                            {selectedRequest.avatarInitials}
-                                        </div>
-                                    )}
+                                        <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.photoPath)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                    ) : null}
+                                    <div className={`w-full h-full bg-[#E5EEFF] rounded-[10px] items-center justify-center text-[#138C9F] font-bold text-[28px] ${selectedRequest.photoPath ? 'hidden' : 'flex'}`}>
+                                        {selectedRequest.avatarInitials || '??'}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -432,9 +433,10 @@ export default function AdminJoinRequests() {
 
                             {selectedDetails && (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {/* التفاصيل المهنية */}
                                     <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
                                         <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
-                                            <FileText className="w-4 h-4" />
+                                            <FiBriefcase size={14} />
                                             التفاصيل المهنية
                                         </h4>
                                         <div className="flex justify-between items-center">
@@ -443,55 +445,46 @@ export default function AdminJoinRequests() {
                                         </div>
                                         <div className="flex justify-between items-center">
                                             <span className="text-[12px] font-bold text-[#737685]">سنوات الخبرة</span>
-                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedRequest.experience || selectedDetails.yearsOfExperience || '-'} سنة</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.yearsOfExperience || '-'} سنة</span>
                                         </div>
                                         <div className="flex justify-between items-center">
                                             <span className="text-[12px] font-bold text-[#737685]">رقم الترخيص</span>
-                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedRequest.licenseNumber || selectedDetails.licenseNumber || '-'}</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.licenseNumber || '-'}</span>
                                         </div>
-                                        {selectedDetails.sessionPrice && (
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
-                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice} ₪</span>
-                                            </div>
-                                        )}
-                                        {selectedDetails.clinicName && (
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">العيادة</span>
-                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicName}</span>
-                                            </div>
-                                        )}
-                                        {selectedDetails.clinicAddress && (
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">عنوان العيادة</span>
-                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicAddress}</span>
-                                            </div>
-                                        )}
-                                        {(selectedDetails.bio || selectedRequest.bio) && (
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice ? `${selectedDetails.sessionPrice} ₪` : '-'}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">العيادة</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicName || '-'}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">عنوان العيادة</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicAddress || '-'}</span>
+                                        </div>
+                                        {selectedDetails.bio && (
                                             <div className="pt-2 border-t border-gray-100">
                                                 <span className="text-[12px] font-bold text-[#737685] block mb-1">النبذة المهنية</span>
-                                                <p className="text-[12px] text-[#434654] leading-relaxed">{selectedDetails.bio || selectedRequest.bio}</p>
+                                                <p className="text-[12px] text-[#434654] leading-relaxed">{selectedDetails.bio}</p>
                                             </div>
                                         )}
                                     </div>
 
+                                    {/* المعلومات الشخصية */}
                                     <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
                                         <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
-                                            <Eye className="w-4 h-4" />
+                                            <FiUser size={14} />
                                             المعلومات الشخصية
                                         </h4>
-                                        {selectedDetails.email && (
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">البريد الإلكتروني</span>
-                                                <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.email}</span>
-                                            </div>
-                                        )}
-                                        {selectedDetails.phoneNumber && (
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">رقم الهاتف</span>
-                                                <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.phoneNumber}</span>
-                                            </div>
-                                        )}
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">البريد الإلكتروني</span>
+                                            <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.email || '-'}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-[12px] font-bold text-[#737685]">رقم الهاتف</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.phoneNumber || '-'}</span>
+                                        </div>
                                         {selectedDetails.secretaryEmail && (
                                             <div className="flex justify-between items-center">
                                                 <span className="text-[12px] font-bold text-[#737685]">بريد السكرتير</span>
@@ -502,27 +495,28 @@ export default function AdminJoinRequests() {
                                 </div>
                             )}
 
+                            {/* أزرار التحميل */}
                             <div className="flex gap-3">
                                 <button
                                     onClick={() => handleDownload(selectedRequest.id, 'cv')}
                                     className="flex-1 h-12 bg-[#138C9F] text-white rounded-[8px] text-[13px] font-bold hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
-                                    <Download className="w-4 h-4" />
+                                    <FiDownload size={14} />
                                     تحميل السيرة الذاتية (CV)
                                 </button>
                                 <button
                                     onClick={() => handleDownload(selectedRequest.id, 'id')}
                                     className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
-                                    <Download className="w-4 h-4" />
+                                    <FiDownload size={14} />
                                     صورة الهوية / مزاولة المهنة
                                 </button>
                             </div>
 
-                            {selectedRequest.status === 'rejected' && selectedRequest.rejectionReason && (
+                            {selectedRequest.rejectionReason && (
                                 <div className="bg-red-50 border border-red-200 rounded-[8px] p-4 flex flex-col gap-1">
                                     <div className="flex items-center gap-2 text-[#BA1A1A] font-bold text-[14px]">
-                                        <AlertTriangle className="w-4 h-4" />
+                                        <FiAlertTriangle size={14} />
                                         <span>سبب الرفض:</span>
                                     </div>
                                     <p className="text-[13px] text-[#961212] pr-6 font-medium">{selectedRequest.rejectionReason}</p>
@@ -543,7 +537,7 @@ export default function AdminJoinRequests() {
                                     disabled={actionLoading}
                                     className="px-5 h-[42px] border border-[#BA1A1A] text-[#BA1A1A] rounded-[8px] text-[14px] font-bold hover:bg-red-50 flex items-center justify-center gap-2 w-full sm:w-auto disabled:opacity-50"
                                 >
-                                    <X className="w-4 h-4" />
+                                    <FiX size={14} />
                                     <span>رفض الطلب</span>
                                 </button>
                             )}
@@ -553,8 +547,7 @@ export default function AdminJoinRequests() {
                                     disabled={actionLoading}
                                     className="px-6 h-[42px] bg-[#138C9F] text-white rounded-[8px] text-[14px] font-bold hover:bg-[#0f7282] flex items-center justify-center gap-2 w-full sm:w-auto flex-1 disabled:opacity-50"
                                 >
-                                    <Check className="w-4 h-4" />
-                                    <span>{actionLoading ? 'جاري المعالجة...' : 'قبول وتفعيل الملف'}</span>
+                                    <span>{actionLoading ? 'جاري...' : 'قبول وتفعيل الملف'}</span>
                                 </button>
                             )}
                         </div>
@@ -567,7 +560,7 @@ export default function AdminJoinRequests() {
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                     <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 text-center text-right">
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
-                            <AlertTriangle className="w-7 h-7" />
+                            <FiAlertTriangle size={28} />
                         </div>
                         <h3 className="text-[18px] font-extrabold text-[#434654] text-center">سبب الرفض</h3>
                         <p className="text-[13px] text-[#737685] mt-1 px-4 text-center">
@@ -579,7 +572,7 @@ export default function AdminJoinRequests() {
                                 value={rejectReasonInput}
                                 onChange={(e) => setRejectReasonInput(e.target.value)}
                                 placeholder="اكتب هنا تفاصيل الرفض بدقة..."
-                                className="w-full h-[100px] border border-gray-300 rounded-[8px] p-3 text-[14px] focus:outline-none focus:border-[#138C9F] text-right"
+                                className="w-full h-[100px] border border-gray-300 rounded-[8px] p-3 text-[14px] focus:outline-none focus:border-[#138C9F] text-right resize-none"
                             />
                         </div>
                         <div className="flex items-center gap-3 mt-6">

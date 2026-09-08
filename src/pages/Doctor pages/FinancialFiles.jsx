@@ -6,6 +6,7 @@ import {
     FiArrowDown, FiArrowUp, FiMoreVertical, FiTrash2
 } from 'react-icons/fi';
 import axiosInstance from '../../api/axiosInstance';
+import { formatDate } from '../../utils/dateFormatter';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || '';
 
@@ -356,7 +357,7 @@ const FinancialFiles = () => {
                             <span className="font-bold text-gray-800">{tx.patientName}</span>
                           </div>
                         </td>
-                        <td className="px-6"><span className="text-gray-800 text-xs font-semibold">{tx.date}</span></td>
+                        <td className="px-6"><span className="text-gray-800 text-xs font-semibold">{formatDate(tx.date)}</span></td>
                         <td className="px-6">
                           <div className="inline-flex items-center gap-1.5 border border-slate-100 rounded-lg px-3 py-1.5 bg-slate-50/50 text-xs font-bold text-gray-600">
                             {tx.methodType === "wallet" ? <FiSmartphone className="w-3.5 h-3.5 text-[#1b8b99]" /> : <FiCreditCard className="w-3.5 h-3.5 text-[#1b8b99]" />}
@@ -399,7 +400,7 @@ const FinancialFiles = () => {
                       <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full ${tx.status === "مكتمل" ? "bg-green-50 text-green-600" : tx.status === "مكتمل جزئياً" ? "bg-amber-50 text-amber-600" : "bg-slate-100 text-gray-500"}`}>{tx.status}</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs">
-                      <div><p className="text-[10px] text-gray-400">التاريخ والوقت</p><p className="font-semibold text-gray-700 mt-0.5">{tx.date}</p></div>
+                       <div><p className="text-[10px] text-gray-400">التاريخ والوقت</p><p className="font-semibold text-gray-700 mt-0.5">{formatDate(tx.date)}</p></div>
                       <div><p className="text-[10px] text-gray-400">طريقة الدفع</p><p className="font-semibold text-gray-700 mt-0.5">{tx.method}</p></div>
                     </div>
                     <div className="flex justify-between items-center bg-slate-50 p-2 rounded-xl mt-2">
@@ -450,7 +451,7 @@ const FinancialFiles = () => {
                     {expenses.map((exp) => (
                       <tr key={exp.id} className="hover:bg-slate-50/40 transition-colors h-14 text-sm font-medium text-gray-700">
                         <td className="px-6"><span className="bg-red-50 text-red-600 text-[11px] font-bold px-3 py-1 rounded-full">{exp.category}</span></td>
-                        <td className="px-6"><span className="text-xs font-semibold text-gray-600">{exp.date}</span></td>
+                        <td className="px-6"><span className="text-xs font-semibold text-gray-600">{formatDate(exp.date)}</span></td>
                         <td className="px-6"><span className="text-gray-700 text-xs">{exp.description || '—'}</span></td>
                         <td className="px-6"><span className="font-mono font-bold text-red-600">ILS {exp.amount?.toFixed(2)}</span></td>
                         <td className="px-6">
@@ -469,7 +470,7 @@ const FinancialFiles = () => {
                       <span className="bg-red-50 text-red-600 text-[11px] font-bold px-3 py-1 rounded-full">{exp.category}</span>
                       <button onClick={() => handleDeleteExpense(exp.id)} className="w-7 h-7 flex items-center justify-center rounded-lg bg-red-50 text-red-400"><FiTrash2 className="w-3.5 h-3.5" /></button>
                     </div>
-                    <p className="text-xs text-gray-500">{exp.date} {exp.description && `• ${exp.description}`}</p>
+                    <p className="text-xs text-gray-500">{formatDate(exp.date)} {exp.description && `• ${exp.description}`}</p>
                     <p className="font-mono font-bold text-red-600 text-sm mt-1">ILS {exp.amount?.toFixed(2)}</p>
                   </div>
                 ))}
@@ -532,7 +533,7 @@ const FinancialFiles = () => {
                     </div>
                     <div className="space-y-2 mb-4">
                       <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">المريض:</span><span className="font-bold text-gray-800">{invoiceModal.patientName}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">التاريخ:</span><span className="font-bold text-gray-800">{invoiceModal.date}</span></div>
+                      <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">التاريخ:</span><span className="font-bold text-gray-800">{formatDate(invoiceModal.date)}</span></div>
                       <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">طريقة الدفع:</span><span className="font-bold text-gray-800">{invoiceModal.method}</span></div>
                       <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">الحالة:</span><span className="font-bold text-gray-800">{invoiceModal.status}</span></div>
                       {invoiceModal.status === 'مكتمل جزئياً' && (

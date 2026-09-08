@@ -7,6 +7,7 @@ import { faQrcode } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from "../../api/axiosInstance";
 import { resolveImageUrl } from "../../utils/imageUrl";
+import { formatDate as formatDateDdMmYyyy } from "../../utils/dateFormatter";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -104,8 +105,14 @@ const MedicalExamination = () => {
 
     const formatDate = (dateStr) => {
         if (!dateStr) return "";
-        const d = new Date(dateStr);
-        return d.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+        try {
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return "";
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
+        } catch { return ""; }
     };
 
     const generateQrForPatient = async () => {
@@ -483,16 +490,17 @@ const MedicalExamination = () => {
                             <div className="space-y-6">
                                 {filteredMedicalHistory.length > 0 ? filteredMedicalHistory.map((visit, idx) => {
                                     const visitDate = new Date(visit.visitDate);
-                                    const monthName = visitDate.toLocaleDateString('ar-EG', { month: 'long' });
-                                    const dayNum = visitDate.getDate();
+                                    const dayNum = String(visitDate.getDate()).padStart(2, '0');
+                                    const monthNum = String(visitDate.getMonth() + 1).padStart(2, '0');
+                                    const yearNum = visitDate.getFullYear();
                                     const timeStr = visitDate.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
                                     return (
                                         <div key={visit.id || idx} className="bg-white border border-[#C3C6D6]/80 rounded-2xl overflow-hidden shadow-xs">
                                             <div className="bg-[#EBF3F5] px-4 py-3 md:px-6 flex items-center justify-between border-b border-[#C3C6D6]/80">
                                                 <div className="flex items-center gap-4">
                                                     <div className="bg-[#138C9F] text-white rounded-lg p-2 flex flex-col items-center justify-center min-w-[70px] h-[64px]">
-                                                        <span className="text-sm font-bold leading-none">{monthName}</span>
-                                                        <span className="text-xl font-black mt-1 leading-none">{dayNum}</span>
+                                                        <span className="text-xl font-black leading-none">{dayNum}/{monthNum}</span>
+                                                        <span className="text-xs font-bold mt-1 leading-none">{yearNum}</span>
                                                     </div>
                                                     <div className="text-right">
                                                         <h3 className="text-base md:text-lg font-black text-[#138C9F]">زيارة طبية</h3>
@@ -615,7 +623,7 @@ const MedicalExamination = () => {
                                 <div className="flex justify-center mb-4 p-4 bg-white rounded-2xl border-2 border-gray-100 inline-block mx-auto">
                                     <QRCodeCanvas value={qrUrl} size={200} level="H" includeMargin={true} />
                                 </div>
-                                <p className="text-[10px] text-gray-400 mb-4">صالح حتى: {new Date(qrExpiry).toLocaleString('ar-EG')}</p>
+                                <p className="text-[10px] text-gray-400 mb-4">صالح حتى: {formatDateDdMmYyyy(qrExpiry)}</p>
                                 <div className="flex gap-2">
                                     <button onClick={() => window.open(qrUrl, '_blank')} className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors">
                                         فتح الرابط

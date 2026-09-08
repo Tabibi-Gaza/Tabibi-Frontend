@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { formatDate } from '../../utils/dateFormatter';
 
 const PatientFile = () => {
     const { id } = useParams();
@@ -86,7 +87,7 @@ const PatientFile = () => {
                                             <h4 className="text-sm font-black text-[#0B1C30] flex items-center gap-2"> 
                                                 <span className="w-1.5 h-1.5 rounded-full bg-[#138C9F]"></span>{disease.name} 
                                             </h4>
-                                            <p className="text-[11px] font-bold text-gray-400 pr-3.5">{disease.date}</p> 
+                                            <p className="text-[11px] font-bold text-gray-400 pr-3.5">{formatDate(disease.date)}</p> 
                                         </div>
                                         <span className="text-[11px] font-black px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">{disease.status}</span> 
                                     </div>

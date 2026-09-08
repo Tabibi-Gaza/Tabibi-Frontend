@@ -32,10 +32,14 @@ const MyAppointment = () => {
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
-    const d = new Date(dateStr);
-    const monthsAr = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-    const daysAr = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-    return `${daysAr[d.getDay()]} ${d.getDate()} ${monthsAr[d.getMonth()]} - ${d.getFullYear()}`;
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return "";
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}/${month}/${year}`;
+    } catch { return ""; }
   };
 
   const formatTime = (dateStr) => {

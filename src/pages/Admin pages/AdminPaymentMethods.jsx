@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { CreditCard, Plus, Edit2, Trash2, CheckCircle, XCircle, Eye, X, Loader2, Building2, Wallet, ToggleLeft, ToggleRight, Clock, Users, DollarSign, AlertCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
+import { formatDate } from '../../utils/dateFormatter';
 
 const bankOptions = [
     'بنك فلسطين', 'البنك الأهلي الأردني', 'بنك القدس', 'البنك الوطني',
@@ -284,7 +285,7 @@ export default function AdminPaymentMethods() {
                                                 <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
                                                 <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
                                                 <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
-                                                <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
+                                                <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{formatDate(payment.createdAt)}</td>
                                                 <td className="px-6 py-3">
                                                     <div className="flex items-center gap-2 justify-center">
                                                         {payment.receiptImageUrl && (
@@ -324,7 +325,7 @@ export default function AdminPaymentMethods() {
                                                     {payment.status === 'Approved' ? 'مقبول' : payment.status === 'Rejected' ? 'مرفوض' : 'قيد الانتظار'}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-3 text-[13px] text-[#526069]">{new Date(payment.createdAt).toLocaleDateString('ar')}</td>
+                                            <td className="px-6 py-3 text-[13px] text-[#526069]">{formatDate(payment.createdAt)}</td>
                                         </tr>
                                     ))}
                                     {allPayments.length === 0 && (

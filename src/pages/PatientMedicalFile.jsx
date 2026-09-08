@@ -37,10 +37,13 @@ const ARABIC_MONTHS = {
 
 const formatDate = (dateString) => {
     if (!dateString) return { month: '', day: '' };
-    const d = new Date(dateString);
-    const month = ARABIC_MONTHS[String(d.getMonth() + 1).padStart(2, '0')] || '';
-    const day = String(d.getDate());
-    return { month, day };
+    try {
+        const d = new Date(dateString);
+        if (isNaN(d.getTime())) return { month: '', day: '' };
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        return { month, day };
+    } catch { return { month: '', day: '' }; }
 };
 
 const PatientMedicalFile = () => {
@@ -143,8 +146,14 @@ const PatientMedicalFile = () => {
 
     const formatDateFull = (dateStr) => {
         if (!dateStr) return "";
-        const d = new Date(dateStr);
-        return d.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        try {
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return "";
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
+        } catch { return ""; }
     };
 
     if (loading) {

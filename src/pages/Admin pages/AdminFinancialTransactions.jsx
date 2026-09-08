@@ -80,8 +80,11 @@ export default function AdminFinancialTransactions() {
         if (!dateStr) return '-';
         try {
             const d = new Date(dateStr);
-            const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-            return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+            if (isNaN(d.getTime())) return dateStr;
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
         } catch { return dateStr; }
     };
 

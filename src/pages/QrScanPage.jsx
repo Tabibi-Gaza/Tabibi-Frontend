@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import { formatDate } from '../utils/dateFormatter';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5227/api';
 
@@ -175,7 +176,7 @@ const QrScanPage = () => {
                       <p className="text-sm font-black text-gray-800">{v.doctorName}</p>
                       <p className="text-[10px] font-bold text-[#138C9F]">{v.specialization}</p>
                     </div>
-                    <p className="text-[10px] text-gray-400 font-bold">{new Date(v.visitDate).toLocaleDateString('ar-EG')}</p>
+                    <p className="text-[10px] text-gray-400 font-bold">{formatDate(v.visitDate)}</p>
                   </div>
                   {v.diagnosis && <p className="text-xs text-gray-600 mb-1"><span className="font-black">التشخيص:</span> {v.diagnosis}</p>}
                   {v.symptoms && <p className="text-xs text-gray-600 mb-1"><span className="font-black">الأعراض:</span> {v.symptoms}</p>}
@@ -195,7 +196,7 @@ const QrScanPage = () => {
                 <div key={i} className="border border-gray-100 rounded-xl p-4">
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-xs font-black text-gray-800">{p.doctorName}</p>
-                    <p className="text-[10px] text-gray-400 font-bold">{p.createdAt ? new Date(p.createdAt).toLocaleDateString('ar-EG') : ''}</p>
+                    <p className="text-[10px] text-gray-400 font-bold">{p.createdAt ? formatDate(p.createdAt) : ''}</p>
                   </div>
                   {p.medications?.map((med, j) => (
                     <div key={j} className="bg-slate-50 p-2 rounded-lg mb-1 flex justify-between items-center text-xs">

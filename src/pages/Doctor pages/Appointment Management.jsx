@@ -137,10 +137,16 @@ const AppointmentManagement = () => {
 
     const formatDateTime = (dateStr) => {
         if (!dateStr) return { time: '', date: '' };
-        const d = new Date(dateStr);
-        const time = d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
-        const date = d.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        return { time, date };
+        try {
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return { time: '', date: '' };
+            const time = d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            const date = `${day}/${month}/${year}`;
+            return { time, date };
+        } catch { return { time: '', date: '' }; }
     };
 
     const getInitials = (name) => {

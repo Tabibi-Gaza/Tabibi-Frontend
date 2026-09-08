@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
+import { formatDate } from '../utils/dateFormatter';
 
 const FinancialTransactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -182,8 +183,8 @@ const FinancialTransactions = () => {
                             <tbody>
                                 {filteredTransactions.map((item) => (
                                     <tr key={item.id} className="border-b border-[#C3C6D6]/50 hover:bg-slate-50/50 transition-colors">
-                                        <td className="px-4 py-5 text-center text-sm font-medium text-[#526069] align-middle">
-                                            {item.transactionDate}
+                                         <td className="px-4 py-5 text-center text-sm font-medium text-[#526069] align-middle">
+                                            {formatDate(item.transactionDate)}
                                         </td>
                                         <td className="px-4 py-5 align-middle">
                                             <div className="flex items-center justify-center gap-3">
@@ -243,7 +244,7 @@ const FinancialTransactions = () => {
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center text-xs text-[#526069] pt-1">
-                                    <span>{item.transactionDate}</span>
+                                    <span>{formatDate(item.transactionDate)}</span>
                                     <span className="font-bold text-[#138C9F] text-sm">{item.amount?.toFixed(2)} {item.currency || 'ILS'}</span>
                                     {item.hasReceipt && item.invoiceUrl ? (
                                         <button onClick={() => handleDownloadInvoice(item.invoiceUrl)} className="p-1.5 rounded-lg bg-[#138C9F]/10 cursor-pointer">

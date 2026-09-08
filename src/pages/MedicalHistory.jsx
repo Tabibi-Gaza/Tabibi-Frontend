@@ -3,6 +3,7 @@ import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { QRCodeCanvas } from 'qrcode.react';
+import { formatDate } from '../utils/dateFormatter';
 import {
   faFileMedical,
   faPenToSquare,
@@ -246,10 +247,7 @@ const MedicalHistory = () => {
                 <p className="text-xs font-bold text-gray-400 mt-1.5 mr-1">
                   آخر تحديث للبيانات الموثقة:{" "}
                   {recordData?.updatedAt
-                    ? new Date(recordData.updatedAt).toLocaleDateString(
-                        "ar-EG",
-                        { year: "numeric", month: "long", day: "numeric" },
-                      )
+                    ? formatDate(recordData.updatedAt)
                     : "غير محدد"}
                 </p>
               </div>
@@ -813,7 +811,7 @@ const MedicalHistory = () => {
               <div className="flex justify-center mb-4 p-4 bg-white rounded-2xl border-2 border-gray-100 inline-block mx-auto">
                 <QRCodeCanvas value={qrUrl} size={200} level="H" includeMargin={true} />
               </div>
-              <p className="text-[10px] text-gray-400 mb-1">صالح حتى: {new Date(qrExpiry).toLocaleString('ar-EG')}</p>
+              <p className="text-[10px] text-gray-400 mb-1">صالح حتى: {formatDate(qrExpiry)}</p>
               <p className="text-[10px] text-gray-300 break-all mb-4 max-h-12 overflow-hidden">{qrUrl}</p>
               <div className="flex gap-2">
                 <button

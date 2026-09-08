@@ -32,7 +32,7 @@ export default function PatientManagement() {
                         avatar: p.profileImageUrl ? (p.profileImageUrl.startsWith('http') ? p.profileImageUrl : `${FILES_URL}/${p.profileImageUrl}`) : null,
                         age: p.age,
                         gender: p.gender === 'Male' ? 'ذكر' : 'أنثى',
-                        lastVisit: p.lastVisit ? (() => { const d = new Date(p.lastVisit); const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']; return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`; })() : '—',
+                        lastVisit: p.lastVisit ? (() => { const d = new Date(p.lastVisit); const day = String(d.getDate()).padStart(2, '0'); const month = String(d.getMonth() + 1).padStart(2, '0'); const year = d.getFullYear(); return `${day}/${month}/${year}`; })() : '—',
                         isActive: true
                     })));
                 }

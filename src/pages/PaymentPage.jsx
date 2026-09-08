@@ -128,16 +128,13 @@ const PaymentPage = () => {
     if (!dt) return ''
     try {
       const date = new Date(dt)
-      const day = date.getDate()
-      const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
-      const month = months[date.getMonth()]
+      if (isNaN(date.getTime())) return dt
+      const day = String(date.getDate()).padStart(2, '0')
+      const month = String(date.getMonth() + 1).padStart(2, '0')
       const year = date.getFullYear()
-      let hours = date.getHours()
-      const minutes = date.getMinutes().toString().padStart(2, '0')
-      const period = hours >= 12 ? 'مساءً' : 'صباحاً'
-      if (hours > 12) hours -= 12
-      if (hours === 0) hours = 12
-      return `${day} ${month} ${year} - ${hours}:${minutes} ${period}`
+      const hours = String(date.getHours()).padStart(2, '0')
+      const minutes = String(date.getMinutes()).padStart(2, '0')
+      return `${day}/${month}/${year} ${hours}:${minutes}`
     } catch {
       return dt
     }

@@ -19,7 +19,10 @@ const getRelativeTime = (dateStr) => {
   if (diffMin < 60) return `منذ ${diffMin} دقيقة`;
   if (diffHr < 24) return `منذ ${diffHr} ساعة`;
   if (diffDay < 7) return `منذ ${diffDay} يوم`;
-  return date.toLocaleDateString('ar-EG', { day: 'numeric', month: 'short', year: 'numeric' });
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
 };
 
 const getNotificationConfig = (type) => {
