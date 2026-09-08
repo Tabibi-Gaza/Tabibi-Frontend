@@ -343,9 +343,9 @@ export default function Chats() {
                     <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50/50'}`}>
                       <div className="relative shrink-0">
                         {conv.participantImageUrl ? (
-                            <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 h-12 rounded-full object-cover border border-gray-100" src={resolveImageUrl(conv.participantImageUrl)} alt={conv.participantName} />
+                            <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 md:h-12 rounded-full object-cover object-top border border-gray-100" src={resolveImageUrl(conv.participantImageUrl)} alt={conv.participantName} />
                         ) : (
-                          <div className="w-11 h-11 md:w-12 h-12 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-extrabold flex items-center justify-center text-sm md:text-base">{getInitials(conv.participantName)}</div>
+                          <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-extrabold flex items-center justify-center text-sm md:text-base">{getInitials(conv.participantName)}</div>
                         )}
                       </div>
                       <div className="flex-1 min-w-0 text-right">
@@ -393,10 +393,10 @@ export default function Chats() {
                     </button>
                     <div className="relative">
                       {activeConversation.participantImageUrl ? (
-                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 h-11 rounded-full object-cover border border-gray-100" src={resolveImageUrl(activeConversation.participantImageUrl)} alt={activeConversation.participantName} />
-                      ) : (
-                        <div className="w-10 h-10 md:w-11 h-11 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-bold flex items-center justify-center text-sm md:text-base">{getInitials(activeConversation.participantName)}</div>
-                      )}
+                            <img loading="lazy" decoding="async" width="44" height="44" className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover object-top border border-gray-100" src={resolveImageUrl(activeConversation.participantImageUrl)} alt={activeConversation.participantName} />
+                        ) : (
+                          <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#1b8b99]/10 text-[#1b8b99] font-bold flex items-center justify-center text-sm md:text-base">{getInitials(activeConversation.participantName)}</div>
+                        )}
                     </div>
                     <div className="text-right">
                       <div className="flex items-center gap-1.5">
