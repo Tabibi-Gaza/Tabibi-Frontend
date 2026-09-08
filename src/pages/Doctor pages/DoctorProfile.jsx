@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets_frontend/assets';
 import { toast } from 'react-toastify';
+import SignatureCanvas from 'react-signature-canvas';
 
 const PALESTINE_LOCATIONS = [
   "مدينة غزة",
@@ -30,8 +31,14 @@ const DoctorProfile = () => {
     const [loading, setLoading] = useState(false); 
     const [showLocations, setShowLocations] = useState(false);
     const [locationSearch, setLocationSearch] = useState('');
+    const [signatureMode, setSignatureMode] = useState('draw');
+    const [signatureImage, setSignatureImage] = useState(null);
+    const [showSignaturePreview, setShowSignaturePreview] = useState(false);
+    const [signatureDrawn, setSignatureDrawn] = useState(false);
     const fileInputRef = useRef(null);
     const locationDropdownRef = useRef(null);
+    const signatureCanvasRef = useRef(null);
+    const signatureFileInputRef = useRef(null);
 
     // ستيت محلية معزولة لإدارة المدخلات أثناء الكتابة
     const [localData, setLocalData] = useState({
@@ -107,6 +114,24 @@ const DoctorProfile = () => {
                 dataToSend.append('ProfileImage', image); 
             }
 
+            // إضافة صورة التوقيع
+            let signatureDataUrl = null;
+            if (signatureImage) {
+                // إذا تم رفع ملف صورة، تحويله إلى dataURL
+                signatureDataUrl = URL.createObjectURL(signatureImage);
+            } else if (signatureCanvasRef.current && signatureDrawn) {
+                // إذا كان هناك رسم في الـ canvas
+                signatureDataUrl = signatureCanvasRef.current.toDataURL('image/png');
+            }
+            
+            if (signatureDataUrl) {
+                // تحويل dataURL إلى File
+                const response = await fetch(signatureDataUrl);
+                const blob = await response.blob();
+                const file = new File([blob], 'signature.png', { type: 'image/png' });
+                dataToSend.append('SignatureImage', file);
+            }
+
             const localUpdates = {
                 firstname: localData.firstname,
                 lastname: localData.lastname,
@@ -129,6 +154,11 @@ const DoctorProfile = () => {
             
             setIsEdit(false); 
             setImage(false);  
+            setSignatureImage(null);
+            setShowSignaturePreview(false);
+            if (signatureCanvasRef.current) {
+                signatureCanvasRef.current.clear();
+            }
         } catch (error) {
 
             toast.error("فشل حفظ التعديلات");
@@ -140,6 +170,37 @@ const DoctorProfile = () => {
     const handleCancel = () => {
         setIsEdit(false);
         setImage(false);
+        setSignatureImage(null);
+        setShowSignaturePreview(false);
+        if (signatureCanvasRef.current) {
+            signatureCanvasRef.current.clear();
+        }
+    };
+
+    // دوال التوقيع
+    const clearSignature = () => {
+        if (signatureCanvasRef.current) {
+            signatureCanvasRef.current.clear();
+        }
+        setSignatureImage(null);
+        setShowSignaturePreview(false);
+        setSignatureDrawn(false);
+    };
+
+    const handleSignatureImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setSignatureImage(file);
+            setShowSignaturePreview(true);
+        }
+    };
+
+    const handleRemoveSignature = () => {
+        setSignatureImage(null);
+        setShowSignaturePreview(false);
+        if (signatureCanvasRef.current) {
+            signatureCanvasRef.current.clear();
+        }
     };
 
     return doctorData && (
@@ -413,6 +474,117 @@ const DoctorProfile = () => {
                                     onChange={(e) => setLocalData(prev => ({ ...prev, bio: e.target.value }))}
                                     className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50 resize-none"
                                 />
+                            </div>
+
+                            {/* التوقيع الرقمي */}
+                            <div className="flex flex-col gap-1.5 text-right sm:col-span-2">
+                                <label className="text-[#138C9F] font-bold text-sm">التوقيع الرقمي</label>
+                                <div className="space-y-4">
+                                    {doctorData.signatureUrl && !isEdit && (
+                                        <div className="bg-gray-50 rounded-xl p-4 border border-[#C3C6D6]/40">
+                                            <p className="text-sm font-bold text-gray-600 mb-2">التوقيع الحالي:</p>
+                                            <img
+                                                src={doctorData.signatureUrl}
+                                                alt="التوقيع الرقمي"
+                                                className="h-20 object-contain border border-gray-200 rounded-lg bg-white p-2"
+                                                crossOrigin="anonymous"
+                                            />
+                                        </div>
+                                    )}
+                                    {isEdit && (
+                                        <div className="space-y-4">
+                                            {/* اختيار طريقة الإدخال */}
+                                            <div className="flex gap-4">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setSignatureMode('draw')}
+                                                    className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-medium border-2 transition-all ${
+                                                        signatureMode === 'draw'
+                                                            ? 'border-[#138C9F] bg-[#138C9F]/10 text-[#138C9F]'
+                                                            : 'border-[#C3C6D6] text-gray-500 hover:border-[#138C9F]/50'
+                                                    }`}
+                                                >
+                                                    رسم التوقيع
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setSignatureMode('upload')}
+                                                    className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-medium border-2 transition-all ${
+                                                        signatureMode === 'upload'
+                                                            ? 'border-[#138C9F] bg-[#138C9F]/10 text-[#138C9F]'
+                                                            : 'border-[#C3C6D6] text-gray-500 hover:border-[#138C9F]/50'
+                                                    }`}
+                                                >
+                                                    رفع صورة
+                                                </button>
+                                            </div>
+
+                                            {signatureMode === 'draw' && (
+                                                <div className="space-y-3">
+                                                    <div className="border-2 border-dashed border-[#C3C6D6] rounded-xl bg-gray-50/50 p-2 min-h-[200px]">
+                                                        <SignatureCanvas
+                                                            ref={signatureCanvasRef}
+                                                            canvasProps={{
+                                                                className: 'w-full h-full cursor-crosshair',
+                                                                style: { backgroundColor: 'white', touchAction: 'none' }
+                                                            }}
+                                                            clearOnResize={false}
+                                                            onEnd={() => setSignatureDrawn(true)}
+                                                        />
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <button
+                                                            type="button"
+                                                            onClick={clearSignature}
+                                                            className="flex-1 py-2 px-4 rounded-xl text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all"
+                                                            disabled={loading}
+                                                        >
+                                                            مسح الرسم
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {signatureMode === 'upload' && (
+                                                <div className="space-y-3">
+                                                    <input
+                                                        type="file"
+                                                        ref={signatureFileInputRef}
+                                                        accept="image/*"
+                                                        disabled={!isEdit || loading}
+                                                        className="hidden"
+                                                        onChange={handleSignatureImageUpload}
+                                                    />
+                                                    {signatureImage && showSignaturePreview ? (
+                                                        <div className="relative bg-gray-50 rounded-xl p-4 border border-[#C3C6D6]/40">
+                                                            <img
+                                                                src={URL.createObjectURL(signatureImage)}
+                                                                alt="معاينة التوقيع"
+                                                                className="h-20 object-contain border border-gray-200 rounded-lg bg-white p-2 mx-auto"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={handleRemoveSignature}
+                                                                className="absolute top-2 left-2 w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-200 transition-all"
+                                                            >
+                                                                ×
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => signatureFileInputRef.current?.click()}
+                                                            disabled={!isEdit || loading}
+                                                            className="w-full py-3 px-4 border-2 border-dashed border-[#C3C6D6] rounded-xl bg-gray-50/50 text-center text-gray-600 hover:border-[#138C9F] hover:bg-[#138C9F]/10 transition-all"
+                                                        >
+                                                            انقر لاختيار صورة التوقيع (PNG, JPG)
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             {/* أزرار التحكم التبادلية أسفل الاستمارة */}
