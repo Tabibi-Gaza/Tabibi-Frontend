@@ -321,11 +321,11 @@ export default function Chats() {
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
         .msg-swipe { transition: transform 0.15s ease; touch-action: pan-y; user-select: none; }
       `}</style>
-      <div className="w-full pt-16 px-3 pb-20 bg-slate-50/30 flex justify-center items-start min-h-screen">
-        <div className="w-full max-w-5xl bg-white border border-[#e9eff6] rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] overflow-hidden relative">
+      <div className="w-full pt-16 px-2 sm:px-3 pb-4 bg-slate-50/30 flex justify-center items-start min-h-screen">
+        <div className="w-full max-w-5xl bg-white border border-[#e9eff6] rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] h-[calc(100dvh-72px)] overflow-hidden relative">
 
-          {/* Sidebar: drawer transition using translate3d */}
-          <div className={`flex flex-col min-h-0 bg-white border-l border-[#e9eff6] h-full ${showChatList ? 'flex' : 'hidden md:flex'}`}>
+          {/* Sidebar */}
+          <div className={`flex flex-col min-h-0 bg-white md:border-l border-[#e9eff6] h-full ${showChatList ? 'absolute inset-0 z-30 md:relative md:z-auto flex' : 'hidden md:flex'}`}>
             <div className="p-4 border-b border-[#e9eff6] shrink-0">
               <h2 className="text-xl md:text-2xl font-black text-[#1b8b99] mb-3">المحـادثات</h2>
               <div className="relative flex items-center border border-[#e9eff6] rounded-xl bg-slate-50 px-3 h-11">
@@ -485,7 +485,7 @@ export default function Chats() {
                   </div>
                 )}
 
-                <form onSubmit={handleSendMessage} className="p-3 md:p-4 border-t pb-20 sticky border-[#e9eff6] bg-white shrink-0">
+                <form onSubmit={handleSendMessage} className="p-3 md:p-4 border-t border-[#e9eff6] bg-white shrink-0">
                   <div className="flex items-center border border-[#e9eff6] rounded-xl bg-slate-50 px-3 h-12 md:h-14 gap-2 md:gap-3 focus-within:border-[#1b8b99] focus-within:bg-white transition-all max-w-full">
                     <button type="submit" disabled={sendMutation.isPending || uploadMutation.isPending || (!newMessage.trim() && !selectedFile)} className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#138C9F] flex items-center justify-center text-white hover:bg-[#107585] transition-colors cursor-pointer shrink-0 disabled:opacity-50">
                       {sendMutation.isPending || uploadMutation.isPending ? <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" /> : <FiSend className="w-4 h-4 md:w-5 md:h-5" />}

@@ -58,8 +58,8 @@ const Contact = () => {
         className="min-h-screen pt-30 dark:bg-gray-900 dark:text-gray-200"
         style={{ direction: "rtl" }}
       >
-        <div className="w-full max-w-[85%] mx-auto px-4">
-          <div className="py-10 px-7.5 mt-0">
+        <div className="w-full max-w-[90%] md:max-w-[85%] mx-auto px-3 md:px-4">
+          <div className="py-8 md:py-10 px-4 md:px-7.5 mt-0">
             {/* ===== Heading ===== */}
             <div className="mb-12.5">
               <div className="flex gap-5 items-center mb-3.75">
@@ -82,9 +82,9 @@ const Contact = () => {
             </div>
 
             {/* ===== Contact Cards ===== */}
-            <div className="flex flex-col md:flex-row justify-between gap-5 mb-9">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-6 md:mb-9">
               {/* Card 1 - Gmail */}
-              <div className="flex-1 bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-5.5 text-center">
+              <div className="bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-4 md:p-5.5 text-center">
                 <a
                   href={`mailto:${contactInfo.email}?subject=استفسار من منصة طبيبي`}
                   target="_blank"
@@ -113,7 +113,7 @@ const Contact = () => {
               </div>
 
               {/* WhatsApp */}
-              <div className="flex-1 bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-5.5 text-center">
+              <div className="bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-4 md:p-5.5 text-center">
                 <a
                   href={`https://wa.me/${contactInfo.whatsapp}`}
                   target="_blank"
@@ -135,7 +135,7 @@ const Contact = () => {
               </div>
 
               {/* Instagram */}
-              <div className="flex-1 bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-5.5 text-center">
+              <div className="bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-4 md:p-5.5 text-center">
                 <a
                   href="https://www.instagram.com/tabibi_gaza/"
                   target="_blank"
@@ -156,7 +156,7 @@ const Contact = () => {
               </div>
 
               {/* LinkedIn */}
-              <div className="flex-1 bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-5.5 text-center">
+              <div className="bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-[10px] p-4 md:p-5.5 text-center">
                 <a
                   href="https://www.linkedin.com/company/tabibi-gaza/"
                   target="_blank"
@@ -178,15 +178,15 @@ const Contact = () => {
             </div>
 
             {/* ===== Contact Web Section ===== */}
-            <div className="w-full mx-auto flex flex-col md:flex-row gap-6.25 items-stretch bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-xl p-6.25">
+            <div className="w-full mx-auto flex flex-col md:flex-row gap-6 md:gap-6.25 items-stretch bg-white dark:bg-gray-800 border border-[#E5E7EB] dark:border-gray-600 rounded-xl p-5 md:p-6.25">
               {/* Form */}
               <div className="flex-1 bg-transparent border-none">
-                <h2 className="text-[20px] font-bold text-[#1F2937] dark:text-white mb-1.25">
+                <h2 className="text-[18px] md:text-[20px] font-bold text-[#1F2937] dark:text-white mb-3 md:mb-1.25">
                   {t('contact.message')}
                 </h2>
                 <form
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-5"
+                  className="flex flex-col gap-4 md:gap-5"
                 >
                   <input
                     type="text"
@@ -194,7 +194,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder={t('contact.address')}
-                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    className="w-full p-3.5 md:p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors text-sm md:text-base min-h-[44px]"
                     required
                   />
                   <input
@@ -203,7 +203,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder={t('contact.email')}
-                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    className="w-full p-3.5 md:p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors text-sm md:text-base min-h-[44px]"
                     required
                   />
                   <input
@@ -212,7 +212,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder={t('contact.title')}
-                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors"
+                    className="w-full p-3.5 md:p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors text-sm md:text-base min-h-[44px]"
                     required
                   />
                   <textarea
@@ -220,14 +220,14 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder={t('contact.message')}
-                    className="w-full p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors resize-none h-30"
+                    className="w-full p-3.5 md:p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors resize-none h-28 md:h-30 text-sm md:text-base"
                     required
                   ></textarea>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full border-none cursor-pointer bg-[#138c9f] text-white p-3 rounded-md text-[14px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,87,194,0.25)] disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    className="w-full border-none cursor-pointer bg-[#138c9f] text-white p-3.5 md:p-3 rounded-md text-[14px] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,87,194,0.25)] disabled:bg-gray-400 disabled:cursor-not-allowed min-h-[44px]"
                   >
                     {loading ? 'جاري الإرسال...' : t('contact.send')}
                   </button>
