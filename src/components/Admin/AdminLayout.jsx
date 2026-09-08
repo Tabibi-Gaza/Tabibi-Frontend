@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import AdminSidebar from './AdminSidebar';
+import { useTheme } from '../../context/ThemeContext';
 
 const AdminLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { lang } = useTheme();
 
     const userStr = localStorage.getItem('user');
     const user = userStr ? JSON.parse(userStr) : null;
@@ -18,8 +20,8 @@ const AdminLayout = () => {
 
     return (
       <div
-        className="min-h-screen bg-[#ecf8fa] flex flex-col relative"
-        dir="rtl"
+        className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex flex-col relative transition-colors"
+        dir={lang === 'ar' ? 'rtl' : 'ltr'}
       >
         <AdminNavbar
           setSidebarOpen={setSidebarOpen}

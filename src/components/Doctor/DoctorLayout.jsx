@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import DoctorSidebar from './DoctorSidebar';
 import DoctorNavbar from './DoctorNavbar';
+import { useTheme } from '../../context/ThemeContext';
 
 const DoctorLayout = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { lang } = useTheme();
 
     const userStr = localStorage.getItem('user');
     const user = userStr ? JSON.parse(userStr) : null;
@@ -17,7 +19,7 @@ const DoctorLayout = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] flex flex-col" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex flex-col transition-colors" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             <DoctorNavbar onMenuToggle={() => setIsMenuOpen(!isMenuOpen)} isMenuOpen={isMenuOpen} />
 
             <div className="flex flex-1 relative">

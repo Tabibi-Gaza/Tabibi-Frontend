@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Notifications from './components/Notifications'
 import { useNotificationSignalR } from './hooks/notifications/useNotificationSignalR'
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { setOnAuthFailure } from './api/axiosInstance';
 import './i18n';
 
@@ -98,7 +98,7 @@ const QrScanPage = lazy(() => import('./pages/QrScanPage'))
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 
 const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-screen">
+  <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
     <div className="w-10 h-10 border-4 border-[#138C9F] border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
@@ -131,12 +131,13 @@ const UserLayout = () => {
   const roles = user?.roles || [];
   const { pathname } = useLocation();
   const isAuthPage = pathname === '/login' || pathname === '/reset-password';
+  const { lang } = useTheme();
 
   if (roles.includes("Doctor") || roles.includes("Secretary")) return <Navigate to="/doctor-dashboard" />;
   if (roles.includes("Admin")) return <Navigate to="/admin-dashboard" />;
 
   return (
-    <div dir='rtl' className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
+    <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <ScrollToTop />
       {!isAuthPage && <Navbar />}
       <Suspense fallback={<LoadingFallback />}>

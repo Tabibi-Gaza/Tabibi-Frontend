@@ -13,15 +13,14 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
 
     return (
       <div
-        className="h-16 md:h-21.5 bg-white border-b border-[#C3C6D6] flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 shadow-sm"
-        dir="rtl"
+        className="h-16 md:h-21.5 bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 shadow-sm transition-colors"
       >
         {/* 🟦 جهة اليمين: زر القائمة، الشعار ووسم الإدارة */}
         <div className="flex items-center gap-3 md:gap-4">
           {/* زر الهامبرغر التفاعلي للهواتف */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1.5 rounded-lg text-gray-600 hover:bg-gray-100 md:hidden transition-colors"
+            className="p-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden transition-colors"
             aria-label="Toggle Sidebar"
           >
             {sidebarOpen ? (
@@ -40,7 +39,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
             className="h-7 md:h-10 w-auto cursor-pointer object-contain"
             onClick={() => navigate("/admin-dashboard")}
           />
-          <span className="bg-[#e2f4f7] text-[#138C9F] text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-[#138C9F]/20 whitespace-nowrap">
+          <span className="bg-[#e2f4f7] dark:bg-gray-700 text-[#138C9F] dark:text-teal-300 text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-[#138C9F]/20 dark:border-teal-400/20 whitespace-nowrap">
             بوابة المسؤول
           </span>
         </div>
@@ -53,9 +52,9 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
               onClick={() => {
                 setShowNotifMenu(!showNotifMenu);
               }}
-              className="p-1.5 md:p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 relative"
+              className="p-1.5 md:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 relative"
             >
-              <FiBell className="h-5 md:h-6 w-5 md:w-6 text-gray-600 hover:text-[#138C9F] transition-colors cursor-pointer" />
+              <FiBell className="h-5 md:h-6 w-5 md:w-6 text-gray-600 dark:text-gray-300 hover:text-[#138C9F] transition-colors cursor-pointer" />
               {unreadCount > 0 && (
                 <span
                   className="absolute top-1 right-1 bg-red-500 text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold animate-pulse"
@@ -67,9 +66,9 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
             </button>
 
             {showNotifMenu && (
-              <div className="absolute left-[-50px] sm:left-0 mt-3 w-72 md:w-80 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 z-50 text-right">
-                <div className="px-4 py-2 border-b border-gray-50 flex justify-between items-center bg-gray-50/50 rounded-t-2xl">
-                  <span className="font-bold text-gray-800 text-sm">
+              <div className="absolute left-[-50px] sm:left-0 mt-3 w-72 md:w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-xl py-2 z-50 text-right">
+                <div className="px-4 py-2 border-b border-gray-50 dark:border-gray-700 flex justify-between items-center bg-gray-50/50 dark:bg-gray-700/50 rounded-t-2xl">
+                  <span className="font-bold text-gray-800 dark:text-gray-200 text-sm">
                     إشعارات النظام
                   </span>
                   <span
@@ -92,10 +91,10 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
                           }
                           setShowNotifMenu(false);
                         }}
-                        className={`px-4 py-3 hover:bg-gray-50 border-b border-gray-50 cursor-pointer transition-colors flex flex-col gap-0.5 ${!notif.isRead ? "bg-[#138C9F]/5" : ""}`}
+                        className={`px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-50 dark:border-gray-700 cursor-pointer transition-colors flex flex-col gap-0.5 ${!notif.isRead ? "bg-[#138C9F]/5 dark:bg-teal-900/20" : ""}`}
                       >
                         <div className="flex items-center justify-between gap-2">
-                          <p className="text-xs text-gray-700 leading-normal font-medium">
+                          <p className="text-xs text-gray-700 dark:text-gray-300 leading-normal font-medium">
                             {notif.message}
                           </p>
                           {notif.count > 1 && (
@@ -128,10 +127,10 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
           </div>
 
           {/* 📸 تفاصيل المسؤول */}
-          <div onClick={() => navigate("/admin/profile")} className="flex items-center gap-2 md:gap-3 cursor-pointer p-1.5 px-2.5 rounded-xl border border-transparent hover:bg-gray-50/60 hover:border-[#138C9F] transition-all duration-300 select-none">
+          <div onClick={() => navigate("/admin/profile")} className="flex items-center gap-2 md:gap-3 cursor-pointer p-1.5 px-2.5 rounded-xl border border-transparent hover:bg-gray-50/60 dark:hover:bg-gray-700/60 hover:border-[#138C9F] transition-all duration-300 select-none">
             <div
               
-              className="w-9 h-9 md:w-11 md:h-11 rounded-full border border-[#C3C6D6] bg-slate-100 overflow-hidden cursor-pointer relative group transition-all duration-300 hover:border-[#138C9F] shadow-sm shrink-0 flex items-center justify-center"
+              className="w-9 h-9 md:w-11 md:h-11 rounded-full border border-[#C3C6D6] dark:border-gray-600 bg-slate-100 dark:bg-gray-700 overflow-hidden cursor-pointer relative group transition-all duration-300 hover:border-[#138C9F] shadow-sm shrink-0 flex items-center justify-center"
               title="عرض الملف الشخصي"
             >
               {userData && userData.image ? (
@@ -153,12 +152,12 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
               )}
             </div>
             <div className="text-right hidden sm:block">
-              <p className="text-xs md:text-sm font-black text-[#138C9F] whitespace-nowrap">
+              <p className="text-xs md:text-sm font-black text-[#138C9F] dark:text-teal-300 whitespace-nowrap">
                 {userData
                   ? `${userData.firstname} ${userData.lastname}`
                   : "عمر حمد"}
               </p>
-              <p className="text-[10px] md:text-[11px] font-bold text-slate-500">
+              <p className="text-[10px] md:text-[11px] font-bold text-slate-500 dark:text-gray-400">
                 {userData.email ? userData.email : "admin@example.com"}
               </p>
             </div>
