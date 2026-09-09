@@ -1,8 +1,7 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useRef, useEffect, useCallback } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets_frontend/assets';
 import { toast } from 'react-toastify';
-import SignatureCanvas from 'react-signature-canvas';
 
 const PALESTINE_LOCATIONS = [
   "مدينة غزة",
@@ -117,10 +116,8 @@ const DoctorProfile = () => {
             // إضافة صورة التوقيع
             let signatureDataUrl = null;
             if (signatureImage) {
-                // إذا تم رفع ملف صورة، تحويله إلى dataURL
                 signatureDataUrl = URL.createObjectURL(signatureImage);
             } else if (signatureCanvasRef.current && signatureDrawn) {
-                // إذا كان هناك رسم في الـ canvas
                 signatureDataUrl = signatureCanvasRef.current.toDataURL('image/png');
             }
             
@@ -156,8 +153,11 @@ const DoctorProfile = () => {
             setImage(false);  
             setSignatureImage(null);
             setShowSignaturePreview(false);
-            if (signatureCanvasRef.current) {
-                signatureCanvasRef.current.clear();
+            setSignatureDrawn(false);
+            const canvas = signatureCanvasRef.current;
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
         } catch (error) {
 
@@ -172,15 +172,20 @@ const DoctorProfile = () => {
         setImage(false);
         setSignatureImage(null);
         setShowSignaturePreview(false);
-        if (signatureCanvasRef.current) {
-            signatureCanvasRef.current.clear();
+        setSignatureDrawn(false);
+        const canvas = signatureCanvasRef.current;
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     };
 
     // دوال التوقيع
     const clearSignature = () => {
-        if (signatureCanvasRef.current) {
-            signatureCanvasRef.current.clear();
+        const canvas = signatureCanvasRef.current;
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
         setSignatureImage(null);
         setShowSignaturePreview(false);
@@ -192,16 +197,89 @@ const DoctorProfile = () => {
         if (file) {
             setSignatureImage(file);
             setShowSignaturePreview(true);
+            setSignatureDrawn(true);
         }
     };
 
     const handleRemoveSignature = () => {
         setSignatureImage(null);
         setShowSignaturePreview(false);
-        if (signatureCanvasRef.current) {
-            signatureCanvasRef.current.clear();
+        setSignatureDrawn(false);
+        const canvas = signatureCanvasRef.current;
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     };
+
+    // Setup native canvas drawing
+    useEffect(() => {
+        const canvas = signatureCanvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        const resize = () => {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        };
+        resize();
+
+        const getPos = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches ? e.touches[0] : e;
+            return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+        };
+
+        const startDraw = (e) => {
+            e.preventDefault();
+            drawing = true;
+            const pos = getPos(e);
+            lastX = pos.x;
+            lastY = pos.y;
+        };
+
+        const draw = (e) => {
+            if (!drawing) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = '#0B1C30';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            lastX = pos.x;
+            lastY = pos.y;
+            setSignatureDrawn(true);
+        };
+
+        const stopDraw = () => { drawing = false; };
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDraw);
+        canvas.addEventListener('mouseleave', stopDraw);
+        canvas.addEventListener('touchstart', startDraw, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', stopDraw);
+
+        return () => {
+            canvas.removeEventListener('mousedown', startDraw);
+            canvas.removeEventListener('mousemove', draw);
+            canvas.removeEventListener('mouseup', stopDraw);
+            canvas.removeEventListener('mouseleave', stopDraw);
+            canvas.removeEventListener('touchstart', startDraw);
+            canvas.removeEventListener('touchmove', draw);
+            canvas.removeEventListener('touchend', stopDraw);
+        };
+    }, [isEdit]);
 
     return doctorData && (
         <div className="w-full min-h-screen bg-[#ecf8fa] py-5" dir="rtl">
@@ -522,14 +600,10 @@ const DoctorProfile = () => {
                                             {signatureMode === 'draw' && (
                                                 <div className="space-y-3">
                                                     <div className="border-2 border-dashed border-[#C3C6D6] rounded-xl bg-gray-50/50 p-2 min-h-[200px]">
-                                                        <SignatureCanvas
+                                                        <canvas
                                                             ref={signatureCanvasRef}
-                                                            canvasProps={{
-                                                                className: 'w-full h-full cursor-crosshair',
-                                                                style: { backgroundColor: 'white', touchAction: 'none' }
-                                                            }}
-                                                            clearOnResize={false}
-                                                            onEnd={() => setSignatureDrawn(true)}
+                                                            className="w-full h-full cursor-crosshair"
+                                                            style={{ backgroundColor: 'white', touchAction: 'none' }}
                                                         />
                                                     </div>
                                                     <div className="flex gap-2">
