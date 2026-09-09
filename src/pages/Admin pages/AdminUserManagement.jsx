@@ -138,37 +138,19 @@ export default function AdminUserManagement() {
             return;
         }
         try {
-            const fileUrl = type === 'cv' ? userDetails?.cvPath : userDetails?.idPath;
-            const fileName = type === 'cv' ? 'CV.pdf' : 'ID_Document.jpg';
-
-            if (fileUrl) {
-                const response = await fetch(fileUrl);
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(url);
-                toast.success('تم تحميل الملف بنجاح');
-                return;
-            }
-
             const endpoint = type === 'cv'
                 ? `/admin/users/doctors/${doctorId}/download-cv`
                 : `/admin/users/doctors/${doctorId}/download-id`;
-            const res = await axiosInstance.get(endpoint, { responseType: 'blob' });
-            const blob2 = new Blob([res.data]);
-            const url2 = window.URL.createObjectURL(blob2);
-            const link2 = document.createElement('a');
-            link2.href = url2;
-            link2.download = fileName;
-            document.body.appendChild(link2);
-            link2.click();
-            document.body.removeChild(link2);
-            window.URL.revokeObjectURL(url2);
+            const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
+            const blob = new Blob([response.data], { type: type === 'cv' ? 'application/pdf' : 'image/jpeg' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = type === 'cv' ? 'CV.pdf' : 'ID_Document.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
             toast.success('تم تحميل الملف بنجاح');
         } catch (error) {
             toast.error('فشل في تحميل الملف');
