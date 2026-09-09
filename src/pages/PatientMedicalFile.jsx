@@ -7,6 +7,7 @@ import { Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
 import { resolveImageUrl } from '../utils/imageUrl';
 import { toast } from 'react-toastify';
+import { assets } from '../assets/assets_frontend/assets';
 
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
@@ -595,7 +596,12 @@ const PatientMedicalFile = () => {
                                 <p style={{ fontSize: '11px', color: '#666' }}>{pdfVisit.specializationName || ""}</p>
                             </div>
                             <div style={{ textAlign: 'center' }}>
-                                <p style={{ fontSize: '11px', color: '#999' }}>تم إنشاء هذا السجل عبر منصة طبيبي</p>
+                                <img
+                                    crossOrigin="anonymous"
+                                    src={assets.logo}
+                                    alt="شعار طبيبي"
+                                    style={{ height: '40px', objectFit: 'contain', marginBottom: '4px' }}
+                                />
                                 <p style={{ fontSize: '10px', color: '#bbb', marginTop: '2px' }}>Tabibi Platform</p>
                             </div>
                         </div>

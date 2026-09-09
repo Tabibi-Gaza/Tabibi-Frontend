@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { FiFileText, FiDownload, FiEye, FiX, FiUser, FiCalendar, FiTrash2 } from 'react-icons/fi';
 import { resolveImageUrl } from '../utils/imageUrl';
+import { assets } from '../assets/assets_frontend/assets';
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
   if (!html2canvas) {
@@ -456,7 +457,12 @@ const MyPrescriptions = () => {
                                 <p style={{ fontSize: '11px', color: '#666' }}>{selectedRx.doctorSpecialization || ""}</p>
                             </div>
                             <div style={{ textAlign: 'center' }}>
-                                <p style={{ fontSize: '11px', color: '#999' }}>تم إنشاء هذه الوصفة عبر منصة طبيبي</p>
+                                <img
+                                    crossOrigin="anonymous"
+                                    src={assets.logo}
+                                    alt="شعار طبيبي"
+                                    style={{ height: '40px', objectFit: 'contain', marginBottom: '4px' }}
+                                />
                                 <p style={{ fontSize: '10px', color: '#bbb', marginTop: '2px' }}>Tabibi Platform</p>
                             </div>
                         </div>
