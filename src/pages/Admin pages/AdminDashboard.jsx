@@ -92,6 +92,18 @@ const AdminDashboard = () => {
 
     const handleDownload = async (applicationId, type) => {
         try {
+            const details = selectedDetails || selectedRequest;
+            if (type === 'cv' && details?.cvPath) {
+                window.open(details.cvPath, '_blank');
+                toast.success('تم فتح ملف السيرة الذاتية');
+                return;
+            }
+            if (type === 'id' && details?.idDocumentPath) {
+                window.open(details.idDocumentPath, '_blank');
+                toast.success('تم فتح ملف الهوية');
+                return;
+            }
+
             const endpoint = type === 'cv'
                 ? `/admin/doctor-applications/${applicationId}/download-cv`
                 : `/admin/doctor-applications/${applicationId}/download-id-document`;

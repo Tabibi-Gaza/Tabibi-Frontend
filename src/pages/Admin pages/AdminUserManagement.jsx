@@ -138,6 +138,17 @@ export default function AdminUserManagement() {
             return;
         }
         try {
+            if (type === 'cv' && userDetails?.cvPath) {
+                window.open(userDetails.cvPath, '_blank');
+                toast.success('تم فتح ملف السيرة الذاتية');
+                return;
+            }
+            if (type === 'id' && userDetails?.idPath) {
+                window.open(userDetails.idPath, '_blank');
+                toast.success('تم فتح ملف الهوية');
+                return;
+            }
+
             const endpoint = type === 'cv'
                 ? `/admin/users/doctors/${doctorId}/download-cv`
                 : `/admin/users/doctors/${doctorId}/download-id`;
@@ -153,7 +164,6 @@ export default function AdminUserManagement() {
             window.URL.revokeObjectURL(url);
             toast.success('تم تحميل الملف بنجاح');
         } catch (error) {
-
             toast.error('فشل في تحميل الملف');
         }
     };
