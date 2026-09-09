@@ -30,6 +30,9 @@ const MedicalHistory = () => {
     const [submitting, setSubmitting] = useState(false);
 
     // QR Code
+    const [hasEdited, setHasEdited] = useState(false);
+    const [showEditWarning, setShowEditWarning] = useState(false);
+
     const [showQrModal, setShowQrModal] = useState(false);
     const [qrToken, setQrToken] = useState('');
     const [qrExpiry, setQrExpiry] = useState('');
@@ -81,6 +84,16 @@ const MedicalHistory = () => {
                     setChronicDiseases(rec.chronicDiseases || []);
                     setAllergies(rec.allergies || []);
                     setCurrentMedicines(rec.currentMedicines || []);
+
+                    // التحقق مما إذا تم تعديل السجل من قبل
+                    const alreadyEdited = localStorage.getItem('medical_history_edited') === 'true';
+                    if (alreadyEdited) {
+                        setHasEdited(true);
+                    } else if (rec.bloodType || rec.chronicDiseases?.length > 0 || rec.allergies?.length > 0 || rec.currentMedicines?.length > 0) {
+                        // إذا كانت هناك بيانات، يعني تم التعديل من قبل
+                        setHasEdited(true);
+                        localStorage.setItem('medical_history_edited', 'true');
+                    }
                 } else {
                     setRecordData(null);
                 }
@@ -160,6 +173,8 @@ const MedicalHistory = () => {
 
             if (data.succeeded) {
                 toast.success("تم تحديث السجل الطبي بنجاح!");
+                localStorage.setItem('medical_history_edited', 'true');
+                setHasEdited(true);
                 const { data: freshData } = await axiosInstance.get('/patient/medical-history');
                 if (freshData.succeeded && freshData.data) {
                     setRecordData(freshData.data);
@@ -269,7 +284,13 @@ const MedicalHistory = () => {
                   <FontAwesomeIcon icon={faQrcode} />
                 </button>
                 <button
-                  onClick={() => setIsEditing(true)}
+                  onClick={() => {
+                    if (hasEdited) {
+                      toast.warn("لقد قمت بتعديل السجل المرضي مسبقاً. لا يُسمح بتعديل مرة أخرى.");
+                      return;
+                    }
+                    setShowEditWarning(true);
+                  }}
                   className="bg-[#138C9F] hover:bg-[#0f7282] text-white px-5 py-2.5 rounded-xl text-xs font-black transition-all duration-200 shadow-xs flex items-center gap-2"
                 >
                   تعديل السجل المرضي
@@ -802,6 +823,41 @@ const MedicalHistory = () => {
             </form>
           </div>
         )}
+        {/* تنبيه تعديل السجل المرضي */}
+        {showEditWarning && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 text-center">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FontAwesomeIcon icon={faTriangleExclamation} className="text-2xl text-amber-500" />
+              </div>
+              <h3 className="text-lg font-black text-gray-800 mb-2">تنبيه هام</h3>
+              <p className="text-sm text-gray-500 mb-2">
+                يمكنك تعديل السجل المرضي <span className="font-black text-red-500">فقط مرة واحدة</span>.
+              </p>
+              <p className="text-xs text-gray-400 mb-6">
+                بعد الحفظ لن تتمكن من التعديل مرة أخرى. تأكد من صحة جميع البيانات قبل الحفظ.
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setShowEditWarning(false)}
+                  className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-black transition-colors"
+                >
+                  إلغاء
+                </button>
+                <button
+                  onClick={() => {
+                    setShowEditWarning(false);
+                    setIsEditing(true);
+                  }}
+                  className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors"
+                >
+                  متابعة التعديل
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* QR Modal */}
         {showQrModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
