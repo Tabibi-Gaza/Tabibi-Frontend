@@ -96,13 +96,17 @@ const AdminDashboard = () => {
                 ? `/admin/doctor-applications/${applicationId}/download-cv`
                 : `/admin/doctor-applications/${applicationId}/download-id-document`;
 
-            const { data } = await axiosInstance.get(endpoint);
-            if (data.url) {
-                window.location.href = data.url;
-                toast.success('تم بدء تحميل الملف');
-            } else {
-                toast.error('رابط الملف غير موجود');
-            }
+            const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
+            const blob = new Blob([response.data]);
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = type === 'cv' ? 'CV.pdf' : 'ID_Document.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            toast.success('تم تحميل الملف بنجاح');
         } catch (error) {
             toast.error('فشل في تحميل الملف');
         }
