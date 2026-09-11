@@ -132,7 +132,7 @@ const PatientMedicalFile = () => {
             const element = printRef.current;
             const canvas = await html2canvas(element, { scale: 2, useCORS: true, logging: false });
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdf = new jsPDF('p', 'mm', 'a5');
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
@@ -517,92 +517,100 @@ const PatientMedicalFile = () => {
             {/* Hidden div for visit PDF generation */}
             {pdfVisit && (
                 <div className="fixed -left-[9999px] top-0" dir="rtl">
-                    <div ref={printRef} style={{ width: '794px', padding: '40px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30' }}>
-                        <div style={{ textAlign: 'center', borderBottom: '3px solid #1b8b99', paddingBottom: '20px', marginBottom: '25px' }}>
-                            <h1 style={{ fontSize: '24px', fontWeight: '900', color: '#1b8b99', margin: 0 }}>تفاصيل زيارة طبية</h1>
-                            <p style={{ fontSize: '12px', color: '#888', margin: '5px 0 0' }}>Tabibi Platform - Medical Visit Record</p>
+                    <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
+                        {/* Watermark */}
+                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-35deg)', opacity: 0.06, pointerEvents: 'none', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                            <img crossOrigin="anonymous" src={assets.logo} alt="" style={{ height: '40px', marginBottom: '4px' }} />
+                            <p style={{ fontSize: '16px', fontWeight: '900', color: '#138C9F', margin: 0 }}>{pdfVisit.clinicName || 'عيادة طبيبي'}</p>
+                            <p style={{ fontSize: '10px', color: '#138C9F', margin: '2px 0 0' }}>Tabibi Platform</p>
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', padding: '15px', background: '#f8fafb', borderRadius: '12px' }}>
-                            <div>
-                                <p style={{ fontSize: '13px', fontWeight: '700', color: '#1b8b99' }}>الطبيب المعالج</p>
-                                <p style={{ fontSize: '15px', fontWeight: '800', margin: '4px 0' }}>{pdfVisit.doctorName}</p>
-                                <p style={{ fontSize: '12px', color: '#666' }}>{pdfVisit.specializationName || ""}</p>
+                        <div style={{ textAlign: 'center', borderBottom: '2px solid #1b8b99', paddingBottom: '12px', marginBottom: '15px', position: 'relative', zIndex: 1 }}>
+                            <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#1b8b99', margin: 0 }}>تفاصيل زيارة طبية</h1>
+                            <p style={{ fontSize: '10px', color: '#888', margin: '4px 0 0' }}>Tabibi Platform - Medical Visit Record</p>
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px', padding: '10px', background: '#f8fafb', borderRadius: '10px', position: 'relative', zIndex: 1 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                {pdfVisit.doctorImageUrl ? (
+                                    <img loading="lazy" crossOrigin="anonymous" src={pdfVisit.doctorImageUrl} alt="" style={{ width: '38px', height: '38px', borderRadius: '10px', objectFit: 'cover' }} />
+                                ) : (
+                                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#1b8b99', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '800' }}>
+                                        {(pdfVisit.doctorName || '').split(' ').map(w => w[0]).join('').slice(0, 2)}
+                                    </div>
+                                )}
+                                <div>
+                                    <p style={{ fontSize: '10px', fontWeight: '700', color: '#1b8b99' }}>الطبيب المعالج</p>
+                                    <p style={{ fontSize: '12px', fontWeight: '800', margin: '2px 0' }}>{pdfVisit.doctorName}</p>
+                                    {pdfVisit.clinicName && <p style={{ fontSize: '10px', color: '#888', margin: 0 }}>{pdfVisit.clinicName}</p>}
+                                    <p style={{ fontSize: '10px', color: '#666', margin: '2px 0 0' }}>{pdfVisit.specializationName || ""}</p>
+                                </div>
                             </div>
                             <div style={{ textAlign: 'left' }}>
-                                <p style={{ fontSize: '13px', fontWeight: '700', color: '#1b8b99' }}>التاريخ</p>
-                                <p style={{ fontSize: '13px', fontWeight: '700', margin: '4px 0' }}>{formatDateFull(pdfVisit.visitDate)}</p>
+                                <p style={{ fontSize: '10px', fontWeight: '700', color: '#1b8b99' }}>التاريخ والوقت</p>
+                                <p style={{ fontSize: '11px', fontWeight: '700', margin: '2px 0' }}>{formatDateFull(pdfVisit.visitDate)}</p>
+                                {pdfVisit.visitDate && <p style={{ fontSize: '10px', color: '#666', margin: 0 }}>{new Date(pdfVisit.visitDate).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })}</p>}
                             </div>
                         </div>
 
                         {pdfVisit.symptoms && (
-                            <div style={{ marginBottom: '15px' }}>
-                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>الأعراض</p>
-                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f8f8f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.symptoms}</p>
+                            <div style={{ marginBottom: '10px', position: 'relative', zIndex: 1 }}>
+                                <p style={{ fontSize: '11px', fontWeight: '800', color: '#1b8b99', marginBottom: '4px' }}>الأعراض</p>
+                                <p style={{ fontSize: '11px', fontWeight: '600', background: '#f8f8f8', padding: '7px 10px', borderRadius: '6px' }}>{pdfVisit.symptoms}</p>
                             </div>
                         )}
                         {pdfVisit.diagnosis && (
-                            <div style={{ marginBottom: '15px' }}>
-                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>التشخيص</p>
-                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f0f7f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.diagnosis}</p>
+                            <div style={{ marginBottom: '10px', position: 'relative', zIndex: 1 }}>
+                                <p style={{ fontSize: '11px', fontWeight: '800', color: '#1b8b99', marginBottom: '4px' }}>التشخيص</p>
+                                <p style={{ fontSize: '11px', fontWeight: '600', background: '#f0f7f8', padding: '7px 10px', borderRadius: '6px' }}>{pdfVisit.diagnosis}</p>
                             </div>
                         )}
                         {pdfVisit.visitNotes && (
-                            <div style={{ marginBottom: '15px' }}>
-                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>ملاحظات الزيارة</p>
-                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f8f8f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.visitNotes}</p>
+                            <div style={{ marginBottom: '10px', position: 'relative', zIndex: 1 }}>
+                                <p style={{ fontSize: '11px', fontWeight: '800', color: '#1b8b99', marginBottom: '4px' }}>ملاحظات الزيارة</p>
+                                <p style={{ fontSize: '11px', fontWeight: '600', background: '#f8f8f8', padding: '7px 10px', borderRadius: '6px' }}>{pdfVisit.visitNotes}</p>
                             </div>
                         )}
                         {pdfVisit.recommendations && (
-                            <div style={{ marginBottom: '15px' }}>
-                                <p style={{ fontSize: '13px', fontWeight: '800', color: '#1b8b99', marginBottom: '5px' }}>التوصيات</p>
-                                <p style={{ fontSize: '13px', fontWeight: '600', background: '#f8f8f8', padding: '10px 15px', borderRadius: '8px' }}>{pdfVisit.recommendations}</p>
+                            <div style={{ marginBottom: '10px', position: 'relative', zIndex: 1 }}>
+                                <p style={{ fontSize: '11px', fontWeight: '800', color: '#1b8b99', marginBottom: '4px' }}>التوصيات</p>
+                                <p style={{ fontSize: '11px', fontWeight: '600', background: '#f8f8f8', padding: '7px 10px', borderRadius: '6px' }}>{pdfVisit.recommendations}</p>
                             </div>
                         )}
 
                         {pdfVisit.prescriptionMedications && pdfVisit.prescriptionMedications.length > 0 && (
-                            <div style={{ borderTop: '2px solid #C3C6D6', paddingTop: '15px', marginTop: '15px' }}>
-                                <p style={{ fontSize: '15px', fontWeight: '800', color: '#1b8b99', marginBottom: '12px' }}>الأدوية الموصوفة</p>
+                            <div style={{ borderTop: '2px solid #C3C6D6', paddingTop: '10px', marginTop: '10px', position: 'relative', zIndex: 1 }}>
+                                <p style={{ fontSize: '12px', fontWeight: '800', color: '#1b8b99', marginBottom: '8px' }}>الأدوية الموصوفة</p>
                                 {pdfVisit.prescriptionMedications.map((med, i) => (
-                                    <div key={i} style={{ background: '#f8fafb', border: '1px solid #e8ecf0', borderRadius: '10px', padding: '12px 15px', marginBottom: '8px' }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                                            <span style={{ fontSize: '14px', fontWeight: '800' }}>{i + 1}. {med.medicationName}</span>
-                                            <span style={{ fontSize: '12px', fontWeight: '700', color: '#1b8b99', background: '#fff', padding: '2px 8px', borderRadius: '6px' }}>{med.dosage}</span>
+                                    <div key={i} style={{ background: '#f8fafb', border: '1px solid #e8ecf0', borderRadius: '8px', padding: '8px 10px', marginBottom: '6px' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
+                                            <span style={{ fontSize: '11px', fontWeight: '800' }}>{i + 1}. {med.medicationName}</span>
+                                            <span style={{ fontSize: '10px', fontWeight: '700', color: '#1b8b99', background: '#fff', padding: '2px 6px', borderRadius: '5px' }}>{med.dosage}</span>
                                         </div>
-                                        <div style={{ fontSize: '12px', color: '#666', fontWeight: '600' }}>
+                                        <div style={{ fontSize: '10px', color: '#666', fontWeight: '600' }}>
                                             <span>{med.frequency} مرات</span>
-                                            {med.duration && <><span style={{ margin: '0 8px' }}>|</span><span>المدة: {med.duration}</span></>}
-                                            {med.instructions && <><span style={{ margin: '0 8px' }}>|</span><span>{med.instructions}</span></>}
+                                            {med.duration && <><span style={{ margin: '0 6px' }}>|</span><span>المدة: {med.duration}</span></>}
+                                            {med.instructions && <><span style={{ margin: '0 6px' }}>|</span><span>{med.instructions}</span></>}
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         )}
 
-                        <div style={{ borderTop: '2px solid #C3C6D6', marginTop: '30px', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                        <div style={{ borderTop: '2px solid #C3C6D6', marginTop: '15px', paddingTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', position: 'relative', zIndex: 1 }}>
                             <div style={{ textAlign: 'right' }}>
-                                <p style={{ fontSize: '12px', fontWeight: '700', color: '#1b8b99', marginBottom: '10px' }}>توقيع الطبيب المعالج</p>
+                                <p style={{ fontSize: '10px', fontWeight: '700', color: '#1b8b99', marginBottom: '6px' }}>توقيع الطبيب المعالج</p>
                                 {pdfVisit.doctorSignatureUrl ? (
-                                    <img
-                                        crossOrigin="anonymous"
-                                        src={pdfVisit.doctorSignatureUrl}
-                                        alt="توقيع الطبيب"
-                                        style={{ height: '50px', objectFit: 'contain' }}
-                                    />
+                                    <img crossOrigin="anonymous" src={pdfVisit.doctorSignatureUrl} alt="توقيع الطبيب" style={{ height: '35px', objectFit: 'contain' }} />
                                 ) : (
-                                    <div style={{ width: '120px', borderBottom: '1px solid #333', marginBottom: '4px' }}></div>
+                                    <div style={{ width: '80px', borderBottom: '1px solid #333', marginBottom: '3px' }}></div>
                                 )}
-                                <p style={{ fontSize: '12px', fontWeight: '700', color: '#333', marginTop: '5px' }}>{pdfVisit.doctorName}</p>
-                                <p style={{ fontSize: '11px', color: '#666' }}>{pdfVisit.specializationName || ""}</p>
+                                <p style={{ fontSize: '10px', fontWeight: '700', color: '#333', marginTop: '3px' }}>{pdfVisit.doctorName}</p>
+                                {pdfVisit.clinicName && <p style={{ fontSize: '9px', color: '#888', margin: 0 }}>{pdfVisit.clinicName}</p>}
                             </div>
                             <div style={{ textAlign: 'center' }}>
-                                <img
-                                    crossOrigin="anonymous"
-                                    src={assets.logo}
-                                    alt="شعار طبيبي"
-                                    style={{ height: '40px', objectFit: 'contain', marginBottom: '4px' }}
-                                />
-                                <p style={{ fontSize: '10px', color: '#bbb', marginTop: '2px' }}>Tabibi Platform</p>
+                                <img crossOrigin="anonymous" src={assets.logo} alt="شعار طبيبي" style={{ height: '28px', objectFit: 'contain', marginBottom: '2px' }} />
+                                <p style={{ fontSize: '8px', color: '#bbb', marginTop: '1px' }}>Tabibi Platform</p>
                             </div>
                         </div>
                     </div>

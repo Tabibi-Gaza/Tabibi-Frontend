@@ -11,6 +11,7 @@ import {
   LogOut,
   UserCheck,
   FileText,
+  Lock,
 } from 'lucide-react';
 import { AppContext } from '../../context/AppContext';
 
@@ -122,6 +123,7 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
 
   const doctorOnlyItems = !isSecretary ? [
     { name: 'إدارة السكرتير', path: '/doctor/secretary-management', icon: <UserCheck size={20} strokeWidth={1.75} /> },
+    { name: 'تغيير كلمة المرور', path: '/doctor/change-password', icon: <Lock size={20} strokeWidth={1.75} /> },
   ] : [];
 
   return (

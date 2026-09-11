@@ -87,6 +87,7 @@ const PatientMedicalFile = lazy(() => import('./pages/PatientMedicalFile'))
 const AppointmentManagement = lazy(() => import('./pages/Doctor pages/Appointment Management'))
 const SecretaryManagement = lazy(() => import('./pages/Doctor pages/SecretaryManagement'))
 const DoctorSubscription = lazy(() => import('./pages/Doctor pages/DoctorSubscription'))
+const DoctorChangePassword = lazy(() => import('./pages/Doctor pages/DoctorChangePassword'))
 const RegisterAsDoctor = lazy(() => import('./pages/RegisterAsDoctor'))
 const Pharmacies = lazy(() => import('./pages/Pharmacies'))
 const MedicalCenters = lazy(() => import('./pages/MedicalCenters'))
@@ -217,6 +218,7 @@ const App = () => {
             <Route path="/doctor/financials" element={<FinancialFiles />} />
             <Route path="/doctor/appointments" element={<AppointmentManagement />} />
             <Route path="/doctor/secretary-management" element={<SecretaryManagement />} />
+            <Route path="/doctor/change-password" element={<DoctorChangePassword />} />
             <Route path="/doctor/subscription" element={<DoctorSubscription />} />
           </Route>
 
