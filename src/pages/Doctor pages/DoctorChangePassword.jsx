@@ -43,7 +43,7 @@ const DoctorChangePassword = () => {
             formData.append('ConfirmNewPassword', confirmPassword);
 
             const { default: axiosInstance } = await import('../../api/axiosInstance');
-            await axiosInstance.post('/doctor/profile/change-password', formData);
+            await axiosInstance.post('/patient/profile/change-password', formData);
             toast.success('تم تغيير كلمة المرور بنجاح');
             navigate('/doctor/profile');
         } catch (err) {
