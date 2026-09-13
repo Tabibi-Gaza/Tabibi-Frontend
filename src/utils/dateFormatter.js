@@ -37,3 +37,18 @@ export const formatDateTime = (dateInput) => {
         return '-';
     }
 };
+
+export const formatTimeArabic = (dateInput) => {
+    if (!dateInput) return '';
+    try {
+        const d = new Date(dateInput);
+        if (isNaN(d.getTime())) return '';
+        let hours = d.getHours();
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        const period = hours >= 12 ? 'م' : 'ص';
+        hours = hours % 12 || 12;
+        return `${hours}:${minutes} ${period}`;
+    } catch {
+        return '';
+    }
+};

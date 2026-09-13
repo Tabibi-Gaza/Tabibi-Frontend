@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstance from "../../api/axiosInstance";
 import { AppContext } from "../../context/AppContext";
+import { formatTimeArabic } from "../../utils/dateFormatter";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -316,7 +317,7 @@ const DoctorDashboard = () => {
                       </div>
                     </td>
                     <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30]">
-                      {new Date(req.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
+                      {formatTimeArabic(req.startTime)}
                     </td>
                     <td className="hidden md:table-cell p-3 md:p-4 whitespace-nowrap">
                       <span className="bg-[#FFF0EE] text-[#BA1A1A] px-2.5 py-0.5 rounded-full text-xs font-bold">
@@ -374,7 +375,7 @@ const DoctorDashboard = () => {
                     <div>
                       <h4 className="font-black text-[#0B1C30] text-base">{selectedPayment.patientName}</h4>
                       <p className="text-xs font-bold text-[#526069] mt-0.5">
-                        موعد المقابلة: {new Date(selectedPayment.startTime).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", hour12: true })}
+                        موعد المقابلة: {formatTimeArabic(selectedPayment.startTime)}
                       </p>
                     </div>
                   </div>

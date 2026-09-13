@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { FiFileText, FiDownload, FiEye, FiX, FiUser, FiCalendar, FiTrash2 } from 'react-icons/fi';
 import { resolveImageUrl } from '../utils/imageUrl';
+import { formatTimeArabic } from '../utils/dateFormatter';
 import { assets } from '../assets/assets_frontend/assets';
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
@@ -376,12 +377,15 @@ const MyPrescriptions = () => {
                 <div className="fixed -left-[9999px] top-0" dir="rtl">
                     <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
                         {/* Watermark */}
-                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-35deg)', opacity: 0.06, pointerEvents: 'none', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-35deg)', opacity: 0.15, pointerEvents: 'none', textAlign: 'center', whiteSpace: 'nowrap' }}>
                             <img crossOrigin="anonymous" src={assets.logo} alt="" style={{ height: '40px', marginBottom: '4px' }} />
-                            <p style={{ fontSize: '16px', fontWeight: '900', color: '#138C9F', margin: 0 }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
-                            <p style={{ fontSize: '10px', color: '#138C9F', margin: '2px 0 0' }}>Tabibi Platform</p>
+                            <p style={{ fontSize: '18px', fontWeight: '900', color: '#138C9F', margin: 0 }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
+                            <p style={{ fontSize: '11px', color: '#138C9F', margin: '2px 0 0', fontWeight: '700' }}>Tabibi Platform</p>
                         </div>
 
+                        <div style={{ textAlign: 'center', marginBottom: '10px', position: 'relative', zIndex: 1 }}>
+                            <img crossOrigin="anonymous" src={assets.logo} alt="شعار طبيبي" style={{ height: '32px', objectFit: 'contain' }} />
+                        </div>
                         <div style={{ textAlign: 'center', borderBottom: '2px solid #138C9F', paddingBottom: '12px', marginBottom: '15px', position: 'relative', zIndex: 1 }}>
                             <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#138C9F', margin: 0 }}>وصفة طبية</h1>
                             <p style={{ fontSize: '10px', color: '#888', margin: '4px 0 0' }}>Tabibi Platform - Medical Prescription</p>
@@ -406,7 +410,7 @@ const MyPrescriptions = () => {
                             <div style={{ textAlign: 'left' }}>
                                 <p style={{ fontSize: '10px', fontWeight: '700', color: '#138C9F' }}>التاريخ والوقت</p>
                                 <p style={{ fontSize: '11px', fontWeight: '700', margin: '2px 0' }}>{formatDate(selectedRx.sentAt)}</p>
-                                {selectedRx.sentAt && <p style={{ fontSize: '10px', color: '#666', margin: 0 }}>{new Date(selectedRx.sentAt).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })}</p>}
+                                {selectedRx.sentAt && <p style={{ fontSize: '10px', color: '#666', margin: 0 }}>{formatTimeArabic(selectedRx.sentAt)}</p>}
                             </div>
                         </div>
 

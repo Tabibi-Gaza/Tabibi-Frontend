@@ -12,6 +12,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { resolveImageUrl } from '../utils/imageUrl';
+import { formatTimeArabic } from '../utils/dateFormatter';
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 
@@ -44,8 +45,7 @@ const MyAppointment = () => {
 
   const formatTime = (dateStr) => {
     if (!dateStr) return "";
-    const d = new Date(dateStr);
-    return d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+    return formatTimeArabic(dateStr);
   };
 
   const getStatus = (status) => STATUS_MAP[status] || { label: status, bg: 'bg-gray-50', text: 'text-gray-600', border: 'border-gray-100' };

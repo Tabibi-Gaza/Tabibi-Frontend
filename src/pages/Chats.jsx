@@ -14,6 +14,7 @@ import {
   useDeleteMessage,
 } from '../queries/chat/chatQueries';
 import { resolveImageUrl } from '../utils/imageUrl';
+import { formatTimeArabic } from '../utils/dateFormatter';
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 const SWIPE_THRESHOLD = 80;
@@ -271,7 +272,7 @@ export default function Chats() {
     const now = new Date();
     const diffMs = now - date;
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) return date.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+    if (diffDays === 0) return formatTimeArabic(dateStr);
     if (diffDays === 1) return 'أمس';
     if (diffDays < 7) return date.toLocaleDateString('ar-EG', { weekday: 'long' });
     const day = String(date.getDate()).padStart(2, '0');
@@ -454,7 +455,7 @@ export default function Chats() {
                               )}
                               {renderMessageContent(msg)}
                               <span className={`block text-[10px] mt-1 text-left ${msg.isMine ? 'text-cyan-100' : 'text-gray-400'}`}>
-                                {msg.sentAt ? new Date(msg.sentAt).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : ''}
+                                {msg.sentAt ? formatTimeArabic(msg.sentAt) : ''}
                               </span>
                             </div>
                           </div>

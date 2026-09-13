@@ -12,6 +12,7 @@ import {
 } from "../../queries/chat/chatQueries";
 import { useDoctorsQuery } from "../../queries/doctors/doctorQueries";
 import { resolveImageUrl } from '../../utils/imageUrl';
+import { formatTimeArabic } from '../../utils/dateFormatter';
 
 const FILES_BASE = import.meta.env.VITE_Files_URL || "";
 
@@ -193,7 +194,7 @@ export default function AdminChats() {
     const diffMs = now - date;
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     if (diffDays === 0) {
-      return date.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+      return formatTimeArabic(dateStr);
     }
     if (diffDays === 1) return "أمس";
     if (diffDays < 7) return date.toLocaleDateString("ar-EG", { weekday: "long" });

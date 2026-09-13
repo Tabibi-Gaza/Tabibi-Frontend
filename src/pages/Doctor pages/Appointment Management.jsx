@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
+import { formatTimeArabic } from '../../utils/dateFormatter';
 import { FiRotateCcw } from 'react-icons/fi';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || '';
@@ -140,7 +141,7 @@ const AppointmentManagement = () => {
         try {
             const d = new Date(dateStr);
             if (isNaN(d.getTime())) return { time: '', date: '' };
-            const time = d.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const time = formatTimeArabic(d);
             const day = String(d.getDate()).padStart(2, '0');
             const month = String(d.getMonth() + 1).padStart(2, '0');
             const year = d.getFullYear();

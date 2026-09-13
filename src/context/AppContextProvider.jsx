@@ -3,6 +3,7 @@ import { AppContext } from "./AppContext";
 import axiosInstance from "../api/axiosInstance";
 import { toast } from "react-toastify";
 import { resolveImageUrl } from "../utils/imageUrl";
+import { formatTimeArabic } from "../utils/dateFormatter";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -120,7 +121,7 @@ const AppContextProvider = (props) => {
                     doctor: appt.doctorName,
                     specialty: appt.specialty,
                     slotDate: appt.startTime?.split('T')[0] || '',
-                    slotTime: appt.startTime ? new Date(appt.startTime).toLocaleTimeString('ar-IQ', { hour: '2-digit', minute: '2-digit' }) : '',
+                    slotTime: appt.startTime ? formatTimeArabic(appt.startTime) : '',
                     amount: appt.amount,
                     isCompleted: appt.status === 'Completed',
                     cancelled: appt.status === 'Cancelled',

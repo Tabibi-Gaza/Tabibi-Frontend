@@ -7,7 +7,7 @@ import { faQrcode, faPenToSquare, faFloppyDisk, faPlus, faTrashAlt, faSmoking, f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from "../../api/axiosInstance";
 import { resolveImageUrl } from "../../utils/imageUrl";
-import { formatDate as formatDateDdMmYyyy } from "../../utils/dateFormatter";
+import { formatDate as formatDateDdMmYyyy, formatTimeArabic } from "../../utils/dateFormatter";
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
@@ -784,7 +784,7 @@ const MedicalExamination = () => {
                                     const dayNum = String(visitDate.getDate()).padStart(2, '0');
                                     const monthNum = String(visitDate.getMonth() + 1).padStart(2, '0');
                                     const yearNum = visitDate.getFullYear();
-                                    const timeStr = visitDate.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
+                                    const timeStr = formatTimeArabic(visitDate);
                                     return (
                                         <div key={visit.id || idx} className="bg-white border border-[#C3C6D6]/80 rounded-2xl overflow-hidden shadow-xs">
                                             <div className="bg-[#EBF3F5] px-4 py-3 md:px-6 flex items-center justify-between border-b border-[#C3C6D6]/80">
