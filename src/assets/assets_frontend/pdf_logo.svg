@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <!-- Heart shape -->
+  <path d="M280 30 C280 10, 310 0, 330 10 C355 22, 360 50, 340 70 C325 85, 300 95, 280 105 C260 95, 235 85, 220 70 C200 50, 205 22, 230 10 C250 0, 280 10, 280 30Z" fill="url(#heartGrad)" opacity="0.9"/>
+  <!-- Medical cross -->
+  <rect x="265" y="38" width="8" height="30" rx="2" fill="white"/>
+  <rect x="255" y="48" width="28" height="8" rx="2" fill="white"/>
+  <!-- Leaf/hand element -->
+  <path d="M240 85 C250 75, 270 70, 280 75 C270 80, 255 82, 240 85Z" fill="#0ea5e9" opacity="0.7"/>
+  <path d="M320 85 C310 75, 290 70, 280 75 C290 80, 305 82, 320 85Z" fill="#138C9F" opacity="0.7"/>
+  
+  <!-- Arabic text "طبيبي" -->
+  <text x="130" y="65" font-family="Tajawal, Arial, sans-serif" font-size="52" font-weight="900" fill="#138C9F" text-anchor="middle">طبيبي</text>
+  
+  <!-- English text "Tabibi" -->
+  <text x="130" y="100" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#138C9F" text-anchor="middle" letter-spacing="3">— Tabibi —</text>
+  
+  <!-- Decorative dots -->
+  <circle cx="45" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
+  <circle cx="60" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
+  <circle cx="75" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
+  <circle cx="90" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
+  
+  <defs>
+    <linearGradient id="heartGrad" x1="220" y1="10" x2="340" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#138C9F"/>
+    </linearGradient>
+  </defs>
+</svg>
