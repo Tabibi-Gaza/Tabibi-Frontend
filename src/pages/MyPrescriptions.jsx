@@ -379,16 +379,9 @@ const MyPrescriptions = () => {
                     <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
                         {/* Watermark — full page */}
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.07, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-35deg)' }}>
-                            <p style={{ fontSize: '64px', fontWeight: '900', color: '#e03030', margin: '0 0 8px', fontFamily: 'Tajawal, Arial, sans-serif' }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <img src={assets.logoPng} alt="" style={{ height: '30px' }} />
-                                <p style={{ fontSize: '18px', color: '#e03030', margin: 0, fontWeight: '700', letterSpacing: '2px' }}>Tabibi Platform</p>
-                            </div>
+                            <p style={{ fontSize: '64px', fontWeight: '900', color: '#e03030', margin: 0, fontFamily: 'Tajawal, Arial, sans-serif' }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
                         </div>
 
-                        <div style={{ textAlign: 'center', marginBottom: '10px', position: 'relative', zIndex: 1, overflow: 'visible' }}>
-                            <img src={assets.logoPng} alt="شعار طبيبي" style={{ width: '140px', display: 'block', margin: '0 auto' }} />
-                        </div>
                         <div style={{ textAlign: 'center', borderBottom: '2px solid #138C9F', paddingBottom: '12px', marginBottom: '15px', position: 'relative', zIndex: 1 }}>
                             <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#138C9F', margin: 0 }}>وصفة طبية</h1>
                             <p style={{ fontSize: '10px', color: '#888', margin: '4px 0 0' }}>Tabibi Platform - Medical Prescription</p>
@@ -466,7 +459,7 @@ const MyPrescriptions = () => {
                                 {selectedRx.clinicName && <p style={{ fontSize: '9px', color: '#888', margin: 0 }}>{selectedRx.clinicName}</p>}
                             </div>
                             <div style={{ textAlign: 'center' }}>
-                                <img crossOrigin="anonymous" src={assets.logo} alt="شعار طبيبي" style={{ height: '28px', objectFit: 'contain', marginBottom: '2px' }} />
+                                <img src={assets.logoPng} alt="شعار طبيبي" style={{ height: '35px', marginBottom: '2px' }} />
                                 <p style={{ fontSize: '8px', color: '#bbb', marginTop: '1px' }}>Tabibi Platform</p>
                             </div>
                         </div>
