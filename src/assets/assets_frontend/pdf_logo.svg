@@ -1,27 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
-  <!-- Heart shape -->
-  <path d="M280 30 C280 10, 310 0, 330 10 C355 22, 360 50, 340 70 C325 85, 300 95, 280 105 C260 95, 235 85, 220 70 C200 50, 205 22, 230 10 C250 0, 280 10, 280 30Z" fill="url(#heartGrad)" opacity="0.9"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 140" fill="none">
+  <!-- Heart shape - left -->
+  <path d="M380 35 C380 12, 415 0, 440 12 C470 28, 475 60, 452 82 C435 98, 405 110, 380 122 C355 110, 325 98, 308 82 C285 60, 290 28, 315 12 C340 0, 380 12, 380 35Z" fill="url(#heartGrad)" opacity="0.9"/>
   <!-- Medical cross -->
-  <rect x="265" y="38" width="8" height="30" rx="2" fill="white"/>
-  <rect x="255" y="48" width="28" height="8" rx="2" fill="white"/>
-  <!-- Leaf/hand element -->
-  <path d="M240 85 C250 75, 270 70, 280 75 C270 80, 255 82, 240 85Z" fill="#0ea5e9" opacity="0.7"/>
-  <path d="M320 85 C310 75, 290 70, 280 75 C290 80, 305 82, 320 85Z" fill="#138C9F" opacity="0.7"/>
+  <rect x="363" y="48" width="10" height="36" rx="3" fill="white"/>
+  <rect x="350" y="60" width="36" height="10" rx="3" fill="white"/>
+  <!-- Leaf left -->
+  <path d="M330 98 C342 86, 360 80, 380 86 C365 92, 348 94, 330 98Z" fill="#0ea5e9" opacity="0.7"/>
+  <!-- Leaf right -->
+  <path d="M430 98 C418 86, 400 80, 380 86 C395 92, 412 94, 430 98Z" fill="#138C9F" opacity="0.7"/>
   
-  <!-- Arabic text "طبيبي" -->
-  <text x="130" y="65" font-family="Tajawal, Arial, sans-serif" font-size="52" font-weight="900" fill="#138C9F" text-anchor="middle">طبيبي</text>
+  <!-- Arabic text طبيبي - using path for reliable rendering -->
+  <text x="155" y="75" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="900" fill="#138C9F" text-anchor="middle" direction="rtl">طبيبي</text>
   
-  <!-- English text "Tabibi" -->
-  <text x="130" y="100" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#138C9F" text-anchor="middle" letter-spacing="3">— Tabibi —</text>
+  <!-- English text Tabibi -->
+  <text x="155" y="115" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#138C9F" text-anchor="middle" letter-spacing="4">Tabibi</text>
   
-  <!-- Decorative dots -->
-  <circle cx="45" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
-  <circle cx="60" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
-  <circle cx="75" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
-  <circle cx="90" cy="85" r="4" fill="#138C9F" opacity="0.6"/>
+  <!-- Left line -->
+  <line x1="20" y1="115" x2="90" y2="115" stroke="#138C9F" stroke-width="2.5"/>
+  <!-- Right line -->
+  <line x1="220" y1="115" x2="290" y2="115" stroke="#138C9F" stroke-width="2.5"/>
   
   <defs>
-    <linearGradient id="heartGrad" x1="220" y1="10" x2="340" y2="105" gradientUnits="userSpaceOnUse">
+    <linearGradient id="heartGrad" x1="308" y1="12" x2="452" y2="122" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#0ea5e9"/>
       <stop offset="100%" stop-color="#138C9F"/>
     </linearGradient>

@@ -377,15 +377,15 @@ const MyPrescriptions = () => {
             {selectedRx && (
                 <div className="fixed -left-[9999px] top-0" dir="rtl">
                     <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
-                        {/* Watermark */}
-                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-35deg)', opacity: 0.12, pointerEvents: 'none', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                            <img src={pdfLogo} alt="" style={{ height: '80px', marginBottom: '8px' }} />
-                            <p style={{ fontSize: '22px', fontWeight: '900', color: '#138C9F', margin: '4px 0', fontFamily: 'Tajawal, Arial, sans-serif' }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
-                            <p style={{ fontSize: '13px', color: '#0ea5e9', margin: 0, fontWeight: '700', letterSpacing: '1px' }}>Tabibi Platform</p>
+                        {/* Watermark — full page */}
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.08, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-35deg)' }}>
+                            <img src={pdfLogo} alt="" style={{ width: '350px', marginBottom: '16px' }} />
+                            <p style={{ fontSize: '42px', fontWeight: '900', color: '#e03030', margin: '8px 0', fontFamily: 'Tajawal, Arial, sans-serif' }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
+                            <p style={{ fontSize: '20px', color: '#e03030', margin: 0, fontWeight: '700', letterSpacing: '2px' }}>Tabibi Platform</p>
                         </div>
 
                         <div style={{ textAlign: 'center', marginBottom: '8px', position: 'relative', zIndex: 1 }}>
-                            <img src={pdfLogo} alt="شعار طبيبي" style={{ height: '50px', objectFit: 'contain' }} />
+                            <img src={pdfLogo} alt="شعار طبيبي" style={{ width: '180px' }} />
                         </div>
                         <div style={{ textAlign: 'center', borderBottom: '2px solid #138C9F', paddingBottom: '12px', marginBottom: '15px', position: 'relative', zIndex: 1 }}>
                             <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#138C9F', margin: 0 }}>وصفة طبية</h1>
