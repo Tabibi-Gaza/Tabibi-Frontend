@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axiosInstance from '../api/axiosInstance'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,6 +9,10 @@ const PaymentPage = () => {
   const { appointmentId } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
+
+  if (!location.state?.doctorId) {
+    return <Navigate to="/doctors" replace />;
+  }
 
   const { doctorId, amount, dateTime, doctorName } = location.state || {}
 

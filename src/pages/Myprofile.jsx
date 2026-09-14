@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/assets_frontend/assets'
 import { AppContext } from '../context/AppContext'
 import axiosInstance from '../api/axiosInstance'
@@ -18,6 +18,12 @@ const Myprofile = () => {
   const [localUserData, setLocalUserData] = useState(() => {
     return userData ? { ...userData } : null;
   })
+
+  const imageUrl = localUserData?.image
+
+  useEffect(() => {
+    return () => { if (imageUrl) URL.revokeObjectURL(imageUrl); };
+  }, [imageUrl])
 
   // تحديد الدولة الأولية بناءً على الرقم المحفوظ إن وُجد
   const [selectedCountry, setSelectedCountry] = useState(() => {

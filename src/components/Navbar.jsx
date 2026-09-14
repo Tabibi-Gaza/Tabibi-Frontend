@@ -25,8 +25,9 @@ const Navbar = () => {
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
-  const isAdmin = token === "admin-token-mock";
-  const isDoctor = token === "doctor-token-mock";
+  const user = (() => { try { return JSON.parse(localStorage.getItem('user')); } catch { return null; } })();
+  const isAdmin = user?.roles?.includes('Admin');
+  const isDoctor = user?.roles?.includes('Doctor') || user?.roles?.includes('Secretary');
 
   const unreadCount = notifications
     ? notifications.filter((n) => !n.isRead).length

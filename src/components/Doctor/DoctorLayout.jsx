@@ -9,7 +9,7 @@ const DoctorLayout = () => {
     const { lang } = useTheme();
 
     const userStr = localStorage.getItem('user');
-    const user = userStr ? JSON.parse(userStr) : null;
+    const user = (() => { try { return JSON.parse(userStr); } catch { return null; } })();
     const roles = user?.roles || [];
     const isDoctorOrSecretary = roles.includes('Doctor') || roles.includes('Secretary');
 

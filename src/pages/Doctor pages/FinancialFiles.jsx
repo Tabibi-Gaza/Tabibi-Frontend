@@ -89,7 +89,7 @@ const FinancialFiles = () => {
                     setExpenses(JSON.parse(savedExpenses));
                 }
             } catch (err) {
-
+                console.error(err);
             } finally {
                 setLoading(false);
             }
@@ -160,27 +160,11 @@ const FinancialFiles = () => {
         const printContent = invoiceRef.current;
         if (!printContent) return;
         const win = window.open('', '_blank');
-        win.document.write(`
-            <html dir="rtl">
-            <head>
-                <title>فاتورة - طبيبي</title>
-                <style>
-                    body { font-family: 'Tajawal', Arial, sans-serif; padding: 40px; color: #333; }
-                    .header { text-align: center; border-bottom: 2px solid #1b8b99; padding-bottom: 20px; margin-bottom: 20px; }
-                    .header h1 { color: #1b8b99; margin: 0; font-size: 24px; }
-                    .header p { color: #666; margin: 5px 0 0; font-size: 12px; }
-                    .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; }
-                    .info-row .label { font-weight: bold; color: #1b8b99; }
-                    .total { font-size: 20px; font-weight: bold; color: #1b8b99; text-align: center; margin-top: 20px; padding: 15px; border: 2px solid #1b8b99; border-radius: 10px; }
-                    .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #999; }
-                </style>
-            </head>
-            <body>
-                ${printContent.innerHTML}
-            </body>
-            </html>
-        `);
-        win.document.close();
+        const doc = win.document;
+        doc.open();
+        doc.write(`<!DOCTYPE html><html dir="rtl"><head><title>فاتورة - طبيبي</title><style>body{font-family:'Tajawal',Arial,sans-serif;padding:40px;color:#333}.header{text-align:center;border-bottom:2px solid #1b8b99;padding-bottom:20px;margin-bottom:20px}.header h1{color:#1b8b99;margin:0;font-size:24px}.header p{color:#666;margin:5px 0 0;font-size:12px}.info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}.info-row .label{font-weight:bold;color:#1b8b99}.total{font-size:20px;font-weight:bold;color:#1b8b99;text-align:center;margin-top:20px;padding:15px;border:2px solid #1b8b99;border-radius:10px}.footer{text-align:center;margin-top:30px;font-size:11px;color:#999}</style></head><body></body></html>`);
+        doc.close();
+        doc.body.appendChild(printContent.cloneNode(true));
         win.print();
     };
 

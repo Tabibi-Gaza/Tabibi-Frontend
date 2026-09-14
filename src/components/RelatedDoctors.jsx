@@ -46,7 +46,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
                                     {/* النجوم والتقييم */}
                                     <div className='flex items-center gap-0.5 text-[10px] text-amber-500 font-bold bg-amber-50 px-1.5 py-0.5 rounded-md'>
                                         <span>★</span>
-                                        <span>4.8</span>
+                                        <span>{item.rating || 4.8}</span>
                                     </div>
                                 </div>
                                 <p className='text-[#138c9f] text-xs font-medium mb-3'>{item.speciality}</p>

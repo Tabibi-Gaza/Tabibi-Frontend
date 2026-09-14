@@ -60,7 +60,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
   const [recentNotifications, setRecentNotifications] = useState([]);
 
   const userStr = localStorage.getItem('user');
-  const user = userStr ? JSON.parse(userStr) : null;
+  const user = (() => { try { return JSON.parse(userStr); } catch { return null; } })();
   const isSecretary = user?.roles?.includes('Secretary');
 
   const { secretaryDoctorInfo } = useContext(AppContext);
@@ -148,7 +148,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
           src={assets.logo}
           alt="شعار طبيبي غزة"
           className="h-7 md:h-10 w-auto cursor-pointer object-contain"
-          onClick={() => navigate("/doctor/dashboard")}
+          onClick={() => navigate("/doctor-dashboard")}
         />
         <span className="bg-[#e2f4f7] dark:bg-gray-700 text-[#138C9F] dark:text-teal-300 text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-[#138C9F]/20 dark:border-teal-400/20 whitespace-nowrap">
           {isSecretary ? 'بوابة السكرتير' : 'بوابة الطبيب'}

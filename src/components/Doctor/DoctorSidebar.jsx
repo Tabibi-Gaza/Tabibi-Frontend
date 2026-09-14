@@ -55,7 +55,7 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
   const { setToken, hasPermission, secretaryPermissions } = useContext(AppContext);
 
   const userStr = localStorage.getItem('user');
-  const user = userStr ? JSON.parse(userStr) : null;
+  const user = (() => { try { return JSON.parse(userStr); } catch { return null; } })();
   const isSecretary = user?.roles?.includes('Secretary');
 
   const handleLogout = () => {
