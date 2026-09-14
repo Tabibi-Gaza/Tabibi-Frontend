@@ -6,7 +6,7 @@ import { FiFileText, FiDownload, FiEye, FiX, FiUser, FiCalendar, FiTrash2 } from
 import { resolveImageUrl } from '../utils/imageUrl';
 import { formatTimeArabic } from '../utils/dateFormatter';
 import { assets } from '../assets/assets_frontend/assets';
-import pdfLogo from '../assets/assets_frontend/pdf_logo.svg';
+
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
   if (!html2canvas) {
@@ -379,13 +379,13 @@ const MyPrescriptions = () => {
                     <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
                         {/* Watermark — full page */}
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.08, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-35deg)' }}>
-                            <img src={pdfLogo} alt="" style={{ width: '350px', marginBottom: '16px' }} />
-                            <p style={{ fontSize: '42px', fontWeight: '900', color: '#e03030', margin: '8px 0', fontFamily: 'Tajawal, Arial, sans-serif' }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
-                            <p style={{ fontSize: '20px', color: '#e03030', margin: 0, fontWeight: '700', letterSpacing: '2px' }}>Tabibi Platform</p>
+                            <img src={assets.logo} alt="" style={{ width: '350px', marginBottom: '16px' }} />
+                            <p style={{ fontSize: '52px', fontWeight: '900', color: '#e03030', margin: '8px 0', fontFamily: 'Tajawal, Arial, sans-serif' }}>{selectedRx.clinicName || 'عيادة طبيبي'}</p>
+                            <p style={{ fontSize: '24px', color: '#e03030', margin: 0, fontWeight: '700', letterSpacing: '3px' }}>Tabibi Platform</p>
                         </div>
 
                         <div style={{ textAlign: 'center', marginBottom: '8px', position: 'relative', zIndex: 1 }}>
-                            <img src={pdfLogo} alt="شعار طبيبي" style={{ width: '180px' }} />
+                            <img src={assets.logo} alt="شعار طبيبي" style={{ width: '200px' }} />
                         </div>
                         <div style={{ textAlign: 'center', borderBottom: '2px solid #138C9F', paddingBottom: '12px', marginBottom: '15px', position: 'relative', zIndex: 1 }}>
                             <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#138C9F', margin: 0 }}>وصفة طبية</h1>
