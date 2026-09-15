@@ -487,7 +487,7 @@ const AppContextProvider = (props) => {
         }
     }, [token]);
 
-    const value = {
+    const value = useMemo(() => ({
         doctors,
         getDoctorsData,
         currencySymbol,
@@ -514,7 +514,11 @@ const AppContextProvider = (props) => {
         secretaryDoctorInfo,
         hasPermission,
         loadSecretaryPermissions,
-    };
+    }), [
+        doctors, token, userData, doctorData, dashboardData,
+        notifications, groupedNotifications, secretaryPermissions,
+        secretaryDoctorInfo, hasPermission, loadSecretaryPermissions,
+    ]);
 
     return (
         <AppContext.Provider value={value}>

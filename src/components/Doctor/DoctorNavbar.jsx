@@ -73,7 +73,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
         setUnreadCount(data.data || 0);
       }
     } catch (err) {
-
+      console.error('Failed to fetch unread count:', err);
     }
   };
 
@@ -84,7 +84,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
         setRecentNotifications(data.data || []);
       }
     } catch (err) {
-
+      console.error('Failed to fetch recent notifications:', err);
     }
   };
 
@@ -94,7 +94,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
       setRecentNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
       setUnreadCount(0);
     } catch (err) {
-
+      console.error('Failed to mark notifications as read:', err);
     }
   };
 
@@ -315,7 +315,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
             <p className="text-xs md:text-sm font-black text-[#138C9F] dark:text-teal-300 whitespace-nowrap">
               {doctorData
                 ? `${doctorData.firstname} ${doctorData.lastname}`
-                : "عمر حمد"}
+                : "الطبيب"}
             </p>
             <p className="text-[10px] md:text-[11px] font-bold text-slate-500 dark:text-gray-400">
               {doctorData.email ? doctorData.email : "doctor@example.com"}

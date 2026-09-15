@@ -155,7 +155,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
               <p className="text-xs md:text-sm font-black text-[#138C9F] dark:text-teal-300 whitespace-nowrap">
                 {userData
                   ? `${userData.firstname} ${userData.lastname}`
-                  : "عمر حمد"}
+                  : "المسؤول"}
               </p>
               <p className="text-[10px] md:text-[11px] font-bold text-slate-500 dark:text-gray-400">
                 {userData.email ? userData.email : "admin@example.com"}
