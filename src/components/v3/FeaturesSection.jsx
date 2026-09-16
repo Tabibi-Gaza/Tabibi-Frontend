@@ -31,17 +31,17 @@ const features = [
 
 function FeaturesSection() {
   return (
-    <section className="bg-white py-20 md:py-28" dir="rtl">
+    <section className="bg-white dark:bg-gray-800 py-20 md:py-28" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
           <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide mb-5">
             مميزات طبيبي
           </span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 dark:text-gray-200 leading-tight">
             كل ما تحتاجه في <span className="text-[#138C9F]">منصة واحدة</span>
           </h2>
-          <p className="text-slate-500 text-sm md:text-base mt-4 max-w-2xl mx-auto font-bold">
+          <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base mt-4 max-w-2xl mx-auto font-bold">
             من الاستشارة إلى المتابعة، نرافقك في كل خطوة من رحلتك الصحية
           </p>
         </div>
@@ -51,7 +51,7 @@ function FeaturesSection() {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group relative bg-gradient-to-b from-white to-slate-50 rounded-3xl border border-slate-100 p-8 md:p-10 hover:shadow-xl hover:border-[#138C9F]/20 transition-all duration-500"
+              className="group relative bg-gradient-to-b from-white to-slate-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl border border-slate-100 dark:border-gray-700 p-8 md:p-10 hover:shadow-xl hover:border-[#138C9F]/20 transition-all duration-500"
             >
               {/* Number */}
               <span className="absolute top-6 left-6 text-6xl md:text-7xl font-black text-[#138C9F]/5 select-none leading-none">
@@ -64,10 +64,10 @@ function FeaturesSection() {
               </div>
 
               {/* Content */}
-              <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-3">
+              <h3 className="text-xl md:text-2xl font-black text-slate-900 dark:text-gray-200 mb-3">
                 {feature.title}
               </h3>
-              <p className="text-slate-500 leading-relaxed font-bold text-sm md:text-base">
+              <p className="text-slate-500 dark:text-gray-400 leading-relaxed font-bold text-sm md:text-base">
                 {feature.desc}
               </p>
             </div>

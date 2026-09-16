@@ -6,6 +6,7 @@ import { FiFileText, FiDownload, FiEye, FiX, FiUser, FiCalendar, FiTrash2 } from
 import { resolveImageUrl } from '../utils/imageUrl';
 import { formatTimeArabic } from '../utils/dateFormatter';
 import { assets } from '../assets/assets_frontend/assets';
+import { useTranslation } from 'react-i18next';
 
 let html2canvas, jsPDF;
 const loadPdfLibs = async () => {
@@ -23,6 +24,7 @@ const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 
 const MyPrescriptions = () => {
     const { token } = useContext(AppContext);
+    const { t } = useTranslation();
     const [prescriptions, setPrescriptions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedRx, setSelectedRx] = useState(null);
@@ -43,7 +45,7 @@ const MyPrescriptions = () => {
                 setPrescriptions(data.data);
             }
         } catch (err) {
-            toast.error('فشل تحميل الوصفات الطبية');
+            toast.error(t('myPrescriptions.fetchError'));
         } finally {
             setLoading(false);
         }
@@ -109,14 +111,14 @@ const MyPrescriptions = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('هل أنت متأكد من حذف هذه الوصفة الطبية؟')) return;
+        if (!window.confirm(t('myPrescriptions.confirmDelete'))) return;
         try {
             await axiosInstance.delete(`/patient/prescriptions/${id}`);
             setPrescriptions(prev => prev.filter(rx => rx.id !== id));
             if (selectedRx?.id === id) setSelectedRx(null);
-            toast.success('تم حذف الوصفة الطبية بنجاح');
+            toast.success(t('myPrescriptions.deleteSuccess'));
         } catch (err) {
-            toast.error('فشل حذف الوصفة الطبية');
+            toast.error(t('myPrescriptions.deleteFailed'));
         }
     };
 
@@ -132,21 +134,21 @@ const MyPrescriptions = () => {
         <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6" dir="rtl">
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
-                    <h1 className="text-2xl sm:text-3xl font-black text-[#0B1C30]">وصفاتي الطبية</h1>
-                    <p className="text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">عرض جميع الوصفات الطبية المستلمة من الأطباء</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-[#0B1C30]">{t('myPrescriptions.title')}</h1>
+                    <p className="text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{t('myPrescriptions.subtitle')}</p>
                 </div>
 
                 {prescriptions.length === 0 ? (
                     <div className="text-center py-20">
                         <FiFileText className="w-16 h-16 text-gray-300 dark:text-gray-500 mx-auto mb-4" />
-                        <p className="text-lg font-bold text-gray-400">لا توجد وصفات طبية بعد</p>
-                        <p className="text-sm font-bold text-gray-300 dark:text-gray-500 mt-1">ستظهر هنا الوصفات التي يرسلها الأطباء لك</p>
+                        <p className="text-lg font-bold text-gray-400">{t('myPrescriptions.noPrescriptions')}</p>
+                        <p className="text-sm font-bold text-gray-300 dark:text-gray-500 mt-1">{t('myPrescriptions.noPrescriptionsDescription')}</p>
                     </div>
                 ) : (
                     <>
                         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/60 rounded-2xl p-4 mb-5 flex flex-col sm:flex-row items-end gap-3">
                             <div className="flex-1 w-full">
-                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">تاريخ الزيارة</label>
+                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">{t('myPrescriptions.visitDate')}</label>
                                 <input
                                     type="date"
                                     value={filterDate}
@@ -155,7 +157,7 @@ const MyPrescriptions = () => {
                                 />
                             </div>
                             <div className="flex-1 w-full">
-                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">اسم الطبيب</label>
+                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">{t('myPrescriptions.doctorName')}</label>
                                 <input
                                     type="text"
                                     value={filterDoctor}
@@ -165,13 +167,13 @@ const MyPrescriptions = () => {
                                 />
                             </div>
                             <div className="flex-1 w-full">
-                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">التخصص</label>
+                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">{t('myPrescriptions.specialization')}</label>
                                 <select
                                     value={filterSpecialization}
                                     onChange={(e) => setFilterSpecialization(e.target.value)}
                                     className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors bg-white"
                                 >
-                                    <option value="">الكل</option>
+                                    <option value="">{t('myPrescriptions.all')}</option>
                                     {specializations.map((spec, i) => (
                                         <option key={i} value={spec}>{spec}</option>
                                     ))}
@@ -182,15 +184,15 @@ const MyPrescriptions = () => {
                                 className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#138C9F] text-[#138C9F] text-xs font-bold hover:bg-[#138C9F]/5 transition-all cursor-pointer whitespace-nowrap"
                             >
                                 <FiX className="w-3.5 h-3.5" />
-                                إعادة تعيين
+                                {t('myPrescriptions.reset')}
                             </button>
                         </div>
 
                         {filteredPrescriptions.length === 0 ? (
                             <div className="text-center py-16">
                                 <FiFileText className="w-14 h-14 text-gray-300 dark:text-gray-500 mx-auto mb-3" />
-                                <p className="text-base font-bold text-gray-400">لا توجد نتائج مطابقة للفلتر</p>
-                                <button onClick={clearFilters} className="mt-2 text-xs font-bold text-[#138C9F] hover:underline cursor-pointer">مسح الفلتر</button>
+                                <p className="text-base font-bold text-gray-400">{t('myPrescriptions.noResults')}</p>
+                                <button onClick={clearFilters} className="mt-2 text-xs font-bold text-[#138C9F] hover:underline cursor-pointer">{t('myPrescriptions.clearFilter')}</button>
                             </div>
                         ) : (
                     <div className="grid gap-5">
@@ -221,19 +223,19 @@ const MyPrescriptions = () => {
                                 <div className="px-5 py-4">
                                     {rx.diagnosis && (
                                         <div className="mb-3">
-                                            <span className="text-xs font-black text-[#138C9F]">التشخيص:</span>
+                                            <span className="text-xs font-black text-[#138C9F]">{t('myPrescriptions.diagnosis')}</span>
                                             <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{rx.diagnosis}</p>
                                         </div>
                                     )}
                                     {rx.symptoms && (
                                         <div className="mb-3">
-                                            <span className="text-xs font-black text-[#138C9F]">الأعراض:</span>
+                                            <span className="text-xs font-black text-[#138C9F]">{t('myPrescriptions.symptoms')}</span>
                                             <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mt-0.5">{rx.symptoms}</p>
                                         </div>
                                     )}
                                     {rx.medications?.length > 0 && (
                                         <div className="mt-3">
-                                            <span className="text-xs font-black text-[#138C9F] mb-2 block">الأدوية الموصوفة:</span>
+                                            <span className="text-xs font-black text-[#138C9F] mb-2 block">{t('myPrescriptions.prescribedMedications')}</span>
                                             <div className="flex flex-wrap gap-2">
                                                 {rx.medications.map((med, i) => (
                                                     <div key={i} className="bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 rounded-lg px-3 py-2 text-xs">
@@ -254,19 +256,19 @@ const MyPrescriptions = () => {
                                         onClick={() => setSelectedRx(rx)}
                                         className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-[#138C9F] text-[#138C9F] text-xs font-bold hover:bg-[#138C9F]/5 transition-all cursor-pointer">
                                         <FiEye className="w-3.5 h-3.5" />
-                                        معاينة التفاصيل
+                                        {t('myPrescriptions.previewDetails')}
                                     </button>
                                     <button
                                         onClick={() => setSelectedRx(rx)}
                                         className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#138C9F] text-white text-xs font-bold hover:bg-[#0f7585] transition-all cursor-pointer shadow-xs">
                                         <FiDownload className="w-3.5 h-3.5" />
-                                        تحميل PDF
+                                        {t('myPrescriptions.downloadPdf')}
                                     </button>
                                     <button
                                         onClick={() => handleDelete(rx.id)}
                                         className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-300 text-red-500 text-xs font-bold hover:bg-red-50 transition-all cursor-pointer">
                                         <FiTrash2 className="w-3.5 h-3.5" />
-                                        حذف
+                                        {t('myPrescriptions.delete')}
                                     </button>
                                 </div>
                             </div>
@@ -281,7 +283,7 @@ const MyPrescriptions = () => {
                 <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={() => setSelectedRx(null)}>
                     <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
                         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 px-6 py-4 flex items-center justify-between z-10">
-                            <h3 className="text-lg font-black text-[#0B1C30]">تفاصيل الوصفة الطبية</h3>
+                            <h3 className="text-lg font-black text-[#0B1C30]">{t('myPrescriptions.prescriptionDetails')}</h3>
                             <button onClick={() => setSelectedRx(null)} className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 cursor-pointer transition-all">
                                 <FiX className="w-4 h-4 text-gray-500" />
                             </button>
@@ -305,38 +307,38 @@ const MyPrescriptions = () => {
 
                             {selectedRx.diagnosis && (
                                 <div className="mb-4">
-                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">التشخيص</h4>
+                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">{t('myPrescriptions.diagnosis')}</h4>
                                     <p className="text-sm font-bold text-[#0B1C30] dark:text-white bg-[#EBF3F5] dark:bg-gray-800 rounded-lg px-4 py-2.5">{selectedRx.diagnosis}</p>
                                 </div>
                             )}
                             {selectedRx.chiefComplaint && (
                                 <div className="mb-4">
-                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">الشكوى الرئيسية</h4>
+                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">{t('myPrescriptions.chiefComplaint')}</h4>
                                     <p className="text-sm font-bold text-[#0B1C30] dark:text-white bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.chiefComplaint}</p>
                                 </div>
                             )}
                             {selectedRx.symptoms && (
                                 <div className="mb-4">
-                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">الأعراض</h4>
+                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">{t('myPrescriptions.symptoms')}</h4>
                                     <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.symptoms}</p>
                                 </div>
                             )}
                             {selectedRx.visitNotes && (
                                 <div className="mb-4">
-                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">ملاحظات الزيارة</h4>
+                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">{t('myPrescriptions.visitNotes')}</h4>
                                     <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.visitNotes}</p>
                                 </div>
                             )}
                             {selectedRx.recommendations && (
                                 <div className="mb-4">
-                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">التوصيات</h4>
+                                    <h4 className="text-xs font-black text-[#138C9F] mb-1">{t('myPrescriptions.recommendations')}</h4>
                                     <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.recommendations}</p>
                                 </div>
                             )}
 
                             {selectedRx.medications?.length > 0 && (
                                 <div className="mt-5">
-                                    <h4 className="text-xs font-black text-[#138C9F] mb-3">الأدوية الموصوفة</h4>
+                                    <h4 className="text-xs font-black text-[#138C9F] mb-3">{t('myPrescriptions.prescribedMedicationsTitle')}</h4>
                                     <div className="space-y-2.5">
                                         {selectedRx.medications.map((med, i) => (
                                             <div key={i} className="bg-[#EBF3F5] dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/40 rounded-xl p-3.5">
@@ -366,7 +368,7 @@ const MyPrescriptions = () => {
                             <button
                                 onClick={() => setSelectedRx(null)}
                                 className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 text-sm font-bold hover:bg-gray-50 dark:bg-gray-900 transition-all cursor-pointer">
-                                إغلاق
+                                {t('myPrescriptions.close')}
                             </button>
                         </div>
                     </div>

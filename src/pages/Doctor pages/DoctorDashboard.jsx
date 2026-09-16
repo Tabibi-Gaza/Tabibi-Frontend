@@ -210,7 +210,7 @@ const DoctorDashboard = () => {
               </thead>
               <tbody className="divide-y divide-[#C3C6D6]/40">
                 {todayAppointments.map((appt) => {
-                  const patientName = (appt.patientName || "").replace(/^undefined\s*/i, "").trim() || "مريض";
+                  const patientName = (appt.patientName || "").replace(/^undefined\s*/i, "").trim() || t('doctorDashboard.patient');
                   const patientImage = appt.patientImage || appt.patientImageUrl || "";
                   return (
                   <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors">
@@ -292,7 +292,7 @@ const DoctorDashboard = () => {
               </thead>
               <tbody className="divide-y divide-[#C3C6D6]/40">
                 {paymentRequests.map((req) => {
-                  const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || "مريض";
+                  const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || t('doctorDashboard.patient');
                   const imgUrl = req.patientImageUrl || "";
                   return (
                   <tr key={req.appointmentId} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors">

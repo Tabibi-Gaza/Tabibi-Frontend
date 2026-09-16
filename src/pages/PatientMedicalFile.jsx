@@ -9,6 +9,7 @@ import { resolveImageUrl } from '../utils/imageUrl';
 import { formatTimeArabic } from '../utils/dateFormatter';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets_frontend/assets';
+import { useTranslation } from 'react-i18next';
 
 
 let html2canvas, jsPDF;
@@ -50,8 +51,9 @@ const formatDate = (dateString) => {
 };
 
 const PatientMedicalFile = () => {
+    const { t } = useTranslation();
     const [searchDate, setSearchDate] = useState('');
-    const [specialty, setSpecialty] = useState('الكل');
+    const [specialty, setSpecialty] = useState('all');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalStep, setModalStep] = useState(1);
     const [selectedVisit, setSelectedVisit] = useState(null);
@@ -75,10 +77,10 @@ const PatientMedicalFile = () => {
                 if (res.data.succeeded) {
                     setVisits(res.data.data);
                 } else {
-                    setError('فشل في تحميل البيانات');
+                    setError(t('patientMedicalFile.fetchFailed'));
                 }
             } catch (err) {
-                setError('حدث خطأ أثناء تحميل البيانات');
+                setError(t('patientMedicalFile.fetchError'));
             } finally {
                 setLoading(false);
             }
@@ -88,11 +90,11 @@ const PatientMedicalFile = () => {
 
     const handleResetFilters = () => {
         setSearchDate('');
-        setSpecialty('الكل');
+        setSpecialty('all');
     };
 
     const filteredVisits = visits.filter((v) => {
-        if (specialty !== 'الكل' && v.specializationName !== specialty) return false;
+        if (specialty !== 'all' && v.specializationName !== specialty) return false;
         if (searchDate && v.visitDate) {
             const visitDateStr = new Date(v.visitDate).toISOString().slice(0, 10);
             if (visitDateStr !== searchDate) return false;
@@ -111,17 +113,17 @@ const PatientMedicalFile = () => {
     };
 
     const handleDeleteVisit = async (visitId) => {
-        if (!window.confirm('هل أنت متأكد من حذف هذه الزيارة؟')) return;
+        if (!window.confirm(t('patientMedicalFile.confirmDelete'))) return;
         try {
             const res = await axiosInstance.delete(`/patient/medical-records/${visitId}`);
             if (res.data.succeeded) {
                 setVisits(prev => prev.filter(v => v.id !== visitId));
-                alert('تم حذف الزيارة بنجاح');
+                alert(t('patientMedicalFile.deleteSuccess'));
             } else {
-                alert('فشل حذف الزيارة');
+                alert(t('patientMedicalFile.deleteFailed'));
             }
         } catch (err) {
-            alert('حدث خطأ أثناء الحذف');
+            alert(t('patientMedicalFile.deleteError'));
         }
     };
 
@@ -139,9 +141,9 @@ const PatientMedicalFile = () => {
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
             pdf.save(`visit-${(visit.doctorName || 'doctor').replace(/\s+/g, '_')}-${new Date(visit.visitDate).toISOString().split('T')[0]}.pdf`);
-            toast.success('تم تحميل الزيارة بنجاح');
+            toast.success(t('patientMedicalFile.downloadSuccess'));
         } catch (err) {
-            toast.error('فشل تحميل ملف PDF');
+            toast.error(t('patientMedicalFile.downloadFailed'));
         } finally {
             setPdfVisit(null);
         }
@@ -183,15 +185,15 @@ const PatientMedicalFile = () => {
 
                 {/* الهيدر العلوي للسجل الطبي */}
                 <div className="text-right space-y-1">
-                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1b8b99]">السجل الطبي</h1>
-                    <p className="text-xs sm:text-sm text-gray-500">عرض وتتبع تاريخك الطبي، التشخيصات، والوصفات الطبية السابقة.</p>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1b8b99]">{t('patientMedicalFile.title')}</h1>
+                    <p className="text-xs sm:text-sm text-gray-500">{t('patientMedicalFile.subtitle')}</p>
                 </div>
 
                 {/* قسم الفلترة والبحث */}
                 <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-4 shadow-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-end">
                         <div className="space-y-1.5 text-right">
-                            <label className="text-xs font-bold text-gray-500">البحث حسب التاريخ</label>
+                            <label className="text-xs font-bold text-gray-500">{t('patientMedicalFile.searchByDate')}</label>
                             <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 bg-slate-50 dark:bg-gray-900/50 h-11 focus-within:border-[#1b8b99] focus-within:bg-white dark:bg-gray-800 transition-all">
                                 <input
                                     type="date"
@@ -203,14 +205,14 @@ const PatientMedicalFile = () => {
                         </div>
 
                         <div className="space-y-1.5 text-right">
-                            <label className="text-xs font-bold text-gray-500">التخصص</label>
+                            <label className="text-xs font-bold text-gray-500">{t('patientMedicalFile.specialty')}</label>
                             <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 bg-slate-50 dark:bg-gray-900/50 h-11 focus-within:border-[#1b8b99] focus-within:bg-white dark:bg-gray-800 transition-all">
                                 <select
                                     value={specialty}
                                     onChange={(e) => setSpecialty(e.target.value)}
                                     className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium appearance-none"
                                 >
-                                    <option value="الكل">الكل</option>
+                                    <option value="all">{t('patientMedicalFile.all')}</option>
                                     {[...new Set(visits.map((v) => v.specializationName).filter(Boolean))].map((spec) => (
                                         <option key={spec} value={spec}>{spec}</option>
                                     ))}
@@ -221,14 +223,14 @@ const PatientMedicalFile = () => {
                         <div className="flex gap-2">
                             <button className="flex-1 flex items-center justify-center gap-2 bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold h-11 rounded-xl transition-all shadow-xs cursor-pointer text-sm">
                                 <FiSliders className="w-4 h-4" />
-                                تطبيق الفلاتر
+                                {t('patientMedicalFile.applyFilters')}
                             </button>
                             <button
                                 onClick={handleResetFilters}
                                 className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-4 rounded-xl transition-all cursor-pointer text-sm"
                             >
                                 <FiRotateCcw className="w-4 h-4" />
-                                إعادة ضبط
+                                {t('patientMedicalFile.resetFilters')}
                             </button>
                         </div>
                     </div>
@@ -236,7 +238,7 @@ const PatientMedicalFile = () => {
 
                 {filteredVisits.length === 0 ? (
                     <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl shadow-xs p-10 text-center">
-                        <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد زيارات طبية مسجلة</p>
+                        <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">{t('patientMedicalFile.noVisits')}</p>
                     </div>
                 ) : (
                     filteredVisits.map((visit) => {
@@ -252,7 +254,7 @@ const PatientMedicalFile = () => {
                                         </div>
                                         <div>
                                             <h3 className="font-bold text-gray-800 dark:text-gray-200 text-base sm:text-lg flex items-center gap-2">
-                                                زيارة طبية
+                                                {t('patientMedicalFile.medicalVisit')}
                                             </h3>
                                             <p className="text-xs text-gray-400 dark:text-gray-500 font-medium mt-0.5">{visit.specializationName}</p>
                                         </div>
@@ -272,13 +274,13 @@ const PatientMedicalFile = () => {
                                             onClick={() => openModal(visit)}
                                             className="bg-[#1b8b99] hover:bg-[#15727e] text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
                                         >
-                                            تقييم
+                                            {t('patientMedicalFile.rating')}
                                         </button>
                                         <button
                                             onClick={() => handleDeleteVisit(visit.id)}
                                             className="bg-red-50 hover:bg-red-100 text-red-500 text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
                                         >
-                                            حذف
+                                            {t('patientMedicalFile.delete')}
                                         </button>
                                     </div>
                                 </div>
@@ -288,7 +290,7 @@ const PatientMedicalFile = () => {
                                     <div className="md:col-span-2 space-y-5">
                                         <div className="space-y-1">
                                             <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
-                                                <FiUser className="w-3.5 h-3.5 text-[#1b8b99]" /> اسم الطبيب
+                                                <FiUser className="w-3.5 h-3.5 text-[#1b8b99]" /> {t('patientMedicalFile.doctorName')}
                                             </p>
                                             <h4 className="font-black text-gray-800 dark:text-gray-200 text-sm sm:text-base">{visit.doctorName}</h4>
                                             <p className="text-xs font-bold text-[#1b8b99]">{visit.specializationName}</p>
@@ -297,7 +299,7 @@ const PatientMedicalFile = () => {
                                         {visit.symptoms && (
                                             <div className="space-y-1">
                                                 <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
-                                                    <FiActivity className="w-3.5 h-3.5 text-[#1b8b99]" /> الأعراض
+                                                    <FiActivity className="w-3.5 h-3.5 text-[#1b8b99]" /> {t('patientMedicalFile.symptoms')}
                                                 </p>
                                                 <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.symptoms}</p>
                                             </div>
@@ -306,7 +308,7 @@ const PatientMedicalFile = () => {
                                         {visit.diagnosis && (
                                             <div className="space-y-1">
                                                 <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
-                                                    <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> التشخيص
+                                                    <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> {t('patientMedicalFile.diagnosis')}
                                                 </p>
                                                 <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.diagnosis}</p>
                                             </div>
@@ -315,7 +317,7 @@ const PatientMedicalFile = () => {
                                         {visit.visitNotes && (
                                             <div className="space-y-1">
                                                 <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
-                                                    <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> ملاحظات الزيارة
+                                                    <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> {t('patientMedicalFile.visitNotes')}
                                                 </p>
                                                 <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.visitNotes}</p>
                                             </div>
@@ -324,7 +326,7 @@ const PatientMedicalFile = () => {
                                         {visit.recommendations && (
                                             <div className="space-y-1">
                                                 <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
-                                                    <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> التوصيات
+                                                    <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> {t('patientMedicalFile.recommendations')}
                                                 </p>
                                                 <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.recommendations}</p>
                                             </div>
@@ -335,7 +337,7 @@ const PatientMedicalFile = () => {
                                         <div className="border border-dashed border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-900/40 rounded-xl p-4 space-y-3">
                                             <h5 className="text-xs font-bold text-[#1b8b99] border-b border-dashed border-slate-200 dark:border-gray-700 pb-2 flex items-center gap-1.5">
                                                 <FiFileText className="w-4 h-4" />
-                                                الوصفة الطبية
+                                                {t('patientMedicalFile.prescription')}
                                             </h5>
                                             <div className="space-y-2">
                                                 {visit.prescriptionMedications.map((med, idx) => (
@@ -359,7 +361,7 @@ const PatientMedicalFile = () => {
 
                                 <div className="bg-slate-50 dark:bg-gray-900/50 border-t border-slate-100 dark:border-gray-700 p-3 text-center">
                                     <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium flex items-center justify-center gap-1.5">
-                                        <span>يتم تحديث السجلات الطبية تلقائياً بعد كل زيارة.</span>
+                                        <span>{t('patientMedicalFile.autoUpdateNotice')}</span>
                                     </p>
                                 </div>
                             </div>
@@ -384,7 +386,7 @@ const PatientMedicalFile = () => {
                             )}
                             <div className="mx-auto">
                                 <span className="bg-cyan-50 text-[#1b8b99] text-[10px] font-black px-3 py-1 rounded-full border border-cyan-100/30">
-                                    الخطوة {modalStep} من 2
+                                    {t('patientMedicalFile.step')} {modalStep} {t('patientMedicalFile.of')} 2
                                 </span>
                             </div>
                             <button
@@ -398,7 +400,7 @@ const PatientMedicalFile = () => {
                         {modalStep === 1 && (
                             <div className="p-5 sm:p-6 text-center space-y-6">
                                 <div className="space-y-1">
-                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800">كيف تقيّم تجربتك مع المنصة بشكل عام؟</h3>
+                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800">{t('patientMedicalFile.platformRatingTitle')}</h3>
                                 </div>
                                 <div className="flex justify-center items-center gap-2" dir="ltr">
                                     {[1, 2, 3, 4, 5].map((star) => (
@@ -415,11 +417,11 @@ const PatientMedicalFile = () => {
                                     ))}
                                 </div>
                                 <div className="space-y-1.5 text-right">
-                                    <label className="text-xs font-bold text-gray-500">أخبرنا المزيد عن تجربتك (اختياري)</label>
+                                    <label className="text-xs font-bold text-gray-500">{t('patientMedicalFile.tellUsMore')}</label>
                                     <textarea
                                         value={platformComment}
                                         onChange={(e) => setPlatformComment(e.target.value)}
-                                        placeholder="اكتب ملاحظاتك هنا..."
+                                        placeholder={t('patientMedicalFile.writeNotes')}
                                         rows={4}
                                         className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right"
                                     />
@@ -429,14 +431,14 @@ const PatientMedicalFile = () => {
                                         onClick={() => setModalStep(2)}
                                         className="w-full bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold h-11 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-sm shadow-xs"
                                     >
-                                        التالي
+                                        {t('patientMedicalFile.next')}
                                         <FiArrowLeft className="w-4 h-4" />
                                     </button>
                                     <button
                                         onClick={() => setModalStep(2)}
                                         className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
                                     >
-                                        تخطي
+                                        {t('patientMedicalFile.skip')}
                                     </button>
                                 </div>
                             </div>
@@ -466,7 +468,7 @@ const PatientMedicalFile = () => {
                                     </div>
                                 </div>
                                 <div className="space-y-1">
-                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800">كيف تقيّم تجربتك مع الطبيب؟</h3>
+                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800">{t('patientMedicalFile.doctorRatingTitle')}</h3>
                                 </div>
                                 <div className="flex justify-center items-center gap-2" dir="ltr">
                                     {[1, 2, 3, 4, 5].map((star) => (
@@ -483,11 +485,11 @@ const PatientMedicalFile = () => {
                                     ))}
                                 </div>
                                 <div className="space-y-1.5 text-right">
-                                    <label className="text-xs font-bold text-gray-500">أخبرنا المزيد عن تجربتك (اختياري)</label>
+                                    <label className="text-xs font-bold text-gray-500">{t('patientMedicalFile.tellUsMore')}</label>
                                     <textarea
                                         value={doctorComment}
                                         onChange={(e) => setDoctorComment(e.target.value)}
-                                        placeholder="اكتب ملاحظاتك هنا..."
+                                        placeholder={t('patientMedicalFile.writeNotes')}
                                         rows={4}
                                         className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right"
                                     />
@@ -496,18 +498,18 @@ const PatientMedicalFile = () => {
                                     <button
                                         onClick={() => {
                                             setIsModalOpen(false);
-                                            alert('تم إرسال تقييمك بنجاح! شكراً لك.');
+                                            alert(t('patientMedicalFile.ratingSubmitted'));
                                         }}
                                         className="w-full bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold h-11 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-sm shadow-xs"
                                     >
                                         <FiSend className="w-4 h-4" />
-                                        إرسال التقييم
+                                        {t('patientMedicalFile.sendRating')}
                                     </button>
                                     <button
                                         onClick={() => setIsModalOpen(false)}
                                         className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
                                     >
-                                        إغلاق
+                                        {t('patientMedicalFile.close')}
                                     </button>
                                 </div>
                             </div>

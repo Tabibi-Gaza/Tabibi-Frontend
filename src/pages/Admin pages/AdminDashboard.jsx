@@ -178,25 +178,25 @@ const AdminDashboard = () => {
 
     const cards = [
         {
-            id: 1, title: 'إجمالي الأطباء', value: statsData.totalDoctors || 0,
-            badge: 'نشط', badgeBg: 'bg-[#138C9F]/10', badgeText: 'text-[#138C9F]',
+            id: 1, title: t('adminDashboard.totalDoctors'), value: statsData.totalDoctors || 0,
+            badge: t('adminDashboard.active'), badgeBg: 'bg-[#138C9F]/10', badgeText: 'text-[#138C9F]',
             icon: <FiUserCheck size={20} />, iconBg: 'bg-[#138C9F]/10', iconColor: 'text-[#138C9F]',
             valueColor: 'text-[#138C9F]', borderHover: 'hover:border-[#138C9F]/40',
         },
         {
-            id: 2, title: 'إجمالي المرضى', value: statsData.totalPatients || 0,
-            badge: 'مسجل', badgeBg: 'bg-emerald-50', badgeText: 'text-emerald-700',
+            id: 2, title: t('adminDashboard.totalPatients'), value: statsData.totalPatients || 0,
+            badge: t('adminDashboard.registered'), badgeBg: 'bg-emerald-50', badgeText: 'text-emerald-700',
             icon: <FiUsers size={20} />, iconBg: 'bg-emerald-50', iconColor: 'text-emerald-600',
             valueColor: 'text-emerald-600', borderHover: 'hover:border-emerald-400/40',
         },
         {
-            id: 3, title: 'مواعيد اليوم', value: statsData.todayAppointments || 0,
-            badge: 'مباشر', badgeBg: 'bg-sky-50', badgeText: 'text-sky-700',
+            id: 3, title: t('adminDashboard.todayAppointments'), value: statsData.todayAppointments || 0,
+            badge: t('adminDashboard.live'), badgeBg: 'bg-sky-50', badgeText: 'text-sky-700',
             icon: <FiClock size={20} />, iconBg: 'bg-sky-50', iconColor: 'text-sky-600',
             valueColor: 'text-sky-600', borderHover: 'hover:border-sky-400/40',
         },
         {
-            id: 4, title: 'إجمالي أرباح المنصة', value: (statsData.totalRevenue || 0) + subscriptionRevenue,
+            id: 4, title: t('adminDashboard.totalRevenue'), value: (statsData.totalRevenue || 0) + subscriptionRevenue,
             badge: statsData.revenueGrowth != null ? (statsData.revenueGrowth >= 0 ? `+${statsData.revenueGrowth}%` : `${statsData.revenueGrowth}%`) : '0%',
             badgeBg: statsData.revenueGrowth != null ? (statsData.revenueGrowth >= 0 ? 'bg-emerald-50' : 'bg-red-50') : 'bg-emerald-50',
             badgeText: statsData.revenueGrowth != null ? (statsData.revenueGrowth >= 0 ? 'text-emerald-700' : 'text-red-700') : 'text-emerald-700',
@@ -263,9 +263,9 @@ const AdminDashboard = () => {
 
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
                     <div className="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-gray-700 mb-4">
-                        <h3 className="font-bold text-[15px] text-[#138C9F]">طلبات الأطباء الجديدة</h3>
+                        <h3 className="font-bold text-[15px] text-[#138C9F]">{t('adminDashboard.newDoctorRequests')}</h3>
                         <span className="text-[10px] font-bold bg-[#138C9F]/10 text-[#138C9F] px-2 py-0.5 rounded-full">
-                            {localDoctorRequests.length} طلب
+                            {localDoctorRequests.length} {t('adminDashboard.requestCount')}
                         </span>
                     </div>
 
@@ -286,12 +286,12 @@ const AdminDashboard = () => {
                                         />
                                         <div className="text-right flex-1 min-w-0">
                                             <h4 className="font-bold text-[13px] text-[#0B1C30] dark:text-white truncate">{req.name}</h4>
-                                            <p className="text-[11px] font-semibold text-[#138C9F] truncate">{req.specialty || 'غير محدد'}</p>
+                                            <p className="text-[11px] font-semibold text-[#138C9F] truncate">{req.specialty || t('adminDashboard.unspecified')}</p>
                                         </div>
                                         <button
                                             onClick={() => fetchDetails(req)}
                                             className="w-8 h-8 rounded-lg bg-[#138C9F]/10 text-[#138C9F] flex items-center justify-center hover:bg-[#138C9F]/20 transition-colors shrink-0"
-                                            title="عرض التفاصيل"
+                                            title={t('adminDashboard.viewDetails')}
                                         >
                                             <FiEye size={14} />
                                         </button>
@@ -302,14 +302,14 @@ const AdminDashboard = () => {
                                             onClick={() => handleAction(req.id, 'approved')}
                                             className="h-8 rounded-lg bg-[#138C9F] text-white text-xs font-bold hover:bg-[#107585] transition-colors cursor-pointer disabled:opacity-50"
                                         >
-                                            {actionLoading === req.id ? '...' : 'قبول'}
+                                            {actionLoading === req.id ? '...' : t('adminDashboard.accept')}
                                         </button>
                                         <button
                                             disabled={actionLoading === req.id}
                                             onClick={() => { setSelectedRequest(req); setShowRejectModal(true); setRejectReasonInput(''); }}
                                             className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50"
                                         >
-                                            رفض
+                                            {t('adminDashboard.reject')}
                                         </button>
                                     </div>
                                 </div>
@@ -319,7 +319,7 @@ const AdminDashboard = () => {
                                 <div className="w-12 h-12 rounded-full bg-slate-50 dark:bg-gray-900 flex items-center justify-center">
                                     <FiUserCheck size={20} className="text-gray-300" />
                                 </div>
-                                <p className="text-xs font-semibold text-gray-400">لا توجد طلبات معلقة</p>
+                                <p className="text-xs font-semibold text-gray-400">{t('adminDashboard.noPendingRequests')}</p>
                             </div>
                         )}
                     </div>
@@ -328,7 +328,7 @@ const AdminDashboard = () => {
                         onClick={() => navigate('/admin/join-requests')}
                         className="mt-3 w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-[#138C9F]/30 text-[#138C9F] text-xs font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer"
                     >
-                        عرض جميع الطلبات
+                        {t('adminDashboard.viewAllRequests')}
                         <FiExternalLink size={12} />
                     </button>
                 </div>
@@ -336,21 +336,21 @@ const AdminDashboard = () => {
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
                     <div className="flex justify-between items-center mb-4">
                         <div>
-                            <h3 className="font-bold text-[15px] text-[#138C9F]">إحصائيات المواعيد</h3>
-                            <p className="text-[11px] text-slate-400 dark:text-gray-500 mt-0.5">حركة المواعيد خلال آخر 7 أيام</p>
+                            <h3 className="font-bold text-[15px] text-[#138C9F]">{t('adminDashboard.appointmentStats')}</h3>
+                            <p className="text-[11px] text-slate-400 dark:text-gray-500 mt-0.5">{t('adminDashboard.appointmentTrend')}</p>
                         </div>
                         <div className="flex items-center gap-4 text-[11px] font-bold">
                             <div className="flex items-center gap-1.5">
                                 <span className="w-2.5 h-2.5 bg-[#138C9F] rounded-sm"></span>
-                                <span className="text-slate-500">مكتمل</span>
+                                <span className="text-slate-500">{t('adminDashboard.completed')}</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <span className="w-2.5 h-2.5 bg-[#60a5fa] rounded-sm"></span>
-                                <span className="text-slate-500">مؤكد</span>
+                                <span className="text-slate-500">{t('adminDashboard.confirmed')}</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <span className="w-2.5 h-2.5 bg-red-300 rounded-sm"></span>
-                                <span className="text-slate-500">ملغي</span>
+                                <span className="text-slate-500">{t('adminDashboard.cancelled')}</span>
                             </div>
                         </div>
                     </div>
@@ -376,7 +376,7 @@ const AdminDashboard = () => {
                             </ResponsiveContainer>
                         ) : (
                             <div className="h-full flex items-center justify-center text-gray-300">
-                                <p className="text-xs font-semibold">لا توجد بيانات كافية</p>
+                                <p className="text-xs font-semibold">{t('adminDashboard.noDataAvailable')}</p>
                             </div>
                         )}
                     </div>
@@ -385,9 +385,9 @@ const AdminDashboard = () => {
 
             <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 shadow-xs">
                 <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-bold text-[15px] text-[#138C9F]">أحدث الحجوزات</h3>
+                    <h3 className="font-bold text-[15px] text-[#138C9F]">{t('adminDashboard.latestBookings')}</h3>
                     <span className="text-[10px] font-bold bg-slate-100 dark:bg-gray-800 text-slate-500 dark:text-gray-400 px-2 py-0.5 rounded-full">
-                        آخر {displayedAppointments.length} حجوزات
+                        {t('adminDashboard.lastBookings', { count: displayedAppointments.length })}
                     </span>
                 </div>
 
@@ -395,18 +395,18 @@ const AdminDashboard = () => {
                     <table className="w-full text-right border-collapse text-sm">
                         <thead>
                             <tr className="bg-[#f0fafb] text-[#138C9F] font-bold h-11 border-b border-[#C3C6D6] dark:border-gray-700/60">
-                                <th className="px-4 rounded-r-xl text-[12px]">المريض</th>
-                                <th className="px-4 text-[12px]">الطبيب</th>
-                                <th className="px-4 text-[12px] hidden md:table-cell">التخصص</th>
-                                <th className="px-4 text-[12px] hidden md:table-cell">المبلغ</th>
-                                <th className="px-4 text-[12px]">التاريخ والوقت</th>
-                                <th className="px-4 rounded-l-xl text-[12px]">الحالة</th>
+                                <th className="px-4 rounded-r-xl text-[12px]">{t('adminDashboard.patient')}</th>
+                                <th className="px-4 text-[12px]">{t('adminDashboard.doctor')}</th>
+                                <th className="px-4 text-[12px] hidden md:table-cell">{t('adminDashboard.specialty')}</th>
+                                <th className="px-4 text-[12px] hidden md:table-cell">{t('adminDashboard.amount')}</th>
+                                <th className="px-4 text-[12px]">{t('adminDashboard.dateTime')}</th>
+                                <th className="px-4 rounded-l-xl text-[12px]">{t('adminDashboard.status')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 font-medium">
                             {displayedAppointments.length > 0 ? (
                                 displayedAppointments.map((appt, index) => {
-                                    const statusLabel = appt.cancelled ? 'ملغي' : appt.isCompleted ? 'مكتمل' : 'مؤكد';
+                                    const statusLabel = appt.cancelled ? t('adminDashboard.cancelled') : appt.isCompleted ? t('adminDashboard.completed') : t('adminDashboard.confirmed');
                                     return (
                                         <tr key={appt.id || index} className="hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-12">
                                             <td className="px-4 text-[#0B1C30] dark:text-white font-bold text-[13px]">{appt.patient}</td>
@@ -429,7 +429,7 @@ const AdminDashboard = () => {
                             ) : (
                                 <tr>
                                     <td colSpan="6" className="px-4 py-10 text-center text-gray-300 dark:text-gray-500 text-xs font-semibold">
-                                        لا توجد حجوزات حالياً
+                                        {t('adminDashboard.noBookings')}
                                     </td>
                                 </tr>
                             )}
@@ -485,7 +485,7 @@ const AdminDashboard = () => {
                             <div className="flex items-center gap-3">
                                 <h3 className="text-[20px] md:text-[22px] font-extrabold text-[#434654]">{selectedRequest.name}</h3>
                                 <span className="bg-[#E5EEFF] text-[#138C9F] text-[13px] font-bold px-3 py-1 rounded-md">
-                                    طبيب
+                                    {t('adminDashboard.doctorLabel')}
                                 </span>
                             </div>
 
@@ -495,35 +495,35 @@ const AdminDashboard = () => {
                                     <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
                                         <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
                                             <FiBriefcase size={14} />
-                                            التفاصيل المهنية
+                                            {t('adminDashboard.professionalDetails')}
                                         </h4>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">التخصص</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.specialization')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.specialization || selectedRequest.specialty || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">سنوات الخبرة</span>
-                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.yearsOfExperience || '-'} سنة</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.yearsOfExperience')}</span>
+                                            <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.yearsOfExperience || '-'} {t('adminDashboard.yearsSuffix')}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">رقم الترخيص</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.licenseNumber')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.licenseNumber || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.sessionPrice')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice ? `${selectedDetails.sessionPrice} ₪` : '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">العيادة</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.clinic')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicName || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">عنوان العيادة</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.clinicAddress')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicAddress || '-'}</span>
                                         </div>
                                         {selectedDetails.bio && (
                                             <div className="pt-2 border-t border-gray-100">
-                                                <span className="text-[12px] font-bold text-[#737685] block mb-1">النبذة المهنية</span>
+                                                <span className="text-[12px] font-bold text-[#737685] block mb-1">{t('adminDashboard.professionalBio')}</span>
                                                 <p className="text-[12px] text-[#434654] leading-relaxed">{selectedDetails.bio}</p>
                                             </div>
                                         )}
@@ -533,19 +533,19 @@ const AdminDashboard = () => {
                                     <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
                                         <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
                                             <FiUser size={14} />
-                                            المعلومات الشخصية
+                                            {t('adminDashboard.personalInfo')}
                                         </h4>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">البريد الإلكتروني</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.email')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.email || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">رقم الهاتف</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.phoneNumber')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.phoneNumber || '-'}</span>
                                         </div>
                                         {selectedDetails.secretaryEmail && (
                                             <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">بريد السكرتير</span>
+                                                <span className="text-[12px] font-bold text-[#737685]">{t('adminDashboard.secretaryEmail')}</span>
                                                 <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.secretaryEmail}</span>
                                             </div>
                                         )}
@@ -560,14 +560,14 @@ const AdminDashboard = () => {
                                     className="flex-1 h-12 bg-[#138C9F] text-white rounded-[8px] text-[13px] font-bold hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
                                     <FiDownload size={14} />
-                                    تحميل السيرة الذاتية (CV)
+                                    {t('adminDashboard.downloadCV')}
                                 </button>
                                 <button
                                     onClick={() => handleDownload(selectedRequest.id, 'id')}
                                     className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white dark:bg-gray-800 rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
                                     <FiDownload size={14} />
-                                    صورة الهوية / مزاولة المهنة
+                                    {t('adminDashboard.downloadId')}
                                 </button>
                             </div>
 
@@ -575,7 +575,7 @@ const AdminDashboard = () => {
                                 <div className="bg-red-50 border border-red-200 rounded-[8px] p-4 flex flex-col gap-1">
                                     <div className="flex items-center gap-2 text-[#BA1A1A] font-bold text-[14px]">
                                         <FiAlertTriangle size={14} />
-                                        <span>سبب الرفض:</span>
+                                        <span>{t('adminDashboard.rejectionReason')}</span>
                                     </div>
                                     <p className="text-[13px] text-[#961212] pr-6 font-medium">{selectedRequest.rejectionReason}</p>
                                 </div>
@@ -587,14 +587,14 @@ const AdminDashboard = () => {
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
                                 className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto"
                             >
-                                إغلاق
+                                {t('adminDashboard.close')}
                             </button>
                             <button
                                 onClick={() => { setShowRejectModal(true); setRejectReasonInput(''); }}
                                 className="px-5 h-[42px] border border-[#BA1A1A] text-[#BA1A1A] rounded-[8px] text-[14px] font-bold hover:bg-red-50 flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
                                 <FiX size={14} />
-                                <span>رفض الطلب</span>
+                                <span>{t('adminDashboard.rejectRequest')}</span>
                             </button>
                             <button
                                 onClick={async () => {
@@ -606,7 +606,7 @@ const AdminDashboard = () => {
                                 disabled={actionLoading === selectedRequest.id}
                                 className="px-6 h-[42px] bg-[#138C9F] text-white rounded-[8px] text-[14px] font-bold hover:bg-[#0f7282] flex items-center justify-center gap-2 w-full sm:w-auto flex-1 disabled:opacity-50"
                             >
-                                {actionLoading === selectedRequest.id ? 'جاري...' : 'قبول وتفعيل الملف'}
+                                {actionLoading === selectedRequest.id ? t('adminDashboard.processing') : t('adminDashboard.acceptAndActivate')}
                             </button>
                         </div>
                     </div>
@@ -619,16 +619,16 @@ const AdminDashboard = () => {
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
                             <FiAlertTriangle size={28} />
                         </div>
-                        <h3 className="text-[18px] font-extrabold text-[#434654] text-center">سبب الرفض</h3>
+                        <h3 className="text-[18px] font-extrabold text-[#434654] text-center">{t('adminDashboard.rejectReasonTitle')}</h3>
                         <p className="text-[13px] text-[#737685] mt-1 px-4 text-center">
-                            يرجى توضيح سبب رفض طلب انضمام الطبيب ليتم إبلاغه بشكل رسمي.
+                            {t('adminDashboard.rejectReasonDescription')}
                         </p>
                         <div className="mt-4 text-right">
-                            <label className="text-[13px] font-bold text-[#434654] block mb-1">تفاصيل السبب</label>
+                            <label className="text-[13px] font-bold text-[#434654] block mb-1">{t('adminDashboard.reasonDetails')}</label>
                             <textarea
                                 value={rejectReasonInput}
                                 onChange={(e) => setRejectReasonInput(e.target.value)}
-                                placeholder="اكتب هنا تفاصيل الرفض بدقة..."
+                                placeholder={t('adminDashboard.reasonPlaceholder')}
                                 className="w-full h-[100px] border border-gray-300 rounded-[8px] p-3 text-[14px] focus:outline-none focus:border-[#138C9F] text-right resize-none"
                             />
                         </div>
@@ -644,7 +644,7 @@ const AdminDashboard = () => {
                                 disabled={actionLoading}
                                 className="flex-1 h-[42px] bg-[#BA1A1A] text-white rounded-[8px] text-[14px] font-bold hover:bg-[#961212] disabled:opacity-50"
                             >
-                                {actionLoading ? 'جاري...' : 'تأكيد الرفض'}
+                                {actionLoading ? t('adminDashboard.processing') : t('adminDashboard.confirmRejection')}
                             </button>
                         </div>
                     </div>

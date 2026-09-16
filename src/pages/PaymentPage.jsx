@@ -4,8 +4,10 @@ import { toast } from 'react-toastify'
 import axiosInstance from '../api/axiosInstance'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload, faFileImage, faSpinner, faUniversity, faWallet, faArrowRight, faCircleCheck, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 const PaymentPage = () => {
+  const { t } = useTranslation()
   const { appointmentId } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
@@ -50,11 +52,11 @@ const PaymentPage = () => {
   const handleFileSelect = useCallback((file) => {
     if (!file) return
     if (!file.type.startsWith('image/')) {
-      toast.error('يرجى اختيار ملف صورة فقط')
+      toast.error(t('payment.selectImageOnly'))
       return
     }
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('حجم الملف يجب أن لا يتجاوز 5 ميغابايت')
+      toast.error(t('payment.maxFileSize'))
       return
     }
     setReceiptFile(file)
@@ -85,19 +87,19 @@ const PaymentPage = () => {
 
   const handleSubmit = async () => {
     if (!selectedMethod) {
-      toast.warn('يرجى اختيار حساب الدفع أولاً')
+      toast.warn(t('payment.selectMethodFirst'))
       return
     }
     if (!receiptFile) {
-      toast.warn('يرجى رفع إيصال الدفع')
+      toast.warn(t('payment.uploadReceiptFirst'))
       return
     }
     if (!senderName.trim()) {
-      toast.warn('يرجى إدخال اسم المرسل')
+      toast.warn(t('payment.enterSenderName'))
       return
     }
     if (!senderPhone.trim()) {
-      toast.warn('يرجى إدخال رقم الهاتف')
+      toast.warn(t('payment.enterSenderPhone'))
       return
     }
 
@@ -116,13 +118,13 @@ const PaymentPage = () => {
       })
 
       if (data.succeeded) {
-        toast.success(data.message || 'تم رفع الإيصال بنجاح! في انتظار مراجعة الطبيب.')
+        toast.success(data.message || t('payment.uploadSuccess'))
         setTimeout(() => navigate('/my-appointment'), 2000)
       } else {
-        toast.error(data.errors?.[0]?.message || data.message || 'فشل رفع الإيصال')
+        toast.error(data.errors?.[0]?.message || data.message || t('payment.uploadFailed'))
       }
     } catch (error) {
-      toast.error(error.response?.data?.errors?.[0]?.message || error.response?.data?.message || 'حدث خطأ أثناء رفع الإيصال')
+      toast.error(error.response?.data?.errors?.[0]?.message || error.response?.data?.message || t('payment.uploadError'))
     } finally {
       setSubmitting(false)
     }
@@ -155,12 +157,12 @@ const PaymentPage = () => {
         className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-[#138C9F] mb-6 transition-colors"
       >
         <FontAwesomeIcon icon={faArrowRight} />
-        <span>العودة</span>
+        <span>{t('payment.back')}</span>
       </button>
 
       <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm mb-6">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-1">تأكيد الدفع</h1>
-        <p className="text-sm text-gray-500">اختر حساب الدفع ثم قم برفع إيصال التحويل</p>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-1">{t('payment.confirmPayment')}</h1>
+        <p className="text-sm text-gray-500">{t('payment.selectPaymentMethod')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -168,15 +170,15 @@ const PaymentPage = () => {
           {/* Appointment Details */}
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
             <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
-              تفاصيل الموعد
+              {t('payment.appointmentDetails')}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-                <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">الطبيب</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">{t('payment.doctor')}</p>
                 <p className="text-sm font-bold text-gray-800">{doctorName || '—'}</p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
-                <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">التاريخ والوقت</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">{t('payment.dateTime')}</p>
                 <p className="text-sm font-bold text-gray-800">{formatDateTime(dateTime)}</p>
               </div>
             </div>
@@ -185,7 +187,7 @@ const PaymentPage = () => {
           {/* Payment Methods - Selectable */}
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
             <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
-              1. اختر حساب الدفع
+              {t('payment.selectPaymentAccount')}
             </h3>
 
             {loadingMethods ? (
@@ -198,7 +200,7 @@ const PaymentPage = () => {
                   <div>
                     <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-3 flex items-center gap-2">
                       <FontAwesomeIcon icon={faUniversity} className="text-[#138C9F]" />
-                      حسابات بنكية
+                      {t('payment.bankAccounts')}
                     </p>
                     {banks.map((bank, idx) => {
                       const isSelected = selectedMethod?.id === bank.id && selectedMethod?.type === 'Bank'
@@ -220,17 +222,17 @@ const PaymentPage = () => {
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                             <div>
-                              <p className="text-xs text-gray-400">اسم الحساب</p>
+                              <p className="text-xs text-gray-400">{t('payment.accountName')}</p>
                               <p className="font-medium text-gray-700">{bank.accountHolderName}</p>
                             </div>
                             {bank.iban && (
                               <div>
-                                <p className="text-xs text-gray-400">الآيبان (IBAN)</p>
+                                <p className="text-xs text-gray-400">{t('payment.iban')}</p>
                                 <p className="font-medium text-gray-700" dir="ltr">{bank.iban}</p>
                               </div>
                             )}
                             <div>
-                              <p className="text-xs text-gray-400">رقم الهاتف</p>
+                              <p className="text-xs text-gray-400">{t('payment.phoneNumber')}</p>
                               <p className="font-medium text-gray-700" dir="ltr">{bank.phoneNumber}</p>
                             </div>
                           </div>
@@ -244,7 +246,7 @@ const PaymentPage = () => {
                   <div>
                     <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-3 flex items-center gap-2">
                       <FontAwesomeIcon icon={faWallet} className="text-[#138C9F]" />
-                      المحافظ الإلكترونية
+                      {t('payment.eWallets')}
                     </p>
                     {wallets.map((wallet, idx) => {
                       const isSelected = selectedMethod?.id === wallet.id && selectedMethod?.type === 'Wallet'
@@ -266,11 +268,11 @@ const PaymentPage = () => {
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                             <div>
-                              <p className="text-xs text-gray-400">الاسم</p>
+                              <p className="text-xs text-gray-400">{t('payment.name')}</p>
                               <p className="font-medium text-gray-700">{wallet.accountHolderName}</p>
                             </div>
                             <div>
-                              <p className="text-xs text-gray-400">رقم الهاتف</p>
+                              <p className="text-xs text-gray-400">{t('payment.phoneNumber')}</p>
                               <p className="font-medium text-gray-700" dir="ltr">{wallet.phoneNumber}</p>
                             </div>
                           </div>
@@ -282,7 +284,7 @@ const PaymentPage = () => {
 
                 {banks.length === 0 && wallets.length === 0 && (
                   <div className="text-center py-6 text-gray-400">
-                    <p className="text-sm">لا توجد طرق دفع متاحة حالياً</p>
+                    <p className="text-sm">{t('payment.noPaymentMethods')}</p>
                   </div>
                 )}
               </div>
@@ -293,13 +295,13 @@ const PaymentPage = () => {
           {selectedMethod && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
               <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
-                2. رفع إيصال الدفع
+                {t('payment.uploadReceipt')}
               </h3>
 
               <div className="bg-[#e6f6f5] dark:bg-gray-800 rounded-xl p-3 mb-4 flex items-center gap-2">
                 <FontAwesomeIcon icon={faInfoCircle} className="text-[#138C9F] text-sm" />
                 <p className="text-xs text-[#0c5f6c] dark:text-gray-300 font-medium">
-                  قم بالتحويل إلى حساب <span className="font-bold">{selectedMethod.name}</span> ({selectedMethod.accountHolderName}) ثم ارفع صورة الإشعار
+                  {t('payment.transferInstruction')} <span className="font-bold">{selectedMethod.name}</span> ({selectedMethod.accountHolderName}) {t('payment.thenUpload')}
                 </p>
               </div>
 
@@ -332,14 +334,14 @@ const PaymentPage = () => {
                       width="384"
                       height="192"
                       src={receiptPreview}
-                      alt="إيصال الدفع"
+                      alt={t('payment.receiptImage')}
                       className="max-h-48 mx-auto rounded-lg object-contain shadow-sm"
                     />
                     <p className="text-sm text-green-600 font-medium flex items-center justify-center gap-2">
                       <FontAwesomeIcon icon={faFileImage} />
-                      تم اختيار الملف
+                      {t('payment.fileSelected')}
                     </p>
-                    <p className="text-xs text-gray-400">انقر لتغيير الصورة</p>
+                    <p className="text-xs text-gray-400">{t('payment.clickToChange')}</p>
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -347,8 +349,8 @@ const PaymentPage = () => {
                       <FontAwesomeIcon icon={faUpload} className="text-2xl text-gray-400" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-600">اسحب الصورة هنا أو انقر للاختيار</p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">PNG, JPG, WEBP - حتى 5 ميغابايت</p>
+                      <p className="text-sm font-bold text-gray-600">{t('payment.dragOrClick')}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('payment.fileFormats')}</p>
                     </div>
                   </div>
                 )}
@@ -356,20 +358,20 @@ const PaymentPage = () => {
 
               <div className="mt-5 space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">اسم المرسل</label>
+                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">{t('payment.senderName')}</label>
                   <input
                     type="text"
-                    placeholder="أدخل اسمك كما في إيصال الدفع"
+                    placeholder={t('payment.senderNamePlaceholder')}
                     className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">رقم الهاتف</label>
+                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">{t('payment.senderPhone')}</label>
                   <input
                     type="tel"
-                    placeholder="رقم الهاتف المرسل منه الدفع"
+                    placeholder={t('payment.senderPhonePlaceholder')}
                     className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
                     value={senderPhone}
                     onChange={(e) => setSenderPhone(e.target.value)}
@@ -391,10 +393,10 @@ const PaymentPage = () => {
                   {submitting ? (
                     <>
                       <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
-                      <span>جاري الرفع...</span>
+                      <span>{t('payment.uploading')}</span>
                     </>
                   ) : (
-                    <span>تأكيد الدفع</span>
+                    <span>{t('payment.submitPayment')}</span>
                   )}
                 </button>
               </div>
@@ -405,33 +407,33 @@ const PaymentPage = () => {
         <div className="lg:col-span-1">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm sticky top-44">
             <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
-              ملخص الدفع
+              {t('payment.paymentSummary')}
             </h3>
 
             <div className="space-y-4">
               <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">الطبيب</span>
+                <span className="text-sm text-gray-500">{t('payment.doctorLabel')}</span>
                 <span className="text-sm font-bold text-gray-800">{doctorName || '—'}</span>
               </div>
               <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">الموعد</span>
+                <span className="text-sm text-gray-500">{t('payment.appointmentLabel')}</span>
                 <span className="text-xs font-medium text-gray-600">{formatDateTime(dateTime)}</span>
               </div>
               {selectedMethod && (
                 <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                  <span className="text-sm text-gray-500">حساب الدفع</span>
+                  <span className="text-sm text-gray-500">{t('payment.paymentAccount')}</span>
                   <span className="text-xs font-medium text-[#138C9F]">{selectedMethod.name}</span>
                 </div>
               )}
               <div className="flex justify-between items-center pt-2">
-                <span className="text-sm font-bold text-gray-700">المبلغ المطلوب</span>
+                <span className="text-sm font-bold text-gray-700">{t('payment.amountDue')}</span>
                 <span className="text-xl font-extrabold text-[#138C9F]">{amount || '—'} <span className="text-sm">ILS</span></span>
               </div>
             </div>
 
             <div className="mt-6 bg-[#f4faff] dark:bg-gray-800 rounded-xl p-4 border border-[#e6f6f5]">
               <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">
-                <span className="font-bold text-[#138C9F]">ملاحظة:</span> سيتم مراجعة الإيصال من قبل الطبيب. تأكد من أن الصورة واضحة والمبلغ يطابق المطلوب.
+                <span className="font-bold text-[#138C9F]">{t('payment.note')}</span> {t('payment.noteDescription')}
               </p>
             </div>
           </div>
