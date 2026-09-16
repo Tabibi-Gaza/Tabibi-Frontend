@@ -30,7 +30,7 @@ const Notifications = () => {
         <div className="flex justify-start mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2.5 text-gray-700 hover:text-gray-900 font-bold text-base border border-gray-200 bg-white px-5 py-2.5 rounded-xl shadow-sm transition-all active:scale-95"
+            className="flex items-center gap-2.5 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold text-base border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-5 py-2.5 rounded-xl shadow-sm transition-all active:scale-95"
           >
             {/* السهم يتجه لليمين ليناسب العودة في الواجهات العربية */}
             <svg
@@ -53,7 +53,7 @@ const Notifications = () => {
 
         {/* ---- رأس الصفحة: الإشعارات ---- */}
         <div className="flex flex-col items-center justify-center text-center gap-3 mb-12">
-          <div className="p-5 bg-gray-50 rounded-full border border-gray-100 shadow-sm">
+          <div className="p-5 bg-gray-50 dark:bg-gray-700 rounded-full border border-gray-100 dark:border-gray-600 shadow-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"   
@@ -82,7 +82,7 @@ const Notifications = () => {
           {displayNotifications.length > 0 ? displayNotifications.map((notif) => (
             <div
               key={notif.id}
-              className="bg-white border border-gray-200 hover:border-teal-500/30 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-teal-500/30 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               {/* المحتوى النصي الأيمن */}
               <div className="flex-1 text-right">
@@ -121,8 +121,8 @@ const Notifications = () => {
               </div>
             </div>
           )) : (
-            <div className="bg-white border border-gray-200 rounded-2xl p-12 text-center">
-              <p className="text-gray-400 font-bold text-base">لا توجد إشعارات حالياً</p>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-12 text-center">
+              <p className="text-gray-400 dark:text-gray-500 font-bold text-base">لا توجد إشعارات حالياً</p>
             </div>
           )}
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../api/axiosInstance';
 import PALESTINE_LOCATIONS from '../constants/locations';
@@ -110,7 +110,7 @@ const RegisterAsDoctor = () => {
             {/* رأس الصفحة - العناوين الرئيسية */}
             <header className="text-center py-10 px-4">
                 <h1 className="text-3xl md:text-4xl font-black text-[#118fa6] mb-2">تسجيل طبيب جديد</h1>
-                <p className="text-slate-500 text-sm md:text-base font-semibold">أكمل ملفك المهني للانضمام إلى نخبة أطباء منصة طبيبي</p>
+                <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base font-semibold">أكمل ملفك المهني للانضمام إلى نخبة أطباء منصة طبيبي</p>
             </header>
 
             {/* جسم الاستمارة الرئيسي */}
@@ -118,7 +118,7 @@ const RegisterAsDoctor = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
 
                     {/* القسم 1: بيانات العيادة */}
-                    <div className="bg-white border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
                         <div className="flex items-center gap-2 mb-6 text-[#118fa6]">
                             <svg className="w-5 h-5 stroke-[2.2] fill-none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -127,37 +127,38 @@ const RegisterAsDoctor = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">اسم العيادة</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">اسم العيادة</label>
                                 <input
                                     type="text"
                                     name="clinicName"
                                     value={formData.clinicName}
                                     onChange={handleChange}
                                     placeholder="مثال: مركز الطمأنينة"
+                                    required
                                     className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6]"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">عنوان العيادة</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">عنوان العيادة</label>
                                 <div className="relative">
                                     <select
                                         name="clinicAddress"
                                         value={formData.clinicAddress}
                                         onChange={handleChange}
-                                        className="w-full h-12 pl-10 pr-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white text-gray-600 appearance-none cursor-pointer"
+                                        className="w-full h-12 pl-10 pr-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 appearance-none cursor-pointer"
                                     >
                                         <option value="">اختر المنطقة...</option>
                                         {PALESTINE_LOCATIONS.map((loc) => (
                                             <option key={loc} value={loc}>{loc}</option>
                                         ))}
                                     </select>
-                                    <svg className="w-4 h-4 absolute left-4 top-4 text-gray-400 pointer-events-none stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 absolute left-4 top-4 text-gray-400 dark:text-gray-500 pointer-events-none stroke-[2.5]" fill="none" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-xs font-bold text-slate-500 mb-2">العنوان بالتفصيل</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">العنوان بالتفصيل</label>
                                 <input
                                     type="text"
                                     name="detailedAddress"
@@ -171,7 +172,7 @@ const RegisterAsDoctor = () => {
                     </div>
 
                     {/* القسم 3: المؤهلات والترخيص */}
-                    <div className="bg-white border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
                         <div className="flex items-center gap-2 mb-6 text-[#118fa6]">
                             <svg className="w-5 h-5 stroke-[2.2] fill-none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -180,51 +181,56 @@ const RegisterAsDoctor = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">رقم الترخيص</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">رقم الترخيص</label>
                                 <input
                                     type="text"
                                     name="licenseNumber"
                                     value={formData.licenseNumber}
                                     onChange={handleChange}
                                     placeholder="000-000-000"
+                                    required
                                     className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
                                     dir="ltr"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">التخصص</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">التخصص</label>
                                 {/* تم احتواء الـ select داخل relative وتزويده بسهم مخصص تفادياً لاختفائه بسبب appearance-none */}
                                 <div className="relative">
                                     <select
                                         name="specializationId"
                                         value={formData.specializationId}
                                         onChange={handleChange}
-                                        className="w-full h-12 pl-10 pr-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white text-gray-600 appearance-none cursor-pointer"
+                                        required
+                                        className="w-full h-12 pl-10 pr-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 appearance-none cursor-pointer"
                                     >
                                         <option value="">اختر التخصص...</option>
                                         {specializations.map(spec => (
                                             <option key={spec.id} value={spec.id}>{spec.name}</option>
                                         ))}
                                     </select>
-                                    <svg className="w-4 h-4 absolute left-4 top-4 text-gray-400 pointer-events-none stroke-[2.5]" fill="none" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 absolute left-4 top-4 text-gray-400 dark:text-gray-500 pointer-events-none stroke-[2.5]" fill="none" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">سنوات الخبرة</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">سنوات الخبرة</label>
                                 <input
                                     type="number"
                                     name="experienceYears"
                                     value={formData.experienceYears}
                                     onChange={handleChange}
                                     placeholder="0"
+                                    required
+                                    min="0"
+                                    max="70"
                                     className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
                                     dir="ltr"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">سعر الكشفية</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">سعر الكشفية</label>
                                 <div className="relative">
                                     <input
                                         type="number"
@@ -232,6 +238,8 @@ const RegisterAsDoctor = () => {
                                         value={formData.consultationFee}
                                         onChange={handleChange}
                                         placeholder="0"
+                                        required
+                                        min="1"
                                         className="w-full h-12 pl-16 pr-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
                                         dir="ltr"
                                     />
@@ -242,7 +250,7 @@ const RegisterAsDoctor = () => {
                     </div>
 
                     {/* القسم 4: التعريف والوثائق */}
-                    <div className="bg-white border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
                         <div className="flex items-center gap-2 mb-6 text-[#118fa6]">
                             <svg className="w-5 h-5 stroke-[2.2] fill-none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -251,7 +259,7 @@ const RegisterAsDoctor = () => {
                         </div>
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">نبذة مهنية</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">نبذة مهنية</label>
                                 <textarea
                                     name="bio"
                                     value={formData.bio}
@@ -263,16 +271,17 @@ const RegisterAsDoctor = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {/* إرفاق الهوية */}
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-500 mb-2">إرفاق الهوية</label>
-                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50/40 text-center relative hover:bg-slate-50 cursor-pointer">
+                                    <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">إرفاق الهوية</label>
+                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50 dark:bg-gray-900/40 text-center relative hover:bg-slate-50 dark:bg-gray-900 cursor-pointer">
                                         <input
                                             type="file"
                                             accept="image/*"
+                                            required
                                             onChange={(e) => handleFileChange(e, 'idCard')}
                                             className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                                         />
                                         <div className="flex flex-col items-center justify-center gap-1">
-                                            <svg className="w-5 h-5 text-slate-400 stroke-[2]" fill="none" viewBox="0 0 24 24">
+                                            <svg className="w-5 h-5 text-slate-400 dark:text-gray-500 stroke-[2]" fill="none" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                                             </svg>
                                             <span className="text-xs font-bold text-slate-500">انقر لرفع صورة الهوية</span>
@@ -282,16 +291,17 @@ const RegisterAsDoctor = () => {
                                 </div>
                                 {/* إرفاق السيرة الذاتية */}
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-500 mb-2">إرفاق السيرة الذاتية</label>
-                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50/40 text-center relative hover:bg-slate-50 cursor-pointer">
+                                    <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">إرفاق السيرة الذاتية</label>
+                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50 dark:bg-gray-900/40 text-center relative hover:bg-slate-50 dark:bg-gray-900 cursor-pointer">
                                         <input
                                             type="file"
                                             accept=".pdf,application/pdf"
+                                            required
                                             onChange={(e) => handleFileChange(e, 'cv')}
                                             className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                                         />
                                         <div className="flex flex-col items-center justify-center gap-1">
-                                            <svg className="w-5 h-5 text-slate-400 stroke-[2]" fill="none" viewBox="0 0 24 24">
+                                            <svg className="w-5 h-5 text-slate-400 dark:text-gray-500 stroke-[2]" fill="none" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                                             </svg>
                                             <span className="text-xs font-bold text-slate-500">انقر لرفع ملف PDF</span>
@@ -304,7 +314,7 @@ const RegisterAsDoctor = () => {
                     </div>
 
                     {/* القسم 5: إضافات */}
-                    <div className="bg-white border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#cfd9e8] rounded-2xl p-6 shadow-xs">
                         <div className="flex items-center gap-2 mb-4 text-[#118fa6]">
                             <svg className="w-5 h-5 stroke-[2.2] fill-none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -313,7 +323,7 @@ const RegisterAsDoctor = () => {
                         </div>
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-2">ملاحظات إضافية</label>
+                                <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">ملاحظات إضافية</label>
                                 <input
                                     type="text"
                                     name="additionalNotes"
@@ -338,13 +348,13 @@ const RegisterAsDoctor = () => {
                         <button
                             type="button"
                             onClick={() => window.history.back()}
-                            className="w-full sm:w-1/3 h-12 border border-[#bcd3ee] bg-white text-[#118fa6] font-bold rounded-xl text-base hover:bg-slate-50 transition-colors order-2 sm:order-1"
+                            className="w-full sm:w-1/3 h-12 border border-[#bcd3ee] bg-white dark:bg-gray-800 text-[#118fa6] font-bold rounded-xl text-base hover:bg-slate-50 dark:bg-gray-900 transition-colors order-2 sm:order-1"
                         >
                             السابق
                         </button>
                     </div>
 
-                    <p className="text-center text-[11px] font-bold text-slate-400 mt-2">سيتم مراجعة طلبك من قبل فريقنا المختص خلال 48 ساعة.</p>
+                    <p className="text-center text-[11px] font-bold text-slate-400 dark:text-gray-500 mt-2">سيتم مراجعة طلبك من قبل فريقنا المختص خلال 48 ساعة.</p>
                 </form>
 
                 {/* كروت الميزات والضمانات السفلية التابعة لـ طيبي */}
@@ -356,7 +366,7 @@ const RegisterAsDoctor = () => {
                             </svg>
                         </div>
                         <h4 className="text-sm font-black text-[#118fa6] mb-1">أمان البيانات</h4>
-                        <p className="text-[11px] font-bold text-slate-500 leading-relaxed">نضمن حماية قصوى لبياناتك الشخصية والمهنية.</p>
+                        <p className="text-[11px] font-bold text-slate-500 dark:text-gray-400 leading-relaxed">نضمن حماية قصوى لبياناتك الشخصية والمهنية.</p>
                     </div>
 
                     <div className="bg-[#edf4ff] rounded-2xl p-5 border border-[#e2eaf8] flex flex-col items-center text-center">
@@ -366,7 +376,7 @@ const RegisterAsDoctor = () => {
                             </svg>
                         </div>
                         <h4 className="text-sm font-black text-[#118fa6] mb-1">شبكة واسعة</h4>
-                        <p className="text-[11px] font-bold text-slate-500 leading-relaxed">انضم إلى مجتمع يضم أكثر من 10,000 طبيب.</p>
+                        <p className="text-[11px] font-bold text-slate-500 dark:text-gray-400 leading-relaxed">انضم إلى مجتمع يضم أكثر من 10,000 طبيب.</p>
                     </div>
 
                     <div className="bg-[#edf4ff] rounded-2xl p-5 border border-[#e2eaf8] flex flex-col items-center text-center">
@@ -376,7 +386,7 @@ const RegisterAsDoctor = () => {
                             </svg>
                         </div>
                         <h4 className="text-sm font-black text-[#118fa6] mb-1">نمو مهني</h4>
-                        <p className="text-[11px] font-bold text-slate-500 leading-relaxed">زد من وصولك للمرضى ونظّم مواعيدك بذكاء.</p>
+                        <p className="text-[11px] font-bold text-slate-500 dark:text-gray-400 leading-relaxed">زد من وصولك للمرضى ونظّم مواعيدك بذكاء.</p>
                     </div>
                 </section>
             </main>

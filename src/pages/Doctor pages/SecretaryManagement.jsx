@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { secretaryService } from '../../services/secretaryService';
 import { faPlus, faTrash, faShieldHalved, faUserTie, faEnvelope, faToggleOn, faToggleOff, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -113,12 +113,12 @@ const SecretaryManagement = () => {
                     <FontAwesomeIcon icon={faUserTie} />
                     إدارة السكرتير
                 </h1>
-                <p className="text-gray-500 text-sm">إضافة وإدارة صلاحيات السكرتير المربوط بعيادتك</p>
+                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">إضافة وإدارة صلاحيات السكرتير المربوط بعيادتك</p>
             </div>
 
             {/* Add Secretary Card */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6 shadow-sm">
-                <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 mb-6 shadow-sm">
+                <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                     <FontAwesomeIcon icon={faPlus} className="text-[#1b8b99]" />
                     إضافة سكرتير جديد
                 </h2>
@@ -146,15 +146,15 @@ const SecretaryManagement = () => {
 
                 {/* Permissions Selection */}
                 <div>
-                    <label className="block text-xs font-bold text-gray-500 mb-2">الصلاحيات الممنوحة</label>
+                    <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-2">الصلاحيات الممنوحة</label>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                         {PERMISSIONS_LIST.map((perm) => (
                             <label
                                 key={perm.key}
                                 className={`flex items-center gap-2 p-3 rounded-xl border cursor-pointer transition ${
                                     selectedPermissions & perm.key
-                                        ? 'border-[#1b8b99] bg-[#ecf8fa]'
-                                        : 'border-gray-200 hover:border-gray-300'
+                                        ? 'border-[#1b8b99] bg-[#ecf8fa] dark:bg-gray-900'
+                                        : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
                                 }`}
                             >
                                 <input
@@ -174,8 +174,8 @@ const SecretaryManagement = () => {
             </div>
 
             {/* Secretaries List */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-                <h2 className="text-lg font-bold text-gray-800 mb-4">السكرتاراة الحاليون</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
+                <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">السكرتاراة الحاليون</h2>
                 {secretaries.length === 0 ? (
                     <div className="text-center py-8 text-gray-400">
                         <FontAwesomeIcon icon={faUserTie} className="text-4xl mb-3" />
@@ -187,15 +187,15 @@ const SecretaryManagement = () => {
                             <div
                                 key={sec.id}
                                 className={`flex items-center justify-between p-4 rounded-xl border transition ${
-                                    sec.isActive ? 'border-gray-200 bg-white' : 'border-red-200 bg-red-50 opacity-60'
+                                    sec.isActive ? 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800' : 'border-red-200 bg-red-50 opacity-60'
                                 }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-[#ecf8fa] flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-full bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center">
                                         <FontAwesomeIcon icon={faUserTie} className="text-[#1b8b99]" />
                                     </div>
                                     <div>
-                                        <p className="font-bold text-gray-800 text-sm">{sec.fullName}</p>
+                                        <p className="font-bold text-gray-800 dark:text-gray-200 text-sm">{sec.fullName}</p>
                                         <p className="text-xs text-gray-400">{sec.email}</p>
                                         {editingId !== sec.id && (
                                             <p className="text-xs text-[#1b8b99] mt-1">
@@ -215,8 +215,8 @@ const SecretaryManagement = () => {
                                                         key={perm.key}
                                                         className={`text-[10px] px-2 py-1 rounded-lg border cursor-pointer transition ${
                                                             editPermissions & perm.key
-                                                                ? 'border-[#1b8b99] bg-[#ecf8fa] text-[#1b8b99] font-bold'
-                                                                : 'border-gray-200 text-gray-400'
+                                                                ? 'border-[#1b8b99] bg-[#ecf8fa] dark:bg-gray-900 text-[#1b8b99] font-bold'
+                                                                : 'border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500'
                                                         }`}
                                                     >
                                                         <input
@@ -237,7 +237,7 @@ const SecretaryManagement = () => {
                                             </button>
                                             <button
                                                 onClick={() => setEditingId(null)}
-                                                className="text-xs px-3 py-1.5 border border-gray-300 text-gray-500 rounded-lg hover:bg-gray-50"
+                                                className="text-xs px-3 py-1.5 border border-gray-300 text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-lg hover:bg-gray-50"
                                             >
                                                 إلغاء
                                             </button>
@@ -249,7 +249,7 @@ const SecretaryManagement = () => {
                                                     setEditingId(sec.id);
                                                     setEditPermissions(sec.permissionsFlags);
                                                 }}
-                                                className="text-xs px-3 py-1.5 border border-[#1b8b99] text-[#1b8b99] rounded-lg font-bold hover:bg-[#ecf8fa] transition flex items-center gap-1"
+                                                className="text-xs px-3 py-1.5 border border-[#1b8b99] text-[#1b8b99] rounded-lg font-bold hover:bg-[#ecf8fa] dark:bg-gray-900 transition flex items-center gap-1"
                                             >
                                                 <FontAwesomeIcon icon={faShieldHalved} />
                                                 تعديل الصلاحيات

@@ -1,13 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react'
+﻿import React, { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/assets_frontend/assets'
 import { AppContext } from '../context/AppContext'
 import axiosInstance from '../api/axiosInstance'
 import { toast } from 'react-toastify'
 import { COUNTRIES, DEFAULT_COUNTRY } from '../constants/countries'
+import { useTranslation } from 'react-i18next'
 
 const Myprofile = () => {
   // جلب البيانات ودوال المزامنة من الـ AppContext
   const { userData, setUserData, loadUserProfileData } = useContext(AppContext)
+  const { t } = useTranslation()
 
   const [isEdit, setIsEdit] = useState(false)
   const [image, setImage] = useState(false)
@@ -36,15 +38,15 @@ const Myprofile = () => {
   const updateUserProfileData = async () => {
     try {
       if (!localUserData.gender) {
-        toast.error("الرجاء اختيار الجنس")
+        toast.error(t('profile.genderRequired'))
         return
       }
       if (!localUserData.dob) {
-        toast.error("الرجاء إدخال تاريخ الميلاد")
+        toast.error(t('profile.dobRequired'))
         return
       }
       if (!phoneNumberPart.trim()) {
-        toast.error("الرجاء إدخال رقم الهاتف")
+        toast.error(t('profile.phoneRequired'))
         return
       }
 
@@ -66,7 +68,7 @@ const Myprofile = () => {
       })
 
       if (data.succeeded) {
-        toast.success("تم تحديث البيانات بنجاح")
+        toast.success(t('profile.updateSuccess'))
 
         // تحديث فوري في كل الموقع (مثل المواقع العالمية)
         const updatedImageUrl = localUserData.image || (image ? URL.createObjectURL(image) : null)
@@ -101,11 +103,11 @@ const Myprofile = () => {
         setIsEdit(false)
         setImage(false)
       } else {
-        toast.error(data.errors?.[0]?.message || data.message || "حدث خطأ أثناء تحديث البيانات")
+        toast.error(data.errors?.[0]?.message || data.message || t('profile.updateError'))
       }
     } catch (error) {
 
-      toast.error(error.response?.data?.errors?.[0]?.message || error.message || "حدث خطأ أثناء تحديث البيانات")
+      toast.error(error.response?.data?.errors?.[0]?.message || error.message || t('profile.updateError'))
     }
   }
 
@@ -123,13 +125,13 @@ const Myprofile = () => {
   return (
     currentData && (
       <div
-        className="w-full bg-white p-6 md:pb-10 md:pr-10 md:pl-10 pt-40 "
+        className="w-full bg-white dark:bg-gray-800 p-6 md:pb-10 md:pr-10 md:pl-10 pt-40 "
         dir="rtl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-4  items-start">
           {/* 1. الجهة اليمنى: الصورة وزر الرفع  */}
           <div className="flex flex-col items-center gap-4 pt-2 order-first lg:order-0">
-            <div className="w-55 h-55 rounded-2xl overflow-hidden bg-gray-100 shadow-xs border border-gray-200">
+            <div className="w-55 h-55 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-xs border border-gray-200">
               {currentData?.image ? (
                 // إذا كانت هناك صورة جديدة مرفوعة أو صورة قديمة مخزنة، نعرض الصورة
                 <img
@@ -169,7 +171,7 @@ const Myprofile = () => {
                 >
                   <path d="M21,15V18.5A3.5,3.5,0,0,1,17.5,22H6.5A3.5,3.5,0,0,1,3,18.5V15M12,2L12,15M12,2L8,6M12,2L16,6" />
                 </svg>
-                رفع صورة
+                {t('profile.uploadImage')}
               </label>
               <input
                 type="file"
@@ -194,21 +196,21 @@ const Myprofile = () => {
           {/* 2. الجهة اليسرى: النموذج  */}
           <div className="flex flex-col">
             <div className="mb-1.5">
-              <h2 className="text-2xl font-bold text-gray-900 mb-1.5">
-                المعلومات الشخصية
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1.5">
+                {t('profile.personalInfo')}
               </h2>
-              <p className="text-gray-500 text-sm">
-                قم بتحديث معلوماتك الأساسية لضمان تجربة حجز دقيقة.
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">
+                {t('profile.personalInfoDescription')}
               </p>
             </div>
 
-            <div className="border-b border-gray-200 my-4 lg:my-6 w-full"></div>
+            <div className="border-b border-gray-200 dark:border-gray-700 my-4 lg:my-6 w-full"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* الاسم الأول  */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  الاسم الأول
+                  {t('profile.firstName')}
                 </label>
                 <input
                   type="text"
@@ -220,14 +222,16 @@ const Myprofile = () => {
                       firstname: e.target.value,
                     }))
                   }
-                  className="py-2 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 bg-white focus:border-[#1b8b99] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  required
+                  pattern="^[\u0600-\u06FFa-zA-Z\s]{2,}$"
+                  className="py-2 px-4 border border-gray-200 dark:border-gray-700 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:border-[#1b8b99] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                 />
               </div>
 
               {/* الاسم الأخير  */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  الاسم الأخير
+                  {t('profile.lastName')}
                 </label>
                 <input
                   type="text"
@@ -239,14 +243,16 @@ const Myprofile = () => {
                       lastname: e.target.value,
                     }))
                   }
-                  className="py-2 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 bg-white focus:border-[#1b8b99] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  required
+                  pattern="^[\u0600-\u06FFa-zA-Z\s]{2,}$"
+                  className="py-2 px-4 border border-gray-200 dark:border-gray-700 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:border-[#1b8b99] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                 />
               </div>
 
               {/* البريد الإلكتروني  */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  البريد الإلكتروني
+                  {t('profile.email')}
                 </label>
                 <input
                   type="email"
@@ -258,22 +264,23 @@ const Myprofile = () => {
                       email: e.target.value,
                     }))
                   }
-                  className="py-2 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 bg-white focus:border-[#1b8b99] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  required
+                  className="py-2 px-4 border border-gray-200 dark:border-gray-700 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:border-[#1b8b99] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                 />
               </div>
 
               {/* رقم الهاتف مع اختيار الدولة */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  رقم الهاتف
+                  {t('profile.phone')}
                 </label>
                 <div className="relative">
-                  <div className="flex items-stretch overflow-hidden border border-gray-200 rounded-lg bg-white focus-within:border-[#1b8b99] transition-colors duration-200">
+                  <div className="flex items-stretch overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus-within:border-[#1b8b99] transition-colors duration-200">
                     <button
                       type="button"
                       disabled={!isEdit}
                       onClick={() => setShowCountries((prev) => !prev)}
-                      className="flex items-center gap-1.5 px-3 py-2 border-l border-gray-200 text-sm font-medium text-gray-700 bg-[#fcfcfc] shrink-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+                      className="flex items-center gap-1.5 px-3 py-2 border-l border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-[#fcfcfc] dark:bg-gray-800 shrink-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       <img
                         loading="lazy"
@@ -307,12 +314,15 @@ const Myprofile = () => {
                           phone: selectedCountry.code + e.target.value.replace(/\D/g, ""),
                         }))
                       }
-                      className="flex-1 min-w-0 py-2 px-3 text-base outline-none transition-colors duration-200 text-gray-800 bg-white focus:outline-none disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                      required
+                      pattern="05[96]\d{8}"
+                      maxLength="10"
+                      className="flex-1 min-w-0 py-2 px-3 text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:outline-none disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                     />
                   </div>
 
                   {showCountries && (
-                    <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg">
+                    <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
                       {COUNTRIES.map((c) => {
                         const isActive = c.code === selectedCountry.code;
                         return (
@@ -328,8 +338,8 @@ const Myprofile = () => {
                               setShowCountries(false);
                             }}
                             className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive
-                              ? "bg-[#e6f4f6] text-[#1b8b99] font-bold"
-                              : "text-gray-700 hover:bg-gray-50"}`}
+                              ? "bg-[#e6f4f6] dark:bg-gray-800 text-[#1b8b99] font-bold"
+                              : "text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50"}`}
                           >
                             <span className="text-lg leading-none">
                               <img
@@ -343,7 +353,7 @@ const Myprofile = () => {
                               />
                             </span>
                             <span className="flex-1 text-right">{c.name}</span>
-                            <span className="text-gray-500 text-xs" dir="ltr">{c.code}</span>
+                            <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs" dir="ltr">{c.code}</span>
                           </button>
                         );
                       })}
@@ -355,9 +365,9 @@ const Myprofile = () => {
               {/* الجنس  */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  الجنس
+                  {t('profile.gender')}
                 </label>
-                <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden bg-[#fcfcfc] h-12">
+                <div className="flex items-center border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-[#fcfcfc] dark:bg-gray-800 h-12">
                   <button
                     type="button"
                     disabled={!isEdit}
@@ -366,7 +376,7 @@ const Myprofile = () => {
                     }
                     className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${currentData.gender === "Male" ? "bg-[#1b8b99] text-white" : "text-gray-700"} ${!isEdit ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
-                    ذكر
+                    {t('profile.male')}
                   </button>
                   <button
                     type="button"
@@ -379,7 +389,7 @@ const Myprofile = () => {
                     }
                     className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${currentData.gender === "Female" ? "bg-[#1b8b99] text-white" : "text-gray-700"} ${!isEdit ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
-                    أنثى
+                    {t('profile.female')}
                   </button>
                 </div>
               </div>
@@ -387,7 +397,7 @@ const Myprofile = () => {
               {/* تاريخ الميلاد  */}
               <div className="flex flex-col gap-1.5">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  تاريخ الميلاد
+                  {t('profile.dateOfBirth')}
                 </label>
                 <input
                   type="date"
@@ -399,14 +409,15 @@ const Myprofile = () => {
                       dob: e.target.value,
                     }))
                   }
-                  className="py-2 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 bg-white focus:border-[#1b8b99] h-12 disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  required
+                  className="py-2 px-4 border border-gray-200 dark:border-gray-700 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:border-[#1b8b99] h-12 disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                 />
               </div>
 
               {/* العنوان  */}
               <div className="flex flex-col gap-1.5 md:col-span-2">
                 <label className="text-[#1b8b99] font-medium text-sm">
-                  العنوان
+                  {t('profile.address')}
                 </label>
                 <input
                   type="text"
@@ -418,13 +429,13 @@ const Myprofile = () => {
                       address: { ...prev.address, line1: e.target.value },
                     }))
                   }
-                  className="py-2 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 bg-white focus:border-[#1b8b99] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  className="py-2 px-4 border border-gray-200 dark:border-gray-700 rounded-lg text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:border-[#1b8b99] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                 />
               </div>
             </div>
 
             {/* أزرار التحكم  */}
-            <div className="mt-8 border-t border-gray-100 pt-6">
+            <div className="mt-8 border-t border-gray-100 dark:border-gray-700 pt-6">
               {isEdit ? (
                 <button
                   onClick={updateUserProfileData}
@@ -439,7 +450,7 @@ const Myprofile = () => {
                   >
                     <path d="M20 6L9 17L4 12" />
                   </svg>
-                  حفظ التعديلات
+                  {t('profile.saveChanges')}
                 </button>
               ) : (
                 <button
@@ -450,7 +461,7 @@ const Myprofile = () => {
                   }}
                   className="bg-[#1b8b99] hover:bg-[#15727e] text-white py-3 px-10 rounded-lg text-base font-bold cursor-pointer inline-flex items-center gap-2.5 transition-colors duration-300"
                 >
-                  تعديل الملف الشخصي
+                  {t('profile.editProfile')}
                 </button>
               )}
             </div>

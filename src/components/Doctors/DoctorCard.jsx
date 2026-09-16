@@ -104,7 +104,7 @@ const DoctorCard = ({ item }) => {
   };
 
   return (
-    <div className="bg-white border border-gray-150 rounded-2xl shadow-xs hover:shadow-md transition-all duration-300 flex flex-col relative">
+    <div className="bg-white dark:bg-gray-800 border border-gray-150 dark:border-gray-700 rounded-2xl shadow-xs hover:shadow-md transition-all duration-300 flex flex-col relative">
       {/* شارة التوفر */}
       {item.availableToday ? (
         <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 text-[10px] font-bold text-white bg-emerald-600 px-2.5 py-1 rounded-full shadow-xs">
@@ -134,7 +134,7 @@ const DoctorCard = ({ item }) => {
       </div>
 
       {/* صورة الطبيب */}
-      <div className="bg-gray-50/50 h-52 w-full flex items-center justify-center relative border-b border-gray-100">
+      <div className="bg-gray-50/50 dark:bg-gray-700/50 h-52 w-full flex items-center justify-center relative border-b border-gray-100 dark:border-gray-700">
         <img
           loading="lazy"
           decoding="async"
@@ -150,7 +150,7 @@ const DoctorCard = ({ item }) => {
       </div>
 
       {/* تفاصيل الطبيب */}
-      <div className="p-4 flex-1 flex flex-col justify-between text-right bg-white relative">
+      <div className="p-4 flex-1 flex flex-col justify-between text-right bg-white dark:bg-gray-800 relative">
         <div className="space-y-1">
           <div className="flex items-center justify-between">
             <h3 className="text-gray-900 font-black text-sm">
@@ -166,7 +166,7 @@ const DoctorCard = ({ item }) => {
             {item.specializationName || "طبيب متخصص"}
           </p>
 
-          <div className="grid grid-cols-2 gap-y-1 gap-x-2 pt-2 pb-1 text-[11px] text-gray-500 font-bold border-b border-gray-50">
+          <div className="grid grid-cols-2 gap-y-1 gap-x-2 pt-2 pb-1 text-[11px] text-gray-500 dark:text-gray-400 font-bold border-b border-gray-50 dark:border-gray-700">
             <div className="flex items-center gap-1 justify-start">
               <FontAwesomeIcon
                 icon={faClock}
@@ -212,7 +212,7 @@ const DoctorCard = ({ item }) => {
           <div className="flex items-center gap-2">
             <button
               onClick={handleOpenReview}
-              className="bg-white border border-[#138C9F]/30 hover:bg-[#138C9F]/5 text-[#138C9F] font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-xs cursor-pointer"
+              className="bg-white dark:bg-gray-700 border border-[#138C9F]/30 hover:bg-[#138C9F]/5 text-[#138C9F] font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-xs cursor-pointer"
             >
               تقييم
             </button>
@@ -233,10 +233,10 @@ const DoctorCard = ({ item }) => {
       {showReviewModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" dir="rtl">
           <div className="absolute inset-0 bg-black/50" onClick={() => !submitting && setShowReviewModal(false)} />
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-6">
             <button
               onClick={() => setShowReviewModal(false)}
-              className="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer"
+              className="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center text-slate-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors cursor-pointer"
               disabled={submitting}
             >
               <FontAwesomeIcon icon={faXmark} />
@@ -282,7 +282,7 @@ const DoctorCard = ({ item }) => {
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
                   placeholder="أضف تعليقاً (اختياري)..."
-                  className="w-full border border-slate-200 rounded-xl p-3 text-sm text-slate-700 font-bold resize-none focus:outline-none focus:ring-2 focus:ring-[#138C9F]/30 focus:border-[#138C9F] transition-all"
+                  className="w-full border border-slate-200 dark:border-gray-600 rounded-xl p-3 text-sm text-slate-700 dark:text-gray-300 font-bold resize-none focus:outline-none focus:ring-2 focus:ring-[#138C9F]/30 focus:border-[#138C9F] transition-all bg-white dark:bg-gray-700"
                   rows={3}
                   disabled={submitting}
                 />
@@ -292,7 +292,7 @@ const DoctorCard = ({ item }) => {
                   disabled={submitting || reviewRating === 0}
                   className={`w-full mt-4 py-3 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                     submitting || reviewRating === 0
-                      ? "bg-slate-100 text-slate-400 cursor-not-allowed"
+                      ? "bg-slate-100 dark:bg-gray-700 text-slate-400 dark:text-gray-500 cursor-not-allowed"
                       : "bg-[#138C9F] hover:bg-[#2c7792] text-white shadow-md"
                   }`}
                 >

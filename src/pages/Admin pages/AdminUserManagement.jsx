@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { Eye, Trash2, Users, UserCheck, UserPlus, Ban, ChevronRight, ChevronLeft, X, User, Briefcase, Award, Download, ToggleLeft, ToggleRight } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
@@ -166,7 +166,7 @@ export default function AdminUserManagement() {
     const totalCountDisplay = totalCount;
 
     return (
-        <div className="w-full bg-[#ecf8fa] flex flex-col gap-6" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
             <div className="flex justify-between items-center w-full flex-wrap gap-2">
                 <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                     إدارة المستخدمين
@@ -174,28 +174,28 @@ export default function AdminUserManagement() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي الأطباء</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Users size={16} /></div>
                 </div>
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">الأطباء النشطون</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalActiveDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#6BFF8F]/30 rounded-full flex items-center justify-center text-[#004F20]"><UserCheck size={16} /></div>
                 </div>
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي المستخدمين</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069]"><UserPlus size={16} /></div>
                 </div>
-                <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">حسابات معطلة</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalInactiveUsers}</span>
@@ -204,33 +204,33 @@ export default function AdminUserManagement() {
                 </div>
             </div>
 
-            <div className="bg-white border border-[#C3C6D6] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl w-full flex flex-col overflow-hidden">
-                <div className="border-b border-[#C3C6D6] px-6 py-4 flex items-center justify-start">
+            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl w-full flex flex-col overflow-hidden">
+                <div className="border-b border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex items-center justify-start">
                     <button className="h-full border-b-2 border-[#003D9B] px-4 font-semibold text-[16px] text-[#003D9B] flex items-center justify-center cursor-pointer">الكل</button>
                 </div>
 
                 <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-right">
                         <thead>
-                            <tr className="bg-[#e2f4f7] py-3">
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px]">المستخدم</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px]">نوع الحساب</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden md:table-cell">تاريخ الانضمام</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px] hidden sm:table-cell">الحالة</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] tracking-[0.6px] text-center w-[120px]">التحكم</th>
+                            <tr className="bg-[#e2f4f7] dark:bg-gray-800 py-3">
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px]">المستخدم</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px]">نوع الحساب</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] hidden md:table-cell">تاريخ الانضمام</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] hidden sm:table-cell">الحالة</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] text-center w-[120px]">التحكم</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#C3C6D6]">
                             {loading ? (
                                 <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">جاري تحميل البيانات...</td></tr>
                             ) : users.map((user) => (
-                                <tr key={user.id} className="hover:bg-slate-50 transition-colors">
+                                <tr key={user.id} className="hover:bg-slate-50 dark:bg-gray-900 transition-colors">
                                     <td className="px-6 py-3 whitespace-nowrap">
                                         <div className="flex items-center gap-3">
                                             {showImg(user) ? (
                                                 <img loading="lazy" decoding="async" width="40" height="40" src={imgSrc(user)} onError={() => handleImgError(user.id)} alt={user.name} className="w-10 h-10 rounded-full border border-[#138C9F] object-cover" />
                                             ) : (
-                                                <div className="w-10 h-10 rounded-full border border-[#138C9F] bg-[#e2f4f7] flex items-center justify-center text-[#138C9F] font-bold text-[14px]">
+                                                <div className="w-10 h-10 rounded-full border border-[#138C9F] bg-[#e2f4f7] dark:bg-gray-800 flex items-center justify-center text-[#138C9F] font-bold text-[14px]">
                                                     {user.name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '??'}
                                                 </div>
                                             )}
@@ -273,20 +273,20 @@ export default function AdminUserManagement() {
                     </table>
                 </div>
 
-                <div className="border-t border-[#C3C6D6] px-6 py-4 flex items-center justify-between flex-wrap gap-4 bg-white">
+                <div className="border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex items-center justify-between flex-wrap gap-4 bg-white">
                     <span className="text-[14px] text-[#526069]">
                         عرض <strong className="text-[#0B1C30]">{users.length}</strong> من أصل <strong className="text-[#0B1C30]">{totalCountDisplay}</strong> مستخدم
                     </span>
                     {totalPages > 1 && (
                         <div className="flex items-center gap-1.5" dir="ltr">
-                            <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="w-8 h-8 rounded border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronLeft size={16} /></button>
+                            <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="w-8 h-8 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronLeft size={16} /></button>
                             {[...Array(totalPages)].map((_, index) => {
                                 const pageNumber = index + 1;
                                 return (
-                                    <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)} className={`w-8 h-8 rounded flex items-center justify-center text-[14px] cursor-pointer transition-colors ${currentPage === pageNumber ? 'bg-[#003D9B] text-white font-bold' : 'border border-transparent hover:border-gray-200 text-[#0b1c30] font-semibold'}`}>{pageNumber}</button>
+                                    <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)} className={`w-8 h-8 rounded flex items-center justify-center text-[14px] cursor-pointer transition-colors ${currentPage === pageNumber ? 'bg-[#003D9B] text-white font-bold' : 'border border-transparent hover:border-gray-200 dark:border-gray-700 text-[#0B1C30] dark:text-white font-semibold'}`}>{pageNumber}</button>
                                 );
                             })}
-                            <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="w-8 h-8 rounded border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronRight size={16} /></button>
+                            <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="w-8 h-8 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronRight size={16} /></button>
                         </div>
                     )}
                 </div>
@@ -294,12 +294,12 @@ export default function AdminUserManagement() {
 
             {isModalOpen && selectedUser && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-fade-in" dir="rtl">
-                    <div className="bg-[#ecf8fa] border border-[#C3C6D6] shadow-2xl rounded-2xl w-full max-w-3xl p-8 relative max-h-[90vh] overflow-y-auto">
-                        <button onClick={() => { setIsModalOpen(false); setUserDetails(null); }} className="absolute top-4 left-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
+                    <div className="bg-[#ecf8fa] dark:bg-gray-900 border border-[#C3C6D6] dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-3xl p-8 relative max-h-[90vh] overflow-y-auto">
+                        <button onClick={() => { setIsModalOpen(false); setUserDetails(null); }} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 transition-colors cursor-pointer">
                             <X size={20} />
                         </button>
 
-                        <div className="bg-white border border-[#D3E2ED] shadow-sm rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
+                        <div className="bg-white dark:bg-gray-800 border border-[#D3E2ED] shadow-sm rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
                             <button onClick={() => { handleDeleteUser(selectedUser); setIsModalOpen(false); }} className="border border-red-200 text-red-600 font-semibold px-4 py-2 rounded-xl hover:bg-red-50 transition-colors cursor-pointer order-3 md:order-1">
                                 حذف الحساب
                             </button>
@@ -316,7 +316,7 @@ export default function AdminUserManagement() {
                                 {showImg(selectedUser) ? (
                                     <img loading="lazy" decoding="async" width="84" height="84" src={imgSrc(selectedUser)} onError={() => handleImgError(selectedUser.id)} alt={selectedUser.name} className="w-[84px] h-[84px] rounded-full object-cover border-2 border-[#138C9F] shadow-sm" />
                                 ) : (
-                                    <div className="w-[84px] h-[84px] rounded-full border-2 border-[#138C9F] bg-[#e2f4f7] flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
+                                    <div className="w-[84px] h-[84px] rounded-full border-2 border-[#138C9F] bg-[#e2f4f7] dark:bg-gray-800 flex items-center justify-center text-[#138C9F] font-bold text-[24px]">
                                         {selectedUser.name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '??'}
                                     </div>
                                 )}
@@ -328,70 +328,70 @@ export default function AdminUserManagement() {
                         ) : userDetails ? (
                             selectedUser.userType === 'Doctor' ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full">
-                                    <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full">
-                                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-[#138C9F] w-full">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full">
+                                        <div className="flex items-center gap-2 border-b border-gray-100 dark:border-gray-700 pb-3 text-[#138C9F] w-full">
                                             <Briefcase size={20} />
                                             <h4 className="font-bold text-[17px]">التفاصيل المهنية</h4>
                                         </div>
                                         <div className="flex flex-col gap-5 w-full">
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">التخصص</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">التخصص</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.specializationName || '-'}</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">سنوات الخبرة</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">سنوات الخبرة</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.yearsOfExperience || 0} سنة</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">رقم الترخيص</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">رقم الترخيص</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.licenseNumber || '-'}</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">سعر الكشفية</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">سعر الكشفية</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.sessionPrice || 0} ₪</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">العيادة</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">العيادة</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.clinicName || '-'}</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">عنوان العيادة</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">عنوان العيادة</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.clinicAddress || '-'}</span>
                                             </div>
                                             {userDetails.detailedAddress && (
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">العنوان بالتفصيل</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">العنوان بالتفصيل</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.detailedAddress}</span>
                                             </div>
                                             )}
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">النبذة المهنية</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">النبذة المهنية</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.bio || '-'}</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full">
-                                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-[#138C9F] w-full">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full">
+                                        <div className="flex items-center gap-2 border-b border-gray-100 dark:border-gray-700 pb-3 text-[#138C9F] w-full">
                                             <User size={20} />
                                             <h4 className="font-bold text-[17px]">المعلومات الشخصية</h4>
                                         </div>
                                         <div className="flex flex-col gap-5 w-full">
                                             <div className="flex flex-col gap-0.5 w-full">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">البريد الإلكتروني</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">البريد الإلكتروني</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr" style={{ textAlign: 'right' }}>{userDetails.email || selectedUser.email}</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5 w-full">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">رقم الهاتف</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">رقم الهاتف</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr">{userDetails.phoneNumber || '-'}</span>
                                             </div>
                                             <div className="flex flex-row w-full gap-16 mt-1">
                                                 <div className="flex flex-col gap-0.5">
-                                                    <span className="font-bold text-[#0B1C30] text-[16px]">تاريخ الميلاد</span>
+                                                    <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">تاريخ الميلاد</span>
                                                     <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.dateOfBirth || '-'}</span>
                                                 </div>
                                                 <div className="flex flex-col gap-0.5">
-                                                    <span className="font-bold text-[#0B1C30] text-[16px]">الجنس</span>
+                                                    <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">الجنس</span>
                                                     <span className="text-[#3D4A5C] text-[16px] font-semibold">{genderMap[userDetails.gender] || userDetails.gender || '-'}</span>
                                                 </div>
                                             </div>
@@ -410,52 +410,52 @@ export default function AdminUserManagement() {
                                     </div>
                                 </div>
                             ) : selectedUser.userType === 'Secretary' ? (
-                                <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full mb-6">
-                                    <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-purple-600 w-full">
+                                <div className="bg-white dark:bg-gray-800 border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full mb-6">
+                                    <div className="flex items-center gap-2 border-b border-gray-100 dark:border-gray-700 pb-3 text-purple-600 w-full">
                                         <User size={20} />
                                         <h4 className="font-bold text-[17px]">معلومات السكرتير</h4>
                                     </div>
                                     <div className="flex flex-col gap-5 w-full">
                                         <div className="flex flex-col gap-0.5 w-full">
-                                            <span className="font-bold text-[#0B1C30] text-[16px]">البريد الإلكتروني</span>
+                                            <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">البريد الإلكتروني</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr" style={{ textAlign: 'right' }}>{selectedUser.email}</span>
                                         </div>
                                         <div className="flex flex-col gap-0.5 w-full">
-                                            <p className="text-[#526069] text-[14px]">هذا المستخدم مسجل كسكرتير ومرتبط بطبيب في المنصة.</p>
+                                            <p className="text-[#526069] dark:text-gray-400 text-[14px]">هذا المستخدم مسجل كسكرتير ومرتبط بطبيب في المنصة.</p>
                                         </div>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="bg-white border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full mb-6">
-                                    <div className="flex items-center gap-2 border-b border-gray-100 pb-3 text-[#003D9B] w-full">
+                                <div className="bg-white dark:bg-gray-800 border border-[#D3E2ED] rounded-2xl p-6 flex flex-col gap-4 w-full mb-6">
+                                    <div className="flex items-center gap-2 border-b border-gray-100 dark:border-gray-700 pb-3 text-[#003D9B] w-full">
                                         <User size={20} />
                                         <h4 className="font-bold text-[17px]">المعلومات الشخصية</h4>
                                     </div>
                                     <div className="flex flex-col gap-5 w-full">
                                         <div className="flex flex-col gap-0.5 w-full">
-                                            <span className="font-bold text-[#0B1C30] text-[16px]">البريد الإلكتروني</span>
+                                            <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">البريد الإلكتروني</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr" style={{ textAlign: 'right' }}>{userDetails.email || selectedUser.email}</span>
                                         </div>
                                         <div className="flex flex-col gap-0.5 w-full">
-                                            <span className="font-bold text-[#0B1C30] text-[16px]">رقم الهاتف</span>
+                                            <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">رقم الهاتف</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold" dir="ltr">{userDetails.phoneNumber || '-'}</span>
                                         </div>
                                         <div className="flex flex-row w-full gap-16 mt-1">
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">تاريخ الميلاد</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">تاريخ الميلاد</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.dateOfBirth || '-'}</span>
                                             </div>
                                             <div className="flex flex-col gap-0.5">
-                                                <span className="font-bold text-[#0B1C30] text-[16px]">الجنس</span>
+                                                <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">الجنس</span>
                                                 <span className="text-[#3D4A5C] text-[16px] font-semibold">{genderMap[userDetails.gender] || userDetails.gender || '-'}</span>
                                             </div>
                                         </div>
                                         <div className="flex flex-col gap-0.5 w-full">
-                                            <span className="font-bold text-[#0B1C30] text-[16px]">العنوان</span>
+                                            <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">العنوان</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.address || '-'}</span>
                                         </div>
                                         <div className="flex flex-col gap-0.5 w-full">
-                                            <span className="font-bold text-[#0B1C30] text-[16px]">فصيلة الدم</span>
+                                            <span className="font-bold text-[#0B1C30] dark:text-white text-[16px]">فصيلة الدم</span>
                                             <span className="text-[#3D4A5C] text-[16px] font-semibold">{userDetails.bloodType || '-'}</span>
                                         </div>
                                     </div>

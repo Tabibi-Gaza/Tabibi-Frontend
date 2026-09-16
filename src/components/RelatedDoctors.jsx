@@ -27,11 +27,11 @@ const RelatedDoctors = ({ speciality, docId }) => {
                     <div 
                         key={index}
                         onClick={() => { navigate(`/appointment/${item._id}`); window.scrollTo(0, 0) }} 
-                        className='border border-gray-100 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col'
+                        className='border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col'
                     >
                         {/* حاوية الصورة وشارة التوفر المتموضعة في أعلى اليمين absolute top-3 right-3 */}
-                        <div className='relative bg-[#f4faff] pt-4 flex justify-center h-48 overflow-hidden'>
-                            <span className='absolute top-3 right-3 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm bg-white text-gray-500'>
+                        <div className='relative bg-[#f4faff] dark:bg-gray-700 pt-4 flex justify-center h-48 overflow-hidden'>
+                            <span className='absolute top-3 right-3 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400'>
                                 <span className='w-1.5 h-1.5 rounded-full bg-gray-400'></span>
                                 غير متاح
                             </span>
@@ -51,7 +51,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
                                 </div>
                                 <p className='text-[#138c9f] text-xs font-medium mb-3'>{item.speciality}</p>
                                 
-                                <div className='flex flex-col gap-1 text-[11px] text-gray-400 border-t border-gray-50 pt-2'>
+                                <div className='flex flex-col gap-1 text-[11px] text-gray-400 dark:text-gray-500 border-t border-gray-50 dark:border-gray-700 pt-2'>
                                     <p className='flex items-center gap-1'>📍 {item.address?.line1 }</p>
                                     <p className='flex items-center gap-1'>🕒 سنوات خبرة {item.experience}</p>
                                 </div>

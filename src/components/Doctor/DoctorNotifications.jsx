@@ -150,12 +150,12 @@ const DoctorNotifications = () => {
   const grouped = groupNotifications(notifications);
 
   return (
-    <div className="min-h-screen bg-[#ecf8fa] p-4 md:p-8" dir="rtl">
-      <div className="max-w-[900px] mx-auto bg-white border border-[#C3C6D6] rounded-2xl shadow-xs overflow-hidden">
+    <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 p-4 md:p-8" dir="rtl">
+      <div className="max-w-[900px] mx-auto bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
 
         {/* Header */}
-        <div className="p-6 border-b border-gray-100 flex flex-col sm:flex-row items-center gap-4 bg-slate-50/50">
-          <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 shrink-0 shadow-xs relative">
+        <div className="p-6 border-b border-gray-100 dark:border-gray-700 flex flex-col sm:flex-row items-center gap-4 bg-slate-50/50 dark:bg-gray-700/50">
+          <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center text-blue-600 shrink-0 shadow-xs relative">
             <Bell size={26} strokeWidth={1.75} />
             {unreadCount > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
@@ -188,8 +188,8 @@ const DoctorNotifications = () => {
             <div className="text-center py-12 text-gray-400 font-bold">جاري التحميل...</div>
           ) : grouped.length === 0 ? (
             <div className="text-center py-12">
-              <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Bell size={28} className="text-gray-300" strokeWidth={1.75} />
+              <div className="w-16 h-16 bg-slate-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Bell size={28} className="text-gray-300 dark:text-gray-500" strokeWidth={1.75} />
               </div>
               <p className="text-base font-bold text-gray-400">لا توجد إشعارات</p>
               <p className="text-sm text-gray-300 mt-1">ستظهر الإشعارات الجديدة هنا</p>
@@ -203,8 +203,8 @@ const DoctorNotifications = () => {
                   key={group.type}
                   className={`p-4 border rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 hover:shadow-md transition-all duration-200 group ${
                     group.allRead
-                      ? 'bg-slate-50 border-slate-100'
-                      : 'bg-white border-blue-100 shadow-sm'
+                      ? 'bg-slate-50 dark:bg-gray-700/50 border-slate-100 dark:border-gray-600'
+                      : 'bg-white dark:bg-gray-800 border-blue-100 dark:border-blue-800/30 shadow-sm'
                   }`}
                 >
                   <div className="space-y-1 w-full flex-1">
@@ -223,7 +223,7 @@ const DoctorNotifications = () => {
                             {group.title}
                           </h3>
                           {group.count > 1 && (
-                            <span className="text-[11px] font-bold text-[#138C9F] bg-[#e2f4f7] px-2 py-0.5 rounded-full">
+                            <span className="text-[11px] font-bold text-[#138C9F] bg-[#e2f4f7] dark:bg-gray-700 px-2 py-0.5 rounded-full">
                               {group.count}
                             </span>
                           )}

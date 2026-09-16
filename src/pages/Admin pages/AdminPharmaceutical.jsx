@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, ChevronRight, ChevronLeft, X, Pill } from 'lucide-react';
 
 export default function AdminPharmaceutical() {
@@ -88,7 +88,7 @@ export default function AdminPharmaceutical() {
         <div className="w-full  flex flex-col gap-[32px] text-right relative" dir="rtl">
 
             {/* SECTION 1: Summary Statistics Card */}
-                <div className="w-full bg-white/80 border border-[#C3C6D6] backdrop-blur-[4px] rounded-[12px] p-4 md:p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
+                <div className="w-full bg-white dark:bg-gray-800/80 border border-[#C3C6D6] dark:border-gray-700 backdrop-blur-[4px] rounded-[12px] p-4 md:p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
 
                 {/* معلومات إجمالي الأدوية */}
                 <div className="flex flex gap-3 items-center justify-center gap-1">
@@ -112,10 +112,10 @@ export default function AdminPharmaceutical() {
             </div>
 
             {/* SECTION 2: Main Content Table */}
-            <div className="w-full bg-white/80 border border-[#C3C6D6] backdrop-blur-[4px] rounded-[12px] shadow-sm overflow-hidden flex flex-col min-h-[480px]">
+            <div className="w-full bg-white dark:bg-gray-800/80 border border-[#C3C6D6] dark:border-gray-700 backdrop-blur-[4px] rounded-[12px] shadow-sm overflow-hidden flex flex-col min-h-[480px]">
 
                 {/* عنوان الجدول العلوي */}
-                <div className="w-full h-[61px] bg-white border-b border-[#C3C6D6] flex items-center justify-center relative">
+                <div className="w-full h-[61px] bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 flex items-center justify-center relative">
                     <h3 className="text-[20px] font-bold text-[#138C9F]">
                         قائمة الأدوية
                     </h3>
@@ -127,7 +127,7 @@ export default function AdminPharmaceutical() {
 
                         {/* رأس الجدول الخفيف */}
                         <thead>
-                            <tr className="bg-[#ecf8fa] border-b border-[#C3C6D6] h-[49px]">
+                            <tr className="bg-[#ecf8fa] dark:bg-gray-900 border-b border-[#C3C6D6] dark:border-gray-700 h-[49px]">
                                 <th className="p-3 md:p-4 text-sm md:text-[14px] md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-right w-1/2 pe-2 md:pe-12">
                                     اسم الدواء
                                 </th>
@@ -141,7 +141,7 @@ export default function AdminPharmaceutical() {
                         <tbody>
                             {currentItems.length > 0 ? (
                                 currentItems.map((med) => (
-                                    <tr key={med.id} className="h-[60px] border-b border-[#C3C6D6] last:border-0 hover:bg-[#ecf8fa]/50 transition-colors">
+                                    <tr key={med.id} className="h-[60px] border-b border-[#C3C6D6] dark:border-gray-700 last:border-0 hover:bg-[#ecf8fa] dark:bg-gray-900/50 transition-colors">
 
                                         {/* عمود اسم الدواء مع الباتش كمعلومات ثانوية عمودية */}
                                         <td className="p-2 text-right pe-2 md:pe-12">
@@ -180,7 +180,7 @@ export default function AdminPharmaceutical() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="2" className="p-12 text-center text-gray-400 font-bold">
+                                    <td colSpan="2" className="p-12 text-center text-gray-400 dark:text-gray-500 font-bold">
                                         لا توجد أدوية مدرجة في النظام حالياً.
                                     </td>
                                 </tr>
@@ -190,9 +190,9 @@ export default function AdminPharmaceutical() {
                 </div>
 
                 {/* SECTION 3: Dynamic Pagination Footer */}
-                <div className="bg-white border-t border-[#C3C6D6] px-6 py-4 flex flex-row justify-between items-center h-[73px]">
+                <div className="bg-white dark:bg-gray-800 border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex flex-row justify-between items-center h-[73px]">
   {/* جملة العرض الإحصائي السفلي */}
-                    <div className="text-[14px] text-[#526069] font-bold">
+                    <div className="text-[14px] text-[#526069] dark:text-gray-400 font-bold">
                         عرض {totalItems === 0 ? 0 : indexOfFirstItem + 1} - {Math.min(indexOfLastItem, totalItems)} من إجمالي {totalItems} دواء
                     </div>
                     {/* محرك التنقل والأرقام التفاعلية */}
@@ -203,7 +203,7 @@ export default function AdminPharmaceutical() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
-                            className="p-2 bg-white border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                             <ChevronRight className="w-4 h-4 text-[#6B7280]" />
                         </button>
@@ -226,7 +226,7 @@ export default function AdminPharmaceutical() {
 <button
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages || totalPages === 0}
-                            className="p-2 bg-white border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                             <ChevronLeft className="w-4 h-4 text-[#6B7280]" />
                         </button> 
@@ -242,12 +242,12 @@ export default function AdminPharmaceutical() {
             {/* INTERACTIVE MODAL: نافذة إضافة وتعديل الدواء */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity">
-                    <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-6 mx-4 relative text-right">
+                    <div className="bg-white dark:bg-gray-800 w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-4 sm:p-6 mx-4 relative text-right">
 
                         {/* إغلاق المودال من الإكس العلوي */}
                         <button
                             onClick={() => setIsModalOpen(false)}
-                            className="absolute top-6 left-6 text-gray-400 hover:text-gray-600 transition-colors"
+                            className="absolute top-6 left-6 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors"
                         >
                             <X className="w-6 h-6" />
                         </button>
@@ -261,7 +261,7 @@ export default function AdminPharmaceutical() {
                                 <h3 className="text-[20px] font-bold text-[#0B1C30]">
                                     {modalMode === 'add' ? 'إضافة دواء جديد' : 'تعديل بيانات الدواء'}
                                 </h3>
-                                <p className="text-[13px] text-gray-500 font-medium">
+                                <p className="text-[13px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">
                                     يرجى ملء الحقول التالية لتحديث الصيدلية الطبية بالنظام
                                 </p>
                             </div>
@@ -278,7 +278,7 @@ export default function AdminPharmaceutical() {
                                     value={medNameInput}
                                     onChange={(e) => setMedNameInput(e.target.value)}
                                     placeholder="مثال: Panadol 500mg"
-                                    className="w-full h-[48px] px-4 border border-[#C3C6D6] rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] text-right"
+                                    className="w-full h-[48px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] dark:text-white text-right"
                                     required
                                 />
                             </div>
@@ -290,7 +290,7 @@ export default function AdminPharmaceutical() {
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-6 h-[44px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 transition-colors w-1/3"
+                                    className="px-6 h-[44px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3"
                                 >
                                     إلغاء
                                 </button>

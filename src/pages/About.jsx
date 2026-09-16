@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faLock, faUsers, faClock, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +19,7 @@ const About = () => {
             <div className="mb-12.5">
               <div className="flex gap-5 items-center mb-3.75">
                 <div
-                  className="w-7.5 h-7.5 bg-[#ecf8fa] rounded-[5px] flex justify-center items-center cursor-pointer mt-3.75"
+                  className="w-7.5 h-7.5 bg-[#ecf8fa] dark:bg-gray-900 rounded-[5px] flex justify-center items-center cursor-pointer mt-3.75"
                   onClick={() => navigate("/doctors")}
                 >
                   <FontAwesomeIcon

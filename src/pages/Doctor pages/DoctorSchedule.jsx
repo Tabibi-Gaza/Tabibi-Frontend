@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { FiSave } from "react-icons/fi";
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
@@ -126,7 +126,7 @@ const DoctorSchedule = () => {
   return (
     <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
       <div className="space-y-6 text-right">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pb-2 border-b border-[#C3C6D6]/30 sm:border-none">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pb-2 border-b border-[#C3C6D6] dark:border-gray-700/30 sm:border-none">
           <h1 className="text-2xl md:text-3xl font-black text-[#138C9F] tracking-wide w-full text-center sm:text-right">
             إدارة ساعات العمل
           </h1>
@@ -143,20 +143,20 @@ const DoctorSchedule = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <div className="lg:col-span-8 bg-white border border-[#C3C6D6]/80 rounded-2xl overflow-hidden shadow-xs">
-            <div className="bg-[#ecf8fa] px-6 py-4 border-b border-[#C3C6D6]/50 text-right">
+          <div className="lg:col-span-8 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl overflow-hidden shadow-xs">
+            <div className="bg-[#ecf8fa] dark:bg-gray-900 px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700/50 text-right">
               <h3 className="text-base font-black text-[#0B1C30]">جدولة الأيام</h3>
             </div>
             <div className="divide-y divide-[#C3C6D6]/40">
               {DAYS_ORDER.map((d) => {
                 const day = schedule[d.key];
                 return (
-                  <div key={d.key} className={`p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors ${day.active ? "bg-white" : "bg-slate-50/50"}`}>
+                  <div key={d.key} className={`p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors ${day.active ? "bg-white" : "bg-slate-50 dark:bg-gray-900/50"}`}>
                     <div className="flex items-center justify-between sm:justify-start gap-4 w-full sm:w-auto">
-                      <span className="text-base md:text-lg font-black text-[#0B1C30] min-w-[70px] text-right">{d.name}</span>
+                      <span className="text-base md:text-lg font-black text-[#0B1C30] dark:text-white min-w-[70px] text-right">{d.name}</span>
                       <label className="relative inline-flex items-center cursor-pointer select-none">
                         <input type="checkbox" checked={day.active} onChange={() => handleToggleDay(d.key)} className="sr-only peer" />
-                        <div className="w-12 h-6 bg-zinc-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#138C9F]"></div>
+                        <div className="w-12 h-6 bg-zinc-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white dark:bg-gray-800 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#138C9F]"></div>
                       </label>
                     </div>
                     <div className="w-full sm:w-auto flex items-center justify-center sm:justify-end">
@@ -164,18 +164,18 @@ const DoctorSchedule = () => {
                         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
                           <div className="relative flex-1 sm:flex-none">
                             <input type="time" value={day.from} onChange={(e) => handleTimeChange(d.key, "from", e.target.value)}
-                              className="w-full sm:w-32 h-11 px-3 bg-[#EBF3F5]/60 border border-[#C3C6D6]/70 rounded-xl text-sm font-bold text-[#0B1C30] focus:outline-hidden focus:border-[#138C9F] text-center" />
+                              className="w-full sm:w-32 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
                           </div>
-                          <span className="text-xs font-bold text-gray-400 px-2">إلى</span>
+                          <span className="text-xs font-bold text-gray-400 dark:text-gray-500 px-2">إلى</span>
                           <div className="relative flex-1 sm:flex-none">
                             <input type="time" value={day.to} onChange={(e) => handleTimeChange(d.key, "to", e.target.value)}
-                              className="w-full sm:w-32 h-11 px-3 bg-[#EBF3F5]/60 border border-[#C3C6D6]/70 rounded-xl text-sm font-bold text-[#0B1C30] focus:outline-hidden focus:border-[#138C9F] text-center" />
+                              className="w-full sm:w-32 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
                           </div>
                         </div>
                       ) : (
                         <div className="text-center sm:text-right py-1">
-                          <span className="text-sm font-black text-gray-400 block">غير متوفر لاستقبال المواعيد</span>
-                          {day.note && <span className="text-xs font-bold text-gray-400/80 mt-0.5 block">{day.note}</span>}
+                          <span className="text-sm font-black text-gray-400 dark:text-gray-500 block">غير متوفر لاستقبال المواعيد</span>
+                          {day.note && <span className="text-xs font-bold text-gray-400 dark:text-gray-500/80 mt-0.5 block">{day.note}</span>}
                         </div>
                       )}
                     </div>
@@ -186,8 +186,8 @@ const DoctorSchedule = () => {
           </div>
 
           <div className="lg:col-span-4 space-y-6 w-full">
-            <div className="bg-white border border-[#C3C6D6]/80 rounded-2xl p-5 md:p-6 shadow-xs space-y-4 text-right">
-              <h3 className="text-lg font-black text-[#0B1C30] border-b border-gray-100 pb-3">نظرة عامة</h3>
+            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-5 md:p-6 shadow-xs space-y-4 text-right">
+              <h3 className="text-lg font-black text-[#0B1C30] dark:text-white border-b border-gray-100 dark:border-gray-700 pb-3">نظرة عامة</h3>
               <div className="space-y-3">
                 <div className="p-3.5 bg-[#F4F6FC] rounded-xl flex justify-between items-center">
                   <span className="text-sm font-bold text-[#526069]">أيام العمل الأسبوعية</span>
@@ -205,7 +205,7 @@ const DoctorSchedule = () => {
             </div>
 
             <div className="bg-[#138C9F] rounded-2xl p-6 md:p-7 shadow-sm text-center text-white relative overflow-hidden space-y-4 flex flex-col items-center justify-center min-h-[240px]">
-              <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-xl font-bold">ℹ️</div>
+              <div className="w-9 h-9 bg-white dark:bg-gray-800/10 rounded-full flex items-center justify-center text-xl font-bold">ℹ️</div>
               <h4 className="text-xl font-black tracking-wide">نصيحة ذكية</h4>
               <p className="text-sm md:text-base font-medium leading-relaxed max-w-[280px] opacity-95">
                 حدد ساعات العمل بدقة لضمان ظهور مواعيدك المتاحة للمريض بشكل صحيح. يمكنك تعديلها في أي وقت.

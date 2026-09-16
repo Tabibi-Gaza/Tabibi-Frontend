@@ -117,10 +117,10 @@ const OtpInput = ({ length = 6, onComplete, onResend, email }) => {
             className={`w-12 h-14 text-center text-xl font-black rounded-xl border-2 transition-all outline-none
               ${
                 activeIndex === i
-                  ? "border-[#138C9F] bg-[#ecf8fa] text-[#138C9F] shadow-md"
+                  ? "border-[#138C9F] bg-[#ecf8fa] dark:bg-gray-700 text-[#138C9F] shadow-md"
                   : digit
-                  ? "border-[#138C9F]/40 bg-white text-[#0B1C30]"
-                  : "border-gray-200 bg-gray-50 text-gray-400"
+                  ? "border-[#138C9F]/40 bg-white dark:bg-gray-800 text-[#0B1C30] dark:text-gray-200"
+                  : "border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
               }`}
           />
         ))}
@@ -128,7 +128,7 @@ const OtpInput = ({ length = 6, onComplete, onResend, email }) => {
 
       <div className="text-center">
         {timer > 0 ? (
-          <p className="text-sm font-bold text-gray-400">
+          <p className="text-sm font-bold text-gray-400 dark:text-gray-500">
             إعادة الإرسال خلال{" "}
             <span className="text-[#138C9F] font-black">{formatTime(timer)}</span>
           </p>

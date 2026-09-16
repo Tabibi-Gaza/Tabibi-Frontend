@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { Filter, RefreshCw, ChevronRight, ChevronLeft, FileText } from 'lucide-react';
 import { FiEye, FiX, FiDownload, FiAlertTriangle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
@@ -179,7 +179,7 @@ export default function AdminJoinRequests() {
     const totalPending = activeFilter === 'pending' ? totalCount : requests.length;
 
     return (
-        <div className="w-full bg-[#ecf8fa] flex flex-col items-start relative text-right" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col items-start relative text-right" dir="rtl">
             <div className="w-full flex flex-col gap-6 md:gap-8">
                 <div className="text-right">
                     <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#138C9F] leading-tight">طلبات انضمام الأطباء</h2>
@@ -187,7 +187,7 @@ export default function AdminJoinRequests() {
                 </div>
 
                 <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6">
-                    <div className="flex-1 bg-white border border-[#C3C6D6] rounded-[12px] p-4 md:p-6 flex flex-row-reverse justify-between items-center shadow-sm">
+                    <div className="flex-1 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-4 md:p-6 flex flex-row-reverse justify-between items-center shadow-sm">
                         <div className="w-[48px] h-[48px] bg-blue-50 rounded-[8px] flex items-center justify-center text-[#138C9F] shrink-0">
                             <FileText className="w-5 h-5" />
                         </div>
@@ -198,8 +198,8 @@ export default function AdminJoinRequests() {
                     </div>
                 </div>
 
-                <div className="w-full bg-white border border-[#C3C6D6] rounded-[12px] overflow-hidden shadow-sm flex flex-col">
-                    <div className="w-full min-h-[75px] py-4 md:py-0 bg-[#e2f4f7] border-b border-[#C3C6D6] flex flex-col sm:flex-row gap-4 justify-between items-center p-6">
+                <div className="w-full bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] overflow-hidden shadow-sm flex flex-col">
+                    <div className="w-full min-h-[75px] py-4 md:py-0 bg-[#e2f4f7] dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 flex flex-col sm:flex-row gap-4 justify-between items-center p-6">
                         <button
                             onClick={() => setShowAdvancedFilterModal(true)}
                             className="h-[38px] border border-[#138C9F] rounded-[8px] px-4 py-2 flex flex-row items-center gap-2 text-[#138C9F] text-[14px] font-bold hover:bg-[#138C9F]/5 transition-all relative w-full sm:w-auto justify-center"
@@ -236,7 +236,7 @@ export default function AdminJoinRequests() {
                     <div className="overflow-x-auto w-full">
                         <table className="w-full border-collapse text-right">
                             <thead>
-                                <tr className="bg-white border-b border-[#C3C6D6] h-[60px] text-[#434654] text-[14px] font-bold">
+                                <tr className="bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 h-[60px] text-[#434654] text-[14px] font-bold">
                                     <th className="p-3 md:p-4 ps-8">اسم الطبيب</th>
                                     <th className="p-3 md:p-4">التخصص</th>
                                     <th className="p-3 md:p-4 text-center hidden md:table-cell">الخبرة (سنوات)</th>
@@ -254,7 +254,7 @@ export default function AdminJoinRequests() {
                                     </tr>
                                 ) : filteredRequests.length > 0 ? (
                                     filteredRequests.map((req) => (
-                                        <tr key={req.id} className="h-[75px] border-b border-[#C3C6D6] bg-white hover:bg-slate-50 transition-colors">
+                                        <tr key={req.id} className="h-[75px] border-b border-[#C3C6D6] dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-slate-50 dark:bg-gray-900 transition-colors">
                                              <td className="p-3 md:p-4 ps-8">
                                                 <div className="flex flex-row items-center gap-3">
                                                     {req.photoPath ? (
@@ -321,12 +321,12 @@ export default function AdminJoinRequests() {
                         </table>
                     </div>
 
-                    <div className="bg-[#e2f4f7] border-t border-[#C3C6D6] px-4 md:px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
+                    <div className="bg-[#e2f4f7] dark:bg-gray-800 border-t border-[#C3C6D6] dark:border-gray-700 px-4 md:px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
                         <div className="flex items-center gap-1.5 order-2 sm:order-1">
                             <button
                                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                                 disabled={currentPage === 1}
-                                className="p-2 bg-white border border-gray-200 rounded text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <ChevronRight className="w-4 h-4" />
                             </button>
@@ -336,7 +336,7 @@ export default function AdminJoinRequests() {
                                     <button
                                         key={pageNumber}
                                         onClick={() => setCurrentPage(pageNumber)}
-                                        className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? 'bg-[#138C9F] text-white font-extrabold' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                                        className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? 'bg-[#138C9F] text-white font-extrabold' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'}`}
                                     >
                                         {pageNumber}
                                     </button>
@@ -345,7 +345,7 @@ export default function AdminJoinRequests() {
                             <button
                                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                                 disabled={currentPage === totalPages || totalPages === 0}
-                                className="p-2 bg-white border border-gray-200 rounded text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
@@ -360,8 +360,8 @@ export default function AdminJoinRequests() {
             {/* Advanced Filter Modal */}
             {showAdvancedFilterModal && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all">
-                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[460px] bg-white rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 flex flex-col text-right">
-                        <div className="h-[60px] bg-[#e2f4f7] px-6 flex items-center justify-between border-b border-[#C3C6D6]">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[460px] bg-white dark:bg-gray-800 rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 flex flex-col text-right">
+                        <div className="h-[60px] bg-[#e2f4f7] dark:bg-gray-800 px-6 flex items-center justify-between border-b border-[#C3C6D6]">
                             <h3 className="text-[16px] font-extrabold text-[#434654]">التصفية المتقدمة للطلبات</h3>
                             <button onClick={() => setShowAdvancedFilterModal(false)} className="text-[#434654] hover:text-black">
                                 <FiX className="w-5 h-5" />
@@ -382,7 +382,7 @@ export default function AdminJoinRequests() {
                         <div className="px-6 pb-6 pt-2 flex items-center gap-3">
                             <button
                                 onClick={resetAdvancedFilters}
-                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 flex items-center justify-center gap-2"
+                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 flex items-center justify-center gap-2"
                             >
                                 <RefreshCw className="w-4 h-4" />
                                 <span>إعادة تعيين</span>
@@ -401,17 +401,17 @@ export default function AdminJoinRequests() {
             {/* Detail Modal — identical to AdminDashboard */}
             {selectedRequest && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-                    <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] shadow-2xl border border-gray-100 text-right flex flex-col">
+                    <div className="w-full max-w-[650px] max-h-[90vh] bg-white dark:bg-gray-800 rounded-[16px] shadow-2xl border border-gray-100 dark:border-gray-700 text-right flex flex-col">
                         {/* Header */}
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30"
+                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white dark:bg-gray-800/20 text-white flex items-center justify-center hover:bg-white dark:bg-gray-800/30"
                             >
                                 <FiX size={16} />
                             </button>
                             <div className="absolute -bottom-8 right-6 flex items-center gap-4">
-                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md">
+                                <div className="w-[100px] h-[100px] bg-white dark:bg-gray-800 rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.photoPath ? (
                                         <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.photoPath)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                     ) : null}
@@ -433,8 +433,8 @@ export default function AdminJoinRequests() {
                             {selectedDetails && (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {/* التفاصيل المهنية */}
-                                    <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
-                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
+                                    <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
+                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
                                             <FiBriefcase size={14} />
                                             التفاصيل المهنية
                                         </h4>
@@ -471,8 +471,8 @@ export default function AdminJoinRequests() {
                                     </div>
 
                                     {/* المعلومات الشخصية */}
-                                    <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
-                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
+                                    <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
+                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
                                             <FiUser size={14} />
                                             المعلومات الشخصية
                                         </h4>
@@ -505,7 +505,7 @@ export default function AdminJoinRequests() {
                                 </button>
                                 <button
                                     onClick={() => handleDownload(selectedRequest.id, 'id')}
-                                    className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                                    className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white dark:bg-gray-800 rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
                                     <FiDownload size={14} />
                                     صورة الهوية / مزاولة المهنة
@@ -523,10 +523,10 @@ export default function AdminJoinRequests() {
                             )}
                         </div>
 
-                        <div className="px-6 md:px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-end gap-3 shrink-0 flex-wrap sm:flex-nowrap">
+                        <div className="px-6 md:px-8 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700 flex items-center justify-end gap-3 shrink-0 flex-wrap sm:flex-nowrap">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 w-full sm:w-auto"
+                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto"
                             >
                                 إغلاق
                             </button>
@@ -557,7 +557,7 @@ export default function AdminJoinRequests() {
             {/* Reject Modal */}
             {showRejectModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 text-center text-right">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white dark:bg-gray-800 rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 dark:border-gray-700 text-center text-right">
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
                             <FiAlertTriangle size={28} />
                         </div>

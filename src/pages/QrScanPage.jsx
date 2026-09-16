@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { formatDate } from '../utils/dateFormatter';
@@ -47,8 +47,8 @@ const QrScanPage = () => {
           <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-2xl">⚠️</span>
           </div>
-          <h2 className="text-lg font-black text-gray-800 mb-2">خطأ في الوصول</h2>
-          <p className="text-sm text-gray-500 font-medium mb-4">{error}</p>
+          <h2 className="text-lg font-black text-gray-800 dark:text-gray-200 mb-2">خطأ في الوصول</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium mb-4">{error}</p>
           <Link to="/" className="inline-block bg-[#138C9F] text-white px-6 py-2 rounded-xl text-xs font-black hover:bg-[#0f7282] transition-colors">
             العودة للرئيسية
           </Link>
@@ -58,27 +58,27 @@ const QrScanPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4" dir="rtl">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4" dir="rtl">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6 text-center">
           <div className="w-14 h-14 bg-[#138C9F]/10 rounded-full flex items-center justify-center mx-auto mb-3">
             <span className="text-2xl">🏥</span>
           </div>
           <h1 className="text-xl font-black text-gray-800">السجل الطبي</h1>
-          <p className="text-xs text-gray-400 font-bold mt-1">تم الوصول عبر رمز QR — صلاحية محدودة</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 font-bold mt-1">تم الوصول عبر رمز QR — صلاحية محدودة</p>
         </div>
 
         {/* Patient Info */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
           <h2 className="text-sm font-black text-[#138C9F] mb-4">معلومات المريض</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <div className="bg-slate-50 p-3 rounded-xl text-center">
+            <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
               <p className="text-[10px] font-bold text-gray-400">الاسم</p>
               <p className="text-sm font-black text-gray-800">{record.patientName}</p>
             </div>
             {record.gender && (
-              <div className="bg-slate-50 p-3 rounded-xl text-center">
+              <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                 <p className="text-[10px] font-bold text-gray-400">الجنس</p>
                 <p className="text-sm font-black text-gray-800">{record.gender === 'Male' ? 'ذكر' : record.gender === 'Female' ? 'أنثى' : record.gender}</p>
               </div>
@@ -94,29 +94,29 @@ const QrScanPage = () => {
 
         {/* Vitals */}
         {record.vitals && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
             <h2 className="text-sm font-black text-[#138C9F] mb-4">المؤشرات الحيوية</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {record.vitals.bloodPressure && (
-                <div className="bg-slate-50 p-3 rounded-xl text-center">
+                <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">ضغط الدم</p>
                   <p className="text-sm font-black text-gray-800">{record.vitals.bloodPressure}</p>
                 </div>
               )}
               {record.vitals.bloodSugar && (
-                <div className="bg-slate-50 p-3 rounded-xl text-center">
+                <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">سكر الدم</p>
                   <p className="text-sm font-black text-gray-800">{record.vitals.bloodSugar} mg/dL</p>
                 </div>
               )}
               {record.vitals.weight && (
-                <div className="bg-slate-50 p-3 rounded-xl text-center">
+                <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">الوزن</p>
                   <p className="text-sm font-black text-gray-800">{record.vitals.weight} كجم</p>
                 </div>
               )}
               {record.vitals.height && (
-                <div className="bg-slate-50 p-3 rounded-xl text-center">
+                <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">الطول</p>
                   <p className="text-sm font-black text-gray-800">{record.vitals.height} سم</p>
                 </div>
@@ -127,7 +127,7 @@ const QrScanPage = () => {
 
         {/* Chronic Diseases */}
         {record.chronicDiseases?.length > 0 && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
             <h2 className="text-sm font-black text-[#138C9F] mb-4">🦠 الأمراض المزمنة</h2>
             <div className="flex flex-wrap gap-2">
               {record.chronicDiseases.map((d, i) => (
@@ -139,7 +139,7 @@ const QrScanPage = () => {
 
         {/* Allergies */}
         {record.allergies?.length > 0 && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
             <h2 className="text-sm font-black text-[#138C9F] mb-4">⚠️ الحساسية</h2>
             <div className="flex flex-wrap gap-2">
               {record.allergies.map((a, i) => (
@@ -151,13 +151,13 @@ const QrScanPage = () => {
 
         {/* Current Medicines */}
         {record.currentMedicines?.length > 0 && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
             <h2 className="text-sm font-black text-[#138C9F] mb-4">💊 الأدوية الحالية</h2>
             <div className="space-y-2">
               {record.currentMedicines.map((m, i) => (
-                <div key={i} className="bg-slate-50 p-3 rounded-xl flex items-center justify-between">
+                <div key={i} className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl flex items-center justify-between">
                   <span className="text-sm font-black text-[#138C9F]">{m.name}</span>
-                  <span className="text-xs text-gray-500 font-bold">{m.dosage} — {m.frequency}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{m.dosage} — {m.frequency}</span>
                 </div>
               ))}
             </div>
@@ -166,20 +166,20 @@ const QrScanPage = () => {
 
         {/* Visits */}
         {record.visits?.length > 0 && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
             <h2 className="text-sm font-black text-[#138C9F] mb-4">📋 الزيارات الطبية</h2>
             <div className="space-y-3">
               {record.visits.map((v, i) => (
-                <div key={i} className="border border-gray-100 rounded-xl p-4">
+                <div key={i} className="border border-gray-100 dark:border-gray-700 rounded-xl p-4">
                   <div className="flex justify-between items-start mb-2">
                     <div>
                       <p className="text-sm font-black text-gray-800">{v.doctorName}</p>
                       <p className="text-[10px] font-bold text-[#138C9F]">{v.specialization}</p>
                     </div>
-                    <p className="text-[10px] text-gray-400 font-bold">{formatDate(v.visitDate)}</p>
+                    <p className="text-[10px] text-gray-400 dark:text-gray-500 font-bold">{formatDate(v.visitDate)}</p>
                   </div>
-                  {v.diagnosis && <p className="text-xs text-gray-600 mb-1"><span className="font-black">التشخيص:</span> {v.diagnosis}</p>}
-                  {v.symptoms && <p className="text-xs text-gray-600 mb-1"><span className="font-black">الأعراض:</span> {v.symptoms}</p>}
+                  {v.diagnosis && <p className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-1"><span className="font-black">التشخيص:</span> {v.diagnosis}</p>}
+                  {v.symptoms && <p className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-1"><span className="font-black">الأعراض:</span> {v.symptoms}</p>}
                   {v.notes && <p className="text-xs text-gray-500"><span className="font-black">ملاحظات:</span> {v.notes}</p>}
                 </div>
               ))}
@@ -189,19 +189,19 @@ const QrScanPage = () => {
 
         {/* Prescriptions */}
         {record.prescriptions?.length > 0 && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 mb-6">
             <h2 className="text-sm font-black text-[#138C9F] mb-4">💊 الوصفات الطبية</h2>
             <div className="space-y-3">
               {record.prescriptions.map((p, i) => (
-                <div key={i} className="border border-gray-100 rounded-xl p-4">
+                <div key={i} className="border border-gray-100 dark:border-gray-700 rounded-xl p-4">
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-xs font-black text-gray-800">{p.doctorName}</p>
-                    <p className="text-[10px] text-gray-400 font-bold">{p.createdAt ? formatDate(p.createdAt) : ''}</p>
+                    <p className="text-[10px] text-gray-400 dark:text-gray-500 font-bold">{p.createdAt ? formatDate(p.createdAt) : ''}</p>
                   </div>
                   {p.medications?.map((med, j) => (
-                    <div key={j} className="bg-slate-50 p-2 rounded-lg mb-1 flex justify-between items-center text-xs">
+                    <div key={j} className="bg-slate-50 dark:bg-gray-900 p-2 rounded-lg mb-1 flex justify-between items-center text-xs">
                       <span className="font-black text-[#138C9F]">{med.medicationName}</span>
-                      <span className="text-gray-500 font-bold">{med.dosage} — {med.frequency}</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{med.dosage} — {med.frequency}</span>
                     </div>
                   ))}
                 </div>
@@ -212,7 +212,7 @@ const QrScanPage = () => {
 
         {/* Footer */}
         <div className="text-center py-4">
-          <p className="text-[10px] text-gray-400 font-bold">تم الوصول عبر رمز QR — منصة طبيبي</p>
+          <p className="text-[10px] text-gray-400 dark:text-gray-500 font-bold">تم الوصول عبر رمز QR — منصة طبيبي</p>
         </div>
       </div>
     </div>

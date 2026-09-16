@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import { FiUserCheck, FiUsers, FiClock, FiDollarSign, FiTrendingUp, FiTrendingDown, FiChevronDown, FiChevronUp, FiExternalLink, FiEye, FiX, FiDownload, FiAlertTriangle, FiBriefcase, FiUser } from 'react-icons/fi';
@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
 import { resolveImageUrl } from '../../utils/imageUrl';
+import { useTranslation } from 'react-i18next';
 
 const STATUS_BADGES = {
     مكتمل: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
@@ -16,6 +17,7 @@ const STATUS_BADGES = {
 const AdminDashboard = () => {
     const { token, dashboardData, loadDashboardData, changeDoctorStatus } = useContext(AppContext);
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null);
     const [processedDoctorIds, setProcessedDoctorIds] = useState([]);
@@ -106,15 +108,15 @@ const AdminDashboard = () => {
             link.click();
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
-            toast.success('تم تحميل الملف بنجاح');
+            toast.success(t('adminDashboard.downloadSuccess'));
         } catch (error) {
-            toast.error('فشل في تحميل الملف');
+            toast.error(t('adminDashboard.downloadFailed'));
         }
     };
 
     const handleConfirmReject = async () => {
         if (!rejectReasonInput.trim()) {
-            toast.error("يرجى كتابة سبب الرفض أولاً");
+            toast.error(t('adminDashboard.writeRejectionReason'));
             return;
         }
         const currentId = selectedRequest?.id;
@@ -127,7 +129,7 @@ const AdminDashboard = () => {
                 Reason: rejectReasonInput
             });
             if (data.succeeded) {
-                toast.success(data.message || 'تم رفض الطلب بنجاح');
+                toast.success(data.message || t('adminDashboard.requestRejected'));
                 setShowRejectModal(false);
                 setSelectedRequest(null);
                 setSelectedDetails(null);
@@ -138,10 +140,10 @@ const AdminDashboard = () => {
                     // silently handle refresh error
                 }
             } else {
-                toast.error(data.errors?.[0]?.message || data.message || 'فشل في رفض الطلب');
+                toast.error(data.errors?.[0]?.message || data.message || t('adminDashboard.rejectFailed'));
             }
         } catch (error) {
-            toast.error(error.response?.data?.errors?.[0]?.message || 'حدث خطأ أثناء رفض الطلب');
+            toast.error(error.response?.data?.errors?.[0]?.message || t('adminDashboard.rejectError'));
         } finally {
             setActionLoading(null);
         }
@@ -153,7 +155,7 @@ const AdminDashboard = () => {
                 <div className="h-10 bg-gray-200 rounded-xl w-64 mb-2"></div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="bg-gray-100 border border-gray-200 h-32 rounded-2xl p-5 flex flex-col justify-between">
+                        <div key={i} className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 h-32 rounded-2xl p-5 flex flex-col justify-between">
                             <div className="flex justify-between items-start"><div className="w-10 h-10 bg-gray-200 rounded-xl"></div><div className="w-16 h-5 bg-gray-200 rounded-md"></div></div>
                             <div className="space-y-2"><div className="w-20 h-3 bg-gray-200 rounded"></div><div className="w-12 h-7 bg-gray-200 rounded"></div></div>
                         </div>
@@ -215,8 +217,8 @@ const AdminDashboard = () => {
     const CustomTooltip = ({ active, payload, label }) => {
         if (!active || !payload?.length) return null;
         return (
-            <div className="bg-white border border-[#C3C6D6] rounded-xl shadow-lg p-3 text-right" dir="rtl">
-                <p className="text-xs font-bold text-[#0B1C30] mb-1">{label}</p>
+            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl shadow-lg p-3 text-right" dir="rtl">
+                <p className="text-xs font-bold text-[#0B1C30] dark:text-white mb-1">{label}</p>
                 {payload.map((entry, i) => (
                     <p key={i} className="text-[11px] font-semibold" style={{ color: entry.color }}>
                         {entry.name}: {entry.value}
@@ -230,13 +232,13 @@ const AdminDashboard = () => {
         <div className="w-full flex flex-col gap-7 text-right" dir="rtl">
 
             <div>
-                <h1 className="text-2xl md:text-[28px] font-extrabold text-[#138C9F] tracking-tight">لوحة التحكم</h1>
-                <p className="text-xs md:text-sm font-semibold text-[#526069] mt-1">نظرة عامة على أداء المنصة وإحصائياتها المباشرة</p>
+                <h1 className="text-2xl md:text-[28px] font-extrabold text-[#138C9F] tracking-tight">{t('adminDashboard.dashboard')}</h1>
+                <p className="text-xs md:text-sm font-semibold text-[#526069] dark:text-gray-400 mt-1">{t('adminDashboard.overview')}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {cards.map((stat) => (
-                    <div key={stat.id} className={`bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col justify-between shadow-xs transition-all duration-300 ${stat.borderHover}`}>
+                    <div key={stat.id} className={`bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 flex flex-col justify-between shadow-xs transition-all duration-300 ${stat.borderHover}`}>
                         <div className="flex justify-between items-start">
                             <div className="flex items-center gap-1.5">
                                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 ${stat.badgeBg} ${stat.badgeText}`}>
@@ -248,7 +250,7 @@ const AdminDashboard = () => {
                             </div>
                         </div>
                         <div>
-                            <p className="text-[11px] font-bold text-[#526069] mb-0.5">{stat.title}</p>
+                            <p className="text-[11px] font-bold text-[#526069] dark:text-gray-400 mb-0.5">{stat.title}</p>
                             <h3 className={`text-2xl font-extrabold ${stat.valueColor}`}>
                                 {stat.isRevenue ? formatRevenue(stat.value) : stat.value}
                             </h3>
@@ -259,8 +261,8 @@ const AdminDashboard = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-6 items-start">
 
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
-                    <div className="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
+                    <div className="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-gray-700 mb-4">
                         <h3 className="font-bold text-[15px] text-[#138C9F]">طلبات الأطباء الجديدة</h3>
                         <span className="text-[10px] font-bold bg-[#138C9F]/10 text-[#138C9F] px-2 py-0.5 rounded-full">
                             {localDoctorRequests.length} طلب
@@ -270,7 +272,7 @@ const AdminDashboard = () => {
                     <div className="flex-1 overflow-y-auto space-y-2.5 pl-1 custom-scrollbar">
                         {localDoctorRequests.length > 0 ? (
                             localDoctorRequests.map((req, index) => (
-                                <div key={req.id || index} className="bg-[#ecf8fa] border border-[#C3C6D6] rounded-xl p-3.5 flex flex-col gap-2.5 transition-all hover:shadow-xs">
+                                <div key={req.id || index} className="bg-[#ecf8fa] dark:bg-gray-900 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-3.5 flex flex-col gap-2.5 transition-all hover:shadow-xs">
                                     <div className="flex items-center gap-3">
                                         <img
                                             loading="lazy"
@@ -283,7 +285,7 @@ const AdminDashboard = () => {
                                             onError={(e) => { e.target.src = 'https://via.placeholder.com/150' }}
                                         />
                                         <div className="text-right flex-1 min-w-0">
-                                            <h4 className="font-bold text-[13px] text-[#0B1C30] truncate">{req.name}</h4>
+                                            <h4 className="font-bold text-[13px] text-[#0B1C30] dark:text-white truncate">{req.name}</h4>
                                             <p className="text-[11px] font-semibold text-[#138C9F] truncate">{req.specialty || 'غير محدد'}</p>
                                         </div>
                                         <button
@@ -305,7 +307,7 @@ const AdminDashboard = () => {
                                         <button
                                             disabled={actionLoading === req.id}
                                             onClick={() => { setSelectedRequest(req); setShowRejectModal(true); setRejectReasonInput(''); }}
-                                            className="h-8 rounded-lg border border-[#C3C6D6] text-[#526069] text-xs font-bold hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-50"
+                                            className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50"
                                         >
                                             رفض
                                         </button>
@@ -313,8 +315,8 @@ const AdminDashboard = () => {
                                 </div>
                             ))
                         ) : (
-                            <div className="h-full flex flex-col items-center justify-center text-gray-300 gap-2">
-                                <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center">
+                            <div className="h-full flex flex-col items-center justify-center text-gray-300 dark:text-gray-500 gap-2">
+                                <div className="w-12 h-12 rounded-full bg-slate-50 dark:bg-gray-900 flex items-center justify-center">
                                     <FiUserCheck size={20} className="text-gray-300" />
                                 </div>
                                 <p className="text-xs font-semibold text-gray-400">لا توجد طلبات معلقة</p>
@@ -331,11 +333,11 @@ const AdminDashboard = () => {
                     </button>
                 </div>
 
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 flex flex-col min-h-[300px] shadow-xs">
                     <div className="flex justify-between items-center mb-4">
                         <div>
                             <h3 className="font-bold text-[15px] text-[#138C9F]">إحصائيات المواعيد</h3>
-                            <p className="text-[11px] text-slate-400 mt-0.5">حركة المواعيد خلال آخر 7 أيام</p>
+                            <p className="text-[11px] text-slate-400 dark:text-gray-500 mt-0.5">حركة المواعيد خلال آخر 7 أيام</p>
                         </div>
                         <div className="flex items-center gap-4 text-[11px] font-bold">
                             <div className="flex items-center gap-1.5">
@@ -381,10 +383,10 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
-            <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 shadow-xs">
+            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 shadow-xs">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="font-bold text-[15px] text-[#138C9F]">أحدث الحجوزات</h3>
-                    <span className="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold bg-slate-100 dark:bg-gray-800 text-slate-500 dark:text-gray-400 px-2 py-0.5 rounded-full">
                         آخر {displayedAppointments.length} حجوزات
                     </span>
                 </div>
@@ -392,7 +394,7 @@ const AdminDashboard = () => {
                 <div className="overflow-x-auto w-full custom-scrollbar">
                     <table className="w-full text-right border-collapse text-sm">
                         <thead>
-                            <tr className="bg-[#f0fafb] text-[#138C9F] font-bold h-11 border-b border-[#C3C6D6]/60">
+                            <tr className="bg-[#f0fafb] text-[#138C9F] font-bold h-11 border-b border-[#C3C6D6] dark:border-gray-700/60">
                                 <th className="px-4 rounded-r-xl text-[12px]">المريض</th>
                                 <th className="px-4 text-[12px]">الطبيب</th>
                                 <th className="px-4 text-[12px] hidden md:table-cell">التخصص</th>
@@ -406,18 +408,18 @@ const AdminDashboard = () => {
                                 displayedAppointments.map((appt, index) => {
                                     const statusLabel = appt.cancelled ? 'ملغي' : appt.isCompleted ? 'مكتمل' : 'مؤكد';
                                     return (
-                                        <tr key={appt.id || index} className="hover:bg-slate-50/50 transition-colors h-12">
-                                            <td className="px-4 text-[#0B1C30] font-bold text-[13px]">{appt.patient}</td>
+                                        <tr key={appt.id || index} className="hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-12">
+                                            <td className="px-4 text-[#0B1C30] dark:text-white font-bold text-[13px]">{appt.patient}</td>
                                             <td className="px-4 text-[#138C9F] font-semibold text-[13px]">{appt.doctor}</td>
-                                            <td className="px-4 text-slate-500 text-[12px] hidden md:table-cell">{appt.specialty || '-'}</td>
-                                            <td className="px-4 text-[#0B1C30] font-bold text-[12px] hidden md:table-cell" dir="ltr" style={{ textAlign: 'right' }}>
+                                            <td className="px-4 text-slate-500 dark:text-gray-400 text-[12px] hidden md:table-cell">{appt.specialty || '-'}</td>
+                                            <td className="px-4 text-[#0B1C30] dark:text-white font-bold text-[12px] hidden md:table-cell" dir="ltr" style={{ textAlign: 'right' }}>
                                                 {appt.amount ? `${appt.amount} ₪` : '-'}
                                             </td>
-                                            <td className="px-4 text-slate-500 text-[11px]" dir="ltr" style={{ textAlign: 'right' }}>
+                                            <td className="px-4 text-slate-500 dark:text-gray-400 text-[11px]" dir="ltr" style={{ textAlign: 'right' }}>
                                                 {appt.slotDate} — {appt.slotTime}
                                             </td>
                                             <td className="px-4">
-                                                <span className={`px-2.5 py-1 rounded-lg text-[11px] font-bold ${STATUS_BADGES[statusLabel] || 'bg-slate-100 text-slate-500'}`}>
+                                                <span className={`px-2.5 py-1 rounded-lg text-[11px] font-bold ${STATUS_BADGES[statusLabel] || 'bg-slate-100 dark:bg-gray-800 text-slate-500 dark:text-gray-400'}`}>
                                                     {statusLabel}
                                                 </span>
                                             </td>
@@ -426,7 +428,7 @@ const AdminDashboard = () => {
                                 })
                             ) : (
                                 <tr>
-                                    <td colSpan="6" className="px-4 py-10 text-center text-gray-300 text-xs font-semibold">
+                                    <td colSpan="6" className="px-4 py-10 text-center text-gray-300 dark:text-gray-500 text-xs font-semibold">
                                         لا توجد حجوزات حالياً
                                     </td>
                                 </tr>
@@ -447,7 +449,7 @@ const AdminDashboard = () => {
                         ) : (
                             <button
                                 onClick={() => setVisibleAppointmentsCount(5)}
-                                className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-slate-100 text-slate-600 text-xs font-bold hover:bg-slate-200 transition-all duration-200 cursor-pointer"
+                                className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-slate-600 dark:text-gray-400 text-xs font-bold hover:bg-slate-200 transition-all duration-200 cursor-pointer"
                             >
                                 <FiChevronUp size={14} /> عرض أقل
                             </button>
@@ -458,17 +460,17 @@ const AdminDashboard = () => {
 
             {selectedRequest && (
             <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <div className="w-full max-w-[650px] max-h-[90vh] bg-white rounded-[16px] shadow-2xl border border-gray-100 text-right flex flex-col">
+            <div className="w-full max-w-[650px] max-h-[90vh] bg-white dark:bg-gray-800 rounded-[16px] shadow-2xl border border-gray-100 dark:border-gray-700 text-right flex flex-col">
                         {/* Header */}
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30"
+                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white dark:bg-gray-800/20 text-white flex items-center justify-center hover:bg-white dark:bg-gray-800/30"
                             >
                                 <FiX size={16} />
                             </button>
                                 <div className="absolute -bottom-8 right-6 flex items-center gap-4">
-                                <div className="w-[100px] h-[100px] bg-white rounded-[12px] p-1 shadow-md">
+                                <div className="w-[100px] h-[100px] bg-white dark:bg-gray-800 rounded-[12px] p-1 shadow-md">
                                     {selectedRequest.img ? (
                                         <img loading="lazy" decoding="async" width="96" height="96" src={resolveImageUrl(selectedRequest.img)} alt={selectedRequest.name} className="w-full h-full rounded-[10px] object-contain" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
                                     ) : null}
@@ -490,8 +492,8 @@ const AdminDashboard = () => {
                             {selectedDetails && (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {/* التفاصيل المهنية */}
-                                    <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
-                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
+                                    <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
+                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
                                             <FiBriefcase size={14} />
                                             التفاصيل المهنية
                                         </h4>
@@ -528,8 +530,8 @@ const AdminDashboard = () => {
                                     </div>
 
                                     {/* المعلومات الشخصية */}
-                                    <div className="border border-gray-200 rounded-[12px] p-4 space-y-3">
-                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 pb-2 flex items-center gap-2">
+                                    <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
+                                        <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
                                             <FiUser size={14} />
                                             المعلومات الشخصية
                                         </h4>
@@ -562,7 +564,7 @@ const AdminDashboard = () => {
                                 </button>
                                 <button
                                     onClick={() => handleDownload(selectedRequest.id, 'id')}
-                                    className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                                    className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white dark:bg-gray-800 rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
                                     <FiDownload size={14} />
                                     صورة الهوية / مزاولة المهنة
@@ -580,10 +582,10 @@ const AdminDashboard = () => {
                             )}
                         </div>
 
-                        <div className="px-6 md:px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-end gap-3 shrink-0 flex-wrap sm:flex-nowrap">
+                        <div className="px-6 md:px-8 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700 flex items-center justify-end gap-3 shrink-0 flex-wrap sm:flex-nowrap">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 w-full sm:w-auto"
+                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto"
                             >
                                 إغلاق
                             </button>
@@ -613,7 +615,7 @@ const AdminDashboard = () => {
             {/* ── Modal تأكيد الرفض ── */}
             {showRejectModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 text-center text-right">
+                    <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white dark:bg-gray-800 rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 dark:border-gray-700 text-center text-right">
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
                             <FiAlertTriangle size={28} />
                         </div>

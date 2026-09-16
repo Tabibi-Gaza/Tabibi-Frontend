@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState, useEffect } from 'react'
+﻿import React, { useContext, useMemo, useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets_frontend/assets'
@@ -101,7 +101,7 @@ const Appointment = () => {
 
   if (loadingFallback) {
     return (
-      <div className="text-center mt-10 pt-40 text-gray-500 font-sans" style={{ direction: "rtl" }}>
+      <div className="text-center mt-10 pt-40 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-sans" style={{ direction: "rtl" }}>
         جاري تحميل بيانات الطبيب...
       </div>
     );
@@ -109,7 +109,7 @@ const Appointment = () => {
 
   if (!docInfo) {
     return (
-      <div className="text-center mt-10 pt-40 text-gray-500 font-sans" style={{ direction: "rtl" }}>
+      <div className="text-center mt-10 pt-40 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-sans" style={{ direction: "rtl" }}>
         الطبيب غير موجود
       </div>
     );
@@ -196,52 +196,52 @@ const Appointment = () => {
 
   return (
     <div className="w-full p-4 pt-40 px-3 text-right" dir="rtl">
-      <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative flex flex-col md:flex-row gap-6 mb-6">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm relative flex flex-col md:flex-row gap-6 mb-6">
         <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
           <button onClick={handleMessageClick} className="flex items-center gap-2 bg-[#138c9f] hover:bg-[#3f9cb1] text-white px-4 py-2 rounded-xl text-sm font-medium transition-all shadow-sm">
             <span>مراسلة</span>
             <FontAwesomeIcon icon={faComments} className="w-4 h-4" />
           </button>
-          <button onClick={toggleFavorite} className={`p-2 rounded-xl border transition-all duration-200 ${isFavorite ? "bg-red-50 border-red-200 text-red-500" : "bg-gray-50 border-gray-200 text-gray-400 hover:text-red-500"}`}>
+          <button onClick={toggleFavorite} className={`p-2 rounded-xl border transition-all duration-200 ${isFavorite ? "bg-red-50 border-red-200 text-red-500" : "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500 hover:text-red-500"}`}>
             <svg xmlns="http://www.w3.org/2000/svg" fill={isFavorite ? "currentColor" : "none"} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
             </svg>
           </button>
         </div>
 
-        <div className="w-full md:w-56 shrink-0 bg-[#f4faff] rounded-xl flex items-center justify-center overflow-hidden p-2">
+        <div className="w-full md:w-56 shrink-0 bg-[#f4faff] dark:bg-gray-700 rounded-xl flex items-center justify-center overflow-hidden p-2">
           <img loading="lazy" decoding="async" width="224" height="224" className="w-full h-56 md:h-auto object-contain" src={docInfo.image} alt={docInfo.name} />
         </div>
 
         <div className="flex-1 flex flex-col justify-between pt-10 md:pt-0 text-5xl">
           <div>
-            <div className="flex items-center gap-2 text-xl font-bold text-gray-800">
+            <div className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-gray-200">
               <h2>{docInfo.name}</h2>
               <img loading="lazy" decoding="async" width="16" height="16" className="w-4 h-4" src={assets.verified_icon} alt="Verified" />
             </div>
-            <div className="flex flex-wrap items-center gap-2 mt-2 text-[15px] text-gray-500">
-              <span className="text-[#138c9f] bg-[#e6f6f5] px-3 py-1 rounded-md font-medium">{docInfo.speciality}</span>
-              <span className="text-gray-300">|</span>
+            <div className="flex flex-wrap items-center gap-2 mt-2 text-[15px] text-gray-500 dark:text-gray-400">
+              <span className="text-[#138c9f] bg-[#e6f6f5] dark:bg-gray-800 px-3 py-1 rounded-md font-medium">{docInfo.speciality}</span>
+              <span className="text-gray-300 dark:text-gray-600">|</span>
               <p>{docInfo.degree}</p>
-              <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-md">سنوات خبرة {docInfo.experience}</span>
+              <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 dark:text-gray-500 px-2.5 py-0.5 rounded-md">سنوات خبرة {docInfo.experience}</span>
             </div>
             <div className="mt-4">
-              <p className="flex items-center gap-1.5 text-sm font-bold text-gray-800">
+              <p className="flex items-center gap-1.5 text-sm font-bold text-gray-800 dark:text-gray-200">
                 <img loading="lazy" decoding="async" width="14" height="14" className="w-3.5 h-3.5" src={assets.info_icon} alt="" /> عن الطبيب
               </p>
-              <p className="text-[15px] text-gray-500 leading-relaxed mt-1 max-w-2xl">{docInfo.about}</p>
+              <p className="text-[15px] text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed mt-1 max-w-2xl">{docInfo.about}</p>
             </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
-            <p className="text-gray-600 text-sm font-medium">
+          <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+            <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 text-sm font-medium">
               كشفية الطبيب: <span className="text-[#138c9f] font-bold text-base">{docInfo.fees} {currencySymbol}</span>
             </p>
           </div>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm mb-8">
-        <h3 className="text-base font-bold text-gray-800 mb-5 flex items-center gap-2 border-r-4 border-[#138c9f] pr-2">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm mb-8">
+        <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-5 flex items-center gap-2 border-r-4 border-[#138c9f] pr-2">
           مواعيد الحجز المتاحة
         </h3>
 
@@ -250,7 +250,7 @@ const Appointment = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#138C9F]"></div>
           </div>
         ) : activeDays.length === 0 ? (
-          <div className="text-center py-10 text-gray-400">
+          <div className="text-center py-10 text-gray-400 dark:text-gray-500">
             <p className="text-lg font-bold">لا توجد مواعيد متاحة حالياً</p>
             <p className="text-sm mt-1">يرجى المحاولة في وقت لاحق</p>
           </div>
@@ -261,7 +261,7 @@ const Appointment = () => {
                 <div
                   key={day.date}
                   onClick={() => { setSlotIndex(calendarData.indexOf(day)); setSlotTime(''); setSelectedSlot(null); }}
-                  className={`text-center py-3 px-4 rounded-lg rounded-xl cursor-pointer transition-all duration-150 border flex flex-col gap-1 ${slotIndex === calendarData.indexOf(day) ? "bg-[#138c9f] text-white border-[#138c9f]" : "border-gray-200 text-gray-500 hover:border-teal-200"}`}
+                   className={`text-center py-3 px-4 rounded-lg rounded-xl cursor-pointer transition-all duration-150 border flex flex-col gap-1 ${slotIndex === calendarData.indexOf(day) ? "bg-[#138c9f] text-white border-[#138c9f]" : "border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:border-teal-200"}`}
                 >
                   <p className="text-[15px]">{day.dayNameAr}</p>
                   <p className="text-base font-bold">{day.dayNumber}</p>
@@ -274,7 +274,7 @@ const Appointment = () => {
                 const availableSlots = calendarData[slotIndex]?.slots?.filter(s => s.isAvailable) || [];
                 if (availableSlots.length === 0) {
                   return (
-                    <p className="text-sm text-gray-400 py-2">لا توجد مواعيد متاحة في هذا اليوم</p>
+                    <p className="text-sm text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 py-2">لا توجد مواعيد متاحة في هذا اليوم</p>
                   );
                 }
                 return availableSlots.map((slot, index) => {
@@ -283,7 +283,7 @@ const Appointment = () => {
                     <p
                       key={index}
                       onClick={() => { setSlotTime(timeLabel); setSelectedSlot(slot); }}
-                      className={`text-[15px] shrink-0 px-4 py-2 rounded-full cursor-pointer transition-all border ${timeLabel === slotTime ? "bg-[#138c9f] text-white border-[#138c9f]" : "text-gray-500 border-gray-200 hover:bg-gray-50"}`}
+                      className={`text-[15px] shrink-0 px-4 py-2 rounded-full cursor-pointer transition-all border ${timeLabel === slotTime ? "bg-[#138c9f] text-white border-[#138c9f]" : "text-gray-500 dark:text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"}`}
                     >
                       {timeLabel}
                     </p>
@@ -295,10 +295,10 @@ const Appointment = () => {
         )}
 
         <div className="mt-5">
-          <label className="block text-[15px] font-semibold text-gray-600 mb-2">ملاحظات إضافية</label>
+          <label className="block text-[15px] font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">ملاحظات إضافية</label>
           <textarea
             placeholder="ما أعراضك؟ (اختياري)"
-            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#138c9f] text-[15px]"
+            className="w-full p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:border-[#138c9f] text-[15px] bg-white dark:bg-gray-700 dark:text-white"
             rows="3"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
     FiSearch, FiCalendar, FiUser, FiActivity, FiFileText,
     FiSliders, FiRotateCcw, FiStar, FiArrowLeft, FiArrowRight, FiSend, FiX, FiDownload
@@ -188,27 +188,27 @@ const PatientMedicalFile = () => {
                 </div>
 
                 {/* قسم الفلترة والبحث */}
-                <div className="bg-white border border-slate-100 rounded-2xl p-4 shadow-xs">
+                <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-4 shadow-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-end">
                         <div className="space-y-1.5 text-right">
                             <label className="text-xs font-bold text-gray-500">البحث حسب التاريخ</label>
-                            <div className="relative flex items-center border border-slate-200 rounded-xl px-3 bg-slate-50/50 h-11 focus-within:border-[#1b8b99] focus-within:bg-white transition-all">
+                            <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 bg-slate-50 dark:bg-gray-900/50 h-11 focus-within:border-[#1b8b99] focus-within:bg-white dark:bg-gray-800 transition-all">
                                 <input
                                     type="date"
                                     value={searchDate}
                                     onChange={(e) => setSearchDate(e.target.value)}
-                                    className="w-full bg-transparent border-none outline-none text-sm text-gray-700 font-medium"
+                                    className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-1.5 text-right">
                             <label className="text-xs font-bold text-gray-500">التخصص</label>
-                            <div className="relative flex items-center border border-slate-200 rounded-xl px-3 bg-slate-50/50 h-11 focus-within:border-[#1b8b99] focus-within:bg-white transition-all">
+                            <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 bg-slate-50 dark:bg-gray-900/50 h-11 focus-within:border-[#1b8b99] focus-within:bg-white dark:bg-gray-800 transition-all">
                                 <select
                                     value={specialty}
                                     onChange={(e) => setSpecialty(e.target.value)}
-                                    className="w-full bg-transparent border-none outline-none text-sm text-gray-700 font-medium appearance-none"
+                                    className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium appearance-none"
                                 >
                                     <option value="الكل">الكل</option>
                                     {[...new Set(visits.map((v) => v.specializationName).filter(Boolean))].map((spec) => (
@@ -225,7 +225,7 @@ const PatientMedicalFile = () => {
                             </button>
                             <button
                                 onClick={handleResetFilters}
-                                className="flex items-center justify-center gap-2 bg-white border border-slate-200 hover:bg-slate-50 text-gray-600 font-bold h-11 px-4 rounded-xl transition-all cursor-pointer text-sm"
+                                className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-4 rounded-xl transition-all cursor-pointer text-sm"
                             >
                                 <FiRotateCcw className="w-4 h-4" />
                                 إعادة ضبط
@@ -235,14 +235,14 @@ const PatientMedicalFile = () => {
                 </div>
 
                 {filteredVisits.length === 0 ? (
-                    <div className="bg-white border border-slate-100 rounded-2xl shadow-xs p-10 text-center">
-                        <p className="text-sm text-gray-400 font-bold">لا توجد زيارات طبية مسجلة</p>
+                    <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl shadow-xs p-10 text-center">
+                        <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد زيارات طبية مسجلة</p>
                     </div>
                 ) : (
                     filteredVisits.map((visit) => {
                         const { month, day } = formatDate(visit.visitDate);
                         return (
-                            <div key={visit.id} className="bg-white border border-slate-100 rounded-2xl shadow-xs overflow-hidden">
+                            <div key={visit.id} className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
                                 {/* هيدر الكرت */}
                                 <div className="bg-cyan-50/40 p-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyan-100/30">
                                     <div className="flex items-center gap-4 text-right">
@@ -251,10 +251,10 @@ const PatientMedicalFile = () => {
                                             <p className="text-lg font-black leading-none mt-0.5">{day}</p>
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-gray-800 text-base sm:text-lg flex items-center gap-2">
+                                            <h3 className="font-bold text-gray-800 dark:text-gray-200 text-base sm:text-lg flex items-center gap-2">
                                                 زيارة طبية
                                             </h3>
-                                            <p className="text-xs text-gray-400 font-medium mt-0.5">{visit.specializationName}</p>
+                                            <p className="text-xs text-gray-400 dark:text-gray-500 font-medium mt-0.5">{visit.specializationName}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2.5 self-start sm:self-auto">
@@ -287,62 +287,62 @@ const PatientMedicalFile = () => {
                                 <div className="p-4 sm:p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-right">
                                     <div className="md:col-span-2 space-y-5">
                                         <div className="space-y-1">
-                                            <p className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
+                                            <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
                                                 <FiUser className="w-3.5 h-3.5 text-[#1b8b99]" /> اسم الطبيب
                                             </p>
-                                            <h4 className="font-black text-gray-800 text-sm sm:text-base">{visit.doctorName}</h4>
+                                            <h4 className="font-black text-gray-800 dark:text-gray-200 text-sm sm:text-base">{visit.doctorName}</h4>
                                             <p className="text-xs font-bold text-[#1b8b99]">{visit.specializationName}</p>
                                         </div>
 
                                         {visit.symptoms && (
                                             <div className="space-y-1">
-                                                <p className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
+                                                <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
                                                     <FiActivity className="w-3.5 h-3.5 text-[#1b8b99]" /> الأعراض
                                                 </p>
-                                                <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">{visit.symptoms}</p>
+                                                <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.symptoms}</p>
                                             </div>
                                         )}
 
                                         {visit.diagnosis && (
                                             <div className="space-y-1">
-                                                <p className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
+                                                <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
                                                     <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> التشخيص
                                                 </p>
-                                                <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">{visit.diagnosis}</p>
+                                                <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.diagnosis}</p>
                                             </div>
                                         )}
 
                                         {visit.visitNotes && (
                                             <div className="space-y-1">
-                                                <p className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
+                                                <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
                                                     <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> ملاحظات الزيارة
                                                 </p>
-                                                <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">{visit.visitNotes}</p>
+                                                <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.visitNotes}</p>
                                             </div>
                                         )}
 
                                         {visit.recommendations && (
                                             <div className="space-y-1">
-                                                <p className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
+                                                <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
                                                     <FiFileText className="w-3.5 h-3.5 text-[#1b8b99]" /> التوصيات
                                                 </p>
-                                                <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">{visit.recommendations}</p>
+                                                <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-medium leading-relaxed">{visit.recommendations}</p>
                                             </div>
                                         )}
                                     </div>
 
                                     {visit.prescriptionMedications && visit.prescriptionMedications.length > 0 && (
-                                        <div className="border border-dashed border-slate-200 bg-slate-50/40 rounded-xl p-4 space-y-3">
-                                            <h5 className="text-xs font-bold text-[#1b8b99] border-b border-dashed border-slate-200 pb-2 flex items-center gap-1.5">
+                                        <div className="border border-dashed border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-900/40 rounded-xl p-4 space-y-3">
+                                            <h5 className="text-xs font-bold text-[#1b8b99] border-b border-dashed border-slate-200 dark:border-gray-700 pb-2 flex items-center gap-1.5">
                                                 <FiFileText className="w-4 h-4" />
                                                 الوصفة الطبية
                                             </h5>
                                             <div className="space-y-2">
                                                 {visit.prescriptionMedications.map((med, idx) => (
-                                                    <div key={idx} className="bg-white p-2.5 rounded-lg border border-slate-100 shadow-2xs space-y-1">
+                                                    <div key={idx} className="bg-white dark:bg-gray-800 p-2.5 rounded-lg border border-slate-100 dark:border-gray-700 shadow-2xs space-y-1">
                                                         <div className="flex justify-between items-center text-xs font-semibold">
                                                             <span className="text-gray-800">{med.medicationName}</span>
-                                                            <span className="text-gray-400 font-mono text-[10px] bg-slate-50 px-2 py-0.5 rounded border border-slate-100">{med.dosage}</span>
+                                                            <span className="text-gray-400 dark:text-gray-500 font-mono text-[10px] bg-slate-50 dark:bg-gray-900 px-2 py-0.5 rounded border border-slate-100">{med.dosage}</span>
                                                         </div>
                                                         {med.frequency && (
                                                             <p className="text-[10px] text-gray-400">{med.frequency}{med.duration ? ` • ${med.duration}` : ''}</p>
@@ -357,8 +357,8 @@ const PatientMedicalFile = () => {
                                     )}
                                 </div>
 
-                                <div className="bg-slate-50/50 border-t border-slate-100 p-3 text-center">
-                                    <p className="text-[11px] text-gray-400 font-medium flex items-center justify-center gap-1.5">
+                                <div className="bg-slate-50 dark:bg-gray-900/50 border-t border-slate-100 dark:border-gray-700 p-3 text-center">
+                                    <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium flex items-center justify-center gap-1.5">
                                         <span>يتم تحديث السجلات الطبية تلقائياً بعد كل زيارة.</span>
                                     </p>
                                 </div>
@@ -371,12 +371,12 @@ const PatientMedicalFile = () => {
             {/* نافذة التقييم المنبثقة */}
             {isModalOpen && selectedVisit && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs transition-all animate-fadeIn">
-                    <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden relative transform transition-all scale-100">
-                        <div className="p-4 bg-white border-b border-slate-50 flex items-center justify-between relative">
+                    <div className="bg-white dark:bg-gray-800 rounded-3xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden relative transform transition-all scale-100">
+                        <div className="p-4 bg-white dark:bg-gray-800 border-b border-slate-50 flex items-center justify-between relative">
                             {modalStep === 2 && (
                                 <button
                                     onClick={() => setModalStep(1)}
-                                    className="text-gray-400 hover:text-gray-600 transition-colors p-1 absolute right-4"
+                                    className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors p-1 absolute right-4"
                                     title="الرجوع للخطوة السابقة"
                                 >
                                     <FiArrowRight className="w-5 h-5" />
@@ -389,7 +389,7 @@ const PatientMedicalFile = () => {
                             </div>
                             <button
                                 onClick={() => setIsModalOpen(false)}
-                                className="text-gray-400 hover:text-gray-600 transition-colors p-1 absolute left-4"
+                                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors p-1 absolute left-4"
                             >
                                 <FiX className="w-5 h-5" />
                             </button>
@@ -409,7 +409,7 @@ const PatientMedicalFile = () => {
                                             className="p-1 transition-transform active:scale-95 cursor-pointer"
                                         >
                                             <FiStar
-                                                className={`w-7 h-7 transition-colors ${star <= platformRating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}`}
+                                                className={`w-7 h-7 transition-colors ${star <= platformRating ? 'fill-amber-400 text-amber-400' : 'text-gray-300 dark:text-gray-500'}`}
                                             />
                                         </button>
                                     ))}
@@ -421,7 +421,7 @@ const PatientMedicalFile = () => {
                                         onChange={(e) => setPlatformComment(e.target.value)}
                                         placeholder="اكتب ملاحظاتك هنا..."
                                         rows={4}
-                                        className="w-full border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 bg-slate-50/50 outline-none focus:border-[#1b8b99] focus:bg-white transition-all resize-none text-right"
+                                        className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right"
                                     />
                                 </div>
                                 <div className="space-y-2.5 pt-2">
@@ -434,7 +434,7 @@ const PatientMedicalFile = () => {
                                     </button>
                                     <button
                                         onClick={() => setModalStep(2)}
-                                        className="w-full bg-white border border-slate-200 hover:bg-slate-50 text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
+                                        className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
                                     >
                                         تخطي
                                     </button>
@@ -444,8 +444,8 @@ const PatientMedicalFile = () => {
 
                         {modalStep === 2 && (
                             <div className="p-5 sm:p-6 text-center space-y-6">
-                                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 flex items-center gap-3 text-right">
-                                    <div className="w-12 h-12 rounded-full bg-slate-200 border border-white shadow-xs overflow-hidden flex items-center justify-center text-gray-400 shrink-0">
+                                <div className="bg-slate-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 rounded-2xl p-3 flex items-center gap-3 text-right">
+                                    <div className="w-12 h-12 rounded-full bg-slate-200 border border-white shadow-xs overflow-hidden flex items-center justify-center text-gray-400 dark:text-gray-500 shrink-0">
                                         {selectedVisit.doctorImageUrl ? (
                                             <img
                                                 loading="lazy"
@@ -461,7 +461,7 @@ const PatientMedicalFile = () => {
                                         )}
                                     </div>
                                     <div className="space-y-0.5">
-                                        <h4 className="font-extrabold text-gray-800 text-sm">{selectedVisit.doctorName}</h4>
+                                        <h4 className="font-extrabold text-gray-800 dark:text-gray-200 text-sm">{selectedVisit.doctorName}</h4>
                                         <p className="text-xs text-[#1b8b99] font-semibold">{selectedVisit.specializationName}</p>
                                     </div>
                                 </div>
@@ -477,7 +477,7 @@ const PatientMedicalFile = () => {
                                             className="p-1 transition-transform active:scale-95 cursor-pointer"
                                         >
                                             <FiStar
-                                                className={`w-7 h-7 transition-colors ${star <= doctorRating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}`}
+                                                className={`w-7 h-7 transition-colors ${star <= doctorRating ? 'fill-amber-400 text-amber-400' : 'text-gray-300 dark:text-gray-500'}`}
                                             />
                                         </button>
                                     ))}
@@ -489,7 +489,7 @@ const PatientMedicalFile = () => {
                                         onChange={(e) => setDoctorComment(e.target.value)}
                                         placeholder="اكتب ملاحظاتك هنا..."
                                         rows={4}
-                                        className="w-full border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 bg-slate-50/50 outline-none focus:border-[#1b8b99] focus:bg-white transition-all resize-none text-right"
+                                        className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right"
                                     />
                                 </div>
                                 <div className="space-y-2.5 pt-2">
@@ -505,7 +505,7 @@ const PatientMedicalFile = () => {
                                     </button>
                                     <button
                                         onClick={() => setIsModalOpen(false)}
-                                        className="w-full bg-white border border-slate-200 hover:bg-slate-50 text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
+                                        className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
                                     >
                                         إغلاق
                                     </button>

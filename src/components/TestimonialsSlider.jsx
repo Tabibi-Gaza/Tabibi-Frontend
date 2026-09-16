@@ -28,7 +28,7 @@ const TestimonialsSlider = () => {
 
     return (
         <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16' dir='rtl'>
-            <div className='bg-white border border-slate-100 rounded-3xl p-8 lg:p-12 shadow-[0_4px_25px_rgba(0,0,0,0.01)] relative overflow-hidden'>
+            <div className='bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-3xl p-8 lg:p-12 shadow-[0_4px_25px_rgba(0,0,0,0.01)] relative overflow-hidden'>
 
                 <div className='absolute inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(58,150,183,0.03),transparent_35%)] pointer-events-none'></div>
 
@@ -45,14 +45,14 @@ const TestimonialsSlider = () => {
                     <div className='flex items-center gap-2 select-none'>
                         <button
                             onClick={prevSlide}
-                            className='w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-600 font-extrabold hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] hover:shadow-md hover:shadow-[#138C9F]/10 transition-all duration-300 active:scale-[0.95] cursor-pointer'
+                            className='w-10 h-10 rounded-xl bg-white dark:bg-gray-700 border border-slate-100 dark:border-gray-600 flex items-center justify-center text-slate-600 dark:text-gray-300 font-extrabold hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] hover:shadow-md hover:shadow-[#138C9F]/10 transition-all duration-300 active:scale-[0.95] cursor-pointer'
                             title="المراجعة السابقة"
                         >
                             <span className='text-base font-black'>→</span>
                         </button>
                         <button
                             onClick={nextSlide}
-                            className='w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-600 font-extrabold hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] hover:shadow-md hover:shadow-[#138C9F]/10 transition-all duration-300 active:scale-[0.95] cursor-pointer'
+                            className='w-10 h-10 rounded-xl bg-white dark:bg-gray-700 border border-slate-100 dark:border-gray-600 flex items-center justify-center text-slate-600 dark:text-gray-300 font-extrabold hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] hover:shadow-md hover:shadow-[#138C9F]/10 transition-all duration-300 active:scale-[0.95] cursor-pointer'
                             title="المراجعة التالية"
                         >
                             <span className='text-base font-black'><FontAwesomeIcon 
@@ -67,7 +67,7 @@ const TestimonialsSlider = () => {
                     key={currentIndex}
                     className='w-full min-h-40 flex flex-col md:flex-row items-start md:items-center gap-6 z-10 relative animate-fade-in transition-all duration-500'
                 >
-                    <div className='w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100/70 flex items-center justify-center text-3xl shrink-0 shadow-[0_4px_12px_rgba(0,0,0,0.015)] select-none'>
+                    <div className='w-16 h-16 rounded-2xl bg-slate-50 dark:bg-gray-700 border border-slate-100/70 dark:border-gray-600 flex items-center justify-center text-3xl shrink-0 shadow-[0_4px_12px_rgba(0,0,0,0.015)] select-none'>
                         {reviews[currentIndex].avatar}
                     </div>
 
@@ -94,7 +94,7 @@ const TestimonialsSlider = () => {
                         <button
                             key={index}
                             onClick={() => setCurrentIndex(index)}
-                            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === index ? 'w-8 bg-[#138C9F]' : 'w-2 bg-slate-200 hover:bg-slate-300'}`}
+                            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === index ? 'w-8 bg-[#138C9F]' : 'w-2 bg-slate-200 dark:bg-gray-600 hover:bg-slate-300 dark:hover:bg-gray-500'}`}
                             title={`الانتقال للمراجعة ${index + 1}`}
                         />
                     ))}

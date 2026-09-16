@@ -20,13 +20,13 @@ const AdminNotifications = () => {
     };
 
     return (
-        <main className="w-full min-h-screen bg-[#ecf8fa] p-4 md:p-10" dir="rtl">
+        <main className="w-full min-h-screen bg-[#ecf8fa] dark:bg-gray-900 p-4 md:p-10" dir="rtl">
             <div className="max-w-4xl mx-auto">
 
                 <div className="flex justify-start mb-6">
                     <button
                         onClick={() => navigate(-1)}
-                        className="flex items-center gap-2 text-gray-700 hover:text-gray-900 font-bold text-sm border border-[#C3C6D6] bg-white px-4 py-2 rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
+                        className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold text-sm border border-[#C3C6D6] dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 transition-all duration-150">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
@@ -35,8 +35,8 @@ const AdminNotifications = () => {
                     </button>
                 </div>
 
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-8 shadow-xs flex flex-col items-center justify-center text-center gap-3 mb-8">
-                    <div className="p-4 bg-[#E5EEFF] rounded-full border border-blue-100 shadow-xs text-[#138C9F]">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-xs flex flex-col items-center justify-center text-center gap-3 mb-8">
+                    <div className="p-4 bg-[#E5EEFF] dark:bg-blue-900/20 rounded-full border border-blue-100 dark:border-blue-800/30 shadow-xs text-[#138C9F]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-12 h-12">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                         </svg>
@@ -51,7 +51,7 @@ const AdminNotifications = () => {
                             <div
                                 key={notif.id}
                                 onClick={() => handleNotificationClick(notif)}
-                                className={`bg-white border rounded-xl p-5 shadow-xs transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-[#C3C6D6] hover:border-[#138C9F]/50 ${notif.link ? 'cursor-pointer hover:shadow-md' : ''}`}
+                                className={`bg-white dark:bg-gray-800 border rounded-xl p-5 shadow-xs transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-[#C3C6D6] dark:border-gray-700 hover:border-[#138C9F]/50 ${notif.link ? 'cursor-pointer hover:shadow-md' : ''}`}
                             >
                                 <div className="flex-1 text-right">
                                     <div className="flex items-center gap-2 mb-1">
@@ -88,7 +88,7 @@ const AdminNotifications = () => {
                             </div>
                         ))
                     ) : (
-                        <div className="bg-white border border-[#C3C6D6] rounded-xl p-10 text-center text-gray-400 font-medium">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-10 text-center text-gray-400 dark:text-gray-500 font-medium">
                             لا توجد إشعارات حالياً.
                         </div>
                     )}

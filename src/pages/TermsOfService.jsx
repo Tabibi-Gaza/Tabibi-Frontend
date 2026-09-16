@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TermsOfService = () => {
@@ -49,14 +49,14 @@ const TermsOfService = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-white antialiased text-[#1e293b] pb-16" dir="rtl">
+        <div className="min-h-screen bg-white dark:bg-gray-800 antialiased text-[#1e293b] dark:text-white pb-16" dir="rtl">
             <main className="max-w-[935px] w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white">
 
                 {/* زر العودة للرئيسية */}
                 <div className="flex justify-end mb-10">
                     <button
                         onClick={() => navigate('/')}
-                        className="flex items-center gap-2 h-6 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] transition-colors duration-200"
+                        className="flex items-center gap-2 h-6 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] dark:text-white transition-colors duration-200"
                     >
                         <span>العودة للرئيسية</span>
                         <span className="w-6 h-6 rounded-lg bg-[#e8edf5] flex items-center justify-center text-[#64748b]">
@@ -70,7 +70,7 @@ const TermsOfService = () => {
                 {/* الهيدر الرئيسي */}
                 <div className="flex items-center justify-end gap-4 mb-10 text-right pr-2 sm:pr-6">
                     <div className="flex flex-col items-end">
-                        <h1 className="m-0 text-[#1e293b] text-3xl sm:text-4xl font-extrabold leading-10 tracking-wide">
+                        <h1 className="m-0 text-[#1e293b] dark:text-white text-3xl sm:text-4xl font-extrabold leading-10 tracking-wide">
                             شروط الاستخدام
                         </h1>
                         <p className="m-0 text-[#64748b] text-base font-semibold leading-7.5 mt-1">
@@ -88,7 +88,7 @@ const TermsOfService = () => {
                     {termsData.map((term) => (
                         <div
                             key={term.id}
-                            className="terms-card w-full p-6 sm:p-8 bg-white border border-[#f3f4f6] rounded-2xl shadow-xs hover:shadow-xs transition-all duration-200"
+                            className="terms-card w-full p-6 sm:p-8 bg-white dark:bg-gray-800 border border-[#f3f4f6] rounded-2xl shadow-xs hover:shadow-xs transition-all duration-200"
                         >
                             <div className="w-full flex items-center justify-between mb-3">
                                 <h2 className="text-xl font-extrabold text-[#1e293b]">
@@ -114,7 +114,7 @@ const TermsOfService = () => {
                     <button
                         onClick={() => navigate('/contact')}
                         type="button"
-                        className="w-full md:w-auto px-10 h-13 rounded-xl bg-white text-[#318CA9] text-base font-extrabold shadow-xs hover:bg-slate-50 active:scale-[0.99] transition-all duration-200 cursor-pointer whitespace-nowrap order-2 md:order-1"
+                        className="w-full md:w-auto px-10 h-13 rounded-xl bg-white dark:bg-gray-800 text-[#318CA9] text-base font-extrabold shadow-xs hover:bg-slate-50 dark:bg-gray-900 active:scale-[0.99] transition-all duration-200 cursor-pointer whitespace-nowrap order-2 md:order-1"
                     >
                         تواصل معنا
                     </button>

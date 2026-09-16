@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+﻿import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { Clock, CheckCircle, AlertCircle, CreditCard, Upload, Building2, Wallet, Loader2, X, FileText } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -124,12 +124,12 @@ export default function DoctorSubscription() {
     const wallets = adminMethods.filter(m => m.methodType === 'Wallet');
 
     return (
-        <div className="w-full bg-[#ecf8fa] flex flex-col gap-6" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
             <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                 اشتراكي
             </h2>
 
-            <div className={`bg-white border rounded-2xl p-6 shadow-sm ${isTrial ? 'border-yellow-300' : isActive ? 'border-green-300' : 'border-red-200'}`}>
+            <div className={`bg-white dark:bg-gray-800 border rounded-2xl p-6 shadow-sm ${isTrial ? 'border-yellow-300' : isActive ? 'border-green-300' : 'border-red-200'}`}>
                 <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-4">
                         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isTrial ? 'bg-yellow-50' : isActive ? 'bg-green-50' : 'bg-red-50'}`}>
@@ -144,7 +144,7 @@ export default function DoctorSubscription() {
                             <h3 className="font-extrabold text-[22px] text-[#0B1C30]">
                                 {isTrial ? 'فترة تجريبية مجانية' : isActive ? 'الاشتراك الشهري' : 'الاشتراك منتهي الصلاحية'}
                             </h3>
-                            <p className="text-[14px] text-[#526069] mt-0.5">
+                            <p className="text-[14px] text-[#526069] dark:text-gray-400 mt-0.5">
                                 {isTrial ? 'استمتع بالمنصة لمدة 7 أيام مجاناً' : isActive ? `ينتهي في ${formatDate(subscription?.endDate)}` : 'يجب تجديد الاشتراك للاستمرار في استخدام المنصة'}
                             </p>
                         </div>
@@ -154,21 +154,21 @@ export default function DoctorSubscription() {
                         <div className={`font-extrabold text-[42px] leading-none ${remainingDays <= 2 && !isTrial ? 'text-red-500' : 'text-[#138C9F]'}`}>
                             {remainingDays}
                         </div>
-                        <span className="text-[13px] text-[#526069] font-semibold">يوم متبقي</span>
+                        <span className="text-[13px] text-[#526069] dark:text-gray-400 font-semibold">يوم متبقي</span>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-5 border-t border-gray-100">
                     <div className="text-center">
-                        <span className="text-[12px] text-[#526069] block mb-1">تاريخ البدء</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">تاريخ البدء</span>
                         <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.startDate)}</span>
                     </div>
                     <div className="text-center">
-                        <span className="text-[12px] text-[#526069] block mb-1">تاريخ الانتهاء</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">تاريخ الانتهاء</span>
                         <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.endDate)}</span>
                     </div>
                     <div className="text-center">
-                        <span className="text-[12px] text-[#526069] block mb-1">المبلغ</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">المبلغ</span>
                         <span className="font-bold text-[14px] text-[#138C9F]">{subscription?.isTrial ? 'مجاني' : `${subscription?.amount || 0} ₪`}</span>
                     </div>
                 </div>
@@ -182,13 +182,13 @@ export default function DoctorSubscription() {
             )}
 
             {showPaymentForm && (
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 shadow-sm">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="font-bold text-[20px] text-[#0B1C30]">تأكيد ودفع الاشتراك</h3>
-                        <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
+                        <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
                     </div>
 
-                    <div className="bg-[#ecf8fa] rounded-xl p-4 mb-6 border border-[#C3C6D6]">
+                    <div className="bg-[#ecf8fa] dark:bg-gray-900 rounded-xl p-4 mb-6 border border-[#C3C6D6]">
                         <div className="flex justify-between items-center">
                             <span className="font-bold text-[15px] text-[#0B1C30]">المبلغ المطلوب:</span>
                             <span className="font-extrabold text-[24px] text-[#138C9F]">50 ₪</span>
@@ -198,13 +198,13 @@ export default function DoctorSubscription() {
 
                     {banks.length > 0 && (
                         <div className="mb-6">
-                            <h4 className="font-bold text-[15px] text-[#0B1C30] mb-3 flex items-center gap-2"><Building2 size={18} className="text-[#003D9B]" /> تحويل بنكي</h4>
+                            <h4 className="font-bold text-[15px] text-[#0B1C30] dark:text-white mb-3 flex items-center gap-2"><Building2 size={18} className="text-[#003D9B]" /> تحويل بنكي</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {banks.map(method => (
-                                    <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 hover:border-gray-300'}`}>
+                                    <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'}`}>
                                         <div className="font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
-                                        <div className="text-[12px] text-[#526069] mt-1">{method.accountHolderName}</div>
-                                        {method.iban && <div className="text-[11px] text-[#526069] mt-0.5" dir="ltr">{method.iban}</div>}
+                                        <div className="text-[12px] text-[#526069] dark:text-gray-400 mt-1">{method.accountHolderName}</div>
+                                        {method.iban && <div className="text-[11px] text-[#526069] dark:text-gray-400 mt-0.5" dir="ltr">{method.iban}</div>}
                                     </button>
                                 ))}
                             </div>
@@ -213,13 +213,13 @@ export default function DoctorSubscription() {
 
                     {wallets.length > 0 && (
                         <div className="mb-6">
-                            <h4 className="font-bold text-[15px] text-[#0B1C30] mb-3 flex items-center gap-2"><Wallet size={18} className="text-[#138C9F]" /> محفظة إلكترونية</h4>
+                            <h4 className="font-bold text-[15px] text-[#0B1C30] dark:text-white mb-3 flex items-center gap-2"><Wallet size={18} className="text-[#138C9F]" /> محفظة إلكترونية</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {wallets.map(method => (
-                                    <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 hover:border-gray-300'}`}>
+                                    <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'}`}>
                                         <div className="font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
-                                        <div className="text-[12px] text-[#526069] mt-1">{method.accountHolderName}</div>
-                                        <div className="text-[11px] text-[#526069] mt-0.5" dir="ltr">{method.phoneNumber}</div>
+                                        <div className="text-[12px] text-[#526069] dark:text-gray-400 mt-1">{method.accountHolderName}</div>
+                                        <div className="text-[11px] text-[#526069] dark:text-gray-400 mt-0.5" dir="ltr">{method.phoneNumber}</div>
                                     </button>
                                 ))}
                             </div>
@@ -235,8 +235,8 @@ export default function DoctorSubscription() {
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block font-bold text-[13px] text-[#526069] mb-1.5">صورة الإيصال / التحويل</label>
-                            <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-[#C3C6D6] rounded-xl cursor-pointer hover:border-[#138C9F] transition-colors">
+                            <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">صورة الإيصال / التحويل</label>
+                            <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl cursor-pointer hover:border-[#138C9F] transition-colors">
                                 {receiptPreview ? (
                                     <img loading="lazy" decoding="async" width="480" height="480" src={receiptPreview} alt="receipt" className="w-full h-full object-contain rounded-xl p-2" />
                                 ) : (
@@ -252,12 +252,12 @@ export default function DoctorSubscription() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
-                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم كما في الحساب" required />
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">اسم صاحب الحساب</label>
+                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم كما في الحساب" required />
                             </div>
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">رقم الهاتف</label>
-                                <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">رقم الهاتف</label>
+                                <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
                         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+﻿import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
 import { formatDate } from '../utils/dateFormatter';
@@ -112,16 +112,16 @@ const FinancialTransactions = () => {
 
     if (loading) {
         return (
-            <div className="bg-[#ecf8fa] min-h-screen flex items-center justify-center" dir="rtl">
+            <div className="bg-[#ecf8fa] dark:bg-gray-900 min-h-screen flex items-center justify-center" dir="rtl">
                 <Loader2 className="w-8 h-8 text-[#138C9F] animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="bg-[#ecf8fa] min-h-screen pt-24 pb-6 px-4" dir="rtl">
+        <div className="bg-[#ecf8fa] dark:bg-gray-900 min-h-screen pt-24 pb-6 px-4" dir="rtl">
             <div className="max-w-6xl mx-auto">
-                <section className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-8">
+                <section className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 md:p-8">
                     <div className="text-right mb-8">
                         <h1 className="text-2xl md:text-3xl font-extrabold text-[#138C9F] mb-2">
                             المعاملات المالية
@@ -131,14 +131,14 @@ const FinancialTransactions = () => {
                         </p>
                     </div>
 
-                    <div className="mb-6 grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 bg-slate-50/50 rounded-xl border border-[#e2e8f0]">
+                    <div className="mb-6 grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-[#e2e8f0]">
                         <div className="w-full">
                             <input
                                 type="text"
                                 placeholder="ابحث باسم الطبيب أو التخصص..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-sm bg-white text-[#0B1C30] outline-none focus:border-[#138C9F] placeholder-gray-400"
+                                className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-800 text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] placeholder-gray-400"
                             />
                         </div>
                         <div className="lg:col-span-2 flex flex-col sm:flex-row items-center gap-3 w-full justify-end" dir="ltr">
@@ -147,16 +147,16 @@ const FinancialTransactions = () => {
                                     type="date"
                                     value={dateFrom}
                                     onChange={(e) => setDateFrom(e.target.value)}
-                                    className="w-full sm:w-52 px-3 h-11 border border-[#C3C6D6] rounded-xl bg-[#138C9F]/5 text-[#138C9F] text-sm font-semibold text-center outline-none focus:border-[#138C9F] cursor-pointer"
+                                    className="w-full sm:w-52 px-3 h-11 border border-[#C3C6D6] dark:border-gray-700 rounded-xl bg-[#138C9F]/5 text-[#138C9F] text-sm font-semibold text-center outline-none focus:border-[#138C9F] cursor-pointer"
                                 />
-                                <span className="text-xs font-bold text-slate-500 min-w-[20px] text-center">إلى</span>
+                                <span className="text-xs font-bold text-slate-500 dark:text-gray-400 min-w-[20px] text-center">إلى</span>
                             </div>
                             <div className="w-full sm:w-auto">
                                 <input
                                     type="date"
                                     value={dateTo}
                                     onChange={(e) => setDateTo(e.target.value)}
-                                    className="w-full sm:w-52 px-3 h-11 border border-[#C3C6D6] rounded-xl bg-[#138C9F]/5 text-[#138C9F] text-sm font-semibold text-center outline-none focus:border-[#138C9F] cursor-pointer"
+                                    className="w-full sm:w-52 px-3 h-11 border border-[#C3C6D6] dark:border-gray-700 rounded-xl bg-[#138C9F]/5 text-[#138C9F] text-sm font-semibold text-center outline-none focus:border-[#138C9F] cursor-pointer"
                                 />
                             </div>
                         </div>
@@ -169,21 +169,21 @@ const FinancialTransactions = () => {
                         </span>
                     </div>
 
-                    <div className="hidden md:block overflow-x-auto border border-[#C3C6D6] rounded-t-xl">
+                    <div className="hidden md:block overflow-x-auto border border-[#C3C6D6] dark:border-gray-700 rounded-t-xl">
                         <table className="w-full table-fixed min-w-[700px] border-collapse">
                             <thead>
                                 <tr className="h-14 bg-[#e2f4f7]">
-                                    <th className="w-[20%] text-sm font-bold text-[#526069] text-center px-4">التاريخ</th>
-                                    <th className="w-[35%] text-sm font-bold text-[#526069] text-center px-4">الطبيب/الخدمة</th>
-                                    <th className="w-[15%] text-sm font-bold text-[#526069] text-center px-4">المبلغ</th>
-                                    <th className="w-[15%] text-sm font-bold text-[#526069] text-center px-4">الحالة</th>
-                                    <th className="w-[15%] text-sm font-bold text-[#526069] text-center px-4">الإجراءات</th>
+                                    <th className="w-[20%] text-sm font-bold text-[#526069] dark:text-gray-400 text-center px-4">التاريخ</th>
+                                    <th className="w-[35%] text-sm font-bold text-[#526069] dark:text-gray-400 text-center px-4">الطبيب/الخدمة</th>
+                                    <th className="w-[15%] text-sm font-bold text-[#526069] dark:text-gray-400 text-center px-4">المبلغ</th>
+                                    <th className="w-[15%] text-sm font-bold text-[#526069] dark:text-gray-400 text-center px-4">الحالة</th>
+                                    <th className="w-[15%] text-sm font-bold text-[#526069] dark:text-gray-400 text-center px-4">الإجراءات</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {filteredTransactions.map((item) => (
-                                    <tr key={item.id} className="border-b border-[#C3C6D6]/50 hover:bg-slate-50/50 transition-colors">
-                                         <td className="px-4 py-5 text-center text-sm font-medium text-[#526069] align-middle">
+                                    <tr key={item.id} className="border-b border-[#C3C6D6] dark:border-gray-700/50 hover:bg-slate-50 dark:bg-gray-900/50 transition-colors">
+                                         <td className="px-4 py-5 text-center text-sm font-medium text-[#526069] dark:text-gray-400 align-middle">
                                             {formatDate(item.transactionDate)}
                                         </td>
                                         <td className="px-4 py-5 align-middle">
@@ -192,8 +192,8 @@ const FinancialTransactions = () => {
                                                     {getInitial(item.doctorName)}
                                                 </span>
                                                 <div className="text-right">
-                                                    <strong className="block text-[#0B1C30] text-sm font-bold">{item.doctorName}</strong>
-                                                    <small className="block text-[#526069] text-xs mt-0.5">{item.doctorSpecialization}</small>
+                                                    <strong className="block text-[#0B1C30] dark:text-white text-sm font-bold">{item.doctorName}</strong>
+                                                    <small className="block text-[#526069] dark:text-gray-400 text-xs mt-0.5">{item.doctorSpecialization}</small>
                                                 </div>
                                             </div>
                                         </td>
@@ -228,22 +228,22 @@ const FinancialTransactions = () => {
 
                     <div className="grid grid-cols-1 gap-4 md:hidden">
                         {filteredTransactions.map((item) => (
-                            <div key={item.id} className="bg-white border border-[#C3C6D6] rounded-xl p-4 flex flex-col gap-3">
-                                <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+                            <div key={item.id} className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 flex flex-col gap-3">
+                                <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-700 pb-2">
                                     <div className="flex items-center gap-2.5">
                                         <span className="w-9 h-9 rounded-full bg-[#138C9F]/10 text-[#138C9F] grid place-items-center text-sm font-bold shrink-0">
                                             {getInitial(item.doctorName)}
                                         </span>
                                         <div className="text-right">
-                                            <strong className="block text-[#0B1C30] text-sm font-bold">{item.doctorName}</strong>
-                                            <small className="block text-[#526069] text-xs">{item.doctorSpecialization}</small>
+                                            <strong className="block text-[#0B1C30] dark:text-white text-sm font-bold">{item.doctorName}</strong>
+                                            <small className="block text-[#526069] dark:text-gray-400 text-xs">{item.doctorSpecialization}</small>
                                         </div>
                                     </div>
                                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusStyle(item.status)}`}>
                                         {getStatusText(item.status)}
                                     </span>
                                 </div>
-                                <div className="flex justify-between items-center text-xs text-[#526069] pt-1">
+                                <div className="flex justify-between items-center text-xs text-[#526069] dark:text-gray-400 pt-1">
                                     <span>{formatDate(item.transactionDate)}</span>
                                     <span className="font-bold text-[#138C9F] text-sm">{item.amount?.toFixed(2)} {item.currency || 'ILS'}</span>
                                     {item.hasReceipt && item.invoiceUrl ? (
@@ -257,7 +257,7 @@ const FinancialTransactions = () => {
                     </div>
 
                     {filteredTransactions.length === 0 && (
-                        <div className="text-center py-12 text-[#526069] border border-dashed border-[#C3C6D6] rounded-xl">
+                        <div className="text-center py-12 text-[#526069] dark:text-gray-400 border border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl">
                             لم يتم العثور على أي معاملات تطابق معايير البحث الحالية.
                         </div>
                     )}
@@ -266,7 +266,7 @@ const FinancialTransactions = () => {
                         <button
                             onClick={handleLoadMore}
                             disabled={loadingMore}
-                            className="w-full h-14 grid place-items-center bg-[#138C9F]/10 text-[#138C9F] text-lg font-extrabold border border-[#C3C6D6] border-t-0 cursor-pointer rounded-b-xl hover:bg-[#138C9F]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                            className="w-full h-14 grid place-items-center bg-[#138C9F]/10 text-[#138C9F] text-lg font-extrabold border border-[#C3C6D6] dark:border-gray-700 border-t-0 cursor-pointer rounded-b-xl hover:bg-[#138C9F]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                         >
                             {loadingMore ? <><Loader2 size={18} className="animate-spin" /> جاري التحميل...</> : 'عرض المزيد من المعاملات'}
                         </button>

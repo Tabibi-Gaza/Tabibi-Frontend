@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const FAQs = () => {
@@ -65,15 +65,15 @@ const FAQs = () => {
 
     return (
       <div
-        className="min-h-screen bg-white pt-30 antialiased text-[#1e293b]"
+        className="min-h-screen bg-white dark:bg-gray-800 pt-30 antialiased text-[#1e293b]"
         dir="rtl"
       >
-        <main className="max-w-233.75 w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white pb-10">
+        <main className="max-w-233.75 w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white dark:bg-gray-800 pb-10">
           {/* زر العودة للرئيسية */}
           <div className="flex justify-start mb-10">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 h-6 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] transition-colors duration-200"
+              className="flex items-center gap-2 h-6 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] dark:text-white transition-colors duration-200"
             >
               <span className="w-6 h-6 rounded-lg bg-[#e8edf5] flex items-center justify-center text-[#64748b]">
                 <svg className="w-3.75 h-3.75" viewBox="0 0 24 24" fill="none">
@@ -101,7 +101,7 @@ const FAQs = () => {
             </div>
 
             <div className="flex flex-col">
-              <h1 className="m-0 text-[#1e293b] text-2xl sm:text-3xl font-extrabold leading-10 tracking-wide">
+              <h1 className="m-0 text-[#1e293b] dark:text-white text-2xl sm:text-3xl font-extrabold leading-10 tracking-wide">
                 الأسئلة الشائعة
               </h1>
               <p className="m-0 text-[#64748b] text-base font-semibold leading-7.5">
@@ -113,7 +113,7 @@ const FAQs = () => {
           {/* لوحة الأسئلة والبحث */}
           <section className="w-full max-w-196.5 mx-auto mb-12">
             {/* حقل البحث الفوري */}
-            <div className="flex items-center gap-3 w-full h-16 px-5 mb-4 border border-[#f3f4f6] rounded-xl bg-white shadow-xs focus-within:border-[#c7e6f3] transition-all duration-200">
+            <div className="flex items-center gap-3 w-full h-16 px-5 mb-4 border border-[#f3f4f6] rounded-xl bg-white dark:bg-gray-800 shadow-xs focus-within:border-[#c7e6f3] transition-all duration-200">
               <input
                 type="search"
                 placeholder="ابحث عن سؤالك هنا..."
@@ -139,13 +139,13 @@ const FAQs = () => {
                 filteredFaqs.map((faq) => (
                   <details
                     key={faq.id}
-                    className="group overflow-hidden border border-[#f3f4f6] open:border-[#c7e6f3] rounded-xl bg-white shadow-xs transition-all duration-200"
+                    className="group overflow-hidden border border-[#f3f4f6] open:border-[#c7e6f3] rounded-xl bg-white dark:bg-gray-800 shadow-xs transition-all duration-200"
                   >
                     <summary className="relative flex items-center w-full h-16 cursor-pointer list-none select-none pr-20 pl-14 text-right">
                       <span className="absolute top-2 right-4 grid place-items-center w-12 h-12 rounded-xl bg-[#F0FDFA]">
                         {faq.icon}
                       </span>
-                      <span className="text-[#1e293b] text-base font-semibold">
+                      <span className="text-[#1e293b] dark:text-white text-base font-semibold">
                         {faq.question}
                       </span>
                       <span className="absolute top-5.5 left-4.5 w-5 h-5 grid place-items-center transition-transform duration-200 group-open:rotate-180">
@@ -182,7 +182,7 @@ const FAQs = () => {
           {/* قسم الدعم والمساعدة الإضافية */}
           <section className="w-full max-w-211.5 mx-auto p-6 sm:p-10 rounded-2xl bg-linear-to-r from-[#fafdfd] via-[#f3f8f8] to-[#eaf2f2] border border-[#edf3f7] shadow-xs flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
             <div className="flex-1 text-center md:text-right order-2 md:order-1">
-              <h2 className="m-0 text-[#1e293b] text-2xl sm:text-3xl font-extrabold leading-10 mb-2">
+              <h2 className="m-0 text-[#1e293b] dark:text-white text-2xl sm:text-3xl font-extrabold leading-10 mb-2">
                 لا زلت بحاجة للمساعدة؟
               </h2>
               <p className="m-0 text-[#64748b] text-sm sm:text-base font-semibold leading-7 mb-6 max-w-139.5">

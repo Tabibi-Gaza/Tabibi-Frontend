@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +20,7 @@ const JoiningAsDoctor = () => {
       >
         {/* الخلفية المائية الخفيفة (أيقونة البطاقة الطبية المدمجة أسفل اليسار كعلامة مائية) */}
         <div className="absolute bottom-[-20px] right-4 md:right-12 w-48 h-48 opacity-10 pointer-events-none select-none">
-          <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+          <div className="w-7 h-7 rounded-lg bg-white dark:bg-gray-800/15 flex items-center justify-center shrink-0">
             <FontAwesomeIcon
               icon={faCheck}
               className="w-3.5 h-3.5 text-white stroke-[2]"
@@ -47,7 +47,7 @@ const JoiningAsDoctor = () => {
                   className="flex items-center justify-start gap-3"
                 >
                   {/* أيقونة الصح (Checkmark) داخل مربع بخلفية دائرية خفيفة متناسقة */}
-                  <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-white dark:bg-gray-800/15 flex items-center justify-center shrink-0">
                     <svg
                       className="w-4 h-4 stroke-white stroke-[3] fill-none"
                       viewBox="0 0 24 24"
@@ -78,7 +78,7 @@ const JoiningAsDoctor = () => {
                   navigate("/register-doctor");
                 }
               }}
-              className="w-full sm:w-auto bg-white text-[#118fa6] font-extrabold text-lg px-8 py-4 rounded-xl shadow-md hover:bg-cyan-50 transition-all duration-200 flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto bg-white dark:bg-gray-800 text-[#118fa6] font-extrabold text-lg px-8 py-4 rounded-xl shadow-md hover:bg-cyan-50 transition-all duration-200 flex items-center justify-center gap-3 group"
             >
               {" "}
               <span>سجل كطبيب الآن</span>

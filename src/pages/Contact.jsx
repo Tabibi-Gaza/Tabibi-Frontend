@@ -195,6 +195,8 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder={t('contact.address')}
                     className="w-full p-3.5 md:p-3.5 border border-[#138c9f] dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 dark:text-white outline-none focus:border-[#138c9f] transition-colors text-sm md:text-base min-h-[44px]"
+                    pattern="^[\u0600-\u06FFa-zA-Z\s]{2,}$"
+                    title="الاسم يجب أن يحتوي على حروف فقط"
                     required
                   />
                   <input

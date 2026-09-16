@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+﻿import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { QRCodeCanvas } from 'qrcode.react';
@@ -367,16 +367,16 @@ const MedicalExamination = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] flex items-center justify-center" dir="rtl">
-                <p className="text-gray-400 font-bold text-lg">جاري تحميل بيانات المريض...</p>
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">جاري تحميل بيانات المريض...</p>
             </div>
         );
     }
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] flex items-center justify-center" dir="rtl">
-                <p className="text-gray-400 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
             </div>
         );
     }
@@ -385,7 +385,7 @@ const MedicalExamination = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] flex" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex" dir="rtl">
             <div className="flex-1 flex flex-col min-w-0">
                 <main className="p-4 md:p-8 max-w-[1240px] w-full mx-auto space-y-6 overflow-y-auto">
 
@@ -402,22 +402,22 @@ const MedicalExamination = () => {
                         )}
                     </div>
 
-                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-4 md:p-6 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-4 md:p-6 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xs">
                         <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 md:gap-12 w-full lg:w-auto">
                             <div className="flex items-center gap-4">
                                 {patientImage ? (
                                     <img loading="lazy" decoding="async" width="64" height="64" src={patientImage} alt={patient.fullName} className="w-16 h-16 rounded-2xl object-cover border border-[#C3C6D6]" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                                 ) : null}
-                                <div className={`w-16 h-16 rounded-2xl bg-[#C4D2FF] text-[#0B1C30] items-center justify-center font-black text-lg ${patientImage ? 'hidden' : 'flex'}`}>
+                                <div className={`w-16 h-16 rounded-2xl bg-[#C4D2FF] text-[#0B1C30] dark:text-white items-center justify-center font-black text-lg ${patientImage ? 'hidden' : 'flex'}`}>
                                     {(patient.fullName || "م").charAt(0)}
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-xs text-gray-400 font-bold block">اسم المريض</span>
+                                    <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">اسم المريض</span>
                                     <span className="text-base md:text-lg font-black text-[#0B1C30]">{patient.fullName}</span>
                                 </div>
                             </div>
-                            <div className="text-right"><span className="text-xs text-gray-400 font-bold block">العمر</span><span className="text-base font-bold text-[#0B1C30]">{patientAge}</span></div>
-                            <div className="text-right"><span className="text-xs text-gray-400 font-bold block">فصيلة الدم</span><span className="text-base font-bold text-[#0B1C30]">{patient.bloodType || "غير معروف"}</span></div>
+                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">العمر</span><span className="text-base font-bold text-[#0B1C30]">{patientAge}</span></div>
+                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">فصيلة الدم</span><span className="text-base font-bold text-[#0B1C30]">{patient.bloodType || "غير معروف"}</span></div>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-center lg:justify-end">
@@ -434,47 +434,47 @@ const MedicalExamination = () => {
                     {activeTab === 'examination' && (
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                             <div className="lg:col-span-8 space-y-6">
-                                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-3">
+                                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-3">
                                     <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span>📝</span> <h3>الأعراض</h3></div>
-                                    <textarea name="symptoms" value={examinationData.symptoms} onChange={handleTextChange} placeholder="أدخل الأعراض هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
+                                    <textarea name="symptoms" value={examinationData.symptoms} onChange={handleTextChange} placeholder="أدخل الأعراض هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
                                 </div>
-                                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-3">
+                                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-3">
                                     <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span></span> <h3>الملاحظات السريرية</h3></div>
-                                    <textarea name="clinicalNotes" value={examinationData.clinicalNotes} onChange={handleTextChange} placeholder="أدخل الملاحظات السريرية هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
+                                    <textarea name="clinicalNotes" value={examinationData.clinicalNotes} onChange={handleTextChange} placeholder="أدخل الملاحظات السريرية هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
                                 </div>
-                                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-3">
+                                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-3">
                                     <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span>📋</span> <h3>التشخيص</h3></div>
-                                    <textarea name="diagnosis" value={examinationData.diagnosis} onChange={handleTextChange} placeholder="أدخل التشخيص الطبي النهائي هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
+                                    <textarea name="diagnosis" value={examinationData.diagnosis} onChange={handleTextChange} placeholder="أدخل التشخيص الطبي النهائي هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
                                 </div>
                             </div>
 
-                            <div className="lg:col-span-4 bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-5 shadow-xs">
+                            <div className="lg:col-span-4 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-5 shadow-xs">
                                 <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-3"><span>📋</span> <h3>إنشاء وصفة طبية</h3></div>
                                 <div className="space-y-1.5 text-right">
                                     <label className="text-xs font-black text-[#0B1C30]">اسم الدواء</label>
-                                    <input type="text" name="name" value={currentMed.name} onChange={handleMedInputChange} placeholder="مثلاً: بنادول..." className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl font-semibold text-sm focus:outline-hidden" />
+                                    <input type="text" name="name" value={currentMed.name} onChange={handleMedInputChange} placeholder="مثلاً: بنادول..." className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl font-semibold text-sm focus:outline-hidden" />
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div className="space-y-1.5 text-right">
                                         <label className="text-xs font-black text-[#0B1C30]">الجرعة</label>
-                                        <input type="text" name="dosage" value={currentMed.dosage} onChange={handleMedInputChange} placeholder="500 ملغ" className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-center text-sm focus:outline-hidden" />
+                                        <input type="text" name="dosage" value={currentMed.dosage} onChange={handleMedInputChange} placeholder="500 ملغ" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                     </div>
                                     <div className="space-y-1.5 text-right">
                                         <label className="text-xs font-black text-[#0B1C30]">التكرار</label>
-                                        <input type="text" name="frequency" value={currentMed.frequency} onChange={handleMedInputChange} placeholder="3 مرات" className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-center text-sm focus:outline-hidden" />
+                                        <input type="text" name="frequency" value={currentMed.frequency} onChange={handleMedInputChange} placeholder="3 مرات" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                     </div>
                                 </div>
                                 <div className="space-y-1.5 text-right">
                                     <label className="text-xs font-black text-[#0B1C30]">المدة</label>
-                                    <input type="text" name="duration" value={currentMed.duration} onChange={handleMedInputChange} placeholder="5 أيام" className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-center text-sm focus:outline-hidden" />
+                                    <input type="text" name="duration" value={currentMed.duration} onChange={handleMedInputChange} placeholder="5 أيام" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                 </div>
                                 <button onClick={handleAddMedicine} className="w-full h-11 bg-[#138C9F] text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm hover:bg-[#0f7282] transition-colors cursor-pointer">➕ إضافة إلى الوصفة</button>
 
-                                <div className="pt-4 border-t border-gray-100 space-y-3">
+                                <div className="pt-4 border-t border-gray-100 dark:border-gray-700 space-y-3">
                                     <div className="flex justify-between items-center"><span className="text-sm font-black text-[#0B1C30]">الأدوية المضافة</span></div>
                                     <div className="space-y-2 max-h-60 overflow-y-auto">
                                         {addedMedicines.map(med => (
-                                            <div key={med.id} className="p-3 border border-[#C3C6D6] rounded-xl flex items-center justify-between bg-slate-50/50">
+                                            <div key={med.id} className="p-3 border border-[#C3C6D6] dark:border-gray-700 rounded-xl flex items-center justify-between bg-slate-50 dark:bg-gray-900/50">
                                                 <div className="flex items-center gap-3">
                                                     <div className="text-[#138C9F] text-sm">💊</div>
                                                     <div className="text-right">
@@ -509,21 +509,21 @@ const MedicalExamination = () => {
                             {/* واجهة العرض */}
                             {!editingMedicalHistory ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
-                                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                                         <div className="flex items-center gap-2 text-amber-600 font-black text-base border-b pb-2">
                                             <span>⚠️</span> <h3>الأمراض المزمنة</h3>
                                         </div>
                                         {medicalHistoryData?.chronicDiseases?.filter(d => d !== "لا يوجد").length > 0
                                             ? medicalHistoryData.chronicDiseases.filter(d => d !== "لا يوجد").map((disease, idx) => (
                                                 <div key={idx} className="p-4 bg-amber-50/40 border border-amber-200/60 rounded-xl">
-                                                    <h4 className="font-bold text-gray-800 text-sm">{disease}</h4>
+                                                    <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm">{disease}</h4>
                                                 </div>
                                             ))
-                                            : <p className="text-sm text-gray-400 font-bold">لا توجد أمراض مزمنة مسجلة</p>
+                                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد أمراض مزمنة مسجلة</p>
                                         }
                                     </div>
 
-                                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                                         <div className="flex items-center gap-2 text-rose-600 font-black text-base border-b pb-2">
                                             <span>🚫</span> <h3>الحساسية الغذائية والدوائية</h3>
                                         </div>
@@ -533,42 +533,42 @@ const MedicalExamination = () => {
                                                     <h4 className="font-bold text-rose-700 text-sm">{allergy}</h4>
                                                 </div>
                                             ))
-                                            : <p className="text-sm text-gray-400 font-bold">لا توجد حساسية مسجلة</p>
+                                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد حساسية مسجلة</p>
                                         }
                                     </div>
 
-                                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
                                         <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
                                             <span>📊</span> <h3>القياسات الحيوية</h3>
                                         </div>
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                            <div className="p-3 bg-slate-50 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 font-bold block">ضغط الدم</span>
+                                            <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">ضغط الدم</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
                                             </div>
-                                            <div className="p-3 bg-slate-50 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 font-bold block">سكر الدم</span>
+                                            <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">سكر الدم</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodSugar || "—"}</span>
                                             </div>
-                                            <div className="p-3 bg-slate-50 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 font-bold block">الوزن</span>
+                                            <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">الوزن</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كغ` : "—"}</span>
                                             </div>
-                                            <div className="p-3 bg-slate-50 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 font-bold block">الطول</span>
+                                            <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">الطول</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
                                         <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
                                             <span>🚬</span> <h3>التدخين ونمط الحياة</h3>
                                         </div>
-                                        <p className="text-sm font-bold text-gray-700 p-2">{medicalHistoryData?.isSmoker ? "مدخن" : "غير مدخن"}</p>
+                                        <p className="text-sm font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 p-2">{medicalHistoryData?.isSmoker ? "مدخن" : "غير مدخن"}</p>
                                     </div>
 
-                                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
                                         <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
                                                 <span>💊</span> <h3>الأدوية والمعلومات الطبية الملتزم بها</h3>
                                             </div>
@@ -592,7 +592,7 @@ const MedicalExamination = () => {
                                                                 <td className="hidden md:table-cell p-3 md:p-4 font-bold text-gray-600">{med.duration || "—"}</td>
                                                             </tr>
                                                         ))
-                                                        : <tr><td colSpan="4" className="p-3 md:p-4 text-center text-gray-400 font-bold">لا يوجد أدوية مسجلة</td></tr>
+                                                        : <tr><td colSpan="4" className="p-3 md:p-4 text-center text-gray-400 dark:text-gray-500 font-bold">لا يوجد أدوية مسجلة</td></tr>
                                                     }
                                                 </tbody>
                                             </table>
@@ -601,22 +601,22 @@ const MedicalExamination = () => {
                                 </div>
                             ) : (
                                 /* واجهة التعديل */
-                                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 sm:p-6 shadow-xs space-y-6">
-                                    <div className="border-b border-gray-100 pb-4 flex items-center justify-between">
+                                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 sm:p-6 shadow-xs space-y-6">
+                                    <div className="border-b border-gray-100 dark:border-gray-700 pb-4 flex items-center justify-between">
                                         <div>
-                                            <h2 className="text-lg font-black text-gray-800 flex items-center gap-2">
+                                            <h2 className="text-lg font-black text-gray-800 dark:text-gray-200 flex items-center gap-2">
                                                 <FontAwesomeIcon icon={faPenToSquare} className="text-[#138C9F]" />
                                                 تعديل السجل المرضي الشخصي
                                             </h2>
-                                            <p className="text-xs text-gray-400 mt-1">تعديل البيانات الطبية للمريض</p>
+                                            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">تعديل البيانات الطبية للمريض</p>
                                         </div>
                                     </div>
 
                                     {/* 1. القياسات الحيوية وفصيلة الدم */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50/50 p-5 rounded-2xl border border-slate-100">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 dark:bg-gray-900/50 p-5 rounded-2xl border border-slate-100">
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 mb-1.5">فصيلة الدم</label>
-                                            <select value={mhBloodType} onChange={(e) => setMhBloodType(e.target.value)} className="w-full bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700">
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">فصيلة الدم</label>
+                                            <select value={mhBloodType} onChange={(e) => setMhBloodType(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700">
                                                 <option value="">اختر الفصيلة...</option>
                                                 <option value="A+">A+</option>
                                                 <option value="A-">A-</option>
@@ -629,28 +629,28 @@ const MedicalExamination = () => {
                                             </select>
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 mb-1.5">ضغط الدم (مثال: 120/80)</label>
-                                            <input type="text" value={mhBloodPressure} onChange={(e) => setMhBloodPressure(e.target.value)} placeholder="120/80" className="w-full bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">ضغط الدم (مثال: 120/80)</label>
+                                            <input type="text" value={mhBloodPressure} onChange={(e) => setMhBloodPressure(e.target.value)} placeholder="120/80" className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 mb-1.5">سكر الدم (mg/dL)</label>
-                                            <input type="number" value={mhBloodSugar} onChange={(e) => setMhBloodSugar(e.target.value)} placeholder="105" className="w-full bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">سكر الدم (mg/dL)</label>
+                                            <input type="number" value={mhBloodSugar} onChange={(e) => setMhBloodSugar(e.target.value)} placeholder="105" className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 mb-1.5">الوزن (كجم)</label>
-                                            <input type="number" value={mhWeight} onChange={(e) => setMhWeight(e.target.value)} placeholder="75" className="w-full bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">الوزن (كجم)</label>
+                                            <input type="number" value={mhWeight} onChange={(e) => setMhWeight(e.target.value)} placeholder="75" className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 mb-1.5">الطول (سم)</label>
-                                            <input type="number" value={mhHeight} onChange={(e) => setMhHeight(e.target.value)} placeholder="170" className="w-full bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">الطول (سم)</label>
+                                            <input type="number" value={mhHeight} onChange={(e) => setMhHeight(e.target.value)} placeholder="170" className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 mb-2">هل المريض مدخن؟</label>
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-2">هل المريض مدخن؟</label>
                                             <div className="flex gap-2">
-                                                <button type="button" onClick={() => setMhIsSmoker(true)} className={`flex-1 py-2 text-xs font-black rounded-xl border transition-all duration-150 ${mhIsSmoker ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-white text-gray-500 border-gray-200"}`}>
+                                                <button type="button" onClick={() => setMhIsSmoker(true)} className={`flex-1 py-2 text-xs font-black rounded-xl border transition-all duration-150 ${mhIsSmoker ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 border-gray-200"}`}>
                                                     <FontAwesomeIcon icon={faSmoking} /> نعم
                                                 </button>
-                                                <button type="button" onClick={() => setMhIsSmoker(false)} className={`flex-1 py-2 text-xs font-black rounded-xl border transition-all duration-150 ${!mhIsSmoker ? "bg-green-50 text-green-600 border-green-200" : "bg-white text-gray-500 border-gray-200"}`}>
+                                                <button type="button" onClick={() => setMhIsSmoker(false)} className={`flex-1 py-2 text-xs font-black rounded-xl border transition-all duration-150 ${!mhIsSmoker ? "bg-green-50 text-green-600 border-green-200" : "bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 border-gray-200"}`}>
                                                     <FontAwesomeIcon icon={faBanSmoking} /> لا
                                                 </button>
                                             </div>
@@ -659,63 +659,63 @@ const MedicalExamination = () => {
 
                                     {/* 2. الأمراض المزمنة والحساسية */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="border border-gray-100 p-4 rounded-2xl bg-white">
-                                            <label className="block text-xs font-black text-gray-800 mb-1.5">
+                                        <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
+                                            <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
                                                 <FontAwesomeIcon icon={faVirus} className="text-blue-500" /> إضافة مرض مزمن
                                             </label>
                                             <div className="flex gap-2 mb-3">
-                                                <input type="text" value={mhDiseaseInput} onChange={(e) => setMhDiseaseInput(e.target.value)} placeholder="مثال: السكري، ضغط الدم..." className="flex-1 border border-gray-200 rounded-xl px-3 h-11 text-xs font-medium focus:outline-none focus:border-[#138C9F]" />
+                                                <input type="text" value={mhDiseaseInput} onChange={(e) => setMhDiseaseInput(e.target.value)} placeholder="مثال: السكري، ضغط الدم..." className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-medium focus:outline-none focus:border-[#138C9F]" />
                                                 <button type="button" onClick={addMhDisease} className="bg-[#138C9F] text-white px-4 rounded-xl text-xs font-black hover:bg-[#0f7282] cursor-pointer">إضافة</button>
                                             </div>
-                                            <div className="flex flex-wrap gap-1.5 min-h-10 p-2 bg-slate-50/50 rounded-xl border border-dashed border-slate-200">
+                                            <div className="flex flex-wrap gap-1.5 min-h-10 p-2 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-dashed border-slate-200">
                                                 {mhChronicDiseases.length > 0 ? mhChronicDiseases.map((disease, idx) => (
                                                     <span key={idx} className="bg-blue-50 text-blue-600 border border-blue-100 font-bold text-xs px-2.5 py-1 rounded-lg flex items-center gap-1.5">
                                                         {disease}
                                                         <button type="button" onClick={() => removeMhDisease(disease)} className="text-blue-400 hover:text-red-500 font-black text-[10px] cursor-pointer">✕</button>
                                                     </span>
-                                                )) : <span className="text-[11px] text-gray-400 italic p-1">لم يتم إدراج أي مرض بعد...</span>}
+                                                )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">لم يتم إدراج أي مرض بعد...</span>}
                                             </div>
                                         </div>
-                                        <div className="border border-gray-100 p-4 rounded-2xl bg-white">
-                                            <label className="block text-xs font-black text-gray-800 mb-1.5">
+                                        <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
+                                            <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
                                                 <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-500" /> إضافة حساسية
                                             </label>
                                             <div className="flex gap-2 mb-3">
-                                                <input type="text" value={mhAllergyInput} onChange={(e) => setMhAllergyInput(e.target.value)} placeholder="مثال: بنسلين، الفول السوداني..." className="flex-1 border border-gray-200 rounded-xl px-3 h-11 text-xs font-medium focus:outline-none focus:border-[#138C9F]" />
+                                                <input type="text" value={mhAllergyInput} onChange={(e) => setMhAllergyInput(e.target.value)} placeholder="مثال: بنسلين، الفول السوداني..." className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-medium focus:outline-none focus:border-[#138C9F]" />
                                                 <button type="button" onClick={addMhAllergy} className="bg-[#138C9F] text-white px-4 rounded-xl text-xs font-black hover:bg-[#0f7282] cursor-pointer">إضافة</button>
                                             </div>
-                                            <div className="flex flex-wrap gap-1.5 min-h-10 p-2 bg-slate-50/50 rounded-xl border border-dashed border-slate-200">
+                                            <div className="flex flex-wrap gap-1.5 min-h-10 p-2 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-dashed border-slate-200">
                                                 {mhAllergies.length > 0 ? mhAllergies.map((allergy, idx) => (
                                                     <span key={idx} className="bg-red-50 text-red-600 border border-red-100 font-bold text-xs px-2.5 py-1 rounded-lg flex items-center gap-1.5">
                                                         {allergy}
                                                         <button type="button" onClick={() => removeMhAllergy(allergy)} className="text-red-400 hover:text-red-600 font-black text-[10px] cursor-pointer">✕</button>
                                                     </span>
-                                                )) : <span className="text-[11px] text-gray-400 italic p-1">لم يتم إدراج أي حساسية بعد...</span>}
+                                                )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">لم يتم إدراج أي حساسية بعد...</span>}
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* 3. الأدوية الحالية */}
-                                    <div className="border border-gray-100 p-4 rounded-2xl bg-white space-y-4">
-                                        <h3 className="text-xs font-black text-gray-800 flex items-center gap-1">
+                                    <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white dark:bg-gray-800 space-y-4">
+                                        <h3 className="text-xs font-black text-gray-800 dark:text-gray-200 flex items-center gap-1">
                                             <FontAwesomeIcon icon={faCapsules} className="text-[#138C9F]" />
                                             إدارة الأدوية الحالية
                                         </h3>
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50/40 p-3 rounded-xl border border-slate-100">
-                                            <input type="text" value={mhMedName} onChange={(e) => setMhMedName(e.target.value)} placeholder="اسم الدواء" className="bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
-                                            <input type="text" value={mhMedDosage} onChange={(e) => setMhMedDosage(e.target.value)} placeholder="الجرعة" className="bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 dark:bg-gray-900/40 p-3 rounded-xl border border-slate-100">
+                                            <input type="text" value={mhMedName} onChange={(e) => setMhMedName(e.target.value)} placeholder="اسم الدواء" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <input type="text" value={mhMedDosage} onChange={(e) => setMhMedDosage(e.target.value)} placeholder="الجرعة" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                             <div className="flex gap-2">
-                                                <input type="text" value={mhMedFrequency} onChange={(e) => setMhMedFrequency(e.target.value)} placeholder="التكرار" className="flex-1 bg-white border border-gray-200 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                                <input type="text" value={mhMedFrequency} onChange={(e) => setMhMedFrequency(e.target.value)} placeholder="التكرار" className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                                 <button type="button" onClick={addMhMedicine} className="bg-[#138C9F] hover:bg-[#0f6b7a] text-white px-3.5 rounded-xl text-xs font-black transition-colors cursor-pointer">
                                                     <FontAwesomeIcon icon={faPlus} /> إدراج
                                                 </button>
                                             </div>
                                         </div>
                                         {mhCurrentMedicines.length > 0 && (
-                                            <div className="overflow-x-auto border border-gray-100 rounded-xl">
+                                            <div className="overflow-x-auto border border-gray-100 dark:border-gray-700 rounded-xl">
                                                 <table className="w-full text-right text-xs border-collapse">
                                                     <thead>
-                                                        <tr className="bg-slate-50 text-gray-500 font-bold border-b border-gray-100">
+                                                        <tr className="bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold border-b border-gray-100">
                                                             <th className="p-3">الدواء</th>
                                                             <th className="p-3">الجرعة</th>
                                                             <th className="p-3">التكرار</th>
@@ -743,7 +743,7 @@ const MedicalExamination = () => {
 
                                     {/* أزرار الحفظ والإلغاء */}
                                     <div className="flex items-center justify-end gap-3 border-t border-gray-50 pt-4">
-                                        <button type="button" onClick={() => setEditingMedicalHistory(false)} className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs font-black transition-colors cursor-pointer">إلغاء</button>
+                                        <button type="button" onClick={() => setEditingMedicalHistory(false)} className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors cursor-pointer">إلغاء</button>
                                         <button type="button" onClick={handleSaveMedicalHistory} disabled={savingMedicalHistory} className="bg-[#138C9F] hover:bg-[#0f7282] disabled:bg-gray-300 text-white px-8 py-2.5 rounded-xl text-xs font-black shadow-xs transition-all duration-200 cursor-pointer">
                                             <FontAwesomeIcon icon={faFloppyDisk} />
                                             <span className="mr-1">{savingMedicalHistory ? "جاري الحفظ..." : "حفظ التعديلات"}</span>
@@ -756,15 +756,15 @@ const MedicalExamination = () => {
 
                     {activeTab === 'medical_file' && (
                         <div className="space-y-6">
-                            <div className="bg-white border border-[#C3C6D6]/80 rounded-2xl p-5 shadow-xs">
+                            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-5 shadow-xs">
                                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
                                     <div className="md:col-span-4 flex flex-col gap-2 text-right">
                                         <label className="text-xs font-black text-[#0B1C30]">بحث حسب التاريخ</label>
-                                        <input className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-sm focus:outline-none focus:border-[#138C9F]" type="date" value={historyFilter.date} onChange={(e) => setHistoryFilter(prev => ({ ...prev, date: e.target.value }))} />
+                                        <input className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:border-[#138C9F]" type="date" value={historyFilter.date} onChange={(e) => setHistoryFilter(prev => ({ ...prev, date: e.target.value }))} />
                                     </div>
                                     <div className="md:col-span-4 flex flex-col gap-2 text-right">
                                         <label className="text-xs font-black text-[#0B1C30]">التخصص</label>
-                                        <select className="w-full h-11 px-4 border border-[#C3C6D6] rounded-xl text-sm font-bold bg-white focus:outline-none focus:border-[#138C9F]" value={historyFilter.diagnosis} onChange={(e) => setHistoryFilter(prev => ({ ...prev, diagnosis: e.target.value }))}>
+                                        <select className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-bold bg-white dark:bg-gray-800 focus:outline-none focus:border-[#138C9F]" value={historyFilter.diagnosis} onChange={(e) => setHistoryFilter(prev => ({ ...prev, diagnosis: e.target.value }))}>
                                             <option value="">الكل</option>
                                             {[...new Set(medicalHistory.map(v => v.doctorSpecialization).filter(Boolean))].map((d, i) => (
                                                 <option key={i} value={d}>{d}</option>
@@ -773,7 +773,7 @@ const MedicalExamination = () => {
                                     </div>
                                     <div className="md:col-span-4 flex gap-3">
                                         <button type="button" className="flex-1 h-11 bg-[#138C9F] text-white font-bold rounded-xl text-sm shadow-xs cursor-pointer">تطبيق الفلاتر</button>
-                                        <button type="button" onClick={() => setHistoryFilter({ date: '', diagnosis: '' })} className="flex-1 h-11 border-2 border-[#138C9F] text-[#138C9F] font-bold rounded-xl text-sm hover:bg-gray-50 cursor-pointer">إعادة ضبط</button>
+                                        <button type="button" onClick={() => setHistoryFilter({ date: '', diagnosis: '' })} className="flex-1 h-11 border-2 border-[#138C9F] text-[#138C9F] font-bold rounded-xl text-sm hover:bg-gray-50 dark:bg-gray-900 cursor-pointer">إعادة ضبط</button>
                                     </div>
                                 </div>
                             </div>
@@ -786,8 +786,8 @@ const MedicalExamination = () => {
                                     const yearNum = visitDate.getFullYear();
                                     const timeStr = formatTimeArabic(visitDate);
                                     return (
-                                        <div key={visit.id || idx} className="bg-white border border-[#C3C6D6]/80 rounded-2xl overflow-hidden shadow-xs">
-                                            <div className="bg-[#EBF3F5] px-4 py-3 md:px-6 flex items-center justify-between border-b border-[#C3C6D6]/80">
+                                        <div key={visit.id || idx} className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl overflow-hidden shadow-xs">
+                                            <div className="bg-[#EBF3F5] dark:bg-gray-800 px-4 py-3 md:px-6 flex items-center justify-between border-b border-[#C3C6D6] dark:border-gray-700/80">
                                                 <div className="flex items-center gap-4">
                                                     <div className="bg-[#138C9F] text-white rounded-lg p-2 flex flex-col items-center justify-center min-w-[70px] h-[64px]">
                                                         <span className="text-xl font-black leading-none">{dayNum}/{monthNum}</span>
@@ -795,7 +795,7 @@ const MedicalExamination = () => {
                                                     </div>
                                                     <div className="text-right">
                                                         <h3 className="text-base md:text-lg font-black text-[#138C9F]">زيارة طبية</h3>
-                                                        <p className="text-xs font-bold text-gray-400 mt-0.5">الساعة {timeStr}</p>
+                                                        <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mt-0.5">الساعة {timeStr}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-2">
@@ -815,7 +815,7 @@ const MedicalExamination = () => {
                                                             <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-sm" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                                             اسم الطبيب
                                                         </span>
-                                                        <p className="text-sm font-black text-[#0B1C30] mt-0.5">
+                                                        <p className="text-sm font-black text-[#0B1C30] dark:text-white mt-0.5">
                                                             {visit.doctorName || patient.doctorName || 'الطبيب المعالج'}
                                                         </p>
                                                         <p className="text-xs font-bold text-[#138C9F]">{visit.doctorSpecialization || ''}</p>
@@ -826,7 +826,7 @@ const MedicalExamination = () => {
                                                                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                                                 الأعراض
                                                             </span>
-                                                            <p className="text-sm font-bold text-[#0B1C30] mt-0.5">{visit.symptoms}</p>
+                                                            <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{visit.symptoms}</p>
                                                         </div>
                                                     )}
                                                     {visit.diagnosis && (
@@ -835,7 +835,7 @@ const MedicalExamination = () => {
                                                                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
                                                                 التشخيص
                                                             </span>
-                                                            <p className="text-sm font-bold text-[#0B1C30] mt-0.5">{visit.diagnosis}</p>
+                                                            <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{visit.diagnosis}</p>
                                                         </div>
                                                     )}
                                                     {visit.visitNotes && (
@@ -843,22 +843,22 @@ const MedicalExamination = () => {
                                                             <span className="text-lg font-black text-[#138C9F] pb-2 flex gap-2 items-center">
                                                                 📝 الملاحظات
                                                             </span>
-                                                            <p className="text-sm font-bold text-[#0B1C30] mt-0.5">{visit.visitNotes}</p>
+                                                            <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{visit.visitNotes}</p>
                                                         </div>
                                                     )}
                                                 </div>
 
                                                 {visit.prescribedMedications?.length > 0 && (
                                                     <div className="lg:col-span-4 flex items-start justify-start lg:justify-end">
-                                                        <div className="w-full max-w-[280px] border border-dashed border-[#C3C6D6] rounded-xl bg-[#FDFDFD]">
-                                                            <span className="text-lg p-4 font-black text-[#138C9F] block mb-3 border-b border-dashed border-[#C3C6D6] pb-2 flex gap-2 items-center justify-center">
+                                                        <div className="w-full max-w-[280px] border border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl bg-[#FDFDFD]">
+                                                            <span className="text-lg p-4 font-black text-[#138C9F] block mb-3 border-b border-dashed border-[#C3C6D6] dark:border-gray-700 pb-2 flex gap-2 items-center justify-center">
                                                                 <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                                                                 الوصفة الطبية
                                                             </span>
                                                             <div className="p-4">
                                                                 <div className="space-y-3">
                                                                     {visit.prescribedMedications.map((med, i) => (
-                                                                        <div key={i} className="p-2.5 bg-gray-50 rounded-lg border border-gray-100">
+                                                                        <div key={i} className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-100">
                                                                             <div className="flex justify-between items-center text-xs font-bold mb-1">
                                                                                 <span className="text-[#0B1C30]">{med.medicationName}</span>
                                                                                 <span className="text-[#138C9F]">{med.dosage || ''}</span>
@@ -898,7 +898,7 @@ const MedicalExamination = () => {
                                         </div>
                                     );
                                 }) : (
-                                    <div className="bg-white border border-[#C3C6D6]/80 rounded-2xl p-8 text-center text-gray-400 font-bold text-sm">
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-8 text-center text-gray-400 dark:text-gray-500 font-bold text-sm">
                                         لا توجد سجلات كشف طبي سابقة لهذا المريض.
                                     </div>
                                 )}
@@ -908,18 +908,18 @@ const MedicalExamination = () => {
 
                     {showQrModal && (
                         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-                            <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl p-6 text-center">
-                                <h3 className="text-lg font-black text-gray-800 mb-2">رمز QR للسجل الطبي</h3>
-                                <p className="text-xs text-gray-400 mb-4">امسح هذا الرمز للوصول السريع للسجل المرضي</p>
-                                <div className="flex justify-center mb-4 p-4 bg-white rounded-2xl border-2 border-gray-100 inline-block mx-auto">
+                            <div className="bg-white dark:bg-gray-800 rounded-3xl w-full max-w-sm shadow-2xl p-6 text-center">
+                                <h3 className="text-lg font-black text-gray-800 dark:text-gray-200 mb-2">رمز QR للسجل الطبي</h3>
+                                <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">امسح هذا الرمز للوصول السريع للسجل المرضي</p>
+                                <div className="flex justify-center mb-4 p-4 bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-100 dark:border-gray-700 inline-block mx-auto">
                                     <QRCodeCanvas value={qrUrl} size={200} level="H" includeMargin={true} />
                                 </div>
-                                <p className="text-[10px] text-gray-400 mb-4">صالح حتى: {formatDateDdMmYyyy(qrExpiry)}</p>
+                                <p className="text-[10px] text-gray-400 dark:text-gray-500 mb-4">صالح حتى: {formatDateDdMmYyyy(qrExpiry)}</p>
                                 <div className="flex gap-2">
                                     <button onClick={() => window.open(qrUrl, '_blank')} className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors">
                                         فتح الرابط
                                     </button>
-                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-xs font-black transition-colors">
+                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors">
                                         إغلاق
                                     </button>
                                 </div>

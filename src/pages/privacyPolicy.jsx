@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const PrivacyPolicy = () => {
@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
     ]
 
     return (
-        <div className="min-h-screen bg-white text-[#1E293B] antialiased" dir="rtl">
+        <div className="min-h-screen bg-white dark:bg-gray-800 text-[#1e293b] dark:text-white antialiased" dir="rtl">
             <main className="max-w-152.5 w-full mx-auto px-5 sm:px-0 py-10 md:py-11 pb-15">
 
                 {/* صف زر العودة */}
@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
                     <a
                         href="/"
                         onClick={handleBack}
-                        className="inline-flex items-center gap-2 flex-row-reverse text-[#4B5563] text-lg font-semibold leading-7 hover:text-[#1E293B] transition-colors duration-200"
+                        className="inline-flex items-center gap-2 flex-row-reverse text-[#4B5563] text-lg font-semibold leading-7 hover:text-[#1e293b] dark:text-white transition-colors duration-200"
                     >
                         <span className="text-right">العودة للرئيسية</span>
 
@@ -69,7 +69,7 @@ const PrivacyPolicy = () => {
                         <div className="inline-flex items-center gap-3.5 flex-row-reverse">
 
                             <div className="w-full max-w-72.5 sm:max-w-none text-right">
-                                <h1 className="m-0 text-[#1E293B] text-3xl sm:text-4xl font-bold leading-12">
+                                <h1 className="m-0 text-[#1e293b] dark:text-white text-3xl sm:text-4xl font-bold leading-12">
                                     سياسة الخصوصية
                                 </h1>
                                 <p className="m-0 text-[#6B7280] text-sm sm:text-base font-semibold leading-7">
@@ -94,9 +94,9 @@ const PrivacyPolicy = () => {
                         {policies.map((policy) => (
                             <article
                                 key={policy.id}
-                                className="min-h-30 last:min-h-26 sm:last:min-h-auto p-4 sm:p-5 border border-[#F3F4F6] rounded-xl bg-white shadow-xs"
+                                className="min-h-30 last:min-h-26 sm:last:min-h-auto p-4 sm:p-5 border border-[#F3F4F6] rounded-xl bg-white dark:bg-gray-800 shadow-xs"
                             >
-                                <h2 className="m-0 text-[#1E293B] text-base sm:text-lg font-bold leading-7 text-right">
+                                <h2 className="m-0 text-[#1e293b] dark:text-white text-base sm:text-lg font-bold leading-7 text-right">
                                     {policy.title}
                                 </h2>
                                 <p className="m-0 mt-1.5 text-[#6B7280] text-[11.5px] sm:text-xs font-medium leading-5 sm:leading-6 text-right">

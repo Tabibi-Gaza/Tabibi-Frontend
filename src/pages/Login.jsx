@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+﻿import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
@@ -62,10 +62,10 @@ const Login = () => {
   const [locationSearch, setLocationSearch] = useState('');
 
   const passwordRules = [
-    { label: 'تحتوي على 8 رموز على الأقل', test: (p) => p.length >= 8 },
-    { label: 'تحتوي على حرف كبير وصغير', test: (p) => /[A-Z]/.test(p) && /[a-z]/.test(p) },
-    { label: 'تحتوي على رقم واحد على الأقل', test: (p) => /\d/.test(p) },
-    { label: 'تحتوي على رمز خاص واحد على الأقل', test: (p) => /[!@#$%^&*(),.?":{}|<>]/.test(p) },
+    { label: t('login.passwordRules.length'), test: (p) => p.length >= 8 },
+    { label: t('login.passwordRules.case'), test: (p) => /[A-Z]/.test(p) && /[a-z]/.test(p) },
+    { label: t('login.passwordRules.number'), test: (p) => /\d/.test(p) },
+    { label: t('login.passwordRules.special'), test: (p) => /[!@#$%^&*(),.?":{}|<>]/.test(p) },
   ];
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const Login = () => {
     event.preventDefault();
 
     if (state === 'RegisterPatient' && !agreeToTerms) {
-      toast.error('يجب الموافقة على شروط الاستخدام وسياسة الخصوصية للمتابعة.');
+      toast.error(t('login.termsRequired'));
       return;
     }
 
@@ -143,10 +143,10 @@ const Login = () => {
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('user', JSON.stringify(user));
           setToken(accessToken);
-          toast.success('تم تسجيل الدخول بنجاح');
+          toast.success(t('login.loginSuccess'));
           navigateByRole(user.roles, user);
         } else {
-          toast.error(data.errors?.[0]?.message || data.message || 'فشل تسجيل الدخول');
+          toast.error(data.errors?.[0]?.message || data.message || t('login.loginFailed'));
         }
       }
 
@@ -167,11 +167,11 @@ const Login = () => {
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('user', JSON.stringify(user));
           setToken(accessToken);
-          toast.success('تم تسجيل حسابك بنجاح!');
+          toast.success(t('login.registerSuccess'));
           navigate('/');
         } else {
           const errorCode = data.errors?.[0]?.code;
-          const errorMsg = data.errors?.[0]?.message || data.message || 'فشل التسجيل';
+          const errorMsg = data.errors?.[0]?.message || data.message || t('login.registerFailed');
           if (errorCode === 'email_exists') {
             toast.error(errorMsg);
             handleStateChange('Login');
@@ -185,20 +185,20 @@ const Login = () => {
       else if (state === 'ForgotPassword') {
         const { data } = await axiosInstance.post('/auth/send-email-otp', { email });
         if (data.succeeded) {
-          toast.success('تم إرسال رمز التحقق إلى بريدك الإلكتروني.');
+          toast.success(t('login.otpSent'));
           setState("OTPVerification");
         } else {
-          toast.error(data.errors?.[0]?.message || data.message || 'حدث خطأ');
+          toast.error(data.errors?.[0]?.message || data.message || t('login.errorOccurred'));
         }
       }
 
       else if (state === 'ResetPassword') {
         if (newPassword !== confirmPassword) {
-          toast.error('كلمات المرور غير متطابقة!');
+          toast.error(t('login.passwordsMismatch'));
           return;
         }
         if (newPassword.length < 8 || !/\d/.test(newPassword) || !/[A-Z]/.test(newPassword)) {
-          toast.error('يرجى التأكد من استيفاء جميع متطلبات كلمة المرور.');
+          toast.error(t('login.passwordRequirementsNotMet'));
           return;
         }
 
@@ -209,10 +209,10 @@ const Login = () => {
           newPassword
         });
         if (data.succeeded) {
-          toast.success('تم تحديث كلمة المرور بنجاح، يمكنك تسجيل الدخول الآن.');
+          toast.success(t('login.passwordUpdated'));
           handleStateChange('Login');
         } else {
-          toast.error(data.errors?.[0]?.message || data.message || 'حدث خطأ');
+          toast.error(data.errors?.[0]?.message || data.message || t('login.errorOccurred'));
         }
       }
     } catch (error) {
@@ -230,18 +230,18 @@ const Login = () => {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('user', JSON.stringify(user));
         setToken(accessToken);
-        toast.success('تم تسجيل الدخول بنجاح!');
+        toast.success(t('login.loginSuccess'));
         navigateByRole(user.roles, user);
       } else {
-        toast.error(data.errors?.[0]?.message || data.message || 'فشل تسجيل الدخول بجوجل');
+        toast.error(data.errors?.[0]?.message || data.message || t('login.googleLoginFailed'));
       }
     } catch (error) {
-      toast.error(error.response?.data?.errors?.[0]?.message || error.response?.data?.message || 'فشل تسجيل الدخول بجوجل');
+      toast.error(error.response?.data?.errors?.[0]?.message || error.response?.data?.message || t('login.googleLoginFailed'));
     }
   };
 
   const handleGoogleError = () => {
-    toast.error('فشل تسجيل الدخول بجوجل');
+    toast.error(t('login.googleLoginFailed'));
   };
 
   const googleLogin = useGoogleLogin({
@@ -272,18 +272,18 @@ const Login = () => {
                       alt="شعار طبيبي"
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">أهلاً بك مجدداً</h2>
+                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.welcomeBack')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
-                    قم بتسجيل الدخول للوصول إلى سجلاتك الطبية ومواعيدك.
+                    {t('login.loginDescription')}
                   </p>
                 </div>
                 
                 <div className="space-y-4 pt-2">
                     <div>
-                      <label className="block text-sm font-bold text-slate-700 dark:text-gray-300 mb-3">{t('login.email')}</label>
+                      <label className="block text-sm font-bold text-slate-700 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.email')}</label>
                       <input
                         type="email"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-base text-[#138C9F] font-medium dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-base text-[#138C9F] font-medium dark:bg-gray-700 dark:text-white dark:border-gray-600"
                         placeholder="name@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -304,7 +304,7 @@ const Login = () => {
                       <div className="relative">
                         <input
                           type={showPassword ? "text" : "password"}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-base text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-base text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
                           placeholder="••••••••"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -312,7 +312,7 @@ const Login = () => {
                         />
                         <button
                           type="button"
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 transition-colors"
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 dark:text-gray-400 transition-colors"
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
@@ -353,56 +353,60 @@ const Login = () => {
                     alt="شعار طبيبي"
                   />
                   <h2 className="text-xl font-black text-[#138C9F] mb-2">{t('login.register')}</h2>
-                  <p className="text-sm text-slate-400 dark:text-gray-400 font-bold">
-                    املأ بياناتك لفتح ملفك الطبي الرقمي الفوري.
+                  <p className="text-sm text-slate-400 dark:text-gray-400 dark:text-gray-500 font-bold">
+                    {t('login.registerDescription')}
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.firstName')} *</label>
+                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.firstName')} *</label>
                     <input
                       type="text"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      pattern="^[\u0600-\u06FFa-zA-Z\s]{2,}$"
+                      title={t('login.nameLettersOnly')}
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.lastName')} *</label>
+                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.lastName')} *</label>
                     <input
                       type="text"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      pattern="^[\u0600-\u06FFa-zA-Z\s]{2,}$"
+                      title={t('login.nameLettersOnly')}
                       required
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.email')} *</label>
+                  <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.email')} *</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.password')} *</label>
+                  <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.password')} *</label>
                   <div className="relative">
                     <input
                       type={showRegPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
                       placeholder="••••••••"
                       required
                     />
                     <button
                       type="button"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 transition-colors"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 dark:text-gray-400 transition-colors"
                       onClick={() => setShowRegPassword(!showRegPassword)}
                     >
                       <FontAwesomeIcon icon={showRegPassword ? faEyeSlash : faEye} />
@@ -415,7 +419,7 @@ const Login = () => {
                           <span className={rule.test(password) ? 'text-emerald-500' : 'text-slate-300'}>
                             {rule.test(password) ? '✓' : '○'}
                           </span>
-                          <span className={rule.test(password) ? 'text-emerald-600' : 'text-slate-400'}>
+                          <span className={rule.test(password) ? 'text-emerald-600' : 'text-slate-400 dark:text-gray-500'}>
                             {rule.label}
                           </span>
                         </div>
@@ -425,12 +429,12 @@ const Login = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.phone')} *</label>
-                    <div className="flex items-stretch overflow-hidden border border-slate-200 rounded-xl focus-within:ring-2 focus-within:ring-[#138C9F] focus-within:border-transparent transition-all country-dropdown">
+                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.phone')} *</label>
+                    <div className="flex items-stretch overflow-hidden border border-slate-200 dark:border-gray-700 rounded-xl focus-within:ring-2 focus-within:ring-[#138C9F] focus-within:border-transparent transition-all country-dropdown">
                       <button
                         type="button"
                         onClick={() => setShowCountries(!showCountries)}
-                        className="flex items-center gap-1.5 px-3 border-l border-slate-200 text-sm font-medium text-slate-700 bg-slate-50 shrink-0 cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 border-l border-slate-200 dark:border-gray-700 text-sm font-medium text-slate-700 dark:text-gray-300 bg-slate-50 dark:bg-gray-900 shrink-0 cursor-pointer"
                       >
                         <img
                           loading="lazy"
@@ -453,12 +457,15 @@ const Login = () => {
                         onChange={(e) => setPhone(selectedCountry.code + e.target.value.replace(/\D/g, ''))}
                         className="flex-1 min-w-0 px-4 py-3 text-sm outline-none text-slate-800 bg-white dark:bg-gray-700 dark:text-white"
                         placeholder="5xxxxxxxx"
+                        pattern="05[96]\d{8}"
+                        title={t('login.phoneValidation')}
+                        maxLength="10"
                         required
                       />
                     </div>
                     {showCountries && (
                       <div className="relative">
-                        <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white border border-slate-200 rounded-xl shadow-xl">
+                        <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl shadow-xl">
                           {COUNTRIES.map((c) => {
                             const isActive = c.code === selectedCountry.code;
                             return (
@@ -470,7 +477,7 @@ const Login = () => {
                                   setPhone(c.code + phone.replace(selectedCountry.code, '').replace(/\D/g, ''));
                                   setShowCountries(false);
                                 }}
-                                className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive ? 'bg-[#e6f4f6] text-[#138C9F] font-bold' : 'text-slate-700 hover:bg-slate-50'}`}
+                                className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive ? 'bg-[#e6f4f6] dark:bg-gray-800 text-[#138C9F] font-bold' : 'text-slate-700 dark:text-gray-300 hover:bg-slate-50 dark:bg-gray-900'}`}
                               >
                                 <img
                                   loading="lazy"
@@ -482,7 +489,7 @@ const Login = () => {
                                   className="w-5 h-[15px] rounded-sm object-cover"
                                 />
                                 <span className="flex-1 text-right">{c.name}</span>
-                                <span className="text-slate-400 text-xs" dir="ltr">{c.code}</span>
+                                <span className="text-slate-400 dark:text-gray-500 text-xs" dir="ltr">{c.code}</span>
                               </button>
                             );
                           })}
@@ -491,39 +498,39 @@ const Login = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.gender')} *</label>
+                    <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.gender')} *</label>
                     <select
                       value={gender}
                       onChange={(e) => setGender(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600"
                       required
                     >
-                      <option value="">اختر...</option>
+                      <option value="">{t('login.selectGender')}</option>
                       <option value="Male">{t('login.male')}</option>
                       <option value="Female">{t('login.female')}</option>
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 mb-3">{t('login.address')} *</label>
+                  <label className="block text-sm font-bold text-slate-600 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.address')} *</label>
                   <div className="relative location-dropdown">
                     <input
                       type="text"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       onFocus={() => setShowLocations(true)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
-                      placeholder="اختر المحافظة ثم أضف التفاصيل"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      placeholder={t('login.addressPlaceholder')}
                       required
                     />
                     {showLocations && (
-                      <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white border border-slate-200 rounded-xl shadow-xl">
+                      <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl shadow-xl">
                         <div className="sticky top-0 bg-white dark:bg-gray-700 px-3 py-2 border-b border-slate-100 dark:border-gray-600">
                           <input
                             type="text"
                             value={locationSearch}
                             onChange={(e) => setLocationSearch(e.target.value)}
-                            placeholder="ابحث عن منطقة..."
+                            placeholder={t('login.searchLocation')}
                             className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 text-sm outline-none focus:ring-1 focus:ring-[#138C9F] dark:bg-gray-600 dark:text-white"
                             autoFocus
                           />
@@ -539,7 +546,7 @@ const Login = () => {
                                 setShowLocations(false);
                                 setLocationSearch('');
                               }}
-                              className={`w-full text-right px-4 py-2.5 text-sm cursor-pointer transition-colors duration-100 hover:bg-[#e6f4f6] hover:text-[#138C9F] ${address === loc ? 'bg-[#e6f4f6] text-[#138C9F] font-bold' : 'text-slate-700'}`}
+                              className={`w-full text-right px-4 py-2.5 text-sm cursor-pointer transition-colors duration-100 hover:bg-[#e6f4f6] dark:bg-gray-800 hover:text-[#138C9F] ${address === loc ? 'bg-[#e6f4f6] dark:bg-gray-800 text-[#138C9F] font-bold' : 'text-slate-700 dark:text-gray-300'}`}
                             >
                               {loc}
                             </button>
@@ -557,7 +564,7 @@ const Login = () => {
                     className="w-4 h-4 text-[#138C9F] border-slate-300 rounded focus:ring-[#138C9F]"
                     required
                   />
-                  <label htmlFor="termsPatient" className="text-sm font-bold text-slate-500 dark:text-gray-300 select-none">
+                  <label htmlFor="termsPatient" className="text-sm font-bold text-slate-500 dark:text-gray-300 dark:text-gray-500 select-none">
                     {t('login.agreeTerms')}
                   </label>
                 </div>
@@ -596,18 +603,18 @@ const Login = () => {
                       alt="شعار طبيبي"
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">إعادة كلمة المرور</h2>
+                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.resetPasswordTitle')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
-                    أدخل بريدك الإلكتروني المسجل لإرسال رمز التحقق.
+                    {t('login.resetPasswordDescription')}
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-bold text-slate-700 dark:text-gray-300 mb-3">{t('login.email')}</label>
+                    <label className="block text-sm font-bold text-slate-700 dark:text-gray-300 dark:text-gray-500 mb-3">{t('login.email')}</label>
                     <input
                       type="email"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-base text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-base text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
                       placeholder="name@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -620,7 +627,7 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold py-3 rounded-xl shadow-md transition-all text-base cursor-pointer"
                 >
-                  إرسال رمز التحقق
+                  {t('login.sendOtp')}
                 </button>
 
                 <p className="text-sm text-center font-bold text-slate-600 dark:text-gray-200 pt-2">
@@ -628,7 +635,7 @@ const Login = () => {
                     className="text-[#138C9F] underline cursor-pointer"
                     onClick={() => handleStateChange("Login")}
                   >
-                    العودة لتسجيل الدخول
+                    {t('login.backToLogin')}
                   </span>
                 </p>
               </>
@@ -649,9 +656,9 @@ const Login = () => {
                       alt="شعار طبيبي"
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">رمز التحقق</h2>
+                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.otpTitle')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
-                    أدخل الرمز المكون من 6 أرقام المرسل إلى
+                    {t('login.otpDescription')}
                   </p>
                   <p className="text-sm font-black text-[#138C9F]">{email}</p>
                 </div>
@@ -664,18 +671,18 @@ const Login = () => {
                       const { data } = await axiosInstance.post('/auth/verify-email-otp', { email, code });
                       if (data.succeeded && data.data) {
                         setOtpResetToken(data.data);
-                        toast.success('تم التحقق بنجاح!');
+                        toast.success(t('login.otpVerified'));
                         setState("ResetPassword");
                       } else {
-                        toast.error(data.errors?.[0]?.message || 'الرمز غير صحيح');
+                        toast.error(data.errors?.[0]?.message || t('login.invalidCode'));
                       }
                     } catch (err) {
-                      toast.error(err.response?.data?.errors?.[0]?.message || 'الرمز غير صحيح');
+                      toast.error(err.response?.data?.errors?.[0]?.message || t('login.invalidCode'));
                     }
                   }}
                   onResend={async () => {
                     await axiosInstance.post('/auth/send-email-otp', { email });
-                    toast.success('تم إعادة إرسال رمز التحقق');
+                    toast.success(t('login.resendOtp'));
                   }}
                 />
 
@@ -684,7 +691,7 @@ const Login = () => {
                     className="text-[#138C9F] underline cursor-pointer"
                     onClick={() => handleStateChange("ForgotPassword")}
                   >
-                    تغيير البريد الإلكتروني
+                    {t('login.changeEmail')}
                   </span>
                 </p>
               </>
@@ -705,18 +712,18 @@ const Login = () => {
                       alt="شعار طبيبي"
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">تعيين كلمة مرور جديدة</h2>
+                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.newPasswordTitle')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
-                    يرجى إدخال كلمة المرور الجديدة وتأكيدها بشكل صحيح.
+                    {t('login.newPasswordDescription')}
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-base font-bold text-slate-700 dark:text-gray-300 mb-2">كلمة المرور الجديدة</label>
+                    <label className="block text-base font-bold text-slate-700 dark:text-gray-300 dark:text-gray-500 mb-2">{t('login.newPassword')}</label>
                     <input
                       type="password"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
                       placeholder="••••••••"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
@@ -724,10 +731,10 @@ const Login = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-base font-bold text-slate-700 dark:text-gray-300 mb-2">تأكيد كلمة المرور</label>
+                    <label className="block text-base font-bold text-slate-700 dark:text-gray-300 dark:text-gray-500 mb-2">{t('login.confirmPassword')}</label>
                     <input
                       type="password"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-gray-700 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent transition-all outline-none text-[#138C9F] dark:bg-gray-700 dark:text-white dark:border-gray-600"
                       placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
@@ -736,18 +743,18 @@ const Login = () => {
                   </div>
 
                   <div className="bg-slate-50 dark:bg-gray-700 rounded-2xl p-4 border border-slate-100 dark:border-gray-600 text-sm space-y-2 font-bold text-slate-500 dark:text-gray-400">
-                    <p className="text-slate-700 dark:text-gray-300 font-black mb-1">متطلبات كلمة المرور:</p>
+                    <p className="text-slate-700 dark:text-gray-300 dark:text-gray-500 font-black mb-1">{t('login.passwordRequirements')}</p>
                     <div className="flex items-center gap-2">
                       <span className="text-emerald-500">✓</span>
-                      <span>تحتوي على 8 رموز على الأقل</span>
+                      <span>{t('login.passwordRules.length')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-emerald-500">✓</span>
-                      <span>تحتوي على رقم واحد على الأقل</span>
+                      <span>{t('login.passwordRules.number')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-emerald-500">✓</span>
-                      <span>تحتوي على حرف كبير واحد على الأقل</span>
+                      <span>{t('login.passwordRules.case')}</span>
                     </div>
                   </div>
                 </div>
@@ -756,7 +763,7 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-black py-3.5 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  تحديث كلمة المرور <span><FontAwesomeIcon icon={faArrowLeft} className="transition-transform group-hover:-translate-x-1 text-lg" /></span>
+                  {t('login.updatePassword')} <span><FontAwesomeIcon icon={faArrowLeft} className="transition-transform group-hover:-translate-x-1 text-lg" /></span>
                 </button>
               </>
             )}
@@ -781,38 +788,38 @@ const Login = () => {
 
           <div className="relative z-10 flex flex-col items-center justify-center h-full">
             <h2 className="text-4xl font-black text-center mb-6 leading-tight text-white drop-shadow-lg">
-              {state === "Login" && "رعاية صحية ذكية بلمسة إنسانية"}
-              {state === "RegisterPatient" && "ملفك الطبي آمن ومحمي دائماً"}
-              {state === "ForgotPassword" && "أمان حسابك أولويتنا الأولى"}
-              {state === "OTPVerification" && "تحقق من هويتك بأمان"}
-              {state === "ResetPassword" && "حماية بياناتك تبدأ من هنا"}
+              {state === "Login" && t('login.smartHealthcare')}
+              {state === "RegisterPatient" && t('login.yourFileSecure')}
+              {state === "ForgotPassword" && t('login.accountSecurity')}
+              {state === "OTPVerification" && t('login.verifyIdentity')}
+              {state === "ResetPassword" && t('login.dataProtection')}
             </h2>
 
             <p className="text-base text-slate-100 text-center font-medium max-w-lg leading-relaxed drop-shadow-md mb-8">
-              {state === "Login" && "نجمع بين أحدث التقنيات الطبية والاهتمام الشخصي لضمان أفضل تجربة رعاية صحية لك ولعائلتك."}
-              {state === "RegisterPatient" && "أنشئ حسابك الآن واحصل على وصول فوري لحجز مواعيدك مع أفضل الأطباء المتخصصين."}
-              {state === "ForgotPassword" && "أدخل بريدك الإلكتروني وسنرسل لك رمز تحقق آمن لاستعادة وصولك بسرعة وسهولة."}
-              {state === "OTPVerification" && "أدخل الرمز المرسل إلى بريدك الإلكتروني للتأكد من هويتك والمتابعة."}
-              {state === "ResetPassword" && "اختر كلمة مرور قوية ومعقدة لحماية بياناتك الطبية والشخصية بأعلى مستويات الأمان."}
+              {state === "Login" && t('login.healthcareDescription')}
+              {state === "RegisterPatient" && t('login.registerDescriptionLeft')}
+              {state === "ForgotPassword" && t('login.forgotPasswordDescriptionLeft')}
+              {state === "OTPVerification" && t('login.otpDescriptionLeft')}
+              {state === "ResetPassword" && t('login.resetPasswordDescriptionLeft')}
             </p>
 
             {(state === "Login" || state === "RegisterPatient") && (
               <div className="grid grid-cols-2 gap-6 w-full">
-                <div className="bg-white/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
+                <div className="bg-white dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
                   <h5 className="text-5xl font-black text-white mb-2">50+</h5>
-                  <p className="text-base text-slate-100 font-semibold">طبيب معتمد</p>
+                  <p className="text-base text-slate-100 font-semibold">{t('login.certifiedDoctors')}</p>
                 </div>
-                <div className="bg-white/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
+                <div className="bg-white dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
                   <h5 className="text-5xl font-black text-emerald-300 mb-2">24/7</h5>
-                  <p className="text-base text-slate-100 font-semibold">دعم فني</p>
+                  <p className="text-base text-slate-100 font-semibold">{t('login.technicalSupport')}</p>
                 </div>
               </div>
             )}
           </div>
 
           <div className="text-xs text-slate-200 text-center relative z-10 font-medium">
-            <p>حماية عالية للبيانات | متوفر على جميع الأجهزة</p>
-            <p className="mt-2">سياسة الخصوصية • شروط الاستخدام</p>
+            <p>{t('login.dataProtectionText')}</p>
+            <p className="mt-2">{t('login.termsAndPrivacy')}</p>
           </div>
         </div>
       </div>

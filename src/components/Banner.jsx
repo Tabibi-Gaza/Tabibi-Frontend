@@ -6,7 +6,7 @@ const Banner = () => {
 
   return (
     <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10' dir='rtl'>
-      <div className='bg-[#eef7fa] rounded-[2.5rem] flex flex-col md:flex-row items-stretch justify-between overflow-hidden relative min-h-105'>
+      <div className='bg-[#eef7fa] dark:bg-gray-800 rounded-[2.5rem] flex flex-col md:flex-row items-stretch justify-between overflow-hidden relative min-h-105'>
         
         <div className='w-full md:w-1/2 p-8 sm:p-12 md:p-16 flex flex-col justify-center items-start text-right z-10'>
           
@@ -17,25 +17,25 @@ const Banner = () => {
           <div className='flex flex-col gap-6 w-full mb-8'>
             
             <div className='flex items-center gap-4 w-full justify-start'>
-              <div className='w-11 h-11 rounded-xl bg-[#e0e7ff] flex items-center justify-center shrink-0 shadow-xs'>
+              <div className='w-11 h-11 rounded-xl bg-[#e0e7ff] dark:bg-purple-900/20 flex items-center justify-center shrink-0 shadow-xs'>
                 <svg className="w-5 h-5 text-[#312e81]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div className='flex flex-col items-start text-right'>
-                <h4 className='text-sm sm:text-base font-black text-slate-800 leading-tight mb-1'>حجز سريع وسهل</h4>
+                <h4 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>حجز سريع وسهل</h4>
                 <p className='text-xs sm:text-sm text-slate-500 font-bold'>احجز موعدك في أقل من دقيقة.</p>
               </div>
             </div>
 
             <div className='flex items-center gap-4 w-full justify-start'>
-              <div className='w-11 h-11 rounded-xl bg-[#e2e8f0] flex items-center justify-center shrink-0 shadow-xs'>
+              <div className='w-11 h-11 rounded-xl bg-[#e2e8f0] dark:bg-gray-700 flex items-center justify-center shrink-0 shadow-xs'>
                 <svg className="w-5 h-5 text-[#475569]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
               </div>
               <div className='flex flex-col items-start text-right'>
-                <h4 className='text-sm sm:text-base font-black text-slate-800 leading-tight mb-1'>أطباء موثوقون</h4>
+                <h4 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>أطباء موثوقون</h4>
                 <p className='text-xs sm:text-sm text-slate-500 font-bold'>جميع الأطباء في منصتنا مسجلون ومعتمدون من الجهات الصحية المختصة.</p>
               </div>
             </div>
@@ -47,7 +47,7 @@ const Banner = () => {
                 </svg>
               </div>
               <div className='flex flex-col items-start text-right'>
-                <h4 className='text-sm sm:text-base font-black text-slate-800 leading-tight mb-1'>دعم فني متواصل</h4>
+                <h4 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>دعم فني متواصل</h4>
                 <p className='text-xs sm:text-sm text-slate-500 font-bold'>فريقنا متواجد دائماً لمساعدتك في أي استفسار حول حجوزاتك الطبية.</p>
               </div>
             </div>

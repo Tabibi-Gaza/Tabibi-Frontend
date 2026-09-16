@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+﻿import React, { useContext, useEffect, useState, useRef } from "react";
 import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
@@ -133,43 +133,43 @@ const MyPrescriptions = () => {
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
                     <h1 className="text-2xl sm:text-3xl font-black text-[#0B1C30]">وصفاتي الطبية</h1>
-                    <p className="text-sm font-bold text-gray-500 mt-1">عرض جميع الوصفات الطبية المستلمة من الأطباء</p>
+                    <p className="text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">عرض جميع الوصفات الطبية المستلمة من الأطباء</p>
                 </div>
 
                 {prescriptions.length === 0 ? (
                     <div className="text-center py-20">
-                        <FiFileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                        <FiFileText className="w-16 h-16 text-gray-300 dark:text-gray-500 mx-auto mb-4" />
                         <p className="text-lg font-bold text-gray-400">لا توجد وصفات طبية بعد</p>
-                        <p className="text-sm font-bold text-gray-300 mt-1">ستظهر هنا الوصفات التي يرسلها الأطباء لك</p>
+                        <p className="text-sm font-bold text-gray-300 dark:text-gray-500 mt-1">ستظهر هنا الوصفات التي يرسلها الأطباء لك</p>
                     </div>
                 ) : (
                     <>
-                        <div className="bg-white border border-[#C3C6D6]/60 rounded-2xl p-4 mb-5 flex flex-col sm:flex-row items-end gap-3">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/60 rounded-2xl p-4 mb-5 flex flex-col sm:flex-row items-end gap-3">
                             <div className="flex-1 w-full">
-                                <label className="text-[10px] font-bold text-gray-400 block mb-1">تاريخ الزيارة</label>
+                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">تاريخ الزيارة</label>
                                 <input
                                     type="date"
                                     value={filterDate}
                                     onChange={(e) => setFilterDate(e.target.value)}
-                                    className="w-full border border-[#C3C6D6]/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] outline-none focus:border-[#138C9F] transition-colors"
+                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors"
                                 />
                             </div>
                             <div className="flex-1 w-full">
-                                <label className="text-[10px] font-bold text-gray-400 block mb-1">اسم الطبيب</label>
+                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">اسم الطبيب</label>
                                 <input
                                     type="text"
                                     value={filterDoctor}
                                     onChange={(e) => setFilterDoctor(e.target.value)}
                                     placeholder="كل"
-                                    className="w-full border border-[#C3C6D6]/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] outline-none focus:border-[#138C9F] transition-colors"
+                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors"
                                 />
                             </div>
                             <div className="flex-1 w-full">
-                                <label className="text-[10px] font-bold text-gray-400 block mb-1">التخصص</label>
+                                <label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 block mb-1">التخصص</label>
                                 <select
                                     value={filterSpecialization}
                                     onChange={(e) => setFilterSpecialization(e.target.value)}
-                                    className="w-full border border-[#C3C6D6]/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] outline-none focus:border-[#138C9F] transition-colors bg-white"
+                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors bg-white"
                                 >
                                     <option value="">الكل</option>
                                     {specializations.map((spec, i) => (
@@ -188,15 +188,15 @@ const MyPrescriptions = () => {
 
                         {filteredPrescriptions.length === 0 ? (
                             <div className="text-center py-16">
-                                <FiFileText className="w-14 h-14 text-gray-300 mx-auto mb-3" />
+                                <FiFileText className="w-14 h-14 text-gray-300 dark:text-gray-500 mx-auto mb-3" />
                                 <p className="text-base font-bold text-gray-400">لا توجد نتائج مطابقة للفلتر</p>
                                 <button onClick={clearFilters} className="mt-2 text-xs font-bold text-[#138C9F] hover:underline cursor-pointer">مسح الفلتر</button>
                             </div>
                         ) : (
                     <div className="grid gap-5">
                         {filteredPrescriptions.map((rx) => (
-                            <div key={rx.id} className="bg-white border border-[#C3C6D6]/60 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all">
-                                <div className="bg-[#EBF3F5] px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#C3C6D6]/40">
+                            <div key={rx.id} className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/60 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all">
+                                <div className="bg-[#EBF3F5] dark:bg-gray-800 px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#C3C6D6] dark:border-gray-700/40">
                                     <div className="flex items-center gap-3">
                                         {getDoctorImageSrc(rx.doctorImage) ? (
                                             <img loading="lazy" decoding="async" width="44" height="44" src={getDoctorImageSrc(rx.doctorImage)} alt={rx.doctorName} className="w-11 h-11 rounded-xl object-cover shrink-0" />
@@ -222,13 +222,13 @@ const MyPrescriptions = () => {
                                     {rx.diagnosis && (
                                         <div className="mb-3">
                                             <span className="text-xs font-black text-[#138C9F]">التشخيص:</span>
-                                            <p className="text-sm font-bold text-[#0B1C30] mt-0.5">{rx.diagnosis}</p>
+                                            <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{rx.diagnosis}</p>
                                         </div>
                                     )}
                                     {rx.symptoms && (
                                         <div className="mb-3">
                                             <span className="text-xs font-black text-[#138C9F]">الأعراض:</span>
-                                            <p className="text-sm font-bold text-gray-600 mt-0.5">{rx.symptoms}</p>
+                                            <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mt-0.5">{rx.symptoms}</p>
                                         </div>
                                     )}
                                     {rx.medications?.length > 0 && (
@@ -236,12 +236,12 @@ const MyPrescriptions = () => {
                                             <span className="text-xs font-black text-[#138C9F] mb-2 block">الأدوية الموصوفة:</span>
                                             <div className="flex flex-wrap gap-2">
                                                 {rx.medications.map((med, i) => (
-                                                    <div key={i} className="bg-gray-50 border border-gray-100 rounded-lg px-3 py-2 text-xs">
+                                                    <div key={i} className="bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 rounded-lg px-3 py-2 text-xs">
                                                         <span className="font-black text-[#0B1C30]">{med.medicationName}</span>
-                                                        <span className="text-gray-400 mx-1">•</span>
+                                                        <span className="text-gray-400 dark:text-gray-500 mx-1">•</span>
                                                         <span className="text-[#138C9F] font-bold">{med.dosage}</span>
-                                                        <span className="text-gray-400 mx-1">•</span>
-                                                        <span className="text-gray-500 font-bold">{med.frequency} مرات</span>
+                                                        <span className="text-gray-400 dark:text-gray-500 mx-1">•</span>
+                                                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{med.frequency} مرات</span>
                                                     </div>
                                                 ))}
                                             </div>
@@ -279,10 +279,10 @@ const MyPrescriptions = () => {
 
             {selectedRx && (
                 <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={() => setSelectedRx(null)}>
-                    <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
-                        <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between z-10">
+                    <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
+                        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 px-6 py-4 flex items-center justify-between z-10">
                             <h3 className="text-lg font-black text-[#0B1C30]">تفاصيل الوصفة الطبية</h3>
-                            <button onClick={() => setSelectedRx(null)} className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center hover:bg-gray-200 cursor-pointer transition-all">
+                            <button onClick={() => setSelectedRx(null)} className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 cursor-pointer transition-all">
                                 <FiX className="w-4 h-4 text-gray-500" />
                             </button>
                         </div>
@@ -299,38 +299,38 @@ const MyPrescriptions = () => {
                                 <div>
                                     <p className="text-sm font-black text-[#0B1C30]">د. {selectedRx.doctorName}</p>
                                     <p className="text-xs font-bold text-gray-500">{selectedRx.doctorSpecialization || ""}</p>
-                                    <p className="text-xs font-bold text-gray-400 mt-0.5">{formatDate(selectedRx.sentAt)}</p>
+                                    <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mt-0.5">{formatDate(selectedRx.sentAt)}</p>
                                 </div>
                             </div>
 
                             {selectedRx.diagnosis && (
                                 <div className="mb-4">
                                     <h4 className="text-xs font-black text-[#138C9F] mb-1">التشخيص</h4>
-                                    <p className="text-sm font-bold text-[#0B1C30] bg-[#EBF3F5] rounded-lg px-4 py-2.5">{selectedRx.diagnosis}</p>
+                                    <p className="text-sm font-bold text-[#0B1C30] dark:text-white bg-[#EBF3F5] dark:bg-gray-800 rounded-lg px-4 py-2.5">{selectedRx.diagnosis}</p>
                                 </div>
                             )}
                             {selectedRx.chiefComplaint && (
                                 <div className="mb-4">
                                     <h4 className="text-xs font-black text-[#138C9F] mb-1">الشكوى الرئيسية</h4>
-                                    <p className="text-sm font-bold text-[#0B1C30] bg-gray-50 rounded-lg px-4 py-2.5">{selectedRx.chiefComplaint}</p>
+                                    <p className="text-sm font-bold text-[#0B1C30] dark:text-white bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.chiefComplaint}</p>
                                 </div>
                             )}
                             {selectedRx.symptoms && (
                                 <div className="mb-4">
                                     <h4 className="text-xs font-black text-[#138C9F] mb-1">الأعراض</h4>
-                                    <p className="text-sm font-bold text-gray-600 bg-gray-50 rounded-lg px-4 py-2.5">{selectedRx.symptoms}</p>
+                                    <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.symptoms}</p>
                                 </div>
                             )}
                             {selectedRx.visitNotes && (
                                 <div className="mb-4">
                                     <h4 className="text-xs font-black text-[#138C9F] mb-1">ملاحظات الزيارة</h4>
-                                    <p className="text-sm font-bold text-gray-600 bg-gray-50 rounded-lg px-4 py-2.5">{selectedRx.visitNotes}</p>
+                                    <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.visitNotes}</p>
                                 </div>
                             )}
                             {selectedRx.recommendations && (
                                 <div className="mb-4">
                                     <h4 className="text-xs font-black text-[#138C9F] mb-1">التوصيات</h4>
-                                    <p className="text-sm font-bold text-gray-600 bg-gray-50 rounded-lg px-4 py-2.5">{selectedRx.recommendations}</p>
+                                    <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-900 rounded-lg px-4 py-2.5">{selectedRx.recommendations}</p>
                                 </div>
                             )}
 
@@ -339,10 +339,10 @@ const MyPrescriptions = () => {
                                     <h4 className="text-xs font-black text-[#138C9F] mb-3">الأدوية الموصوفة</h4>
                                     <div className="space-y-2.5">
                                         {selectedRx.medications.map((med, i) => (
-                                            <div key={i} className="bg-[#EBF3F5] border border-[#C3C6D6]/40 rounded-xl p-3.5">
+                                            <div key={i} className="bg-[#EBF3F5] dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/40 rounded-xl p-3.5">
                                                 <div className="flex items-center justify-between mb-1.5">
                                                     <span className="text-sm font-black text-[#0B1C30]">{med.medicationName}</span>
-                                                    <span className="text-xs font-bold text-[#138C9F] bg-white px-2 py-0.5 rounded-md">{med.dosage}</span>
+                                                    <span className="text-xs font-bold text-[#138C9F] bg-white dark:bg-gray-800 px-2 py-0.5 rounded-md">{med.dosage}</span>
                                                 </div>
                                                 <div className="flex flex-wrap gap-3 text-xs font-bold text-gray-500">
                                                     <span>{med.frequency} مرات</span>
@@ -356,7 +356,7 @@ const MyPrescriptions = () => {
                             )}
                         </div>
 
-                        <div className="sticky bottom-0 bg-white border-t border-gray-100 px-6 py-4 flex gap-2">
+                        <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 px-6 py-4 flex gap-2">
                             <button
                                 onClick={handleDownloadPDF}
                                 className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#138C9F] text-white text-sm font-bold hover:bg-[#0f7585] transition-all cursor-pointer shadow-xs">
@@ -365,7 +365,7 @@ const MyPrescriptions = () => {
                             </button>
                             <button
                                 onClick={() => setSelectedRx(null)}
-                                className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-bold hover:bg-gray-50 transition-all cursor-pointer">
+                                className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 text-sm font-bold hover:bg-gray-50 dark:bg-gray-900 transition-all cursor-pointer">
                                 إغلاق
                             </button>
                         </div>

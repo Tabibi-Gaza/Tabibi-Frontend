@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
@@ -59,14 +59,14 @@ const DoctorChangePassword = () => {
             <div className="max-w-lg mx-auto">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#138C9F] transition-colors mb-6 cursor-pointer"
+                    className="flex items-center gap-2 text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-[#138C9F] transition-colors mb-6 cursor-pointer"
                 >
                     <ArrowRight className="w-4 h-4" />
                     رجوع
                 </button>
 
-                <div className="bg-white rounded-2xl border border-[#C3C6D6]/60 shadow-sm overflow-hidden">
-                    <div className="bg-[#EBF3F5] px-6 py-5 border-b border-[#C3C6D6]/40">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl border border-[#C3C6D6] dark:border-gray-700/60 shadow-sm overflow-hidden">
+                    <div className="bg-[#EBF3F5] dark:bg-gray-800 px-6 py-5 border-b border-[#C3C6D6] dark:border-gray-700/40">
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-xl bg-[#138C9F] flex items-center justify-center">
                                 <Lock className="w-5 h-5 text-white" />
@@ -80,34 +80,34 @@ const DoctorChangePassword = () => {
 
                     <form onSubmit={handleSubmit} className="p-6 space-y-5">
                         <div>
-                            <label className="text-xs font-bold text-gray-500 block mb-1.5">كلمة المرور الحالية</label>
+                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">كلمة المرور الحالية</label>
                             <div className="relative">
                                 <input
                                     type={showOld ? 'text' : 'password'}
                                     value={oldPassword}
                                     onChange={(e) => setOldPassword(e.target.value)}
-                                    className="w-full border border-[#C3C6D6]/60 rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] outline-none focus:border-[#138C9F] transition-colors pr-11"
+                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors pr-11"
                                     placeholder="أدخل كلمة المرور الحالية"
                                     required
                                 />
-                                <button type="button" onClick={() => setShowOld(!showOld)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                                <button type="button" onClick={() => setShowOld(!showOld)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 cursor-pointer">
                                     {showOld ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
                             </div>
                         </div>
 
                         <div>
-                            <label className="text-xs font-bold text-gray-500 block mb-1.5">كلمة المرور الجديدة</label>
+                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">كلمة المرور الجديدة</label>
                             <div className="relative">
                                 <input
                                     type={showNew ? 'text' : 'password'}
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    className="w-full border border-[#C3C6D6]/60 rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] outline-none focus:border-[#138C9F] transition-colors pr-11"
+                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors pr-11"
                                     placeholder="أدخل كلمة المرور الجديدة"
                                     required
                                 />
-                                <button type="button" onClick={() => setShowNew(!showNew)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                                <button type="button" onClick={() => setShowNew(!showNew)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 cursor-pointer">
                                     {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
                             </div>
@@ -120,7 +120,7 @@ const DoctorChangePassword = () => {
                                             ) : (
                                                 <XCircle className="w-3.5 h-3.5 text-red-400" />
                                             )}
-                                            <span className={rule.test(newPassword) ? 'text-green-600' : 'text-gray-400'}>{rule.label}</span>
+                                            <span className={rule.test(newPassword) ? 'text-green-600' : 'text-gray-400 dark:text-gray-500'}>{rule.label}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -128,21 +128,21 @@ const DoctorChangePassword = () => {
                         </div>
 
                         <div>
-                            <label className="text-xs font-bold text-gray-500 block mb-1.5">تأكيد كلمة المرور الجديدة</label>
+                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">تأكيد كلمة المرور الجديدة</label>
                             <div className="relative">
                                 <input
                                     type={showConfirm ? 'text' : 'password'}
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className={`w-full border rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] outline-none transition-colors pr-11 ${
+                                    className={`w-full border rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] dark:text-white outline-none transition-colors pr-11 ${
                                         confirmPassword.length > 0
                                             ? passwordsMatch ? 'border-green-400 focus:border-green-500' : 'border-red-400 focus:border-red-500'
-                                            : 'border-[#C3C6D6]/60 focus:border-[#138C9F]'
+                                            : 'border-[#C3C6D6] dark:border-gray-700/60 focus:border-[#138C9F]'
                                     }`}
                                     placeholder="أعد إدخال كلمة المرور الجديدة"
                                     required
                                 />
-                                <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                                <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 cursor-pointer">
                                     {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
                             </div>

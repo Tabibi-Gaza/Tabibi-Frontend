@@ -41,9 +41,9 @@ const Navbar = () => {
   ];
 
   const patientExtraLinks = [
-    { name: "الصيدليات", path: "/pharmacies" },
-    { name: "المراكز الطبية", path: "/medical-centers" },
-    { name: "المختبرات", path: "/labs" },
+    { name: t('nav.pharmacies'), path: "/pharmacies" },
+    { name: t('nav.medicalCenters'), path: "/medical-centers" },
+    { name: t('nav.labs'), path: "/labs" },
   ];
 
   const isLoggedIn = !!token;
@@ -99,7 +99,7 @@ const Navbar = () => {
                   : "text-gray-700  hover:text-[#138C9F] font-bold transition-colors pb-1"
               }
             >
-              <li>لوحة التحكم (مسؤول)</li>
+              <li>{t('nav.adminDashboardFull')}</li>
             </NavLink>
           )}
 
@@ -112,7 +112,7 @@ const Navbar = () => {
                   : "text-gray-700  hover:text-[#2f7d99] font-bold transition-colors pb-1"
               }
             >
-              <li>لوحة التحكم (طبيب)</li>
+              <li>{t('nav.doctorDashboardFull')}</li>
             </NavLink>
           )}
         </ul>
@@ -192,13 +192,13 @@ const Navbar = () => {
                     <div className="fixed inset-x-4 top-28 mx-auto max-w-sm md:max-w-none md:absolute md:top-auto md:left-0 md:right-auto md:inset-x-auto md:mt-3 w-auto md:w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-2xl md:shadow-xl py-2 z-50 text-right transition-all duration-200">
                       <div className="px-4 py-2 border-b border-gray-150 dark:border-gray-700 flex justify-between items-center bg-gray-50/50 dark:bg-gray-700/50 rounded-t-2xl">
                         <span className="font-bold text-gray-800 dark:text-gray-200 text-xs sm:text-sm">
-                          الإشعارات
+                          {t('nav.notifications')}
                         </span>
                         <span
                           className="text-xs text-[#138C9F] cursor-pointer hover:underline font-bold"
                           onClick={() => setShowNotifMenu(false)}
                         >
-                          إغلاق
+                          {t('nav.close')}
                         </span>
                       </div>
                       <div className="max-h-64 overflow-y-auto scrollbar-none">
@@ -233,7 +233,7 @@ const Navbar = () => {
                           ))
                         ) : (
                           <p className="text-center py-6 text-xs text-gray-400">
-                            لا توجد إشعارات حالياً
+                            {t('nav.noNotifications')}
                           </p>
                         )}
                       </div>
@@ -245,7 +245,7 @@ const Navbar = () => {
                           }}
                           className="w-full text-center text-xs font-bold text-[#138C9F] hover:underline py-1"
                         >
-                          عرض الكل
+                          {t('nav.viewAll')}
                         </button>
                       </div>
                     </div>
@@ -309,7 +309,7 @@ const Navbar = () => {
                           }}
                           className="hover:bg-[#138C9F]/10 text-[#138C9F] font-bold px-4 py-2 rounded-lg transition-colors cursor-pointer text-right bg-[#138C9F]/5 text-xs sm:text-sm"
                         >
-                          لوحة تحكم الإدارة
+                          {t('nav.adminDashboard')}
                         </p>
                         <hr className="my-1 border-gray-100" />
                       </>
@@ -323,7 +323,7 @@ const Navbar = () => {
                           }}
                           className="hover:bg-[#138C9F]/10 text-[#138C9F] font-bold px-4 py-2 rounded-lg transition-colors cursor-pointer text-right bg-[#138C9F]/5 text-xs sm:text-sm"
                         >
-                          لوحة تحكم الطبيب
+                          {t('nav.doctorDashboard')}
                         </p>
                         <hr className="my-1 border-gray-100" />
                       </>
@@ -335,7 +335,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      ملفي الشخصي
+                      {t('nav.myProfile')}
                     </p>
                     <p
                       onClick={() => {
@@ -344,7 +344,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      حجوزاتي
+                      {t('nav.myAppointments')}
                     </p>
                     <p
                       onClick={() => {
@@ -353,7 +353,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      السجل المرضي الشخصي
+                      {t('nav.personalMedicalHistory')}
                     </p>
                     <p
                       onClick={() => {
@@ -362,7 +362,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      التاريخ الطبي
+                      {t('nav.medicalHistoryFull')}
                     </p>
                     <p
                       onClick={() => {
@@ -371,7 +371,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      وصفاتي الطبية
+                      {t('nav.myPrescriptions')}
                     </p>
                     <p
                       onClick={() => {
@@ -380,7 +380,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      المحادثات
+                      {t('nav.chats')}
                     </p>
                     <p
                       onClick={() => {
@@ -389,7 +389,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      المعاملات المالية
+                      {t('nav.financial')}
                     </p>
                     <p
                       onClick={() => {
@@ -398,7 +398,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      المفضلة
+                      {t('nav.favorites')}
                     </p>
                     <p
                       onClick={() => {
@@ -407,7 +407,7 @@ const Navbar = () => {
                       }}
                       className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
                     >
-                      السلة
+                      {t('nav.cart')}
                     </p>
                     <hr className="my-1 border-gray-100" />
                     <p
@@ -523,7 +523,7 @@ const Navbar = () => {
                 `w-full text-center font-bold text-amber-700 rounded-xl mt-1 ${isActive ? "bg-amber-100" : "bg-amber-50 hover:bg-amber-100/80"}`
               }
             >
-              <p className="py-3 w-full">🛠️ لوحة التحكم (Admin)</p>
+              <p className="py-3 w-full">🛠️ {t('nav.adminDashboardMobile')}</p>
             </NavLink>
           )}
 
@@ -535,7 +535,7 @@ const Navbar = () => {
                 `w-full text-center font-bold text-[#138C9F] rounded-xl mt-1 ${isActive ? "bg-cyan-100" : "bg-cyan-50 hover:bg-cyan-100/80"}`
               }
             >
-              <p className="py-3 w-full"> لوحة التحكم (Doctor)</p>
+              <p className="py-3 w-full"> {t('nav.doctorDashboardMobile')}</p>
             </NavLink>
           )}
 

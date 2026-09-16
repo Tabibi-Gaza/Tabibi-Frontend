@@ -144,9 +144,9 @@ const AIAssistant = () => {
   };
 
   return (
-    <div className="relative py-16 px-4" dir="rtl">
+    <div className="relative py-16 px-4 dark:bg-gray-900" dir="rtl">
       <div className="max-w-6xl mx-auto">
-        <div className="bg-[#0B1437] rounded-3xl overflow-hidden shadow-2xl">
+        <div className="bg-[#0B1437] dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
 
             {/* Right Side - Chat */}
@@ -212,7 +212,7 @@ const AIAssistant = () => {
             </div>
 
             {/* Left Side - Result */}
-            <div className="bg-[#0a1030] p-8 lg:p-12 flex items-center justify-center min-h-[500px]">
+            <div className="bg-[#0a1030] dark:bg-gray-900 p-8 lg:p-12 flex items-center justify-center min-h-[500px]">
               {!result ? (
                 <div className="text-center space-y-4">
                   <div className="w-24 h-24 mx-auto bg-white/5 rounded-full flex items-center justify-center">
@@ -226,12 +226,12 @@ const AIAssistant = () => {
                 </div>
               ) : (
                 <div className="w-full max-w-sm space-y-4">
-                  <div className="bg-white rounded-3xl p-6 shadow-xl">
-                    <div className="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl">
+                    <div className="w-16 h-16 mx-auto bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-4">
                       <span className="text-3xl">{result.icon}</span>
                     </div>
                     <p className="text-xs text-[#138C9F] font-bold text-center mb-1">التخصص الموصى به</p>
-                    <h3 className="text-lg font-black text-slate-800 text-center mb-4">
+                    <h3 className="text-lg font-black text-slate-800 dark:text-gray-200 text-center mb-4">
                       {result.name}
                     </h3>
                     <button

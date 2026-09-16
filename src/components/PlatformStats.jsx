@@ -49,7 +49,7 @@ const PlatformStats = () => {
     return (
       <div
         id="speciality"
-        className='py-16 bg-[#ecf8fa] border-y border-slate-200/60'
+        className='py-16 bg-[#ecf8fa] dark:bg-gray-900 border-y border-slate-200/60 dark:border-gray-700'
         dir="rtl"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,7 +57,7 @@ const PlatformStats = () => {
             {statsData.map((stat) => (
               <div
                 key={stat.id}
-                className="bg-white border border-slate-100 p-6 rounded-2xl flex items-center justify-between gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-[#138C9F]/30 hover:shadow-[0_10px_30px_rgba(58,150,183,0.05)] transition-all duration-300 group"
+                className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 p-6 rounded-2xl flex items-center justify-between gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-[#138C9F]/30 hover:shadow-[0_10px_30px_rgba(58,150,183,0.05)] transition-all duration-300 group"
               >
                 <div className="flex flex-col items-start text-right leading-tightOrder">
                   <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight transition-colors group-hover:text-[#138C9F] duration-200">
@@ -68,7 +68,7 @@ const PlatformStats = () => {
                   </span>
                 </div>
 
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0 bg-slate-50 border border-slate-100/80 group-hover:bg-[#138C9F] group-hover:border-[#138C9F]/20 transition-all duration-300 transform group-hover:scale-105">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0 bg-slate-50 dark:bg-gray-700 border border-slate-100/80 dark:border-gray-600 group-hover:bg-[#138C9F] group-hover:border-[#138C9F]/20 transition-all duration-300 transform group-hover:scale-105">
                   {/* حذفنا خاصية color المباشرة وأضفنا التنسيق في الـ className */}
                   <FontAwesomeIcon
                     icon={stat.icon}
@@ -79,7 +79,7 @@ const PlatformStats = () => {
             ))}
           </div>
 
-          <div className="bg-white border border-slate-100/80 rounded-3xl p-8 lg:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.015)] flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-10 relative overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 border border-slate-100/80 dark:border-gray-700 rounded-3xl p-8 lg:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.015)] flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-10 relative overflow-hidden">
             <div className="lg:w-1/3 flex flex-col items-start justify-center text-right z-10">
               <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-3 py-1.5 rounded-lg mb-4 tracking-wide border border-[#138C9F]/10">
                 آلية العمل
@@ -114,7 +114,7 @@ const PlatformStats = () => {
               {stepsData.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-start text-right p-6 bg-[#ecf8fa]/90 rounded-2xl border border-slate-100 relative group hover:bg-white hover:border-[#138C9F]/30 hover:shadow-[0_12px_30px_rgba(0,0,0,0.02)] transition-all duration-300 overflow-hidden"
+                  className="flex flex-col items-start text-right p-6 bg-[#ecf8fa]/90 dark:bg-gray-700/90 rounded-2xl border border-slate-100 dark:border-gray-600 relative group hover:bg-white dark:hover:bg-gray-800 hover:border-[#138C9F]/30 hover:shadow-[0_12px_30px_rgba(0,0,0,0.02)] transition-all duration-300 overflow-hidden"
                 >
                   <span className="text-4xl font-black text-slate-400 group-hover:text-[#138C9F] transition-colors duration-300 mb-4 block select-none font-sans leading-none">
                     {item.step}

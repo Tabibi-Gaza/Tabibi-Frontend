@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from "../../api/axiosInstance";
 import { resolveImageUrl } from "../../utils/imageUrl";
@@ -53,16 +53,16 @@ const MedicalFile = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] flex items-center justify-center" dir="rtl">
-                <p className="text-gray-400 font-bold text-lg">جاري تحميل السجل المرضي...</p>
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">جاري تحميل السجل المرضي...</p>
             </div>
         );
     }
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] flex items-center justify-center" dir="rtl">
-                <p className="text-gray-400 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
             </div>
         );
     }
@@ -71,7 +71,7 @@ const MedicalFile = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] pr-6" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 pr-6" dir="rtl">
             <div className="space-y-6">
 
                 <div className="flex flex-col gap-1 text-right">
@@ -93,48 +93,48 @@ const MedicalFile = () => {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 text-center">
-                        <span className="text-xs text-gray-400 font-bold block mb-1">فصيلة الدم</span>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">فصيلة الدم</span>
                         <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.bloodType || "—"}</span>
                     </div>
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 text-center">
-                        <span className="text-xs text-gray-400 font-bold block mb-1">ضغط الدم</span>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">ضغط الدم</span>
                         <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
                     </div>
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 text-center">
-                        <span className="text-xs text-gray-400 font-bold block mb-1">سكر الدم</span>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">سكر الدم</span>
                         <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodSugar ? `mg/dL ${medicalHistoryData.vitals.bloodSugar}` : "—"}</span>
                     </div>
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 text-center">
-                        <span className="text-xs text-gray-400 font-bold block mb-1">الوزن</span>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">الوزن</span>
                         <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كجم` : "—"}</span>
                     </div>
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 text-center">
-                        <span className="text-xs text-gray-400 font-bold block mb-1">الطول</span>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">الطول</span>
                         <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
                     </div>
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 text-center">
-                        <span className="text-xs text-gray-400 font-bold block mb-1">مدة التدخين</span>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">مدة التدخين</span>
                         <span className="text-sm font-bold text-[#0B1C30]">{medicalHistoryData?.isSmoker ? "مدخن" : "غير مدخن"}</span>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                         <div className="flex items-center gap-2 text-amber-600 font-black text-base border-b pb-2">
                             <span>⚠️</span> <h3>الأمراض المزمنة</h3>
                         </div>
                         {medicalHistoryData?.chronicDiseases?.filter(d => d !== "لا يوجد").length > 0
                             ? medicalHistoryData.chronicDiseases.filter(d => d !== "لا يوجد").map((disease, idx) => (
                                 <div key={idx} className="p-4 bg-amber-50/40 border border-amber-200/60 rounded-xl">
-                                    <h4 className="font-bold text-gray-800 text-sm">{disease}</h4>
+                                    <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm">{disease}</h4>
                                 </div>
                             ))
-                            : <p className="text-sm text-gray-400 font-bold">لا توجد أمراض مزمنة مسجلة</p>
+                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد أمراض مزمنة مسجلة</p>
                         }
                     </div>
 
-                    <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs">
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                         <div className="flex items-center gap-2 text-rose-600 font-black text-base border-b pb-2">
                             <span>🚫</span> <h3>الحساسية الغذائية والدوائية</h3>
                         </div>
@@ -144,12 +144,12 @@ const MedicalFile = () => {
                                     <h4 className="font-bold text-rose-700 text-sm">{allergy}</h4>
                                 </div>
                             ))
-                            : <p className="text-sm text-gray-400 font-bold">لا توجد حساسية مسجلة</p>
+                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد حساسية مسجلة</p>
                         }
                     </div>
                 </div>
 
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-5 space-y-4 shadow-xs">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                     <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
                         <span>💊</span> <h3>الأدوية والمعلومات الطبية الملتزم بها</h3>
                     </div>
@@ -171,7 +171,7 @@ const MedicalFile = () => {
                                             <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
                                         </tr>
                                     ))
-                                    : <tr><td colSpan="3" className="p-3 md:p-4 text-center text-gray-400 font-bold">لا يوجد أدوية مسجلة</td></tr>
+                                    : <tr><td colSpan="3" className="p-3 md:p-4 text-center text-gray-400 dark:text-gray-500 font-bold">لا يوجد أدوية مسجلة</td></tr>
                                 }
                             </tbody>
                         </table>

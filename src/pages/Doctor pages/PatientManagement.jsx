@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     FiSliders,
@@ -88,14 +88,14 @@ export default function PatientManagement() {
 
     if (loading) {
         return (
-            <div className="w-full bg-gray-50/50 pb-8 pr-4 flex items-center justify-center h-64" dir="rtl">
-                <p className="text-gray-400 font-bold">جاري تحميل بيانات المرضى...</p>
+            <div className="w-full bg-gray-50 dark:bg-gray-900/50 pb-8 pr-4 flex items-center justify-center h-64" dir="rtl">
+                <p className="text-gray-400 dark:text-gray-500 font-bold">جاري تحميل بيانات المرضى...</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full bg-gray-50/50  pb-8 pr-4" dir="rtl">
+      <div className="w-full bg-gray-50 dark:bg-gray-900/50  pb-8 pr-4" dir="rtl">
         {/* العناوين والإحصائيات */}
         {/*    <div
         className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"
@@ -115,7 +115,7 @@ export default function PatientManagement() {
         </div>
 
         {/* الحاوية الرئيسية للقائمة */}
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
           {/* شريط التحكم بالبحث والتصفية */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 ">
             <h2 className="text-lg md:text-xl font-bold text-[#0B1C30]">
@@ -131,20 +131,20 @@ export default function PatientManagement() {
                   placeholder="ابحث باسم المريض..."
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  className="w-full h-10 ps-9 pe-4 bg-gray-50 rounded-lg text-sm text-right focus:outline-none focus:border-[#138C9F]"
+                  className="w-full h-10 ps-9 pe-4 bg-gray-50 dark:bg-gray-900 rounded-lg text-sm text-right focus:outline-none focus:border-[#138C9F]"
                 />
               </div>
               <div className="relative w-full sm:w-auto">
                 <select
                   value={statusFilter}
                   onChange={handleFilterChange}
-                  className="w-full sm:w-auto h-10 px-8 bg-white rounded-lg text-sm font-bold text-right cursor-pointer focus:outline-none"
+                  className="w-full sm:w-auto h-10 px-8 bg-white dark:bg-gray-800 rounded-lg text-sm font-bold text-right cursor-pointer focus:outline-none"
                 >
                   <option value="all">كل الحالات</option>
                   <option value="active">نشط</option>
                   <option value="inactive">غير نشط</option>
                 </select>
-                <FiSliders className="absolute inset-y-0 start-3 my-auto text-gray-400 pointer-events-none transform rotate-90 w-3.5 h-3.5" />
+                <FiSliders className="absolute inset-y-0 start-3 my-auto text-gray-400 dark:text-gray-500 pointer-events-none transform rotate-90 w-3.5 h-3.5" />
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function PatientManagement() {
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-right border-collapse">
               <thead>
-                <tr className="bg-[#e2f4f7]  text-xs font-bold text-[#434654]">
+                <tr className="bg-[#e2f4f7] dark:bg-gray-800  text-xs font-bold text-[#434654]">
                   <th className="p-4 w-[30%]">الاسم</th>
                   <th className="p-4 text-center">العمر/ الجنس</th>
                   <th className="p-4 text-center">آخر زيارة</th>
@@ -166,7 +166,7 @@ export default function PatientManagement() {
                   currentTableData.map((patient) => (
                     <tr
                       key={patient.id}
-                      className="hover:bg-gray-50/70 transition-colors"
+                      className="hover:bg-gray-50 dark:bg-gray-900/70 transition-colors"
                     >
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -264,15 +264,15 @@ export default function PatientManagement() {
                     {patient.isActive ? "نشط" : "غير نشط"}
                   </span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-gray-50 p-3 rounded-xl text-xs font-bold text-slate-700">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-gray-50 dark:bg-gray-900 p-3 rounded-xl text-xs font-bold text-slate-700">
                   <div>
-                    <span className="text-gray-400 block mb-0.5">
+                    <span className="text-gray-400 dark:text-gray-500 block mb-0.5">
                       العمر / الجنس
                     </span>
                     {patient.age} سنة / {patient.gender}
                   </div>
                   <div>
-                    <span className="text-gray-400 block mb-0.5">
+                    <span className="text-gray-400 dark:text-gray-500 block mb-0.5">
                       آخر زيارة
                     </span>
                     {patient.lastVisit}
@@ -288,7 +288,7 @@ export default function PatientManagement() {
                   </button>
                   <button
                     onClick={() => handleMedicalFile(patient.id)}
-                    className="flex-1 flex items-center justify-center gap-1.5 h-10 border border-[#138C9F] text-[#138C9F] text-xs font-extrabold rounded-xl bg-white cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-1.5 h-10 border border-[#138C9F] text-[#138C9F] text-xs font-extrabold rounded-xl bg-white dark:bg-gray-800 cursor-pointer"
                   >
                     <span>التاريخ الطبي</span>
                     <FiFolder className="w-3.5 h-3.5" />
@@ -299,7 +299,7 @@ export default function PatientManagement() {
           </div>
 
           {/* شريط التنقل السفلي المعدل (Pagination Fixed) */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4 bg-gray-50 border-t border-[#C3C6D6] text-sm text-[#434654]">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4 bg-gray-50 dark:bg-gray-900 border-t border-[#C3C6D6] dark:border-gray-700 text-sm text-[#434654]">
             <div className="font-semibold text-center sm:text-right">
               عرض{" "}
               {filteredPatients.length > 0
@@ -313,7 +313,7 @@ export default function PatientManagement() {
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                className={`p-2 bg-white rounded-lg transition-colors cursor-pointer ${currentPage === 1 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                className={`p-2 bg-white dark:bg-gray-800 rounded-lg transition-colors cursor-pointer ${currentPage === 1 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"}`}
               >
                 <FiChevronRight className="w-4 h-4" />
               </button>
@@ -322,7 +322,7 @@ export default function PatientManagement() {
                 <button
                   key={index + 1}
                   onClick={() => setCurrentPage(index + 1)}
-                  className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${currentPage === index + 1 ? "bg-[#138C9F] text-white" : "bg-white hover:bg-gray-100"}`}
+                  className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${currentPage === index + 1 ? "bg-[#138C9F] text-white" : "bg-white dark:bg-gray-800 hover:bg-gray-100"}`}
                 >
                   {index + 1}
                 </button>
@@ -333,7 +333,7 @@ export default function PatientManagement() {
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
-                className={`p-2 bg-white rounded-lg transition-colors cursor-pointer ${currentPage === totalPages ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                className={`p-2 bg-white dark:bg-gray-800 rounded-lg transition-colors cursor-pointer ${currentPage === totalPages ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"}`}
               >
                 <FiChevronLeft className="w-4 h-4" />
               </button>

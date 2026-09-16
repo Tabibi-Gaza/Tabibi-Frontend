@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+﻿import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
     FiSearch, FiTrendingUp, FiClock, FiCheckCircle,
     FiAlertCircle, FiSmartphone, FiCreditCard, FiDollarSign, FiInfo,
@@ -185,14 +185,14 @@ const FinancialFiles = () => {
 
     if (loading) {
         return (
-            <div className="w-full pr-4 bg-slate-50/30 flex items-center justify-center h-64" dir="rtl">
-                <p className="text-gray-400 font-bold">جاري تحميل البيانات المالية...</p>
+            <div className="w-full pr-4 bg-slate-50 dark:bg-gray-900/30 flex items-center justify-center h-64" dir="rtl">
+                <p className="text-gray-400 dark:text-gray-500 font-bold">جاري تحميل البيانات المالية...</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full pr-4 bg-slate-50/30 space-y-6" dir="rtl">
+      <div className="w-full pr-4 bg-slate-50 dark:bg-gray-900/30 space-y-6" dir="rtl">
           <div className="text-right">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">السجلات المالية</h1>
             <p className="text-xs sm:text-sm text-gray-500">تتبع أرباحك وإدارة معاملاتك المالية بكل سهولة.</p>
@@ -200,9 +200,9 @@ const FinancialFiles = () => {
 
           {/* ===== كروت الإحصائيات ===== */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-5">
-            <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
+            <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
               <div className="flex justify-between items-start">
-                <span className="text-xs font-bold text-gray-500 bg-slate-50 px-3 py-1 rounded-full">الإيرادات الإجمالية</span>
+                <span className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 bg-slate-50 dark:bg-gray-900 px-3 py-1 rounded-full">الإيرادات الإجمالية</span>
                 <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center text-[#1b8b99]"><FiDollarSign className="w-5 h-5" /></div>
               </div>
               <div>
@@ -211,9 +211,9 @@ const FinancialFiles = () => {
               </div>
             </div>
 
-            <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
+            <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
               <div className="flex justify-between items-start">
-                <span className="text-xs font-bold text-gray-500 bg-slate-50 px-3 py-1 rounded-full">المصروفات</span>
+                <span className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 bg-slate-50 dark:bg-gray-900 px-3 py-1 rounded-full">المصروفات</span>
                 <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500"><FiArrowDown className="w-5 h-5" /></div>
               </div>
               <div>
@@ -222,22 +222,22 @@ const FinancialFiles = () => {
               </div>
             </div>
 
-            <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
+            <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
               <div className="flex justify-between items-start">
-                <span className="text-xs font-bold text-gray-500 bg-slate-50 px-3 py-1 rounded-full">صافي الربح</span>
+                <span className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 bg-slate-50 dark:bg-gray-900 px-3 py-1 rounded-full">صافي الربح</span>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${netProfit >= 0 ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'}`}>
                   <FiTrendingUp className="w-5 h-5" />
                 </div>
               </div>
               <div>
                 <h2 className={`text-2xl font-black ${netProfit >= 0 ? 'text-green-600' : 'text-red-500'}`}>{netProfit} <span className="text-lg font-bold text-gray-600">ILS</span></h2>
-                <p className="text-[11px] text-gray-400 flex items-center gap-1"><FiInfo className="w-3.5 h-3.5" /> إيرادات - مصروفات</p>
+                <p className="text-[11px] text-gray-400 dark:text-gray-500 flex items-center gap-1"><FiInfo className="w-3.5 h-3.5" /> إيرادات - مصروفات</p>
               </div>
             </div>
 
-            <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
+            <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 shadow-xs flex flex-col justify-between h-36 text-right">
               <div className="flex justify-between items-start">
-                <span className="text-xs font-bold text-gray-500 bg-slate-50 px-3 py-1 rounded-full">دفعات متبقية</span>
+                <span className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 bg-slate-50 dark:bg-gray-900 px-3 py-1 rounded-full">دفعات متبقية</span>
                 <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500"><FiAlertCircle className="w-5 h-5" /></div>
               </div>
               <div>
@@ -251,13 +251,13 @@ const FinancialFiles = () => {
           <div className="flex gap-2 border-b border-slate-200">
             <button
               onClick={() => setActiveTab('transactions')}
-              className={`px-5 py-3 text-sm font-bold transition-all cursor-pointer border-b-2 ${activeTab === 'transactions' ? 'text-[#1b8b99] border-[#1b8b99]' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+              className={`px-5 py-3 text-sm font-bold transition-all cursor-pointer border-b-2 ${activeTab === 'transactions' ? 'text-[#1b8b99] border-[#1b8b99]' : 'text-gray-400 dark:text-gray-500 border-transparent hover:text-gray-600 dark:text-gray-400 dark:text-gray-500'}`}
             >
               جدول الإيرادات والدفعات
             </button>
             <button
               onClick={() => setActiveTab('expenses')}
-              className={`px-5 py-3 text-sm font-bold transition-all cursor-pointer border-b-2 ${activeTab === 'expenses' ? 'text-[#1b8b99] border-[#1b8b99]' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+              className={`px-5 py-3 text-sm font-bold transition-all cursor-pointer border-b-2 ${activeTab === 'expenses' ? 'text-[#1b8b99] border-[#1b8b99]' : 'text-gray-400 dark:text-gray-500 border-transparent hover:text-gray-600 dark:text-gray-400 dark:text-gray-500'}`}
             >
               جدول المصاريف التشغيلية
             </button>
@@ -265,16 +265,16 @@ const FinancialFiles = () => {
 
           {/* ===== جدول المعاملات ===== */}
           {activeTab === 'transactions' && (
-            <div className="bg-white border border-[#e9eff6] rounded-2xl shadow-xs overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
               {/* شريط الفلترة */}
-              <div className="p-4 sm:p-5 border-b border-slate-100 space-y-3">
+              <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-gray-700 space-y-3">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <div className="relative flex items-center border border-slate-200 rounded-xl bg-slate-50 px-3 h-10 w-full sm:w-64 focus-within:border-[#1b8b99] focus-within:bg-white transition-all">
-                      <FiSearch className="w-4 h-4 text-gray-400 pointer-events-none shrink-0" />
-                      <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="بحث بالاسم أو طريقة الدفع..." className="w-full bg-transparent border-none outline-none text-xs sm:text-sm text-gray-700 pr-2 h-full text-right" />
+                    <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl bg-slate-50 dark:bg-gray-900 px-3 h-10 w-full sm:w-64 focus-within:border-[#1b8b99] focus-within:bg-white dark:bg-gray-800 transition-all">
+                      <FiSearch className="w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none shrink-0" />
+                      <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="بحث بالاسم أو طريقة الدفع..." className="w-full bg-transparent border-none outline-none text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 pr-2 h-full text-right" />
                     </div>
-                    <button onClick={() => setShowFilters(!showFilters)} className={`h-10 px-3 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${showFilters ? 'bg-[#1b8b99] text-white border-[#1b8b99]' : 'border-slate-200 text-gray-600 hover:bg-slate-50'}`}>
+                    <button onClick={() => setShowFilters(!showFilters)} className={`h-10 px-3 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${showFilters ? 'bg-[#1b8b99] text-white border-[#1b8b99]' : 'border-slate-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900'}`}>
                       <FiFilter className="w-3.5 h-3.5" /> فلاتر
                     </button>
                   </div>
@@ -293,22 +293,22 @@ const FinancialFiles = () => {
                       <label className="text-[10px] font-bold text-gray-400">نطاق التاريخ</label>
                       <div className="flex gap-1">
                         {DATE_RANGES.map(d => (
-                          <button key={d.value} onClick={() => setDateFilter(d.value)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${dateFilter === d.value ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 text-gray-500 hover:bg-slate-200'}`}>{d.label}</button>
+                          <button key={d.value} onClick={() => setDateFilter(d.value)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${dateFilter === d.value ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-200'}`}>{d.label}</button>
                         ))}
                       </div>
                     </div>
                     {dateFilter === 'custom' && (
                       <div className="flex items-center gap-2">
-                        <input type="date" value={customDateFrom} onChange={e => setCustomDateFrom(e.target.value)} className="h-8 px-2 border border-slate-200 rounded-lg text-xs" />
-                        <span className="text-gray-400 text-xs">إلى</span>
-                        <input type="date" value={customDateTo} onChange={e => setCustomDateTo(e.target.value)} className="h-8 px-2 border border-slate-200 rounded-lg text-xs" />
+                        <input type="date" value={customDateFrom} onChange={e => setCustomDateFrom(e.target.value)} className="h-8 px-2 border border-slate-200 dark:border-gray-700 rounded-lg text-xs" />
+                        <span className="text-gray-400 dark:text-gray-500 text-xs">إلى</span>
+                        <input type="date" value={customDateTo} onChange={e => setCustomDateTo(e.target.value)} className="h-8 px-2 border border-slate-200 dark:border-gray-700 rounded-lg text-xs" />
                       </div>
                     )}
                     <div className="flex flex-col gap-1">
                       <label className="text-[10px] font-bold text-gray-400">طريقة الدفع</label>
                       <div className="flex gap-1 flex-wrap">
                         {PAYMENT_METHODS_FILTER.map(m => (
-                          <button key={m} onClick={() => setPaymentMethodFilter(m)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${paymentMethodFilter === m ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 text-gray-500 hover:bg-slate-200'}`}>{m}</button>
+                          <button key={m} onClick={() => setPaymentMethodFilter(m)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${paymentMethodFilter === m ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-200'}`}>{m}</button>
                         ))}
                       </div>
                     </div>
@@ -320,7 +320,7 @@ const FinancialFiles = () => {
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-right border-collapse">
                   <thead>
-                    <tr className="bg-slate-50/70 border-b border-slate-100 text-slate-500 text-xs font-bold h-12">
+                    <tr className="bg-slate-50 dark:bg-gray-900/70 border-b border-slate-100 dark:border-gray-700 text-slate-500 dark:text-gray-400 text-xs font-bold h-12">
                       <th className="px-6">المريض</th>
                       <th className="px-6">التاريخ والوقت</th>
                       <th className="px-6">طريقة الدفع</th>
@@ -331,19 +331,19 @@ const FinancialFiles = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {displayedTransactions.map((tx) => (
-                      <tr key={tx.id} className="hover:bg-slate-50/40 transition-colors h-16 text-sm font-medium text-gray-700">
+                      <tr key={tx.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-16 text-sm font-medium text-gray-700">
                         <td className="px-6">
                           <div className="flex items-center gap-3">
                             {tx.patientImageUrl ? (
                               <img loading="lazy" decoding="async" width="36" height="36" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-9 h-9 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                             ) : null}
-                            <div className={`w-9 h-9 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
+                            <div className={`w-9 h-9 rounded-full bg-slate-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
                             <span className="font-bold text-gray-800">{tx.patientName}</span>
                           </div>
                         </td>
-                        <td className="px-6"><span className="text-gray-800 text-xs font-semibold">{formatDate(tx.date)}</span></td>
+                        <td className="px-6"><span className="text-gray-800 dark:text-gray-200 text-xs font-semibold">{formatDate(tx.date)}</span></td>
                         <td className="px-6">
-                          <div className="inline-flex items-center gap-1.5 border border-slate-100 rounded-lg px-3 py-1.5 bg-slate-50/50 text-xs font-bold text-gray-600">
+                          <div className="inline-flex items-center gap-1.5 border border-slate-100 dark:border-gray-700 rounded-lg px-3 py-1.5 bg-slate-50 dark:bg-gray-900/50 text-xs font-bold text-gray-600">
                             {tx.methodType === "wallet" ? <FiSmartphone className="w-3.5 h-3.5 text-[#1b8b99]" /> : <FiCreditCard className="w-3.5 h-3.5 text-[#1b8b99]" />}
                             <span>{tx.method}</span>
                           </div>
@@ -355,7 +355,7 @@ const FinancialFiles = () => {
                           </div>
                         </td>
                         <td className="px-6">
-                          <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-3 py-1 rounded-full ${tx.status === "مكتمل" ? "bg-green-50 text-green-600" : tx.status === "مكتمل جزئياً" ? "bg-amber-50 text-amber-600" : "bg-slate-100 text-gray-500"}`}>
+                          <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-3 py-1 rounded-full ${tx.status === "مكتمل" ? "bg-green-50 text-green-600" : tx.status === "مكتمل جزئياً" ? "bg-amber-50 text-amber-600" : "bg-slate-100 dark:bg-gray-800 text-gray-500"}`}>
                             <span className={`w-1.5 h-1.5 rounded-full ${tx.status === "مكتمل" ? "bg-green-500" : tx.status === "مكتمل جزئياً" ? "bg-amber-500" : "bg-gray-400"}`}></span>
                             {tx.status}
                           </span>
@@ -372,23 +372,23 @@ const FinancialFiles = () => {
               {/* جول الموبايل */}
               <div className="block md:hidden divide-y divide-slate-100">
                 {displayedTransactions.map((tx) => (
-                  <div key={tx.id} className="p-4 space-y-3 hover:bg-slate-50/30 transition-all text-right">
+                  <div key={tx.id} className="p-4 space-y-3 hover:bg-slate-50 dark:bg-gray-900/30 transition-all text-right">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         {tx.patientImageUrl ? (
                             <img loading="lazy" decoding="async" width="32" height="32" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-8 h-8 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                         ) : null}
-                        <div className={`w-8 h-8 rounded-full bg-slate-100 text-gray-600 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
-                        <span className="font-bold text-gray-800 text-sm">{tx.patientName}</span>
+                        <div className={`w-8 h-8 rounded-full bg-slate-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
+                        <span className="font-bold text-gray-800 dark:text-gray-200 text-sm">{tx.patientName}</span>
                       </div>
-                      <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full ${tx.status === "مكتمل" ? "bg-green-50 text-green-600" : tx.status === "مكتمل جزئياً" ? "bg-amber-50 text-amber-600" : "bg-slate-100 text-gray-500"}`}>{tx.status}</span>
+                      <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full ${tx.status === "مكتمل" ? "bg-green-50 text-green-600" : tx.status === "مكتمل جزئياً" ? "bg-amber-50 text-amber-600" : "bg-slate-100 dark:bg-gray-800 text-gray-500"}`}>{tx.status}</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs">
-                       <div><p className="text-[10px] text-gray-400">التاريخ والوقت</p><p className="font-semibold text-gray-700 mt-0.5">{formatDate(tx.date)}</p></div>
-                      <div><p className="text-[10px] text-gray-400">طريقة الدفع</p><p className="font-semibold text-gray-700 mt-0.5">{tx.method}</p></div>
+                       <div><p className="text-[10px] text-gray-400">التاريخ والوقت</p><p className="font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-500 mt-0.5">{formatDate(tx.date)}</p></div>
+                      <div><p className="text-[10px] text-gray-400">طريقة الدفع</p><p className="font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-500 mt-0.5">{tx.method}</p></div>
                     </div>
-                    <div className="flex justify-between items-center bg-slate-50 p-2 rounded-xl mt-2">
-                      <span className="text-[11px] text-gray-500 font-medium">المبلغ الإجمالي:</span>
+                    <div className="flex justify-between items-center bg-slate-50 dark:bg-gray-900 p-2 rounded-xl mt-2">
+                      <span className="text-[11px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">المبلغ الإجمالي:</span>
                       <div className="flex items-center gap-2">
                         <span className="font-mono font-bold text-sm text-gray-800">{tx.currency} {tx.amount?.toFixed(2)}</span>
                         <button onClick={() => setInvoiceModal(tx)} className="w-7 h-7 flex items-center justify-center rounded-lg bg-cyan-50 text-[#1b8b99]"><FiPrinter className="w-3.5 h-3.5" /></button>
@@ -398,10 +398,10 @@ const FinancialFiles = () => {
                 ))}
               </div>
 
-              {displayedTransactions.length === 0 && <div className="p-12 text-center text-gray-400 text-sm font-medium">لا توجد معاملات تطابق بحثك الحالي.</div>}
+              {displayedTransactions.length === 0 && <div className="p-12 text-center text-gray-400 dark:text-gray-500 text-sm font-medium">لا توجد معاملات تطابق بحثك الحالي.</div>}
 
               {filteredTransactions.length > 5 && (
-                <div className="border-t border-slate-100 p-4 text-center">
+                <div className="border-t border-slate-100 dark:border-gray-700 p-4 text-center">
                   <button onClick={() => setShowAll(!showAll)} className="text-xs sm:text-sm font-bold text-[#1b8b99] hover:text-[#15727e] transition-colors cursor-pointer">
                     {showAll ? "عرض معاملات أقل" : "عرض جميع المعاملات"}
                   </button>
@@ -412,8 +412,8 @@ const FinancialFiles = () => {
 
           {/* ===== جدول المصاريف ===== */}
           {activeTab === 'expenses' && (
-            <div className="bg-white border border-[#e9eff6] rounded-2xl shadow-xs overflow-hidden">
-              <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+            <div className="bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
+              <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                 <h3 className="text-base font-bold text-gray-800">المصاريف التشغيلية</h3>
                 <button onClick={() => setExpenseModal(true)} className="h-9 px-4 rounded-xl bg-[#1b8b99] text-white text-xs font-bold flex items-center gap-1.5 hover:bg-[#15727e] transition-all cursor-pointer">
                   <FiPlus className="w-3.5 h-3.5" /> إضافة مصروف
@@ -423,7 +423,7 @@ const FinancialFiles = () => {
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-right border-collapse">
                   <thead>
-                    <tr className="bg-slate-50/70 border-b border-slate-100 text-slate-500 text-xs font-bold h-12">
+                    <tr className="bg-slate-50 dark:bg-gray-900/70 border-b border-slate-100 dark:border-gray-700 text-slate-500 dark:text-gray-400 text-xs font-bold h-12">
                       <th className="px-6">التصنيف</th>
                       <th className="px-6">التاريخ</th>
                       <th className="px-6">الوصف</th>
@@ -433,10 +433,10 @@ const FinancialFiles = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {expenses.map((exp) => (
-                      <tr key={exp.id} className="hover:bg-slate-50/40 transition-colors h-14 text-sm font-medium text-gray-700">
+                      <tr key={exp.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-14 text-sm font-medium text-gray-700">
                         <td className="px-6"><span className="bg-red-50 text-red-600 text-[11px] font-bold px-3 py-1 rounded-full">{exp.category}</span></td>
                         <td className="px-6"><span className="text-xs font-semibold text-gray-600">{formatDate(exp.date)}</span></td>
-                        <td className="px-6"><span className="text-gray-700 text-xs">{exp.description || '—'}</span></td>
+                        <td className="px-6"><span className="text-gray-700 dark:text-gray-300 dark:text-gray-500 text-xs">{exp.description || '—'}</span></td>
                         <td className="px-6"><span className="font-mono font-bold text-red-600">ILS {exp.amount?.toFixed(2)}</span></td>
                         <td className="px-6">
                           <button onClick={() => handleDeleteExpense(exp.id)} className="w-7 h-7 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:bg-red-100 hover:text-red-600 transition-all cursor-pointer"><FiTrash2 className="w-3.5 h-3.5" /></button>
@@ -460,42 +460,42 @@ const FinancialFiles = () => {
                 ))}
               </div>
 
-              {expenses.length === 0 && <div className="p-12 text-center text-gray-400 text-sm font-medium">لا توجد مصاريف مسجلة.</div>}
+              {expenses.length === 0 && <div className="p-12 text-center text-gray-400 dark:text-gray-500 text-sm font-medium">لا توجد مصاريف مسجلة.</div>}
             </div>
           )}
 
           {/* ===== Modal إضافة مصروف ===== */}
           {expenseModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
-              <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden">
-                <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden">
+                <div className="p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                   <h3 className="text-base font-bold text-gray-800">إضافة مصروف جديد</h3>
-                  <button onClick={() => setExpenseModal(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 text-gray-400 cursor-pointer"><FiX className="w-5 h-5" /></button>
+                  <button onClick={() => setExpenseModal(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5" /></button>
                 </div>
                 <div className="p-5 space-y-4">
                   <div>
-                    <label className="text-xs font-bold text-gray-500 block mb-1.5">التصنيف *</label>
-                    <select value={newExpense.category} onChange={e => setNewExpense({...newExpense, category: e.target.value})} className="w-full h-11 px-4 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99]">
+                    <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">التصنيف *</label>
+                    <select value={newExpense.category} onChange={e => setNewExpense({...newExpense, category: e.target.value})} className="w-full h-11 px-4 border border-slate-200 dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99]">
                       <option value="">اختر التصنيف</option>
                       {EXPENSE_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-gray-500 block mb-1.5">المبلغ (ILS) *</label>
-                    <input type="number" value={newExpense.amount} onChange={e => setNewExpense({...newExpense, amount: e.target.value})} placeholder="0.00" className="w-full h-11 px-4 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99]" />
+                    <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">المبلغ (ILS) *</label>
+                    <input type="number" value={newExpense.amount} onChange={e => setNewExpense({...newExpense, amount: e.target.value})} placeholder="0.00" className="w-full h-11 px-4 border border-slate-200 dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99]" />
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-gray-500 block mb-1.5">التاريخ</label>
-                    <input type="date" value={newExpense.date} onChange={e => setNewExpense({...newExpense, date: e.target.value})} className="w-full h-11 px-4 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99]" />
+                    <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">التاريخ</label>
+                    <input type="date" value={newExpense.date} onChange={e => setNewExpense({...newExpense, date: e.target.value})} className="w-full h-11 px-4 border border-slate-200 dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99]" />
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-gray-500 block mb-1.5">الوصف (اختياري)</label>
-                    <textarea value={newExpense.description} onChange={e => setNewExpense({...newExpense, description: e.target.value})} placeholder="تفاصيل المصروف..." rows={2} className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99] resize-none" />
+                    <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">الوصف (اختياري)</label>
+                    <textarea value={newExpense.description} onChange={e => setNewExpense({...newExpense, description: e.target.value})} placeholder="تفاصيل المصروف..." rows={2} className="w-full px-4 py-2.5 border border-slate-200 dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#1b8b99] resize-none" />
                   </div>
                 </div>
-                <div className="p-5 border-t border-slate-100 flex gap-3">
+                <div className="p-5 border-t border-slate-100 dark:border-gray-700 flex gap-3">
                   <button onClick={handleAddExpense} disabled={!newExpense.category || !newExpense.amount} className="flex-1 h-11 bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold rounded-xl text-sm transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">إضافة</button>
-                  <button onClick={() => setExpenseModal(false)} className="flex-1 h-11 border border-slate-200 text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 transition-all cursor-pointer">إلغاء</button>
+                  <button onClick={() => setExpenseModal(false)} className="flex-1 h-11 border border-slate-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer">إلغاء</button>
                 </div>
               </div>
             </div>
@@ -504,26 +504,26 @@ const FinancialFiles = () => {
           {/* ===== Modal الفاتورة ===== */}
           {invoiceModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
-              <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden">
-                <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden">
+                <div className="p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                   <h3 className="text-base font-bold text-gray-800">معاينة الفاتورة</h3>
-                  <button onClick={() => setInvoiceModal(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 text-gray-400 cursor-pointer"><FiX className="w-5 h-5" /></button>
+                  <button onClick={() => setInvoiceModal(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5" /></button>
                 </div>
                 <div className="p-5">
-                  <div ref={invoiceRef} className="border border-slate-200 rounded-xl p-5 text-right">
+                  <div ref={invoiceRef} className="border border-slate-200 dark:border-gray-700 rounded-xl p-5 text-right">
                     <div className="text-center border-b-2 border-[#1b8b99] pb-4 mb-4">
                       <h2 className="text-xl font-black text-[#1b8b99]">طبيبي</h2>
-                      <p className="text-xs text-gray-500 mt-1">منصة إدارة العيادات الطبية</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">منصة إدارة العيادات الطبية</p>
                     </div>
                     <div className="space-y-2 mb-4">
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">المريض:</span><span className="font-bold text-gray-800">{invoiceModal.patientName}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">التاريخ:</span><span className="font-bold text-gray-800">{formatDate(invoiceModal.date)}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">طريقة الدفع:</span><span className="font-bold text-gray-800">{invoiceModal.method}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">الحالة:</span><span className="font-bold text-gray-800">{invoiceModal.status}</span></div>
+                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">المريض:</span><span className="font-bold text-gray-800">{invoiceModal.patientName}</span></div>
+                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">التاريخ:</span><span className="font-bold text-gray-800">{formatDate(invoiceModal.date)}</span></div>
+                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">طريقة الدفع:</span><span className="font-bold text-gray-800">{invoiceModal.method}</span></div>
+                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">الحالة:</span><span className="font-bold text-gray-800">{invoiceModal.status}</span></div>
                       {invoiceModal.status === 'مكتمل جزئياً' && (
                         <>
-                          <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">المدفوع:</span><span className="font-bold text-green-600">{invoiceModal.paidAmount?.toFixed(2)} ILS</span></div>
-                          <div className="flex justify-between text-sm"><span className="text-gray-500 font-bold">المتبقي:</span><span className="font-bold text-amber-600">{(invoiceModal.amount - invoiceModal.paidAmount)?.toFixed(2)} ILS</span></div>
+                          <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">المدفوع:</span><span className="font-bold text-green-600">{invoiceModal.paidAmount?.toFixed(2)} ILS</span></div>
+                          <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">المتبقي:</span><span className="font-bold text-amber-600">{(invoiceModal.amount - invoiceModal.paidAmount)?.toFixed(2)} ILS</span></div>
                         </>
                       )}
                     </div>
@@ -531,14 +531,14 @@ const FinancialFiles = () => {
                       <p className="text-xs text-gray-500">المبلغ الإجمالي</p>
                       <p className="text-2xl font-black text-[#1b8b99]">{invoiceModal.amount?.toFixed(2)} ILS</p>
                     </div>
-                    <p className="text-center text-[10px] text-gray-400 mt-4">شكراً لثقتكم بمنصة طبيبي</p>
+                    <p className="text-center text-[10px] text-gray-400 dark:text-gray-500 mt-4">شكراً لثقتكم بمنصة طبيبي</p>
                   </div>
                 </div>
-                <div className="p-5 border-t border-slate-100 flex gap-3">
+                <div className="p-5 border-t border-slate-100 dark:border-gray-700 flex gap-3">
                   <button onClick={handlePrintInvoice} className="flex-1 h-11 bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
                     <FiPrinter className="w-4 h-4" /> طباعة
                   </button>
-                  <button onClick={() => setInvoiceModal(null)} className="flex-1 h-11 border border-slate-200 text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 transition-all cursor-pointer">إغلاق</button>
+                  <button onClick={() => setInvoiceModal(null)} className="flex-1 h-11 border border-slate-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer">إغلاق</button>
                 </div>
               </div>
             </div>

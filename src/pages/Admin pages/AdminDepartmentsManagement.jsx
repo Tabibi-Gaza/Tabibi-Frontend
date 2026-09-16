@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, Users, Layers, ChevronRight, ChevronLeft, X, ToggleLeft, ToggleRight, Loader2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import {
@@ -96,12 +96,12 @@ export default function AdminDepartmentsManagement() {
           </div>
           <button onClick={openAddModal} className="flex flex-row items-center justify-center gap-3 w-full md:w-auto h-[48px] md:h-[52px] px-6 py-3 md:py-4 bg-[#138C9F] text-white rounded-lg shadow-sm font-bold text-[15px] hover:bg-[#0f7282] transition-colors shrink-0">
             <span>إضافة قسم جديد</span>
-            <Plus className="w-5 h-5 bg-white text-[#138C9F] rounded-full p-0.5 shrink-0" />
+            <Plus className="w-5 h-5 bg-white dark:bg-gray-800 text-[#138C9F] rounded-full p-0.5 shrink-0" />
           </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[30px] mb-8">
-          <div className="flex flex-col items-center justify-center h-[140px] md:h-[160px] bg-white border border-[#138C9F] rounded-xl p-4 md:p-6 shadow-sm">
+          <div className="flex flex-col items-center justify-center h-[140px] md:h-[160px] bg-white dark:bg-gray-800 border border-[#138C9F] rounded-xl p-4 md:p-6 shadow-sm">
             <Layers className="w-[26.67px] h-[20.1px] text-[#138C9F] mb-2" />
             <span className="text-[18px] md:text-[20px] font-bold text-[#138C9F] mb-1">أقسام نشطة حالياً</span>
             <span className="text-[22px] md:text-[25px] font-extrabold text-[#138C9F]">{totalActiveDepartments}</span>
@@ -115,14 +115,14 @@ export default function AdminDepartmentsManagement() {
 
         <div className="mb-4">
           <input type="text" value={searchQuery} onChange={handleSearch} placeholder="بحث عن قسم..."
-            className="w-full md:w-[350px] h-[44px] px-4 border border-[#C3C6D6] rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] placeholder-gray-400 text-right text-sm" />
+            className="w-full md:w-[350px] h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] dark:text-white placeholder-gray-400 text-right text-sm" />
         </div>
 
-        <div className="bg-white border border-[#C3C6D6] rounded-xl overflow-hidden shadow-sm flex flex-col">
+        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl overflow-hidden shadow-sm flex flex-col">
           <div className="overflow-x-auto">
             <table className="w-full text-right border-collapse">
               <thead>
-                <tr className="bg-[#e2f4f7] border-b border-[#C3C6D6]">
+                <tr className="bg-[#e2f4f7] dark:bg-gray-800 border-b border-[#C3C6D6]">
                   <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654]">اسم القسم</th>
                   <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden md:table-cell">عدد الأطباء</th>
                   <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden sm:table-cell">الحالة</th>
@@ -134,10 +134,10 @@ export default function AdminDepartmentsManagement() {
                   <tr><td colSpan="4" className="p-8 text-center"><Loader2 className="w-8 h-8 text-[#138C9F] animate-spin mx-auto" /></td></tr>
                 ) : departments.length > 0 ? (
                   departments.map((dept) => (
-                    <tr key={dept.id} className="border-b border-[#C3C6D6] last:border-0 hover:bg-[#f1f4ff] transition-colors">
+                    <tr key={dept.id} className="border-b border-[#C3C6D6] dark:border-gray-700 last:border-0 hover:bg-[#f1f4ff] transition-colors">
                       <td className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#0B1C30]">{dept.name}</td>
                       <td className="p-3 md:p-4 text-center hidden md:table-cell">
-                        <span className="inline-block bg-[#E5EEFF] text-[#0B1C30] text-[13px] md:text-[14px] font-semibold px-3 md:px-4 py-1 rounded-full">
+                        <span className="inline-block bg-[#E5EEFF] text-[#0B1C30] dark:text-white text-[13px] md:text-[14px] font-semibold px-3 md:px-4 py-1 rounded-full">
                           {dept.doctorCount || 0} {(dept.doctorCount || 0) === 1 ? "طبيب" : (dept.doctorCount || 0) >= 2 && (dept.doctorCount || 0) <= 10 ? "أطباء" : "طبيب"}
                         </span>
                       </td>
@@ -148,7 +148,7 @@ export default function AdminDepartmentsManagement() {
                       </td>
                       <td className="p-3 md:p-4 text-center">
                         <div className="flex justify-center items-center gap-2">
-                          <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 hover:bg-gray-50'}`} title={dept.isActive ? "تعطيل" : "تفعيل"}>
+                          <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'}`} title={dept.isActive ? "تعطيل" : "تفعيل"}>
                             {dept.isActive ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                           </button>
                           <button onClick={() => openEditModal(dept)} className="p-2 text-[#003D9B] hover:bg-blue-50 rounded transition-colors" title="تعديل">
@@ -162,51 +162,51 @@ export default function AdminDepartmentsManagement() {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="4" className="p-8 text-center text-gray-400 font-bold">لا توجد أقسام مضافة حالياً.</td></tr>
+                  <tr><td colSpan="4" className="p-8 text-center text-gray-400 dark:text-gray-500 font-bold">لا توجد أقسام مضافة حالياً.</td></tr>
                 )}
               </tbody>
             </table>
           </div>
 
-          <div className="bg-[#e2f4f7] border-t border-[#C3C6D6] px-4 md:px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
+          <div className="bg-[#e2f4f7] dark:bg-gray-800 border-t border-[#C3C6D6] dark:border-gray-700 px-4 md:px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
             <div className="text-[13px] md:text-[14px] text-[#434654] font-semibold">
               عرض {totalItems === 0 ? 0 : indexOfFirstItem + 1} - {Math.min(indexOfFirstItem + itemsPerPage, totalItems)} من إجمالي {totalItems} قسم
             </div>
             <div className="flex items-center gap-1.5">
-              <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="p-2 bg-white border border-gray-200 rounded text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronRight className="w-4 h-4" /></button>
+              <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronRight className="w-4 h-4" /></button>
               {Array.from({ length: totalPages }, (_, index) => {
                 const pageNumber = index + 1;
                 return (
                   <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)}
-                    className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? "bg-[#138C9F] text-white font-extrabold" : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"}`}>
+                    className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? "bg-[#138C9F] text-white font-extrabold" : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50"}`}>
                     {pageNumber}
                   </button>
                 );
               })}
-              <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0} className="p-2 bg-white border border-gray-200 rounded text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronLeft className="w-4 h-4" /></button>
+              <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0} className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronLeft className="w-4 h-4" /></button>
             </div>
           </div>
         </div>
 
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-            <div className="bg-white w-full max-w-[calc(100%-2rem)] sm:max-w-[550px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 p-4 sm:p-6 mx-4 relative text-right">
-              <button onClick={() => setIsModalOpen(false)} className="absolute top-6 left-6 text-gray-400 hover:text-gray-600 transition-colors"><X className="w-6 h-6" /></button>
+            <div className="bg-white dark:bg-gray-800 w-full max-w-[calc(100%-2rem)] sm:max-w-[550px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 p-4 sm:p-6 mx-4 relative text-right">
+              <button onClick={() => setIsModalOpen(false)} className="absolute top-6 left-6 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors"><X className="w-6 h-6" /></button>
               <div className="flex items-center justify-start gap-3 mb-6 mt-2">
                 <Plus className="w-6 h-6 bg-[#138C9F] text-white rounded-full p-0.5" />
                 <div>
                   <h3 className="text-[18px] md:text-[20px] font-bold text-[#0B1C30]">{modalMode === "add" ? "إضافة قسم جديد" : "تعديل بيانات القسم"}</h3>
-                  <p className="text-[13px] md:text-[14px] text-gray-500 font-medium">قم بإدخال المعلومات الأساسية للقسم لإضافته إلى النظام</p>
+                  <p className="text-[13px] md:text-[14px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">قم بإدخال المعلومات الأساسية للقسم لإضافته إلى النظام</p>
                 </div>
               </div>
               <form onSubmit={handleSaveDepartment} className="space-y-6">
                 <div className="flex flex-col gap-2">
                   <label className="text-[14px] font-bold text-[#138C9F]">اسم القسم</label>
                   <input type="text" value={deptNameInput} onChange={(e) => setDeptNameInput(e.target.value)} placeholder="مثلاً: جراحة قلب"
-                    className="w-full h-[50px] px-4 border border-[#C3C6D6] rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] placeholder-gray-300 text-right" required />
+                    className="w-full h-[50px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] dark:text-white placeholder-gray-300 text-right" required />
                 </div>
                 <div className="flex items-center justify-end gap-3 pt-2">
-                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 transition-colors w-1/3 text-center">إلغاء</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3 text-center">إلغاء</button>
                   <button type="submit" disabled={createMut.isPending || updateMut.isPending} className="px-6 h-[46px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 flex-1 disabled:opacity-50">
                     {(createMut.isPending || updateMut.isPending) && <Loader2 className="w-5 h-5 animate-spin" />}
                     <span>{modalMode === "add" ? "إضافة القسم" : "حفظ التعديلات"}</span>

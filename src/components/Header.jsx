@@ -57,27 +57,27 @@ const Header = () => {
 
   return (
     <div
-      className="relative w-full  overflow-visible bg-cover bg-center bg-no-repeat pb-12 sm:pb-18 md:pb-26 lg:pb-34 pt-50 px-4 sm:px-6 md:px-12 flex flex-col items-center justify-center border border-gray-100 shadow-sm mb-16"
+      className="relative w-full  overflow-visible bg-cover bg-center bg-no-repeat pb-12 sm:pb-18 md:pb-26 lg:pb-34 pt-50 px-4 sm:px-6 md:px-12 flex flex-col items-center justify-center border border-gray-100 dark:border-gray-700 shadow-sm mb-16"
       style={{
         backgroundImage: `url(${assets.header_img})`,
       }}
       dir="rtl"
     >
       {/* حاوية الصندوق الزجاجي */}
-      <div className="w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 bg-white/40 backdrop-blur-md p-4 sm:p-10 rounded-2xl md:rounded-3xl border border-white/40 shadow-lg animate-fadeIn">
+      <div           className="w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 bg-white/40 dark:bg-gray-800/40 backdrop-blur-md p-4 sm:p-10 rounded-2xl md:rounded-3xl border border-white/40 dark:border-gray-700/40 shadow-lg animate-fadeIn">
         <h1 className='text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-snug select-none px-2'>
           رعاية طبية متميزة وخدمات صحية موثوقة لجميع أفراد الأسرة.
         </h1>
 
         <form
           onSubmit={handleSearch}
-          className="w-full max-w-3xl bg-white p-2 md:p-1.5 rounded-2xl md:rounded-full flex flex-col md:flex-row items-center gap-3 md:gap-2 shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-slate-100 relative z-30"
+          className="w-full max-w-3xl bg-white dark:bg-gray-800 p-2 md:p-1.5 rounded-2xl md:rounded-full flex flex-col md:flex-row items-center gap-3 md:gap-2 shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-slate-100 dark:border-gray-700 relative z-30"
         >
           <div className="w-full flex-1 relative" ref={dropdownRef}>
             <div
               onClick={() => !isLoading && setIsOpen(!isOpen)}
               className={`w-full text-slate-900 text-sm md:text-base px-4 sm:px-5 py-3 md:py-2.5 rounded-xl md:rounded-full cursor-pointer flex items-center justify-between transition-all duration-200
-                ${isOpen ? "bg-slate-50" : "bg-transparent hover:bg-slate-50/50"} ${isLoading ? "opacity-60 cursor-wait" : ""}`}
+                ${isOpen ? "bg-slate-50 dark:bg-gray-700" : "bg-transparent hover:bg-slate-50/50 dark:hover:bg-gray-700/50"} ${isLoading ? "opacity-60 cursor-wait" : ""}`}
             >
               <div className="flex items-center gap-3 select-none overflow-hidden">
                 <span className="text-lg text-[#138C9F] shrink-0 flex items-center justify-center">
@@ -106,7 +106,7 @@ const Header = () => {
             </div>
 
             {isOpen && (
-              <div className="absolute top-[115%] left-0 right-0 bg-white border border-slate-100 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1 animate-fadeIn max-h-72 overflow-y-auto">
+              <div className="absolute top-[115%] left-0 right-0 bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.12)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1 animate-fadeIn max-h-72 overflow-y-auto">
                 <div
                   onClick={() => {
                     setSpeciality("");
@@ -115,8 +115,8 @@ const Header = () => {
                   className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all duration-150 select-none border border-transparent sm:col-span-2
                     ${
                       speciality === ""
-                        ? "bg-slate-100 text-slate-900 font-black"
-                        : "text-slate-500 hover:bg-slate-50"
+                        ? "bg-slate-100 dark:bg-gray-700 text-slate-900 dark:text-gray-200 font-black"
+                        : "text-slate-500 dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700"
                     }`}
                 >
                   <div className="flex items-center gap-2.5">
@@ -146,7 +146,7 @@ const Header = () => {
                       ${
                         speciality === option.id
                           ? "bg-[#138C9F] text-white"
-                          : "text-slate-700 hover:bg-slate-50 hover:text-[#138C9F]"
+                          : "text-slate-700 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-[#138C9F]"
                       }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">

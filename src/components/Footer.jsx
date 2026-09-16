@@ -35,9 +35,9 @@ const Footer = () => {
           </Link>
 
           <div className='space-y-2 mt-4'>
-            <h2 className='text-2xl md:text-3xl font-black text-black dark:text-white'>وجهتك الأولى</h2>
-            <h3 className='text-xl md:text-2xl font-black text-[#138C9F]'>للبحث عن أفضل الأطباء</h3>
-            <p className='text-base md:text-xl text-gray-400 dark:text-gray-300 font-bold mt-1'>وحجز مواعيدك الطبية بسهولة وأمان.</p>
+            <h2 className='text-2xl md:text-3xl font-black text-black dark:text-white'>{t('footer.firstDestination')}</h2>
+            <h3 className='text-xl md:text-2xl font-black text-[#138C9F]'>{t('footer.bestDoctorsSearch')}</h3>
+            <p className='text-base md:text-xl text-gray-400 dark:text-gray-300 font-bold mt-1'>{t('footer.easyBooking')}</p>
           </div>
 
           <div className='mt-8 lg:mt-12 font-black text-gray-500 dark:text-gray-400 text-center lg:text-right'>
@@ -76,9 +76,8 @@ const Footer = () => {
         {/* حاوية العنوان والأزرار - تتحول من عمودي في الموبايل إلى أفقي متباعد في الشاشات الكبيرة */}
         <div className='flex flex-col lg:flex-row justify-between items-center lg:items-start gap-8 w-full text-center lg:text-right'>
           <h2 className='text-2xl md:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white leading-relaxed max-w-xl'>
-            احصل على استشارتك الطبية في
-            <span className='block'> أي وقت ومن أي مكان مع تطبيق</span>
-            <span className='text-[#138C9F] block mt-2 md:mt-3 font-bold animate-pulse'>طبيبي!</span>
+            {t('footer.consultationTitle')}
+            <span className='text-[#138C9F] block mt-2 md:mt-3 font-bold animate-pulse'>{t('footer.appName')}</span>
           </h2>
 
           {/* حاوية أزرار المتاجر الموحدة العرض تماماً والمصطفة بذكاء */}
@@ -102,7 +101,7 @@ const Footer = () => {
             >
               <img loading="lazy" decoding="async" width="24" height="28" src='https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg' className='h-6 md:h-7 w-auto object-contain shrink-0' alt='App Store' />
               <div className='flex flex-col text-left leading-tight font-sans select-none'>
-                <span className='text-[9px] text-gray-300 block font-light tracking-wide'>حمّل من</span>
+                <span className='text-[9px] text-gray-300 block font-light tracking-wide'>{t('footer.downloadFrom')}</span>
                 <span className='text-xs font-semibold block text-left mt-0.5 tracking-tight'>App Store</span>
               </div>
             </a>
@@ -113,7 +112,7 @@ const Footer = () => {
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full pt-8 mt-10 border-t border-gray-300/60 dark:border-gray-700 text-center sm:text-right'>
           {/* قائمة المنصة */}
           <div className='flex flex-col items-center sm:items-start gap-4'>
-            <p className='text-base md:text-lg font-black text-gray-900 dark:text-white'>المنصة</p>
+            <p className='text-base md:text-lg font-black text-gray-900 dark:text-white'>{t('footer.platform')}</p>
             <ul className='flex flex-col items-center sm:items-start gap-3 text-gray-500 dark:text-gray-400 text-sm md:text-base font-bold'>
               {platformLinks.map((link, index) => (
                 <li key={index}>
@@ -127,7 +126,7 @@ const Footer = () => {
 
           {/* قائمة الدعم */}
           <div className='flex flex-col items-center sm:items-start gap-4'>
-            <p className='text-base md:text-lg font-black text-gray-900 dark:text-white'>الدعم</p>
+            <p className='text-base md:text-lg font-black text-gray-900 dark:text-white'>{t('footer.support')}</p>
             <ul className='flex flex-col items-center sm:items-start gap-3 text-gray-500 dark:text-gray-400 text-sm md:text-base font-bold'>
               {supportLinks.map((link, index) => (
                 <li key={index}>
@@ -141,7 +140,7 @@ const Footer = () => {
 
           {/* قائمة قانوني */}
           <div className='flex flex-col items-center sm:items-start gap-4 col-span-1 sm:col-span-2 md:col-span-1'>
-            <p className='text-base md:text-lg font-black text-gray-900 dark:text-white'>قانوني</p>
+            <p className='text-base md:text-lg font-black text-gray-900 dark:text-white'>{t('footer.legal')}</p>
             <ul className='flex flex-col items-center sm:items-start gap-3 text-gray-500 dark:text-gray-400 text-sm md:text-base font-bold'>
               {legalLinks.map((link, index) => (
                 <li key={index}>

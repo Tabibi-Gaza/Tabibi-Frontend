@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { CreditCard, Plus, Edit2, Trash2, CheckCircle, XCircle, Eye, X, Loader2, Building2, Wallet, ToggleLeft, ToggleRight, Clock, Users, DollarSign, AlertCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
@@ -182,18 +182,18 @@ export default function AdminPaymentMethods() {
     };
 
     return (
-        <div className="w-full bg-[#ecf8fa] flex flex-col gap-6" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
             <div className="flex justify-between items-center">
                 <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                     إدارة طرق الدفع والاشتراكات
                 </h2>
             </div>
 
-            <div className="flex gap-2 bg-white border border-[#C3C6D6] rounded-xl p-1 w-fit">
-                <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] hover:bg-gray-50'}`}>
+            <div className="flex gap-2 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-1 w-fit">
+                <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'}`}>
                     طرق الدفع
                 </button>
-                <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] hover:bg-gray-50'}`}>
+                <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'}`}>
                     مدفوعات الاشتراكات
                     {pendingPayments.length > 0 && (
                         <span className="mr-2 bg-red-500 text-white text-[11px] px-2 py-0.5 rounded-full">{pendingPayments.length}</span>
@@ -215,7 +215,7 @@ export default function AdminPaymentMethods() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {paymentMethods.map((method) => (
-                                <div key={method.id} className="bg-white border border-[#C3C6D6] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                                <div key={method.id} className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-2">
                                             {method.methodType === 'Bank' ? <Building2 size={20} className="text-[#003D9B]" /> : <Wallet size={20} className="text-[#138C9F]" />}
@@ -228,7 +228,7 @@ export default function AdminPaymentMethods() {
                                     <div className="space-y-2 text-[13px]">
                                         <div className="flex justify-between"><span className="text-[#526069]">صاحب الحساب:</span><span className="font-bold text-[#0B1C30]">{method.accountHolderName}</span></div>
                                         <div className="flex justify-between"><span className="text-[#526069]">الهاتف:</span><span className="font-bold text-[#0B1C30]" dir="ltr">{method.phoneNumber}</span></div>
-                                        {method.iban && <div className="flex justify-between"><span className="text-[#526069]">الآيبان:</span><span className="font-bold text-[#0B1C30] text-[11px]" dir="ltr">{method.iban}</span></div>}
+                                        {method.iban && <div className="flex justify-between"><span className="text-[#526069]">الآيبان:</span><span className="font-bold text-[#0B1C30] dark:text-white text-[11px]" dir="ltr">{method.iban}</span></div>}
                                     </div>
                                     <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-100">
                                         <button onClick={() => openEdit(method)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-[13px] font-bold text-[#003D9B] hover:bg-blue-50 transition-colors cursor-pointer">
@@ -249,34 +249,34 @@ export default function AdminPaymentMethods() {
             ) : (
                 <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
                             <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">اشتراكات نشطة</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalActiveSubscriptions}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#DCFCE7] rounded-full flex items-center justify-center text-[#166534]"><CheckCircle size={16} /></div>
                         </div>
-                        <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
                             <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">فترات تجريبية</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalTrialSubscriptions}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#FFF7E6] rounded-full flex items-center justify-center text-[#B45309]"><Clock size={16} /></div>
                         </div>
-                        <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
                             <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">مدفوعات معلقة</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.pendingPayments}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#FFF7E6] rounded-full flex items-center justify-center text-[#B45309]"><AlertCircle size={16} /></div>
                         </div>
-                        <div className="bg-white border border-[#C3C6D6] rounded-xl p-4 h-[78px] flex items-center justify-between">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
                             <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">إجمالي الإيرادات</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalRevenue} ₪</span></div>
                             <div className="w-[30px] h-[30px] bg-[#E5EEFF] rounded-full flex items-center justify-center text-[#003D9B]"><DollarSign size={16} /></div>
                         </div>
                     </div>
 
                     {pendingPayments.length > 0 && (
-                        <div className="bg-white border border-[#C3C6D6] rounded-xl overflow-hidden">
+                        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl overflow-hidden">
                             <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30]">مدفوعات معلقة - تحتاج مراجعة</h3></div>
                             <div className="overflow-x-auto">
                                 <table className="w-full border-collapse text-right">
-                                    <thead><tr className="bg-[#e2f4f7] h-[48px]">
+                                    <thead><tr className="bg-[#e2f4f7] dark:bg-gray-800 h-[48px]">
                                         <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الطبيب</th>
                                         <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">المبلغ</th>
-                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] hidden md:table-cell">طريقة الدفع</th>
-                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] hidden md:table-cell">التاريخ</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 hidden md:table-cell">طريقة الدفع</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 hidden md:table-cell">التاريخ</th>
                                         <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الإجراءات</th>
                                     </tr></thead>
                                     <tbody className="divide-y divide-[#C3C6D6]">
@@ -284,8 +284,8 @@ export default function AdminPaymentMethods() {
                                             <tr key={payment.id} className="h-[60px] hover:bg-slate-50">
                                                 <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
                                                 <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
-                                                <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
-                                                <td className="px-6 py-3 text-[13px] text-[#526069] hidden md:table-cell">{formatDate(payment.createdAt)}</td>
+                                                <td className="px-6 py-3 text-[13px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
+                                                <td className="px-6 py-3 text-[13px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{formatDate(payment.createdAt)}</td>
                                                 <td className="px-6 py-3">
                                                     <div className="flex items-center gap-2 justify-center">
                                                         {payment.receiptImageUrl && (
@@ -305,11 +305,11 @@ export default function AdminPaymentMethods() {
                         </div>
                     )}
 
-                    <div className="bg-white border border-[#C3C6D6] rounded-xl overflow-hidden">
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl overflow-hidden">
                         <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30]">جميع المدفوعات</h3></div>
                         <div className="overflow-x-auto">
                             <table className="w-full border-collapse text-right">
-                                <thead><tr className="bg-[#e2f4f7] h-[48px]">
+                                <thead><tr className="bg-[#e2f4f7] dark:bg-gray-800 h-[48px]">
                                     <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الطبيب</th>
                                     <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">المبلغ</th>
                                     <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الحالة</th>
@@ -340,47 +340,47 @@ export default function AdminPaymentMethods() {
 
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-                    <div className="bg-white border border-[#C3C6D6] shadow-2xl rounded-2xl w-full max-w-lg p-8 relative">
-                        <button onClick={resetForm} className="absolute top-4 left-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
-                        <h3 className="font-extrabold text-[20px] text-[#0B1C30] mb-6">{editMode ? 'تعديل طريقة الدفع' : 'إضافة طريقة دفع جديدة'}</h3>
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-lg p-8 relative">
+                        <button onClick={resetForm} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
+                        <h3 className="font-extrabold text-[20px] text-[#0B1C30] dark:text-white mb-6">{editMode ? 'تعديل طريقة الدفع' : 'إضافة طريقة دفع جديدة'}</h3>
                         <form onSubmit={handleSave} className="space-y-4">
                             <div className="flex gap-3">
-                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Bank', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Bank' ? 'border-[#003D9B] bg-[#003D9B]/5 text-[#003D9B]' : 'border-gray-200 text-gray-500'}`}>
+                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Bank', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Bank' ? 'border-[#003D9B] bg-[#003D9B]/5 text-[#003D9B]' : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                                     <Building2 size={16} className="inline ml-2" /> حساب بنكي
                                 </button>
-                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Wallet', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Wallet' ? 'border-[#138C9F] bg-[#138C9F]/5 text-[#138C9F]' : 'border-gray-200 text-gray-500'}`}>
+                                <button type="button" onClick={() => setFormData(p => ({ ...p, methodType: 'Wallet', providerName: '', iban: '' }))} className={`flex-1 py-3 rounded-xl font-bold text-[14px] border-2 transition-colors cursor-pointer ${formData.methodType === 'Wallet' ? 'border-[#138C9F] bg-[#138C9F]/5 text-[#138C9F]' : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                                     <Wallet size={16} className="inline ml-2" /> محفظة إلكترونية
                                 </button>
                             </div>
 
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">{formData.methodType === 'Bank' ? 'البنك' : 'مقدم الخدمة'}</label>
-                                <select value={formData.providerName} onChange={e => setFormData(p => ({ ...p, providerName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" required>
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{formData.methodType === 'Bank' ? 'البنك' : 'مقدم الخدمة'}</label>
+                                <select value={formData.providerName} onChange={e => setFormData(p => ({ ...p, providerName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" required>
                                     <option value="">اختر...</option>
                                     {(formData.methodType === 'Bank' ? bankOptions : walletOptions).map(b => <option key={b} value={b}>{b}</option>)}
                                 </select>
                             </div>
 
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">اسم صاحب الحساب</label>
-                                <input type="text" value={formData.accountHolderName} onChange={e => setFormData(p => ({ ...p, accountHolderName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم الكامل" required />
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">اسم صاحب الحساب</label>
+                                <input type="text" value={formData.accountHolderName} onChange={e => setFormData(p => ({ ...p, accountHolderName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم الكامل" required />
                             </div>
 
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] mb-1.5">رقم الهاتف</label>
-                                <input type="text" value={formData.phoneNumber} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setFormData(p => ({ ...p, phoneNumber: val })); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">رقم الهاتف</label>
+                                <input type="text" value={formData.phoneNumber} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setFormData(p => ({ ...p, phoneNumber: val })); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
 
                             {formData.methodType === 'Bank' && (
                                 <div>
-                                    <label className="block font-bold text-[13px] text-[#526069] mb-1.5">رقم الآيبان (IBAN)</label>
-                                    <input type="text" value={formData.iban} onChange={e => { const cleaned = formatIban(e.target.value); setFormData(p => ({ ...p, iban: cleaned })); const err = validateIban(cleaned, formData.providerName); setIbanError(err); }} onBlur={() => { const err = validateIban(formData.iban, formData.providerName); setIbanError(err); }} placeholder={getBankPlaceholder(formData.providerName)} maxLength={29} className={`w-full h-[44px] px-4 border rounded-xl text-[14px] focus:outline-none text-[#0B1C30] ${ibanError ? 'border-red-300 focus:border-red-400' : 'border-[#C3C6D6] focus:border-[#138C9F]'}`} dir="ltr" required />
+                                    <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">رقم الآيبان (IBAN)</label>
+                                    <input type="text" value={formData.iban} onChange={e => { const cleaned = formatIban(e.target.value); setFormData(p => ({ ...p, iban: cleaned })); const err = validateIban(cleaned, formData.providerName); setIbanError(err); }} onBlur={() => { const err = validateIban(formData.iban, formData.providerName); setIbanError(err); }} placeholder={getBankPlaceholder(formData.providerName)} maxLength={29} className={`w-full h-[44px] px-4 border rounded-xl text-[14px] focus:outline-none text-[#0B1C30] dark:text-white ${ibanError ? 'border-red-300 focus:border-red-400' : 'border-[#C3C6D6] dark:border-gray-700 focus:border-[#138C9F]'}`} dir="ltr" required />
                                     {ibanError && <p className="text-[11px] text-red-500 mt-1">{ibanError}</p>}
                                 </div>
                             )}
 
                             <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={resetForm} className="flex-1 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 transition-colors cursor-pointer">إلغاء</button>
+                                <button type="button" onClick={resetForm} className="flex-1 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors cursor-pointer">إلغاء</button>
                                 <button type="submit" disabled={submitting} className="flex-1 h-[46px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50">
                                     {submitting && <Loader2 size={16} className="animate-spin" />}
                                     {editMode ? 'حفظ التعديلات' : 'إضافة'}
@@ -393,12 +393,12 @@ export default function AdminPaymentMethods() {
 
             {rejectModal.open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-                    <div className="bg-white border border-[#C3C6D6] shadow-2xl rounded-2xl w-full max-w-md p-8 relative">
-                        <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="absolute top-4 left-4 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 cursor-pointer"><X size={20} /></button>
-                        <h3 className="font-extrabold text-[20px] text-[#0B1C30] mb-4">رفض الدفع</h3>
-                        <textarea value={rejectModal.reason} onChange={e => setRejectModal(p => ({ ...p, reason: e.target.value }))} className="w-full h-24 px-4 py-3 border border-[#C3C6D6] rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] resize-none" placeholder="سبب الرفض..." required />
+                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-md p-8 relative">
+                        <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
+                        <h3 className="font-extrabold text-[20px] text-[#0B1C30] dark:text-white mb-4">رفض الدفع</h3>
+                        <textarea value={rejectModal.reason} onChange={e => setRejectModal(p => ({ ...p, reason: e.target.value }))} className="w-full h-24 px-4 py-3 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-white resize-none" placeholder="سبب الرفض..." required />
                         <div className="flex gap-3 mt-4">
-                            <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 rounded-xl font-bold hover:bg-gray-50 cursor-pointer">إلغاء</button>
+                            <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 cursor-pointer">إلغاء</button>
                             <button onClick={handleReject} className="flex-1 h-[42px] bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 cursor-pointer">رفض الدفع</button>
                         </div>
                     </div>

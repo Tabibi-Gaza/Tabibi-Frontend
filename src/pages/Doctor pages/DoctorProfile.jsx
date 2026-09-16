@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect, useCallback } from 'react';
+﻿import React, { useState, useContext, useRef, useEffect, useCallback } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets_frontend/assets';
 import { toast } from 'react-toastify';
@@ -282,13 +282,13 @@ const DoctorProfile = () => {
     }, [isEdit]);
 
     return doctorData && (
-        <div className="w-full min-h-screen bg-[#ecf8fa] py-5" dir="rtl">
+        <div className="w-full min-h-screen bg-[#ecf8fa] dark:bg-gray-900 py-5" dir="rtl">
             <div className=" mx-auto px-6">
-                <div className="bg-white border border-[#C3C6D6] rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 
                     {/* 📸 جزء الصورة ومعاينتها */}
                     <div className="w-full max-w-[220px] flex flex-col items-center shrink-0 mx-auto md:mx-0">
-                        <div className="w-full max-w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-[#C3C6D6] mb-5">
+                        <div className="w-full max-w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-sm border border-[#C3C6D6] dark:border-gray-700 mb-5">
                             <img
                                 loading="lazy"
                                 decoding="async"
@@ -322,11 +322,11 @@ const DoctorProfile = () => {
                     {/* 📝 نموذج حقول البيانات الاستبدالي المماثل للآدمن تماماً والظاهر في image_299dfc.png */}
                     <div className="flex-grow w-full">
                         <div className="text-right">
-                            <h2 className="text-2xl font-bold text-[#0B1C30] mb-1.5">المعلومات الشخصية للطبيب</h2>
-                            <p className="text-[#526069] text-sm">قم بتحديث معلوماتك الأساسية لضمان تجربة حجز دقيقة عبر منصة طبيبي.</p>
+                            <h2 className="text-2xl font-bold text-[#0B1C30] dark:text-white mb-1.5">المعلومات الشخصية للطبيب</h2>
+                            <p className="text-[#526069] dark:text-gray-400 text-sm">قم بتحديث معلوماتك الأساسية لضمان تجربة حجز دقيقة عبر منصة طبيبي.</p>
                         </div>
 
-                        <div className="border-b border-[#C3C6D6] my-5 w-full"></div>
+                        <div className="border-b border-[#C3C6D6] dark:border-gray-700 my-5 w-full"></div>
 
                         <form onSubmit={updateProfileData} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
@@ -338,7 +338,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.firstname : doctorData.firstname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, firstname: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -350,7 +350,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.lastname : doctorData.lastname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, lastname: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -362,7 +362,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.email : doctorData.email || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, email: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50 disabled:text-gray-500"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500"
                                     style={{ direction: 'ltr' }}
                                 />
                             </div>
@@ -377,7 +377,7 @@ const DoctorProfile = () => {
                                     onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setLocalData(prev => ({ ...prev, phone: val })); }}
                                     maxLength={10}
                                     placeholder="059XXXXXXXX"
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                     style={{ direction: 'ltr' }}
                                 />
                             </div>
@@ -385,13 +385,13 @@ const DoctorProfile = () => {
                             {/* الجنس التفاعلي */}
                             <div className="flex flex-col gap-1.5 text-right">
                                 <label className="text-[#138C9F] font-bold text-sm">الجنس</label>
-                                <div className="flex items-center border border-[#C3C6D6] rounded-xl overflow-hidden bg-gray-50 h-[46px] p-0.5">
+                                <div className="flex items-center border border-[#C3C6D6] dark:border-gray-700 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-900 h-[46px] p-0.5">
                                     <button
                                         type="button" 
                                         disabled={!isEdit || loading}
                                         onClick={() => setLocalData(prev => ({ ...prev, gender: 'Male' }))}
                                         className={`flex-1 text-center h-full flex items-center justify-center font-bold text-sm transition-all rounded-lg ${
-                                            (isEdit ? localData.gender : doctorData.gender) === 'Male' ? 'bg-[#138C9F] text-white shadow-xs' : 'text-gray-500 hover:bg-gray-100'
+                                            (isEdit ? localData.gender : doctorData.gender) === 'Male' ? 'bg-[#138C9F] text-white shadow-xs' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:bg-gray-800'
                                         }`}
                                     >
                                         ذكر
@@ -401,7 +401,7 @@ const DoctorProfile = () => {
                                         disabled={!isEdit || loading}
                                         onClick={() => setLocalData(prev => ({ ...prev, gender: 'Female' }))}
                                         className={`flex-1 text-center h-full flex items-center justify-center font-bold text-sm transition-all rounded-lg ${
-                                            (isEdit ? localData.gender : doctorData.gender) === 'Female' ? 'bg-[#138C9F] text-white shadow-xs' : 'text-gray-500 hover:bg-gray-100'
+                                            (isEdit ? localData.gender : doctorData.gender) === 'Female' ? 'bg-[#138C9F] text-white shadow-xs' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:bg-gray-800'
                                         }`}
                                     >
                                         أنثى
@@ -418,7 +418,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.dob : doctorData.dob || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, dob: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                 />
                             </div>
 
@@ -431,7 +431,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.experienceYears : doctorData.experienceYears || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, experienceYears: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                 />
                             </div>
 
@@ -444,7 +444,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.sessionPrice : doctorData.sessionPrice || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, sessionPrice: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                 />
                             </div>
 
@@ -457,7 +457,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.specialization : doctorData.specialization || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, specialization: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                 />
                             </div>
 
@@ -470,7 +470,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.clinicName : doctorData.clinicName || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, clinicName: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                 />
                             </div>
 
@@ -488,17 +488,17 @@ const DoctorProfile = () => {
                                             setShowLocations(true);
                                         }}
                                         onFocus={() => isEdit && !loading && setShowLocations(true)}
-                                        className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50 w-full text-sm"
+                                        className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 w-full text-sm"
                                     />
                                     {isEdit && showLocations && (
-                                        <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white border border-[#C3C6D6] rounded-xl shadow-xl">
-                                            <div className="sticky top-0 bg-white px-3 py-2 border-b border-gray-100">
+                                        <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl shadow-xl">
+                                            <div className="sticky top-0 bg-white dark:bg-gray-800 px-3 py-2 border-b border-gray-100">
                                                 <input
                                                     type="text"
                                                     value={locationSearch}
                                                     onChange={(e) => setLocationSearch(e.target.value)}
                                                     placeholder="ابحث عن منطقة..."
-                                                    className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm outline-none focus:ring-1 focus:ring-[#138C9F]"
+                                                    className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-sm outline-none focus:ring-1 focus:ring-[#138C9F]"
                                                     autoFocus
                                                 />
                                             </div>
@@ -513,13 +513,13 @@ const DoctorProfile = () => {
                                                             setShowLocations(false);
                                                             setLocationSearch('');
                                                         }}
-                                                        className={`w-full text-right px-4 py-2.5 text-sm cursor-pointer transition-colors duration-100 hover:bg-[#e6f4f6] hover:text-[#138C9F] ${localData.clinicAddress === loc ? 'bg-[#e6f4f6] text-[#138C9F] font-bold' : 'text-gray-700'}`}
+                                                        className={`w-full text-right px-4 py-2.5 text-sm cursor-pointer transition-colors duration-100 hover:bg-[#e6f4f6] dark:bg-gray-800 hover:text-[#138C9F] ${localData.clinicAddress === loc ? 'bg-[#e6f4f6] dark:bg-gray-800 text-[#138C9F] font-bold' : 'text-gray-700 dark:text-gray-300 dark:text-gray-500'}`}
                                                     >
                                                         {loc}
                                                     </button>
                                                 ))}
                                             {PALESTINE_LOCATIONS.filter(loc => !locationSearch || loc.includes(locationSearch)).length === 0 && (
-                                                <div className="px-4 py-3 text-sm text-gray-400 text-center">
+                                                <div className="px-4 py-3 text-sm text-gray-400 dark:text-gray-500 text-center">
                                                     لا توجد نتائج
                                                 </div>
                                             )}
@@ -537,7 +537,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.detailedAddress : doctorData.detailedAddress || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, detailedAddress: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
                                 />
                             </div>
 
@@ -550,7 +550,7 @@ const DoctorProfile = () => {
                                     rows={3}
                                     value={isEdit ? localData.bio : doctorData.bio || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, bio: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] rounded-xl outline-none text-black bg-white focus:border-[#138C9F] disabled:bg-gray-50 resize-none"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 resize-none"
                                 />
                             </div>
 
@@ -559,12 +559,12 @@ const DoctorProfile = () => {
                                 <label className="text-[#138C9F] font-bold text-sm">التوقيع الرقمي</label>
                                 <div className="space-y-4">
                                     {doctorData.signatureUrl && !isEdit && (
-                                        <div className="bg-gray-50 rounded-xl p-4 border border-[#C3C6D6]/40">
-                                            <p className="text-sm font-bold text-gray-600 mb-2">التوقيع الحالي:</p>
+                                        <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-[#C3C6D6] dark:border-gray-700/40">
+                                            <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">التوقيع الحالي:</p>
                                             <img
                                                 src={doctorData.signatureUrl}
                                                 alt="التوقيع الرقمي"
-                                                className="h-20 object-contain border border-gray-200 rounded-lg bg-white p-2"
+                                                className="h-20 object-contain border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2"
                                                 crossOrigin="anonymous"
                                             />
                                         </div>
@@ -579,7 +579,7 @@ const DoctorProfile = () => {
                                                     className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-medium border-2 transition-all ${
                                                         signatureMode === 'draw'
                                                             ? 'border-[#138C9F] bg-[#138C9F]/10 text-[#138C9F]'
-                                                            : 'border-[#C3C6D6] text-gray-500 hover:border-[#138C9F]/50'
+                                                            : 'border-[#C3C6D6] dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:border-[#138C9F]/50'
                                                     }`}
                                                 >
                                                     رسم التوقيع
@@ -590,7 +590,7 @@ const DoctorProfile = () => {
                                                     className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-medium border-2 transition-all ${
                                                         signatureMode === 'upload'
                                                             ? 'border-[#138C9F] bg-[#138C9F]/10 text-[#138C9F]'
-                                                            : 'border-[#C3C6D6] text-gray-500 hover:border-[#138C9F]/50'
+                                                            : 'border-[#C3C6D6] dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:border-[#138C9F]/50'
                                                     }`}
                                                 >
                                                     رفع صورة
@@ -599,7 +599,7 @@ const DoctorProfile = () => {
 
                                             {signatureMode === 'draw' && (
                                                 <div className="space-y-3">
-                                                    <div className="border-2 border-dashed border-[#C3C6D6] rounded-xl bg-gray-50/50 p-2 min-h-[200px]">
+                                                    <div className="border-2 border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-900/50 p-2 min-h-[200px]">
                                                         <canvas
                                                             ref={signatureCanvasRef}
                                                             className="w-full h-full cursor-crosshair"
@@ -610,7 +610,7 @@ const DoctorProfile = () => {
                                                         <button
                                                             type="button"
                                                             onClick={clearSignature}
-                                                            className="flex-1 py-2 px-4 rounded-xl text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all"
+                                                            className="flex-1 py-2 px-4 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 transition-all"
                                                             disabled={loading}
                                                         >
                                                             مسح الرسم
@@ -630,11 +630,11 @@ const DoctorProfile = () => {
                                                         onChange={handleSignatureImageUpload}
                                                     />
                                                     {signatureImage && showSignaturePreview ? (
-                                                        <div className="relative bg-gray-50 rounded-xl p-4 border border-[#C3C6D6]/40">
+                                                        <div className="relative bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-[#C3C6D6] dark:border-gray-700/40">
                                                             <img
                                                                 src={URL.createObjectURL(signatureImage)}
                                                                 alt="معاينة التوقيع"
-                                                                className="h-20 object-contain border border-gray-200 rounded-lg bg-white p-2 mx-auto"
+                                                                className="h-20 object-contain border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 mx-auto"
                                                             />
                                                             <button
                                                                 type="button"
@@ -649,7 +649,7 @@ const DoctorProfile = () => {
                                                             type="button"
                                                             onClick={() => signatureFileInputRef.current?.click()}
                                                             disabled={!isEdit || loading}
-                                                            className="w-full py-3 px-4 border-2 border-dashed border-[#C3C6D6] rounded-xl bg-gray-50/50 text-center text-gray-600 hover:border-[#138C9F] hover:bg-[#138C9F]/10 transition-all"
+                                                            className="w-full py-3 px-4 border-2 border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-900/50 text-center text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:border-[#138C9F] hover:bg-[#138C9F]/10 transition-all"
                                                         >
                                                             انقر لاختيار صورة التوقيع (PNG, JPG)
                                                         </button>
@@ -662,7 +662,7 @@ const DoctorProfile = () => {
                             </div>
 
                             {/* أزرار التحكم التبادلية أسفل الاستمارة */}
-                            <div className="border-t border-[#C3C6D6] pt-6 mt-2 sm:col-span-2 text-right flex items-center gap-4">
+                            <div className="border-t border-[#C3C6D6] dark:border-gray-700 pt-6 mt-2 sm:col-span-2 text-right flex items-center gap-4">
                                 {isEdit ? (
                                     <>
                                         <button
@@ -675,7 +675,7 @@ const DoctorProfile = () => {
                                         <button
                                             type="button"
                                             onClick={handleCancel}
-                                            className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 px-8 rounded-xl text-base font-medium cursor-pointer"
+                                            className="bg-gray-200 hover:bg-gray-300 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-3 px-8 rounded-xl text-base font-medium cursor-pointer"
                                         >
                                             إلغاء
                                         </button>

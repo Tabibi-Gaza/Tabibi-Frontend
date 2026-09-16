@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { formatDate } from '../../utils/dateFormatter';
 
@@ -19,12 +19,12 @@ const PatientFile = () => {
     const patientData = database[id] || database["3"]; // استرجاع المريض حسب المعرف أو افتراضي سلطان العبدالله 
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] p-6" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 p-6" dir="rtl">
             <main className="max-w-[1000px] mx-auto space-y-6">
                 <div className="flex justify-between items-center">
                     <div className="text-right">
                         <h1 className="text-2xl font-black text-[#138C9F]">السجل المرضي الشخصي</h1> 
-                        <p className="text-xs font-bold text-gray-400 mt-1">عرض وتتبع الحالة المزمنة والحساسية الحالية للمريض.</p> 
+                        <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mt-1">عرض وتتبع الحالة المزمنة والحساسية الحالية للمريض.</p> 
                     </div>
                     <button onClick={() => navigate(-1)} className="text-[#138C9F] font-bold text-sm hover:underline cursor-pointer">
                         ◀ العودة للخلف
@@ -32,26 +32,26 @@ const PatientFile = () => {
                 </div>
 
                 {/* كارت المريض العلوي */}
-                <div className="bg-white border border-[#C3C6D6]/70 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs"> 
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/70 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs"> 
                     <div className="flex items-center gap-5 text-right w-full md:w-auto"> 
                         <img loading="lazy" decoding="async" width="80" height="80" src={patientData.avatar} alt={patientData.name} className="w-20 h-20 rounded-2xl object-cover border border-[#C3C6D6]" /> 
                         <h2 className="text-2xl font-black text-[#0B1C30]">{patientData.name}</h2> 
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3 w-full md:w-auto"> 
                         <div className="bg-[#EBF7F9] rounded-xl px-5 py-3 text-center min-w-[90px]"> 
-                            <span className="text-[11px] font-bold text-gray-400 block">الوزن</span> 
+                            <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500 block">الوزن</span> 
                             <span className="text-base font-black text-[#138C9F] mt-1 block">{patientData.weight}</span> 
                         </div>
                         <div className="bg-[#EBF7F9] rounded-xl px-5 py-3 text-center min-w-[90px]"> 
-                            <span className="text-[11px] font-bold text-gray-400 block">الطول</span> 
+                            <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500 block">الطول</span> 
                             <span className="text-base font-black text-[#138C9F] mt-1 block">{patientData.height}</span> 
                         </div>
                         <div className="bg-[#EBF7F9] rounded-xl px-5 py-3 text-center min-w-[90px]"> 
-                            <span className="text-[11px] font-bold text-gray-400 block">فصيلة الدم</span> 
+                            <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500 block">فصيلة الدم</span> 
                             <span className="text-base font-black text-red-500 mt-1 block">{patientData.bloodType}</span> 
                         </div>
                         <div className="bg-[#EBF7F9] rounded-xl px-5 py-3 text-center min-w-[90px]"> 
-                            <span className="text-[11px] font-bold text-gray-400 block">العمر</span> 
+                            <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500 block">العمر</span> 
                             <span className="text-base font-black text-[#138C9F] mt-1 block">{patientData.age}</span> 
                         </div>
                     </div>
@@ -59,50 +59,50 @@ const PatientFile = () => {
 
                 {/* التفاصيل المرضية */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                    <div className="lg:col-span-4 bg-white border border-[#C3C6D6]/70 rounded-2xl p-5 shadow-xs space-y-4"> 
+                    <div className="lg:col-span-4 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/70 rounded-2xl p-5 shadow-xs space-y-4"> 
                         <div className="flex items-center gap-2 text-red-500 font-black text-sm border-b pb-3"> 
                             <span>⚠️</span><h3>الحساسية</h3> 
                         </div>
                         <div className="space-y-3">
                             {patientData.allergies.length > 0 ? (
                                 patientData.allergies.map(allergy => (
-                                    <div key={allergy.id} className={`p-3 bg-slate-50/60 border-r-4 ${allergy.color} rounded-xl text-right`}> 
+                                    <div key={allergy.id} className={`p-3 bg-slate-50 dark:bg-gray-900/60 border-r-4 ${allergy.color} rounded-xl text-right`}> 
                                         <h4 className="text-xs font-black text-red-600">{allergy.title}</h4> 
-                                        <p className="text-[11px] font-bold text-gray-500 mt-1">{allergy.desc}</p> 
+                                        <p className="text-[11px] font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{allergy.desc}</p> 
                                     </div>
                                 ))
-                            ) : <p className="text-xs text-gray-400 font-bold text-center">لا توجد ردود فعل حساسية مسجلة.</p>}
+                            ) : <p className="text-xs text-gray-400 dark:text-gray-500 font-bold text-center">لا توجد ردود فعل حساسية مسجلة.</p>}
                         </div>
                     </div>
 
-                    <div className="lg:col-span-8 bg-white border border-[#C3C6D6]/70 rounded-2xl overflow-hidden shadow-xs"> 
-                        <div className="p-5 flex items-center gap-2 text-[#138C9F] font-black text-sm border-b bg-slate-50/40"> 
+                    <div className="lg:col-span-8 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/70 rounded-2xl overflow-hidden shadow-xs"> 
+                        <div className="p-5 flex items-center gap-2 text-[#138C9F] font-black text-sm border-b bg-slate-50 dark:bg-gray-900/40"> 
                             <span>🧬</span><h3>الأمراض المزمنة</h3> 
                         </div>
                         <div className="p-5 space-y-4">
                             {patientData.chronicDiseases.length > 0 ? (
                                 patientData.chronicDiseases.map(disease => (
-                                    <div key={disease.id} className="p-4 border border-[#C3C6D6]/60 rounded-xl flex items-center justify-between text-right"> 
+                                    <div key={disease.id} className="p-4 border border-[#C3C6D6] dark:border-gray-700/60 rounded-xl flex items-center justify-between text-right"> 
                                         <div className="space-y-1"> 
-                                            <h4 className="text-sm font-black text-[#0B1C30] flex items-center gap-2"> 
+                                            <h4 className="text-sm font-black text-[#0B1C30] dark:text-white flex items-center gap-2"> 
                                                 <span className="w-1.5 h-1.5 rounded-full bg-[#138C9F]"></span>{disease.name} 
                                             </h4>
-                                            <p className="text-[11px] font-bold text-gray-400 pr-3.5">{formatDate(disease.date)}</p> 
+                                            <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 pr-3.5">{formatDate(disease.date)}</p> 
                                         </div>
                                         <span className="text-[11px] font-black px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">{disease.status}</span> 
                                     </div>
                                 ))
-                            ) : <p className="text-sm text-gray-400 font-bold p-2">لا يعاني المريض من أمراض مزمنة مسجلة.</p>}
+                            ) : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold p-2">لا يعاني المريض من أمراض مزمنة مسجلة.</p>}
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white border border-[#C3C6D6]/70 rounded-2xl overflow-hidden shadow-xs"> 
-                    <div className="p-4 flex items-center gap-2 text-[#138C9F] font-black text-sm border-b bg-slate-50/40"> 
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/70 rounded-2xl overflow-hidden shadow-xs"> 
+                    <div className="p-4 flex items-center gap-2 text-[#138C9F] font-black text-sm border-b bg-slate-50 dark:bg-gray-900/40"> 
                         <span>🚬</span><h3>التدخين</h3> 
                     </div>
                     <div className="p-6 text-right">
-                        <p className="text-sm font-black text-[#0B1C30] leading-relaxed">{patientData.smoking}</p> 
+                        <p className="text-sm font-black text-[#0B1C30] dark:text-white leading-relaxed">{patientData.smoking}</p> 
                     </div>
                 </div>
             </main>

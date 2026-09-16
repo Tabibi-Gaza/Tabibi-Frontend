@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+﻿import React, { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axiosInstance from '../api/axiosInstance'
@@ -152,39 +152,39 @@ const PaymentPage = () => {
     <div className="w-full p-4 pt-40 max-w-4xl mx-auto text-right mb-16" dir="rtl">
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#138C9F] mb-6 transition-colors"
+        className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-[#138C9F] mb-6 transition-colors"
       >
         <FontAwesomeIcon icon={faArrowRight} />
         <span>العودة</span>
       </button>
 
-      <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm mb-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-1">تأكيد الدفع</h1>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm mb-6">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-1">تأكيد الدفع</h1>
         <p className="text-sm text-gray-500">اختر حساب الدفع ثم قم برفع إيصال التحويل</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           {/* Appointment Details */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-            <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
               تفاصيل الموعد
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-xs text-gray-400 mb-1">الطبيب</p>
+              <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">الطبيب</p>
                 <p className="text-sm font-bold text-gray-800">{doctorName || '—'}</p>
               </div>
-              <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-xs text-gray-400 mb-1">التاريخ والوقت</p>
+              <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
+                <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">التاريخ والوقت</p>
                 <p className="text-sm font-bold text-gray-800">{formatDateTime(dateTime)}</p>
               </div>
             </div>
           </div>
 
           {/* Payment Methods - Selectable */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-            <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
               1. اختر حساب الدفع
             </h3>
 
@@ -196,7 +196,7 @@ const PaymentPage = () => {
               <div className="space-y-4">
                 {banks.length > 0 && (
                   <div>
-                    <p className="text-sm font-bold text-gray-600 mb-3 flex items-center gap-2">
+                    <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-3 flex items-center gap-2">
                       <FontAwesomeIcon icon={faUniversity} className="text-[#138C9F]" />
                       حسابات بنكية
                     </p>
@@ -208,12 +208,12 @@ const PaymentPage = () => {
                           onClick={() => setSelectedMethod({ id: bank.id, type: 'Bank', name: bank.name, accountHolderName: bank.accountHolderName })}
                           className={`rounded-xl p-4 mb-3 border-2 cursor-pointer transition-all ${
                             isSelected
-                              ? 'border-[#138C9F] bg-[#e6f6f5] shadow-sm'
-                              : 'border-gray-100 bg-gray-50 hover:border-gray-300'
+                              ? 'border-[#138C9F] bg-[#e6f6f5] dark:bg-gray-800 shadow-sm'
+                              : 'border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 hover:border-gray-300'
                           }`}
                         >
                           <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs font-bold text-[#138C9F] bg-[#e6f6f5] px-2 py-0.5 rounded-md">{bank.name}</span>
+                            <span className="text-xs font-bold text-[#138C9F] bg-[#e6f6f5] dark:bg-gray-800 px-2 py-0.5 rounded-md">{bank.name}</span>
                             {isSelected && (
                               <FontAwesomeIcon icon={faCircleCheck} className="text-[#138C9F] text-lg" />
                             )}
@@ -242,7 +242,7 @@ const PaymentPage = () => {
 
                 {wallets.length > 0 && (
                   <div>
-                    <p className="text-sm font-bold text-gray-600 mb-3 flex items-center gap-2">
+                    <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-3 flex items-center gap-2">
                       <FontAwesomeIcon icon={faWallet} className="text-[#138C9F]" />
                       المحافظ الإلكترونية
                     </p>
@@ -254,12 +254,12 @@ const PaymentPage = () => {
                           onClick={() => setSelectedMethod({ id: wallet.id, type: 'Wallet', name: wallet.name, accountHolderName: wallet.accountHolderName })}
                           className={`rounded-xl p-4 mb-3 border-2 cursor-pointer transition-all ${
                             isSelected
-                              ? 'border-[#138C9F] bg-[#e6f6f5] shadow-sm'
-                              : 'border-gray-100 bg-gray-50 hover:border-gray-300'
+                              ? 'border-[#138C9F] bg-[#e6f6f5] dark:bg-gray-800 shadow-sm'
+                              : 'border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 hover:border-gray-300'
                           }`}
                         >
                           <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs font-bold text-[#138C9F] bg-[#e6f6f5] px-2 py-0.5 rounded-md">{wallet.name}</span>
+                            <span className="text-xs font-bold text-[#138C9F] bg-[#e6f6f5] dark:bg-gray-800 px-2 py-0.5 rounded-md">{wallet.name}</span>
                             {isSelected && (
                               <FontAwesomeIcon icon={faCircleCheck} className="text-[#138C9F] text-lg" />
                             )}
@@ -291,14 +291,14 @@ const PaymentPage = () => {
 
           {/* Receipt Upload - Only show after selecting a method */}
           {selectedMethod && (
-            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-              <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+              <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
                 2. رفع إيصال الدفع
               </h3>
 
-              <div className="bg-[#e6f6f5] rounded-xl p-3 mb-4 flex items-center gap-2">
+              <div className="bg-[#e6f6f5] dark:bg-gray-800 rounded-xl p-3 mb-4 flex items-center gap-2">
                 <FontAwesomeIcon icon={faInfoCircle} className="text-[#138C9F] text-sm" />
-                <p className="text-xs text-[#0c5f6c] font-medium">
+                <p className="text-xs text-[#0c5f6c] dark:text-gray-300 font-medium">
                   قم بالتحويل إلى حساب <span className="font-bold">{selectedMethod.name}</span> ({selectedMethod.accountHolderName}) ثم ارفع صورة الإشعار
                 </p>
               </div>
@@ -310,10 +310,10 @@ const PaymentPage = () => {
                 onClick={() => document.getElementById('receipt-input').click()}
                 className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${
                   isDragging
-                    ? 'border-[#138C9F] bg-[#e6f6f5]'
+                    ? 'border-[#138C9F] bg-[#e6f6f5] dark:bg-gray-800'
                     : receiptPreview
                       ? 'border-green-300 bg-green-50'
-                      : 'border-gray-200 hover:border-[#138C9F] hover:bg-gray-50'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-[#138C9F] hover:bg-gray-50 dark:bg-gray-900'
                 }`}
               >
                 <input
@@ -343,12 +343,12 @@ const PaymentPage = () => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                    <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto">
                       <FontAwesomeIcon icon={faUpload} className="text-2xl text-gray-400" />
                     </div>
                     <div>
                       <p className="text-sm font-bold text-gray-600">اسحب الصورة هنا أو انقر للاختيار</p>
-                      <p className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP - حتى 5 ميغابايت</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">PNG, JPG, WEBP - حتى 5 ميغابايت</p>
                     </div>
                   </div>
                 )}
@@ -356,21 +356,21 @@ const PaymentPage = () => {
 
               <div className="mt-5 space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 mb-2">اسم المرسل</label>
+                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">اسم المرسل</label>
                   <input
                     type="text"
                     placeholder="أدخل اسمك كما في إيصال الدفع"
-                    className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
+                    className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 mb-2">رقم الهاتف</label>
+                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">رقم الهاتف</label>
                   <input
                     type="tel"
                     placeholder="رقم الهاتف المرسل منه الدفع"
-                    className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
+                    className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
                     value={senderPhone}
                     onChange={(e) => setSenderPhone(e.target.value)}
                     dir="ltr"
@@ -403,8 +403,8 @@ const PaymentPage = () => {
         </div>
 
         <div className="lg:col-span-1">
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm sticky top-44">
-            <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm sticky top-44">
+            <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2 border-r-4 border-[#138C9F] pr-2">
               ملخص الدفع
             </h3>
 
@@ -429,8 +429,8 @@ const PaymentPage = () => {
               </div>
             </div>
 
-            <div className="mt-6 bg-[#f4faff] rounded-xl p-4 border border-[#e6f6f5]">
-              <p className="text-xs text-gray-500 leading-relaxed">
+            <div className="mt-6 bg-[#f4faff] dark:bg-gray-800 rounded-xl p-4 border border-[#e6f6f5]">
+              <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">
                 <span className="font-bold text-[#138C9F]">ملاحظة:</span> سيتم مراجعة الإيصال من قبل الطبيب. تأكد من أن الصورة واضحة والمبلغ يطابق المطلوب.
               </p>
             </div>
