@@ -74,7 +74,7 @@ const DoctorChangePassword = () => {
                                 <Lock className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-lg font-black text-[#0B1C30]">{t('doctorChangePassword.title')}</h1>
+                                <h1 className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{t('doctorChangePassword.title')}</h1>
                                 <p className="text-xs font-bold text-gray-500">{t('doctorChangePassword.description')}</p>
                             </div>
                         </div>

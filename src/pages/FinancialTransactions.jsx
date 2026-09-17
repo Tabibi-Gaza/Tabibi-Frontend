@@ -126,7 +126,7 @@ const FinancialTransactions = () => {
                         <h1 className="text-2xl md:text-3xl font-extrabold text-[#138C9F] mb-2">
                             المعاملات المالية
                         </h1>
-                        <p className="text-sm md:text-base text-[#526069]">
+                        <p className="text-sm md:text-base text-[#526069] dark:text-gray-400">
                             تتبع جميع المعاملات المالية، الفواتير، وحالة الدفعات الخاصة بك بكل سهولة.
                         </p>
                     </div>
@@ -164,7 +164,7 @@ const FinancialTransactions = () => {
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 px-2">
                         <span className="text-xl font-extrabold text-[#138C9F]">المعاملات الأخيرة</span>
-                        <span className="text-sm font-bold text-[#526069]">
+                        <span className="text-sm font-bold text-[#526069] dark:text-gray-400">
                             إجمالي المدفوعات ({displayTotal} ₪)
                         </span>
                     </div>

@@ -257,7 +257,7 @@ export default function AdminContactUs() {
                                 <tr key={msg.id} className="border-b border-[#C3C6D6] dark:border-gray-700 last:border-none hover:bg-slate-50 dark:bg-gray-900 transition-colors">
                                     <td className="p-3 md:p-4 font-bold text-base text-[#138C9F]">{msg.fullName}</td>
                                     <td className="p-3 md:p-4 font-semibold text-sm text-[#434654]">{msg.email}</td>
-                                    <td className="p-3 md:p-4 font-semibold text-sm text-[#0B1C30]">{msg.subject || t('adminContactUs.noSubject')}</td>
+                                    <td className="p-3 md:p-4 font-semibold text-sm text-[#0B1C30] dark:text-gray-200">{msg.subject || t('adminContactUs.noSubject')}</td>
                                     <td className="p-3 md:p-4 font-bold text-sm text-[#434654] hidden md:table-cell">{msg.createdAt}</td>
                                     <td className="p-3 md:p-4 hidden sm:table-cell">
                                         <span className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold ${badge.className}`}>
@@ -297,7 +297,7 @@ export default function AdminContactUs() {
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div className="bg-white dark:bg-gray-800 w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
                         <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-white">
-                            <h3 className="font-bold text-lg text-[#0B1C30]">{t('adminContactUs.messageDetails')}</h3>
+                            <h3 className="font-bold text-lg text-[#0B1C30] dark:text-gray-200">{t('adminContactUs.messageDetails')}</h3>
                             <button onClick={() => setIsDetailsOpen(false)} className="text-gray-400 dark:text-gray-500 hover:text-gray-600"><FiX size={20} /></button>
                         </div>
                         <div className="p-6 flex flex-col gap-6">
@@ -318,7 +318,7 @@ export default function AdminContactUs() {
                             </div>
                             <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-3">
                                 <h5 className="font-bold text-[#138C9F] text-sm">
-                                    {t('adminContactUs.subject')}: <span className="text-[#0B1C30]">{selectedMessage.subject || t('adminContactUs.noSubject')}</span>
+                                    {t('adminContactUs.subject')}: <span className="text-[#0B1C30] dark:text-gray-200">{selectedMessage.subject || t('adminContactUs.noSubject')}</span>
                                 </h5>
                                 <hr className="border-gray-200" />
                                 <p className="font-medium text-sm text-[#434654] leading-relaxed whitespace-pre-line">{selectedMessage.message}</p>
@@ -342,7 +342,7 @@ export default function AdminContactUs() {
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <form onSubmit={handleSendReply} className="bg-white dark:bg-gray-800 w-full max-w-xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
                         <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-white">
-                            <h3 className="font-bold text-lg text-[#0B1C30]">{t('adminContactUs.quickReplyTitle')}</h3>
+                            <h3 className="font-bold text-lg text-[#0B1C30] dark:text-gray-200">{t('adminContactUs.quickReplyTitle')}</h3>
                             <button type="button" onClick={() => setIsReplyOpen(false)} className="text-gray-400 dark:text-gray-500 hover:text-gray-600"><FiX size={20} /></button>
                         </div>
                         <div className="p-6 flex flex-col gap-4">

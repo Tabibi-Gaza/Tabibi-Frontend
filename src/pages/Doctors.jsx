@@ -101,11 +101,11 @@ if (isError)
           />
         </div>
 
-        <h2 className="text-lg font-black text-gray-800 dark:text-gray-200 mb-2 dark:text-gray-200">
+        <h2 className="text-lg font-black text-gray-800 dark:text-gray-200 mb-2">
           {t('doctors.errorLoading')}
         </h2>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold leading-relaxed mb-6 dark:text-gray-400">
+        <p className="text-sm text-gray-500 dark:text-gray-400 font-bold leading-relaxed mb-6">
           {t('doctors.errorDescription')}
         </p>
 
@@ -128,7 +128,7 @@ if (isError)
         <h1 className="text-xl sm:text-2xl font-black text-[#0c2340] dark:text-gray-200">
           {t('doctors.title')}
         </h1>
-        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1 font-bold dark:text-gray-400">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1 font-bold">
           {t('doctors.browseDoctors')}
         </p>
       </div>
@@ -268,10 +268,10 @@ if (isError)
                 className="text-1xl text-gray-400"
               />
             </span>
-            <h3 className="text-gray-800 dark:text-gray-200 font-black text-sm dark:text-gray-200">
+            <h3 className="text-gray-800 dark:text-gray-200 font-black text-sm">
               {t('doctors.noDoctors')}
             </h3>
-            <p className="text-xs text-gray-400 dark:text-gray-500 max-w-xs leading-relaxed dark:text-gray-400">
+            <p className="text-xs text-gray-400 dark:text-gray-500 max-w-xs leading-relaxed">
               {t('doctors.noResultsDescription')}
             </p>
             <button
@@ -286,7 +286,7 @@ if (isError)
 
       {/* نظام الـ Pagination */}
       {!isDoctorsLoading && totalPages > 1 && (
-        <div className="flex items-center justify-center gap-1.5 mt-10 text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 select-none dark:text-gray-400">
+        <div className="flex items-center justify-center gap-1.5 mt-10 text-xs font-bold text-gray-500 dark:text-gray-400 select-none">
           <button
             onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
             disabled={activePage === 1}

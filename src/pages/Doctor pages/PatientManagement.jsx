@@ -120,7 +120,7 @@ export default function PatientManagement() {
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
           {/* شريط التحكم بالبحث والتصفية */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 ">
-            <h2 className="text-lg md:text-xl font-bold text-[#0B1C30]">
+            <h2 className="text-lg md:text-xl font-bold text-[#0B1C30] dark:text-gray-200">
               {t('patientManagement.patientList')}
             </h2>
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
@@ -182,7 +182,7 @@ export default function PatientManagement() {
                             className="w-10 h-10 rounded-full object-cover border"
                           />
                           <div className="flex flex-col">
-                            <span className="text-base font-bold text-[#0B1C30]">
+                            <span className="text-base font-bold text-[#0B1C30] dark:text-gray-200">
                               {patient.name}
                             </span>
                             <span className="text-xs text-[#434654]">
@@ -199,7 +199,7 @@ export default function PatientManagement() {
                       </td>
                       <td className="p-4 text-center">
                         <span
-                          className={`inline-block px-4 py-1 text-xs font-bold rounded-full ${patient.isActive ? "bg-[#138C9F]/20 text-[#138C9F]" : "bg-[#526069]/10 text-[#526069]"}`}
+                          className={`inline-block px-4 py-1 text-xs font-bold rounded-full ${patient.isActive ? "bg-[#138C9F]/20 text-[#138C9F]" : "bg-[#526069]/10 text-[#526069] dark:text-gray-400"}`}
                         >
                           {patient.isActive ? t('patientManagement.statusCompleted') : t('patientManagement.statusIncomplete')}
                         </span>
@@ -254,14 +254,14 @@ export default function PatientManagement() {
                       className="w-11 h-11 rounded-full object-cover border"
                     />
                     <div>
-                      <h4 className="text-base font-bold text-[#0B1C30]">
+                      <h4 className="text-base font-bold text-[#0B1C30] dark:text-gray-200">
                         {patient.name}
                       </h4>
                       <p className="text-xs text-[#434654]">{patient.email}</p>
                     </div>
                   </div>
                   <span
-                    className={`px-3 py-0.5 text-[11px] font-bold rounded-full ${patient.isActive ? "bg-[#138C9F]/20 text-[#138C9F]" : "bg-[#526069]/10 text-[#526069]"}`}
+                    className={`px-3 py-0.5 text-[11px] font-bold rounded-full ${patient.isActive ? "bg-[#138C9F]/20 text-[#138C9F]" : "bg-[#526069]/10 text-[#526069] dark:text-gray-400"}`}
                   >
                     {patient.isActive ? t('patientManagement.active') : t('patientManagement.inactive')}
                   </span>

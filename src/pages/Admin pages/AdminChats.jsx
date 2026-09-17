@@ -421,7 +421,7 @@ export default function AdminChats() {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 flex flex-col max-h-[80vh]">
             <div className="p-4 border-b border-[#e9eff6] dark:border-gray-700 flex items-center justify-between shrink-0">
-              <h3 className="text-[18px] font-bold text-[#0B1C30]">{t('adminChats.newChatWithDoctor')}</h3>
+              <h3 className="text-[18px] font-bold text-[#0B1C30] dark:text-gray-200">{t('adminChats.newChatWithDoctor')}</h3>
               <button onClick={() => { setShowNewChatModal(false); setDoctorSearchQuery(""); }} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors">
                 <X className="w-5 h-5" />
               </button>

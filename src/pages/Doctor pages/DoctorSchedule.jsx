@@ -147,7 +147,7 @@ const DoctorSchedule = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           <div className="lg:col-span-8 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl overflow-hidden shadow-xs">
             <div className="bg-[#ecf8fa] dark:bg-gray-900 px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700/50 text-right">
-              <h3 className="text-base font-black text-[#0B1C30]">{t('doctorSchedule.scheduleDays')}</h3>
+              <h3 className="text-base font-black text-[#0B1C30] dark:text-gray-200">{t('doctorSchedule.scheduleDays')}</h3>
             </div>
             <div className="divide-y divide-[#C3C6D6]/40">
               {DAYS_ORDER.map((d) => {

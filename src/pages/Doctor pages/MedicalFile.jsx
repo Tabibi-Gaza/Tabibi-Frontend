@@ -95,27 +95,27 @@ const MedicalFile = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
                         <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">فصيلة الدم</span>
-                        <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.bloodType || "—"}</span>
+                        <span className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.bloodType || "—"}</span>
                     </div>
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
                         <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">ضغط الدم</span>
-                        <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
+                        <span className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
                     </div>
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
                         <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">سكر الدم</span>
-                        <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodSugar ? `mg/dL ${medicalHistoryData.vitals.bloodSugar}` : "—"}</span>
+                        <span className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.bloodSugar ? `mg/dL ${medicalHistoryData.vitals.bloodSugar}` : "—"}</span>
                     </div>
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
                         <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">الوزن</span>
-                        <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كجم` : "—"}</span>
+                        <span className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كجم` : "—"}</span>
                     </div>
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
                         <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">الطول</span>
-                        <span className="text-lg font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
+                        <span className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
                     </div>
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 text-center">
                         <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block mb-1">مدة التدخين</span>
-                        <span className="text-sm font-bold text-[#0B1C30]">{medicalHistoryData?.isSmoker ? "مدخن" : "غير مدخن"}</span>
+                        <span className="text-sm font-bold text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.isSmoker ? "مدخن" : "غير مدخن"}</span>
                     </div>
                 </div>
 
@@ -157,16 +157,16 @@ const MedicalFile = () => {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="border-b border-gray-100">
-                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">اسم الدواء/العلمي</th>
-                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">الجرعة اليومية</th>
-                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">التكرار والاستخدام</th>
+                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">اسم الدواء/العلمي</th>
+                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">الجرعة اليومية</th>
+                                    <th className="p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">التكرار والاستخدام</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {medicalHistoryData?.currentMedicines?.filter(m => m.name !== "لا يوجد").length > 0
                                     ? medicalHistoryData.currentMedicines.filter(m => m.name !== "لا يوجد").map((med, idx) => (
                                         <tr key={idx} className="border-b border-gray-50 last:border-0">
-                                            <td className="p-3 md:p-4 font-bold text-[#0B1C30]">{med.name}</td>
+                                            <td className="p-3 md:p-4 font-bold text-[#0B1C30] dark:text-gray-200">{med.name}</td>
                                             <td className="p-3 md:p-4 font-bold text-gray-600">{med.dosage || "—"}</td>
                                             <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
                                         </tr>

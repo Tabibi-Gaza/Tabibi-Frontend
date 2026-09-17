@@ -102,7 +102,7 @@ export default function AdminFinancialTransactions() {
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
                             <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.totalSubscriptions')}</span>
-                            <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.totalAppointments}</span>
+                            <span className="text-[20px] font-semibold text-[#0B1C30] dark:text-gray-200">{stats.totalAppointments}</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[#E5EEFF] flex items-center justify-center text-[#138C9F]">
                             <Calendar className="w-[18px] h-[20px]" />
@@ -112,7 +112,7 @@ export default function AdminFinancialTransactions() {
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
                             <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.totalRevenue')}</span>
-                            <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.totalRevenue} ₪</span>
+                            <span className="text-[20px] font-semibold text-[#0B1C30] dark:text-gray-200">{stats.totalRevenue} ₪</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[rgba(107,255,143,0.3)] flex items-center justify-center text-[#006A2D]">
                             <DollarSign className="w-5 h-5" />
@@ -122,7 +122,7 @@ export default function AdminFinancialTransactions() {
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
                             <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.pendingPayments')}</span>
-                            <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.pendingPayments}</span>
+                            <span className="text-[20px] font-semibold text-[#0B1C30] dark:text-gray-200">{stats.pendingPayments}</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[rgba(255,218,214,0.3)] flex items-center justify-center text-[#BA1A1A]">
                             <Clock className="w-5 h-5" />
@@ -132,7 +132,7 @@ export default function AdminFinancialTransactions() {
 
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] shadow-xs flex flex-col overflow-hidden">
                     <div className="p-6 border-b border-[#C3C6D6] dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 relative">
-                        <h3 className="text-[20px] font-bold text-black">{t('adminFinancialTransactions.title')}</h3>
+                        <h3 className="text-[20px] font-bold text-black dark:text-white">{t('adminFinancialTransactions.title')}</h3>
 
                         <div className="relative">
                             <button
@@ -184,8 +184,8 @@ export default function AdminFinancialTransactions() {
                                     </tr>
                                 ) : displayedTransactions.map((item) => (
                                     <tr key={item.id} className="border-t border-[#C3C6D6] dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-[65px]">
-                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.doctorName}</td>
-                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black">{item.amount} ₪</td>
+                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black dark:text-white">{item.doctorName}</td>
+                                        <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black dark:text-white">{item.amount} ₪</td>
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-normal text-[#434654] hidden md:table-cell">{formatDate(item.date)}</td>
                                         <td className="p-3 md:p-4 px-6 hidden md:table-cell">
                                             <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#e2f4f7] dark:bg-gray-800 text-[12px] font-bold text-[#138C9F]">

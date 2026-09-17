@@ -289,7 +289,7 @@ export default function AdminJoinRequests() {
                                                             <button
                                                                 onClick={() => handleAccept(req.id)}
                                                                 disabled={actionLoading}
-                                                                className="w-[64px] h-[28px] bg-[#D3E4FE] text-black rounded-[12px] font-bold text-[12px] hover:bg-blue-200 transition-colors disabled:opacity-50"
+                                                                className="w-[64px] h-[28px] bg-[#D3E4FE] text-black dark:text-white rounded-[12px] font-bold text-[12px] hover:bg-blue-200 transition-colors disabled:opacity-50"
                                                             >{t('adminJoinRequests.accept')}</button>
                                                             <button
                                                                 onClick={() => { setSelectedRequest(req); openRejectFlow(); }}
@@ -353,7 +353,7 @@ export default function AdminJoinRequests() {
                     <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[460px] bg-white dark:bg-gray-800 rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 flex flex-col text-right">
                         <div className="h-[60px] bg-[#e2f4f7] dark:bg-gray-800 px-6 flex items-center justify-between border-b border-[#C3C6D6]">
                             <h3 className="text-[16px] font-extrabold text-[#434654]">التصفية المتقدمة للطلبات</h3>
-                            <button onClick={() => setShowAdvancedFilterModal(false)} className="text-[#434654] hover:text-black">
+                            <button onClick={() => setShowAdvancedFilterModal(false)} className="text-[#434654] hover:text-black dark:text-white">
                                 <FiX className="w-5 h-5" />
                             </button>
                         </div>

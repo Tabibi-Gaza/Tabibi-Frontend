@@ -134,7 +134,7 @@ const MyPrescriptions = () => {
         <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6" dir="rtl">
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
-                    <h1 className="text-2xl sm:text-3xl font-black text-[#0B1C30]">{t('myPrescriptions.title')}</h1>
+                    <h1 className="text-2xl sm:text-3xl font-black text-[#0B1C30] dark:text-gray-200">{t('myPrescriptions.title')}</h1>
                     <p className="text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{t('myPrescriptions.subtitle')}</p>
                 </div>
 
@@ -208,7 +208,7 @@ const MyPrescriptions = () => {
                                             </div>
                                         )}
                                         <div>
-                                            <p className="text-sm font-black text-[#0B1C30]">د. {rx.doctorName}</p>
+                                            <p className="text-sm font-black text-[#0B1C30] dark:text-gray-200">د. {rx.doctorName}</p>
                                             <p className="text-xs font-bold text-gray-500">{rx.doctorSpecialization || ""}</p>
                                         </div>
                                     </div>
@@ -239,7 +239,7 @@ const MyPrescriptions = () => {
                                             <div className="flex flex-wrap gap-2">
                                                 {rx.medications.map((med, i) => (
                                                     <div key={i} className="bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-700 rounded-lg px-3 py-2 text-xs">
-                                                        <span className="font-black text-[#0B1C30]">{med.medicationName}</span>
+                                                        <span className="font-black text-[#0B1C30] dark:text-gray-200">{med.medicationName}</span>
                                                         <span className="text-gray-400 dark:text-gray-500 mx-1">•</span>
                                                         <span className="text-[#138C9F] font-bold">{med.dosage}</span>
                                                         <span className="text-gray-400 dark:text-gray-500 mx-1">•</span>
@@ -283,7 +283,7 @@ const MyPrescriptions = () => {
                 <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={() => setSelectedRx(null)}>
                     <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
                         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 px-6 py-4 flex items-center justify-between z-10">
-                            <h3 className="text-lg font-black text-[#0B1C30]">{t('myPrescriptions.prescriptionDetails')}</h3>
+                            <h3 className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{t('myPrescriptions.prescriptionDetails')}</h3>
                             <button onClick={() => setSelectedRx(null)} className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 cursor-pointer transition-all">
                                 <FiX className="w-4 h-4 text-gray-500" />
                             </button>
@@ -299,7 +299,7 @@ const MyPrescriptions = () => {
                                     </div>
                                 )}
                                 <div>
-                                    <p className="text-sm font-black text-[#0B1C30]">د. {selectedRx.doctorName}</p>
+                                    <p className="text-sm font-black text-[#0B1C30] dark:text-gray-200">د. {selectedRx.doctorName}</p>
                                     <p className="text-xs font-bold text-gray-500">{selectedRx.doctorSpecialization || ""}</p>
                                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mt-0.5">{formatDate(selectedRx.sentAt)}</p>
                                 </div>
@@ -343,7 +343,7 @@ const MyPrescriptions = () => {
                                         {selectedRx.medications.map((med, i) => (
                                             <div key={i} className="bg-[#EBF3F5] dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/40 rounded-xl p-3.5">
                                                 <div className="flex items-center justify-between mb-1.5">
-                                                    <span className="text-sm font-black text-[#0B1C30]">{med.medicationName}</span>
+                                                    <span className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{med.medicationName}</span>
                                                     <span className="text-xs font-bold text-[#138C9F] bg-white dark:bg-gray-800 px-2 py-0.5 rounded-md">{med.dosage}</span>
                                                 </div>
                                                 <div className="flex flex-wrap gap-3 text-xs font-bold text-gray-500">

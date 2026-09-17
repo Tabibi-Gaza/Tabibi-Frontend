@@ -215,15 +215,15 @@ export default function AdminPaymentMethods() {
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-2">
                                             {method.methodType === 'Bank' ? <Building2 size={20} className="text-[#003D9B]" /> : <Wallet size={20} className="text-[#138C9F]" />}
-                                            <span className="font-bold text-[15px] text-[#0B1C30]">{method.providerName}</span>
+                                            <span className="font-bold text-[15px] text-[#0B1C30] dark:text-gray-200">{method.providerName}</span>
                                         </div>
                                         <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${method.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
                                             {method.isActive ? t('adminPaymentMethods.active') : t('adminPaymentMethods.inactive')}
                                         </span>
                                     </div>
                                     <div className="space-y-2 text-[13px]">
-                                        <div className="flex justify-between"><span className="text-[#526069]">{t('adminPaymentMethods.accountHolder')}</span><span className="font-bold text-[#0B1C30]">{method.accountHolderName}</span></div>
-                                        <div className="flex justify-between"><span className="text-[#526069]">{t('adminPaymentMethods.phone')}</span><span className="font-bold text-[#0B1C30]" dir="ltr">{method.phoneNumber}</span></div>
+                                        <div className="flex justify-between"><span className="text-[#526069]">{t('adminPaymentMethods.accountHolder')}</span><span className="font-bold text-[#0B1C30] dark:text-gray-200">{method.accountHolderName}</span></div>
+                                        <div className="flex justify-between"><span className="text-[#526069]">{t('adminPaymentMethods.phone')}</span><span className="font-bold text-[#0B1C30] dark:text-gray-200" dir="ltr">{method.phoneNumber}</span></div>
                                         {method.iban && <div className="flex justify-between"><span className="text-[#526069]">{t('adminPaymentMethods.iban')}</span><span className="font-bold text-[#0B1C30] dark:text-white text-[11px]" dir="ltr">{method.iban}</span></div>}
                                     </div>
                                     <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-100">
@@ -237,7 +237,7 @@ export default function AdminPaymentMethods() {
                                 </div>
                             ))}
                             {paymentMethods.length === 0 && (
-                                <div className="col-span-full text-center py-12 text-[#526069]">{t('adminPaymentMethods.noPaymentMethods')}</div>
+                                <div className="col-span-full text-center py-12 text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.noPaymentMethods')}</div>
                             )}
                         </div>
                     )}
@@ -246,39 +246,39 @@ export default function AdminPaymentMethods() {
                 <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.activeSubscriptions')}</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalActiveSubscriptions}</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.activeSubscriptions')}</span><span className="font-semibold text-[20px] text-[#0B1C30] dark:text-gray-200">{stats.totalActiveSubscriptions}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#DCFCE7] rounded-full flex items-center justify-center text-[#166534]"><CheckCircle size={16} /></div>
                         </div>
                         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.trialPeriods')}</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalTrialSubscriptions}</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.trialPeriods')}</span><span className="font-semibold text-[20px] text-[#0B1C30] dark:text-gray-200">{stats.totalTrialSubscriptions}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#FFF7E6] rounded-full flex items-center justify-center text-[#B45309]"><Clock size={16} /></div>
                         </div>
                         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.pendingPayments')}</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.pendingPayments}</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.pendingPayments')}</span><span className="font-semibold text-[20px] text-[#0B1C30] dark:text-gray-200">{stats.pendingPayments}</span></div>
                             <div className="w-[30px] h-[30px] bg-[#FFF7E6] rounded-full flex items-center justify-center text-[#B45309]"><AlertCircle size={16} /></div>
                         </div>
                         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-4 h-[78px] flex items-center justify-between">
-                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.totalRevenue')}</span><span className="font-semibold text-[20px] text-[#0B1C30]">{stats.totalRevenue} ₪</span></div>
+                            <div className="flex flex-col"><span className="font-semibold text-[12px] text-[#526069]">{t('adminPaymentMethods.totalRevenue')}</span><span className="font-semibold text-[20px] text-[#0B1C30] dark:text-gray-200">{stats.totalRevenue} ₪</span></div>
                             <div className="w-[30px] h-[30px] bg-[#E5EEFF] rounded-full flex items-center justify-center text-[#003D9B]"><DollarSign size={16} /></div>
                         </div>
                     </div>
 
                     {pendingPayments.length > 0 && (
                         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl overflow-hidden">
-                            <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30]">{t('adminPaymentMethods.pendingPaymentsReview')}</h3></div>
+                            <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30] dark:text-gray-200">{t('adminPaymentMethods.pendingPaymentsReview')}</h3></div>
                             <div className="overflow-x-auto">
                                 <table className="w-full border-collapse text-right">
                                     <thead><tr className="bg-[#e2f4f7] dark:bg-gray-800 h-[48px]">
-                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">{t('adminPaymentMethods.doctor')}</th>
-                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">{t('adminPaymentMethods.amount')}</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.doctor')}</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.amount')}</th>
                                         <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{t('adminPaymentMethods.paymentMethod')}</th>
                                         <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{t('adminPaymentMethods.date')}</th>
-                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الإجراءات</th>
+                                        <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">الإجراءات</th>
                                     </tr></thead>
                                     <tbody className="divide-y divide-[#C3C6D6]">
                                         {pendingPayments.map((payment) => (
                                             <tr key={payment.id} className="h-[60px] hover:bg-slate-50">
-                                                <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
+                                                <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30] dark:text-gray-200">{payment.doctorName}</td>
                                                 <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
                                                 <td className="px-6 py-3 text-[13px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
                                                 <td className="px-6 py-3 text-[13px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{formatDate(payment.createdAt)}</td>
@@ -302,30 +302,30 @@ export default function AdminPaymentMethods() {
                     )}
 
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl overflow-hidden">
-                        <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30]">{t('adminPaymentMethods.allPayments')}</h3></div>
+                        <div className="px-6 py-4 border-b border-[#C3C6D6]"><h3 className="font-bold text-[16px] text-[#0B1C30] dark:text-gray-200">{t('adminPaymentMethods.allPayments')}</h3></div>
                         <div className="overflow-x-auto">
                             <table className="w-full border-collapse text-right">
                                 <thead><tr className="bg-[#e2f4f7] dark:bg-gray-800 h-[48px]">
-                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">{t('adminPaymentMethods.doctor')}</th>
-                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">{t('adminPaymentMethods.amount')}</th>
-                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">الحالة</th>
-                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069]">{t('adminPaymentMethods.date')}</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.doctor')}</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.amount')}</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">الحالة</th>
+                                    <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.date')}</th>
                                 </tr></thead>
                                 <tbody className="divide-y divide-[#C3C6D6]">
                                     {allPayments.map((payment) => (
                                         <tr key={payment.id} className="h-[55px] hover:bg-slate-50">
-                                            <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30]">{payment.doctorName}</td>
+                                            <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30] dark:text-gray-200">{payment.doctorName}</td>
                                             <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
                                             <td className="px-6 py-3">
                                                 <span className={`px-3 py-1 rounded-full text-[12px] font-bold ${payment.status === 'Approved' ? 'bg-[#DCFCE7] text-[#166534]' : payment.status === 'Rejected' ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#FFF7E6] text-[#B45309]'}`}>
                                                     {payment.status === 'Approved' ? t('adminPaymentMethods.approved') : payment.status === 'Rejected' ? t('adminPaymentMethods.rejected') : t('adminPaymentMethods.pending')}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-3 text-[13px] text-[#526069]">{formatDate(payment.createdAt)}</td>
+                                            <td className="px-6 py-3 text-[13px] text-[#526069] dark:text-gray-400">{formatDate(payment.createdAt)}</td>
                                         </tr>
                                     ))}
                                     {allPayments.length === 0 && (
-                                        <tr><td colSpan="4" className="px-6 py-10 text-center text-[#526069]">{t('adminPaymentMethods.noPayments')}</td></tr>
+                                        <tr><td colSpan="4" className="px-6 py-10 text-center text-[#526069] dark:text-gray-400">{t('adminPaymentMethods.noPayments')}</td></tr>
                                     )}
                                 </tbody>
                             </table>
@@ -349,7 +349,7 @@ export default function AdminPaymentMethods() {
 
                             <div>
                                 <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{formData.methodType === 'Bank' ? t('adminPaymentMethods.bank') : t('adminPaymentMethods.serviceProvider')}</label>
-                                <select value={formData.providerName} onChange={e => setFormData(p => ({ ...p, providerName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" required>
+                                <select value={formData.providerName} onChange={e => setFormData(p => ({ ...p, providerName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-gray-200" required>
                                     <option value="">{t('adminPaymentMethods.select')}</option>
                                     {(formData.methodType === 'Bank' ? bankOptions : walletOptions).map(b => <option key={b} value={b}>{b}</option>)}
                                 </select>
@@ -357,12 +357,12 @@ export default function AdminPaymentMethods() {
 
                             <div>
                                 <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('adminPaymentMethods.accountHolderName')}</label>
-                                <input type="text" value={formData.accountHolderName} onChange={e => setFormData(p => ({ ...p, accountHolderName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder={t('adminPaymentMethods.fullName')} required />
+                                <input type="text" value={formData.accountHolderName} onChange={e => setFormData(p => ({ ...p, accountHolderName: e.target.value }))} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-gray-200" placeholder={t('adminPaymentMethods.fullName')} required />
                             </div>
 
                             <div>
                                 <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('adminPaymentMethods.phoneNumber')}</label>
-                                <input type="text" value={formData.phoneNumber} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setFormData(p => ({ ...p, phoneNumber: val })); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
+                                <input type="text" value={formData.phoneNumber} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setFormData(p => ({ ...p, phoneNumber: val })); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-gray-200" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
 
                             {formData.methodType === 'Bank' && (

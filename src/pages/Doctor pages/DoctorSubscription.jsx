@@ -141,7 +141,7 @@ export default function DoctorSubscription() {
                                     {isTrial ? t('doctorSubscription.trialPeriod') : isActive ? t('doctorSubscription.activeSubscription') : t('doctorSubscription.expiredSubscription')}
                                 </span>
                             </div>
-                            <h3 className="font-extrabold text-[22px] text-[#0B1C30]">
+                            <h3 className="font-extrabold text-[22px] text-[#0B1C30] dark:text-gray-200">
                                 {isTrial ? t('doctorSubscription.freeTrial') : isActive ? t('doctorSubscription.monthlySubscription') : t('doctorSubscription.expiredSubscriptionTitle')}
                             </h3>
                             <p className="text-[14px] text-[#526069] dark:text-gray-400 mt-0.5">
@@ -161,11 +161,11 @@ export default function DoctorSubscription() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-5 border-t border-gray-100">
                     <div className="text-center">
                         <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">{t('doctorSubscription.startDate')}</span>
-                        <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.startDate)}</span>
+                        <span className="font-bold text-[14px] text-[#0B1C30] dark:text-gray-200">{formatDate(subscription?.startDate)}</span>
                     </div>
                     <div className="text-center">
                         <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">{t('doctorSubscription.endDate')}</span>
-                        <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.endDate)}</span>
+                        <span className="font-bold text-[14px] text-[#0B1C30] dark:text-gray-200">{formatDate(subscription?.endDate)}</span>
                     </div>
                     <div className="text-center">
                         <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">{t('doctorSubscription.amount')}</span>
@@ -184,16 +184,16 @@ export default function DoctorSubscription() {
             {showPaymentForm && (
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-bold text-[20px] text-[#0B1C30]">{t('doctorSubscription.confirmAndPay')}</h3>
+                        <h3 className="font-bold text-[20px] text-[#0B1C30] dark:text-gray-200">{t('doctorSubscription.confirmAndPay')}</h3>
                         <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
                     </div>
 
                     <div className="bg-[#ecf8fa] dark:bg-gray-900 rounded-xl p-4 mb-6 border border-[#C3C6D6]">
                         <div className="flex justify-between items-center">
-                            <span className="font-bold text-[15px] text-[#0B1C30]">{t('doctorSubscription.requiredAmount')}</span>
+                            <span className="font-bold text-[15px] text-[#0B1C30] dark:text-gray-200">{t('doctorSubscription.requiredAmount')}</span>
                             <span className="font-extrabold text-[24px] text-[#138C9F]">50 ₪</span>
                         </div>
-                        <span className="text-[12px] text-[#526069]">{t('doctorSubscription.monthlySubscriptionDesc')}</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400">{t('doctorSubscription.monthlySubscriptionDesc')}</span>
                     </div>
 
                     {banks.length > 0 && (
@@ -202,7 +202,7 @@ export default function DoctorSubscription() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {banks.map(method => (
                                     <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'}`}>
-                                        <div className="font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
+                                        <div className="font-bold text-[14px] text-[#0B1C30] dark:text-gray-200">{method.providerName}</div>
                                         <div className="text-[12px] text-[#526069] dark:text-gray-400 mt-1">{method.accountHolderName}</div>
                                         {method.iban && <div className="text-[11px] text-[#526069] dark:text-gray-400 mt-0.5" dir="ltr">{method.iban}</div>}
                                     </button>
@@ -217,7 +217,7 @@ export default function DoctorSubscription() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {wallets.map(method => (
                                     <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'}`}>
-                                        <div className="font-bold text-[14px] text-[#0B1C30]">{method.providerName}</div>
+                                        <div className="font-bold text-[14px] text-[#0B1C30] dark:text-gray-200">{method.providerName}</div>
                                         <div className="text-[12px] text-[#526069] dark:text-gray-400 mt-1">{method.accountHolderName}</div>
                                         <div className="text-[11px] text-[#526069] dark:text-gray-400 mt-0.5" dir="ltr">{method.phoneNumber}</div>
                                     </button>
@@ -227,7 +227,7 @@ export default function DoctorSubscription() {
                     )}
 
                     {adminMethods.length === 0 && (
-                        <div className="text-center py-8 text-[#526069]">
+                        <div className="text-center py-8 text-[#526069] dark:text-gray-400">
                             <AlertCircle size={32} className="mx-auto mb-2 text-gray-300" />{t('doctorSubscription.noPaymentMethods')}</div>
                     )}
 
@@ -238,7 +238,7 @@ export default function DoctorSubscription() {
                                 {receiptPreview ? (
                                     <img loading="lazy" decoding="async" width="480" height="480" src={receiptPreview} alt="receipt" className="w-full h-full object-contain rounded-xl p-2" />
                                 ) : (
-                                    <div className="flex flex-col items-center gap-2 text-[#526069]">
+                                    <div className="flex flex-col items-center gap-2 text-[#526069] dark:text-gray-400">
                                         <Upload size={28} />
                                         <span className="font-bold text-[13px]">{t('doctorSubscription.clickToUploadReceipt')}</span>
                                         <span className="text-[11px]">PNG, JPG (حد أقصى 5MB)</span>
@@ -251,11 +251,11 @@ export default function DoctorSubscription() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('doctorSubscription.accountHolderName')}</label>
-                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder={t('doctorSubscription.nameAsOnAccount')} required />
+                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-gray-200" placeholder={t('doctorSubscription.nameAsOnAccount')} required />
                             </div>
                             <div>
                                 <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('doctorSubscription.phoneNumber')}</label>
-                                <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
+                                <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-gray-200" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
                         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../api/axiosInstance';
 import {
   Calendar, Wallet, MessageSquare, Info, CheckCheck,
@@ -164,7 +164,7 @@ const DoctorNotifications = () => {
             )}
           </div>
           <div className="text-center sm:text-right flex-1">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0B1C30] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0B1C30] dark:text-gray-200 tracking-tight">
               الإشعارات
             </h1>
             <p className="text-sm sm:text-base font-semibold text-[#434654] mt-1">
@@ -219,7 +219,7 @@ const DoctorNotifications = () => {
                           {!group.allRead && (
                             <span className="w-2.5 h-2.5 bg-blue-500 rounded-full shrink-0" />
                           )}
-                          <h3 className="text-base font-bold text-[#0B1C30] group-hover:text-[#138C9F] transition-colors">
+                          <h3 className="text-base font-bold text-[#0B1C30] dark:text-gray-200 group-hover:text-[#138C9F] transition-colors">
                             {group.title}
                           </h3>
                           {group.count > 1 && (

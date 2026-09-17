@@ -415,11 +415,11 @@ const MedicalExamination = () => {
                                 </div>
                                 <div className="text-right">
                                     <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.patientName')}</span>
-                                    <span className="text-base md:text-lg font-black text-[#0B1C30]">{patient.fullName}</span>
+                                    <span className="text-base md:text-lg font-black text-[#0B1C30] dark:text-gray-200">{patient.fullName}</span>
                                 </div>
                             </div>
-                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.age')}</span><span className="text-base font-bold text-[#0B1C30]">{patientAge}</span></div>
-                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodType')}</span><span className="text-base font-bold text-[#0B1C30]">{patient.bloodType || t('medicalExamination.unknown')}</span></div>
+                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.age')}</span><span className="text-base font-bold text-[#0B1C30] dark:text-gray-200">{patientAge}</span></div>
+                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodType')}</span><span className="text-base font-bold text-[#0B1C30] dark:text-gray-200">{patient.bloodType || t('medicalExamination.unknown')}</span></div>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-center lg:justify-end">
@@ -453,34 +453,34 @@ const MedicalExamination = () => {
                             <div className="lg:col-span-4 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-5 shadow-xs">
                                 <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-3"><span>📋</span> <h3>{t('medicalExamination.createPrescription')}</h3></div>
                                 <div className="space-y-1.5 text-right">
-                                    <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.medicineName')}</label>
+                                    <label className="text-xs font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.medicineName')}</label>
                                     <input type="text" name="name" value={currentMed.name} onChange={handleMedInputChange} placeholder="مثلاً: بنادول..." className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl font-semibold text-sm focus:outline-hidden" />
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div className="space-y-1.5 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.dosage')}</label>
+                                        <label className="text-xs font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.dosage')}</label>
                                         <input type="text" name="dosage" value={currentMed.dosage} onChange={handleMedInputChange} placeholder="500 ملغ" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                     </div>
                                     <div className="space-y-1.5 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.frequency')}</label>
+                                        <label className="text-xs font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.frequency')}</label>
                                         <input type="text" name="frequency" value={currentMed.frequency} onChange={handleMedInputChange} placeholder="3 مرات" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                     </div>
                                 </div>
                                 <div className="space-y-1.5 text-right">
-                                    <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.duration')}</label>
+                                    <label className="text-xs font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.duration')}</label>
                                     <input type="text" name="duration" value={currentMed.duration} onChange={handleMedInputChange} placeholder="5 أيام" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                 </div>
                                 <button onClick={handleAddMedicine} className="w-full h-11 bg-[#138C9F] text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm hover:bg-[#0f7282] transition-colors cursor-pointer">➕ إضافة إلى الوصفة</button>
 
                                 <div className="pt-4 border-t border-gray-100 dark:border-gray-700 space-y-3">
-                                    <div className="flex justify-between items-center"><span className="text-sm font-black text-[#0B1C30]">{t('medicalExamination.addedMedicines')}</span></div>
+                                    <div className="flex justify-between items-center"><span className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.addedMedicines')}</span></div>
                                     <div className="space-y-2 max-h-60 overflow-y-auto">
                                         {addedMedicines.map(med => (
                                             <div key={med.id} className="p-3 border border-[#C3C6D6] dark:border-gray-700 rounded-xl flex items-center justify-between bg-slate-50 dark:bg-gray-900/50">
                                                 <div className="flex items-center gap-3">
                                                     <div className="text-[#138C9F] text-sm">💊</div>
                                                     <div className="text-right">
-                                                        <h5 className="text-sm font-black text-[#0B1C30]">{med.name}</h5>
+                                                        <h5 className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{med.name}</h5>
                                                         <p className="text-[11px] font-bold text-gray-400">{med.frequency} • {med.duration}</p>
                                                     </div>
                                                 </div>
@@ -544,19 +544,19 @@ const MedicalExamination = () => {
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
                                                 <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodPressure')}</span>
-                                                <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
+                                                <span className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
                                             </div>
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
                                                 <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodSugar')}</span>
-                                                <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodSugar || "—"}</span>
+                                                <span className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.bloodSugar || "—"}</span>
                                             </div>
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
                                                 <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.weight')}</span>
-                                                <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كغ` : "—"}</span>
+                                                <span className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كغ` : "—"}</span>
                                             </div>
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
                                                 <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.height')}</span>
-                                                <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
+                                                <span className="text-sm font-black text-[#0B1C30] dark:text-gray-200">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -576,17 +576,17 @@ const MedicalExamination = () => {
                                             <table className="w-full text-sm">
                                                 <thead>
                                                     <tr className="border-b border-gray-100">
-                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.medicineNameHeader')}</th>
-                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.dosage')}</th>
-                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.frequency')}</th>
-                                                        <th className="hidden md:table-cell p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.duration')}</th>
+                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.medicineNameHeader')}</th>
+                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.dosage')}</th>
+                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.frequency')}</th>
+                                                        <th className="hidden md:table-cell p-3 md:p-4 text-right font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.duration')}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {medicalHistoryData?.currentMedicines?.filter(m => m.name !== "لا يوجد").length > 0
                                                         ? medicalHistoryData.currentMedicines.filter(m => m.name !== "لا يوجد").map((med, idx) => (
                                                             <tr key={idx} className="border-b border-gray-50 last:border-0">
-                                                                <td className="p-3 md:p-4 font-bold text-[#0B1C30]">{med.name}</td>
+                                                                <td className="p-3 md:p-4 font-bold text-[#0B1C30] dark:text-gray-200">{med.name}</td>
                                                                 <td className="p-3 md:p-4 font-bold text-gray-600">{med.dosage || "—"}</td>
                                                                 <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
                                                                 <td className="hidden md:table-cell p-3 md:p-4 font-bold text-gray-600">{med.duration || "—"}</td>
@@ -750,11 +750,11 @@ const MedicalExamination = () => {
                             <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-5 shadow-xs">
                                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
                                     <div className="md:col-span-4 flex flex-col gap-2 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">بحث حسب التاريخ</label>
+                                        <label className="text-xs font-black text-[#0B1C30] dark:text-gray-200">بحث حسب التاريخ</label>
                                         <input className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:border-[#138C9F]" type="date" value={historyFilter.date} onChange={(e) => setHistoryFilter(prev => ({ ...prev, date: e.target.value }))} />
                                     </div>
                                     <div className="md:col-span-4 flex flex-col gap-2 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.specialization')}</label>
+                                        <label className="text-xs font-black text-[#0B1C30] dark:text-gray-200">{t('medicalExamination.specialization')}</label>
                                         <select className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-bold bg-white dark:bg-gray-800 focus:outline-none focus:border-[#138C9F]" value={historyFilter.diagnosis} onChange={(e) => setHistoryFilter(prev => ({ ...prev, diagnosis: e.target.value }))}>
                                             <option value="">{t('medicalExamination.all')}</option>
                                             {[...new Set(medicalHistory.map(v => v.doctorSpecialization).filter(Boolean))].map((d, i) => (
@@ -843,7 +843,7 @@ const MedicalExamination = () => {
                                                                     {visit.prescribedMedications.map((med, i) => (
                                                                         <div key={i} className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-100">
                                                                             <div className="flex justify-between items-center text-xs font-bold mb-1">
-                                                                                <span className="text-[#0B1C30]">{med.medicationName}</span>
+                                                                                <span className="text-[#0B1C30] dark:text-gray-200">{med.medicationName}</span>
                                                                                 <span className="text-[#138C9F]">{med.dosage || ''}</span>
                                                                             </div>
                                                                             <div className="flex gap-2 text-[10px] text-gray-400">

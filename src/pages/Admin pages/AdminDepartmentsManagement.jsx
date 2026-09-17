@@ -137,7 +137,7 @@ export default function AdminDepartmentsManagement() {
                 ) : departments.length > 0 ? (
                   departments.map((dept) => (
                     <tr key={dept.id} className="border-b border-[#C3C6D6] dark:border-gray-700 last:border-0 hover:bg-[#f1f4ff] transition-colors">
-                      <td className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#0B1C30]">{dept.name}</td>
+                      <td className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#0B1C30] dark:text-gray-200">{dept.name}</td>
                       <td className="p-3 md:p-4 text-center hidden md:table-cell">
                         <span className="inline-block bg-[#E5EEFF] text-[#0B1C30] dark:text-white text-[13px] md:text-[14px] font-semibold px-3 md:px-4 py-1 rounded-full">
                           {dept.doctorCount || 0} {(dept.doctorCount || 0) === 1 ? t('adminDepartments.doctor') : (dept.doctorCount || 0) >= 2 && (dept.doctorCount || 0) <= 10 ? t('adminDepartments.doctors') : t('adminDepartments.doctor')}
@@ -197,7 +197,7 @@ export default function AdminDepartmentsManagement() {
               <div className="flex items-center justify-start gap-3 mb-6 mt-2">
                 <Plus className="w-6 h-6 bg-[#138C9F] text-white rounded-full p-0.5" />
                 <div>
-                  <h3 className="text-[18px] md:text-[20px] font-bold text-[#0B1C30]">{modalMode === "add" ? t('adminDepartments.addNew') : t('adminDepartments.editTitle')}</h3>
+                  <h3 className="text-[18px] md:text-[20px] font-bold text-[#0B1C30] dark:text-gray-200">{modalMode === "add" ? t('adminDepartments.addNew') : t('adminDepartments.editTitle')}</h3>
                   <p className="text-[13px] md:text-[14px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">{t('adminDepartments.modalDescription')}</p>
                 </div>
               </div>

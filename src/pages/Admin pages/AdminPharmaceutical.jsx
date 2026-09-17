@@ -210,7 +210,7 @@ export default function AdminPharmaceutical() {
                                     onClick={() => setCurrentPage(pageNum)}
                                     className={`w-10 h-10 font-extrabold rounded-[5px] flex items-center justify-center text-[16px] transition-colors ${currentPage === pageNum
                                             ? 'bg-[#138C9F] text-white'
-                                            : 'bg-[#C3C6D6] text-black hover:bg-gray-400'
+                                            : 'bg-[#C3C6D6] text-black dark:text-white hover:bg-gray-400'
                                         }`}
                                 >
                                     {pageNum}
@@ -252,7 +252,7 @@ export default function AdminPharmaceutical() {
                                 <Pill className="w-4 h-4" />
                             </div>
                             <div>
-                                <h3 className="text-[20px] font-bold text-[#0B1C30]">
+                                <h3 className="text-[20px] font-bold text-[#0B1C30] dark:text-gray-200">
                                     {modalMode === 'add' ? t('adminPharmaceutical.addNewMedicine') : t('adminPharmaceutical.editMedicine')}
                                 </h3>
                                 <p className="text-[13px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">

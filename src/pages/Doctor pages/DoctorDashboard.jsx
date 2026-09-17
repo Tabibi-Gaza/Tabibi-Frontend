@@ -51,8 +51,8 @@ const DoctorDashboard = () => {
           completedCount: statsRes.data.data.completedAppointmentsCount || 0,
         });
       }
-    } catch (error) {
-
+    } catch (err) {
+      console.error('Failed to load dashboard data:', err);
     } finally {
       setLoading(false);
     }
@@ -164,12 +164,12 @@ const DoctorDashboard = () => {
 
         <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 p-4 md:p-6 rounded-2xl flex flex-col justify-between min-h-[5rem] md:min-h-[6rem] shadow-xs">
           <div className="text-left">
-            <svg className="w-6 h-6 text-[#526069]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-6 h-6 text-[#526069] dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
           <div className="text-left">
-            <h4 className="text-2xl md:text-3xl font-black text-[#0B1C30]">{stats.completedCount}</h4>
+            <h4 className="text-2xl md:text-3xl font-black text-[#0B1C30] dark:text-gray-200">{stats.completedCount}</h4>
             <p className="text-[10px] md:text-xs font-bold text-[#526069] dark:text-gray-400 mt-0.5 leading-tight">{t('doctorDashboard.completedAppointments')}</p>
           </div>
         </div>
@@ -201,7 +201,7 @@ const DoctorDashboard = () => {
           ) : (
             <table className="w-full text-right border-collapse max-w-full">
               <thead>
-                <tr className="bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 text-[#526069]">
+                <tr className="bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400">
                   <th className="p-3 md:p-4 text-xs font-bold">{t('doctorDashboard.patient')}</th>
                   <th className="p-3 md:p-4 text-xs font-bold">{t('doctorDashboard.timeSlot')}</th>
                   <th className="hidden md:table-cell p-3 md:p-4 text-xs font-bold">{t('doctorDashboard.status')}</th>
@@ -236,14 +236,14 @@ const DoctorDashboard = () => {
                         <span className="font-bold text-[#0B1C30] dark:text-white text-xs md:text-sm">{patientName}</span>
                       </div>
                     </td>
-                    <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30]">
+                    <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30] dark:text-gray-200">
                       {appt.startTime} - {appt.endTime}
                     </td>
                     <td className="hidden md:table-cell p-3 md:p-4 whitespace-nowrap">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                         appt.status === "مؤكد" ? "bg-[#D1F7EC] text-[#00875A]"
                           : appt.status === "قيد الانتظار" ? "bg-[#FFF0EE] text-[#BA1A1A]"
-                            : "bg-[#F4F5F7] text-[#526069]"
+                            : "bg-[#F4F5F7] text-[#526069] dark:text-gray-400"
                       }`}>
                         {appt.status}
                       </span>
@@ -283,7 +283,7 @@ const DoctorDashboard = () => {
           ) : (
             <table className="w-full text-right border-collapse max-w-full">
               <thead>
-                <tr className="bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 text-[#526069]">
+                <tr className="bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400">
                   <th className="p-3 md:p-4 text-xs font-bold">{t('doctorDashboard.patient')}</th>
                   <th className="p-3 md:p-4 text-xs font-bold">{t('doctorDashboard.time')}</th>
                   <th className="hidden md:table-cell p-3 md:p-4 text-xs font-bold">{t('doctorDashboard.status')}</th>
@@ -318,7 +318,7 @@ const DoctorDashboard = () => {
                         <span className="font-bold text-[#0B1C30] dark:text-white text-xs md:text-sm">{cleanName}</span>
                       </div>
                     </td>
-                    <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30]">
+                    <td className="p-3 md:p-4 whitespace-nowrap text-xs md:text-sm font-bold text-[#0B1C30] dark:text-gray-200">
                       {formatTimeArabic(req.startTime)}
                     </td>
                     <td className="hidden md:table-cell p-3 md:p-4 whitespace-nowrap">
@@ -347,7 +347,7 @@ const DoctorDashboard = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pb-14 bg-[#0B1C30]/40 backdrop-blur-xs">
           <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] border border-[#C3C6D6] dark:border-gray-700 overflow-hidden shadow-xl">
             <div className="bg-[#ecf8fa] dark:bg-gray-900 px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700/50 flex justify-between items-center">
-              <h3 className="text-base font-black text-[#0B1C30]">{t('doctorDashboard.invoiceDetails')}</h3>
+              <h3 className="text-base font-black text-[#0B1C30] dark:text-gray-200">{t('doctorDashboard.invoiceDetails')}</h3>
               <button onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }} className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold text-lg cursor-pointer">✕</button>
             </div>
 
@@ -384,11 +384,11 @@ const DoctorDashboard = () => {
 
                   <div className="space-y-3 border-b border-gray-100 dark:border-gray-700 pb-4">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="font-bold text-[#526069]">Amount:</span>
-                      <span className="font-black text-[#0B1C30]">{selectedPayment.amount} ILS</span>
+                      <span className="font-bold text-[#526069] dark:text-gray-400">Amount:</span>
+                      <span className="font-black text-[#0B1C30] dark:text-gray-200">{selectedPayment.amount} ILS</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
-                      <span className="font-bold text-[#526069]">{t('doctorDashboard.attachmentStatus')}</span>
+                      <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.attachmentStatus')}</span>
                       <span className="bg-[#FFF0EE] text-[#BA1A1A] px-2.5 py-0.5 rounded-full text-xs font-bold">
                         {selectedPayment.status === "PendingVerification" ? "بانتظار التأكيد" : selectedPayment.status === "Approved" ? "تم التأكيد" : selectedPayment.status === "Rejected" ? "مرفوض" : selectedPayment.status}
                       </span>
@@ -413,24 +413,24 @@ const DoctorDashboard = () => {
                       </div>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">{t('doctorDashboard.name')}</span>
-                          <span className="font-bold text-[#0B1C30]">{selectedPayment.paymentMethodName}</span>
+                          <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.name')}</span>
+                          <span className="font-bold text-[#0B1C30] dark:text-gray-200">{selectedPayment.paymentMethodName}</span>
                         </div>
                         {selectedPayment.accountHolderName && (
                           <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">{t('doctorDashboard.accountHolderName')}</span>
-                            <span className="font-bold text-[#0B1C30]">{selectedPayment.accountHolderName}</span>
+                          <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.accountHolderName')}</span>
+                            <span className="font-bold text-[#0B1C30] dark:text-gray-200">{selectedPayment.accountHolderName}</span>
                           </div>
                         )}
                         {selectedPayment.phoneNumber && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">{t('doctorDashboard.phone')}</span>
-                            <span className="font-bold text-[#0B1C30]">{selectedPayment.phoneNumber}</span>
+                            <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.phone')}</span>
+                            <span className="font-bold text-[#0B1C30] dark:text-gray-200">{selectedPayment.phoneNumber}</span>
                           </div>
                         )}
                         {selectedPayment.iban && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">{t('doctorDashboard.iban')}</span>
+                            <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.iban')}</span>
                             <span className="font-bold text-[#0B1C30] dark:text-white font-mono text-xs">{selectedPayment.iban}</span>
                           </div>
                         )}
@@ -443,13 +443,13 @@ const DoctorDashboard = () => {
                       <span className="font-black text-[#0B1C30] dark:text-white text-sm">{t('doctorDashboard.senderData')}</span>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-[#526069]">{t('doctorDashboard.accountHolderName')}</span>
-                          <span className="font-bold text-[#0B1C30]">{selectedPayment.senderAccountHolderName}</span>
+                          <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.accountHolderName')}</span>
+                          <span className="font-bold text-[#0B1C30] dark:text-gray-200">{selectedPayment.senderAccountHolderName}</span>
                         </div>
                         {selectedPayment.senderPhoneNumber && (
                           <div className="flex justify-between items-center">
-                            <span className="font-bold text-[#526069]">{t('doctorDashboard.phone')}</span>
-                            <span className="font-bold text-[#0B1C30]">{selectedPayment.senderPhoneNumber}</span>
+                            <span className="font-bold text-[#526069] dark:text-gray-400">{t('doctorDashboard.phone')}</span>
+                            <span className="font-bold text-[#0B1C30] dark:text-gray-200">{selectedPayment.senderPhoneNumber}</span>
                           </div>
                         )}
                       </div>
@@ -523,7 +523,7 @@ const DoctorDashboard = () => {
               <textarea
                 value={rejectionReason}
                 onChange={(e) => setRejectionReason(e.target.value)}
-                placeholder="Rejection reason (optional)"
+                placeholder="سبب الرفض (اختياري)"
                 className="w-full border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-3 text-sm text-right resize-none h-[6vh] focus:outline-none focus:border-[#138C9F]"
               />
             </div>
@@ -533,13 +533,13 @@ const DoctorDashboard = () => {
                 disabled={actionLoading}
                 className="flex-1 h-[3vh] bg-[#BA1A1A] hover:bg-[#9a1515] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
               >
-                {actionLoading ? "Rejecting..." : "Confirm Rejection"}
+                {actionLoading ? "جاري الرفض..." : "تأكيد الرفض"}
               </button>
               <button
                 onClick={() => { setRejectModalOpen(false); setRejectionReason(""); }}
                 className="px-4 h-[3vh] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
               >
-                Cancel
+                إلغاء
               </button>
             </div>
           </div>

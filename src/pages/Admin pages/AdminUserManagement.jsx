@@ -178,29 +178,29 @@ export default function AdminUserManagement() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.totalDoctors')}</span>
-                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalDoctors}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalDoctors')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Users size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.activeDoctors')}</span>
-                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalActiveDoctors}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.activeDoctors')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalActiveDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#6BFF8F]/30 rounded-full flex items-center justify-center text-[#004F20]"><UserCheck size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.totalUsers')}</span>
-                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalUsers}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalUsers')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalUsers}</span>
                     </div>
-                    <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069]"><UserPlus size={16} /></div>
+                    <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069] dark:text-gray-400"><UserPlus size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.inactiveAccounts')}</span>
-                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalInactiveUsers}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.inactiveAccounts')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalInactiveUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#FFDAD6] rounded-full flex items-center justify-center text-[#BA1A1A]"><Ban size={16} /></div>
                 </div>
@@ -224,7 +224,7 @@ export default function AdminUserManagement() {
                         </thead>
                         <tbody className="divide-y divide-[#C3C6D6]">
                             {loading ? (
-                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">{t('common.loading')}</td></tr>
+                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069] dark:text-gray-400">{t('common.loading')}</td></tr>
                             ) : users.map((user) => (
                                 <tr key={user.id} className="hover:bg-slate-50 dark:bg-gray-900 transition-colors">
                                     <td className="px-6 py-3 whitespace-nowrap">
@@ -237,8 +237,8 @@ export default function AdminUserManagement() {
                                                 </div>
                                             )}
                                             <div className="flex flex-col">
-                                                <span className="font-semibold text-[16px] text-[#0B1C30]">{user.name}</span>
-                                                <span className="font-medium text-[14px] text-[#526069]">{user.email}</span>
+                                                <span className="font-semibold text-[16px] text-[#0B1C30] dark:text-gray-200">{user.name}</span>
+                                                <span className="font-medium text-[14px] text-[#526069] dark:text-gray-400">{user.email}</span>
                                             </div>
                                         </div>
                                     </td>
@@ -254,7 +254,7 @@ export default function AdminUserManagement() {
                                         </span>
                                     </td>
                                     <td className="px-6 py-3 whitespace-nowrap text-center">
-                                        <div className="flex items-center justify-center gap-3 text-[#526069]">
+                                        <div className="flex items-center justify-center gap-3 text-[#526069] dark:text-gray-400">
                                             <button onClick={() => handleToggleActivation(user)} className={`transition-colors p-1.5 cursor-pointer ${user.isActive ? 'hover:text-amber-600' : 'hover:text-green-600'}`} title={user.isActive ? t('adminUserManagement.deactivate') : t('adminUserManagement.activate')}>
                                                 {user.isActive ? <ToggleLeft size={22} /> : <ToggleRight size={22} className="text-green-600" />}
                                             </button>
@@ -269,15 +269,15 @@ export default function AdminUserManagement() {
                                 </tr>
                             ))}
                             {!loading && users.length === 0 && (
-                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">لا يوجد مستخدمين لعرضهم.</td></tr>
+                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069] dark:text-gray-400">لا يوجد مستخدمين لعرضهم.</td></tr>
                             )}
                         </tbody>
                     </table>
                 </div>
 
                 <div className="border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex items-center justify-between flex-wrap gap-4 bg-white">
-                    <span className="text-[14px] text-[#526069]">
-                        عرض <strong className="text-[#0B1C30]">{users.length}</strong> من أصل <strong className="text-[#0B1C30]">{totalCountDisplay}</strong> مستخدم
+                    <span className="text-[14px] text-[#526069] dark:text-gray-400">
+                        عرض <strong className="text-[#0B1C30] dark:text-gray-200">{users.length}</strong> من أصل <strong className="text-[#0B1C30] dark:text-gray-200">{totalCountDisplay}</strong> مستخدم
                     </span>
                     {totalPages > 1 && (
                         <div className="flex items-center gap-1.5" dir="ltr">
@@ -312,7 +312,7 @@ export default function AdminUserManagement() {
                                         <span className={`text-white text-[13px] font-bold px-3 py-1 rounded-md ${selectedUser.userType === 'Doctor' ? 'bg-[#138C9F]' : selectedUser.userType === 'Secretary' ? 'bg-purple-600' : 'bg-[#003D9B]'}`}>
                                             {selectedUser.userType === 'Doctor' ? 'طبيب' : selectedUser.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
                                         </span>
-                                        <h3 className="font-extrabold text-[24px] text-[#0B1C30]">{selectedUser.name}</h3>
+                                        <h3 className="font-extrabold text-[24px] text-[#0B1C30] dark:text-gray-200">{selectedUser.name}</h3>
                                     </div>
                                 </div>
                                 {showImg(selectedUser) ? (
@@ -326,7 +326,7 @@ export default function AdminUserManagement() {
                         </div>
 
                         {detailsLoading ? (
-                            <div className="text-center py-8 text-[#526069]">جاري تحميل التفاصيل...</div>
+                            <div className="text-center py-8 text-[#526069] dark:text-gray-400">جاري تحميل التفاصيل...</div>
                         ) : userDetails ? (
                             selectedUser.userType === 'Doctor' ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full">
@@ -464,7 +464,7 @@ export default function AdminUserManagement() {
                                 </div>
                             )
                         ) : (
-                            <div className="text-center py-8 text-[#526069]">لا توجد تفاصيل</div>
+                            <div className="text-center py-8 text-[#526069] dark:text-gray-400">لا توجد تفاصيل</div>
                         )}
                     </div>
                 </div>

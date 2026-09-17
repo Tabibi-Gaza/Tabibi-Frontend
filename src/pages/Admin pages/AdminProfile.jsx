@@ -230,7 +230,7 @@ const AdminProfile = () => {
                                         disabled={!isEdit || loading}
                                         onClick={() => setLocalData(prev => ({ ...prev, gender: 'Male' }))}
                                         className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${
-                                            (isEdit ? localData.gender : userData.gender) === 'Male' ? 'bg-[#138C9F] text-white font-bold' : 'text-black hover:bg-[#C3C6D6]/40'
+                                            (isEdit ? localData.gender : userData.gender) === 'Male' ? 'bg-[#138C9F] text-white font-bold' : 'text-black dark:text-white hover:bg-[#C3C6D6]/40'
                                         } ${!isEdit ? 'cursor-not-allowed opacity-85' : 'cursor-pointer'}`}
                                     >
                                         ذكر
@@ -240,7 +240,7 @@ const AdminProfile = () => {
                                         disabled={!isEdit || loading}
                                         onClick={() => setLocalData(prev => ({ ...prev, gender: 'Female' }))}
                                         className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${
-                                            (isEdit ? localData.gender : userData.gender) === 'Female' ? 'bg-[#138C9F] text-white font-bold' : 'text-black hover:bg-[#C3C6D6]/40'
+                                            (isEdit ? localData.gender : userData.gender) === 'Female' ? 'bg-[#138C9F] text-white font-bold' : 'text-black dark:text-white hover:bg-[#C3C6D6]/40'
                                         } ${!isEdit ? 'cursor-not-allowed opacity-85' : 'cursor-pointer'}`}
                                     >
                                         أنثى

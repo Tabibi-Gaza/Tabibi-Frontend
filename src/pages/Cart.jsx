@@ -6,8 +6,13 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('cart') || '[]');
-    setCartItems(saved);
+    try {
+      const saved = JSON.parse(localStorage.getItem('cart') || '[]');
+      setCartItems(saved);
+    } catch (err) {
+      console.error('Failed to parse cart from localStorage:', err);
+      setCartItems([]);
+    }
   }, []);
 
   const removeItem = (itemId) => {
