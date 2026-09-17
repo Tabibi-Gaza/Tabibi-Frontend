@@ -2,6 +2,7 @@
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets_frontend/assets';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const PALESTINE_LOCATIONS = [
   "مدينة غزة",
@@ -22,6 +23,7 @@ const PALESTINE_LOCATIONS = [
 ];
 
 const DoctorProfile = () => {
+    const { t } = useTranslation();
     // استهلاك الـ Context الخاص بالطبيب
     const { doctorData, updateDoctorProfileData } = useContext(AppContext);
 
@@ -296,7 +298,7 @@ const DoctorProfile = () => {
                                 height="293"
                                 className="w-full h-full object-cover"
                                 src={image ? URL.createObjectURL(image) : doctorData.image || '/images/default-doctor.webp'}
-                                alt="صورة الطبيب الشخصية"
+                                alt={t('doctorProfile.profileImageAlt')}
                             />
                         </div>
 
@@ -322,8 +324,8 @@ const DoctorProfile = () => {
                     {/* 📝 نموذج حقول البيانات الاستبدالي المماثل للآدمن تماماً والظاهر في image_299dfc.png */}
                     <div className="flex-grow w-full">
                         <div className="text-right">
-                            <h2 className="text-2xl font-bold text-[#0B1C30] dark:text-white mb-1.5">المعلومات الشخصية للطبيب</h2>
-                            <p className="text-[#526069] dark:text-gray-400 text-sm">قم بتحديث معلوماتك الأساسية لضمان تجربة حجز دقيقة عبر منصة طبيبي.</p>
+                            <h2 className="text-2xl font-bold text-[#0B1C30] dark:text-white mb-1.5">{t('doctorProfile.title')}</h2>
+                            <p className="text-[#526069] dark:text-gray-400 text-sm">{t('doctorProfile.description')}</p>
                         </div>
 
                         <div className="border-b border-[#C3C6D6] dark:border-gray-700 my-5 w-full"></div>
@@ -332,13 +334,13 @@ const DoctorProfile = () => {
 
                             {/* الاسم الأول */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F] font-bold text-sm">الاسم الأول</label>
+                                <label className="text-[#138C9F] font-bold text-sm">{t('doctorProfile.firstName')}</label>
                                 <input
                                     type="text"
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.firstname : doctorData.firstname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, firstname: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -350,26 +352,26 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.lastname : doctorData.lastname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, lastname: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
                             {/* البريد الإلكتروني */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F] font-bold text-sm">البريد الإلكتروني</label>
+                                <label className="text-[#138C9F] font-bold text-sm">{t('doctorProfile.email')}</label>
                                 <input
                                     type="email"
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.email : doctorData.email || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, email: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                     style={{ direction: 'ltr' }}
                                 />
                             </div>
 
                             {/* رقم الهاتف */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F] font-bold text-sm">رقم الهاتف</label>
+                                <label className="text-[#138C9F] font-bold text-sm">{t('doctorProfile.phone')}</label>
                                 <input
                                     type="text"
                                     disabled={!isEdit || loading}
@@ -377,7 +379,7 @@ const DoctorProfile = () => {
                                     onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setLocalData(prev => ({ ...prev, phone: val })); }}
                                     maxLength={10}
                                     placeholder="059XXXXXXXX"
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                     style={{ direction: 'ltr' }}
                                 />
                             </div>
@@ -418,7 +420,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.dob : doctorData.dob || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, dob: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                 />
                             </div>
 
@@ -431,7 +433,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.experienceYears : doctorData.experienceYears || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, experienceYears: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                 />
                             </div>
 
@@ -444,7 +446,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.sessionPrice : doctorData.sessionPrice || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, sessionPrice: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                 />
                             </div>
 
@@ -457,7 +459,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.specialization : doctorData.specialization || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, specialization: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                 />
                             </div>
 
@@ -470,7 +472,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.clinicName : doctorData.clinicName || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, clinicName: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                 />
                             </div>
 
@@ -488,7 +490,7 @@ const DoctorProfile = () => {
                                             setShowLocations(true);
                                         }}
                                         onFocus={() => isEdit && !loading && setShowLocations(true)}
-                                        className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 w-full text-sm"
+                                        className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500 w-full text-sm"
                                     />
                                     {isEdit && showLocations && (
                                         <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl shadow-xl">
@@ -537,7 +539,7 @@ const DoctorProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.detailedAddress : doctorData.detailedAddress || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, detailedAddress: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500"
                                 />
                             </div>
 
@@ -550,7 +552,7 @@ const DoctorProfile = () => {
                                     rows={3}
                                     value={isEdit ? localData.bio : doctorData.bio || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, bio: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 resize-none"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl outline-none text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:text-gray-500 dark:disabled:text-gray-500 resize-none"
                                 />
                             </div>
 
@@ -593,7 +595,7 @@ const DoctorProfile = () => {
                                                             : 'border-[#C3C6D6] dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:border-[#138C9F]/50'
                                                     }`}
                                                 >
-                                                    رفع صورة
+                            {t('doctorProfile.uploadImage')}
                                                 </button>
                                             </div>
 

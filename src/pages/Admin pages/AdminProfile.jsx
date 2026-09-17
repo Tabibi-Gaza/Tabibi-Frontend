@@ -2,8 +2,10 @@
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets_frontend/assets';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const AdminProfile = () => {
+    const { t } = useTranslation();
     // استهلاك دالة الآدمن والبيانات من الـ Context
     const { userData, updateAdminProfileData } = useContext(AppContext);
 
@@ -73,7 +75,7 @@ const AdminProfile = () => {
             setImage(false);  
         } catch (error) {
 
-            toast.error("فشل حفظ التعديلات");
+            toast.error(t('adminProfile.saveFailed'));
         } finally {
             setLoading(false);
         }
@@ -101,7 +103,7 @@ const AdminProfile = () => {
                   height="220"
                   className="w-full h-full object-cover"
                   src={image ? URL.createObjectURL(image) : userData.image}
-                  alt="صورة شخصية"
+                  alt={t('adminProfile.profileImageAlt')}
                 />
               ) : (
                 // 2. إذا لم تكن هناك أي صورة، نعرض أول حرفين بشكل عريض ومناسب للحجم الكبير
@@ -128,9 +130,7 @@ const AdminProfile = () => {
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                     />
-                                </svg>
-                                رفع صورة
-                            </label>
+                                </svg>{t('adminProfile.uploadImage')}</label>
                             <input
                                 type="file"
                                 id="file-upload"
@@ -149,8 +149,8 @@ const AdminProfile = () => {
                     {/* 📝 العمود الأيسر: الاستمارات والإدخال */}
                     <div className="flex-grow w-full">
                         <div className="text-right">
-                            <h2 className="text-2xl font-bold text-[#0B1C30] dark:text-white mb-1.5">المعلومات الشخصية</h2>
-                            <p className="text-[#526069] dark:text-gray-400 text-sm">قم بتحديث معلوماتك الأساسية لضمان تجربة حجز دقيقة.</p>
+                            <h2 className="text-2xl font-bold text-[#0B1C30] dark:text-white mb-1.5">{t('adminProfile.title')}</h2>
+                            <p className="text-[#526069] dark:text-gray-400 text-sm">{t('adminProfile.description')}</p>
                         </div>
 
                         <div className="border-b border-[#C3C6D6] dark:border-gray-700 my-5 w-full"></div>
@@ -159,13 +159,13 @@ const AdminProfile = () => {
 
                             {/* الاسم الأول */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F]/85 font-medium text-sm">الاسم الأول</label>
+                                <label className="text-[#138C9F]/85 font-medium text-sm">{t('adminProfile.firstName')}</label>
                                 <input
                                     type="text"
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.firstname : userData.firstname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, firstname: e.target.value }))}
-                                    placeholder="الاسم الأول"
+                                    placeholder={t('adminProfile.firstName')}
                                     className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
@@ -185,7 +185,7 @@ const AdminProfile = () => {
 
                             {/* البريد الإلكتروني */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F]/85 font-medium text-sm">البريد الإلكتروني</label>
+                                <label className="text-[#138C9F]/85 font-medium text-sm">{t('adminProfile.email')}</label>
                                 <input
                                     type="email"
                                     disabled={!isEdit || loading}
@@ -198,7 +198,7 @@ const AdminProfile = () => {
 
                             {/* رقم الهاتف */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F]/85 font-medium text-sm">رقم الهاتف</label>
+                                <label className="text-[#138C9F]/85 font-medium text-sm">{t('adminProfile.phone')}</label>
                                 <input
                                     type="tel"
                                     disabled={!isEdit || loading}
@@ -211,7 +211,7 @@ const AdminProfile = () => {
 
                             {/* تاريخ الميلاد */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F]/85 font-medium text-sm">تاريخ الميلاد</label>
+                                <label className="text-[#138C9F]/85 font-medium text-sm">{t('adminProfile.dateOfBirth')}</label>
                                 <input
                                     type="date"
                                     disabled={!isEdit || loading}
@@ -223,7 +223,7 @@ const AdminProfile = () => {
 
                             {/* مكوّن اختيار الجنس التفاعلي */}
                             <div className="flex flex-col gap-1.5 text-right">
-                                <label className="text-[#138C9F]/85 font-medium text-sm">الجنس</label>
+                                <label className="text-[#138C9F]/85 font-medium text-sm">{t('adminProfile.gender')}</label>
                                 <div className="flex items-center border border-[#C3C6D6] dark:border-gray-700 rounded-lg overflow-hidden bg-[#E5EEFF] h-[48px]">
                                     <button
                                         type="button" 
@@ -266,7 +266,7 @@ const AdminProfile = () => {
                                                     strokeLinejoin="round"
                                                 />
                                             </svg>
-                                            {loading ? 'جاري الحفظ...' : 'حفظ التعديلات'}
+                                            {loading ? t('adminProfile.saving') : 'حفظ التعديلات'}
                                         </button>
                                         <button
                                             type="button"

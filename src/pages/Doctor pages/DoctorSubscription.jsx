@@ -4,8 +4,10 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/axiosInstance';
 import { AppContext } from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
 
 export default function DoctorSubscription() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { token } = useContext(AppContext);
     const [subscription, setSubscription] = useState(null);
@@ -45,17 +47,17 @@ export default function DoctorSubscription() {
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
         if (file) {
-            if (file.size > 5 * 1024 * 1024) { toast.error('حجم الملف يتجاوز 5 ميغابايت'); return; }
+            if (file.size > 5 * 1024 * 1024) { toast.error(t('doctorSubscription.fileTooLarge')); return; }
             setReceiptFile(file);
             setReceiptPreview(URL.createObjectURL(file));
         }
     };
 
     const handleSubmitPayment = async () => {
-        if (!selectedMethod) { toast.error('يرجى اختيار طريقة الدفع'); return; }
-        if (!senderName.trim()) { toast.error('يرجى إدخال اسم صاحب الحساب'); return; }
-        if (!senderPhone.trim()) { toast.error('يرجى إدخال رقم الهاتف'); return; }
-        if (!receiptFile) { toast.error('يرجى رفع صورة الإيصال'); return; }
+        if (!selectedMethod) { toast.error(t('doctorSubscription.selectPaymentMethod')); return; }
+        if (!senderName.trim()) { toast.error(t('doctorSubscription.enterAccountHolderName')); return; }
+        if (!senderPhone.trim()) { toast.error(t('doctorSubscription.enterPhoneNumber')); return; }
+        if (!receiptFile) { toast.error(t('doctorSubscription.uploadReceipt')); return; }
 
         setSubmitting(true);
         try {
@@ -71,7 +73,7 @@ export default function DoctorSubscription() {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             if (data.succeeded) {
-                toast.success('تم إرسال طلب الدفع بنجاح! سيتم مراجعته من قبل الإدارة');
+                toast.success(t('doctorSubscription.paymentSubmitted'));
                 setShowPaymentForm(false);
                 setSelectedMethod(null);
                 setReceiptFile(null);
@@ -80,10 +82,10 @@ export default function DoctorSubscription() {
                 setSenderPhone('');
                 fetchSubscription();
             } else {
-                toast.error(data.errors?.[0]?.message || 'فشل إرسال الطلب');
+                toast.error(data.errors?.[0]?.message || t('doctorSubscription.submitFailed'));
             }
         } catch (error) {
-            toast.error(error.response?.data?.message || 'حدث خطأ أثناء إرسال الطلب');
+            toast.error(error.response?.data?.message || t('doctorSubscription.submitError'));
         } finally { setSubmitting(false); }
     };
 
@@ -125,9 +127,7 @@ export default function DoctorSubscription() {
 
     return (
         <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
-            <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
-                اشتراكي
-            </h2>
+            <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">{t('doctorSubscription.title')}</h2>
 
             <div className={`bg-white dark:bg-gray-800 border rounded-2xl p-6 shadow-sm ${isTrial ? 'border-yellow-300' : isActive ? 'border-green-300' : 'border-red-200'}`}>
                 <div className="flex items-center justify-between flex-wrap gap-4">
@@ -138,14 +138,14 @@ export default function DoctorSubscription() {
                         <div>
                             <div className="flex items-center gap-2 mb-1">
                                 <span className={`font-bold text-[13px] px-3 py-1 rounded-md text-white ${isTrial ? 'bg-yellow-500' : isActive ? 'bg-green-600' : 'bg-red-500'}`}>
-                                    {isTrial ? 'فترة تجريبية' : isActive ? 'اشتراك نشط' : 'اشتراك منتهي'}
+                                    {isTrial ? t('doctorSubscription.trialPeriod') : isActive ? t('doctorSubscription.activeSubscription') : t('doctorSubscription.expiredSubscription')}
                                 </span>
                             </div>
                             <h3 className="font-extrabold text-[22px] text-[#0B1C30]">
-                                {isTrial ? 'فترة تجريبية مجانية' : isActive ? 'الاشتراك الشهري' : 'الاشتراك منتهي الصلاحية'}
+                                {isTrial ? t('doctorSubscription.freeTrial') : isActive ? t('doctorSubscription.monthlySubscription') : t('doctorSubscription.expiredSubscriptionTitle')}
                             </h3>
                             <p className="text-[14px] text-[#526069] dark:text-gray-400 mt-0.5">
-                                {isTrial ? 'استمتع بالمنصة لمدة 7 أيام مجاناً' : isActive ? `ينتهي في ${formatDate(subscription?.endDate)}` : 'يجب تجديد الاشتراك للاستمرار في استخدام المنصة'}
+                                {isTrial ? t('doctorSubscription.enjoyFreeTrial') : isActive ? `ينتهي في ${formatDate(subscription?.endDate)}` : t('doctorSubscription.renewToContinue')}
                             </p>
                         </div>
                     </div>
@@ -154,22 +154,22 @@ export default function DoctorSubscription() {
                         <div className={`font-extrabold text-[42px] leading-none ${remainingDays <= 2 && !isTrial ? 'text-red-500' : 'text-[#138C9F]'}`}>
                             {remainingDays}
                         </div>
-                        <span className="text-[13px] text-[#526069] dark:text-gray-400 font-semibold">يوم متبقي</span>
+                        <span className="text-[13px] text-[#526069] dark:text-gray-400 font-semibold">{t('doctorSubscription.daysRemaining')}</span>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-5 border-t border-gray-100">
                     <div className="text-center">
-                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">تاريخ البدء</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">{t('doctorSubscription.startDate')}</span>
                         <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.startDate)}</span>
                     </div>
                     <div className="text-center">
-                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">تاريخ الانتهاء</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">{t('doctorSubscription.endDate')}</span>
                         <span className="font-bold text-[14px] text-[#0B1C30]">{formatDate(subscription?.endDate)}</span>
                     </div>
                     <div className="text-center">
-                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">المبلغ</span>
-                        <span className="font-bold text-[14px] text-[#138C9F]">{subscription?.isTrial ? 'مجاني' : `${subscription?.amount || 0} ₪`}</span>
+                        <span className="text-[12px] text-[#526069] dark:text-gray-400 block mb-1">{t('doctorSubscription.amount')}</span>
+                        <span className="font-bold text-[14px] text-[#138C9F]">{subscription?.isTrial ? t('doctorSubscription.free') : `${subscription?.amount || 0} ₪`}</span>
                     </div>
                 </div>
             </div>
@@ -177,28 +177,28 @@ export default function DoctorSubscription() {
             {(isExpired || isTrial || !subscription) && (
                 <button onClick={() => { setShowPaymentForm(true); fetchAdminMethods(); }} className="flex items-center justify-center gap-2 w-full py-4 bg-[#138C9F] text-white rounded-xl font-bold text-[16px] hover:bg-[#0f7282] transition-colors cursor-pointer shadow-sm">
                     <CreditCard size={20} />
-                    {isTrial ? 'اشترك الآن بعد انتهاء الفترة التجريبية' : 'تجديد الاشتراك'}
+                    {isTrial ? t('doctorSubscription.subscribeNow') : t('doctorSubscription.renewSubscription')}
                 </button>
             )}
 
             {showPaymentForm && (
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-bold text-[20px] text-[#0B1C30]">تأكيد ودفع الاشتراك</h3>
+                        <h3 className="font-bold text-[20px] text-[#0B1C30]">{t('doctorSubscription.confirmAndPay')}</h3>
                         <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
                     </div>
 
                     <div className="bg-[#ecf8fa] dark:bg-gray-900 rounded-xl p-4 mb-6 border border-[#C3C6D6]">
                         <div className="flex justify-between items-center">
-                            <span className="font-bold text-[15px] text-[#0B1C30]">المبلغ المطلوب:</span>
+                            <span className="font-bold text-[15px] text-[#0B1C30]">{t('doctorSubscription.requiredAmount')}</span>
                             <span className="font-extrabold text-[24px] text-[#138C9F]">50 ₪</span>
                         </div>
-                        <span className="text-[12px] text-[#526069]">اشتراك شهري - 30 يوم</span>
+                        <span className="text-[12px] text-[#526069]">{t('doctorSubscription.monthlySubscriptionDesc')}</span>
                     </div>
 
                     {banks.length > 0 && (
                         <div className="mb-6">
-                            <h4 className="font-bold text-[15px] text-[#0B1C30] dark:text-white mb-3 flex items-center gap-2"><Building2 size={18} className="text-[#003D9B]" /> تحويل بنكي</h4>
+                            <h4 className="font-bold text-[15px] text-[#0B1C30] dark:text-white mb-3 flex items-center gap-2"><Building2 size={18} className="text-[#003D9B]" />{t('doctorSubscription.bankTransfer')}</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {banks.map(method => (
                                     <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'}`}>
@@ -213,7 +213,7 @@ export default function DoctorSubscription() {
 
                     {wallets.length > 0 && (
                         <div className="mb-6">
-                            <h4 className="font-bold text-[15px] text-[#0B1C30] dark:text-white mb-3 flex items-center gap-2"><Wallet size={18} className="text-[#138C9F]" /> محفظة إلكترونية</h4>
+                            <h4 className="font-bold text-[15px] text-[#0B1C30] dark:text-white mb-3 flex items-center gap-2"><Wallet size={18} className="text-[#138C9F]" />{t('doctorSubscription.electronicWallet')}</h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {wallets.map(method => (
                                     <button key={method.id} onClick={() => setSelectedMethod(method)} className={`text-right p-4 rounded-xl border-2 transition-all cursor-pointer ${selectedMethod?.id === method.id ? 'border-[#138C9F] bg-[#138C9F]/5' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'}`}>
@@ -228,21 +228,19 @@ export default function DoctorSubscription() {
 
                     {adminMethods.length === 0 && (
                         <div className="text-center py-8 text-[#526069]">
-                            <AlertCircle size={32} className="mx-auto mb-2 text-gray-300" />
-                            لا توجد طرق دفع متاحة حالياً. يرجى المحاولة لاحقاً.
-                        </div>
+                            <AlertCircle size={32} className="mx-auto mb-2 text-gray-300" />{t('doctorSubscription.noPaymentMethods')}</div>
                     )}
 
                     <div className="space-y-4">
                         <div>
-                            <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">صورة الإيصال / التحويل</label>
+                            <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('doctorSubscription.receiptImage')}</label>
                             <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl cursor-pointer hover:border-[#138C9F] transition-colors">
                                 {receiptPreview ? (
                                     <img loading="lazy" decoding="async" width="480" height="480" src={receiptPreview} alt="receipt" className="w-full h-full object-contain rounded-xl p-2" />
                                 ) : (
                                     <div className="flex flex-col items-center gap-2 text-[#526069]">
                                         <Upload size={28} />
-                                        <span className="font-bold text-[13px]">اضغط لرفع صورة الإيصال</span>
+                                        <span className="font-bold text-[13px]">{t('doctorSubscription.clickToUploadReceipt')}</span>
                                         <span className="text-[11px]">PNG, JPG (حد أقصى 5MB)</span>
                                     </div>
                                 )}
@@ -252,17 +250,17 @@ export default function DoctorSubscription() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">اسم صاحب الحساب</label>
-                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder="الاسم كما في الحساب" required />
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('doctorSubscription.accountHolderName')}</label>
+                                <input type="text" value={senderName} onChange={e => setSenderName(e.target.value)} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" placeholder={t('doctorSubscription.nameAsOnAccount')} required />
                             </div>
                             <div>
-                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">رقم الهاتف</label>
+                                <label className="block font-bold text-[13px] text-[#526069] dark:text-gray-400 mb-1.5">{t('doctorSubscription.phoneNumber')}</label>
                                 <input type="text" value={senderPhone} onChange={e => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setSenderPhone(val); }} className="w-full h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30]" dir="ltr" placeholder="059XXXXXXXX" maxLength={10} required />
                             </div>
                         </div>
 
                         <button onClick={handleSubmitPayment} disabled={submitting || !selectedMethod || !receiptFile} className="w-full py-4 bg-[#138C9F] text-white rounded-xl font-bold text-[16px] hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {submitting ? <><Loader2 size={18} className="animate-spin" /> جاري الإرسال...</> : <><FileText size={18} /> إرسال طلب الدفع</>}
+                            {submitting ? <><Loader2 size={18} className="animate-spin" />{t('doctorSubscription.sending')}</> : <><FileText size={18} />{t('doctorSubscription.sendPaymentRequest')}</>}
                         </button>
                     </div>
                 </div>

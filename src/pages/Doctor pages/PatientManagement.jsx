@@ -11,10 +11,12 @@ import {
     FiSearch
 } from 'react-icons/fi';
 import axiosInstance from '../../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || '';
 
 export default function PatientManagement() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const [patients, setPatients] = useState([]);
@@ -31,7 +33,7 @@ export default function PatientManagement() {
                         email: p.email,
                         avatar: p.profileImageUrl ? (p.profileImageUrl.startsWith('http') ? p.profileImageUrl : `${FILES_URL}/${p.profileImageUrl}`) : null,
                         age: p.age,
-                        gender: p.gender === 'Male' ? 'ذكر' : 'أنثى',
+                        gender: p.gender === 'Male' ? t('profile.male') : t('profile.female'),
                         lastVisit: p.lastVisit ? (() => { const d = new Date(p.lastVisit); const day = String(d.getDate()).padStart(2, '0'); const month = String(d.getMonth() + 1).padStart(2, '0'); const year = d.getFullYear(); return `${day}/${month}/${year}`; })() : '—',
                         isActive: true
                     })));
@@ -89,7 +91,7 @@ export default function PatientManagement() {
     if (loading) {
         return (
             <div className="w-full bg-gray-50 dark:bg-gray-900/50 pb-8 pr-4 flex items-center justify-center h-64" dir="rtl">
-                <p className="text-gray-400 dark:text-gray-500 font-bold">جاري تحميل بيانات المرضى...</p>
+                <p className="text-gray-400 dark:text-gray-500 font-bold">{t('patientManagement.loading')}</p>
             </div>
         );
     }
@@ -106,10 +108,10 @@ export default function PatientManagement() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
           <div className="space-y-1">
             <h1 className="text-2xl md:text-3xl font-extrabold text-[#138C9F]">
-              إدارة المرضى
+              {t('patientManagement.title')}
             </h1>
             <p className="text-sm font-semibold text-[#434654]">
-              إجمالي المتاح بالقائمة الفعالة: {filteredPatients.length} مريض
+              {t('patientManagement.totalAvailable', { count: filteredPatients.length })}
             </p>
           </div>
         </div>
@@ -119,7 +121,7 @@ export default function PatientManagement() {
           {/* شريط التحكم بالبحث والتصفية */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 ">
             <h2 className="text-lg md:text-xl font-bold text-[#0B1C30]">
-              قائمة المرضى
+              {t('patientManagement.patientList')}
             </h2>
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
               <div className="relative w-full sm:w-64">
@@ -128,7 +130,7 @@ export default function PatientManagement() {
                 </span>
                 <input
                   type="text"
-                  placeholder="ابحث باسم المريض..."
+                  placeholder={t('patientManagement.searchPlaceholder')}
                   value={searchTerm}
                   onChange={handleSearchChange}
                   className="w-full h-10 ps-9 pe-4 bg-gray-50 dark:bg-gray-900 rounded-lg text-sm text-right focus:outline-none focus:border-[#138C9F]"
@@ -140,9 +142,9 @@ export default function PatientManagement() {
                   onChange={handleFilterChange}
                   className="w-full sm:w-auto h-10 px-8 bg-white dark:bg-gray-800 rounded-lg text-sm font-bold text-right cursor-pointer focus:outline-none"
                 >
-                  <option value="all">كل الحالات</option>
-                  <option value="active">نشط</option>
-                  <option value="inactive">غير نشط</option>
+                  <option value="all">{t('patientManagement.allStatuses')}</option>
+                  <option value="active">{t('patientManagement.active')}</option>
+                  <option value="inactive">{t('patientManagement.inactive')}</option>
                 </select>
                 <FiSliders className="absolute inset-y-0 start-3 my-auto text-gray-400 dark:text-gray-500 pointer-events-none transform rotate-90 w-3.5 h-3.5" />
               </div>
@@ -154,11 +156,11 @@ export default function PatientManagement() {
             <table className="w-full text-right border-collapse">
               <thead>
                 <tr className="bg-[#e2f4f7] dark:bg-gray-800  text-xs font-bold text-[#434654]">
-                  <th className="p-4 w-[30%]">الاسم</th>
-                  <th className="p-4 text-center">العمر/ الجنس</th>
-                  <th className="p-4 text-center">آخر زيارة</th>
-                  <th className="p-4 text-center">الحالة</th>
-                  <th className="p-4 text-center w-[30%]">إجراءات سريعة</th>
+                  <th className="p-4 w-[30%]">{t('patientManagement.nameHeader')}</th>
+                  <th className="p-4 text-center">{t('patientManagement.ageGenderHeader')}</th>
+                  <th className="p-4 text-center">{t('patientManagement.lastVisitHeader')}</th>
+                  <th className="p-4 text-center">{t('patientManagement.statusHeader')}</th>
+                  <th className="p-4 text-center w-[30%]">{t('patientManagement.actionsHeader')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#C3C6D6]/60">
@@ -190,7 +192,7 @@ export default function PatientManagement() {
                         </div>
                       </td>
                       <td className="p-4 text-center text-sm font-medium">
-                        {patient.age} سنة / {patient.gender}
+                        {patient.age} {t('patientManagement.years')} / {patient.gender}
                       </td>
                       <td className="p-4 text-center text-sm font-medium">
                         {patient.lastVisit}
@@ -199,7 +201,7 @@ export default function PatientManagement() {
                         <span
                           className={`inline-block px-4 py-1 text-xs font-bold rounded-full ${patient.isActive ? "bg-[#138C9F]/20 text-[#138C9F]" : "bg-[#526069]/10 text-[#526069]"}`}
                         >
-                          {patient.isActive ? "مكتمل" : "غير مكتمل"}
+                          {patient.isActive ? t('patientManagement.statusCompleted') : t('patientManagement.statusIncomplete')}
                         </span>
                       </td>
                       <td className="p-4 text-center">
@@ -208,14 +210,14 @@ export default function PatientManagement() {
                             onClick={() => handleMedicalRecord(patient.id)}
                             className="flex items-center gap-2 px-4 py-2 bg-[#138C9F] text-white text-xs font-extrabold rounded-lg hover:bg-[#107585] shadow-sm cursor-pointer"
                           >
-                            <span>السجل المرضي الشخصي</span>
+                            <span>{t('patientManagement.personalMedicalRecord')}</span>
                             <FiFileText className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleMedicalFile(patient.id)}
                             className="flex items-center gap-2 px-4 py-2 border border-[#138C9F] text-[#138C9F] text-xs font-extrabold rounded-lg hover:bg-[#138C9F]/5 cursor-pointer"
                           >
-                            <span>التاريخ الطبي</span>
+                            <span>{t('patientManagement.medicalHistory')}</span>
                             <FiFolder className="w-3.5 h-3.5" />
                           </button>
                         </div>
@@ -228,7 +230,7 @@ export default function PatientManagement() {
                       colSpan="5"
                       className="text-center p-8 text-sm text-gray-400"
                     >
-                      لا يوجد مرضى يطابقون خيارات البحث.
+                      {t('patientManagement.noMatchingPatients')}
                     </td>
                   </tr>
                 )}
@@ -261,19 +263,19 @@ export default function PatientManagement() {
                   <span
                     className={`px-3 py-0.5 text-[11px] font-bold rounded-full ${patient.isActive ? "bg-[#138C9F]/20 text-[#138C9F]" : "bg-[#526069]/10 text-[#526069]"}`}
                   >
-                    {patient.isActive ? "نشط" : "غير نشط"}
+                    {patient.isActive ? t('patientManagement.active') : t('patientManagement.inactive')}
                   </span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-gray-50 dark:bg-gray-900 p-3 rounded-xl text-xs font-bold text-slate-700">
                   <div>
                     <span className="text-gray-400 dark:text-gray-500 block mb-0.5">
-                      العمر / الجنس
+                      {t('patientManagement.ageGender')}
                     </span>
-                    {patient.age} سنة / {patient.gender}
+                    {patient.age} {t('patientManagement.years')} / {patient.gender}
                   </div>
                   <div>
                     <span className="text-gray-400 dark:text-gray-500 block mb-0.5">
-                      آخر زيارة
+                      {t('patientManagement.lastVisitHeader')}
                     </span>
                     {patient.lastVisit}
                   </div>
@@ -283,14 +285,14 @@ export default function PatientManagement() {
                     onClick={() => handleMedicalRecord(patient.id)}
                     className="flex-1 flex items-center justify-center gap-1.5 h-10 bg-[#138C9F] text-white text-xs font-extrabold rounded-xl cursor-pointer"
                   >
-                    <span>السجل المرضي الشخصي</span>
+                    <span>{t('patientManagement.personalMedicalRecord')}</span>
                     <FiFileText className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => handleMedicalFile(patient.id)}
                     className="flex-1 flex items-center justify-center gap-1.5 h-10 border border-[#138C9F] text-[#138C9F] text-xs font-extrabold rounded-xl bg-white dark:bg-gray-800 cursor-pointer"
                   >
-                    <span>التاريخ الطبي</span>
+                    <span>{t('patientManagement.medicalHistory')}</span>
                     <FiFolder className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -301,12 +303,12 @@ export default function PatientManagement() {
           {/* شريط التنقل السفلي المعدل (Pagination Fixed) */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4 bg-gray-50 dark:bg-gray-900 border-t border-[#C3C6D6] dark:border-gray-700 text-sm text-[#434654]">
             <div className="font-semibold text-center sm:text-right">
-              عرض{" "}
+              {t('patientManagement.showing')}{" "}
               {filteredPatients.length > 0
                 ? (currentPage - 1) * itemsPerPage + 1
                 : 0}
               -{Math.min(currentPage * itemsPerPage, filteredPatients.length)}{" "}
-              من أصل {filteredPatients.length} مريض
+              {t('patientManagement.ofTotal', { count: filteredPatients.length })}
             </div>
 
             <div className="flex items-center gap-1.5">

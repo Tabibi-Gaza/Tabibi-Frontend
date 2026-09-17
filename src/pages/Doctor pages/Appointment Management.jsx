@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
 import { formatTimeArabic } from '../../utils/dateFormatter';
 import { FiRotateCcw } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || '';
 
@@ -22,16 +23,17 @@ const STATUS_MAP = {
 };
 
 const STATUS_LABELS = {
-  'PendingPayment': 'بانتظار الدفع',
-  'PendingVerification': 'بانتظار التأكيد',
+  'PendingPayment': t('appointmentManagement.pendingPayment'),
+  'PendingVerification': t('appointmentManagement.pendingVerification'),
   'Confirmed': 'مؤكد',
-  'InProgress': 'جاري الكشف',
-  'Completed': 'مكتمل',
+  'InProgress': t('appointmentManagement.inProgress'),
+  'Completed': t('appointmentManagement.completed'),
   'Cancelled': 'ملغي',
-  'NoShow': 'لم يحضر',
+  'NoShow': t('appointmentManagement.noShow'),
 };
 
 const AppointmentManagement = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('all');
     const [statusFilter, setStatusFilter] = useState('all');
@@ -126,7 +128,7 @@ const AppointmentManagement = () => {
         try {
             const { data } = await axiosInstance.post(`/doctor/appointments/${appointmentId}/start-consultation`);
             if (data.succeeded) {
-                toast.success('تم بدء الكشف بنجاح');
+                toast.success(t('appointmentManagement.examinationStarted'));
             }
         } catch (err) {
         }
@@ -160,28 +162,28 @@ const AppointmentManagement = () => {
       <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
         <div className="space-y-6 text-right">
           <div className="text-right space-y-1">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#112240]">إدارة المواعيد</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#112240]">{t('appointmentManagement.title')}</h1>
             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">لديك {stats.todayAppointmentsCount} موعداً مجدولاً لهذا اليوم.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 sm:p-6 flex items-center justify-between text-right shadow-2xs">
               <div className="space-y-1">
-                <span className="text-xs sm:text-sm font-bold text-gray-400">مواعيد اليوم</span>
+                <span className="text-xs sm:text-sm font-bold text-gray-400">{t('appointmentManagement.todayAppointments')}</span>
                 <h2 className="text-2xl sm:text-3xl font-black text-[#1b8b99]">{stats.todayAppointmentsCount}</h2>
               </div>
               <div className="w-12 h-12 rounded-2xl bg-cyan-50 flex items-center justify-center text-[#1b8b99]"><FiCalendar className="w-5 h-5" /></div>
             </div>
             <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 sm:p-6 flex items-center justify-between text-right shadow-2xs">
               <div className="space-y-1">
-                <span className="text-xs sm:text-sm font-bold text-gray-400">بانتظار التأكيد</span>
+                <span className="text-xs sm:text-sm font-bold text-gray-400">{t('appointmentManagement.pendingVerification')}</span>
                 <h2 className="text-2xl sm:text-3xl font-black text-slate-800">{stats.pendingVerificationCount}</h2>
               </div>
               <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500"><FiClock className="w-5 h-5" /></div>
             </div>
             <div className="bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-5 sm:p-6 flex items-center justify-between text-right shadow-2xs">
               <div className="space-y-1">
-                <span className="text-xs sm:text-sm font-bold text-gray-400">تم الانتهاء</span>
+                <span className="text-xs sm:text-sm font-bold text-gray-400">{t('appointmentManagement.completed')}</span>
                 <h2 className="text-2xl sm:text-3xl font-black text-slate-800">{stats.completedAppointmentsCount}</h2>
               </div>
               <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center text-green-500"><FiCheckCircle className="w-5 h-5" /></div>
@@ -192,9 +194,9 @@ const AppointmentManagement = () => {
             <div className="px-4 pt-4 sm:px-6 border-b border-slate-100 dark:border-gray-700 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
               <div className="flex items-center gap-6 sm:gap-8 border-b border-slate-100 dark:border-gray-700 md:border-none overflow-x-auto shrink-0 pb-2 md:pb-0">
                 {[
-                  { key: 'daily', label: 'الجدول اليومي' },
-                  { key: 'all', label: 'جميع المواعيد' },
-                  { key: 'waiting', label: 'قائمة الانتظار' },
+                  { key: 'daily', label: t('appointmentManagement.dailySchedule') },
+                  { key: 'all', label: t('appointmentManagement.allAppointments') },
+                  { key: 'waiting', label: t('appointmentManagement.waitingList') },
                 ].map(tab => (
                   <button key={tab.key} onClick={() => handleTabChange(tab.key)}
                     className={`text-sm sm:text-base font-bold pb-3.5 transition-all relative whitespace-nowrap cursor-pointer ${activeTab === tab.key ? "text-[#1b8b99] border-b-2 border-[#1b8b99]" : "text-gray-400 dark:text-gray-500 hover:text-gray-600"}`}>
@@ -207,9 +209,9 @@ const AppointmentManagement = () => {
                   <FiSliders className="w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none ml-2 shrink-0" />
                   <select value={statusFilter} onChange={handleStatusFilterChange}
                     className="w-full bg-transparent border-none outline-none text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 cursor-pointer appearance-none text-right">
-                    <option value="all">كل الحالات</option>
-                    <option value="completed">مكتمل</option>
-                    <option value="not_completed">غير مكتمل</option>
+                    <option value="all">{t('appointmentManagement.allStatuses')}</option>
+                    <option value="completed">{t('appointmentManagement.completed')}</option>
+                    <option value="not_completed">{t('appointmentManagement.notCompleted')}</option>
                   </select>
                 </div>
               </div>
@@ -217,19 +219,15 @@ const AppointmentManagement = () => {
 
             {activeTab === 'all' && (
               <div className="px-4 sm:px-6 py-4 border-b border-slate-100 dark:border-gray-700 flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                <label className="text-xs font-bold text-slate-600 dark:text-gray-400 shrink-0">تخصيص التاريخ</label>
+                <label className="text-xs font-bold text-slate-600 dark:text-gray-400 shrink-0">{t('appointmentManagement.customDate')}</label>
                 <input type="date" value={customDate} onChange={e => setCustomDate(e.target.value)}
                   className="text-sm font-bold border border-slate-200 dark:border-gray-700 rounded-xl px-4 py-2 text-slate-700 dark:text-gray-300 bg-white dark:bg-gray-800 focus:border-[#1b8b99] focus:outline-none transition-all w-full sm:w-56" />
                 <div className="flex items-center gap-2">
                   <button onClick={() => { setAppliedDate(customDate); setCurrentPage(1); }}
-                    className="text-sm font-bold px-5 py-2 rounded-xl bg-[#1b8b99] text-white hover:bg-[#15727e] transition-all cursor-pointer shadow-xs">
-                    تطبيق الفلتر
-                  </button>
+                    className="text-sm font-bold px-5 py-2 rounded-xl bg-[#1b8b99] text-white hover:bg-[#15727e] transition-all cursor-pointer shadow-xs">{t('appointmentManagement.applyFilter')}</button>
                   <button onClick={() => { setCustomDate(''); setAppliedDate(''); setCurrentPage(1); }}
                     className="flex items-center gap-1.5 text-sm font-bold px-5 py-2 rounded-xl border border-slate-200 dark:border-gray-700 text-slate-600 dark:text-gray-400 hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer">
-                    <FiRotateCcw className="w-3.5 h-3.5" />
-                    إعادة ضبط
-                  </button>
+                    <FiRotateCcw className="w-3.5 h-3.5" />{t('appointmentManagement.reset')}</button>
                 </div>
               </div>
             )}
@@ -242,11 +240,11 @@ const AppointmentManagement = () => {
                   <table className="w-full text-right border-collapse">
                     <thead>
                       <tr className="bg-slate-50 dark:bg-gray-900/60 border-b border-slate-100 dark:border-gray-700 text-slate-500 dark:text-gray-400 text-xs font-bold h-12">
-                        <th className="px-6 text-center md:text-right">المريض</th>
-                        <th className="px-6">الوقت</th>
-                        <th className="px-6">نوع الزيارة</th>
-                        <th className="px-6">الحالة</th>
-                        <th className="px-6 text-center">الإجراءات</th>
+                        <th className="px-6 text-center md:text-right">{t('appointmentManagement.patient')}</th>
+                        <th className="px-6">{t('appointmentManagement.time')}</th>
+                        <th className="px-6">{t('appointmentManagement.visitType')}</th>
+                        <th className="px-6">{t('appointmentManagement.status')}</th>
+                        <th className="px-6 text-center">{t('appointmentManagement.actions')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
@@ -282,9 +280,7 @@ const AppointmentManagement = () => {
                             </td>
                             <td className="px-6 text-center">
                               <button disabled={!canStart} onClick={() => handleStartSession(appt.id, appt.patientId)}
-                                className={`text-xs font-bold px-4 py-2 rounded-xl transition-all ${canStart ? "bg-[#1b8b99] hover:bg-[#15727e] text-white cursor-pointer shadow-2xs" : "bg-slate-100 dark:bg-gray-800 text-slate-400 dark:text-gray-500 cursor-not-allowed"}`}>
-                                بدء الكشف
-                              </button>
+                                className={`text-xs font-bold px-4 py-2 rounded-xl transition-all ${canStart ? "bg-[#1b8b99] hover:bg-[#15727e] text-white cursor-pointer shadow-2xs" : "bg-slate-100 dark:bg-gray-800 text-slate-400 dark:text-gray-500 cursor-not-allowed"}`}>{t('appointmentManagement.startExamination')}</button>
                             </td>
                           </tr>
                         );
@@ -317,19 +313,17 @@ const AppointmentManagement = () => {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs bg-slate-50 dark:bg-gray-900/60 p-3 rounded-xl border border-slate-100">
                           <div>
-                            <p className="text-[10px] text-gray-400">الوقت والتاريخ</p>
+                            <p className="text-[10px] text-gray-400">{t('appointmentManagement.timeAndDate')}</p>
                             <p className="font-bold text-gray-800 dark:text-gray-200 mt-0.5">{dt.time} <span className="text-[10px] text-gray-400 dark:text-gray-500 font-medium">({dt.date})</span></p>
                           </div>
                           <div>
-                            <p className="text-[10px] text-gray-400">نوع الزيارة</p>
+                            <p className="text-[10px] text-gray-400">{t('appointmentManagement.visitType')}</p>
                             <p className="font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 mt-0.5">{appt.visitType || '-'}</p>
                           </div>
                         </div>
                         <div className="pt-1">
                           <button disabled={!canStart} onClick={() => handleStartSession(appt.id, appt.patientId)}
-                            className={`w-full text-xs font-bold py-2.5 rounded-xl transition-all text-center ${canStart ? "bg-[#1b8b99] hover:bg-[#15727e] text-white shadow-xs" : "bg-slate-100 dark:bg-gray-800 text-slate-400 dark:text-gray-500 cursor-not-allowed"}`}>
-                            بدء الكشف
-                          </button>
+                            className={`w-full text-xs font-bold py-2.5 rounded-xl transition-all text-center ${canStart ? "bg-[#1b8b99] hover:bg-[#15727e] text-white shadow-xs" : "bg-slate-100 dark:bg-gray-800 text-slate-400 dark:text-gray-500 cursor-not-allowed"}`}>{t('appointmentManagement.startExamination')}</button>
                         </div>
                       </div>
                     );
@@ -337,15 +331,13 @@ const AppointmentManagement = () => {
                 </div>
 
                 {appointments.length === 0 && (
-                  <div className="p-12 text-center text-gray-400 dark:text-gray-500 text-sm font-medium">لا توجد مواعيد مجدولة.</div>
+                  <div className="p-12 text-center text-gray-400 dark:text-gray-500 text-sm font-medium">{t('appointmentManagement.noScheduledAppointments')}</div>
                 )}
               </>
             )}
 
             <div className="border-t border-slate-100 dark:border-gray-700 px-4 sm:px-6 py-4 flex items-center justify-between flex-row-reverse">
-              <p className="text-xs sm:text-sm font-bold text-gray-500">
-                عرض <span className="text-gray-700">{appointments.length}</span> من أصل <span className="text-gray-700">{totalCount}</span> موعد
-              </p>
+              <p className="text-xs sm:text-sm font-bold text-gray-500">{t('appointmentManagement.showing')}<span className="text-gray-700">{appointments.length}</span>{t('appointmentManagement.ofTotal')}<span className="text-gray-700">{totalCount}</span>{t('appointmentManagement.appointment')}</p>
               <div className="flex items-center gap-1.5" dir="ltr">
                 <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
                   className={`w-8 h-8 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900 transition-colors ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}>

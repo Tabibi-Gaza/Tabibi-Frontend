@@ -2,14 +2,16 @@
 import { SlidersHorizontal, Calendar, CheckCircle2, Clock, DollarSign, TrendingUp } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 export default function AdminFinancialTransactions() {
+    const { t } = useTranslation();
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [stats, setStats] = useState({ totalAppointments: 0, successfulPayments: 0, pendingPayments: 0, totalRevenue: 0 });
     const [statsLoading, setStatsLoading] = useState(false);
 
-    const [filterStatus, setFilterStatus] = useState('الكل');
+    const [filterStatus, setFilterStatus] = useState(t('adminFinancialTransactions.all'));
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const INITIAL_VISIBLE_COUNT = 3;
@@ -26,9 +28,9 @@ export default function AdminFinancialTransactions() {
                     doctorName: t.doctorName || '-',
                     amount: t.amount,
                     date: t.date || t.createdAt,
-                    status: t.status === 'Approved' || t.status === 'مكتمل' ? 'مكتمل' : t.status === 'Rejected' || t.status === 'ملغى' || t.status === 'مرفوض' ? 'ملغى' : 'قيد الانتظار',
+                    status: t.status === 'Approved' || t.status === t('adminFinancialTransactions.completed') ? t('adminFinancialTransactions.completed') : t.status === 'Rejected' || t.status === t('adminFinancialTransactions.cancelled') || t.status === 'مرفوض' ? t('adminFinancialTransactions.cancelled') : t('adminFinancialTransactions.pending'),
                     notes: t.notes || t.reason || '',
-                    type: t.type || 'اشتراك',
+                    type: t.type || t('adminFinancialTransactions.subscription'),
                 })));
             } else {
                 setTransactions([]);
@@ -65,7 +67,7 @@ export default function AdminFinancialTransactions() {
         fetchStats();
     }, [fetchTransactions, fetchStats]);
 
-    const filteredTransactions = transactions.filter(t => filterStatus === 'الكل' || t.status === filterStatus);
+    const filteredTransactions = transactions.filter(t => filterStatus === t('adminFinancialTransactions.all') || t.status === filterStatus);
     const displayedTransactions = filteredTransactions.slice(0, visibleCount);
 
     const handleToggleShow = () => {
@@ -92,18 +94,14 @@ export default function AdminFinancialTransactions() {
         <div className="w-full bg-[#ecf8fa]" dir="rtl">
             <div className="mx-auto flex flex-col gap-6">
                 <div className="text-right">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">
-                        المعاملات المالية
-                    </h1>
-                    <p className="text-xs sm:text-sm text-gray-500">
-                        تتبع أرباحك وإدارة معاملاتك المالية بكل سهولة.
-                    </p>
+                    <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">{t('adminFinancialTransactions.title')}</h1>
+                    <p className="text-xs sm:text-sm text-gray-500">{t('adminFinancialTransactions.description')}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
-                            <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">إجمالي الاشتراكات</span>
+                            <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.totalSubscriptions')}</span>
                             <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.totalAppointments}</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[#E5EEFF] flex items-center justify-center text-[#138C9F]">
@@ -113,7 +111,7 @@ export default function AdminFinancialTransactions() {
 
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
-                            <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">إجمالي الإيرادات</span>
+                            <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.totalRevenue')}</span>
                             <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.totalRevenue} ₪</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[rgba(107,255,143,0.3)] flex items-center justify-center text-[#006A2D]">
@@ -123,7 +121,7 @@ export default function AdminFinancialTransactions() {
 
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-6 flex items-center justify-between shadow-xs">
                         <div className="flex flex-col items-start gap-1">
-                            <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">مدفوعات معلقة</span>
+                            <span className="text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.pendingPayments')}</span>
                             <span className="text-[20px] font-semibold text-[#0B1C30]">{stats.pendingPayments}</span>
                         </div>
                         <div className="w-12 h-12 rounded-[8px] bg-[rgba(255,218,214,0.3)] flex items-center justify-center text-[#BA1A1A]">
@@ -134,20 +132,20 @@ export default function AdminFinancialTransactions() {
 
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] shadow-xs flex flex-col overflow-hidden">
                     <div className="p-6 border-b border-[#C3C6D6] dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 relative">
-                        <h3 className="text-[20px] font-bold text-black">المعاملات المالية</h3>
+                        <h3 className="text-[20px] font-bold text-black">{t('adminFinancialTransactions.title')}</h3>
 
                         <div className="relative">
                             <button
                                 onClick={() => setIsOpenFilter(!isOpenFilter)}
                                 className="bg-[#e2f4f7] dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-full px-4 py-2 flex items-center gap-2 text-[14px] font-bold text-[#138C9F] hover:bg-[#e1ecff] transition-all cursor-pointer"
                             >
-                                <span>تصفية</span>
+                                <span>{t('adminFinancialTransactions.filter')}</span>
                                 <SlidersHorizontal className="w-3.5 h-3.5" />
                             </button>
 
                             {isOpenFilter && (
                                 <div className="absolute left-0 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 py-1">
-                                    {['الكل', 'مكتمل', 'قيد الانتظار', 'ملغى'].map((status) => (
+                                    {[t('adminFinancialTransactions.all'), t('adminFinancialTransactions.completed'), t('adminFinancialTransactions.pending'), t('adminFinancialTransactions.cancelled')].map((status) => (
                                         <button
                                             key={status}
                                             onClick={() => {
@@ -169,11 +167,11 @@ export default function AdminFinancialTransactions() {
                         <table className="w-full text-right border-collapse">
                             <thead className="bg-[rgba(239,244,255,0.5)]">
                                 <tr>
-                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">اسم الطبيب</th>
-                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">المبلغ</th>
-                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px] hidden md:table-cell">التاريخ</th>
-                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px] hidden md:table-cell">النوع</th>
-                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">الحالة</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.doctorName')}</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.amount')}</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px] hidden md:table-cell">{t('adminFinancialTransactions.date')}</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px] hidden md:table-cell">{t('adminFinancialTransactions.type')}</th>
+                                    <th className="p-3 md:p-4 px-6 text-sm md:text-[12px] font-bold text-[#434654] tracking-[0.6px]">{t('adminFinancialTransactions.status')}</th>
                                 </tr>
                             </thead>
 
@@ -191,18 +189,18 @@ export default function AdminFinancialTransactions() {
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-normal text-[#434654] hidden md:table-cell">{formatDate(item.date)}</td>
                                         <td className="p-3 md:p-4 px-6 hidden md:table-cell">
                                             <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#e2f4f7] dark:bg-gray-800 text-[12px] font-bold text-[#138C9F]">
-                                                {item.type || 'اشتراك'}
+                                                {item.type || t('adminFinancialTransactions.subscription')}
                                             </span>
                                         </td>
                                         <td className="p-3 md:p-4 px-6">
-                                            {item.status === 'مكتمل' && (
-                                                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[rgba(107,255,143,0.2)] text-[12px] font-bold text-[#006A2D]">مكتمل</span>
+                                            {item.status === t('adminFinancialTransactions.completed') && (
+                                                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[rgba(107,255,143,0.2)] text-[12px] font-bold text-[#006A2D]">{t('adminFinancialTransactions.completed')}</span>
                                             )}
-                                            {item.status === 'قيد الانتظار' && (
-                                                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#D3E2ED] text-[12px] font-bold text-[#56656E]">قيد الانتظار</span>
+                                            {item.status === t('adminFinancialTransactions.pending') && (
+                                                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#D3E2ED] text-[12px] font-bold text-[#56656E]">{t('adminFinancialTransactions.pending')}</span>
                                             )}
-                                            {item.status === 'ملغى' && (
-                                                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#FFDAD6] text-[12px] font-bold text-[#BA1A1A]">ملغى</span>
+                                            {item.status === t('adminFinancialTransactions.cancelled') && (
+                                                <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-[#FFDAD6] text-[12px] font-bold text-[#BA1A1A]">{t('adminFinancialTransactions.cancelled')}</span>
                                             )}
                                         </td>
                                     </tr>
@@ -225,7 +223,7 @@ export default function AdminFinancialTransactions() {
                                 onClick={handleToggleShow}
                                 className="text-[14px] font-bold text-[#138C9F] hover:text-[#0f6c7c] transition-colors cursor-pointer flex items-center gap-1 w-full h-full justify-center"
                             >
-                                <span>{visibleCount >= filteredTransactions.length ? 'عرض أقل' : 'عرض المزيد'}</span>
+                                <span>{visibleCount >= filteredTransactions.length ? t('adminFinancialTransactions.showLess') : t('adminFinancialTransactions.showMore')}</span>
                             </button>
                         </div>
                     )}

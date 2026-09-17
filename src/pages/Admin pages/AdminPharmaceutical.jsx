@@ -1,7 +1,9 @@
 ﻿import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, ChevronRight, ChevronLeft, X, Pill } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function AdminPharmaceutical() {
+    const { t } = useTranslation();
     // 1. البيانات الابتدائية للأدوية بناءً على مواصفات التصميم والأسماء المذكورة
     const [medicines, setMedicines] = useState([
         { id: 1, name: 'Panadol 500mg' },
@@ -71,7 +73,7 @@ export default function AdminPharmaceutical() {
 
     // حذف دواء
     const handleDeleteMedicine = (id) => {
-        const confirmDelete = window.confirm("هل أنت متأكد من حذف هذا الدواء نهائياً؟");
+        const confirmDelete = window.confirm(t('adminPharmaceutical.confirmDelete'));
         if (confirmDelete) {
             const updatedMedicines = medicines.filter(med => med.id !== id);
             setMedicines(updatedMedicines);
@@ -92,9 +94,7 @@ export default function AdminPharmaceutical() {
 
                 {/* معلومات إجمالي الأدوية */}
                 <div className="flex flex gap-3 items-center justify-center gap-1">
-                    <span className="text-[20px] font-extrabold tracking-[0.6px] text-[#434654]">
-                        إجمالي الأدوية
-                    </span>
+                    <span className="text-[20px] font-extrabold tracking-[0.6px] text-[#434654]">{t('adminPharmaceutical.totalMedicines')}</span>
                     <span className="text-[30px] font-bold text-[#138C9F] ">
                         {totalItems}
                     </span>
@@ -105,7 +105,7 @@ export default function AdminPharmaceutical() {
                     onClick={openAddModal}
                     className="flex flex-row items-center justify-center gap-3 px-6 h-[44px] bg-[#138C9F] text-white rounded-full font-bold text-[15px] transition-all hover:bg-[#0f7282] shadow-[0px_10px_15px_-3px_rgba(0,61,155,0.2),0px_4px_6px_-4px_rgba(0,61,155,0.2)]"
                 >
-                    <span>إضافة دواء جديد</span>
+                    <span>{t('adminPharmaceutical.addNewMedicine')}</span>
                     <Plus className="w-3.5 h-3.5 text-white" />
                 </button>
 
@@ -116,9 +116,7 @@ export default function AdminPharmaceutical() {
 
                 {/* عنوان الجدول العلوي */}
                 <div className="w-full h-[61px] bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 flex items-center justify-center relative">
-                    <h3 className="text-[20px] font-bold text-[#138C9F]">
-                        قائمة الأدوية
-                    </h3>
+                    <h3 className="text-[20px] font-bold text-[#138C9F]">{t('adminPharmaceutical.medicinesList')}</h3>
                 </div>
 
                 {/* جدول عرض البيانات */}
@@ -128,12 +126,8 @@ export default function AdminPharmaceutical() {
                         {/* رأس الجدول الخفيف */}
                         <thead>
                             <tr className="bg-[#ecf8fa] dark:bg-gray-900 border-b border-[#C3C6D6] dark:border-gray-700 h-[49px]">
-                                <th className="p-3 md:p-4 text-sm md:text-[14px] md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-right w-1/2 pe-2 md:pe-12">
-                                    اسم الدواء
-                                </th>
-                                <th className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-center w-1/2">
-                                    الإجراءات
-                                </th>
+                                <th className="p-3 md:p-4 text-sm md:text-[14px] md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-right w-1/2 pe-2 md:pe-12">{t('adminPharmaceutical.medicineName')}</th>
+                                <th className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#138C9F] tracking-[0.6px] text-center w-1/2">{t('adminPharmaceutical.actions')}</th>
                             </tr>
                         </thead>
 
@@ -259,7 +253,7 @@ export default function AdminPharmaceutical() {
                             </div>
                             <div>
                                 <h3 className="text-[20px] font-bold text-[#0B1C30]">
-                                    {modalMode === 'add' ? 'إضافة دواء جديد' : 'تعديل بيانات الدواء'}
+                                    {modalMode === 'add' ? t('adminPharmaceutical.addNewMedicine') : t('adminPharmaceutical.editMedicine')}
                                 </h3>
                                 <p className="text-[13px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">
                                     يرجى ملء الحقول التالية لتحديث الصيدلية الطبية بالنظام
@@ -272,7 +266,7 @@ export default function AdminPharmaceutical() {
 
                             {/* حقل اسم الدواء */}
                             <div className="flex flex-col gap-2">
-                                <label className="text-[14px] font-bold text-[#138C9F]">اسم الدواء</label>
+                                <label className="text-[14px] font-bold text-[#138C9F]">{t('adminPharmaceutical.medicineName')}</label>
                                 <input
                                     type="text"
                                     value={medNameInput}
@@ -298,7 +292,7 @@ export default function AdminPharmaceutical() {
                                     type="submit"
                                     className="px-6 h-[44px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex-1"
                                 >
-                                    {modalMode === 'add' ? 'إضافة الدواء' : 'حفظ التعديلات'}
+                                    {modalMode === 'add' ? 'إضافة الدواء' : t('adminPharmaceutical.saveChanges')}
                                 </button>
                             </div>
 

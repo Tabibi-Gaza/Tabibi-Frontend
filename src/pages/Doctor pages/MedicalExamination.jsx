@@ -8,10 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from "../../api/axiosInstance";
 import { resolveImageUrl } from "../../utils/imageUrl";
 import { formatDate as formatDateDdMmYyyy, formatTimeArabic } from "../../utils/dateFormatter";
+import { useTranslation } from 'react-i18next';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
 const MedicalExamination = () => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -112,7 +114,7 @@ const MedicalExamination = () => {
     };
 
     const calculateAge = (dob) => {
-        if (!dob) return "غير محدد";
+        if (!dob) return t('medicalExamination.notSpecified');
         const birth = new Date(dob);
         const today = new Date();
         let age = today.getFullYear() - birth.getFullYear();
@@ -142,10 +144,10 @@ const MedicalExamination = () => {
                 setQrExpiry(data.data.expiresAt);
                 setShowQrModal(true);
             } else {
-                toast.error('فشل إنشاء رمز QR');
+                toast.error(t('medicalExamination.qrGenerateFailed'));
             }
         } catch {
-            toast.error('حدث خطأ أثناء إنشاء رمز QR');
+            toast.error(t('medicalExamination.qrError'));
         } finally {
             setGeneratingQr(false);
         }
@@ -154,17 +156,17 @@ const MedicalExamination = () => {
     const qrUrl = qrToken ? `${window.location.origin}/qr/${encodeURIComponent(qrToken)}` : '';
 
     const handleDeleteRecord = async (recordId) => {
-        if (!window.confirm('هل أنت متأكد من حذف هذا السجل الطبي؟')) return;
+        if (!window.confirm(t('medicalExamination.confirmDeleteRecord'))) return;
         try {
             const res = await axiosInstance.delete(`/doctor/medical-records/${recordId}`);
             if (res.data.succeeded) {
                 setMedicalHistory(prev => prev.filter(r => r.id !== recordId));
-                toast.success('تم حذف السجل الطبي بنجاح');
+                toast.success(t('medicalExamination.recordDeleted'));
             } else {
-                toast.error('فشل حذف السجل');
+                toast.error(t('medicalExamination.deleteFailed'));
             }
         } catch (err) {
-            toast.error('حدث خطأ أثناء الحذف');
+            toast.error(t('medicalExamination.deleteError'));
         }
     };
 
@@ -172,17 +174,17 @@ const MedicalExamination = () => {
         try {
             const res = await axiosInstance.post(`/doctor/appointments/medical-records/${recordId}/send-prescription`);
             if (res.data.succeeded) {
-                toast.success('تم إرسال الروشتة للمريض بنجاح');
+                toast.success(t('medicalExamination.prescriptionSent'));
                 setMedicalHistory(prev => prev.map(r =>
                     r.id === recordId
                         ? { ...r, prescriptionStatus: 'Sent' }
                         : r
                 ));
             } else {
-                toast.error(res.data.message || 'فشل إرسال الروشتة');
+                toast.error(res.data.message || t('medicalExamination.prescriptionSendFailed'));
             }
         } catch (err) {
-            toast.error('حدث خطأ أثناء إرسال الروشتة');
+            toast.error(t('medicalExamination.prescriptionSendError'));
         }
     };
 
@@ -251,13 +253,13 @@ const MedicalExamination = () => {
                 } catch (e) {}
 
                 setActiveTab('medical_file');
-                toast.success('تم حفظ بيانات الكشف الطبي بنجاح!');
+                toast.success(t('medicalExamination.examinationSaved'));
             } else {
-                toast.error(res.data.message || "لم يتم الحفظ");
+                toast.error(res.data.message || t('medicalExamination.notSaved'));
             }
         } catch (err) {
 
-            toast.error("حدث خطأ أثناء حفظ البيانات");
+            toast.error(t('medicalExamination.saveError'));
         }
     };
 
@@ -306,7 +308,7 @@ const MedicalExamination = () => {
             };
             const res = await axiosInstance.put(`/doctor/appointments/patient/${id}/medical-history`, payload);
             if (res.data.succeeded) {
-                toast.success('تم تحديث السجل المرضي الشخصي بنجاح!');
+                toast.success(t('medicalExamination.recordUpdated'));
                 setEditingMedicalHistory(false);
                 try {
                     const historyRes = await axiosInstance.get(`/doctor/appointments/patient/${id}/medical-history`);
@@ -315,10 +317,10 @@ const MedicalExamination = () => {
                     }
                 } catch (e) {}
             } else {
-                toast.error(res.data.message || 'فشل تحديث السجل المرضي');
+                toast.error(res.data.message || t('medicalExamination.updateFailed'));
             }
         } catch (err) {
-            toast.error('حدث خطأ أثناء تحديث السجل المرضي');
+            toast.error(t('medicalExamination.updateError'));
         } finally {
             setSavingMedicalHistory(false);
         }
@@ -357,7 +359,7 @@ const MedicalExamination = () => {
             setMhMedDosage('');
             setMhMedFrequency('');
         } else {
-            toast.warn("الرجاء ملء حقول الدواء بالكامل");
+            toast.warn(t('medicalExamination.fillAllFields'));
         }
     };
 
@@ -368,7 +370,7 @@ const MedicalExamination = () => {
     if (loading) {
         return (
             <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
-                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">جاري تحميل بيانات المريض...</p>
+                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">{t('medicalExamination.loadingPatientData')}</p>
             </div>
         );
     }
@@ -376,7 +378,7 @@ const MedicalExamination = () => {
     if (!patient) {
         return (
             <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
-                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
+                <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">{t('medicalExamination.patientNotFound')}</p>
             </div>
         );
     }
@@ -391,9 +393,9 @@ const MedicalExamination = () => {
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h1 className="text-2xl md:text-3xl font-black text-[#138C9F]">
-                            {activeTab === 'examination' && 'بدء الكشف الطبي'}
-                            {activeTab === 'patient_record' && 'السجل المرضي الشخصي'}
-                            {activeTab === 'medical_file' && 'التاريخ الطبي'}
+                            {activeTab === 'examination' && t('medicalExamination.startExamination')}
+                            {activeTab === 'patient_record' && t('medicalExamination.personalMedicalRecord')}
+                            {activeTab === 'medical_file' && t('medicalExamination.medicalHistory')}
                         </h1>
                         {activeTab === 'examination' && (
                             <button onClick={handleSaveExamination} className="bg-[#138C9F] hover:bg-[#0f6f7f] text-white font-bold h-11 px-6 rounded-xl flex items-center gap-2 transition-all shadow-xs cursor-pointer">
@@ -412,21 +414,21 @@ const MedicalExamination = () => {
                                     {(patient.fullName || "م").charAt(0)}
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">اسم المريض</span>
+                                    <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.patientName')}</span>
                                     <span className="text-base md:text-lg font-black text-[#0B1C30]">{patient.fullName}</span>
                                 </div>
                             </div>
-                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">العمر</span><span className="text-base font-bold text-[#0B1C30]">{patientAge}</span></div>
-                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">فصيلة الدم</span><span className="text-base font-bold text-[#0B1C30]">{patient.bloodType || "غير معروف"}</span></div>
+                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.age')}</span><span className="text-base font-bold text-[#0B1C30]">{patientAge}</span></div>
+                            <div className="text-right"><span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodType')}</span><span className="text-base font-bold text-[#0B1C30]">{patient.bloodType || t('medicalExamination.unknown')}</span></div>
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-center lg:justify-end">
                             <button onClick={() => setActiveTab('examination')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'examination' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>شاشة الكشف الحالية</button>
-                            <button onClick={() => setActiveTab('patient_record')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'patient_record' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>السجل المرضي الشخصي</button>
-                            <button onClick={() => setActiveTab('medical_file')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'medical_file' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>التاريخ الطبي</button>
+                            <button onClick={() => setActiveTab('patient_record')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'patient_record' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>{t('medicalExamination.personalMedicalRecord')}</button>
+                            <button onClick={() => setActiveTab('medical_file')} className={`h-10 px-4 font-bold text-xs md:text-sm rounded-xl transition-all cursor-pointer ${activeTab === 'medical_file' ? 'bg-[#138C9F] text-white' : 'border border-[#138C9F] text-[#138C9F]'}`}>{t('medicalExamination.medicalHistory')}</button>
                             <button onClick={generateQrForPatient} disabled={generatingQr} className="h-10 px-4 rounded-xl border border-[#138C9F] text-[#138C9F] hover:bg-[#138C9F] hover:text-white disabled:opacity-50 transition-colors flex items-center justify-center gap-2 font-bold text-xs md:text-sm" title="إنشاء رمز QR للسجل الطبي">
                                 <FontAwesomeIcon icon={faQrcode} className="text-base" />
-                                {generatingQr ? 'جاري الإنشاء...' : 'رمز QR للسجل'}
+                                {generatingQr ? t('medicalExamination.generating') : t('medicalExamination.qrCodeForRecord')}
                             </button>
                         </div>
                     </div>
@@ -435,43 +437,43 @@ const MedicalExamination = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                             <div className="lg:col-span-8 space-y-6">
                                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-3">
-                                    <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span>📝</span> <h3>الأعراض</h3></div>
+                                    <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span>📝</span> <h3>{t('medicalExamination.symptoms')}</h3></div>
                                     <textarea name="symptoms" value={examinationData.symptoms} onChange={handleTextChange} placeholder="أدخل الأعراض هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
                                 </div>
                                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-3">
-                                    <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span></span> <h3>الملاحظات السريرية</h3></div>
+                                    <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span></span> <h3>{t('medicalExamination.clinicalNotes')}</h3></div>
                                     <textarea name="clinicalNotes" value={examinationData.clinicalNotes} onChange={handleTextChange} placeholder="أدخل الملاحظات السريرية هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
                                 </div>
                                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-3">
-                                    <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span>📋</span> <h3>التشخيص</h3></div>
+                                    <div className="flex items-center gap-2 text-[#138C9F] font-black text-base"><span>📋</span> <h3>{t('medicalExamination.diagnosis')}</h3></div>
                                     <textarea name="diagnosis" value={examinationData.diagnosis} onChange={handleTextChange} placeholder="أدخل التشخيص الطبي النهائي هنا..." className="w-full h-32 p-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-semibold focus:outline-hidden focus:border-[#138C9F] resize-none" />
                                 </div>
                             </div>
 
                             <div className="lg:col-span-4 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-5 shadow-xs">
-                                <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-3"><span>📋</span> <h3>إنشاء وصفة طبية</h3></div>
+                                <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-3"><span>📋</span> <h3>{t('medicalExamination.createPrescription')}</h3></div>
                                 <div className="space-y-1.5 text-right">
-                                    <label className="text-xs font-black text-[#0B1C30]">اسم الدواء</label>
+                                    <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.medicineName')}</label>
                                     <input type="text" name="name" value={currentMed.name} onChange={handleMedInputChange} placeholder="مثلاً: بنادول..." className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl font-semibold text-sm focus:outline-hidden" />
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div className="space-y-1.5 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">الجرعة</label>
+                                        <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.dosage')}</label>
                                         <input type="text" name="dosage" value={currentMed.dosage} onChange={handleMedInputChange} placeholder="500 ملغ" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                     </div>
                                     <div className="space-y-1.5 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">التكرار</label>
+                                        <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.frequency')}</label>
                                         <input type="text" name="frequency" value={currentMed.frequency} onChange={handleMedInputChange} placeholder="3 مرات" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                     </div>
                                 </div>
                                 <div className="space-y-1.5 text-right">
-                                    <label className="text-xs font-black text-[#0B1C30]">المدة</label>
+                                    <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.duration')}</label>
                                     <input type="text" name="duration" value={currentMed.duration} onChange={handleMedInputChange} placeholder="5 أيام" className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-center text-sm focus:outline-hidden" />
                                 </div>
                                 <button onClick={handleAddMedicine} className="w-full h-11 bg-[#138C9F] text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm hover:bg-[#0f7282] transition-colors cursor-pointer">➕ إضافة إلى الوصفة</button>
 
                                 <div className="pt-4 border-t border-gray-100 dark:border-gray-700 space-y-3">
-                                    <div className="flex justify-between items-center"><span className="text-sm font-black text-[#0B1C30]">الأدوية المضافة</span></div>
+                                    <div className="flex justify-between items-center"><span className="text-sm font-black text-[#0B1C30]">{t('medicalExamination.addedMedicines')}</span></div>
                                     <div className="space-y-2 max-h-60 overflow-y-auto">
                                         {addedMedicines.map(med => (
                                             <div key={med.id} className="p-3 border border-[#C3C6D6] dark:border-gray-700 rounded-xl flex items-center justify-between bg-slate-50 dark:bg-gray-900/50">
@@ -499,9 +501,7 @@ const MedicalExamination = () => {
                                     <button
                                         onClick={handleStartEditMedicalHistory}
                                         className="bg-[#138C9F] hover:bg-[#0f7282] text-white px-5 py-2.5 rounded-xl text-xs font-black transition-all duration-200 shadow-xs flex items-center gap-2 cursor-pointer"
-                                    >
-                                        تعديل السجل المرضي الشخصي
-                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                    >{t('medicalExamination.editPersonalRecord')}<FontAwesomeIcon icon={faPenToSquare} />
                                     </button>
                                 </div>
                             )}
@@ -511,7 +511,7 @@ const MedicalExamination = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
                                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                                         <div className="flex items-center gap-2 text-amber-600 font-black text-base border-b pb-2">
-                                            <span>⚠️</span> <h3>الأمراض المزمنة</h3>
+                                            <span>⚠️</span> <h3>{t('medicalExamination.chronicDiseases')}</h3>
                                         </div>
                                         {medicalHistoryData?.chronicDiseases?.filter(d => d !== "لا يوجد").length > 0
                                             ? medicalHistoryData.chronicDiseases.filter(d => d !== "لا يوجد").map((disease, idx) => (
@@ -519,13 +519,13 @@ const MedicalExamination = () => {
                                                     <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm">{disease}</h4>
                                                 </div>
                                             ))
-                                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد أمراض مزمنة مسجلة</p>
+                                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">{t('medicalExamination.noChronicDiseases')}</p>
                                         }
                                     </div>
 
                                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs">
                                         <div className="flex items-center gap-2 text-rose-600 font-black text-base border-b pb-2">
-                                            <span>🚫</span> <h3>الحساسية الغذائية والدوائية</h3>
+                                            <span>🚫</span> <h3>{t('medicalExamination.foodAndDrugAllergies')}</h3>
                                         </div>
                                         {medicalHistoryData?.allergies?.filter(a => a !== "لا يوجد").length > 0
                                             ? medicalHistoryData.allergies.filter(a => a !== "لا يوجد").map((allergy, idx) => (
@@ -533,29 +533,29 @@ const MedicalExamination = () => {
                                                     <h4 className="font-bold text-rose-700 text-sm">{allergy}</h4>
                                                 </div>
                                             ))
-                                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">لا توجد حساسية مسجلة</p>
+                                            : <p className="text-sm text-gray-400 dark:text-gray-500 font-bold">{t('medicalExamination.noAllergies')}</p>
                                         }
                                     </div>
 
                                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
                                         <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
-                                            <span>📊</span> <h3>القياسات الحيوية</h3>
+                                            <span>📊</span> <h3>{t('medicalExamination.vitalSigns')}</h3>
                                         </div>
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">ضغط الدم</span>
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodPressure')}</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodPressure || "—"}</span>
                                             </div>
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">سكر الدم</span>
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.bloodSugar')}</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.bloodSugar || "—"}</span>
                                             </div>
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">الوزن</span>
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.weight')}</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.weight ? `${medicalHistoryData.vitals.weight} كغ` : "—"}</span>
                                             </div>
                                             <div className="p-3 bg-slate-50 dark:bg-gray-900 rounded-xl text-center">
-                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">الطول</span>
+                                                <span className="text-xs text-gray-400 dark:text-gray-500 font-bold block">{t('medicalExamination.height')}</span>
                                                 <span className="text-sm font-black text-[#0B1C30]">{medicalHistoryData?.vitals?.height ? `${medicalHistoryData.vitals.height} سم` : "—"}</span>
                                             </div>
                                         </div>
@@ -563,23 +563,23 @@ const MedicalExamination = () => {
 
                                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
                                         <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
-                                            <span>🚬</span> <h3>التدخين ونمط الحياة</h3>
+                                            <span>🚬</span> <h3>{t('medicalExamination.smokingAndLifestyle')}</h3>
                                         </div>
-                                        <p className="text-sm font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 p-2">{medicalHistoryData?.isSmoker ? "مدخن" : "غير مدخن"}</p>
+                                        <p className="text-sm font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 p-2">{medicalHistoryData?.isSmoker ? t('medicalExamination.smoker') : t('medicalExamination.nonSmoker')}</p>
                                     </div>
 
                                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 space-y-4 shadow-xs md:col-span-2">
                                         <div className="flex items-center gap-2 text-[#138C9F] font-black text-base border-b pb-2">
-                                                <span>💊</span> <h3>الأدوية والمعلومات الطبية الملتزم بها</h3>
+                                                <span>💊</span> <h3>{t('medicalExamination.currentMedications')}</h3>
                                             </div>
                                         <div className="overflow-x-auto">
                                             <table className="w-full text-sm">
                                                 <thead>
                                                     <tr className="border-b border-gray-100">
-                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">اسم الدواء/العلمي</th>
-                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">الجرعة</th>
-                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">التكرار</th>
-                                                        <th className="hidden md:table-cell p-3 md:p-4 text-right font-black text-[#0B1C30]">المدة</th>
+                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.medicineNameHeader')}</th>
+                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.dosage')}</th>
+                                                        <th className="p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.frequency')}</th>
+                                                        <th className="hidden md:table-cell p-3 md:p-4 text-right font-black text-[#0B1C30]">{t('medicalExamination.duration')}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -592,7 +592,7 @@ const MedicalExamination = () => {
                                                                 <td className="hidden md:table-cell p-3 md:p-4 font-bold text-gray-600">{med.duration || "—"}</td>
                                                             </tr>
                                                         ))
-                                                        : <tr><td colSpan="4" className="p-3 md:p-4 text-center text-gray-400 dark:text-gray-500 font-bold">لا يوجد أدوية مسجلة</td></tr>
+                                                        : <tr><td colSpan="4" className="p-3 md:p-4 text-center text-gray-400 dark:text-gray-500 font-bold">{t('medicalExamination.noMedicationsRecorded')}</td></tr>
                                                     }
                                                 </tbody>
                                             </table>
@@ -605,17 +605,15 @@ const MedicalExamination = () => {
                                     <div className="border-b border-gray-100 dark:border-gray-700 pb-4 flex items-center justify-between">
                                         <div>
                                             <h2 className="text-lg font-black text-gray-800 dark:text-gray-200 flex items-center gap-2">
-                                                <FontAwesomeIcon icon={faPenToSquare} className="text-[#138C9F]" />
-                                                تعديل السجل المرضي الشخصي
-                                            </h2>
-                                            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">تعديل البيانات الطبية للمريض</p>
+                                                <FontAwesomeIcon icon={faPenToSquare} className="text-[#138C9F]" />{t('medicalExamination.editPersonalRecord')}</h2>
+                                            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('medicalExamination.editPatientData')}</p>
                                         </div>
                                     </div>
 
                                     {/* 1. القياسات الحيوية وفصيلة الدم */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 dark:bg-gray-900/50 p-5 rounded-2xl border border-slate-100">
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">فصيلة الدم</label>
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">{t('medicalExamination.bloodType')}</label>
                                             <select value={mhBloodType} onChange={(e) => setMhBloodType(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700">
                                                 <option value="">اختر الفصيلة...</option>
                                                 <option value="A+">A+</option>
@@ -645,14 +643,12 @@ const MedicalExamination = () => {
                                             <input type="number" value={mhHeight} onChange={(e) => setMhHeight(e.target.value)} placeholder="170" className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-2">هل المريض مدخن؟</label>
+                                            <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-2">{t('medicalExamination.isPatientSmoker')}</label>
                                             <div className="flex gap-2">
                                                 <button type="button" onClick={() => setMhIsSmoker(true)} className={`flex-1 py-2 text-xs font-black rounded-xl border transition-all duration-150 ${mhIsSmoker ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 border-gray-200"}`}>
-                                                    <FontAwesomeIcon icon={faSmoking} /> نعم
-                                                </button>
+                                                    <FontAwesomeIcon icon={faSmoking} />{t('common.yes')}</button>
                                                 <button type="button" onClick={() => setMhIsSmoker(false)} className={`flex-1 py-2 text-xs font-black rounded-xl border transition-all duration-150 ${!mhIsSmoker ? "bg-green-50 text-green-600 border-green-200" : "bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 border-gray-200"}`}>
-                                                    <FontAwesomeIcon icon={faBanSmoking} /> لا
-                                                </button>
+                                                    <FontAwesomeIcon icon={faBanSmoking} />{t('common.no')}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -661,11 +657,10 @@ const MedicalExamination = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
                                             <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
-                                                <FontAwesomeIcon icon={faVirus} className="text-blue-500" /> إضافة مرض مزمن
-                                            </label>
+                                                <FontAwesomeIcon icon={faVirus} className="text-blue-500" />{t('medicalExamination.addChronicDisease')}</label>
                                             <div className="flex gap-2 mb-3">
                                                 <input type="text" value={mhDiseaseInput} onChange={(e) => setMhDiseaseInput(e.target.value)} placeholder="مثال: السكري، ضغط الدم..." className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-medium focus:outline-none focus:border-[#138C9F]" />
-                                                <button type="button" onClick={addMhDisease} className="bg-[#138C9F] text-white px-4 rounded-xl text-xs font-black hover:bg-[#0f7282] cursor-pointer">إضافة</button>
+                                                <button type="button" onClick={addMhDisease} className="bg-[#138C9F] text-white px-4 rounded-xl text-xs font-black hover:bg-[#0f7282] cursor-pointer">{t('common.add')}</button>
                                             </div>
                                             <div className="flex flex-wrap gap-1.5 min-h-10 p-2 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-dashed border-slate-200">
                                                 {mhChronicDiseases.length > 0 ? mhChronicDiseases.map((disease, idx) => (
@@ -673,16 +668,15 @@ const MedicalExamination = () => {
                                                         {disease}
                                                         <button type="button" onClick={() => removeMhDisease(disease)} className="text-blue-400 hover:text-red-500 font-black text-[10px] cursor-pointer">✕</button>
                                                     </span>
-                                                )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">لم يتم إدراج أي مرض بعد...</span>}
+                                                )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">{t('medicalExamination.noDiseasesAdded')}</span>}
                                             </div>
                                         </div>
                                         <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
                                             <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
-                                                <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-500" /> إضافة حساسية
-                                            </label>
+                                                <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-500" />{t('medicalExamination.addAllergy')}</label>
                                             <div className="flex gap-2 mb-3">
                                                 <input type="text" value={mhAllergyInput} onChange={(e) => setMhAllergyInput(e.target.value)} placeholder="مثال: بنسلين، الفول السوداني..." className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-medium focus:outline-none focus:border-[#138C9F]" />
-                                                <button type="button" onClick={addMhAllergy} className="bg-[#138C9F] text-white px-4 rounded-xl text-xs font-black hover:bg-[#0f7282] cursor-pointer">إضافة</button>
+                                                <button type="button" onClick={addMhAllergy} className="bg-[#138C9F] text-white px-4 rounded-xl text-xs font-black hover:bg-[#0f7282] cursor-pointer">{t('common.add')}</button>
                                             </div>
                                             <div className="flex flex-wrap gap-1.5 min-h-10 p-2 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-dashed border-slate-200">
                                                 {mhAllergies.length > 0 ? mhAllergies.map((allergy, idx) => (
@@ -690,7 +684,7 @@ const MedicalExamination = () => {
                                                         {allergy}
                                                         <button type="button" onClick={() => removeMhAllergy(allergy)} className="text-red-400 hover:text-red-600 font-black text-[10px] cursor-pointer">✕</button>
                                                     </span>
-                                                )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">لم يتم إدراج أي حساسية بعد...</span>}
+                                                )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">{t('medicalExamination.noAllergiesAdded')}</span>}
                                             </div>
                                         </div>
                                     </div>
@@ -698,17 +692,14 @@ const MedicalExamination = () => {
                                     {/* 3. الأدوية الحالية */}
                                     <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white dark:bg-gray-800 space-y-4">
                                         <h3 className="text-xs font-black text-gray-800 dark:text-gray-200 flex items-center gap-1">
-                                            <FontAwesomeIcon icon={faCapsules} className="text-[#138C9F]" />
-                                            إدارة الأدوية الحالية
-                                        </h3>
+                                            <FontAwesomeIcon icon={faCapsules} className="text-[#138C9F]" />{t('medicalExamination.manageCurrentMedications')}</h3>
                                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 dark:bg-gray-900/40 p-3 rounded-xl border border-slate-100">
-                                            <input type="text" value={mhMedName} onChange={(e) => setMhMedName(e.target.value)} placeholder="اسم الدواء" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
-                                            <input type="text" value={mhMedDosage} onChange={(e) => setMhMedDosage(e.target.value)} placeholder="الجرعة" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <input type="text" value={mhMedName} onChange={(e) => setMhMedName(e.target.value)} placeholder={t('medicalExamination.medicineName')} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                            <input type="text" value={mhMedDosage} onChange={(e) => setMhMedDosage(e.target.value)} placeholder={t('medicalExamination.dosage')} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                             <div className="flex gap-2">
-                                                <input type="text" value={mhMedFrequency} onChange={(e) => setMhMedFrequency(e.target.value)} placeholder="التكرار" className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
+                                                <input type="text" value={mhMedFrequency} onChange={(e) => setMhMedFrequency(e.target.value)} placeholder={t('medicalExamination.frequency')} className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F]" />
                                                 <button type="button" onClick={addMhMedicine} className="bg-[#138C9F] hover:bg-[#0f6b7a] text-white px-3.5 rounded-xl text-xs font-black transition-colors cursor-pointer">
-                                                    <FontAwesomeIcon icon={faPlus} /> إدراج
-                                                </button>
+                                                    <FontAwesomeIcon icon={faPlus} />{t('medicalExamination.insert')}</button>
                                             </div>
                                         </div>
                                         {mhCurrentMedicines.length > 0 && (
@@ -716,10 +707,10 @@ const MedicalExamination = () => {
                                                 <table className="w-full text-right text-xs border-collapse">
                                                     <thead>
                                                         <tr className="bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold border-b border-gray-100">
-                                                            <th className="p-3">الدواء</th>
-                                                            <th className="p-3">الجرعة</th>
-                                                            <th className="p-3">التكرار</th>
-                                                            <th className="p-3 text-center" style={{ width: "50px" }}>حذف</th>
+                                                            <th className="p-3">{t('medicalExamination.medicine')}</th>
+                                                            <th className="p-3">{t('medicalExamination.dosage')}</th>
+                                                            <th className="p-3">{t('medicalExamination.frequency')}</th>
+                                                            <th className="p-3 text-center" style={{ width: "50px" }}>{t('common.delete')}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -743,10 +734,10 @@ const MedicalExamination = () => {
 
                                     {/* أزرار الحفظ والإلغاء */}
                                     <div className="flex items-center justify-end gap-3 border-t border-gray-50 pt-4">
-                                        <button type="button" onClick={() => setEditingMedicalHistory(false)} className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors cursor-pointer">إلغاء</button>
+                                        <button type="button" onClick={() => setEditingMedicalHistory(false)} className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors cursor-pointer">{t('common.cancel')}</button>
                                         <button type="button" onClick={handleSaveMedicalHistory} disabled={savingMedicalHistory} className="bg-[#138C9F] hover:bg-[#0f7282] disabled:bg-gray-300 text-white px-8 py-2.5 rounded-xl text-xs font-black shadow-xs transition-all duration-200 cursor-pointer">
                                             <FontAwesomeIcon icon={faFloppyDisk} />
-                                            <span className="mr-1">{savingMedicalHistory ? "جاري الحفظ..." : "حفظ التعديلات"}</span>
+                                            <span className="mr-1">{savingMedicalHistory ? t('medicalExamination.saving') : t('common.saveChanges')}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -763,17 +754,17 @@ const MedicalExamination = () => {
                                         <input className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:border-[#138C9F]" type="date" value={historyFilter.date} onChange={(e) => setHistoryFilter(prev => ({ ...prev, date: e.target.value }))} />
                                     </div>
                                     <div className="md:col-span-4 flex flex-col gap-2 text-right">
-                                        <label className="text-xs font-black text-[#0B1C30]">التخصص</label>
+                                        <label className="text-xs font-black text-[#0B1C30]">{t('medicalExamination.specialization')}</label>
                                         <select className="w-full h-11 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-sm font-bold bg-white dark:bg-gray-800 focus:outline-none focus:border-[#138C9F]" value={historyFilter.diagnosis} onChange={(e) => setHistoryFilter(prev => ({ ...prev, diagnosis: e.target.value }))}>
-                                            <option value="">الكل</option>
+                                            <option value="">{t('medicalExamination.all')}</option>
                                             {[...new Set(medicalHistory.map(v => v.doctorSpecialization).filter(Boolean))].map((d, i) => (
                                                 <option key={i} value={d}>{d}</option>
                                             ))}
                                         </select>
                                     </div>
                                     <div className="md:col-span-4 flex gap-3">
-                                        <button type="button" className="flex-1 h-11 bg-[#138C9F] text-white font-bold rounded-xl text-sm shadow-xs cursor-pointer">تطبيق الفلاتر</button>
-                                        <button type="button" onClick={() => setHistoryFilter({ date: '', diagnosis: '' })} className="flex-1 h-11 border-2 border-[#138C9F] text-[#138C9F] font-bold rounded-xl text-sm hover:bg-gray-50 dark:bg-gray-900 cursor-pointer">إعادة ضبط</button>
+                                        <button type="button" className="flex-1 h-11 bg-[#138C9F] text-white font-bold rounded-xl text-sm shadow-xs cursor-pointer">{t('medicalExamination.applyFilters')}</button>
+                                        <button type="button" onClick={() => setHistoryFilter({ date: '', diagnosis: '' })} className="flex-1 h-11 border-2 border-[#138C9F] text-[#138C9F] font-bold rounded-xl text-sm hover:bg-gray-50 dark:bg-gray-900 cursor-pointer">{t('medicalExamination.resetFilters')}</button>
                                     </div>
                                 </div>
                             </div>
@@ -794,14 +785,14 @@ const MedicalExamination = () => {
                                                         <span className="text-xs font-bold mt-1 leading-none">{yearNum}</span>
                                                     </div>
                                                     <div className="text-right">
-                                                        <h3 className="text-base md:text-lg font-black text-[#138C9F]">زيارة طبية</h3>
+                                                        <h3 className="text-base md:text-lg font-black text-[#138C9F]">{t('medicalExamination.medicalVisit')}</h3>
                                                         <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mt-0.5">الساعة {timeStr}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="bg-[#BCE3E6] text-[#138C9F] font-bold text-xs px-4 py-1.5 rounded-full">منتهية</span>
+                                                    <span className="bg-[#BCE3E6] text-[#138C9F] font-bold text-xs px-4 py-1.5 rounded-full">{t('medicalExamination.completed')}</span>
                                                     {String(visit.doctorId) === String(currentDoctorId) && (
-                                                        <button onClick={() => handleDeleteRecord(visit.id)} title="حذف السجل" className="w-9 h-9 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:bg-red-100 hover:text-red-600 transition-all cursor-pointer border border-red-200">
+                                                        <button onClick={() => handleDeleteRecord(visit.id)} title={t('medicalExamination.deleteRecord')} className="w-9 h-9 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:bg-red-100 hover:text-red-600 transition-all cursor-pointer border border-red-200">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                                                         </button>
                                                     )}
@@ -812,9 +803,7 @@ const MedicalExamination = () => {
                                                 <div className="lg:col-span-8 space-y-4 text-right">
                                                     <div className="flex flex-col gap-2">
                                                         <span className="text-lg font-black text-[#138C9F] pb-2 flex gap-2 items-center">
-                                                            <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-sm" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                                            اسم الطبيب
-                                                        </span>
+                                                            <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-sm" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>{t('medicalExamination.doctorName')}</span>
                                                         <p className="text-sm font-black text-[#0B1C30] dark:text-white mt-0.5">
                                                             {visit.doctorName || patient.doctorName || 'الطبيب المعالج'}
                                                         </p>
@@ -823,18 +812,14 @@ const MedicalExamination = () => {
                                                     {visit.symptoms && (
                                                         <div className="flex flex-col gap-0.5">
                                                             <span className="text-lg font-black text-[#138C9F] pb-2 flex gap-2 items-center">
-                                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                                                الأعراض
-                                                            </span>
+                                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>{t('medicalExamination.symptoms')}</span>
                                                             <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{visit.symptoms}</p>
                                                         </div>
                                                     )}
                                                     {visit.diagnosis && (
                                                         <div className="flex flex-col gap-0.5">
                                                             <span className="text-lg font-black text-[#138C9F] pb-2 flex gap-2 items-center">
-                                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
-                                                                التشخيص
-                                                            </span>
+                                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>{t('medicalExamination.diagnosis')}</span>
                                                             <p className="text-sm font-bold text-[#0B1C30] dark:text-white mt-0.5">{visit.diagnosis}</p>
                                                         </div>
                                                     )}
@@ -852,9 +837,7 @@ const MedicalExamination = () => {
                                                     <div className="lg:col-span-4 flex items-start justify-start lg:justify-end">
                                                         <div className="w-full max-w-[280px] border border-dashed border-[#C3C6D6] dark:border-gray-700 rounded-xl bg-[#FDFDFD]">
                                                             <span className="text-lg p-4 font-black text-[#138C9F] block mb-3 border-b border-dashed border-[#C3C6D6] dark:border-gray-700 pb-2 flex gap-2 items-center justify-center">
-                                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                                                                الوصفة الطبية
-                                                            </span>
+                                                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-lg" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>{t('medicalExamination.prescription')}</span>
                                                             <div className="p-4">
                                                                 <div className="space-y-3">
                                                                     {visit.prescribedMedications.map((med, i) => (
@@ -873,22 +856,16 @@ const MedicalExamination = () => {
                                                             </div>
                                                             {visit.prescriptionStatus === 'Sent' ? (
                                                                 <div className="px-4 pb-4">
-                                                                    <div className="w-full py-2.5 rounded-xl bg-green-50 text-green-600 text-xs font-bold text-center border border-green-200 mb-2">
-                                                                        تم الإرسال للمريض ✓
-                                                                    </div>
+                                                                    <div className="w-full py-2.5 rounded-xl bg-green-50 text-green-600 text-xs font-bold text-center border border-green-200 mb-2">{t('medicalExamination.sentToPatient')}</div>
                                                                     <button
                                                                         onClick={() => handleSendPrescription(visit.id)}
-                                                                        className="w-full py-2.5 rounded-xl bg-[#138C9F] text-white text-xs font-bold cursor-pointer hover:bg-[#0f7585] transition-all shadow-xs">
-                                                                        إعادة إرسال الروشتة
-                                                                    </button>
+                                                                        className="w-full py-2.5 rounded-xl bg-[#138C9F] text-white text-xs font-bold cursor-pointer hover:bg-[#0f7585] transition-all shadow-xs">{t('medicalExamination.resendPrescription')}</button>
                                                                 </div>
                                                             ) : (
                                                                 <div className="px-4 pb-4">
                                                                     <button
                                                                         onClick={() => handleSendPrescription(visit.id)}
-                                                                        className="w-full py-2.5 rounded-xl bg-[#138C9F] text-white text-xs font-bold cursor-pointer hover:bg-[#0f7585] transition-all shadow-xs">
-                                                                        إرسال وتصدير الروشتة
-                                                                    </button>
+                                                                        className="w-full py-2.5 rounded-xl bg-[#138C9F] text-white text-xs font-bold cursor-pointer hover:bg-[#0f7585] transition-all shadow-xs">{t('medicalExamination.sendAndExportPrescription')}</button>
                                                                 </div>
                                                             )}
                                                         </div>
@@ -898,9 +875,7 @@ const MedicalExamination = () => {
                                         </div>
                                     );
                                 }) : (
-                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-8 text-center text-gray-400 dark:text-gray-500 font-bold text-sm">
-                                        لا توجد سجلات كشف طبي سابقة لهذا المريض.
-                                    </div>
+                                    <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-8 text-center text-gray-400 dark:text-gray-500 font-bold text-sm">{t('medicalExamination.noPreviousRecords')}</div>
                                 )}
                             </div>
                         </div>
@@ -909,19 +884,15 @@ const MedicalExamination = () => {
                     {showQrModal && (
                         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
                             <div className="bg-white dark:bg-gray-800 rounded-3xl w-full max-w-sm shadow-2xl p-6 text-center">
-                                <h3 className="text-lg font-black text-gray-800 dark:text-gray-200 mb-2">رمز QR للسجل الطبي</h3>
-                                <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">امسح هذا الرمز للوصول السريع للسجل المرضي</p>
+                                <h3 className="text-lg font-black text-gray-800 dark:text-gray-200 mb-2">{t('medicalExamination.qrCodeForRecord')}</h3>
+                                <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">{t('medicalExamination.scanForQuickAccess')}</p>
                                 <div className="flex justify-center mb-4 p-4 bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-100 dark:border-gray-700 inline-block mx-auto">
                                     <QRCodeCanvas value={qrUrl} size={200} level="H" includeMargin={true} />
                                 </div>
                                 <p className="text-[10px] text-gray-400 dark:text-gray-500 mb-4">صالح حتى: {formatDateDdMmYyyy(qrExpiry)}</p>
                                 <div className="flex gap-2">
-                                    <button onClick={() => window.open(qrUrl, '_blank')} className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors">
-                                        فتح الرابط
-                                    </button>
-                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors">
-                                        إغلاق
-                                    </button>
+                                    <button onClick={() => window.open(qrUrl, '_blank')} className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors">{t('medicalExamination.openLink')}</button>
+                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors">{t('common.close')}</button>
                                 </div>
                             </div>
                         </div>

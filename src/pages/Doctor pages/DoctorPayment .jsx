@@ -5,6 +5,7 @@ import {
     FiTrash2, FiLoader
 } from 'react-icons/fi';
 import axiosInstance from '../../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 const BANKS = [
     { id: '11111111-1111-1111-1111-111111111111', name: 'بنك فلسطين', logo: '/images/payment/bank-of-palestine.webp' },
@@ -34,6 +35,7 @@ const BANK_IBAN_CODES = {
 };
 
 const getBankPlaceholder = (bankId) => {
+    const { t } = useTranslation();
     const code = BANK_IBAN_CODES[bankId];
     if (!code) return 'PS00 0000 0000 0000 0000 0000 0000';
     return `PS00${code}00000000000000000000000`;
@@ -103,7 +105,7 @@ const DoctorPayment = () => {
             const methods = res.data.data || [];
             setPaymentMethods(methods);
 
-            const banks = methods.filter(m => m.type === 'تحويل بنكي');
+            const banks = methods.filter(m => m.type === t('doctorPayment.bankTransfer'));
             const allBanks = [];
             for (const b of banks) {
                 try {
@@ -115,7 +117,7 @@ const DoctorPayment = () => {
             }
             setBankList(allBanks);
 
-            const walletMethods = methods.filter(m => m.type === 'محفظة إلكترونية');
+            const walletMethods = methods.filter(m => m.type === t('doctorPayment.electronicWallet'));
             const walletDetails = [];
             for (const w of walletMethods) {
                 try {
@@ -127,7 +129,7 @@ const DoctorPayment = () => {
             }
             setWallets(walletDetails);
         } catch (err) {
-            setError('فشل في تحميل بيانات طرق الدفع');
+            setError(t('doctorPayment.errorLoadingPaymentMethods'));
         } finally {
             setLoading(false);
         }
@@ -145,7 +147,7 @@ const DoctorPayment = () => {
 
     const handleAddBank = async () => {
         if (!bankForm.accountHolderName || !bankForm.phoneNumber || !bankForm.iban) {
-            setError('يرجى ملء جميع الحقول المطلوبة');
+            setError(t('doctorPayment.fillRequiredFields'));
             return;
         }
         const ibanErr = validateIban(bankForm.iban, bankForm.bankId);
@@ -170,7 +172,7 @@ const DoctorPayment = () => {
             await fetchData();
         } catch (err) {
 
-            setError(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || 'فشل في إضافة الحساب البنكي');
+            setError(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || t('doctorPayment.addBankFailed'));
         } finally {
             setSaving(false);
         }
@@ -178,7 +180,7 @@ const DoctorPayment = () => {
 
     const handleAddWallet = async () => {
         if (!walletForm.accountHolderName || !walletForm.phoneNumber) {
-            setError('يرجى ملء جميع الحقول المطلوبة');
+            setError(t('doctorPayment.fillRequiredFields'));
             return;
         }
         setSaving(true);
@@ -194,7 +196,7 @@ const DoctorPayment = () => {
             setWalletForm({ walletProviderId: WALLET_PROVIDERS[0].id, accountHolderName: '', phoneNumber: '' });
             await fetchData();
         } catch (err) {
-            setError(err.response?.data?.errors?.[0]?.message || 'فشل في إضافة المحفظة');
+            setError(err.response?.data?.errors?.[0]?.message || t('doctorPayment.addWalletFailed'));
         } finally {
             setSaving(false);
         }
@@ -217,7 +219,7 @@ const DoctorPayment = () => {
             setEditData(null);
             await fetchData();
         } catch (err) {
-            setError(err.response?.data?.errors?.[0]?.message || 'فشل في تحديث الحساب البنكي');
+            setError(err.response?.data?.errors?.[0]?.message || t('doctorPayment.updateBankFailed'));
         } finally {
             setSaving(false);
         }
@@ -239,7 +241,7 @@ const DoctorPayment = () => {
             setEditData(null);
             await fetchData();
         } catch (err) {
-            setError(err.response?.data?.errors?.[0]?.message || 'فشل في تحديث المحفظة');
+            setError(err.response?.data?.errors?.[0]?.message || t('doctorPayment.updateWalletFailed'));
         } finally {
             setSaving(false);
         }
@@ -249,12 +251,12 @@ const DoctorPayment = () => {
         setSaving(true);
         setError('');
         try {
-            const apiType = type === 'تحويل بنكي' ? 'Bank' : 'Wallet';
+            const apiType = type === t('doctorPayment.bankTransfer') ? 'Bank' : 'Wallet';
             await axiosInstance.delete(`/doctor/payment-methods/${id}?type=${apiType}`);
             setDeleteConfirm(null);
             await fetchData();
         } catch (err) {
-            setError('فشل في حذف طريقة الدفع');
+            setError(t('doctorPayment.deletePaymentFailed'));
         } finally {
             setSaving(false);
         }
@@ -291,7 +293,7 @@ const DoctorPayment = () => {
                 <div className="bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700 shadow-xs p-8">
                     <div className="flex items-center justify-center gap-3 text-[#1b8b99]">
                         <FiLoader className="w-6 h-6 animate-spin" />
-                        <span className="text-sm font-bold">جاري تحميل بيانات طرق الدفع...</span>
+                        <span className="text-sm font-bold">{t('doctorPayment.loadingPaymentMethods')}</span>
                     </div>
                 </div>
             </div>
@@ -318,34 +320,27 @@ const DoctorPayment = () => {
                     <div className="p-4 sm:p-6 md:p-8 space-y-6">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-gray-700 pb-6">
                             <div className="space-y-1 text-right">
-                                <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">إدارة طرق الدفع</h1>
-                                <p className="text-xs sm:text-sm text-gray-500">
-                                    قم بتهيئة قنوات الدفع المحلية الخاصة بك. سيتم عرض هذه المعلومات للمرضى عند حجز الموعد لرفع إيصال الدفع.
-                                </p>
+                                <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">{t('doctorPayment.pageTitle')}</h1>
+                                <p className="text-xs sm:text-sm text-gray-500">{t('doctorPayment.pageDescription')}</p>
                             </div>
                             <button
                                 onClick={() => { setViewMode("add"); setAddType("bank"); setError(''); }}
                                 className="flex items-center justify-center gap-2 bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold py-3 px-5 rounded-xl transition-all shadow-xs cursor-pointer text-sm self-start sm:self-auto"
                             >
-                                <FiPlus className="w-5 h-5" />
-                                إضافة طريقة دفع جديدة
-                            </button>
+                                <FiPlus className="w-5 h-5" />{t('doctorPayment.addNewMethod')}</button>
                         </div>
 
                         <div className="bg-cyan-50/40 border-r-4 border-[#1b8b99] p-4 rounded-xl flex items-start gap-3">
                             <FiInfo className="w-5 h-5 text-[#1b8b99] shrink-0 mt-0.5" />
                             <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 leading-relaxed text-right">
-                                <strong className="text-[#1b8b99]">ملاحظة:</strong> طرق الدفع المفعّلة أدناه هي ما سيظهر للمرضى في واجهة الدفع. تأكد من صحة أرقام الهواتف والحسابات البنكية لضمان وصول التحويلات بشكل صحيح.
-                            </p>
+                                <strong className="text-[#1b8b99]">{t('doctorPayment.noteLabel')}</strong>{t('doctorPayment.noteDescription')}</p>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
                             {/* قسم الحسابات البنكية */}
                             <div className="space-y-4">
                                 <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2 text-right">
-                                    <FiCreditCard className="text-[#1b8b99] w-5 h-5" />
-                                    الحسابات البنكية
-                                </h2>
+                                    <FiCreditCard className="text-[#1b8b99] w-5 h-5" />{t('doctorPayment.bankAccountsTitle')}</h2>
 
                                 {bankList.length > 0 ? bankList.map((bankDetail) => (
                                     <div key={bankDetail.id} className="text-white p-4 rounded-2xl relative overflow-hidden shadow-md space-y-3 text-right" style={{
@@ -358,26 +353,26 @@ const DoctorPayment = () => {
                                         <div className="absolute inset-0 bg-black/50 rounded-2xl" />
                                         <div className="relative z-10">
                                         <div className="flex justify-between items-start">
-                                            <span className="bg-white dark:bg-gray-800/20 text-white text-[11px] font-bold px-3 py-1 rounded-full">نشط</span>
+                                            <span className="bg-white dark:bg-gray-800/20 text-white text-[11px] font-bold px-3 py-1 rounded-full">{t('doctorPayment.activeStatus')}</span>
                                         </div>
 
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-2 pt-2">
                                             <div>
-                                                <p className="text-sm text-white/70 font-bold">اسم الحساب</p>
+                                                <p className="text-sm text-white/70 font-bold">{t('doctorPayment.accountName')}</p>
                                                 <p className="text-lg font-bold truncate">{bankDetail.accountHolderName}</p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-white/70 font-bold">البنك</p>
+                                                <p className="text-sm text-white/70 font-bold">{t('doctorPayment.bankName')}</p>
                                                 <p className="text-lg font-bold truncate">{bankDetail.bankName}</p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-white/70 font-bold">رقم جوال الحساب</p>
+                                                <p className="text-sm text-white/70 font-bold">{t('doctorPayment.accountPhoneNumber')}</p>
                                                 <p className="text-lg font-mono font-bold truncate" dir="ltr">{bankDetail.phoneNumber}</p>
                                             </div>
                                         </div>
 
                                         <div className="pt-2 border-t border-white/20">
-                                            <p className="text-sm text-white/70 font-bold mb-0.5">الآيبان</p>
+                                            <p className="text-sm text-white/70 font-bold mb-0.5">{t('doctorPayment.ibanLabel')}</p>
                                             <div className="flex items-center justify-between bg-black/20 p-2 rounded-lg font-mono text-base">
                                                 <span className="truncate">{bankDetail.iban}</span>
                                                 <button
@@ -392,33 +387,27 @@ const DoctorPayment = () => {
                                         <div className="flex justify-end gap-2 -mx-4 -mb-4 mt-2 bg-black/10 px-4 py-2 rounded-b-2xl">
                                             <button
                                                 onClick={() => {
-                                                    setDeleteConfirm({ id: bankDetail.id, type: 'تحويل بنكي', name: bankDetail.bankName });
+                                                    setDeleteConfirm({ id: bankDetail.id, type: t('doctorPayment.bankTransfer'), name: bankDetail.bankName });
                                                 }}
                                                 className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all"
                                             >
-                                                <FiTrash2 className="w-3 h-3" />
-                                                حذف
-                                            </button>
+                                                <FiTrash2 className="w-3 h-3" />{t('doctorPayment.delete')}</button>
                                             <button
                                                 onClick={() => openEditBank(bankDetail)}
                                                 className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all"
                                             >
-                                                <FiEdit3 className="w-3 h-3" />
-                                                تعديل البيانات
-                                            </button>
+                                                <FiEdit3 className="w-3 h-3" />{t('doctorPayment.editData')}</button>
                                         </div>
                                         </div>
                                     </div>
                                 )) : (
                                     <div className="border-2 border-dashed border-slate-200 dark:border-gray-700 rounded-2xl p-8 text-center text-gray-400">
                                         <FiCreditCard className="w-10 h-10 mx-auto mb-2 opacity-30" />
-                                        <p className="text-sm">لم تتم إضافة حساب بنكي بعد</p>
+                                        <p className="text-sm">{t('doctorPayment.noBankAccountYet')}</p>
                                         <button
                                             onClick={() => { setViewMode("add"); setAddType("bank"); }}
                                             className="mt-3 text-sm text-[#1b8b99] font-bold hover:underline"
-                                        >
-                                            + إضافة حساب بنكي
-                                        </button>
+                                        >{t('doctorPayment.addBankAccount')}</button>
                                     </div>
                                 )}
                             </div>
@@ -426,9 +415,7 @@ const DoctorPayment = () => {
                             {/* قسم المحافظ الرقمية */}
                             <div className="space-y-4">
                                 <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2 text-right">
-                                    <FiSmartphone className="text-[#1b8b99] w-5 h-5" />
-                                    المحافظ الرقمية
-                                </h2>
+                                    <FiSmartphone className="text-[#1b8b99] w-5 h-5" />{t('doctorPayment.digitalWalletsTitle')}</h2>
 
                                 <div className="space-y-4">
                                     {wallets.length > 0 ? wallets.map((wallet) => (
@@ -457,7 +444,7 @@ const DoctorPayment = () => {
 
                                                 <div className="flex items-center gap-2">
                                                     <button
-                                                        onClick={() => setDeleteConfirm({ id: wallet.id, type: 'محفظة إلكترونية', name: wallet.providerName })}
+                                                        onClick={() => setDeleteConfirm({ id: wallet.id, type: t('doctorPayment.electronicWallet'), name: wallet.providerName })}
                                                         className="text-xs text-white/80 hover:text-red-200 p-1.5 rounded-lg hover:bg-white dark:bg-gray-800/10 transition-colors"
                                                     >
                                                         <FiTrash2 className="w-3.5 h-3.5" />
@@ -466,22 +453,18 @@ const DoctorPayment = () => {
                                                         onClick={() => openEditWallet(wallet)}
                                                         className="flex items-center gap-1 text-xs text-white hover:text-white/90 font-bold"
                                                     >
-                                                        <FiEdit3 className="w-3.5 h-3.5" />
-                                                        تعديل
-                                                    </button>
+                                                        <FiEdit3 className="w-3.5 h-3.5" />{t('doctorPayment.editWallet')}</button>
                                                 </div>
                                             </div>
                                         </div>
                                     )) : (
                                         <div className="border-2 border-dashed border-slate-200 dark:border-gray-700 rounded-2xl p-8 text-center text-gray-400">
                                             <FiSmartphone className="w-10 h-10 mx-auto mb-2 opacity-30" />
-                                            <p className="text-sm">لم تتم إضافة محفظة رقمية بعد</p>
+                                            <p className="text-sm">{t('doctorPayment.noWalletYet')}</p>
                                             <button
                                                 onClick={() => { setViewMode("add"); setAddType("wallet"); }}
                                                 className="mt-3 text-sm text-[#1b8b99] font-bold hover:underline"
-                                            >
-                                                + إضافة محفظة رقمية
-                                            </button>
+                                            >{t('doctorPayment.addDigitalWallet')}</button>
                                         </div>
                                     )}
                                 </div>
@@ -491,7 +474,7 @@ const DoctorPayment = () => {
                         <div className="border border-dashed border-slate-200 dark:border-gray-700 rounded-xl p-4 flex items-center justify-center gap-2 bg-slate-50 dark:bg-gray-900/50 mt-6">
                             <FiAlertCircle className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0" />
                             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium text-center">
-                                <strong className="text-gray-700">نصيحة تقنية:</strong> يفضل دائماً توفير خيار محفظة رقمية واحد على الأقل وخيار بنكي واحد.
+                                <strong className="text-gray-700">{t('doctorPayment.technicalTip')}</strong> يفضل دائماً توفير خيار محفظة رقمية واحد على الأقل وخيار بنكي واحد.
                             </p>
                         </div>
                     </div>
@@ -500,12 +483,12 @@ const DoctorPayment = () => {
                 {viewMode === "add" && (
                     <div className="p-4 sm:p-6 md:p-8 space-y-6">
                         <div className="text-center space-y-2 border-b border-slate-100 dark:border-gray-700 pb-6">
-                            <h1 className="text-2xl font-bold text-[#1b8b99]">إضافة طريقة دفع جديدة</h1>
-                            <p className="text-xs sm:text-sm text-gray-500">قم بإعداد تفاصيل التحويل المالي لاستلام مدفوعات المرضى مباشرة</p>
+                            <h1 className="text-2xl font-bold text-[#1b8b99]">{t('doctorPayment.addNewMethod')}</h1>
+                            <p className="text-xs sm:text-sm text-gray-500">{t('doctorPayment.addNewMethodDescription')}</p>
                         </div>
 
                         <div className="space-y-3">
-                            <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 text-right">اختر نوع وسيلة الدفع</label>
+                            <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 dark:text-gray-500 text-right">{t('doctorPayment.choosePaymentType')}</label>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div
                                     onClick={() => { setAddType("bank"); setError(''); }}
@@ -517,8 +500,8 @@ const DoctorPayment = () => {
                                         <FiCreditCard className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">حساب بنكي</h3>
-                                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">التحويل المباشر للحسابات الفلسطينية</p>
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">{t('doctorPayment.bankAccountType')}</h3>
+                                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('doctorPayment.bankTransferDesc')}</p>
                                     </div>
                                 </div>
 
@@ -532,8 +515,8 @@ const DoctorPayment = () => {
                                         <FiSmartphone className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">محفظة رقمية</h3>
-                                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">جوال باي، بال بي</p>
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">{t('doctorPayment.walletType')}</h3>
+                                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('doctorPayment.walletProvidersDesc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -543,7 +526,7 @@ const DoctorPayment = () => {
                             {addType === "bank" ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
                                     <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">اسم البنك</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.bankNameLabel')}</label>
                                         <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 bg-slate-50 dark:bg-gray-900 h-12">
                                             <select
                                                 value={bankForm.bankId}
@@ -559,17 +542,17 @@ const DoctorPayment = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">اسم صاحب الحساب</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.accountHolderName')}</label>
                                         <input
                                             type="text"
                                             value={bankForm.accountHolderName}
                                             onChange={(e) => setBankForm({ ...bankForm, accountHolderName: e.target.value })}
-                                            placeholder="الاسم كما في البنك"
+                                            placeholder={t('doctorPayment.accountHolderPlaceholder')}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all"
                                         />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">رقم جوال الحساب</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.accountPhoneNumber')}</label>
                                         <input
                                             type="text"
                                             value={bankForm.phoneNumber}
@@ -580,7 +563,7 @@ const DoctorPayment = () => {
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">رقم الآيبان (IBAN)</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.ibanNumberLabel')}</label>
                                         <input
                                             type="text"
                                             value={bankForm.iban}
@@ -603,15 +586,14 @@ const DoctorPayment = () => {
                                         {ibanError && <p className="text-[11px] text-red-500 mt-1">{ibanError}</p>}
                                         {bankForm.iban && !ibanError && bankForm.iban.length === 29 && (
                                             <p className="text-[11px] text-green-600 mt-1 flex items-center gap-1">
-                                                <FiCheck className="w-3 h-3" /> صيغة الآيبان صحيحة
-                                            </p>
+                                                <FiCheck className="w-3 h-3" />{t('doctorPayment.ibanValid')}</p>
                                         )}
                                     </div>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
                                     <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">نوع المحفظة</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.walletTypeLabel')}</label>
                                         <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 bg-slate-50 dark:bg-gray-900 h-12">
                                             <select
                                                 value={walletForm.walletProviderId}
@@ -624,17 +606,17 @@ const DoctorPayment = () => {
                                         </div>
                                     </div>
                                     <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">اسم صاحب المحفظة</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.walletHolderName')}</label>
                                         <input
                                             type="text"
                                             value={walletForm.accountHolderName}
                                             onChange={(e) => setWalletForm({ ...walletForm, accountHolderName: e.target.value })}
-                                            placeholder="الاسم كما في المحفظة"
+                                            placeholder={t('doctorPayment.walletHolderPlaceholder')}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all"
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-[#1b8b99]">رقم جوال المحفظة</label>
+                                        <label className="text-xs font-bold text-[#1b8b99]">{t('doctorPayment.walletPhoneNumber')}</label>
                                         <input
                                             type="text"
                                             value={walletForm.phoneNumber}
@@ -643,7 +625,7 @@ const DoctorPayment = () => {
                                             maxLength={10}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all text-right"
                                         />
-                                        <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1">تأكد من مطابقة رقم الجوال المسجل في خدمة المحفظة الرقمية.</p>
+                                        <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1">{t('doctorPayment.walletPhoneNote')}</p>
                                     </div>
                                 </div>
                             )}
@@ -660,9 +642,7 @@ const DoctorPayment = () => {
                                 <button
                                     onClick={() => { setViewMode("list"); setError(''); }}
                                     className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm"
-                                >
-                                    إلغاء
-                                </button>
+                                >{t('common.cancel')}</button>
                             </div>
                         </div>
                     </div>
@@ -674,7 +654,7 @@ const DoctorPayment = () => {
                             <div className="bg-slate-50 dark:bg-gray-900 px-4 py-4 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                                 <div className="flex items-center gap-2 text-[#1b8b99]">
                                     <FiCreditCard className="w-5 h-5" />
-                                    <h2 className="font-bold text-sm sm:text-base">تعديل بيانات وسيلة الدفع</h2>
+                                    <h2 className="font-bold text-sm sm:text-base">{t('doctorPayment.editPaymentTitle')}</h2>
                                 </div>
                                 <button onClick={() => { setViewMode("list"); setEditData(null); }} className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors">
                                     <FiX className="w-5 h-5" />
@@ -684,21 +664,19 @@ const DoctorPayment = () => {
                                 <div className="bg-slate-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 p-4 rounded-xl flex items-start gap-3">
                                     <FiInfo className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0 mt-0.5" />
                                     <div className="text-right space-y-0.5">
-                                        <h4 className="text-xs font-bold text-gray-700">تعليمات هامة</h4>
-                                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">
-                                            سيتم عرض هذه البيانات للمرضى أثناء عملية حجز الموعد. يرجى التأكد من دقة المعلومات لضمان استلام الدفعات بشكل صحيح.
-                                        </p>
+                                        <h4 className="text-xs font-bold text-gray-700">{t('doctorPayment.importantInstructions')}</h4>
+                                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">{t('doctorPayment.importantInstructionsDesc')}</p>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">اسم الحساب</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.accountName')}</label>
                                         <input type="text" value={bankForm.accountHolderName}
                                             onChange={(e) => setBankForm({ ...bankForm, accountHolderName: e.target.value })}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] transition-all" />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">اسم البنك</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.bankNameLabel')}</label>
                                         <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 h-12 bg-white">
                                             <select value={bankForm.bankId}
                                                 onChange={(e) => setBankForm({ ...bankForm, bankId: e.target.value })}
@@ -709,14 +687,14 @@ const DoctorPayment = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">رقم جوال الحساب</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.accountPhoneNumber')}</label>
                                         <input type="text" value={bankForm.phoneNumber}
                                             onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setBankForm({ ...bankForm, phoneNumber: val }); }}
                                             maxLength={10}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] transition-all text-right" />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">رقم الآيبان (IBAN)</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.ibanNumberLabel')}</label>
                                         <input type="text" value={bankForm.iban}
                                             onChange={(e) => { const cleaned = formatIban(e.target.value); setBankForm({ ...bankForm, iban: cleaned }); const err = validateIban(cleaned, bankForm.bankId); setIbanError(err); }}
                                             onBlur={() => { const err = validateIban(bankForm.iban, bankForm.bankId); setIbanError(err); }}
@@ -733,9 +711,7 @@ const DoctorPayment = () => {
                                         حفظ التغييرات
                                     </button>
                                     <button onClick={() => { setViewMode("list"); setEditData(null); }}
-                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm">
-                                        إلغاء
-                                    </button>
+                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm">{t('common.cancel')}</button>
                                 </div>
                             </div>
                         </div>
@@ -748,7 +724,7 @@ const DoctorPayment = () => {
                             <div className="bg-slate-50 dark:bg-gray-900 px-4 py-4 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                                 <div className="flex items-center gap-2 text-[#1b8b99]">
                                     <FiSmartphone className="w-5 h-5" />
-                                    <h2 className="font-bold text-sm sm:text-base">تعديل بيانات المحفظة الرقمية</h2>
+                                    <h2 className="font-bold text-sm sm:text-base">{t('doctorPayment.editWalletTitle')}</h2>
                                 </div>
                                 <button onClick={() => { setViewMode("list"); setEditData(null); }} className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors">
                                     <FiX className="w-5 h-5" />
@@ -758,21 +734,19 @@ const DoctorPayment = () => {
                                 <div className="bg-slate-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 p-4 rounded-xl flex items-start gap-3">
                                     <FiInfo className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0 mt-0.5" />
                                     <div className="text-right space-y-0.5">
-                                        <h4 className="text-xs font-bold text-gray-700">تعليمات هامة</h4>
-                                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">
-                                            سيتم عرض هذه البيانات للمرضى أثناء عملية حجز الموعد. يرجى التأكد من دقة المعلومات لضمان استلام الدفعات بشكل صحيح.
-                                        </p>
+                                        <h4 className="text-xs font-bold text-gray-700">{t('doctorPayment.importantInstructions')}</h4>
+                                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">{t('doctorPayment.importantInstructionsDesc')}</p>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
                                     <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">اسم صاحب المحفظة</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.walletHolderName')}</label>
                                         <input type="text" value={walletForm.accountHolderName}
                                             onChange={(e) => setWalletForm({ ...walletForm, accountHolderName: e.target.value })}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] transition-all" />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">نوع المحفظة</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.walletTypeLabel')}</label>
                                         <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 h-12 bg-white">
                                             <select value={walletForm.walletProviderId}
                                                 onChange={(e) => setWalletForm({ ...walletForm, walletProviderId: e.target.value })}
@@ -783,7 +757,7 @@ const DoctorPayment = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">رقم المحفظة</label>
+                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.walletNumber')}</label>
                                         <input type="text" value={walletForm.phoneNumber}
                                             onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setWalletForm({ ...walletForm, phoneNumber: val }); }}
                                             maxLength={10}
@@ -797,9 +771,7 @@ const DoctorPayment = () => {
                                         حفظ التغييرات
                                     </button>
                                     <button onClick={() => { setViewMode("list"); setEditData(null); }}
-                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm">
-                                        إلغاء
-                                    </button>
+                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm">{t('common.cancel')}</button>
                                 </div>
                             </div>
                         </div>
@@ -809,7 +781,7 @@ const DoctorPayment = () => {
                 {deleteConfirm && (
                     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setDeleteConfirm(null)}>
                         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-sm w-full shadow-xl" onClick={(e) => e.stopPropagation()}>
-                            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">حذف طريقة الدفع</h3>
+                            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">{t('doctorPayment.deletePaymentTitle')}</h3>
                             <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-6">
                                 هل أنت متأكد من حذف "{deleteConfirm.name}"؟ لن تتمكن من التراجع عن هذا الإجراء.
                             </p>
@@ -825,9 +797,7 @@ const DoctorPayment = () => {
                                 <button
                                     onClick={() => setDeleteConfirm(null)}
                                     className="flex-1 bg-slate-100 dark:bg-gray-800 hover:bg-slate-200 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold py-2.5 px-4 rounded-xl text-sm transition-colors"
-                                >
-                                    إلغاء
-                                </button>
+                                >{t('common.cancel')}</button>
                             </div>
                         </div>
                     </div>

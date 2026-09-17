@@ -374,7 +374,7 @@ const Myprofile = () => {
                     onClick={() =>
                       setLocalUserData((prev) => ({ ...prev, gender: "Male" }))
                     }
-                    className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${currentData.gender === "Male" ? "bg-[#1b8b99] text-white" : "text-gray-700"} ${!isEdit ? "cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${currentData.gender === "Male" ? "bg-[#1b8b99] text-white" : "text-gray-700 dark:text-gray-300"} ${!isEdit ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     {t('profile.male')}
                   </button>
@@ -387,7 +387,7 @@ const Myprofile = () => {
                         gender: "Female",
                       }))
                     }
-                    className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${currentData.gender === "Female" ? "bg-[#1b8b99] text-white" : "text-gray-700"} ${!isEdit ? "cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`flex-1 text-center h-full flex items-center justify-center font-medium text-sm transition-all duration-200 ${currentData.gender === "Female" ? "bg-[#1b8b99] text-white" : "text-gray-700 dark:text-gray-300"} ${!isEdit ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     {t('profile.female')}
                   </button>

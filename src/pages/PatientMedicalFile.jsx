@@ -603,7 +603,7 @@ const PatientMedicalFile = () => {
                             <div style={{ textAlign: 'right' }}>
                                 <p style={{ fontSize: '10px', fontWeight: '700', color: '#1b8b99', marginBottom: '6px' }}>توقيع الطبيب المعالج</p>
                                 {pdfVisit.doctorSignatureUrl ? (
-                                    <img crossOrigin="anonymous" src={pdfVisit.doctorSignatureUrl} alt="توقيع الطبيب" style={{ height: '35px', objectFit: 'contain' }} />
+                                    <img loading="lazy" crossOrigin="anonymous" src={pdfVisit.doctorSignatureUrl} alt="توقيع الطبيب" style={{ height: '35px', objectFit: 'contain' }} />
                                 ) : (
                                     <div style={{ width: '80px', borderBottom: '1px solid #333', marginBottom: '3px' }}></div>
                                 )}
@@ -611,7 +611,7 @@ const PatientMedicalFile = () => {
                                 {pdfVisit.clinicName && <p style={{ fontSize: '9px', color: '#888', margin: 0 }}>{pdfVisit.clinicName}</p>}
                             </div>
                             <div style={{ textAlign: 'center' }}>
-                                <img src={assets.logoPng} alt="شعار طبيبي" style={{ height: '35px', marginBottom: '2px' }} />
+                                <img loading="lazy" src={assets.logoPng} alt="شعار طبيبي" style={{ height: '35px', marginBottom: '2px' }} />
                                 <p style={{ fontSize: '8px', color: '#bbb', marginTop: '1px' }}>Tabibi Platform</p>
                             </div>
                         </div>

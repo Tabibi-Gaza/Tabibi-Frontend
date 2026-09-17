@@ -105,9 +105,7 @@ const RegisterAsDoctor = () => {
 
     return (
         // تم إضافة pt-24 لضمان عدم تداخل هيدر الصفحة مع الـ Navbar الثابت علوياً
-        <div className="min-h-screen bg-[#f7f9fc] text-slate-800 pt-24 pb-16" dir="rtl">
-
-            {/* رأس الصفحة - العناوين الرئيسية */}
+        <div className="min-h-screen bg-[#f7f9fc] dark:bg-gray-900 text-slate-800 dark:text-gray-200 pt-24 pb-16" dir="rtl">
             <header className="text-center py-10 px-4">
                 <h1 className="text-3xl md:text-4xl font-black text-[#118fa6] mb-2">تسجيل طبيب جديد</h1>
                 <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base font-semibold">أكمل ملفك المهني للانضمام إلى نخبة أطباء منصة طبيبي</p>
@@ -135,7 +133,7 @@ const RegisterAsDoctor = () => {
                                     onChange={handleChange}
                                     placeholder="مثال: مركز الطمأنينة"
                                     required
-                                    className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6]"
+                                    className="w-full h-12 px-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white dark:bg-gray-700 dark:text-white"
                                 />
                             </div>
                             <div>
@@ -165,7 +163,7 @@ const RegisterAsDoctor = () => {
                                     value={formData.detailedAddress}
                                     onChange={handleChange}
                                     placeholder="مثال: شارع الشهداء، بجانب صيدلية الحياة، الطابق الثاني"
-                                    className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6]"
+                                    className="w-full h-12 px-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white dark:bg-gray-700 dark:text-white"
                                 />
                             </div>
                         </div>
@@ -189,7 +187,7 @@ const RegisterAsDoctor = () => {
                                     onChange={handleChange}
                                     placeholder="000-000-000"
                                     required
-                                    className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
+                                    className="w-full h-12 px-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] text-left bg-white dark:bg-gray-700 dark:text-white"
                                     dir="ltr"
                                 />
                             </div>
@@ -225,7 +223,7 @@ const RegisterAsDoctor = () => {
                                     required
                                     min="0"
                                     max="70"
-                                    className="w-full h-12 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
+                                    className="w-full h-12 px-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] text-left bg-white dark:bg-gray-700 dark:text-white"
                                     dir="ltr"
                                 />
                             </div>
@@ -240,7 +238,7 @@ const RegisterAsDoctor = () => {
                                         placeholder="0"
                                         required
                                         min="1"
-                                        className="w-full h-12 pl-16 pr-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] text-left"
+                                        className="w-full h-12 pl-16 pr-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] text-left bg-white dark:bg-gray-700 dark:text-white"
                                         dir="ltr"
                                     />
                                     <span className="absolute left-3 top-3.5 text-xs font-bold text-gray-400">ILS</span>
@@ -265,7 +263,7 @@ const RegisterAsDoctor = () => {
                                     value={formData.bio}
                                     onChange={handleChange}
                                     placeholder="اكتب نبذة مختصرة عن مسيرتك المهنية..."
-                                    className="w-full h-28 p-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6] resize-none"
+                                    className="w-full h-28 p-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] resize-none bg-white dark:bg-gray-700 dark:text-white"
                                 />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -330,7 +328,7 @@ const RegisterAsDoctor = () => {
                                     value={formData.additionalNotes}
                                     onChange={handleChange}
                                     placeholder="أي معلومات أخرى ترغب بمشاركتها..."
-                                    className="w-full h-14 px-4 border border-[#bcd3ee] rounded-xl text-sm outline-none focus:border-[#118fa6]"
+                                    className="w-full h-14 px-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] bg-white dark:bg-gray-700 dark:text-white"
                                 />
                             </div>
                         </div>

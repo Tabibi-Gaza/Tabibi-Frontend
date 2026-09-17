@@ -102,14 +102,6 @@ const Contact = () => {
                 <h2 className="text-[15px] font-bold text-[#1F2937] dark:text-white mb-1.5">
                   Gmail
                 </h2>
-                <p className="text-[#6B7280] dark:text-gray-200 text-[13px]">
-                  <a
-                    href={`mailto:${contactInfo.email}?subject=استفسار من منصة طبيبي`}
-                    className="text-[#138c9f] hover:underline"
-                  >
-                    {contactInfo.email}
-                  </a>
-                </p>
               </div>
 
               {/* WhatsApp */}

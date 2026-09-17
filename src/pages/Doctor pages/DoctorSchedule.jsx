@@ -191,17 +191,17 @@ const DoctorSchedule = () => {
             <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl p-5 md:p-6 shadow-xs space-y-4 text-right">
               <h3 className="text-lg font-black text-[#0B1C30] dark:text-white border-b border-gray-100 dark:border-gray-700 pb-3">{t('doctorSchedule.overview')}</h3>
               <div className="space-y-3">
-                <div className="p-3.5 bg-[#F4F6FC] rounded-xl flex justify-between items-center">
-                  <span className="text-sm font-bold text-[#526069]">{t('doctorSchedule.weeklyWorkDays')}</span>
+                  <div className="p-3.5 bg-[#F4F6FC] dark:bg-gray-800 rounded-xl flex justify-between items-center">
+                  <span className="text-sm font-bold text-[#526069] dark:text-gray-400">{t('doctorSchedule.weeklyWorkDays')}</span>
                   <span className="text-sm font-black text-[#138C9F]">{overviewStats.activeDays} {t('doctorSchedule.days')}</span>
                 </div>
-                <div className="p-3.5 bg-[#F4F6FC] rounded-xl flex justify-between items-center">
+                <div className="p-3.5 bg-[#F4F6FC] dark:bg-gray-800 rounded-xl flex justify-between items-center">
                   <span className="text-sm font-black text-[#138C9F]">{overviewStats.totalHours} {t('doctorSchedule.hours')}</span>
-                  <span className="text-sm font-bold text-[#526069]">{t('doctorSchedule.totalAvailableHours')}</span>
+                  <span className="text-sm font-bold text-[#526069] dark:text-gray-400">{t('doctorSchedule.totalAvailableHours')}</span>
                 </div>
-                <div className="p-3.5 bg-[#F4F6FC] rounded-xl flex justify-between items-center">
+                <div className="p-3.5 bg-[#F4F6FC] dark:bg-gray-800 rounded-xl flex justify-between items-center">
                   <span className="text-sm font-black text-[#138C9F]">{overviewStats.slotDuration} {t('doctorSchedule.minutes')}</span>
-                  <span className="text-sm font-bold text-[#526069]">{t('doctorSchedule.defaultSlotDuration')}</span>
+                  <span className="text-sm font-bold text-[#526069] dark:text-gray-400">{t('doctorSchedule.defaultSlotDuration')}</span>
                 </div>
               </div>
             </div>

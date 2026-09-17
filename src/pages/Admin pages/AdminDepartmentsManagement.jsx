@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, Users, Layers, ChevronRight, ChevronLeft, X, ToggleLeft, ToggleRight, Loader2 } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import {
   useAdminSpecializationsQuery,
   useCreateSpecialization,
@@ -10,6 +11,7 @@ import {
 } from '../../queries/specializations/specializationQueries';
 
 export default function AdminDepartmentsManagement() {
+    const { t } = useTranslation();
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
     const itemsPerPage = 10;
@@ -46,12 +48,12 @@ export default function AdminDepartmentsManagement() {
         try {
             if (modalMode === 'add') {
                 const res = await createMut.mutateAsync(deptNameInput.trim());
-                if (res.succeeded) toast.success('تمت إضافة القسم بنجاح.');
-                else toast.error(res.errors?.[0]?.message || 'فشل إضافة القسم.');
+                if (res.succeeded) toast.success(t('adminDepartments.addSuccess'));
+                else toast.error(res.errors?.[0]?.message || t('adminDepartments.addFailed'));
             } else {
                 const res = await updateMut.mutateAsync({ id: currentDeptId, name: deptNameInput.trim() });
-                if (res.succeeded) toast.success('تم تعديل القسم بنجاح.');
-                else toast.error(res.errors?.[0]?.message || 'فشل تعديل القسم.');
+                if (res.succeeded) toast.success(t('adminDepartments.editSuccess'));
+                else toast.error(res.errors?.[0]?.message || t('adminDepartments.editFailed'));
             }
             setIsModalOpen(false);
             setDeptNameInput('');
@@ -61,25 +63,25 @@ export default function AdminDepartmentsManagement() {
     };
 
     const handleDeleteDepartment = async (id) => {
-        if (!window.confirm("هل أنت متأكد من حذف هذا القسم؟")) return;
+        if (!window.confirm(t('adminDepartments.deleteConfirm'))) return;
         try {
             const res = await deleteMut.mutateAsync(id);
             if (res.succeeded) {
-                toast.success('تم حذف القسم بنجاح.');
+                toast.success(t('adminDepartments.deleteSuccess'));
                 const maxPage = Math.ceil((totalItems - 1) / itemsPerPage) || 1;
                 if (currentPage > maxPage) setCurrentPage(maxPage);
             } else {
-                toast.error(res.errors?.[0]?.message || 'فشل حذف القسم.');
+                toast.error(res.errors?.[0]?.message || t('adminDepartments.deleteFailed'));
             }
         } catch (error) {
-            toast.error(error.response?.data?.errors?.[0]?.message || 'حدث خطأ أثناء الحذف.');
+            toast.error(error.response?.data?.errors?.[0]?.message || t('adminDepartments.deleteError'));
         }
     };
 
     const handleToggleActivation = async (id) => {
         try {
             const res = await toggleMut.mutateAsync(id);
-            if (!res.succeeded) toast.error(res.errors?.[0]?.message || 'فشل تغيير الحالة.');
+            if (!res.succeeded) toast.error(res.errors?.[0]?.message || t('adminDepartments.toggleFailed'));
         } catch (error) {
             toast.error('حدث خطأ.');
         }
@@ -91,11 +93,11 @@ export default function AdminDepartmentsManagement() {
       <div className="w-full relative" dir="rtl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div className="flex flex-col gap-1.5 text-right w-full md:w-auto">
-            <h2 className="text-[26px] md:text-[32px] font-extrabold leading-tight text-[#138C9F]">إدارة الأقسام</h2>
-            <p className="text-[14px] md:text-[16px] font-semibold leading-normal text-[#434654]">قم بإضافة وتعديل الأقسام الطبية المتاحة في العيادة</p>
+            <h2 className="text-[26px] md:text-[32px] font-extrabold leading-tight text-[#138C9F]">{t('adminDepartments.title')}</h2>
+            <p className="text-[14px] md:text-[16px] font-semibold leading-normal text-[#434654]">{t('adminDepartments.description')}</p>
           </div>
           <button onClick={openAddModal} className="flex flex-row items-center justify-center gap-3 w-full md:w-auto h-[48px] md:h-[52px] px-6 py-3 md:py-4 bg-[#138C9F] text-white rounded-lg shadow-sm font-bold text-[15px] hover:bg-[#0f7282] transition-colors shrink-0">
-            <span>إضافة قسم جديد</span>
+            <span>{t('adminDepartments.addNew')}</span>
             <Plus className="w-5 h-5 bg-white dark:bg-gray-800 text-[#138C9F] rounded-full p-0.5 shrink-0" />
           </button>
         </div>
@@ -103,18 +105,18 @@ export default function AdminDepartmentsManagement() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[30px] mb-8">
           <div className="flex flex-col items-center justify-center h-[140px] md:h-[160px] bg-white dark:bg-gray-800 border border-[#138C9F] rounded-xl p-4 md:p-6 shadow-sm">
             <Layers className="w-[26.67px] h-[20.1px] text-[#138C9F] mb-2" />
-            <span className="text-[18px] md:text-[20px] font-bold text-[#138C9F] mb-1">أقسام نشطة حالياً</span>
+            <span className="text-[18px] md:text-[20px] font-bold text-[#138C9F] mb-1">{t('adminDepartments.activeDepartments')}</span>
             <span className="text-[22px] md:text-[25px] font-extrabold text-[#138C9F]">{totalActiveDepartments}</span>
           </div>
           <div className="flex flex-col items-center justify-center h-[140px] md:h-[160px] bg-[#138C9F] rounded-xl p-4 md:p-6 shadow-sm">
             <Users className="w-[26.67px] h-[20.1px] text-white mb-2" />
-            <span className="text-[18px] md:text-[20px] font-bold text-white mb-1">إجمالي الأطباء في الأقسام</span>
+            <span className="text-[18px] md:text-[20px] font-bold text-white mb-1">{t('adminDepartments.totalDoctors')}</span>
             <span className="text-[22px] md:text-[25px] font-extrabold text-white">{totalDoctors}</span>
           </div>
         </div>
 
         <div className="mb-4">
-          <input type="text" value={searchQuery} onChange={handleSearch} placeholder="بحث عن قسم..."
+          <input type="text" value={searchQuery} onChange={handleSearch} placeholder={t('adminDepartments.searchPlaceholder')}
             className="w-full md:w-[350px] h-[44px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] dark:text-white placeholder-gray-400 text-right text-sm" />
         </div>
 
@@ -123,10 +125,10 @@ export default function AdminDepartmentsManagement() {
             <table className="w-full text-right border-collapse">
               <thead>
                 <tr className="bg-[#e2f4f7] dark:bg-gray-800 border-b border-[#C3C6D6]">
-                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654]">اسم القسم</th>
-                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden md:table-cell">عدد الأطباء</th>
-                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden sm:table-cell">الحالة</th>
-                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center">الإجراءات</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654]">{t('adminDepartments.departmentName')}</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden md:table-cell">{t('adminDepartments.doctorCount')}</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center hidden sm:table-cell">{t('adminDepartments.status')}</th>
+                  <th className="p-3 md:p-4 text-sm md:text-[18px] font-bold text-[#434654] text-center">{t('adminDepartments.actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -138,17 +140,17 @@ export default function AdminDepartmentsManagement() {
                       <td className="p-3 md:p-4 text-sm md:text-[16px] font-bold text-[#0B1C30]">{dept.name}</td>
                       <td className="p-3 md:p-4 text-center hidden md:table-cell">
                         <span className="inline-block bg-[#E5EEFF] text-[#0B1C30] dark:text-white text-[13px] md:text-[14px] font-semibold px-3 md:px-4 py-1 rounded-full">
-                          {dept.doctorCount || 0} {(dept.doctorCount || 0) === 1 ? "طبيب" : (dept.doctorCount || 0) >= 2 && (dept.doctorCount || 0) <= 10 ? "أطباء" : "طبيب"}
+                          {dept.doctorCount || 0} {(dept.doctorCount || 0) === 1 ? t('adminDepartments.doctor') : (dept.doctorCount || 0) >= 2 && (dept.doctorCount || 0) <= 10 ? t('adminDepartments.doctors') : t('adminDepartments.doctor')}
                         </span>
                       </td>
                       <td className="p-3 md:p-4 text-center hidden sm:table-cell">
                         <span className={`inline-block text-[13px] md:text-[14px] font-bold px-3 md:px-4 py-1 rounded-full ${dept.isActive ? "bg-[rgba(0,79,32,0.1)] text-[#004F20]" : "bg-[rgba(195,198,214,0.3)] text-[#434654]"}`}>
-                          {dept.isActive ? "نشط" : "غير نشط"}
+                          {dept.isActive ? t('adminDepartments.active') : t('adminDepartments.inactive')}
                         </span>
                       </td>
                       <td className="p-3 md:p-4 text-center">
                         <div className="flex justify-center items-center gap-2">
-                          <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'}`} title={dept.isActive ? "تعطيل" : "تفعيل"}>
+                          <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'}`} title={dept.isActive ? t('adminDepartments.deactivate') : t('adminDepartments.activate')}>
                             {dept.isActive ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                           </button>
                           <button onClick={() => openEditModal(dept)} className="p-2 text-[#003D9B] hover:bg-blue-50 rounded transition-colors" title="تعديل">
@@ -162,7 +164,7 @@ export default function AdminDepartmentsManagement() {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="4" className="p-8 text-center text-gray-400 dark:text-gray-500 font-bold">لا توجد أقسام مضافة حالياً.</td></tr>
+                  <tr><td colSpan="4" className="p-8 text-center text-gray-400 dark:text-gray-500 font-bold">{t('adminDepartments.noDepartments')}</td></tr>
                 )}
               </tbody>
             </table>
@@ -195,21 +197,21 @@ export default function AdminDepartmentsManagement() {
               <div className="flex items-center justify-start gap-3 mb-6 mt-2">
                 <Plus className="w-6 h-6 bg-[#138C9F] text-white rounded-full p-0.5" />
                 <div>
-                  <h3 className="text-[18px] md:text-[20px] font-bold text-[#0B1C30]">{modalMode === "add" ? "إضافة قسم جديد" : "تعديل بيانات القسم"}</h3>
-                  <p className="text-[13px] md:text-[14px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">قم بإدخال المعلومات الأساسية للقسم لإضافته إلى النظام</p>
+                  <h3 className="text-[18px] md:text-[20px] font-bold text-[#0B1C30]">{modalMode === "add" ? t('adminDepartments.addNew') : t('adminDepartments.editTitle')}</h3>
+                  <p className="text-[13px] md:text-[14px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">{t('adminDepartments.modalDescription')}</p>
                 </div>
               </div>
               <form onSubmit={handleSaveDepartment} className="space-y-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[14px] font-bold text-[#138C9F]">اسم القسم</label>
-                  <input type="text" value={deptNameInput} onChange={(e) => setDeptNameInput(e.target.value)} placeholder="مثلاً: جراحة قلب"
+                  <label className="text-[14px] font-bold text-[#138C9F]">{t('adminDepartments.departmentName')}</label>
+                  <input type="text" value={deptNameInput} onChange={(e) => setDeptNameInput(e.target.value)} placeholder={t('adminDepartments.departmentPlaceholder')}
                     className="w-full h-[50px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] dark:text-white placeholder-gray-300 text-right" required />
                 </div>
                 <div className="flex items-center justify-end gap-3 pt-2">
                   <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3 text-center">إلغاء</button>
                   <button type="submit" disabled={createMut.isPending || updateMut.isPending} className="px-6 h-[46px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 flex-1 disabled:opacity-50">
                     {(createMut.isPending || updateMut.isPending) && <Loader2 className="w-5 h-5 animate-spin" />}
-                    <span>{modalMode === "add" ? "إضافة القسم" : "حفظ التعديلات"}</span>
+                    <span>{modalMode === "add" ? t('adminDepartments.addDepartment') : t('adminDepartments.saveChanges')}</span>
                   </button>
                 </div>
               </form>

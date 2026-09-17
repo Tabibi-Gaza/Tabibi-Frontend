@@ -362,17 +362,17 @@ const PaymentPage = () => {
                   <input
                     type="text"
                     placeholder={t('payment.senderNamePlaceholder')}
-                    className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
+                    className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm bg-white dark:bg-gray-700 dark:text-white"
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2">{t('payment.senderPhone')}</label>
+                  <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">{t('payment.senderPhone')}</label>
                   <input
                     type="tel"
                     placeholder={t('payment.senderPhonePlaceholder')}
-                    className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm"
+                    className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] text-sm bg-white dark:bg-gray-700 dark:text-white"
                     value={senderPhone}
                     onChange={(e) => setSenderPhone(e.target.value)}
                     dir="ltr"

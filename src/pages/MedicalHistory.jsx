@@ -513,7 +513,7 @@ const MedicalHistory = () => {
                   <select
                     value={bloodType}
                     onChange={(e) => setBloodType(e.target.value)}
-                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700"
+                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700 dark:text-gray-300"
                   >
                     <option value="">{t('medicalHistory.selectBloodType')}</option>
                     <option value="A+">A+</option>
@@ -536,7 +536,7 @@ const MedicalHistory = () => {
                     value={bloodPressure}
                     onChange={(e) => setBloodPressure(e.target.value)}
                     placeholder="120/80"
-                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                   />
                 </div>
 
@@ -549,7 +549,7 @@ const MedicalHistory = () => {
                     value={bloodSugar}
                     onChange={(e) => setBloodSugar(e.target.value)}
                     placeholder="105"
-                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                   />
                 </div>
 
@@ -562,7 +562,7 @@ const MedicalHistory = () => {
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
                     placeholder="75"
-                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                   />
                 </div>
 
@@ -575,7 +575,7 @@ const MedicalHistory = () => {
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     placeholder="170"
-                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                    className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                   />
                 </div>
 
@@ -618,7 +618,7 @@ const MedicalHistory = () => {
                       value={diseaseInput}
                       onChange={(e) => setDiseaseInput(e.target.value)}
                       placeholder={t('medicalHistory.diseasePlaceholder')}
-                      className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-medium focus:outline-none focus:border-[#138C9F]"
+                      className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-medium focus:outline-none focus:border-[#138C9F] dark:text-gray-300 dark:bg-gray-800"
                     />
                     <button
                       type="button"
@@ -668,7 +668,7 @@ const MedicalHistory = () => {
                       value={allergyInput}
                       onChange={(e) => setAllergyInput(e.target.value)}
                       placeholder={t('medicalHistory.allergyPlaceholder')}
-                      className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-medium focus:outline-none focus:border-[#138C9F]"
+                      className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-medium focus:outline-none focus:border-[#138C9F] dark:text-gray-300 dark:bg-gray-800"
                     />
                     <button
                       type="button"
@@ -723,14 +723,14 @@ const MedicalHistory = () => {
                     value={medName}
                     onChange={(e) => setMedName(e.target.value)}
                     placeholder={t('medicalHistory.medNamePlaceholder')}
-                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                   />
                   <input
                     type="text"
                     value={medDosage}
                     onChange={(e) => setMedDosage(e.target.value)}
                     placeholder={t('medicalHistory.medDosagePlaceholder')}
-                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                   />
                   <div className="flex gap-2">
                     <input
@@ -738,7 +738,7 @@ const MedicalHistory = () => {
                       value={medFrequency}
                       onChange={(e) => setMedFrequency(e.target.value)}
                       placeholder={t('medicalHistory.medFrequencyPlaceholder')}
-                      className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F]"
+                      className="flex-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-12 text-xs font-bold focus:outline-none focus:border-[#138C9F] dark:text-gray-300"
                     />
                     <button
                       type="button"

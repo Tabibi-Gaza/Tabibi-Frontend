@@ -7,6 +7,7 @@ import axiosInstance from '../../api/axiosInstance';
 import { specializationKeys } from '../../queries/specializations/specializationKeys';
 import { doctorKeys } from '../../queries/doctors/doctorKeys';
 import { resolveImageUrl } from '../../utils/imageUrl';
+import { useTranslation } from 'react-i18next';
 
 const STATUS_MAP = {
     'Pending': 'pending',
@@ -15,6 +16,7 @@ const STATUS_MAP = {
 };
 
 export default function AdminJoinRequests() {
+    const { t } = useTranslation();
     const queryClient = useQueryClient();
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -84,17 +86,17 @@ export default function AdminJoinRequests() {
         try {
             const { data } = await axiosInstance.post('/admin/doctor-applications/approve', { Id: id });
             if (data.succeeded) {
-                toast.success(data.message || 'تم قبول الطلب بنجاح');
+                toast.success(data.message || t('adminJoinRequests.acceptSuccess'));
                 setSelectedRequest(null);
                 setSelectedDetails(null);
                 await fetchApplications();
                 queryClient.invalidateQueries({ queryKey: specializationKeys.all });
                 queryClient.invalidateQueries({ queryKey: doctorKeys.all });
             } else {
-                toast.error(data.errors?.[0]?.message || data.message || 'فشل في قبول الطلب');
+                toast.error(data.errors?.[0]?.message || data.message || t('adminJoinRequests.acceptFailed'));
             }
         } catch (error) {
-            toast.error(error.response?.data?.errors?.[0]?.message || 'حدث خطأ أثناء قبول الطلب');
+            toast.error(error.response?.data?.errors?.[0]?.message || t('adminJoinRequests.acceptError'));
         } finally {
             setActionLoading(false);
         }
@@ -107,7 +109,7 @@ export default function AdminJoinRequests() {
 
     const handleConfirmReject = async () => {
         if (!rejectReasonInput.trim()) {
-            toast.error("يرجى كتابة سبب الرفض أولاً");
+            toast.error(t('adminJoinRequests.writeRejectionReason'));
             return;
         }
         setActionLoading(true);
@@ -117,7 +119,7 @@ export default function AdminJoinRequests() {
                 Reason: rejectReasonInput
             });
             if (data.succeeded) {
-                toast.success(data.message || 'تم رفض الطلب بنجاح');
+                toast.success(data.message || t('adminJoinRequests.rejectSuccess'));
                 setShowRejectModal(false);
                 setSelectedRequest(null);
                 setSelectedDetails(null);
@@ -125,10 +127,10 @@ export default function AdminJoinRequests() {
                 queryClient.invalidateQueries({ queryKey: specializationKeys.all });
                 queryClient.invalidateQueries({ queryKey: doctorKeys.all });
             } else {
-                toast.error(data.errors?.[0]?.message || data.message || 'فشل في رفض الطلب');
+                toast.error(data.errors?.[0]?.message || data.message || t('adminJoinRequests.rejectFailed'));
             }
         } catch (error) {
-            toast.error(error.response?.data?.errors?.[0]?.message || 'حدث خطأ أثناء رفض الطلب');
+            toast.error(error.response?.data?.errors?.[0]?.message || t('adminJoinRequests.rejectError'));
         } finally {
             setActionLoading(false);
         }
@@ -165,9 +167,9 @@ export default function AdminJoinRequests() {
             link.click();
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
-            toast.success('تم تحميل الملف بنجاح');
+            toast.success(t('adminJoinRequests.downloadSuccess'));
         } catch (error) {
-            toast.error('فشل في تحميل الملف');
+            toast.error(t('adminJoinRequests.downloadFailed'));
         }
     };
 
@@ -182,8 +184,8 @@ export default function AdminJoinRequests() {
         <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col items-start relative text-right" dir="rtl">
             <div className="w-full flex flex-col gap-6 md:gap-8">
                 <div className="text-right">
-                    <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#138C9F] leading-tight">طلبات انضمام الأطباء</h2>
-                    <p className="text-[14px] md:text-[16px] font-semibold text-[#434654] mt-1">إدارة ومراجعة طلبات الاعتماد للأطباء الجدد في المنصة.</p>
+                    <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#138C9F] leading-tight">{t('adminJoinRequests.title')}</h2>
+                    <p className="text-[14px] md:text-[16px] font-semibold text-[#434654] mt-1">{t('adminJoinRequests.description')}</p>
                 </div>
 
                 <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6">
@@ -192,7 +194,7 @@ export default function AdminJoinRequests() {
                             <FileText className="w-5 h-5" />
                         </div>
                         <div className="flex flex-col items-start text-right">
-                            <span className="text-[13px] md:text-[14px] font-bold text-[#434654]">إجمالي الطلبات المعلقة</span>
+                            <span className="text-[13px] md:text-[14px] font-bold text-[#434654]">{t('adminJoinRequests.totalPending')}</span>
                             <span className="text-[22px] md:text-[26px] font-extrabold text-[#138C9F]">{totalCount}</span>
                         </div>
                     </div>
@@ -204,7 +206,7 @@ export default function AdminJoinRequests() {
                             onClick={() => setShowAdvancedFilterModal(true)}
                             className="h-[38px] border border-[#138C9F] rounded-[8px] px-4 py-2 flex flex-row items-center gap-2 text-[#138C9F] text-[14px] font-bold hover:bg-[#138C9F]/5 transition-all relative w-full sm:w-auto justify-center"
                         >
-                            <span>تصفية متقدمة</span>
+                            <span>{t('adminJoinRequests.advancedFilter')}</span>
                             <Filter className="w-3.5 h-3.5" />
                             {searchName && (
                                 <span className="absolute -top-1.5 -left-1.5 w-4 h-4 bg-[#BA1A1A] text-white text-[10px] rounded-full flex items-center justify-center">!</span>
@@ -215,21 +217,15 @@ export default function AdminJoinRequests() {
                             <button
                                 onClick={() => { setActiveFilter('pending'); setCurrentPage(1); }}
                                 className={`h-[38px] md:h-[40px] px-4 md:px-6 rounded-full text-[13px] md:text-[15px] font-bold transition-all whitespace-nowrap ${activeFilter === 'pending' ? 'bg-[#138C9F] text-white' : 'bg-[#E5EEFF] text-[#434654]'}`}
-                            >
-                                المعلقة
-                            </button>
+                            >{t('adminJoinRequests.pending')}</button>
                             <button
                                 onClick={() => { setActiveFilter('accepted'); setCurrentPage(1); }}
                                 className={`h-[38px] md:h-[40px] px-4 md:px-6 rounded-full text-[13px] md:text-[15px] font-bold transition-all whitespace-nowrap ${activeFilter === 'accepted' ? 'bg-[#006A2D] text-white' : 'bg-[#E5EEFF] text-[#434654]'}`}
-                            >
-                                المقبولة
-                            </button>
+                            >{t('adminJoinRequests.accepted')}</button>
                             <button
                                 onClick={() => { setActiveFilter('rejected'); setCurrentPage(1); }}
                                 className={`h-[38px] md:h-[40px] px-4 md:px-6 rounded-full text-[13px] md:text-[15px] font-bold transition-all whitespace-nowrap ${activeFilter === 'rejected' ? 'bg-[#BA1A1A] text-white' : 'bg-[#E5EEFF] text-[#434654]'}`}
-                            >
-                                المرفوضة
-                            </button>
+                            >{t('adminJoinRequests.rejected')}</button>
                         </div>
                     </div>
 
@@ -237,12 +233,12 @@ export default function AdminJoinRequests() {
                         <table className="w-full border-collapse text-right">
                             <thead>
                                 <tr className="bg-white dark:bg-gray-800 border-b border-[#C3C6D6] dark:border-gray-700 h-[60px] text-[#434654] text-[14px] font-bold">
-                                    <th className="p-3 md:p-4 ps-8">اسم الطبيب</th>
-                                    <th className="p-3 md:p-4">التخصص</th>
-                                    <th className="p-3 md:p-4 text-center hidden md:table-cell">الخبرة (سنوات)</th>
-                                    <th className="p-3 md:p-4">الحالة</th>
-                                    <th className="p-3 md:p-4 hidden md:table-cell">تاريخ الطلب</th>
-                                    <th className="p-3 md:p-4 text-center">الإجراءات</th>
+                                    <th className="p-3 md:p-4 ps-8">{t('adminJoinRequests.doctorName')}</th>
+                                    <th className="p-3 md:p-4">{t('adminJoinRequests.specialty')}</th>
+                                    <th className="p-3 md:p-4 text-center hidden md:table-cell">{t('adminJoinRequests.experience')}</th>
+                                    <th className="p-3 md:p-4">{t('adminJoinRequests.status')}</th>
+                                    <th className="p-3 md:p-4 hidden md:table-cell">{t('adminJoinRequests.requestDate')}</th>
+                                    <th className="p-3 md:p-4 text-center">{t('adminJoinRequests.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -258,7 +254,7 @@ export default function AdminJoinRequests() {
                                              <td className="p-3 md:p-4 ps-8">
                                                 <div className="flex flex-row items-center gap-3">
                                                     {req.photoPath ? (
-                                                        <img src={resolveImageUrl(req.photoPath)} alt={req.name} className="w-[36px] h-[36px] rounded-full object-cover shrink-0" />
+                                                        <img loading="lazy" src={resolveImageUrl(req.photoPath)} alt={req.name} className="w-[36px] h-[36px] rounded-full object-cover shrink-0" />
                                                     ) : (
                                                         <div className="w-[36px] h-[36px] bg-[#138C9F]/10 text-[#138C9F] rounded-full flex items-center justify-center font-bold text-[14px] shrink-0">
                                                             {req.avatarInitials}
@@ -274,7 +270,7 @@ export default function AdminJoinRequests() {
                                             <td className="p-3 md:p-4 text-center text-[#138C9F] font-semibold hidden md:table-cell">{req.experience}</td>
                                             <td className="p-3 md:p-4">
                                                 <span className={`inline-flex items-center justify-between w-[100px] h-[24px] rounded-full px-3 text-[12px] font-bold ${req.status === 'accepted' ? 'bg-[#DCFCE7] text-[#15803D]' : req.status === 'rejected' ? 'bg-[#FEE2E2] text-[#991B1B]' : 'bg-[#FEF3C7] text-[#92400E]'}`}>
-                                                    <span>{req.status === 'accepted' ? 'تم القبول' : req.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة'}</span>
+                                                    <span>{req.status === 'accepted' ? t('adminJoinRequests.acceptedStatus') : req.status === 'rejected' ? t('adminJoinRequests.rejectedStatus') : t('adminJoinRequests.underReview')}</span>
                                                     <span className={`w-1.5 h-1.5 rounded-full ${req.status === 'accepted' ? 'bg-[#16A34A]' : req.status === 'rejected' ? 'bg-[#DC2626]' : 'bg-[#D97706]'}`}></span>
                                                 </span>
                                             </td>
@@ -284,7 +280,7 @@ export default function AdminJoinRequests() {
                                                      <button
                                                         onClick={() => fetchDetails(req)}
                                                         className="w-8 h-8 rounded-lg bg-[#138C9F]/10 text-[#138C9F] flex items-center justify-center hover:bg-[#138C9F]/20 transition-colors shrink-0"
-                                                        title="عرض التفاصيل"
+                                                        title={t('adminJoinRequests.viewDetails')}
                                                     >
                                                         <FiEye size={14} />
                                                     </button>
@@ -294,16 +290,12 @@ export default function AdminJoinRequests() {
                                                                 onClick={() => handleAccept(req.id)}
                                                                 disabled={actionLoading}
                                                                 className="w-[64px] h-[28px] bg-[#D3E4FE] text-black rounded-[12px] font-bold text-[12px] hover:bg-blue-200 transition-colors disabled:opacity-50"
-                                                            >
-                                                                قبول
-                                                            </button>
+                                                            >{t('adminJoinRequests.accept')}</button>
                                                             <button
                                                                 onClick={() => { setSelectedRequest(req); openRejectFlow(); }}
                                                                 disabled={actionLoading}
                                                                 className="w-[70px] h-[28px] bg-[#BA1A1A] text-white rounded-[12px] font-bold text-[12px] hover:bg-red-700 transition-colors disabled:opacity-50"
-                                                            >
-                                                                رفض
-                                                            </button>
+                                                            >{t('adminJoinRequests.reject')}</button>
                                                         </>
                                                     )}
                                                 </div>
@@ -312,9 +304,7 @@ export default function AdminJoinRequests() {
                                     ))
                                 ) : (
                                     <tr>
-                                        <td colSpan="6" className="p-8 text-center text-[#737685] font-bold text-[15px]">
-                                            لا توجد نتائج مطابقة لخيارات التصفية المحددة.
-                                        </td>
+                                        <td colSpan="6" className="p-8 text-center text-[#737685] font-bold text-[15px]">{t('adminJoinRequests.noResults')}</td>
                                     </tr>
                                 )}
                             </tbody>
@@ -439,32 +429,32 @@ export default function AdminJoinRequests() {
                                             التفاصيل المهنية
                                         </h4>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">التخصص</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.specialty')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.specialization || selectedRequest.specialty || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">سنوات الخبرة</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.yearsOfExperience')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.yearsOfExperience || '-'} سنة</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">رقم الترخيص</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.licenseNumber')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.licenseNumber || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">سعر الكشفية</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.sessionPrice')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.sessionPrice ? `${selectedDetails.sessionPrice} ₪` : '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">العيادة</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.clinic')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicName || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">عنوان العيادة</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.clinicAddress')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.clinicAddress || '-'}</span>
                                         </div>
                                         {selectedDetails.bio && (
                                             <div className="pt-2 border-t border-gray-100">
-                                                <span className="text-[12px] font-bold text-[#737685] block mb-1">النبذة المهنية</span>
+                                                <span className="text-[12px] font-bold text-[#737685] block mb-1">{t('adminJoinRequests.professionalBio')}</span>
                                                 <p className="text-[12px] text-[#434654] leading-relaxed">{selectedDetails.bio}</p>
                                             </div>
                                         )}
@@ -473,20 +463,18 @@ export default function AdminJoinRequests() {
                                     {/* المعلومات الشخصية */}
                                     <div className="border border-gray-200 dark:border-gray-700 rounded-[12px] p-4 space-y-3">
                                         <h4 className="text-[14px] font-bold text-[#138C9F] border-b border-gray-100 dark:border-gray-700 pb-2 flex items-center gap-2">
-                                            <FiUser size={14} />
-                                            المعلومات الشخصية
-                                        </h4>
+                                            <FiUser size={14} />{t('adminJoinRequests.personalInfo')}</h4>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">البريد الإلكتروني</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.email')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.email || '-'}</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[12px] font-bold text-[#737685]">رقم الهاتف</span>
+                                            <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.phoneNumber')}</span>
                                             <span className="text-[13px] font-semibold text-[#434654]">{selectedDetails.phoneNumber || '-'}</span>
                                         </div>
                                         {selectedDetails.secretaryEmail && (
                                             <div className="flex justify-between items-center">
-                                                <span className="text-[12px] font-bold text-[#737685]">بريد السكرتير</span>
+                                                <span className="text-[12px] font-bold text-[#737685]">{t('adminJoinRequests.secretaryEmail')}</span>
                                                 <span className="text-[13px] font-semibold text-[#434654] truncate max-w-[180px]">{selectedDetails.secretaryEmail}</span>
                                             </div>
                                         )}
@@ -500,23 +488,19 @@ export default function AdminJoinRequests() {
                                     onClick={() => handleDownload(selectedRequest.id, 'cv')}
                                     className="flex-1 h-12 bg-[#138C9F] text-white rounded-[8px] text-[13px] font-bold hover:bg-[#0f7282] transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
-                                    <FiDownload size={14} />
-                                    تحميل السيرة الذاتية (CV)
-                                </button>
+                                    <FiDownload size={14} />{t('adminJoinRequests.downloadCV')}</button>
                                 <button
                                     onClick={() => handleDownload(selectedRequest.id, 'id')}
                                     className="flex-1 h-12 border border-[#138C9F] text-[#138C9F] bg-white dark:bg-gray-800 rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
-                                    <FiDownload size={14} />
-                                    صورة الهوية / مزاولة المهنة
-                                </button>
+                                    <FiDownload size={14} />{t('adminJoinRequests.downloadId')}</button>
                             </div>
 
                             {selectedRequest.rejectionReason && (
                                 <div className="bg-red-50 border border-red-200 rounded-[8px] p-4 flex flex-col gap-1">
                                     <div className="flex items-center gap-2 text-[#BA1A1A] font-bold text-[14px]">
                                         <FiAlertTriangle size={14} />
-                                        <span>سبب الرفض:</span>
+                                        <span>{t('adminJoinRequests.rejectionReason')}</span>
                                     </div>
                                     <p className="text-[13px] text-[#961212] pr-6 font-medium">{selectedRequest.rejectionReason}</p>
                                 </div>
@@ -537,7 +521,7 @@ export default function AdminJoinRequests() {
                                     className="px-5 h-[42px] border border-[#BA1A1A] text-[#BA1A1A] rounded-[8px] text-[14px] font-bold hover:bg-red-50 flex items-center justify-center gap-2 w-full sm:w-auto disabled:opacity-50"
                                 >
                                     <FiX size={14} />
-                                    <span>رفض الطلب</span>
+                                    <span>{t('adminJoinRequests.rejectRequest')}</span>
                                 </button>
                             )}
                             {selectedRequest.status !== 'accepted' && (
@@ -546,7 +530,7 @@ export default function AdminJoinRequests() {
                                     disabled={actionLoading}
                                     className="px-6 h-[42px] bg-[#138C9F] text-white rounded-[8px] text-[14px] font-bold hover:bg-[#0f7282] flex items-center justify-center gap-2 w-full sm:w-auto flex-1 disabled:opacity-50"
                                 >
-                                    <span>{actionLoading ? 'جاري...' : 'قبول وتفعيل الملف'}</span>
+                                    <span>{actionLoading ? 'جاري...' : t('adminJoinRequests.acceptAndActivate')}</span>
                                 </button>
                             )}
                         </div>
@@ -561,16 +545,14 @@ export default function AdminJoinRequests() {
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">
                             <FiAlertTriangle size={28} />
                         </div>
-                        <h3 className="text-[18px] font-extrabold text-[#434654] text-center">سبب الرفض</h3>
-                        <p className="text-[13px] text-[#737685] mt-1 px-4 text-center">
-                            يرجى توضيح سبب رفض طلب انضمام الطبيب ليتم إبلاغه بشكل رسمي.
-                        </p>
+                        <h3 className="text-[18px] font-extrabold text-[#434654] text-center">{t('adminJoinRequests.rejectionReasonTitle')}</h3>
+                        <p className="text-[13px] text-[#737685] mt-1 px-4 text-center">{t('adminJoinRequests.rejectionReasonDescription')}</p>
                         <div className="mt-4 text-right">
-                            <label className="text-[13px] font-bold text-[#434654] block mb-1">تفاصيل السبب</label>
+                            <label className="text-[13px] font-bold text-[#434654] block mb-1">{t('adminJoinRequests.reasonDetails')}</label>
                             <textarea
                                 value={rejectReasonInput}
                                 onChange={(e) => setRejectReasonInput(e.target.value)}
-                                placeholder="اكتب هنا تفاصيل الرفض بدقة..."
+                                placeholder={t('adminJoinRequests.reasonPlaceholder')}
                                 className="w-full h-[100px] border border-gray-300 rounded-[8px] p-3 text-[14px] focus:outline-none focus:border-[#138C9F] text-right resize-none"
                             />
                         </div>
@@ -586,7 +568,7 @@ export default function AdminJoinRequests() {
                                 disabled={actionLoading}
                                 className="flex-1 h-[42px] bg-[#BA1A1A] text-white rounded-[8px] text-[14px] font-bold hover:bg-[#961212] disabled:opacity-50"
                             >
-                                {actionLoading ? 'جاري...' : 'تأكيد الرفض'}
+                                {actionLoading ? 'جاري...' : t('adminJoinRequests.confirmRejection')}
                             </button>
                         </div>
                     </div>

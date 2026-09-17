@@ -149,36 +149,36 @@ const DoctorDashboard = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 w-full">
-        <div className="bg-[#138C9F] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-24 md:h-[15vh] text-white relative overflow-hidden shadow-sm">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 w-full">
+        <div className="bg-[#138C9F] p-4 md:p-6 rounded-2xl flex flex-col justify-between min-h-[5rem] md:min-h-[6rem] text-white relative overflow-hidden shadow-sm">
           <div className="flex justify-between items-start w-full">
             <svg className="w-6 h-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
           <div className="text-left">
-            <h4 className="text-3xl font-black">{stats.todayCount}</h4>
-            <p className="text-xs font-bold text-white/90 mt-0.5">{t('doctorDashboard.todayAppointments')}</p>
+            <h4 className="text-2xl md:text-3xl font-black">{stats.todayCount}</h4>
+            <p className="text-[10px] md:text-xs font-bold text-white/90 mt-0.5 leading-tight">{t('doctorDashboard.todayAppointments')}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 p-5 md:p-6 rounded-2xl flex flex-col justify-between h-24 md:h-[15vh] shadow-xs">
+        <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 p-4 md:p-6 rounded-2xl flex flex-col justify-between min-h-[5rem] md:min-h-[6rem] shadow-xs">
           <div className="text-left">
             <svg className="w-6 h-6 text-[#526069]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
           <div className="text-left">
-            <h4 className="text-3xl font-black text-[#0B1C30]">{stats.completedCount}</h4>
-            <p className="text-xs font-bold text-[#526069] dark:text-gray-400 mt-0.5">{t('doctorDashboard.completedAppointments')}</p>
+            <h4 className="text-2xl md:text-3xl font-black text-[#0B1C30]">{stats.completedCount}</h4>
+            <p className="text-[10px] md:text-xs font-bold text-[#526069] dark:text-gray-400 mt-0.5 leading-tight">{t('doctorDashboard.completedAppointments')}</p>
           </div>
         </div>
 
-        <div className="bg-[#FFF0EE] border border-[#FFDAD6] p-5 md:p-6 rounded-2xl flex flex-col justify-between h-24 md:h-[15vh] shadow-xs">
+        <div className="bg-[#FFF0EE] border border-[#FFDAD6] p-4 md:p-6 rounded-2xl flex flex-col justify-between min-h-[5rem] md:min-h-[6rem] shadow-xs">
           <div className="text-2xl text-[#BA1A1A] font-light">!</div>
           <div className="text-left">
-            <h4 className="text-3xl font-black text-[#BA1A1A]">{paymentRequests.length}</h4>
-            <p className="text-xs font-bold text-[#BA1A1A] mt-0.5">{t('doctorDashboard.pendingRequests')}</p>
+            <h4 className="text-2xl md:text-3xl font-black text-[#BA1A1A]">{paymentRequests.length}</h4>
+            <p className="text-[10px] md:text-xs font-bold text-[#BA1A1A] mt-0.5 leading-tight">{t('doctorDashboard.pendingRequests')}</p>
           </div>
         </div>
       </div>
