@@ -5,12 +5,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../../api/axiosInstance';
 import { specializationKeys } from '../../queries/specializations/specializationKeys';
 import { resolveImageUrl } from '../../utils/imageUrl';
+import { useTranslation } from 'react-i18next';
 
 const ADMIN_EMAILS = ['admin@tabibi.com', 'Mazen@gmail.com'];
 
 const genderMap = { Male: 'ذكر', Female: 'أنثى', PreferNotToSay: 'يفضل عدم القول' };
 
 export default function AdminUserManagement() {
+    const { t } = useTranslation();
     const queryClient = useQueryClient();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -49,7 +51,7 @@ export default function AdminUserManagement() {
             }
         } catch (error) {
 
-            toast.error('فشل في جلب بيانات المستخدمين');
+            toast.error(t('adminUserManagement.fetchFailed'));
         } finally {
             setLoading(false);
         }
@@ -95,29 +97,29 @@ export default function AdminUserManagement() {
     };
 
     const handleDeleteUser = async (user) => {
-        if (!window.confirm('هل أنت متأكد من رغبتك في حذف هذا المستخدم؟')) return;
+        if (!window.confirm(t('adminUserManagement.deleteConfirm'))) return;
         try {
             const { data } = await axiosInstance.delete(`/admin/users/${user.userId}`);
             if (data.succeeded) {
-                toast.success(data.message || 'تم حذف المستخدم بنجاح');
+                toast.success(data.message || t('adminUserManagement.deleteSuccess'));
                 fetchUsers();
                 setIsModalOpen(false);
                 queryClient.invalidateQueries({ queryKey: specializationKeys.all });
             } else {
-                toast.error(data.errors?.[0]?.message || data.message || 'فشل في حذف المستخدم');
+                toast.error(data.errors?.[0]?.message || data.message || t('adminUserManagement.deleteFailed'));
             }
         } catch (error) {
-            toast.error(error.response?.data?.errors?.[0]?.message || 'حدث خطأ أثناء الحذف');
+            toast.error(error.response?.data?.errors?.[0]?.message || t('adminUserManagement.deleteError'));
         }
     };
 
     const handleToggleActivation = async (user) => {
-        const action = user.isActive ? 'تعطيل' : 'تفعيل';
-        if (!window.confirm(`هل أنت متأكد من ${action} هذا المستخدم؟`)) return;
+        const action = user.isActive ? t('adminUserManagement.deactivate') : t('adminUserManagement.activate');
+        if (!window.confirm(t('adminUserManagement.toggleConfirm', { action }))) return;
         try {
             const { data } = await axiosInstance.post('/admin/users/toggle-activation', { userId: user.userId });
             if (data.succeeded) {
-                toast.success(data.message || `تم ${action} المستخدم بنجاح`);
+                toast.success(data.message || t('adminUserManagement.toggleSuccess', { action }));
                 fetchUsers();
                 fetchStats();
                 queryClient.invalidateQueries({ queryKey: specializationKeys.all });
@@ -125,16 +127,16 @@ export default function AdminUserManagement() {
                     setSelectedUser(prev => ({ ...prev, isActive: !prev.isActive }));
                 }
             } else {
-                toast.error(data.errors?.[0]?.message || data.message || `فشل ${action} المستخدم`);
+                toast.error(data.errors?.[0]?.message || data.message || t('adminUserManagement.toggleFailed', { action }));
             }
         } catch (error) {
-            toast.error(error.response?.data?.errors?.[0]?.message || 'حدث خطأ');
+            toast.error(error.response?.data?.errors?.[0]?.message || t('common.errorOccurred'));
         }
     };
 
     const handleDownload = async (doctorId, type) => {
         if (!doctorId) {
-            toast.info('لا توجد ملفات مرفوعة لهذا الطبيب');
+            toast.info(t('adminUserManagement.noFiles'));
             return;
         }
         try {
@@ -152,9 +154,9 @@ export default function AdminUserManagement() {
             link.click();
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
-            toast.success('تم تحميل الملف بنجاح');
+            toast.success(t('adminUserManagement.downloadSuccess'));
         } catch (error) {
-            toast.error('فشل في تحميل الملف');
+            toast.error(t('adminUserManagement.downloadFailed'));
         }
     };
 
@@ -169,35 +171,35 @@ export default function AdminUserManagement() {
         <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
             <div className="flex justify-between items-center w-full flex-wrap gap-2">
                 <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
-                    إدارة المستخدمين
+                    {t('adminUserManagement.title')}
                 </h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي الأطباء</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.totalDoctors')}</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Users size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">الأطباء النشطون</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.activeDoctors')}</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalActiveDoctors}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#6BFF8F]/30 rounded-full flex items-center justify-center text-[#004F20]"><UserCheck size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">إجمالي المستخدمين</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.totalUsers')}</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069]"><UserPlus size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">حسابات معطلة</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069]">{t('adminUserManagement.inactiveAccounts')}</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30]">{stats.totalInactiveUsers}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#FFDAD6] rounded-full flex items-center justify-center text-[#BA1A1A]"><Ban size={16} /></div>
@@ -206,23 +208,23 @@ export default function AdminUserManagement() {
 
             <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl w-full flex flex-col overflow-hidden">
                 <div className="border-b border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex items-center justify-start">
-                    <button className="h-full border-b-2 border-[#003D9B] px-4 font-semibold text-[16px] text-[#003D9B] flex items-center justify-center cursor-pointer">الكل</button>
+                    <button className="h-full border-b-2 border-[#003D9B] px-4 font-semibold text-[16px] text-[#003D9B] flex items-center justify-center cursor-pointer">{t('common.all')}</button>
                 </div>
 
                 <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-right">
                         <thead>
                             <tr className="bg-[#e2f4f7] dark:bg-gray-800 py-3">
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px]">المستخدم</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px]">نوع الحساب</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] hidden md:table-cell">تاريخ الانضمام</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] hidden sm:table-cell">الحالة</th>
-                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] text-center w-[120px]">التحكم</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px]">{t('adminUserManagement.user')}</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px]">{t('adminUserManagement.accountType')}</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] hidden md:table-cell">{t('adminUserManagement.joinDate')}</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] hidden sm:table-cell">{t('adminUserManagement.status')}</th>
+                                <th className="px-6 py-3 font-bold text-[14px] text-[#526069] dark:text-gray-400 tracking-[0.6px] text-center w-[120px]">{t('adminUserManagement.control')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#C3C6D6]">
                             {loading ? (
-                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">جاري تحميل البيانات...</td></tr>
+                                <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069]">{t('common.loading')}</td></tr>
                             ) : users.map((user) => (
                                 <tr key={user.id} className="hover:bg-slate-50 dark:bg-gray-900 transition-colors">
                                     <td className="px-6 py-3 whitespace-nowrap">
@@ -242,24 +244,24 @@ export default function AdminUserManagement() {
                                     </td>
                                     <td className="px-6 py-3 whitespace-nowrap">
                                         <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-bold ${user.userType === 'Doctor' ? 'bg-[#138C9F]/20 text-[#138C9F]' : user.userType === 'Secretary' ? 'bg-purple-100 text-purple-700' : 'bg-[#003D9B]/20 text-[#003D9B]'}`}>
-                                            {user.userType === 'Doctor' ? 'طبيب' : user.userType === 'Secretary' ? 'سكرتير' : 'مريض'}
+                                            {user.userType === 'Doctor' ? t('adminUserManagement.doctor') : user.userType === 'Secretary' ? t('adminUserManagement.secretary') : t('adminUserManagement.patient')}
                                         </span>
                                     </td>
                                     <td className="px-6 py-3 whitespace-nowrap font-medium text-[14px] text-[#434654] hidden md:table-cell">{user.createdAt || '-'}</td>
                                     <td className="px-6 py-3 whitespace-nowrap hidden sm:table-cell">
                                         <span className={`inline-block px-3 py-1 rounded-full text-[12px] font-bold ${user.isActive ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
-                                            {user.isActive ? 'نشط' : 'معطل'}
+                                            {user.isActive ? t('adminUserManagement.active') : t('adminUserManagement.inactive')}
                                         </span>
                                     </td>
                                     <td className="px-6 py-3 whitespace-nowrap text-center">
                                         <div className="flex items-center justify-center gap-3 text-[#526069]">
-                                            <button onClick={() => handleToggleActivation(user)} className={`transition-colors p-1.5 cursor-pointer ${user.isActive ? 'hover:text-amber-600' : 'hover:text-green-600'}`} title={user.isActive ? 'تعطيل' : 'تفعيل'}>
+                                            <button onClick={() => handleToggleActivation(user)} className={`transition-colors p-1.5 cursor-pointer ${user.isActive ? 'hover:text-amber-600' : 'hover:text-green-600'}`} title={user.isActive ? t('adminUserManagement.deactivate') : t('adminUserManagement.activate')}>
                                                 {user.isActive ? <ToggleLeft size={22} /> : <ToggleRight size={22} className="text-green-600" />}
                                             </button>
-                                            <button onClick={() => handleViewUser(user)} className="hover:text-[#003D9B] transition-colors p-1.5 cursor-pointer" title="عرض">
+                                            <button onClick={() => handleViewUser(user)} className="hover:text-[#003D9B] transition-colors p-1.5 cursor-pointer" title={t('adminUserManagement.view')}>
                                                 <Eye size={22} />
                                             </button>
-                                            <button onClick={() => handleDeleteUser(user)} className="hover:text-red-600 transition-colors p-1.5 cursor-pointer" title="حذف">
+                                            <button onClick={() => handleDeleteUser(user)} className="hover:text-red-600 transition-colors p-1.5 cursor-pointer" title={t('common.delete')}>
                                                 <Trash2 size={22} />
                                             </button>
                                         </div>

@@ -141,7 +141,7 @@ const Myprofile = () => {
                   height="220"
                   className="w-full h-full object-cover"
                   src={currentData.image}
-                  alt="صورة شخصية"
+                  alt={t('profile.profileImageAlt')}
                 />
               ) : (
                 // 2. إذا لم تكن هناك أي صورة، نعرض أول حرفين بشكل عريض ومناسب للحجم الكبير

@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FiSearch, FiSend, FiArrowRight } from 'react-icons/fi';
 import { Send, Loader2, MessageSquare, Paperclip, FileText, X, Trash2, Pin } from 'lucide-react';
 import { toast } from 'react-toastify';
@@ -16,6 +17,7 @@ import { formatTimeArabic } from '../../utils/dateFormatter';
 const FILES_BASE = import.meta.env.VITE_Files_URL || '';
 
 export default function DoctorChats() {
+  const { t } = useTranslation();
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [newMessage, setNewMessage] = useState('');
@@ -91,7 +93,7 @@ export default function DoctorChats() {
 
     sendMutation.mutate({
       conversationId: activeConversationId,
-      content: newMessage.trim() || (fileType === 'image' ? 'صورة' : 'مستند'),
+      content: newMessage.trim() || (fileType === 'image' ? t('doctorChats.image') : t('doctorChats.document')),
       filePath,
       fileType,
     });
@@ -107,18 +109,18 @@ export default function DoctorChats() {
   const handleDeleteConversation = (e, conv) => {
     e.stopPropagation();
     if (conv.isAdmin) {
-      toast.error('لا يمكنك حذف محادثة الأدمن');
+      toast.error(t('doctorChats.cannotDeleteAdmin'));
       return;
     }
     setDeleteConfirmId(conv.conversationId);
-    setDeleteConfirmName(conv.participantName || 'هذه المحادثة');
+    setDeleteConfirmName(conv.participantName || t('doctorChats.defaultChatName'));
   };
 
   const confirmDelete = () => {
     if (!deleteConfirmId) return;
     deleteMutation.mutate(deleteConfirmId, {
       onSuccess: () => {
-        toast.success('تم حذف المحادثة بنجاح');
+        toast.success(t('doctorChats.deleteSuccess'));
         if (activeConversationId === deleteConfirmId) {
           setActiveConversationId(null);
         }
@@ -126,7 +128,7 @@ export default function DoctorChats() {
         setDeleteConfirmName('');
       },
       onError: () => {
-        toast.error('فشل حذف المحادثة');
+        toast.error(t('doctorChats.deleteFailed'));
         setDeleteConfirmId(null);
       },
     });
@@ -139,7 +141,7 @@ export default function DoctorChats() {
     const diffMs = now - date;
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     if (diffDays === 0) return formatTimeArabic(dateStr);
-    if (diffDays === 1) return 'أمس';
+    if (diffDays === 1) return t('doctorChats.yesterday');
     if (diffDays < 7) return date.toLocaleDateString('ar-EG', { weekday: 'long' });
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -161,7 +163,7 @@ export default function DoctorChats() {
           width="250"
           height="250"
           src={resolveImageUrl(msg.filePath)}
-          alt="صورة"
+          alt={t('doctorChats.image')}
           className="max-w-[250px] max-h-[250px] rounded-lg object-cover cursor-pointer"
           onClick={() => window.open(resolveImageUrl(msg.filePath), '_blank')}
         />
@@ -171,7 +173,7 @@ export default function DoctorChats() {
       return (
         <a href={resolveImageUrl(msg.filePath)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 underline">
           <FileText className="w-4 h-4" />
-          <span>{msg.content || 'مستند'}</span>
+          <span>{msg.content || t('doctorChats.document')}</span>
         </a>
       );
     }
@@ -193,10 +195,10 @@ export default function DoctorChats() {
           {/* Sidebar */}
           <div className={`flex flex-col min-h-0 bg-white dark:bg-gray-800 border-l border-[#e9eff6] dark:border-gray-700 h-full ${showChatList ? 'flex' : 'hidden md:flex'}`}>
             <div className="p-4 border-b border-[#e9eff6] dark:border-gray-700 shrink-0">
-              <h2 className="text-xl md:text-2xl font-black text-[#1b8b99] mb-3">المحـادثات</h2>
+              <h2 className="text-xl md:text-2xl font-black text-[#1b8b99] mb-3">{t('doctorChats.title')}</h2>
               <div className="relative flex items-center border border-[#e9eff6] dark:border-gray-700 rounded-xl bg-slate-50 dark:bg-gray-900 px-3 h-11">
                 <FiSearch className="w-5 h-5 text-gray-400 dark:text-gray-500 pointer-events-none shrink-0" />
-                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="بحث في المحادثات..." className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 pr-2 h-full text-right" />
+                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t('doctorChats.searchPlaceholder')} className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 pr-2 h-full text-right" />
               </div>
             </div>
             <div className="flex-1 overflow-y-auto custom-scrollbar divide-y divide-gray-50">
@@ -218,12 +220,12 @@ export default function DoctorChats() {
                         <div className="flex items-center justify-between gap-1 mb-1">
                           <div className="flex items-center gap-1.5 min-w-0">
                             {conv.isPinned && <Pin className="w-3 h-3 text-[#1b8b99] shrink-0" />}
-                            <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm truncate">{conv.participantName || 'مستخدم'}</h4>
+                            <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm truncate">{conv.participantName || t('doctorChats.user')}</h4>
                             {conv.isAdmin && <span className="text-[9px] font-bold text-[#1b8b99] bg-[#1b8b99]/10 px-1.5 py-0.5 rounded-full shrink-0">Admin</span>}
                           </div>
                           <span className="text-[10px] md:text-[11px] text-gray-400 dark:text-gray-500 shrink-0">{formatTime(conv.lastMessageTime)}</span>
                         </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">{conv.lastMessage || 'لا توجد رسائل بعد'}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">{conv.lastMessage || t('doctorChats.noMessagesYet')}</p>
                       </div>
                       <div className="flex flex-col items-center gap-1 shrink-0">
                         {conv.unreadCount > 0 && (
@@ -233,7 +235,7 @@ export default function DoctorChats() {
                           <button
                             onClick={(e) => handleDeleteConversation(e, conv)}
                             className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 dark:text-gray-500 hover:text-red-500 transition-all duration-200"
-                            title="حذف المحادثة"
+                            title={t('doctorChats.deleteChat')}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -245,7 +247,7 @@ export default function DoctorChats() {
               ) : (
                 <div className="flex flex-col items-center justify-center py-20 px-4 text-center text-gray-400">
                   <MessageSquare className="w-10 h-10 mb-2" />
-                  <p className="text-sm font-bold">{searchQuery ? 'لا توجد نتائج' : 'لا توجد محادثات'}</p>
+                  <p className="text-sm font-bold">{searchQuery ? t('doctorChats.noResults') : t('doctorChats.noConversations')}</p>
                 </div>
               )}
             </div>
@@ -270,7 +272,7 @@ export default function DoctorChats() {
                     <div className="text-right">
                       <div className="flex items-center gap-1.5">
                         {activeConversation.isPinned && <Pin className="w-3.5 h-3.5 text-[#1b8b99]" />}
-                        <h3 className="font-extrabold text-gray-800 dark:text-gray-200 text-sm md:text-base">{activeConversation.participantName || 'مستخدم'}</h3>
+                        <h3 className="font-extrabold text-gray-800 dark:text-gray-200 text-sm md:text-base">{activeConversation.participantName || t('doctorChats.user')}</h3>
                         {activeConversation.isAdmin && <span className="text-[10px] font-bold text-[#1b8b99] bg-[#1b8b99]/10 px-2 py-0.5 rounded-full">Admin</span>}
                       </div>
                       {activeConversation.participantSpecialty && <p className="text-[10px] md:text-[11px] font-bold text-gray-400">{activeConversation.participantSpecialty}</p>}
@@ -284,7 +286,7 @@ export default function DoctorChats() {
                   ) : messages.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-12 text-gray-400">
                       <MessageSquare className="w-10 h-10 mb-2" />
-                      <span className="text-sm font-bold">ابدأ المحادثة</span>
+                      <span className="text-sm font-bold">{t('doctorChats.startChat')}</span>
                     </div>
                   ) : (
                     messages.map((msg) => (
@@ -302,7 +304,7 @@ export default function DoctorChats() {
 
                 {selectedFile && (
                   <div className="px-4 py-2 border-t border-[#e9eff6] dark:border-gray-700 bg-slate-50 dark:bg-gray-900 flex items-center gap-3">
-                    {filePreview ? <img loading="lazy" decoding="async" width="48" height="48" src={filePreview} alt="معاينة" className="w-12 h-12 rounded-lg object-cover" /> : <FileText className="w-8 h-8 text-[#1b8b99]" />}
+                    {filePreview ? <img loading="lazy" decoding="async" width="48" height="48" src={filePreview} alt={t('doctorChats.preview')} className="w-12 h-12 rounded-lg object-cover" /> : <FileText className="w-8 h-8 text-[#1b8b99]" />}
                     <span className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 truncate flex-1">{selectedFile.name}</span>
                     <button onClick={clearFile} className="text-gray-400 dark:text-gray-500 hover:text-red-500"><X className="w-4 h-4" /></button>
                   </div>
@@ -317,14 +319,14 @@ export default function DoctorChats() {
                     <button type="button" onClick={() => fileInputRef.current?.click()} className="text-gray-400 dark:text-gray-500 hover:text-[#1b8b99] transition-colors cursor-pointer shrink-0">
                       <Paperclip className="w-5 h-5" />
                     </button>
-                    <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="اكتب رسالتك هنا..." className="flex-1 bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right" />
+                    <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder={t('doctorChats.typeMessage')} className="flex-1 bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right" />
                   </div>
                 </form>
               </>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
                 <MessageSquare className="w-12 h-12 text-gray-300 dark:text-gray-500 mb-3" />
-                <p className="text-gray-400 dark:text-gray-500 text-sm font-medium">يُرجى تحديد محادثة من القائمة الجانبية لبدء المحادثة.</p>
+                <p className="text-gray-400 dark:text-gray-500 text-sm font-medium">{t('doctorChats.selectChatPrompt')}</p>
               </div>
             )}
           </div>
@@ -339,22 +341,22 @@ export default function DoctorChats() {
               <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trash2 className="w-7 h-7 text-red-500" />
               </div>
-              <h3 className="text-[18px] font-bold text-gray-800 dark:text-gray-200 mb-2">حذف المحادثة</h3>
-              <p className="text-sm text-gray-500">هل أنت متأكد من حذف محادثة {deleteConfirmName}؟ سيتم حذف جميع الرسائل نهائياً.</p>
+              <h3 className="text-[18px] font-bold text-gray-800 dark:text-gray-200 mb-2">{t('doctorChats.deleteChatTitle')}</h3>
+              <p className="text-sm text-gray-500">{t('doctorChats.deleteConfirmMessage', { name: deleteConfirmName })}</p>
             </div>
             <div className="flex border-t border-gray-100">
               <button
                 onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(''); }}
                 className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors"
               >
-                إلغاء
+                {t('doctorChats.cancel')}
               </button>
               <button
                 onClick={confirmDelete}
                 disabled={deleteMutation.isPending}
                 className="flex-1 py-3 text-sm font-bold text-red-500 hover:bg-red-50 transition-colors border-r border-gray-100 dark:border-gray-700 disabled:opacity-50"
               >
-                {deleteMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : 'حذف'}
+                {deleteMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : t('doctorChats.delete')}
               </button>
             </div>
           </div>

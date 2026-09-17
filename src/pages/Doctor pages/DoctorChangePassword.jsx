@@ -1,17 +1,12 @@
 ﻿import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
 import { Lock, Eye, EyeOff, CheckCircle, XCircle, ArrowRight } from 'lucide-react';
 
-const passwordRules = [
-    { id: 1, label: '8 أحرف على الأقل', test: (p) => p.length >= 8 },
-    { id: 2, label: 'حرف كبير وصغير', test: (p) => /[A-Z]/.test(p) && /[a-z]/.test(p) },
-    { id: 3, label: 'رقم واحد على الأقل', test: (p) => /\d/.test(p) },
-    { id: 4, label: 'رمز خاص واحد على الأقل', test: (p) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(p) },
-];
-
 const DoctorChangePassword = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { token } = useContext(AppContext);
     const [oldPassword, setOldPassword] = useState('');
@@ -22,17 +17,24 @@ const DoctorChangePassword = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const passwordRules = [
+        { id: 1, label: t('doctorChangePassword.ruleLength'), test: (p) => p.length >= 8 },
+        { id: 2, label: t('doctorChangePassword.ruleCase'), test: (p) => /[A-Z]/.test(p) && /[a-z]/.test(p) },
+        { id: 3, label: t('doctorChangePassword.ruleNumber'), test: (p) => /\d/.test(p) },
+        { id: 4, label: t('doctorChangePassword.ruleSpecial'), test: (p) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(p) },
+    ];
+
     const allRulesPassed = passwordRules.every((r) => r.test(newPassword));
     const passwordsMatch = newPassword === confirmPassword && confirmPassword.length > 0;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!allRulesPassed) {
-            toast.error('كلمة المرور الجديدة لا تلبي جميع المتطلبات');
+            toast.error(t('doctorChangePassword.requirementsNotMet'));
             return;
         }
         if (!passwordsMatch) {
-            toast.error('كلمة المرور الجديدة وتأكيدها غير متطابقتين');
+            toast.error(t('doctorChangePassword.passwordsNotMatching'));
             return;
         }
         setLoading(true);
@@ -44,10 +46,10 @@ const DoctorChangePassword = () => {
 
             const { default: axiosInstance } = await import('../../api/axiosInstance');
             await axiosInstance.post('/doctor/profile/change-password', formData);
-            toast.success('تم تغيير كلمة المرور بنجاح');
+            toast.success(t('doctorChangePassword.changeSuccess'));
             navigate('/doctor/profile');
         } catch (err) {
-            const msg = err.response?.data?.message || err.response?.data?.errors?.[0]?.description || 'فشل تغيير كلمة المرور';
+            const msg = err.response?.data?.message || err.response?.data?.errors?.[0]?.description || t('doctorChangePassword.changeFailed');
             toast.error(msg);
         } finally {
             setLoading(false);
@@ -62,7 +64,7 @@ const DoctorChangePassword = () => {
                     className="flex items-center gap-2 text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-[#138C9F] transition-colors mb-6 cursor-pointer"
                 >
                     <ArrowRight className="w-4 h-4" />
-                    رجوع
+                    {t('doctorChangePassword.back')}
                 </button>
 
                 <div className="bg-white dark:bg-gray-800 rounded-2xl border border-[#C3C6D6] dark:border-gray-700/60 shadow-sm overflow-hidden">
@@ -72,22 +74,22 @@ const DoctorChangePassword = () => {
                                 <Lock className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-lg font-black text-[#0B1C30]">تغيير كلمة المرور</h1>
-                                <p className="text-xs font-bold text-gray-500">قم بتأكيد كلمة المرور الحالية ثم اكتب الجديدة</p>
+                                <h1 className="text-lg font-black text-[#0B1C30]">{t('doctorChangePassword.title')}</h1>
+                                <p className="text-xs font-bold text-gray-500">{t('doctorChangePassword.description')}</p>
                             </div>
                         </div>
                     </div>
 
                     <form onSubmit={handleSubmit} className="p-6 space-y-5">
                         <div>
-                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">كلمة المرور الحالية</label>
+                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">{t('doctorChangePassword.currentPassword')}</label>
                             <div className="relative">
                                 <input
                                     type={showOld ? 'text' : 'password'}
                                     value={oldPassword}
                                     onChange={(e) => setOldPassword(e.target.value)}
                                     className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors pr-11"
-                                    placeholder="أدخل كلمة المرور الحالية"
+                                    placeholder={t('doctorChangePassword.currentPasswordPlaceholder')}
                                     required
                                 />
                                 <button type="button" onClick={() => setShowOld(!showOld)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 cursor-pointer">
@@ -97,14 +99,14 @@ const DoctorChangePassword = () => {
                         </div>
 
                         <div>
-                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">كلمة المرور الجديدة</label>
+                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">{t('doctorChangePassword.newPassword')}</label>
                             <div className="relative">
                                 <input
                                     type={showNew ? 'text' : 'password'}
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-xl px-4 py-3 text-sm font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors pr-11"
-                                    placeholder="أدخل كلمة المرور الجديدة"
+                                    placeholder={t('doctorChangePassword.newPasswordPlaceholder')}
                                     required
                                 />
                                 <button type="button" onClick={() => setShowNew(!showNew)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 cursor-pointer">
@@ -128,7 +130,7 @@ const DoctorChangePassword = () => {
                         </div>
 
                         <div>
-                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">تأكيد كلمة المرور الجديدة</label>
+                            <label className="text-xs font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500 block mb-1.5">{t('doctorChangePassword.confirmNewPassword')}</label>
                             <div className="relative">
                                 <input
                                     type={showConfirm ? 'text' : 'password'}
@@ -139,7 +141,7 @@ const DoctorChangePassword = () => {
                                             ? passwordsMatch ? 'border-green-400 focus:border-green-500' : 'border-red-400 focus:border-red-500'
                                             : 'border-[#C3C6D6] dark:border-gray-700/60 focus:border-[#138C9F]'
                                     }`}
-                                    placeholder="أعد إدخال كلمة المرور الجديدة"
+                                    placeholder={t('doctorChangePassword.confirmNewPasswordPlaceholder')}
                                     required
                                 />
                                 <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 cursor-pointer">
@@ -148,7 +150,7 @@ const DoctorChangePassword = () => {
                             </div>
                             {confirmPassword.length > 0 && (
                                 <p className={`mt-1.5 text-xs font-bold ${passwordsMatch ? 'text-green-600' : 'text-red-500'}`}>
-                                    {passwordsMatch ? 'كلمتا المرور متطابقتان' : 'كلمتا المرور غير متطابقتين'}
+                                    {passwordsMatch ? t('doctorChangePassword.passwordsMatch') : t('doctorChangePassword.passwordsMismatch')}
                                 </p>
                             )}
                         </div>
@@ -158,7 +160,7 @@ const DoctorChangePassword = () => {
                             disabled={loading || !allRulesPassed || !passwordsMatch || !oldPassword}
                             className="w-full py-3 rounded-xl bg-[#138C9F] text-white font-bold text-sm hover:bg-[#0f7585] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                         >
-                            {loading ? 'جاري التحديث...' : 'تغيير كلمة المرور'}
+                            {loading ? t('doctorChangePassword.updating') : t('doctorChangePassword.changePassword')}
                         </button>
                     </form>
                 </div>

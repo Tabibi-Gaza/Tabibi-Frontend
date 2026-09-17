@@ -269,7 +269,7 @@ const Login = () => {
                       onClick={() => navigate('/')}
                       className="h-28 w-auto cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
-                      alt="شعار طبيبي"
+                      alt={t('login.logoAlt')}
                     />
                   </div>
                   <h2 className="text-3xl font-black text-[#138C9F]">{t('login.welcomeBack')}</h2>
@@ -350,7 +350,7 @@ const Login = () => {
                     height="80"
                     className="h-28 w-auto mx-auto object-contain mb-3"
                     src={assets.logo}
-                    alt="شعار طبيبي"
+                    alt={t('login.logoAlt')}
                   />
                   <h2 className="text-xl font-black text-[#138C9F] mb-2">{t('login.register')}</h2>
                   <p className="text-sm text-slate-400 dark:text-gray-400 dark:text-gray-500 font-bold">
@@ -600,7 +600,7 @@ const Login = () => {
                       onClick={() => navigate('/')}
                       className="h-28 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
-                      alt="شعار طبيبي"
+                      alt={t('login.logoAlt')}
                     />
                   </div>
                   <h2 className="text-3xl font-black text-[#138C9F]">{t('login.resetPasswordTitle')}</h2>
@@ -653,7 +653,7 @@ const Login = () => {
                       onClick={() => navigate('/')}
                       className="h-28 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
-                      alt="شعار طبيبي"
+                      alt={t('login.logoAlt')}
                     />
                   </div>
                   <h2 className="text-3xl font-black text-[#138C9F]">{t('login.otpTitle')}</h2>
@@ -709,7 +709,7 @@ const Login = () => {
                       onClick={() => navigate('/')}
                       className="h-28 cursor-pointer object-contain transform hover:scale-105 transition-all duration-300"
                       src={assets.logo}
-                      alt="شعار طبيبي"
+                      alt={t('login.logoAlt')}
                     />
                   </div>
                   <h2 className="text-3xl font-black text-[#138C9F]">{t('login.newPasswordTitle')}</h2>

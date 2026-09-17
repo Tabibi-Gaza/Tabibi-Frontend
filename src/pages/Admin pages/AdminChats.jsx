@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
 import { Send, Search, ArrowRight, Loader2, MessageSquare, UserPlus, X, Paperclip, Image, FileText, Trash2, Pin } from "lucide-react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import {
   useInboxQuery,
   useMessagesQuery,
@@ -17,6 +18,7 @@ import { formatTimeArabic } from '../../utils/dateFormatter';
 const FILES_BASE = import.meta.env.VITE_Files_URL || "";
 
 export default function AdminChats() {
+  const { t } = useTranslation();
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [newMessage, setNewMessage] = useState("");
@@ -100,14 +102,14 @@ export default function AdminChats() {
         filePath = await uploadMutation.mutateAsync(selectedFile);
         fileType = selectedFile.type.startsWith("image/") ? "image" : "document";
       } catch (err) {
-        toast.error("فشل رفع الملف");
+        toast.error(t('adminChats.fileUploadFailed'));
         return;
       }
     }
 
     sendMutation.mutate({
       conversationId: activeConversationId,
-      content: newMessage.trim() || (fileType === "image" ? "صورة" : "مستند"),
+      content: newMessage.trim() || (fileType === "image" ? t('adminChats.image') : t('adminChats.document')),
       filePath,
       fileType,
     });
@@ -137,7 +139,7 @@ export default function AdminChats() {
     try {
       const userId = doctor.userId;
       if (!userId) {
-        toast.error("معرف المستخدم غير موجود");
+        toast.error(t('adminChats.userIdNotFound'));
         return;
       }
 
@@ -155,25 +157,25 @@ export default function AdminChats() {
         setShowChatOnMobile(true);
       } else {
         setNewChatDoctor(null);
-        toast.error(result.errors?.[0]?.message || "فشل إنشاء المحادثة");
+        toast.error(result.errors?.[0]?.message || t('adminChats.createChatFailed'));
       }
     } catch (error) {
       setNewChatDoctor(null);
-      toast.error(error.response?.data?.errors?.[0]?.message || "حدث خطأ");
+      toast.error(error.response?.data?.errors?.[0]?.message || t('adminChats.errorOccurred'));
     }
   };
 
   const handleDeleteConversation = (e, conv) => {
     e.stopPropagation();
     setDeleteConfirmId(conv.conversationId);
-    setDeleteConfirmName(conv.participantName || "هذه المحادثة");
+    setDeleteConfirmName(conv.participantName || t('adminChats.deleteChat'));
   };
 
   const confirmDelete = () => {
     if (!deleteConfirmId) return;
     deleteMutation.mutate(deleteConfirmId, {
       onSuccess: () => {
-        toast.success("تم حذف المحادثة بنجاح");
+        toast.success(t('adminChats.deleteSuccess'));
         if (activeConversationId === deleteConfirmId) {
           setActiveConversationId(null);
         }
@@ -181,7 +183,7 @@ export default function AdminChats() {
         setDeleteConfirmName("");
       },
       onError: () => {
-        toast.error("فشل حذف المحادثة");
+        toast.error(t('adminChats.deleteFailed'));
         setDeleteConfirmId(null);
       },
     });
@@ -196,7 +198,7 @@ export default function AdminChats() {
     if (diffDays === 0) {
       return formatTimeArabic(dateStr);
     }
-    if (diffDays === 1) return "أمس";
+    if (diffDays === 1) return t('adminChats.yesterday');
     if (diffDays < 7) return date.toLocaleDateString("ar-EG", { weekday: "long" });
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -233,7 +235,7 @@ export default function AdminChats() {
           className="flex items-center gap-2 underline"
         >
           <FileText className="w-4 h-4" />
-          <span>{msg.content || "مستند"}</span>
+          <span>{msg.content || t('adminChats.document')}</span>
         </a>
       );
     }
@@ -250,11 +252,11 @@ export default function AdminChats() {
         <div className={`bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm flex flex-col overflow-hidden h-full ${showChatOnMobile ? "hidden md:flex" : "flex"}`}>
           <div className="p-4 flex flex-col gap-3 border-b border-[#e9eff6]">
             <div className="flex items-center justify-between">
-              <h2 className="text-[20px] font-extrabold text-[#138C9F] text-right">المحادثات</h2>
+              <h2 className="text-[20px] font-extrabold text-[#138C9F] text-right">{t('adminChats.title')}</h2>
               <button
                 onClick={() => setShowNewChatModal(true)}
                 className="w-9 h-9 bg-[#138C9F] text-white rounded-full flex items-center justify-center hover:bg-[#0f7282] transition-colors"
-                title="محادثة جديدة"
+                title={t('adminChats.newChat')}
               >
                 <UserPlus className="w-4 h-4" />
               </button>
@@ -265,7 +267,7 @@ export default function AdminChats() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="بحث في المحادثات..."
+                placeholder={t('adminChats.searchPlaceholder')}
                 className="w-full bg-transparent border-none outline-none text-xs text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right"
               />
             </div>
@@ -279,7 +281,7 @@ export default function AdminChats() {
             ) : filteredConversations.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-gray-400">
                 <MessageSquare className="w-10 h-10 mb-2" />
-                <span className="text-sm font-bold">{searchQuery ? "لا توجد نتائج" : "لا توجد محادثات"}</span>
+                <span className="text-sm font-bold">{searchQuery ? t('adminChats.noResults') : t('adminChats.noConversations')}</span>
               </div>
             ) : (
               filteredConversations.map((conv) => {
@@ -301,10 +303,10 @@ export default function AdminChats() {
                       <div className="flex flex-col min-w-0">
                         <div className="flex items-center gap-1.5">
                           {conv.isPinned && <Pin className="w-3 h-3 text-[#138C9F] shrink-0" />}
-                          <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm truncate">{conv.participantName || "مستخدم"}</h4>
+                          <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm truncate">{conv.participantName || t('adminChats.user')}</h4>
                         </div>
                         <p className="text-xs text-gray-400 dark:text-gray-500 truncate mt-0.5">{conv.participantSpecialty || ""}</p>
-                        <p className="text-[11px] text-gray-400 dark:text-gray-500 truncate mt-0.5 max-w-[180px]">{conv.lastMessage || "لا توجد رسائل"}</p>
+                        <p className="text-[11px] text-gray-400 dark:text-gray-500 truncate mt-0.5 max-w-[180px]">{conv.lastMessage || t('adminChats.noMessages')}</p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-1 shrink-0">
@@ -315,7 +317,7 @@ export default function AdminChats() {
                       <button
                         onClick={(e) => handleDeleteConversation(e, conv)}
                         className="opacity-0 group-hover:opacity-100 mt-1 p-1 text-gray-300 dark:text-gray-500 hover:text-red-500 transition-all duration-200"
-                        title="حذف المحادثة"
+                        title={t('adminChats.deleteChat')}
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -357,7 +359,7 @@ export default function AdminChats() {
                 ) : messages.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-12 text-gray-400">
                     <MessageSquare className="w-10 h-10 mb-2" />
-                    <span className="text-sm font-bold">ابدأ المحادثة</span>
+                    <span className="text-sm font-bold">{t('adminChats.startChat')}</span>
                   </div>
                 ) : (
                   messages.map((msg) => (
@@ -398,7 +400,7 @@ export default function AdminChats() {
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="اكتب رسالتك هنا..."
+                    placeholder={t('adminChats.typeMessage')}
                     className="flex-1 bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right"
                     dir="rtl"
                   />
@@ -408,7 +410,7 @@ export default function AdminChats() {
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 font-bold gap-3">
               <MessageSquare className="w-12 h-12" />
-              <span>الرجاء تحديد محادثة للبدء في العرض</span>
+              <span>{t('adminChats.selectChatPrompt')}</span>
             </div>
           )}
         </div>
@@ -419,7 +421,7 @@ export default function AdminChats() {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 w-full max-w-[calc(100%-2rem)] sm:max-w-[500px] rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 flex flex-col max-h-[80vh]">
             <div className="p-4 border-b border-[#e9eff6] dark:border-gray-700 flex items-center justify-between shrink-0">
-              <h3 className="text-[18px] font-bold text-[#0B1C30]">محادثة جديدة مع طبيب</h3>
+              <h3 className="text-[18px] font-bold text-[#0B1C30]">{t('adminChats.newChatWithDoctor')}</h3>
               <button onClick={() => { setShowNewChatModal(false); setDoctorSearchQuery(""); }} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors">
                 <X className="w-5 h-5" />
               </button>
@@ -427,14 +429,14 @@ export default function AdminChats() {
             <div className="p-4 border-b border-[#e9eff6] dark:border-gray-700 shrink-0">
               <div className="relative flex items-center border border-[#e9eff6] dark:border-gray-700 rounded-xl bg-slate-50 dark:bg-gray-900 px-3 h-10">
                 <Search className="w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none shrink-0 ml-2" />
-                <input type="text" value={doctorSearchQuery} onChange={(e) => setDoctorSearchQuery(e.target.value)} placeholder="ابحث عن طبيب بالاسم..." className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right" autoFocus />
+                <input type="text" value={doctorSearchQuery} onChange={(e) => setDoctorSearchQuery(e.target.value)} placeholder={t('adminChats.searchDoctorPlaceholder')} className="w-full bg-transparent border-none outline-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right" autoFocus />
               </div>
             </div>
             <div className="flex-1 overflow-y-auto">
               {doctorsLoading ? (
                 <div className="flex items-center justify-center py-12"><Loader2 className="w-6 h-6 text-[#138C9F] animate-spin" /></div>
               ) : doctors.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-12 text-gray-400"><span className="text-sm font-bold">لا يوجد أطباء</span></div>
+                <div className="flex flex-col items-center justify-center py-12 text-gray-400"><span className="text-sm font-bold">{t('adminChats.noDoctors')}</span></div>
               ) : (
                 doctors.map((doc) => {
                   const existingConv = conversations.find((c) => c.participantName === doc.fullName);
@@ -451,7 +453,7 @@ export default function AdminChats() {
                         <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm truncate">{doc.fullName}</h4>
                         <p className="text-xs text-gray-400 dark:text-gray-500 truncate mt-0.5">{doc.specializationName || ""}</p>
                       </div>
-                      {existingConv && <span className="text-[10px] text-[#138C9F] font-bold bg-[#138C9F]/10 px-2 py-1 rounded-full shrink-0">محادثة موجودة</span>}
+                      {existingConv && <span className="text-[10px] text-[#138C9F] font-bold bg-[#138C9F]/10 px-2 py-1 rounded-full shrink-0">{t('adminChats.existingChat')}</span>}
                     </div>
                   );
                 })
@@ -469,22 +471,22 @@ export default function AdminChats() {
               <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trash2 className="w-7 h-7 text-red-500" />
               </div>
-              <h3 className="text-[18px] font-bold text-gray-800 dark:text-gray-200 mb-2">حذف المحادثة</h3>
-              <p className="text-sm text-gray-500">هل أنت متأكد من حذف محادثة {deleteConfirmName}؟ سيتم حذف جميع الرسائل نهائياً.</p>
+              <h3 className="text-[18px] font-bold text-gray-800 dark:text-gray-200 mb-2">{t('adminChats.deleteChatTitle')}</h3>
+              <p className="text-sm text-gray-500">{t('adminChats.deleteConfirmMessage', { name: deleteConfirmName })}</p>
             </div>
             <div className="flex border-t border-gray-100">
               <button
                 onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(""); }}
                 className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors"
               >
-                إلغاء
+                {t('common.cancel')}
               </button>
               <button
                 onClick={confirmDelete}
                 disabled={deleteMutation.isPending}
                 className="flex-1 py-3 text-sm font-bold text-red-500 hover:bg-red-50 transition-colors border-r border-gray-100 dark:border-gray-700 disabled:opacity-50"
               >
-                {deleteMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : "حذف"}
+                {deleteMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin inline" /> : t('common.delete')}
               </button>
             </div>
           </div>
