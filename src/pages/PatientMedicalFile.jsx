@@ -343,7 +343,7 @@ const PatientMedicalFile = () => {
                                                 {visit.prescriptionMedications.map((med, idx) => (
                                                     <div key={idx} className="bg-white dark:bg-gray-800 p-2.5 rounded-lg border border-slate-100 dark:border-gray-700 shadow-2xs space-y-1">
                                                         <div className="flex justify-between items-center text-xs font-semibold">
-                                                            <span className="text-gray-800">{med.medicationName}</span>
+                                                            <span className="text-gray-800 dark:text-gray-200">{med.medicationName}</span>
                                                             <span className="text-gray-400 dark:text-gray-500 font-mono text-[10px] bg-slate-50 dark:bg-gray-900 px-2 py-0.5 rounded border border-slate-100">{med.dosage}</span>
                                                         </div>
                                                         {med.frequency && (
@@ -400,7 +400,7 @@ const PatientMedicalFile = () => {
                         {modalStep === 1 && (
                             <div className="p-5 sm:p-6 text-center space-y-6">
                                 <div className="space-y-1">
-                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800">{t('patientMedicalFile.platformRatingTitle')}</h3>
+                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800 dark:text-gray-200">{t('patientMedicalFile.platformRatingTitle')}</h3>
                                 </div>
                                 <div className="flex justify-center items-center gap-2" dir="ltr">
                                     {[1, 2, 3, 4, 5].map((star) => (
@@ -468,7 +468,7 @@ const PatientMedicalFile = () => {
                                     </div>
                                 </div>
                                 <div className="space-y-1">
-                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800">{t('patientMedicalFile.doctorRatingTitle')}</h3>
+                                    <h3 className="text-base sm:text-lg font-extrabold text-gray-800 dark:text-gray-200">{t('patientMedicalFile.doctorRatingTitle')}</h3>
                                 </div>
                                 <div className="flex justify-center items-center gap-2" dir="ltr">
                                     {[1, 2, 3, 4, 5].map((star) => (

@@ -62,7 +62,7 @@ const reviews = [
 
 function TestimonialsSlider() {
   const renderReview = (review, index, isActive) => (
-    <div className={`group bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30" : ""}`}>
+    <div className={`group bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700 p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30" : ""}`}>
       <div className="flex items-start gap-4 mb-4">
         <FontAwesomeIcon icon={faQuoteRight} className="text-3xl md:text-4xl text-[#138C9F]/10 shrink-0 mt-1" />
         <div className="flex-1">

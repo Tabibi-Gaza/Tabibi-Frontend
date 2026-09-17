@@ -253,7 +253,7 @@ const AppointmentManagement = () => {
                         const canStart = appt.status === 'Confirmed' || appt.status === 'InProgress';
                         const dt = formatDateTime(appt.startTime);
                         return (
-                          <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/30 transition-colors h-20 text-sm font-semibold text-gray-700">
+                           <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/30 transition-colors h-20 text-sm font-semibold text-gray-700 dark:text-gray-300">
                             <td className="px-6">
                               <div className="flex items-center gap-3">
                                 <div className="relative shrink-0">
@@ -337,7 +337,7 @@ const AppointmentManagement = () => {
             )}
 
             <div className="border-t border-slate-100 dark:border-gray-700 px-4 sm:px-6 py-4 flex items-center justify-between flex-row-reverse">
-              <p className="text-xs sm:text-sm font-bold text-gray-500">{t('appointmentManagement.showing')}<span className="text-gray-700">{appointments.length}</span>{t('appointmentManagement.ofTotal')}<span className="text-gray-700">{totalCount}</span>{t('appointmentManagement.appointment')}</p>
+              <p className="text-xs sm:text-sm font-bold text-gray-500">{t('appointmentManagement.showing')}<span className="text-gray-700 dark:text-gray-300">{appointments.length}</span>{t('appointmentManagement.ofTotal')}<span className="text-gray-700 dark:text-gray-300">{totalCount}</span>{t('appointmentManagement.appointment')}</p>
               <div className="flex items-center gap-1.5" dir="ltr">
                 <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
                   className={`w-8 h-8 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900 transition-colors ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}>

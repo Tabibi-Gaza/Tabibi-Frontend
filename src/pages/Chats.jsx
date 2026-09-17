@@ -500,7 +500,7 @@ export default function Chats() {
                 </form>
               </>
             ) : (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
+              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white dark:bg-gray-800">
                 <div className="w-16 h-16 rounded-full bg-[#1b8b99]/10 flex items-center justify-center text-[#1b8b99] mb-4">
                   <svg className="w-8 h-8 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>

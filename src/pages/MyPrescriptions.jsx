@@ -171,7 +171,7 @@ const MyPrescriptions = () => {
                                 <select
                                     value={filterSpecialization}
                                     onChange={(e) => setFilterSpecialization(e.target.value)}
-                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors bg-white"
+                                    className="w-full border border-[#C3C6D6] dark:border-gray-700/60 rounded-lg px-3 py-2 text-xs font-bold text-[#0B1C30] dark:text-white outline-none focus:border-[#138C9F] transition-colors bg-white dark:bg-gray-800"
                                 >
                                     <option value="">{t('myPrescriptions.all')}</option>
                                     {specializations.map((spec, i) => (

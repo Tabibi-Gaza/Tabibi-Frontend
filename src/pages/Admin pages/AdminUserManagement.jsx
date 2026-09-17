@@ -275,7 +275,7 @@ export default function AdminUserManagement() {
                     </table>
                 </div>
 
-                <div className="border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex items-center justify-between flex-wrap gap-4 bg-white">
+                <div className="border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex items-center justify-between flex-wrap gap-4 bg-white dark:bg-gray-800">
                     <span className="text-[14px] text-[#526069] dark:text-gray-400">
                         عرض <strong className="text-[#0B1C30] dark:text-gray-200">{users.length}</strong> من أصل <strong className="text-[#0B1C30] dark:text-gray-200">{totalCountDisplay}</strong> مستخدم
                     </span>

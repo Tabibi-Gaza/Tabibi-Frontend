@@ -175,11 +175,11 @@ const PaymentPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
                 <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">{t('payment.doctor')}</p>
-                <p className="text-sm font-bold text-gray-800">{doctorName || '—'}</p>
+                <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{doctorName || '—'}</p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4">
                 <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">{t('payment.dateTime')}</p>
-                <p className="text-sm font-bold text-gray-800">{formatDateTime(dateTime)}</p>
+                <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{formatDateTime(dateTime)}</p>
               </div>
             </div>
           </div>
@@ -223,17 +223,17 @@ const PaymentPage = () => {
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                             <div>
                               <p className="text-xs text-gray-400">{t('payment.accountName')}</p>
-                              <p className="font-medium text-gray-700">{bank.accountHolderName}</p>
+                              <p className="font-medium text-gray-700 dark:text-gray-300">{bank.accountHolderName}</p>
                             </div>
                             {bank.iban && (
                               <div>
                                 <p className="text-xs text-gray-400">{t('payment.iban')}</p>
-                                <p className="font-medium text-gray-700" dir="ltr">{bank.iban}</p>
+                                <p className="font-medium text-gray-700 dark:text-gray-300" dir="ltr">{bank.iban}</p>
                               </div>
                             )}
                             <div>
                               <p className="text-xs text-gray-400">{t('payment.phoneNumber')}</p>
-                              <p className="font-medium text-gray-700" dir="ltr">{bank.phoneNumber}</p>
+                              <p className="font-medium text-gray-700 dark:text-gray-300" dir="ltr">{bank.phoneNumber}</p>
                             </div>
                           </div>
                         </div>
@@ -269,11 +269,11 @@ const PaymentPage = () => {
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                             <div>
                               <p className="text-xs text-gray-400">{t('payment.name')}</p>
-                              <p className="font-medium text-gray-700">{wallet.accountHolderName}</p>
+                              <p className="font-medium text-gray-700 dark:text-gray-300">{wallet.accountHolderName}</p>
                             </div>
                             <div>
                               <p className="text-xs text-gray-400">{t('payment.phoneNumber')}</p>
-                              <p className="font-medium text-gray-700" dir="ltr">{wallet.phoneNumber}</p>
+                              <p className="font-medium text-gray-700 dark:text-gray-300" dir="ltr">{wallet.phoneNumber}</p>
                             </div>
                           </div>
                         </div>
@@ -349,7 +349,7 @@ const PaymentPage = () => {
                       <FontAwesomeIcon icon={faUpload} className="text-2xl text-gray-400" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-gray-600">{t('payment.dragOrClick')}</p>
+                       <p className="text-sm font-bold text-gray-600 dark:text-gray-400">{t('payment.dragOrClick')}</p>
                       <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('payment.fileFormats')}</p>
                     </div>
                   </div>
@@ -413,11 +413,11 @@ const PaymentPage = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center pb-3 border-b border-gray-100">
                 <span className="text-sm text-gray-500">{t('payment.doctorLabel')}</span>
-                <span className="text-sm font-bold text-gray-800">{doctorName || '—'}</span>
+                <span className="text-sm font-bold text-gray-800 dark:text-gray-200">{doctorName || '—'}</span>
               </div>
               <div className="flex justify-between items-center pb-3 border-b border-gray-100">
                 <span className="text-sm text-gray-500">{t('payment.appointmentLabel')}</span>
-                <span className="text-xs font-medium text-gray-600">{formatDateTime(dateTime)}</span>
+                <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{formatDateTime(dateTime)}</span>
               </div>
               {selectedMethod && (
                 <div className="flex justify-between items-center pb-3 border-b border-gray-100">
@@ -426,7 +426,7 @@ const PaymentPage = () => {
                 </div>
               )}
               <div className="flex justify-between items-center pt-2">
-                <span className="text-sm font-bold text-gray-700">{t('payment.amountDue')}</span>
+                <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{t('payment.amountDue')}</span>
                 <span className="text-xl font-extrabold text-[#138C9F]">{amount || '—'} <span className="text-sm">ILS</span></span>
               </div>
             </div>

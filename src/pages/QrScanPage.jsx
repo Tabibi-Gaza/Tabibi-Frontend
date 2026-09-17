@@ -65,7 +65,7 @@ const QrScanPage = () => {
           <div className="w-14 h-14 bg-[#138C9F]/10 rounded-full flex items-center justify-center mx-auto mb-3">
             <span className="text-2xl">🏥</span>
           </div>
-          <h1 className="text-xl font-black text-gray-800">السجل الطبي</h1>
+           <h1 className="text-xl font-black text-gray-800 dark:text-gray-200">السجل الطبي</h1>
           <p className="text-xs text-gray-400 dark:text-gray-500 font-bold mt-1">تم الوصول عبر رمز QR — صلاحية محدودة</p>
         </div>
 
@@ -75,12 +75,12 @@ const QrScanPage = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
               <p className="text-[10px] font-bold text-gray-400">الاسم</p>
-              <p className="text-sm font-black text-gray-800">{record.patientName}</p>
+               <p className="text-sm font-black text-gray-800 dark:text-gray-200">{record.patientName}</p>
             </div>
             {record.gender && (
               <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                 <p className="text-[10px] font-bold text-gray-400">الجنس</p>
-                <p className="text-sm font-black text-gray-800">{record.gender === 'Male' ? 'ذكر' : record.gender === 'Female' ? 'أنثى' : record.gender}</p>
+                <p className="text-sm font-black text-gray-800 dark:text-gray-200">{record.gender === 'Male' ? 'ذكر' : record.gender === 'Female' ? 'أنثى' : record.gender}</p>
               </div>
             )}
             {record.bloodType && (
@@ -100,25 +100,25 @@ const QrScanPage = () => {
               {record.vitals.bloodPressure && (
                 <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">ضغط الدم</p>
-                  <p className="text-sm font-black text-gray-800">{record.vitals.bloodPressure}</p>
+                   <p className="text-sm font-black text-gray-800 dark:text-gray-200">{record.vitals.bloodPressure}</p>
                 </div>
               )}
               {record.vitals.bloodSugar && (
                 <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">سكر الدم</p>
-                  <p className="text-sm font-black text-gray-800">{record.vitals.bloodSugar} mg/dL</p>
+                   <p className="text-sm font-black text-gray-800 dark:text-gray-200">{record.vitals.bloodSugar} mg/dL</p>
                 </div>
               )}
               {record.vitals.weight && (
                 <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">الوزن</p>
-                  <p className="text-sm font-black text-gray-800">{record.vitals.weight} كجم</p>
+                   <p className="text-sm font-black text-gray-800 dark:text-gray-200">{record.vitals.weight} كجم</p>
                 </div>
               )}
               {record.vitals.height && (
                 <div className="bg-slate-50 dark:bg-gray-900 p-3 rounded-xl text-center">
                   <p className="text-[10px] font-bold text-gray-400">الطول</p>
-                  <p className="text-sm font-black text-gray-800">{record.vitals.height} سم</p>
+                   <p className="text-sm font-black text-gray-800 dark:text-gray-200">{record.vitals.height} سم</p>
                 </div>
               )}
             </div>
@@ -173,7 +173,7 @@ const QrScanPage = () => {
                 <div key={i} className="border border-gray-100 dark:border-gray-700 rounded-xl p-4">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <p className="text-sm font-black text-gray-800">{v.doctorName}</p>
+                       <p className="text-sm font-black text-gray-800 dark:text-gray-200">{v.doctorName}</p>
                       <p className="text-[10px] font-bold text-[#138C9F]">{v.specialization}</p>
                     </div>
                     <p className="text-[10px] text-gray-400 dark:text-gray-500 font-bold">{formatDate(v.visitDate)}</p>
@@ -195,7 +195,7 @@ const QrScanPage = () => {
               {record.prescriptions.map((p, i) => (
                 <div key={i} className="border border-gray-100 dark:border-gray-700 rounded-xl p-4">
                   <div className="flex justify-between items-start mb-2">
-                    <p className="text-xs font-black text-gray-800">{p.doctorName}</p>
+                     <p className="text-xs font-black text-gray-800 dark:text-gray-200">{p.doctorName}</p>
                     <p className="text-[10px] text-gray-400 dark:text-gray-500 font-bold">{p.createdAt ? formatDate(p.createdAt) : ''}</p>
                   </div>
                   {p.medications?.map((med, j) => (

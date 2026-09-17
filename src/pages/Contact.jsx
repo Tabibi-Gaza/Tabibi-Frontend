@@ -72,7 +72,7 @@ const Contact = () => {
                     className="text-[#1F2937] text-[20px] bg-zinc-200 rounded p-1"
                   />
                 </div>
-                <h1 className="text-[#1F2937] dark:text-white font-bold text-[28px]">
+                <h1 className="text-[#1F2937] dark:text-white font-bold text-xl sm:text-[28px]">
                   تواصل معنا
                 </h1>
               </div>

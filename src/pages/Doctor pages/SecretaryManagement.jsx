@@ -164,7 +164,7 @@ const SecretaryManagement = () => {
                                     className="w-4 h-4 accent-[#1b8b99]"
                                 />
                                 <div>
-                                    <span className="text-sm font-bold text-gray-800">{perm.label}</span>
+                                    <span className="text-sm font-bold text-gray-800 dark:text-gray-200">{perm.label}</span>
                                     <p className="text-[10px] text-gray-400">{perm.description}</p>
                                 </div>
                             </label>

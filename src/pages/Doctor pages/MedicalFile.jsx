@@ -167,8 +167,8 @@ const MedicalFile = () => {
                                     ? medicalHistoryData.currentMedicines.filter(m => m.name !== "لا يوجد").map((med, idx) => (
                                         <tr key={idx} className="border-b border-gray-50 last:border-0">
                                             <td className="p-3 md:p-4 font-bold text-[#0B1C30] dark:text-gray-200">{med.name}</td>
-                                            <td className="p-3 md:p-4 font-bold text-gray-600">{med.dosage || "—"}</td>
-                                            <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
+                                             <td className="p-3 md:p-4 font-bold text-gray-600 dark:text-gray-400">{med.dosage || "—"}</td>
+                                             <td className="p-3 md:p-4 font-bold text-gray-600 dark:text-gray-400">{med.frequency || "—"}</td>
                                         </tr>
                                     ))
                                     : <tr><td colSpan="3" className="p-3 md:p-4 text-center text-gray-400 dark:text-gray-500 font-bold">لا يوجد أدوية مسجلة</td></tr>

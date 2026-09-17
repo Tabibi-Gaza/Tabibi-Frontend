@@ -87,7 +87,7 @@ const Notifications = () => {
               {/* المحتوى النصي الأيمن */}
               <div className="flex-1 text-right">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <h3 className="text-lg font-bold text-gray-800">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">
                     {notif.title}
                   </h3>
                   {notif.count > 1 && (
@@ -96,7 +96,7 @@ const Notifications = () => {
                     </span>
                   )}
                 </div>
-                <p className="text-base text-gray-600 leading-relaxed font-medium">
+                <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
                   {notif.message}
                 </p>
               </div>

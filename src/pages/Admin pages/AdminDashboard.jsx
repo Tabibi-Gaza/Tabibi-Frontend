@@ -460,7 +460,7 @@ const AdminDashboard = () => {
 
             {selectedRequest && (
             <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <div className="w-full max-w-[650px] max-h-[90vh] bg-white dark:bg-gray-800 rounded-[16px] shadow-2xl border border-gray-100 dark:border-gray-700 text-right flex flex-col">
+            <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[650px] max-h-[90vh] bg-white dark:bg-gray-800 rounded-[16px] shadow-2xl border border-gray-100 dark:border-gray-700 text-right flex flex-col">
                         {/* Header */}
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button

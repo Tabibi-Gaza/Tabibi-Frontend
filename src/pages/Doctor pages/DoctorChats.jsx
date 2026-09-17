@@ -324,7 +324,7 @@ export default function DoctorChats() {
                 </form>
               </>
             ) : (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
+              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white dark:bg-gray-800">
                 <MessageSquare className="w-12 h-12 text-gray-300 dark:text-gray-500 mb-3" />
                 <p className="text-gray-400 dark:text-gray-500 text-sm font-medium">{t('doctorChats.selectChatPrompt')}</p>
               </div>

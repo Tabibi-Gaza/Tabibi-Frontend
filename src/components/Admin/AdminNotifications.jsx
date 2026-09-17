@@ -67,7 +67,7 @@ const AdminNotifications = () => {
                                             <span className="w-2 h-2 rounded-full bg-blue-600 block shrink-0 animate-pulse"></span>
                                         )}
                                     </div>
-                                    <p className="text-sm text-gray-600 leading-relaxed font-medium">{notif.message}</p>
+                                     <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{notif.message}</p>
                                 </div>
 
                                 <div className="flex items-center gap-2 shrink-0 justify-end sm:justify-start min-w-[90px]">

@@ -208,7 +208,7 @@ const FinancialFiles = () => {
                 <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center text-[#1b8b99]"><FiDollarSign className="w-5 h-5" /></div>
               </div>
               <div>
-                <h2 className="text-2xl font-black text-gray-800">{totalRevenue} <span className="text-lg font-bold text-gray-600">ILS</span></h2>
+                <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">{totalRevenue} <span className="text-lg font-bold text-gray-600 dark:text-gray-400">ILS</span></h2>
                 <p className="text-[11px] text-green-600 flex items-center gap-1 font-medium"><FiTrendingUp className="w-3.5 h-3.5" />{t('financialFiles.totalExaminations')}</p>
               </div>
             </div>
@@ -219,7 +219,7 @@ const FinancialFiles = () => {
                 <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500"><FiArrowDown className="w-5 h-5" /></div>
               </div>
               <div>
-                <h2 className="text-2xl font-black text-gray-800">{totalExpenses} <span className="text-lg font-bold text-gray-600">ILS</span></h2>
+                <h2 className="text-2xl font-black text-gray-800 dark:text-gray-200">{totalExpenses} <span className="text-lg font-bold text-gray-600 dark:text-gray-400">ILS</span></h2>
                 <p className="text-[11px] text-red-500 flex items-center gap-1 font-medium"><FiArrowDown className="w-3.5 h-3.5" />{t('financialFiles.operationalExpenses')}</p>
               </div>
             </div>
@@ -232,7 +232,7 @@ const FinancialFiles = () => {
                 </div>
               </div>
               <div>
-                <h2 className={`text-2xl font-black ${netProfit >= 0 ? 'text-green-600' : 'text-red-500'}`}>{netProfit} <span className="text-lg font-bold text-gray-600">ILS</span></h2>
+                <h2 className={`text-2xl font-black ${netProfit >= 0 ? 'text-green-600' : 'text-red-500'}`}>{netProfit} <span className="text-lg font-bold text-gray-600 dark:text-gray-400">ILS</span></h2>
                 <p className="text-[11px] text-gray-400 dark:text-gray-500 flex items-center gap-1"><FiInfo className="w-3.5 h-3.5" />{t('financialFiles.revenueMinusExpenses')}</p>
               </div>
             </div>
@@ -243,7 +243,7 @@ const FinancialFiles = () => {
                 <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500"><FiAlertCircle className="w-5 h-5" /></div>
               </div>
               <div>
-                <h2 className="text-2xl font-black text-amber-600">{unpaidTotal} <span className="text-lg font-bold text-gray-600">ILS</span></h2>
+                <h2 className="text-2xl font-black text-amber-600">{unpaidTotal} <span className="text-lg font-bold text-gray-600 dark:text-gray-400">ILS</span></h2>
                 <p className="text-[11px] text-amber-600 flex items-center gap-1 font-medium"><FiClock className="w-3.5 h-3.5" />{t('financialFiles.uncollectedAmounts')}</p>
               </div>
             </div>
@@ -328,26 +328,26 @@ const FinancialFiles = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {displayedTransactions.map((tx) => (
-                      <tr key={tx.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-16 text-sm font-medium text-gray-700">
+                      <tr key={tx.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-16 text-sm font-medium text-gray-700 dark:text-gray-300">
                         <td className="px-6">
                           <div className="flex items-center gap-3">
                             {tx.patientImageUrl ? (
                               <img loading="lazy" decoding="async" width="36" height="36" src={tx.patientImageUrl.startsWith('http') ? tx.patientImageUrl : `${FILES_URL}/${tx.patientImageUrl}`} alt={tx.patientName} className="w-9 h-9 rounded-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                             ) : null}
                             <div className={`w-9 h-9 rounded-full bg-slate-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold flex items-center justify-center text-xs ${tx.patientImageUrl ? 'hidden' : ''}`}>{tx.initials}</div>
-                            <span className="font-bold text-gray-800">{tx.patientName}</span>
+                            <span className="font-bold text-gray-800 dark:text-gray-200">{tx.patientName}</span>
                           </div>
                         </td>
                         <td className="px-6"><span className="text-gray-800 dark:text-gray-200 text-xs font-semibold">{formatDate(tx.date)}</span></td>
                         <td className="px-6">
-                          <div className="inline-flex items-center gap-1.5 border border-slate-100 dark:border-gray-700 rounded-lg px-3 py-1.5 bg-slate-50 dark:bg-gray-900/50 text-xs font-bold text-gray-600">
+                           <div className="inline-flex items-center gap-1.5 border border-slate-100 dark:border-gray-700 rounded-lg px-3 py-1.5 bg-slate-50 dark:bg-gray-900/50 text-xs font-bold text-gray-600 dark:text-gray-400">
                             {tx.methodType === "wallet" ? <FiSmartphone className="w-3.5 h-3.5 text-[#1b8b99]" /> : <FiCreditCard className="w-3.5 h-3.5 text-[#1b8b99]" />}
                             <span>{tx.method}</span>
                           </div>
                         </td>
                         <td className="px-6">
                           <div className="flex flex-col">
-                            <span className="font-mono font-bold text-gray-800">{tx.currency} {tx.amount?.toFixed(2)}</span>
+                            <span className="font-mono font-bold text-gray-800 dark:text-gray-200">{tx.currency} {tx.amount?.toFixed(2)}</span>
                             {tx.status === t('financialFiles.partiallyCompleted') && <span className="text-[10px] text-amber-500 font-bold">مدفوع: {tx.paidAmount?.toFixed(2)} | متبقي: {(tx.amount - tx.paidAmount)?.toFixed(2)}</span>}
                           </div>
                         </td>
@@ -387,7 +387,7 @@ const FinancialFiles = () => {
                     <div className="flex justify-between items-center bg-slate-50 dark:bg-gray-900 p-2 rounded-xl mt-2">
                       <span className="text-[11px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">{t('financialFiles.totalAmountLabel')}</span>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-sm text-gray-800">{tx.currency} {tx.amount?.toFixed(2)}</span>
+                        <span className="font-mono font-bold text-sm text-gray-800 dark:text-gray-200">{tx.currency} {tx.amount?.toFixed(2)}</span>
                         <button onClick={() => setInvoiceModal(tx)} className="w-7 h-7 flex items-center justify-center rounded-lg bg-cyan-50 text-[#1b8b99]"><FiPrinter className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
@@ -411,7 +411,7 @@ const FinancialFiles = () => {
           {activeTab === 'expenses' && (
             <div className="bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
               <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
-                <h3 className="text-base font-bold text-gray-800">{t('financialFiles.operationalExpensesTitle')}</h3>
+                <h3 className="text-base font-bold text-gray-800 dark:text-gray-200">{t('financialFiles.operationalExpensesTitle')}</h3>
                 <button onClick={() => setExpenseModal(true)} className="h-9 px-4 rounded-xl bg-[#1b8b99] text-white text-xs font-bold flex items-center gap-1.5 hover:bg-[#15727e] transition-all cursor-pointer">
                   <FiPlus className="w-3.5 h-3.5" />{t('financialFiles.addExpense')}</button>
               </div>
@@ -429,9 +429,9 @@ const FinancialFiles = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {expenses.map((exp) => (
-                      <tr key={exp.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-14 text-sm font-medium text-gray-700">
+                      <tr key={exp.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-14 text-sm font-medium text-gray-700 dark:text-gray-300">
                         <td className="px-6"><span className="bg-red-50 text-red-600 text-[11px] font-bold px-3 py-1 rounded-full">{exp.category}</span></td>
-                        <td className="px-6"><span className="text-xs font-semibold text-gray-600">{formatDate(exp.date)}</span></td>
+                        <td className="px-6"><span className="text-xs font-semibold text-gray-600 dark:text-gray-400">{formatDate(exp.date)}</span></td>
                         <td className="px-6"><span className="text-gray-700 dark:text-gray-300 dark:text-gray-500 text-xs">{exp.description || '—'}</span></td>
                         <td className="px-6"><span className="font-mono font-bold text-red-600">ILS {exp.amount?.toFixed(2)}</span></td>
                         <td className="px-6">
@@ -465,7 +465,7 @@ const FinancialFiles = () => {
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
               <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden">
                 <div className="p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
-                  <h3 className="text-base font-bold text-gray-800">{t('financialFiles.addNewExpense')}</h3>
+                   <h3 className="text-base font-bold text-gray-800 dark:text-gray-200">{t('financialFiles.addNewExpense')}</h3>
                   <button onClick={() => setExpenseModal(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5" /></button>
                 </div>
                 <div className="p-5 space-y-4">
@@ -502,7 +502,7 @@ const FinancialFiles = () => {
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
               <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden">
                 <div className="p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
-                  <h3 className="text-base font-bold text-gray-800">{t('financialFiles.invoicePreview')}</h3>
+                   <h3 className="text-base font-bold text-gray-800 dark:text-gray-200">{t('financialFiles.invoicePreview')}</h3>
                   <button onClick={() => setInvoiceModal(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5" /></button>
                 </div>
                 <div className="p-5">
@@ -512,10 +512,10 @@ const FinancialFiles = () => {
                       <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{t('financialFiles.platformDescription')}</p>
                     </div>
                     <div className="space-y-2 mb-4">
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.patientLabel')}</span><span className="font-bold text-gray-800">{invoiceModal.patientName}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.dateLabel')}</span><span className="font-bold text-gray-800">{formatDate(invoiceModal.date)}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.paymentMethodLabel')}</span><span className="font-bold text-gray-800">{invoiceModal.method}</span></div>
-                      <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.statusLabel')}</span><span className="font-bold text-gray-800">{invoiceModal.status}</span></div>
+                       <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.patientLabel')}</span><span className="font-bold text-gray-800 dark:text-gray-200">{invoiceModal.patientName}</span></div>
+                       <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.dateLabel')}</span><span className="font-bold text-gray-800 dark:text-gray-200">{formatDate(invoiceModal.date)}</span></div>
+                       <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.paymentMethodLabel')}</span><span className="font-bold text-gray-800 dark:text-gray-200">{invoiceModal.method}</span></div>
+                       <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.statusLabel')}</span><span className="font-bold text-gray-800 dark:text-gray-200">{invoiceModal.status}</span></div>
                       {invoiceModal.status === t('financialFiles.partiallyCompleted') && (
                         <>
                           <div className="flex justify-between text-sm"><span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.paidLabel')}</span><span className="font-bold text-green-600">{invoiceModal.paidAmount?.toFixed(2)} ILS</span></div>

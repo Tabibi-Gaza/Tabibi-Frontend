@@ -17,7 +17,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
     return (
         <div className='flex flex-col items-center gap-3 my-12 text-gray-900 text-right' dir='rtl'>
             <div className='text-center mb-4'>
-                <h2 className='text-2xl font-bold text-gray-800'>أطباء ذو صلة</h2>
+                <h2 className='text-2xl font-bold text-gray-800 dark:text-gray-200'>أطباء ذو صلة</h2>
                 <p className='text-xs text-gray-400 mt-1'>تصفح قائمة الأطباء الموثوقين لدينا في نفس التخصص.</p>
             </div>
 
@@ -42,7 +42,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
                         <div className='p-4 flex-1 flex flex-col justify-between'>
                             <div>
                                 <div className='flex justify-between items-center mb-1'>
-                                    <h3 className='text-base font-bold text-gray-800'>{item.name}</h3>
+                                    <h3 className='text-base font-bold text-gray-800 dark:text-gray-200'>{item.name}</h3>
                                     {/* النجوم والتقييم */}
                                     <div className='flex items-center gap-0.5 text-[10px] text-amber-500 font-bold bg-amber-50 px-1.5 py-0.5 rounded-md'>
                                         <span>★</span>

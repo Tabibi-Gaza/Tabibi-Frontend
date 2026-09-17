@@ -12,7 +12,7 @@ const doctorItems = [
 
 function FeaturedDoctorsSlider() {
   const renderDoctor = (doctor, index, isActive) => (
-    <div className={`bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30 scale-[1.02]" : ""}`}>
+    <div className={`bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30 scale-[1.02]" : ""}`}>
       <div className="relative h-56 md:h-64 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
         <img loading="lazy" decoding="async" width="400" height="400" src={doctor.image} alt={doctor.name} className="w-full h-full object-cover" />
         <div className="absolute top-3 right-3 bg-green-500/90 text-white text-[10px] font-black px-2.5 py-1 rounded-lg flex items-center gap-1">

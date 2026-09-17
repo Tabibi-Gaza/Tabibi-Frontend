@@ -587,9 +587,9 @@ const MedicalExamination = () => {
                                                         ? medicalHistoryData.currentMedicines.filter(m => m.name !== "لا يوجد").map((med, idx) => (
                                                             <tr key={idx} className="border-b border-gray-50 last:border-0">
                                                                 <td className="p-3 md:p-4 font-bold text-[#0B1C30] dark:text-gray-200">{med.name}</td>
-                                                                <td className="p-3 md:p-4 font-bold text-gray-600">{med.dosage || "—"}</td>
-                                                                <td className="p-3 md:p-4 font-bold text-gray-600">{med.frequency || "—"}</td>
-                                                                <td className="hidden md:table-cell p-3 md:p-4 font-bold text-gray-600">{med.duration || "—"}</td>
+                                                                 <td className="p-3 md:p-4 font-bold text-gray-600 dark:text-gray-400">{med.dosage || "—"}</td>
+                                                                 <td className="p-3 md:p-4 font-bold text-gray-600 dark:text-gray-400">{med.frequency || "—"}</td>
+                                                                 <td className="hidden md:table-cell p-3 md:p-4 font-bold text-gray-600 dark:text-gray-400">{med.duration || "—"}</td>
                                                             </tr>
                                                         ))
                                                         : <tr><td colSpan="4" className="p-3 md:p-4 text-center text-gray-400 dark:text-gray-500 font-bold">{t('medicalExamination.noMedicationsRecorded')}</td></tr>
@@ -614,7 +614,7 @@ const MedicalExamination = () => {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-50 dark:bg-gray-900/50 p-5 rounded-2xl border border-slate-100">
                                         <div>
                                             <label className="block text-xs font-black text-gray-700 dark:text-gray-300 dark:text-gray-500 mb-1.5">{t('medicalExamination.bloodType')}</label>
-                                            <select value={mhBloodType} onChange={(e) => setMhBloodType(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700">
+                                             <select value={mhBloodType} onChange={(e) => setMhBloodType(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 h-11 text-xs font-bold focus:outline-none focus:border-[#138C9F] text-gray-700 dark:text-gray-300">
                                                 <option value="">اختر الفصيلة...</option>
                                                 <option value="A+">A+</option>
                                                 <option value="A-">A-</option>
@@ -655,7 +655,7 @@ const MedicalExamination = () => {
 
                                     {/* 2. الأمراض المزمنة والحساسية */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
+                                        <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white dark:bg-gray-800">
                                             <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
                                                 <FontAwesomeIcon icon={faVirus} className="text-blue-500" />{t('medicalExamination.addChronicDisease')}</label>
                                             <div className="flex gap-2 mb-3">
@@ -671,7 +671,7 @@ const MedicalExamination = () => {
                                                 )) : <span className="text-[11px] text-gray-400 dark:text-gray-500 italic p-1">{t('medicalExamination.noDiseasesAdded')}</span>}
                                             </div>
                                         </div>
-                                        <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
+                                        <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white dark:bg-gray-800">
                                             <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
                                                 <FontAwesomeIcon icon={faTriangleExclamation} className="text-red-500" />{t('medicalExamination.addAllergy')}</label>
                                             <div className="flex gap-2 mb-3">

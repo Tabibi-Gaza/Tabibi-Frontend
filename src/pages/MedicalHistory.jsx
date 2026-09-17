@@ -303,7 +303,7 @@ const MedicalHistory = () => {
 
             {!recordData ? (
               /* حالة السجل فارغ تماماً */
-              <div className="flex flex-col items-center justify-center p-12 text-center">
+              <div className="flex flex-col items-center justify-center p-6 md:p-12 text-center">
                 <div className="w-20 h-20 bg-[#138C9F]/10  rounded-full flex items-center justify-center mb-4">
                   <span className="text-3xl text-[#138C9F] opacity-70">
                     <FontAwesomeIcon icon={faFolderOpen} />
@@ -330,7 +330,7 @@ const MedicalHistory = () => {
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.bloodPressure')}
                     </p>
-                    <p className="text-base font-extrabold text-gray-700">
+                    <p className="text-base font-extrabold text-gray-700 dark:text-gray-300">
                       {recordData.vitals?.bloodPressure || "--/--"}
                     </p>
                   </div>
@@ -338,7 +338,7 @@ const MedicalHistory = () => {
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.bloodSugar')}
                     </p>
-                    <p className="text-base font-extrabold text-gray-700">
+                    <p className="text-base font-extrabold text-gray-700 dark:text-gray-300">
                       {recordData.vitals?.bloodSugar
                         ? `${recordData.vitals.bloodSugar} mg/dL`
                         : "--"}
@@ -348,7 +348,7 @@ const MedicalHistory = () => {
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.weight')}
                     </p>
-                    <p className="text-base font-extrabold text-gray-700">
+                    <p className="text-base font-extrabold text-gray-700 dark:text-gray-300">
                       {recordData.vitals?.weight
                         ? `${recordData.vitals.weight} ${t('medicalHistory.kg')}`
                         : "--"}
@@ -358,7 +358,7 @@ const MedicalHistory = () => {
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.height')}
                     </p>
-                    <p className="text-base font-extrabold text-gray-700">
+                    <p className="text-base font-extrabold text-gray-700 dark:text-gray-300">
                       {recordData.vitals?.height
                         ? `${recordData.vitals.height} ${t('medicalHistory.cm')}`
                         : "--"}
@@ -378,7 +378,7 @@ const MedicalHistory = () => {
 
                 {/* الصف الثاني: الأمراض المزمنة والحساسية */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="border border-gray-100 dark:border-gray-700 p-5 rounded-2xl bg-white">
+                  <div className="border border-gray-100 dark:border-gray-700 p-5 rounded-2xl bg-white dark:bg-gray-800">
                     <h3 className="text-sm font-black text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-1.5">
                       <span className="text-blue-500">🦠</span> {t('medicalHistory.chronicDiseases')}
                     </h3>
@@ -401,7 +401,7 @@ const MedicalHistory = () => {
                     </div>
                   </div>
 
-                  <div className="border border-gray-100 dark:border-gray-700 p-5 rounded-2xl bg-white">
+                  <div className="border border-gray-100 dark:border-gray-700 p-5 rounded-2xl bg-white dark:bg-gray-800">
                     <h3 className="text-sm font-black text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-1.5">
                       <span className="text-red-500">⚠️</span> {t('medicalHistory.allergies')}
                     </h3>
@@ -426,10 +426,10 @@ const MedicalHistory = () => {
                 </div>
 
                 {/* الصف الثالث: الأدوية الحالية */}
-                <div className="border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden bg-white">
+                <div className="border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden bg-white dark:bg-gray-800">
                   <div className="p-4 bg-slate-50 dark:bg-gray-900/50 border-b border-gray-50 flex items-center gap-2">
                     <span className="text-teal-600 text-base">💊</span>
-                    <h3 className="text-sm font-black text-gray-800">
+                    <h3 className="text-sm font-black text-gray-800 dark:text-gray-200">
                       {t('medicalHistory.currentMedications')}
                     </h3>
                   </div>
@@ -607,7 +607,7 @@ const MedicalHistory = () => {
               {/* 2. الـ Tags - الأمراض والحساسية */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* حقل الأمراض المزمنة */}
-                <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
+                <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white dark:bg-gray-800">
                   <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
                     <FontAwesomeIcon icon={faVirus} className="text-blue-500" />
                     {t('medicalHistory.addChronicDisease')}
@@ -654,7 +654,7 @@ const MedicalHistory = () => {
                 </div>
 
                 {/* حقل الحساسية */}
-                <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white">
+                <div className="border border-gray-100 dark:border-gray-700 p-4 rounded-2xl bg-white dark:bg-gray-800">
                   <label className="block text-xs font-black text-gray-800 dark:text-gray-200 mb-1.5">
                     <FontAwesomeIcon
                       icon={faTriangleExclamation}
@@ -772,7 +772,7 @@ const MedicalHistory = () => {
                         {currentMedicines.map((med, idx) => (
                           <tr
                             key={idx}
-                            className="border-b border-gray-50/60 font-bold text-gray-700"
+                            className="border-b border-gray-50/60 font-bold text-gray-700 dark:text-gray-300"
                           >
                             <td className="p-3 md:p-4 text-[#138C9F]">{med.name}</td>
                             <td className="p-3 md:p-4">{med.dosage}</td>

@@ -296,7 +296,7 @@ export default function AdminContactUs() {
             {isDetailsOpen && selectedMessage && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div className="bg-white dark:bg-gray-800 w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
-                        <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-white">
+                        <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
                             <h3 className="font-bold text-lg text-[#0B1C30] dark:text-gray-200">{t('adminContactUs.messageDetails')}</h3>
                             <button onClick={() => setIsDetailsOpen(false)} className="text-gray-400 dark:text-gray-500 hover:text-gray-600"><FiX size={20} /></button>
                         </div>
@@ -341,7 +341,7 @@ export default function AdminContactUs() {
             {isReplyOpen && selectedMessage && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <form onSubmit={handleSendReply} className="bg-white dark:bg-gray-800 w-full max-w-xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
-                        <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-white">
+                        <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
                             <h3 className="font-bold text-lg text-[#0B1C30] dark:text-gray-200">{t('adminContactUs.quickReplyTitle')}</h3>
                             <button type="button" onClick={() => setIsReplyOpen(false)} className="text-gray-400 dark:text-gray-500 hover:text-gray-600"><FiX size={20} /></button>
                         </div>

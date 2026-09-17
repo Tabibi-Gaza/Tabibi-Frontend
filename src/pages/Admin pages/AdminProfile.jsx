@@ -166,7 +166,7 @@ const AdminProfile = () => {
                                     value={isEdit ? localData.firstname : userData.firstname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, firstname: e.target.value }))}
                                     placeholder={t('adminProfile.firstName')}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -179,7 +179,7 @@ const AdminProfile = () => {
                                     value={isEdit ? localData.lastname : userData.lastname || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, lastname: e.target.value }))}
                                     placeholder="الاسم الأخير"
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -192,7 +192,7 @@ const AdminProfile = () => {
                                     value={isEdit ? localData.email : userData.email || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, email: e.target.value }))}
                                     placeholder="example@mail.com"
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -205,7 +205,7 @@ const AdminProfile = () => {
                                     value={isEdit ? localData.phone : userData.phone || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, phone: e.target.value }))}
                                     placeholder="+970 "
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -217,7 +217,7 @@ const AdminProfile = () => {
                                     disabled={!isEdit || loading}
                                     value={isEdit ? localData.dob : userData.dob || ''}
                                     onChange={(e) => setLocalData(prev => ({ ...prev, dob: e.target.value }))}
-                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black bg-white dark:bg-gray-800 focus:border-[#138C9F] h-[48px] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
+                                    className="py-2.5 px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-lg text-base outline-none transition-all duration-200 text-black dark:text-white bg-white dark:bg-gray-800 focus:border-[#138C9F] h-[48px] disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                                 />
                             </div>
 

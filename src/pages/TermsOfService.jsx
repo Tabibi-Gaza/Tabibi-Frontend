@@ -50,7 +50,7 @@ const TermsOfService = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-800 antialiased text-[#1e293b] dark:text-white pb-16" dir="rtl">
-            <main className="max-w-[935px] w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white">
+            <main className="max-w-[935px] w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white dark:bg-gray-800">
 
                 {/* زر العودة للرئيسية */}
                 <div className="flex justify-end mb-10">

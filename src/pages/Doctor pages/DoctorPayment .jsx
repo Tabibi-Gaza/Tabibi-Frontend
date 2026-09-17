@@ -474,7 +474,7 @@ const DoctorPayment = () => {
                         <div className="border border-dashed border-slate-200 dark:border-gray-700 rounded-xl p-4 flex items-center justify-center gap-2 bg-slate-50 dark:bg-gray-900/50 mt-6">
                             <FiAlertCircle className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0" />
                             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium text-center">
-                                <strong className="text-gray-700">{t('doctorPayment.technicalTip')}</strong> يفضل دائماً توفير خيار محفظة رقمية واحد على الأقل وخيار بنكي واحد.
+                                                                 <strong className="text-gray-700 dark:text-gray-300">{t('doctorPayment.technicalTip')}</strong> يفضل دائماً توفير خيار محفظة رقمية واحد على الأقل وخيار بنكي واحد.
                             </p>
                         </div>
                     </div>
@@ -493,7 +493,7 @@ const DoctorPayment = () => {
                                 <div
                                     onClick={() => { setAddType("bank"); setError(''); }}
                                     className={`border-2 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-3 cursor-pointer transition-all ${
-                                        addType === "bank" ? "border-[#1b8b99] bg-cyan-50/20" : "border-slate-100 dark:border-gray-700 hover:border-slate-200 dark:border-gray-700 bg-white"
+                                        addType === "bank" ? "border-[#1b8b99] bg-cyan-50/20" : "border-slate-100 dark:border-gray-700 hover:border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800"
                                     }`}
                                 >
                                     <div className={`w-12 h-12 rounded-full flex items-center justify-center ${addType === "bank" ? "bg-[#1b8b99] text-white" : "bg-slate-100 dark:bg-gray-800 text-gray-500"}`}>
@@ -508,7 +508,7 @@ const DoctorPayment = () => {
                                 <div
                                     onClick={() => { setAddType("wallet"); setError(''); }}
                                     className={`border-2 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-3 cursor-pointer transition-all ${
-                                        addType === "wallet" ? "border-[#1b8b99] bg-cyan-50/20" : "border-slate-100 dark:border-gray-700 hover:border-slate-200 dark:border-gray-700 bg-white"
+                                        addType === "wallet" ? "border-[#1b8b99] bg-cyan-50/20" : "border-slate-100 dark:border-gray-700 hover:border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800"
                                     }`}
                                 >
                                     <div className={`w-12 h-12 rounded-full flex items-center justify-center ${addType === "wallet" ? "bg-[#1b8b99] text-white" : "bg-slate-100 dark:bg-gray-800 text-gray-500"}`}>
@@ -664,20 +664,20 @@ const DoctorPayment = () => {
                                 <div className="bg-slate-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 p-4 rounded-xl flex items-start gap-3">
                                     <FiInfo className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0 mt-0.5" />
                                     <div className="text-right space-y-0.5">
-                                        <h4 className="text-xs font-bold text-gray-700">{t('doctorPayment.importantInstructions')}</h4>
-                                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">{t('doctorPayment.importantInstructionsDesc')}</p>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
-                                    <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.accountName')}</label>
+                                         <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.importantInstructions')}</h4>
+                                         <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">{t('doctorPayment.importantInstructionsDesc')}</p>
+                                     </div>
+                                 </div>
+                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
+                                     <div className="space-y-1.5">
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.accountName')}</label>
                                         <input type="text" value={bankForm.accountHolderName}
                                             onChange={(e) => setBankForm({ ...bankForm, accountHolderName: e.target.value })}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] transition-all" />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.bankNameLabel')}</label>
-                                        <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 h-12 bg-white">
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.bankNameLabel')}</label>
+                                        <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 h-12 bg-white dark:bg-gray-800">
                                             <select value={bankForm.bankId}
                                                 onChange={(e) => setBankForm({ ...bankForm, bankId: e.target.value })}
                                                 className="w-full bg-transparent outline-none border-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 appearance-none font-medium">
@@ -687,14 +687,14 @@ const DoctorPayment = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.accountPhoneNumber')}</label>
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.accountPhoneNumber')}</label>
                                         <input type="text" value={bankForm.phoneNumber}
                                             onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setBankForm({ ...bankForm, phoneNumber: val }); }}
                                             maxLength={10}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] transition-all text-right" />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.ibanNumberLabel')}</label>
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.ibanNumberLabel')}</label>
                                         <input type="text" value={bankForm.iban}
                                             onChange={(e) => { const cleaned = formatIban(e.target.value); setBankForm({ ...bankForm, iban: cleaned }); const err = validateIban(cleaned, bankForm.bankId); setIbanError(err); }}
                                             onBlur={() => { const err = validateIban(bankForm.iban, bankForm.bankId); setIbanError(err); }}
@@ -734,20 +734,20 @@ const DoctorPayment = () => {
                                 <div className="bg-slate-50 dark:bg-gray-900 border border-slate-100 dark:border-gray-700 p-4 rounded-xl flex items-start gap-3">
                                     <FiInfo className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0 mt-0.5" />
                                     <div className="text-right space-y-0.5">
-                                        <h4 className="text-xs font-bold text-gray-700">{t('doctorPayment.importantInstructions')}</h4>
-                                        <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">{t('doctorPayment.importantInstructionsDesc')}</p>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
-                                    <div className="md:col-span-2 space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.walletHolderName')}</label>
+                                         <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.importantInstructions')}</h4>
+                                         <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">{t('doctorPayment.importantInstructionsDesc')}</p>
+                                     </div>
+                                 </div>
+                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
+                                     <div className="md:col-span-2 space-y-1.5">
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.walletHolderName')}</label>
                                         <input type="text" value={walletForm.accountHolderName}
                                             onChange={(e) => setWalletForm({ ...walletForm, accountHolderName: e.target.value })}
                                             className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] transition-all" />
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.walletTypeLabel')}</label>
-                                        <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 h-12 bg-white">
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.walletTypeLabel')}</label>
+                                        <div className="relative flex items-center border border-slate-200 dark:border-gray-700 rounded-xl px-3 h-12 bg-white dark:bg-gray-800">
                                             <select value={walletForm.walletProviderId}
                                                 onChange={(e) => setWalletForm({ ...walletForm, walletProviderId: e.target.value })}
                                                 className="w-full bg-transparent outline-none border-none text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 appearance-none font-medium">
@@ -757,7 +757,7 @@ const DoctorPayment = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-700">{t('doctorPayment.walletNumber')}</label>
+                                         <label className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('doctorPayment.walletNumber')}</label>
                                         <input type="text" value={walletForm.phoneNumber}
                                             onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setWalletForm({ ...walletForm, phoneNumber: val }); }}
                                             maxLength={10}

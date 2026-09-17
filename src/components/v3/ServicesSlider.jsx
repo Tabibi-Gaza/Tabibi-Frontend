@@ -16,7 +16,7 @@ const serviceItems = [
 
 function ServicesSlider() {
   const renderService = (service, index, isActive) => (
-    <div className={`group bg-white rounded-2xl p-6 md:p-8 border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30 scale-[1.02]" : ""}`}>
+    <div className={`group bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-8 border border-slate-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 ${isActive ? "ring-2 ring-[#138C9F]/30 scale-[1.02]" : ""}`}>
       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110`}>
         <FontAwesomeIcon icon={service.icon} className="text-white text-xl" />
       </div>

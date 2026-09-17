@@ -96,7 +96,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
-                  : "text-gray-700  hover:text-[#138C9F] font-bold transition-colors pb-1"
+                   : "text-gray-700 dark:text-gray-300  hover:text-[#138C9F] font-bold transition-colors pb-1"
               }
             >
               <li>{t('nav.adminDashboardFull')}</li>
@@ -109,7 +109,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
-                  : "text-gray-700  hover:text-[#2f7d99] font-bold transition-colors pb-1"
+                   : "text-gray-700 dark:text-gray-300  hover:text-[#2f7d99] font-bold transition-colors pb-1"
               }
             >
               <li>{t('nav.doctorDashboardFull')}</li>

@@ -66,7 +66,7 @@ function FramesSection() {
               </div>
 
               {isOpen && (
-                <div className="absolute top-[115%] left-0 right-0 bg-white border border-slate-100 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-72 overflow-y-auto">
+                <div className="absolute top-[115%] left-0 right-0 bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-72 overflow-y-auto">
                   <div onClick={() => { setSpeciality(""); setIsOpen(false); }}
                     className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none sm:col-span-2 ${
                       speciality === "" ? "bg-slate-100 text-slate-900 font-black" : "text-slate-500 hover:bg-slate-50"

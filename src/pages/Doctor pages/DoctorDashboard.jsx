@@ -139,7 +139,7 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
+    <div className="space-y-6 md:space-y-8 w-full pb-8 px-4 relative" dir="rtl">
       <div className="space-y-1 text-right md:pl-4">
         <h2 className="text-2xl md:text-4xl font-black text-[#0B1C30] dark:text-white tracking-tight">
           {new Date().getHours() < 12 ? t('doctorDashboard.goodMorning') : t('doctorDashboard.goodEvening')} {doctorData?.firstname || ''} {doctorData?.lastname || ''}
@@ -184,7 +184,7 @@ const DoctorDashboard = () => {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
-        <div className="px-4 md:px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700 flex justify-between items-center bg-white">
+        <div className="px-4 md:px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-[#138C9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -266,7 +266,7 @@ const DoctorDashboard = () => {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
-        <div className="px-4 md:px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700 flex justify-between items-center bg-white">
+        <div className="px-4 md:px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-[#138C9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -489,20 +489,20 @@ const DoctorDashboard = () => {
                 <button
                   onClick={handleConfirmPayment}
                   disabled={actionLoading || !selectedPayment}
-                  className="flex-1 h-[3vh] bg-[#138C9F] hover:bg-[#0f7282] active:scale-[0.98] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
+                  className="flex-1 min-h-[44px] bg-[#138C9F] hover:bg-[#0f7282] active:scale-[0.98] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
                 >
                   {actionLoading ? t('doctorDashboard.confirming') : t('doctorDashboard.confirmPayment')}
                 </button>
                 <button
                   onClick={() => setRejectModalOpen(true)}
                   disabled={actionLoading || !selectedPayment}
-                  className="px-4 h-[3vh] border border-[#BA1A1A] bg-white dark:bg-gray-800 hover:bg-[#FFF0EE] text-[#BA1A1A] font-bold rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
+                  className="px-4 min-h-[44px] border border-[#BA1A1A] bg-white dark:bg-gray-800 hover:bg-[#FFF0EE] text-[#BA1A1A] font-bold rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
                 >
                   {t('doctorDashboard.reject')}
                 </button>
                 <button
                   onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }}
-                  className="px-4 h-[3vh] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
+className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
                 >
                   {t('doctorDashboard.cancel')}
                 </button>
@@ -531,13 +531,13 @@ const DoctorDashboard = () => {
               <button
                 onClick={handleRejectPayment}
                 disabled={actionLoading}
-                className="flex-1 h-[3vh] bg-[#BA1A1A] hover:bg-[#9a1515] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
+                className="flex-1 min-h-[44px] bg-[#BA1A1A] hover:bg-[#9a1515] text-white font-black rounded-xl text-sm transition-all cursor-pointer text-center disabled:opacity-50"
               >
                 {actionLoading ? "جاري الرفض..." : "تأكيد الرفض"}
               </button>
               <button
                 onClick={() => { setRejectModalOpen(false); setRejectionReason(""); }}
-                className="px-4 h-[3vh] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
+                className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
               >
                 إلغاء
               </button>

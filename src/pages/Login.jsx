@@ -272,7 +272,7 @@ const Login = () => {
                       alt={t('login.logoAlt')}
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.welcomeBack')}</h2>
+                  <h2 className="text-2xl md:text-3xl font-black text-[#138C9F]">{t('login.welcomeBack')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
                     {t('login.loginDescription')}
                   </p>
@@ -603,7 +603,7 @@ const Login = () => {
                       alt={t('login.logoAlt')}
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.resetPasswordTitle')}</h2>
+                  <h2 className="text-2xl md:text-3xl font-black text-[#138C9F]">{t('login.resetPasswordTitle')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
                     {t('login.resetPasswordDescription')}
                   </p>
@@ -656,7 +656,7 @@ const Login = () => {
                       alt={t('login.logoAlt')}
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.otpTitle')}</h2>
+                  <h2 className="text-2xl md:text-3xl font-black text-[#138C9F]">{t('login.otpTitle')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
                     {t('login.otpDescription')}
                   </p>
@@ -712,7 +712,7 @@ const Login = () => {
                       alt={t('login.logoAlt')}
                     />
                   </div>
-                  <h2 className="text-3xl font-black text-[#138C9F]">{t('login.newPasswordTitle')}</h2>
+                  <h2 className="text-2xl md:text-3xl font-black text-[#138C9F]">{t('login.newPasswordTitle')}</h2>
                   <p className="text-base text-slate-500 dark:text-gray-400 font-bold">
                     {t('login.newPasswordDescription')}
                   </p>

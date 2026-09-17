@@ -76,7 +76,7 @@ function FeaturesSlider() {
   const next = features[(currentIndex + 1) % TOTAL];
 
   return (
-    <section className="relative bg-white min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
+    <section className="relative bg-white dark:bg-gray-800 min-h-screen flex flex-col items-center justify-center py-16 md:py-24" dir="rtl">
       <div className="w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-16">
         {/* Text Side */}
         <div className="w-full md:w-1/2 text-center md:text-right">

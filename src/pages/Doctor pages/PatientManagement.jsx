@@ -239,7 +239,7 @@ export default function PatientManagement() {
           </div>
 
           {/* عرض كروت بديلة للموبايل */}
-          <div className="block md:hidden divide-y divide-[#C3C6D6]/60 bg-white">
+          <div className="block md:hidden divide-y divide-[#C3C6D6]/60 bg-white dark:bg-gray-800">
             {currentTableData.map((patient) => (
               <div key={patient.id} className="p-4 space-y-4">
                 <div className="flex items-center justify-between">
