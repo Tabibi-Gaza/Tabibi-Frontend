@@ -805,13 +805,13 @@ const Login = () => {
 
             {(state === "Login" || state === "RegisterPatient") && (
               <div className="grid grid-cols-2 gap-6 w-full">
-                <div className="bg-white dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
-                  <h5 className="text-5xl font-black text-white mb-2">50+</h5>
-                  <p className="text-base text-slate-100 font-semibold">{t('login.certifiedDoctors')}</p>
+                <div className="bg-white/90 dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
+                  <h5 className="text-5xl font-black text-[#0f7282] dark:text-white mb-2">50+</h5>
+                  <p className="text-base text-slate-800 dark:text-slate-100 font-semibold">{t('login.certifiedDoctors')}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
-                  <h5 className="text-5xl font-black text-emerald-300 mb-2">24/7</h5>
-                  <p className="text-base text-slate-100 font-semibold">{t('login.technicalSupport')}</p>
+                <div className="bg-white/90 dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
+                  <h5 className="text-5xl font-black text-[#138C9F] dark:text-emerald-300 mb-2">24/7</h5>
+                  <p className="text-base text-slate-800 dark:text-slate-100 font-semibold">{t('login.technicalSupport')}</p>
                 </div>
               </div>
             )}
