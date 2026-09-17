@@ -384,7 +384,7 @@ const DoctorDashboard = () => {
 
                   <div className="space-y-3 border-b border-gray-100 dark:border-gray-700 pb-4">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="font-bold text-[#526069] dark:text-gray-400">Amount:</span>
+                      <span className="font-bold text-[#526069] dark:text-gray-400">المبلغ:</span>
                       <span className="font-black text-[#0B1C30] dark:text-gray-200">{selectedPayment.amount} ILS</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
