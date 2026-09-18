@@ -33,8 +33,8 @@ const formatIban = (value) => {
 
 const validateIban = (iban, bankName) => {
     const clean = formatIban(iban);
-    if (clean.length !== 29) return t('adminPaymentMethods.ibanLengthError');
-    if (!clean.startsWith('PS')) return t('adminPaymentMethods.ibanStartError');
+    if (clean.length !== 29) return 'الآيبان يجب أن يكون 29 خانة بالضبط';
+    if (!clean.startsWith('PS')) return 'الآيبان يجب أن يبدأ بـ PS';
     const expectedCode = BANK_IBAN_CODES[bankName];
     if (expectedCode && clean.substring(4, 8) !== expectedCode) {
         return `رمز البنك غير صحيح، يجب أن يكون ${expectedCode}`;
