@@ -11,20 +11,20 @@ import { useTranslation } from 'react-i18next';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || '';
 
-const DATE_RANGES = [
-    { label: t('financialFiles.all'), value: 'all' },
-    { label: t('financialFiles.today'), value: 'today' },
-    { label: t('financialFiles.thisWeek'), value: 'week' },
-    { label: t('financialFiles.thisMonth'), value: 'month' },
-    { label: t('financialFiles.custom'), value: 'custom' },
-];
-
-const PAYMENT_METHODS_FILTER = [t('financialFiles.all'), t('financialFiles.bankOfPalestine'), 'Jawwal Pay', 'كاش', t('financialFiles.bankTransfer')];
-
-const EXPENSE_CATEGORIES = [t('financialFiles.medicalSupplies'), t('financialFiles.rent'), t('financialFiles.salaries'), t('financialFiles.utilities'), t('financialFiles.maintenance'), t('financialFiles.marketing'), t('financialFiles.other')];
-
 const FinancialFiles = () => {
     const { t } = useTranslation();
+
+    const DATE_RANGES = [
+        { label: t('financialFiles.all'), value: 'all' },
+        { label: t('financialFiles.today'), value: 'today' },
+        { label: t('financialFiles.thisWeek'), value: 'week' },
+        { label: t('financialFiles.thisMonth'), value: 'month' },
+        { label: t('financialFiles.custom'), value: 'custom' },
+    ];
+
+    const PAYMENT_METHODS_FILTER = [t('financialFiles.all'), t('financialFiles.bankOfPalestine'), 'Jawwal Pay', 'كاش', t('financialFiles.bankTransfer')];
+
+    const EXPENSE_CATEGORIES = [t('financialFiles.medicalSupplies'), t('financialFiles.rent'), t('financialFiles.salaries'), t('financialFiles.utilities'), t('financialFiles.maintenance'), t('financialFiles.marketing'), t('financialFiles.other')];
     const [searchQuery, setSearchQuery] = useState('');
     const [showAll, setShowAll] = useState(false);
     const [loading, setLoading] = useState(true);

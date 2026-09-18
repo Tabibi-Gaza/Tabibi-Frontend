@@ -35,7 +35,6 @@ const BANK_IBAN_CODES = {
 };
 
 const getBankPlaceholder = (bankId) => {
-    const { t } = useTranslation();
     const code = BANK_IBAN_CODES[bankId];
     if (!code) return 'PS00 0000 0000 0000 0000 0000 0000';
     return `PS00${code}00000000000000000000000`;

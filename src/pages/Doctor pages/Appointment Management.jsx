@@ -22,18 +22,18 @@ const STATUS_MAP = {
   'NoShow': 'canceled',
 };
 
-const STATUS_LABELS = {
-  'PendingPayment': t('appointmentManagement.pendingPayment'),
-  'PendingVerification': t('appointmentManagement.pendingVerification'),
-  'Confirmed': 'مؤكد',
-  'InProgress': t('appointmentManagement.inProgress'),
-  'Completed': t('appointmentManagement.completed'),
-  'Cancelled': 'ملغي',
-  'NoShow': t('appointmentManagement.noShow'),
-};
-
 const AppointmentManagement = () => {
     const { t } = useTranslation();
+
+    const STATUS_LABELS = {
+      'PendingPayment': t('appointmentManagement.pendingPayment'),
+      'PendingVerification': t('appointmentManagement.pendingVerification'),
+      'Confirmed': 'مؤكد',
+      'InProgress': t('appointmentManagement.inProgress'),
+      'Completed': t('appointmentManagement.completed'),
+      'Cancelled': 'ملغي',
+      'NoShow': t('appointmentManagement.noShow'),
+    };
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('all');
     const [statusFilter, setStatusFilter] = useState('all');
