@@ -23,14 +23,14 @@ export default function AdminFinancialTransactions() {
             const { data } = await axiosInstance.get('/admin/subscriptions/payments/all');
             if (data.succeeded && data.data) {
                 const items = Array.isArray(data.data) ? data.data : data.data.items || [];
-                setTransactions(items.map(t => ({
-                    id: t.id,
-                    doctorName: t.doctorName || '-',
-                    amount: t.amount,
-                    date: t.date || t.createdAt,
-                    status: t.status === 'Approved' || t.status === t('adminFinancialTransactions.completed') ? t('adminFinancialTransactions.completed') : t.status === 'Rejected' || t.status === t('adminFinancialTransactions.cancelled') || t.status === 'مرفوض' ? t('adminFinancialTransactions.cancelled') : t('adminFinancialTransactions.pending'),
-                    notes: t.notes || t.reason || '',
-                    type: t.type || t('adminFinancialTransactions.subscription'),
+                setTransactions(items.map(tx => ({
+                    id: tx.id,
+                    doctorName: tx.doctorName || '-',
+                    amount: tx.amount,
+                    date: tx.date || tx.createdAt,
+                    status: tx.status === 'Approved' ? t('adminFinancialTransactions.completed') : tx.status === 'Rejected' || tx.status === 'مرفوض' ? t('adminFinancialTransactions.cancelled') : t('adminFinancialTransactions.pending'),
+                    notes: tx.notes || tx.reason || '',
+                    type: tx.type || t('adminFinancialTransactions.subscription'),
                 })));
             } else {
                 setTransactions([]);
@@ -67,7 +67,7 @@ export default function AdminFinancialTransactions() {
         fetchStats();
     }, [fetchTransactions, fetchStats]);
 
-    const filteredTransactions = transactions.filter(t => filterStatus === t('adminFinancialTransactions.all') || t.status === filterStatus);
+    const filteredTransactions = transactions.filter(tx => filterStatus === t('adminFinancialTransactions.all') || tx.status === filterStatus);
     const displayedTransactions = filteredTransactions.slice(0, visibleCount);
 
     const handleToggleShow = () => {

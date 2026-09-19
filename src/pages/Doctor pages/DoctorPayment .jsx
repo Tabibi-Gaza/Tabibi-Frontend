@@ -104,7 +104,7 @@ const DoctorPayment = () => {
             const methods = res.data.data || [];
             setPaymentMethods(methods);
 
-            const banks = methods.filter(m => m.type === t('doctorPayment.bankTransfer'));
+            const banks = methods.filter(m => m.type === 'Bank');
             const allBanks = [];
             for (const b of banks) {
                 try {
@@ -116,7 +116,7 @@ const DoctorPayment = () => {
             }
             setBankList(allBanks);
 
-            const walletMethods = methods.filter(m => m.type === t('doctorPayment.electronicWallet'));
+            const walletMethods = methods.filter(m => m.type === 'Wallet');
             const walletDetails = [];
             for (const w of walletMethods) {
                 try {
