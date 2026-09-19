@@ -66,6 +66,7 @@ const getWalletLogo = (providerName) => {
 };
 
 const DoctorPayment = () => {
+    const { t } = useTranslation();
     const [viewMode, setViewMode] = useState('list');
     const [addType, setAddType] = useState('bank');
     const [loading, setLoading] = useState(true);
