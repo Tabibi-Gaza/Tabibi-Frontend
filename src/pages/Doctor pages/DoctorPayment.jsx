@@ -207,7 +207,7 @@ const DoctorPayment = () => {
         setSaving(true);
         setError('');
         try {
-            await axiosInstance.put('/doctor/payment-methods', {
+            const res = await axiosInstance.put('/doctor/payment-methods', {
                 id: editData.id,
                 type: 'Bank',
                 accountHolderName: bankForm.accountHolderName,
@@ -215,11 +215,15 @@ const DoctorPayment = () => {
                 bankId: bankForm.bankId,
                 iban: bankForm.iban,
             });
-            setViewMode('list');
-            setEditData(null);
-            await fetchData();
+            if (res.data.succeeded) {
+                setViewMode('list');
+                setEditData(null);
+                await fetchData();
+            } else {
+                setError(res.data.errors?.[0]?.message || res.data.message || t('doctorPayment.updateBankFailed'));
+            }
         } catch (err) {
-            setError(err.response?.data?.errors?.[0]?.message || t('doctorPayment.updateBankFailed'));
+            setError(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || t('doctorPayment.updateBankFailed'));
         } finally {
             setSaving(false);
         }
@@ -230,18 +234,22 @@ const DoctorPayment = () => {
         setSaving(true);
         setError('');
         try {
-            await axiosInstance.put('/doctor/payment-methods', {
+            const res = await axiosInstance.put('/doctor/payment-methods', {
                 id: editData.id,
                 type: 'Wallet',
                 accountHolderName: walletForm.accountHolderName,
                 phoneNumber: walletForm.phoneNumber,
                 walletProviderId: walletForm.walletProviderId,
             });
-            setViewMode('list');
-            setEditData(null);
-            await fetchData();
+            if (res.data.succeeded) {
+                setViewMode('list');
+                setEditData(null);
+                await fetchData();
+            } else {
+                setError(res.data.errors?.[0]?.message || res.data.message || t('doctorPayment.updateWalletFailed'));
+            }
         } catch (err) {
-            setError(err.response?.data?.errors?.[0]?.message || t('doctorPayment.updateWalletFailed'));
+            setError(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || t('doctorPayment.updateWalletFailed'));
         } finally {
             setSaving(false);
         }
@@ -251,12 +259,12 @@ const DoctorPayment = () => {
         setSaving(true);
         setError('');
         try {
-            const apiType = type === t('doctorPayment.bankTransfer') ? 'Bank' : 'Wallet';
+            const apiType = type;
             await axiosInstance.delete(`/doctor/payment-methods/${id}?type=${apiType}`);
             setDeleteConfirm(null);
             await fetchData();
         } catch (err) {
-            setError(t('doctorPayment.deletePaymentFailed'));
+            setError(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || t('doctorPayment.deletePaymentFailed'));
         } finally {
             setSaving(false);
         }
@@ -387,7 +395,7 @@ const DoctorPayment = () => {
                                         <div className="flex justify-end gap-2 -mx-4 -mb-4 mt-2 bg-black/10 px-4 py-2 rounded-b-2xl">
                                             <button
                                                 onClick={() => {
-                                                    setDeleteConfirm({ id: bankDetail.id, type: t('doctorPayment.bankTransfer'), name: bankDetail.bankName });
+                                                    setDeleteConfirm({ id: bankDetail.id, type: 'Bank', name: bankDetail.bankName });
                                                 }}
                                                 className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all"
                                             >
@@ -444,7 +452,7 @@ const DoctorPayment = () => {
 
                                                 <div className="flex items-center gap-2">
                                                     <button
-                                                        onClick={() => setDeleteConfirm({ id: wallet.id, type: t('doctorPayment.electronicWallet'), name: wallet.providerName })}
+                                                        onClick={() => setDeleteConfirm({ id: wallet.id, type: 'Wallet', name: wallet.providerName })}
                                                         className="text-xs text-white/80 hover:text-red-200 p-1.5 rounded-lg hover:bg-white dark:bg-gray-800/10 transition-colors"
                                                     >
                                                         <FiTrash2 className="w-3.5 h-3.5" />
