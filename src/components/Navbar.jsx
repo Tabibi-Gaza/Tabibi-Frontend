@@ -77,43 +77,48 @@ const Navbar = () => {
         {/* ---- القائمة المركزية للشاشات الكبيرة والمتوسطة ---- */}
         <ul className="hidden md:flex items-center gap-6 lg:gap-8 font-medium text-gray-800 dark:text-gray-200 text-sm lg:text-base">
           {displayLinks.map((link, index) => (
-            <NavLink
-              key={index}
-              to={link.path}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
-                  : "text-gray-700 dark:text-gray-300 hover:text-[#138C9F] transition-colors pb-1"
-              }
-            >
-              <li>{link.name}</li>
-            </NavLink>
+            <li key={index}>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
+                    : "text-gray-700 dark:text-gray-300 hover:text-[#138C9F] transition-colors pb-1"
+                }
+              >
+                {link.name}
+              </NavLink>
+            </li>
           ))}
 
           {isAdmin && (
-            <NavLink
-              to="/admin-dashboard"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
-                   : "text-gray-700 dark:text-gray-300  hover:text-[#138C9F] font-bold transition-colors pb-1"
-              }
-            >
-              <li>{t('nav.adminDashboardFull')}</li>
-            </NavLink>
+            <li>
+              <NavLink
+                to="/admin-dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
+                     : "text-gray-700 dark:text-gray-300  hover:text-[#138C9F] font-bold transition-colors pb-1"
+                }
+              >
+                {t('nav.adminDashboardFull')}
+              </NavLink>
+            </li>
           )}
 
           {isDoctor && (
-            <NavLink
-              to="/doctor-dashboard"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
-                   : "text-gray-700 dark:text-gray-300  hover:text-[#2f7d99] font-bold transition-colors pb-1"
-              }
-            >
-              <li>{t('nav.doctorDashboardFull')}</li>
-            </NavLink>
+            <li>
+              <NavLink
+                to="/doctor-dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#138C9F] font-bold pb-1 border-b-2 border-[#138C9F]"
+                     : "text-gray-700 dark:text-gray-300  hover:text-[#2f7d99] font-bold transition-colors pb-1"
+                }
+              >
+                {t('nav.doctorDashboardFull')}
+              </NavLink>
+            </li>
           )}
         </ul>
 

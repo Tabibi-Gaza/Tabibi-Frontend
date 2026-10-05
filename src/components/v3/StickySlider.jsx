@@ -82,12 +82,15 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
                 {Array.from({ length: totalSlides }).map((_, i) => (
                   <button
                     key={i}
+                    type="button"
                     onClick={() => goToSlide(i)}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      i === currentIndex ? "w-10 bg-[#138C9F]" : "w-2 bg-slate-200 hover:bg-slate-300"
-                    }`}
+                    className="relative flex items-center justify-center px-2 py-2 -mx-2 -my-2 cursor-pointer"
                     aria-label={`الانتقال للشريحة ${i + 1}`}
-                  />
+                  >
+                    <span className={`block h-2 rounded-full transition-all duration-300 ${
+                      i === currentIndex ? "w-10 bg-[#138C9F]" : "w-2 bg-slate-200 hover:bg-slate-300"
+                    }`} />
+                  </button>
                 ))}
               </div>
 

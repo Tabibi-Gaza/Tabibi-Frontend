@@ -2,9 +2,7 @@ import React, { useEffect, Suspense, lazy, Component } from 'react'
 import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Notifications from './components/Notifications'
 import { useNotificationSignalR } from './hooks/notifications/useNotificationSignalR'
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { setOnAuthFailure } from './api/axiosInstance';
 import './i18n';
@@ -64,6 +62,7 @@ const FinancialTransactions = lazy(() => import('./pages/FinancialTransactions')
 const Chats = lazy(() => import('./pages/Chats'))
 const AdminDashboard = lazy(() => import('./pages/Admin pages/AdminDashboard'))
 const AdminProfile = lazy(() => import('./pages/Admin pages/AdminProfile'))
+const Notifications = lazy(() => import('./components/Notifications'))
 const AdminNotifications = lazy(() => import('./components/Admin/AdminNotifications'))
 const AdminUserManagement = lazy(() => import('./pages/Admin pages/AdminUserManagement'))
 const AdminDepartmentsManagement = lazy(() => import('./pages/Admin pages/AdminDepartmentsManagement'))
@@ -95,8 +94,7 @@ const Labs = lazy(() => import('./pages/Labs'))
 const Favorites = lazy(() => import('./pages/Favorites'))
 const Cart = lazy(() => import('./pages/Cart'))
 const QrScanPage = lazy(() => import('./pages/QrScanPage'))
-
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+const LoginWithGoogle = lazy(() => import('./components/LoginWithGoogle'))
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -145,8 +143,8 @@ const UserLayout = () => {
         <Routes>
           <Route path='/' element={<HomeV3 />} />
           <Route path='/home-v2' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/reset-password' element={<Login />} />
+          <Route path='/login' element={<LoginWithGoogle />} />
+          <Route path='/reset-password' element={<LoginWithGoogle />} />
           <Route path='/doctors' element={<Doctors />} />
           <Route path='/doctors/:speciality' element={<Doctors />} />
           <Route path='/about' element={<About />} />
@@ -188,7 +186,6 @@ const App = () => {
   return (
     <ErrorBoundary>
     <ThemeProvider>
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route element={<AdminLayout />}>
@@ -227,7 +224,6 @@ const App = () => {
           <Route path="/*" element={<UserLayout />} />
         </Routes>
       </Suspense>
-    </GoogleOAuthProvider>
     </ThemeProvider>
     </ErrorBoundary>
   )

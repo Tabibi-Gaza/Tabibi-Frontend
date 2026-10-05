@@ -161,7 +161,7 @@ function ReviewsGrid() {
                         className="w-10 h-10 md:w-11 md:h-11 rounded-xl object-cover shrink-0"
                       />
                       <div className="text-right flex-1 min-w-0">
-                        <h4 className="font-black text-slate-900 dark:text-gray-200 text-sm">{review.patientName}</h4>
+                        <h3 className="font-black text-slate-900 dark:text-gray-200 text-sm">{review.patientName}</h3>
                         <span className="text-[11px] font-bold text-[#138C9F]/60 bg-[#138C9F]/5 px-2 py-0.5 rounded-full">{review.specializationName}</span>
                       </div>
                     </div>
@@ -175,19 +175,24 @@ function ReviewsGrid() {
 
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-3 md:gap-4 mt-8 md:mt-10">
-                <button onClick={prevPage} className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
+                <button onClick={prevPage} aria-label="الصفحة السابقة" className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
                   <FontAwesomeIcon icon={faArrowRight} className="text-xs md:text-sm" />
                 </button>
                 <div className="flex items-center gap-2">
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <button
                       key={i}
+                      type="button"
                       onClick={() => setPage(i)}
-                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === page ? "w-8 bg-[#138C9F]" : "w-2 bg-slate-200 dark:bg-gray-600 hover:bg-slate-300 dark:hover:bg-gray-500"}`}
-                    />
+                      aria-label={`الصفحة ${i + 1}`}
+                      aria-current={i === page ? "page" : undefined}
+                      className="relative flex items-center justify-center px-2 py-2 -mx-2 -my-2 cursor-pointer"
+                    >
+                      <span className={`block h-2 rounded-full transition-all duration-300 ${i === page ? "w-8 bg-[#138C9F]" : "w-2 bg-slate-200 dark:bg-gray-600 hover:bg-slate-300 dark:hover:bg-gray-500"}`} />
+                    </button>
                   ))}
                 </div>
-                <button onClick={nextPage} className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
+                <button onClick={nextPage} aria-label="الصفحة التالية" className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
                   <FontAwesomeIcon icon={faArrowLeft} className="text-xs md:text-sm" />
                 </button>
               </div>
@@ -217,7 +222,7 @@ function ReviewsGrid() {
                 className="w-12 h-12 rounded-xl object-cover shrink-0"
               />
               <div>
-                <h4 className="font-black text-slate-900 dark:text-gray-200">{popupReview.patientName}</h4>
+                <h3 className="font-black text-slate-900 dark:text-gray-200">{popupReview.patientName}</h3>
                 <span className="text-xs font-bold text-[#138C9F]/60">{popupReview.specializationName}</span>
               </div>
             </div>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/inline-css.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "serve dist -s -l 3000"

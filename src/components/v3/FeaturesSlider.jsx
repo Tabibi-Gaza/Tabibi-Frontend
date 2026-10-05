@@ -11,7 +11,7 @@ const features = [
     title: "استشارة طبية عن بعد",
     desc: "تواصل مع طبيبك أينما كنت عبر مكالمات فيديو عالية الجودة. احصل على الاستشارة الطبية وأنت في منزلك.",
     accent: "#138C9F",
-    image: "/images/features/feature-1.jpg",
+    image: "/images/features/feature-1.webp",
   },
   {
     number: "02",
@@ -19,7 +19,7 @@ const features = [
     title: "حجز مواعيد ذكي",
     desc: "ابحث عن أفضل الأطباء حسب التخصص والمنطقة، واحجز موعدك في ثوانٍ. نظام ذكي يقترح لك المواعيد المناسبة.",
     accent: "#10b981",
-    image: "/images/features/feature-2.jpg",
+    image: "/images/features/feature-2.webp",
   },
   {
     number: "03",
@@ -27,7 +27,7 @@ const features = [
     title: "ملفك الصحي المتكامل",
     desc: "سجل طبي شامل يتابع حالتك الصحية. تذكير بالأدوية، تقارير الفحوصات، ومتابعة دورية لحالتك.",
     accent: "#8b5cf6",
-    image: "/images/features/feature-3.jpg",
+    image: "/images/features/feature-3.webp",
   },
   {
     number: "04",
@@ -35,7 +35,7 @@ const features = [
     title: "وصفات إلكترونية آمنة",
     desc: "استلم وصفاتك الطبية مباشرة على هاتفك. وصفات رقمية معتمدة ترسل لأقرب صيدلية تختارها.",
     accent: "#f59e0b",
-    image: "/images/features/feature-4.jpg",
+    image: "/images/features/feature-4.webp",
   },
 ];
 
@@ -148,15 +148,21 @@ function FeaturesSlider() {
         {features.map((_, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => jumpTo(i)}
-            className={`h-2 md:h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
-              i === currentIndex ? "w-6 md:w-8" : "w-2 md:w-2.5 hover:opacity-80"
-            }`}
-            style={{
-              backgroundColor: i === currentIndex ? current.accent : "rgba(0,0,0,0.15)",
-            }}
+            className="relative flex items-center justify-center px-2 py-2 md:px-2.5 md:py-2.5 -mx-2 -my-2 md:-mx-2.5 md:-my-2.5 cursor-pointer"
+            style={{}}
             aria-label={`اضغط للانتقال إلى الشريحة ${i + 1}`}
-          />
+          >
+            <span
+              className={`block h-2 md:h-2.5 rounded-full transition-all duration-500 ${
+                i === currentIndex ? "w-6 md:w-8" : "w-2 md:w-2.5 hover:opacity-80"
+              }`}
+              style={{
+                backgroundColor: i === currentIndex ? current.accent : "rgba(0,0,0,0.15)",
+              }}
+            />
+          </button>
         ))}
       </div>
     </section>

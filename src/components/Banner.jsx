@@ -23,7 +23,7 @@ const Banner = () => {
                 </svg>
               </div>
               <div className='flex flex-col items-start text-right'>
-                <h4 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>حجز سريع وسهل</h4>
+                <h3 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>حجز سريع وسهل</h3>
                 <p className='text-xs sm:text-sm text-slate-500 font-bold'>احجز موعدك في أقل من دقيقة.</p>
               </div>
             </div>
@@ -35,7 +35,7 @@ const Banner = () => {
                 </svg>
               </div>
               <div className='flex flex-col items-start text-right'>
-                <h4 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>أطباء موثوقون</h4>
+                <h3 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>أطباء موثوقون</h3>
                 <p className='text-xs sm:text-sm text-slate-500 font-bold'>جميع الأطباء في منصتنا مسجلون ومعتمدون من الجهات الصحية المختصة.</p>
               </div>
             </div>
@@ -47,7 +47,7 @@ const Banner = () => {
                 </svg>
               </div>
               <div className='flex flex-col items-start text-right'>
-                <h4 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>دعم فني متواصل</h4>
+                <h3 className='text-sm sm:text-base font-black text-slate-800 dark:text-gray-200 leading-tight mb-1'>دعم فني متواصل</h3>
                 <p className='text-xs sm:text-sm text-slate-500 font-bold'>فريقنا متواجد دائماً لمساعدتك في أي استفسار حول حجوزاتك الطبية.</p>
               </div>
             </div>

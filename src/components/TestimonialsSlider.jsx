@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { reviewsData } from '../assets/assets_frontend/assets';
+import { reviewsData } from '../assets/assets_frontend/extraData';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 

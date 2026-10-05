@@ -82,7 +82,7 @@ function TestimonialsSlider() {
           {review.avatar}
         </div>
         <div className="text-right flex-1">
-          <h4 className="font-black text-slate-900 text-sm">{review.patient}</h4>
+          <h3 className="font-black text-slate-900 text-sm">{review.patient}</h3>
           <p className="text-xs text-[#138C9F] font-bold">{review.clinic}</p>
           <p className="text-[11px] text-slate-400 font-bold">{review.date}</p>
         </div>

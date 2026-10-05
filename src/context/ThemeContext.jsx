@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import i18n from '../i18n';
+import i18n, { loadEn } from '../i18n';
 
 const ThemeContext = createContext();
 
@@ -21,7 +21,11 @@ export const ThemeProvider = ({ children }) => {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
     localStorage.setItem('lang', lang);
-    i18n.changeLanguage(lang);
+    if (lang === 'en') {
+      loadEn().then(() => i18n.changeLanguage('en'));
+    } else {
+      i18n.changeLanguage(lang);
+    }
   }, [lang]);
 
   const toggleTheme = () => setTheme(t => t === 'light' ? 'dark' : 'light');

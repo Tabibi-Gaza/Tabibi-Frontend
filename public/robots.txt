@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tabibi-frontend.apps.taqat.academy/sitemap.xml

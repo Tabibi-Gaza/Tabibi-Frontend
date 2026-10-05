@@ -1,0 +1,47 @@
+# طبيبي — Tabibi
+
+> منصة طبية رقمية فلسطينية لحجز المواعيد والاستشارات الطبية عن بُعد، وإدارة العيادات الإلكترونية.
+
+المنصة: https://tabibi-frontend.apps.taqat.academy/
+API: https://tabibi-api.apps.taqat.academy/
+اللغة: العربية (ar) — RTL
+الواجهة: React 19 + Vite + Tailwind CSS 4، خط Cairo.
+
+## التطبيق
+
+تطبيق ويب متعدد الأدوار (مريض / طبيب / سكرتير / أدمن) مبني كـ Single Page Application.
+
+## الصفحات الرئيسية
+
+- [/](https://tabibi-frontend.apps.taqat.academy/) — الرئيسية: أقسام الإطارات، الميزات، المساعد الذكي، الأطباء المميزين، آراء المراجعين.
+- [/doctors](https://tabibi-frontend.apps.taqat.academy/doctors) — البحث عن الأطباء وتصفية حسب التخصص.
+- [/doctors/:id](https://tabibi-frontend.apps.taqat.academy/doctors/:id) — ملف الطبيب وحجز موعد.
+- [/appointment](https://tabibi-frontend.apps.taqat.academy/appointment) — حجز الموعد واختيار الوقت.
+- [/login](https://tabibi-frontend.apps.taqat.academy/login) · [/register](https://tabibi-frontend.apps.taqat.academy/register) — الدخول والتسجيل (بريد إلكتروني أو Google).
+- [/about](https://tabibi-frontend.apps.taqat.academy/about) · [/contact](https://tabibi-frontend.apps.taqat.academy/contact) · [/faqs](https://tabibi-frontend.apps.taqat.academy/faqs) — من نحن، تواصل معنا، الأسئلة الشائعة.
+- [/privacy-policy](https://tabibi-frontend.apps.taqat.academy/privacy-policy) · [/terms-of-service](https://tabibi-frontend.apps.taqat.academy/terms-of-service) — الخصوصية والشروط.
+
+## لوحات التحكم
+
+- `/dashboard` — لوحة المريض: مواعيدي، وصفاتي الطبية، الملف الطبي، المحادثات.
+- `/doctor` — لوحة الطبيب: اليوم، المرضى، الفواتير، الملفات المالية.
+- `/secretary` — لوحة السكرتير: إدارة مواعيد العيادة.
+- `/admin` — لوحة الإدارة: المستخدمون، طلبات الانضمام، المدفوعات، التقارير، إعدادات المنصة.
+
+## API
+
+الـ API مبني على ASP.NET Core، ويُستدعى عبر:
+
+```
+GET  /api/...
+POST /api/...
+Authorization: Bearer <JWT>
+```
+
+مصدر الـ API: https://tabibi-api.apps.taqat.academy/
+
+## ملاحظات للـ Agents
+
+- الواجهة عربية بالكامل مع دعم i18n (ar / en) عبر i18next.
+- المحتوى يُحمَّل ديناميكيًا (code splitting) — الصفحات الكسولة تحتاج JavaScript.
+- لا يوجد محتوى خفي عن محركات البحث: كل النصوص مضمَّنة في HTML بعد التحميل الأول.
