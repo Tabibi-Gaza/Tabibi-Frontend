@@ -6,7 +6,7 @@ import { assets } from '../assets/assets_frontend/assets';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { COUNTRIES, DEFAULT_COUNTRY } from '../constants/countries';
+import { COUNTRIES, DEFAULT_COUNTRY, phonePattern, phoneTitle, toStored } from '../constants/countries';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useTranslation } from 'react-i18next';
 import OtpInput from '../components/OtpInput';
@@ -156,7 +156,7 @@ const Login = () => {
           lastName,
           email,
           password,
-          phoneNumber: phone.replace(selectedCountry.code, ''),
+          phoneNumber: toStored(phone.replace(selectedCountry.code, ''), selectedCountry),
           gender: gender === "Male" ? 1 : 2,
           dateOfBirth: "2000-01-01",
           address,
@@ -456,15 +456,15 @@ const Login = () => {
                         value={phone.replace(selectedCountry.code, '')}
                         onChange={(e) => setPhone(selectedCountry.code + e.target.value.replace(/\D/g, ''))}
                         className="flex-1 min-w-0 px-4 py-3 text-sm outline-none text-slate-800 bg-white dark:bg-gray-700 dark:text-white"
-                        placeholder="5xxxxxxxx"
-                        pattern="05[96]\d{8}"
-                        title={t('login.phoneValidation')}
-                        maxLength="10"
+                        placeholder={selectedCountry.example}
+                        pattern={phonePattern(selectedCountry)}
+                        title={phoneTitle(selectedCountry)}
+                        maxLength={selectedCountry.max}
                         required
                       />
                     </div>
                     {showCountries && (
-                      <div className="relative">
+                      <div className="relative country-dropdown">
                         <div className="absolute z-50 left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl shadow-xl">
                           {COUNTRIES.map((c) => {
                             const isActive = c.code === selectedCountry.code;

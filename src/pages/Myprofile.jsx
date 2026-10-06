@@ -3,7 +3,7 @@ import { assets } from '../assets/assets_frontend/assets'
 import { AppContext } from '../context/AppContext'
 import axiosInstance from '../api/axiosInstance'
 import { toast } from 'react-toastify'
-import { COUNTRIES, DEFAULT_COUNTRY } from '../constants/countries'
+import { COUNTRIES, DEFAULT_COUNTRY, phonePattern, phoneTitle, toNational, toStored } from '../constants/countries'
 import { useTranslation } from 'react-i18next'
 
 const Myprofile = () => {
@@ -54,7 +54,8 @@ const Myprofile = () => {
       formData.append('firstName', localUserData.firstname || '')
       formData.append('lastName', localUserData.lastname || '')
       formData.append('email', localUserData.email || '')
-      formData.append('phoneNumber', localUserData.phone || '')
+      const phoneDigits = (localUserData.phone || '').replace(selectedCountry.code, '').replace(/\D/g, '')
+      formData.append('phoneNumber', toStored(phoneDigits, selectedCountry))
       formData.append('gender', localUserData.gender)
       formData.append('dateOfBirth', localUserData.dob)
       formData.append('address', localUserData.address?.line1 || '')
@@ -114,12 +115,12 @@ const Myprofile = () => {
   // في حال كانت بيانات الـ Context لم تجهز بعد (مثلاً قيد الرفع أو الجلب من السيرفر)
   const currentData = isEdit || hasSaved ? localUserData : (userData || localUserData);
 
-  // استخراج رقم الهاتف بدون رمز الدولة
+  // استخراج رقم الهاتف بدون رمز الدولة وبدون صفر الصدارة
   const phoneNumberPart = (() => {
     const p = currentData?.phone || "";
     if (!p) return "";
     const match = COUNTRIES.find((c) => p.startsWith(c.code));
-    return match ? p.slice(match.code.length) : p;
+    return toNational(match ? p.slice(match.code.length) : p, selectedCountry);
   })();
 
   return (
@@ -307,7 +308,7 @@ const Myprofile = () => {
                       dir="ltr"
                       disabled={!isEdit}
                       value={phoneNumberPart}
-                      placeholder="5xxxxxxxx"
+                      placeholder={selectedCountry.example}
                       onChange={(e) =>
                         setLocalUserData((prev) => ({
                           ...prev,
@@ -315,8 +316,9 @@ const Myprofile = () => {
                         }))
                       }
                       required
-                      pattern="05[96]\d{8}"
-                      maxLength="10"
+                      pattern={phonePattern(selectedCountry)}
+                      title={phoneTitle(selectedCountry)}
+                      maxLength={selectedCountry.max}
                       className="flex-1 min-w-0 py-2 px-3 text-base outline-none transition-colors duration-200 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 focus:outline-none disabled:bg-gray-50 dark:bg-gray-900 disabled:text-gray-500 dark:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed"
                     />
                   </div>
