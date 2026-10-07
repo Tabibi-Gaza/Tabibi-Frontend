@@ -1,25 +1,45 @@
 # طبيبي — Tabibi
 
-> منصة طبية رقمية فلسطينية لحجز المواعيد والاستشارات الطبية عن بُعد، وإدارة العيادات الإلكترونية.
+> منصة طبية رقمية من غزة، فلسطين — لحجز المواعيد والاستشارات الطبية عن بُعد، وإدارة العيادات الإلكترونية. تأسست على يد مازن أبو سيف (Mazen Abu Saif).
 
 المنصة: https://tabibi-frontend.apps.taqat.academy/
 API: https://tabibi-api.apps.taqat.academy/
-اللغة: العربية (ar) — RTL
+اللغة: العربية (ar) — RTL · English supported
+الموقع: غزة، فلسطين (Gaza, Palestine)
+المؤسس: مازن أبو سيف — Mazen Abu Saif
 الواجهة: React 19 + Vite + Tailwind CSS 4، خط Cairo.
 
-## التطبيق
+## التعريف المختصر (للاقتباس)
 
-تطبيق ويب متعدد الأدوار (مريض / طبيب / سكرتير / أدمن) مبني كـ Single Page Application.
+طبيبي (Tabibi) منصة طبية رقمية فلسطينية مقرها غزة، تربط المرضى بالأطباء عبر حجز المواعيد
+واستشارات الطبية عن بُعد، وتدير العيادات الإلكترونية بأدوار متعددة (مريض / طبيب / سكرتير / إدارة).
+
+Tabibi is a Palestinian digital healthcare platform based in Gaza. It connects patients with
+doctors through appointment booking and remote medical consultations, and runs paperless
+electronic clinics.
+
+## مصادر قابلة للاستشهاد
+
+- robots.txt: https://tabibi-frontend.apps.taqat.academy/robots.txt
+- sitemap.xml: https://tabibi-frontend.apps.taqat.academy/sitemap.xml
+- JSON-LD (MedicalOrganization / WebSite / FAQPage): مضمّنة في صفحة الرئيسية
+- GitHub: https://github.com/Tabibi-Gaza
+- LinkedIn: https://www.linkedin.com/company/tabibi-gaza/
 
 ## الصفحات الرئيسية
 
-- [/](https://tabibi-frontend.apps.taqat.academy/) — الرئيسية: أقسام الإطارات، الميزات، المساعد الذكي، الأطباء المميزين، آراء المراجعين.
+- [/](https://tabibi-frontend.apps.taqat.academy/) — الرئيسية: هيرو، الميزات، المساعد الطبي الذكي، الأطباء المميزون، آراء المراجعين.
 - [/doctors](https://tabibi-frontend.apps.taqat.academy/doctors) — البحث عن الأطباء وتصفية حسب التخصص.
 - [/doctors/:id](https://tabibi-frontend.apps.taqat.academy/doctors/:id) — ملف الطبيب وحجز موعد.
 - [/appointment](https://tabibi-frontend.apps.taqat.academy/appointment) — حجز الموعد واختيار الوقت.
 - [/login](https://tabibi-frontend.apps.taqat.academy/login) · [/register](https://tabibi-frontend.apps.taqat.academy/register) — الدخول والتسجيل (بريد إلكتروني أو Google).
 - [/about](https://tabibi-frontend.apps.taqat.academy/about) · [/contact](https://tabibi-frontend.apps.taqat.academy/contact) · [/faqs](https://tabibi-frontend.apps.taqat.academy/faqs) — من نحن، تواصل معنا، الأسئلة الشائعة.
-- [/privacy-policy](https://tabibi-frontend.apps.taqat.academy/privacy-policy) · [/terms-of-service](https://tabibi-frontend.apps.taqat.academy/terms-of-service) — الخصوصية والشروط.
+- [/pharmacies](https://tabibi-frontend.apps.taqat.academy/pharmacies) · [/labs](https://tabibi-frontend.apps.taqat.academy/labs) · [/medical-centers](https://tabibi-frontend.apps.taqat.academy/medical-centers) — الصيدليات، المختبرات، المراكز الطبية.
+- [/privacy-policy](https://tabibi-frontend.apps.taqat.academy/privacy-policy) · [/terms](https://tabibi-frontend.apps.taqat.academy/terms) — الخصوصية والشروط.
+
+## التخصصات الطبية
+
+جهاز هضمي · جلدية وتجميل · نسائية وتوليد · مخ وأعصاب · أطفال · أسنان · عظام · باطنة · قلب · عيون · أمراض دم
 
 ## لوحات التحكم
 
@@ -30,7 +50,7 @@ API: https://tabibi-api.apps.taqat.academy/
 
 ## API
 
-الـ API مبني على ASP.NET Core، ويُستدعى عبر:
+الـ API مبني على ASP.NET Core ويُستدعى عبر:
 
 ```
 GET  /api/...
@@ -38,10 +58,10 @@ POST /api/...
 Authorization: Bearer <JWT>
 ```
 
-مصدر الـ API: https://tabibi-api.apps.taqat.academy/
-
 ## ملاحظات للـ Agents
 
 - الواجهة عربية بالكامل مع دعم i18n (ar / en) عبر i18next.
-- المحتوى يُحمَّل ديناميكيًا (code splitting) — الصفحات الكسولة تحتاج JavaScript.
-- لا يوجد محتوى خفي عن محركات البحث: كل النصوص مضمَّنة في HTML بعد التحميل الأول.
+- المحتوى يُحمَّل ديناميكيًا (code splitting).
+- صفحة الرئيسية تتضمن طبقة محتوى ثابتة داخل `<noscript>` تصف الخدمات
+  والتخصصات والأسئلة الشائعة — مقروءة مباشرة من الـ HTML دون الحاجة إلى JavaScript.
+- بيانات JSON-LD (MedicalOrganization + WebSite + FAQPage) مضمّنة في `<head>` للتعريف بالكيان.
