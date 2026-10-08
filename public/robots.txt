@@ -1,5 +1,5 @@
-# Tabibi (طبيبي) — منصة رقمية متكاملة لأطباء العيادات الخاصة، غزة، فلسطين
-# https://tabibi-frontend.apps.taqat.academy/
+# Tabibi - integrated digital platform for private clinic doctors
+# Gaza, Palestine - https://tabibi-frontend.apps.taqat.academy/
 
 User-agent: *
 Allow: /
@@ -67,4 +67,4 @@ User-agent: Googlebot-Image
 Allow: /
 
 Sitemap: https://tabibi-frontend.apps.taqat.academy/sitemap.xml
-LLMS: https://tabibi-frontend.apps.taqat.academy/llms.txt
+# LLMS (llms.txt): https://tabibi-frontend.apps.taqat.academy/llms.txt

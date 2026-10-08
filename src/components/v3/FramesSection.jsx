@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,36 @@ function FramesSection() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { data: specs, isLoading } = useSpecializations();
+  const videoRef = useRef(null);
+  const [videoSrc, setVideoSrc] = useState(undefined);
+
+  useEffect(() => {
+    let cancelled = false;
+    const start = () => {
+      if (!cancelled) setVideoSrc("/hero-bg.webm");
+    };
+    const delayed = () => window.setTimeout(start, 400);
+    if (document.readyState === "complete") {
+      const t = window.setTimeout(start, 400);
+      return () => {
+        cancelled = true;
+        window.clearTimeout(t);
+      };
+    }
+    window.addEventListener("load", delayed);
+    const safety = window.setTimeout(start, 5000);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", delayed);
+      window.clearTimeout(safety);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!videoSrc || !videoRef.current) return;
+    const attempt = videoRef.current.play();
+    if (attempt && typeof attempt.catch === "function") attempt.catch(() => {});
+  }, [videoSrc]);
 
   const options = specs?.map((s) => ({ id: s.id, label: s.name })) || [];
   const selected = options.find((o) => o.id === speciality);
@@ -21,15 +51,16 @@ function FramesSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir="rtl">
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="none"
+        src={videoSrc}
         className="absolute inset-0 w-full h-full object-cover"
         style={{ zIndex: 0 }}
-      >
-        <source src="/hero-bg.webm" type="video/webm" />
-      </video>
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-[#138C9F]/40 via-[#138C9F]/20 to-[#0d6b7a]/60" style={{ zIndex: 1 }} />
 
       <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6" style={{ zIndex: 2 }}>
