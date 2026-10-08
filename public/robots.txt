@@ -1,4 +1,4 @@
-# Tabibi (طبيبي) — منصة طبية رقمية في غزة، فلسطين
+# Tabibi (طبيبي) — منصة رقمية متكاملة لأطباء العيادات الخاصة، غزة، فلسطين
 # https://tabibi-frontend.apps.taqat.academy/
 
 User-agent: *

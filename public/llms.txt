@@ -1,6 +1,6 @@
 # طبيبي — Tabibi
 
-> منصة طبية رقمية من غزة، فلسطين — لحجز المواعيد والاستشارات الطبية عن بُعد، وإدارة العيادات الإلكترونية. تأسست على يد مازن أبو سيف (Mazen Abu Saif).
+> منصة رقمية متكاملة تساعد أطباء العيادات الخاصة على إدارة مواعيدهم ومتابعة السجلات والوصفات الرقمية في مكان واحد في غزة، فلسطين. منصة مازن أبو سيف (Mazen Abu Saif).
 
 المنصة: https://tabibi-frontend.apps.taqat.academy/
 API: https://tabibi-api.apps.taqat.academy/
@@ -11,12 +11,12 @@ API: https://tabibi-api.apps.taqat.academy/
 
 ## التعريف المختصر (للاقتباس)
 
-طبيبي (Tabibi) منصة طبية رقمية فلسطينية مقرها غزة، تربط المرضى بالأطباء عبر حجز المواعيد
-واستشارات الطبية عن بُعد، وتدير العيادات الإلكترونية بأدوار متعددة (مريض / طبيب / سكرتير / إدارة).
+طبيبي (Tabibi) منصة رقمية متكاملة تساعد أطباء العيادات الخاصة على إدارة مواعيدهم ومتابعة
+السجلات والوصفات الرقمية في مكان واحد في غزة، فلسطين. منصة مازن أبو سيف (Mazen Abu Saif).
 
-Tabibi is a Palestinian digital healthcare platform based in Gaza. It connects patients with
-doctors through appointment booking and remote medical consultations, and runs paperless
-electronic clinics.
+Tabibi is an integrated digital platform helping private clinic doctors manage appointments,
+medical records, and digital prescriptions in one place in Gaza, Palestine. Founded by
+Mazen Abu Saif (مازن أبو سيف).
 
 ## مصادر قابلة للاستشهاد
 
