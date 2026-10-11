@@ -144,10 +144,10 @@ const MedicalExamination = () => {
                 setQrExpiry(data.data.expiresAt);
                 setShowQrModal(true);
             } else {
-                toast.error(t('medicalExamination.qrGenerateFailed'));
+                toast.error(data.errors?.[0]?.message || data.message || t('medicalExamination.qrGenerateFailed'));
             }
-        } catch {
-            toast.error(t('medicalExamination.qrError'));
+        } catch (err) {
+            toast.error(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || t('medicalExamination.qrError'));
         } finally {
             setGeneratingQr(false);
         }

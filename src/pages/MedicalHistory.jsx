@@ -202,10 +202,10 @@ const MedicalHistory = () => {
                 setQrExpiry(data.data.expiresAt);
                 setShowQrModal(true);
             } else {
-                toast.error(t('medicalHistory.qrGenerateFailed'));
+                toast.error(data.errors?.[0]?.message || data.message || t('medicalHistory.qrGenerateFailed'));
             }
-        } catch {
-            toast.error(t('medicalHistory.qrError'));
+        } catch (err) {
+            toast.error(err.response?.data?.errors?.[0]?.message || err.response?.data?.message || t('medicalHistory.qrError'));
         } finally {
             setGeneratingQr(false);
         }
