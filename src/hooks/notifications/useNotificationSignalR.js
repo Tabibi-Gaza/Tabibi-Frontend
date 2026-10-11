@@ -10,7 +10,7 @@ export const useNotificationSignalR = () => {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
 
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5135/api";
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5200/api";
     const hubUrl = API_URL.replace("/api", "") + "/hubs/notifications";
 
     if (connection && connection.state === "Connected") {

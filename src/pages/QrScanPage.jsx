@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { formatDate } from '../utils/dateFormatter';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5227/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5200/api';
 
 const QrScanPage = () => {
   const { token } = useParams();
