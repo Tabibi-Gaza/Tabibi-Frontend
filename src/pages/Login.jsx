@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { COUNTRIES, DEFAULT_COUNTRY, phonePattern, phoneTitle, toStored } from '../constants/countries';
-import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { useTranslation } from 'react-i18next';
 import OtpInput from '../components/OtpInput';
 
@@ -244,10 +244,8 @@ const Login = () => {
     toast.error(t('login.googleLoginFailed'));
   };
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: handleGoogleSuccess,
-    onError: handleGoogleError,
-  });
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const isGoogleEnabled = Boolean(googleClientId) && googleClientId !== 'YOUR_GOOGLE_CLIENT_ID';
 
   return (
     <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center" dir="rtl">
@@ -327,6 +325,30 @@ const Login = () => {
                   >
                     {t('login.loginBtn')}
                   </button>
+
+                  {isGoogleEnabled && (
+                    <>
+                      <div className="relative py-1">
+                        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                          <div className="w-full border-t border-slate-200 dark:border-gray-700" />
+                        </div>
+                        <div className="relative flex justify-center text-xs font-bold text-slate-400 dark:text-gray-500">
+                          <span className="bg-white dark:bg-gray-800 px-3">{t('login.orContinueWith')}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center pt-1" dir="ltr">
+                        <GoogleLogin
+                          onSuccess={handleGoogleSuccess}
+                          onError={handleGoogleError}
+                          theme="outline"
+                          size="large"
+                          shape="rectangular"
+                          width="320"
+                        />
+                      </div>
+                    </>
+                  )}
 
                 <p className="text-sm text-center font-bold text-slate-600 dark:text-gray-200 pt-2">
                   {t('login.noAccount')}{" "}
