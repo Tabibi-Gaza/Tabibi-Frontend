@@ -2,6 +2,7 @@ import React, { useEffect, Suspense, lazy, Component } from 'react'
 import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import TabibiAssistant from './components/TabibiAssistant'
 import { useNotificationSignalR } from './hooks/notifications/useNotificationSignalR'
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { setOnAuthFailure } from './api/axiosInstance';
@@ -171,6 +172,7 @@ const UserLayout = () => {
         </Routes>
       </Suspense>
       {!isAuthPage && <Footer />}
+      {!isAuthPage && <TabibiAssistant />}
     </div>
   )
 }
