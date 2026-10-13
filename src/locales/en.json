@@ -1042,7 +1042,12 @@
     "defaultSlotDuration": "Default Slot Duration",
     "minutes": "minutes",
     "smartTip": "Smart Tip",
-    "smartTipText": "Set work hours accurately to ensure your available appointments appear correctly for patients. You can modify them at any time."
+    "smartTipText": "Set work hours accurately to ensure your available appointments appear correctly for patients. You can modify them at any time.",
+    "intervalsHint": "You can add more than one interval per day — each interval separately (e.g. 9:00 to 12:00 then 1:00 to 3:00).",
+    "addInterval": "Add interval",
+    "removeInterval": "Remove interval",
+    "overlapError": "Intervals overlap on the same day — review them before saving.",
+    "invalidInterval": "End time must be after start time."
   },
   "doctorProfile": {
     "title": "Doctor Personal Information",

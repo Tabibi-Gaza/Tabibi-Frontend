@@ -74,28 +74,31 @@ const Appointment = () => {
     fetchDoctor();
   }, [docId, doctors]);
 
+  const fetchCalendar = async () => {
+    setLoadingCalendar(true);
+    try {
+      const { data } = await axiosInstance.get(`/booking/doctor/${docId}/calendar-slots`);
+      if (data.succeeded && data.data?.calendarDays) {
+        const days = data.data.calendarDays;
+        setCalendarData(days);
+        setSlotIndex(prevIdx => {
+          if (days[prevIdx]?.isActiveDay && days[prevIdx]?.slots?.some(s => s.isAvailable)) return prevIdx;
+          const firstIdx = days.findIndex(d => d.isActiveDay && d.slots?.some(s => s.isAvailable));
+          return firstIdx >= 0 ? firstIdx : prevIdx;
+        });
+      } else {
+        setCalendarData([]);
+      }
+    } catch (err) {
+
+      setCalendarData([]);
+    } finally {
+      setLoadingCalendar(false);
+    }
+  };
+
   useEffect(() => {
     if (!docId) return;
-    const fetchCalendar = async () => {
-      setLoadingCalendar(true);
-      try {
-        const { data } = await axiosInstance.get(`/booking/doctor/${docId}/calendar-slots`);
-        if (data.succeeded && data.data?.calendarDays) {
-          setCalendarData(data.data.calendarDays);
-          const firstActiveIdx = data.data.calendarDays.findIndex(
-            d => d.isActiveDay && d.slots?.some(s => s.isAvailable)
-          );
-          if (firstActiveIdx >= 0) setSlotIndex(firstActiveIdx);
-        } else {
-          setCalendarData([]);
-        }
-      } catch (err) {
-
-        setCalendarData([]);
-      } finally {
-        setLoadingCalendar(false);
-      }
-    };
     fetchCalendar();
   }, [docId]);
 
@@ -152,10 +155,18 @@ const Appointment = () => {
           }
         })
       } else {
-        toast.error(data.errors?.[0]?.message || data.message || 'فشل الحجز');
+        const msg = data.errors?.[0]?.message || data.message || 'فشل الحجز';
+        toast.error(msg);
+        setSelectedSlot(null);
+        setSlotTime('');
+        await fetchCalendar();
       }
     } catch (error) {
-      toast.error(error.response?.data?.errors?.[0]?.message || error.response?.data?.message || 'حدث خطأ أثناء الحجز');
+      const msg = error.response?.data?.errors?.[0]?.message || error.response?.data?.message || 'حدث خطأ أثناء الحجز';
+      toast.error(msg);
+      setSelectedSlot(null);
+      setSlotTime('');
+      await fetchCalendar();
     } finally {
       setBooking(false);
     }

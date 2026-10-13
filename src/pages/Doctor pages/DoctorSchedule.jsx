@@ -14,10 +14,27 @@ const DAYS_ORDER = [
   { key: 'friday', nameKey: 'doctorSchedule.friday', dayOfWeek: 5 },
 ];
 
+const toMinutes = (hhmm) => {
+  const [h, m] = (hhmm || '00:00').split(':').map(Number);
+  return h * 60 + m;
+};
+
+const fromMinutes = (mins) => {
+  const clamped = Math.max(0, Math.min(23 * 60 + 59, mins));
+  const h = String(Math.floor(clamped / 60)).padStart(2, '0');
+  const m = String(clamped % 60).padStart(2, '0');
+  return `${h}:${m}`;
+};
+
 const buildDefaultSchedule = () => {
   const s = {};
   DAYS_ORDER.forEach(d => {
-    s[d.key] = { active: false, from: '09:00', to: '17:00', slotDuration: 30, note: d.key === 'friday' ? 'doctorSchedule.weekendNote' : '' };
+    s[d.key] = {
+      active: false,
+      intervals: [{ from: '09:00', to: '17:00' }],
+      slotDuration: 30,
+      note: d.key === 'friday' ? 'doctorSchedule.weekendNote' : ''
+    };
   });
   return s;
 };
@@ -36,15 +53,22 @@ const DoctorSchedule = () => {
           const newSchedule = buildDefaultSchedule();
           data.data.days.forEach(day => {
             const match = DAYS_ORDER.find(d => d.dayOfWeek === day.dayOfWeek);
-            if (match) {
-              newSchedule[match.key] = {
-                active: day.isActive,
-                from: day.startTime?.substring(0, 5) || '09:00',
-                to: day.endTime?.substring(0, 5) || '17:00',
-                slotDuration: day.slotDurationMinutes || 30,
-                note: match.key === 'friday' ? 'doctorSchedule.weekendNote' : ''
-              };
+            if (!match) return;
+            const entry = newSchedule[match.key];
+            const from = day.startTime?.substring(0, 5) || '09:00';
+            const to = day.endTime?.substring(0, 5) || '17:00';
+            if (day.isActive) {
+              entry.active = true;
+              entry.intervals.push({ from, to });
+              entry.slotDuration = day.slotDurationMinutes || 30;
+            } else if (entry.intervals.length === 1 && entry.intervals[0].from === '09:00' && entry.intervals[0].to === '17:00') {
+              entry.intervals = [{ from, to }];
             }
+          });
+          DAYS_ORDER.forEach(d => {
+            const entry = newSchedule[d.key];
+            if (!entry.active && entry.intervals.length > 1) entry.intervals = [entry.intervals[0]];
+            if (entry.intervals.length === 0) entry.intervals = [{ from: '09:00', to: '17:00' }];
           });
           setSchedule(newSchedule);
         }
@@ -64,10 +88,39 @@ const DoctorSchedule = () => {
     }));
   };
 
-  const handleTimeChange = (dayKey, field, value) => {
+  const handleIntervalChange = (dayKey, index, field, value) => {
     setSchedule(prev => ({
       ...prev,
-      [dayKey]: { ...prev[dayKey], [field]: value }
+      [dayKey]: {
+        ...prev[dayKey],
+        intervals: prev[dayKey].intervals.map((iv, i) =>
+          i === index ? { ...iv, [field]: value } : iv
+        )
+      }
+    }));
+  };
+
+  const handleAddInterval = (dayKey) => {
+    setSchedule(prev => {
+      const day = prev[dayKey];
+      const last = day.intervals[day.intervals.length - 1];
+      const startMin = toMinutes(last?.to || '17:00');
+      const from = fromMinutes(startMin);
+      const to = fromMinutes(startMin + 120);
+      return {
+        ...prev,
+        [dayKey]: { ...day, intervals: [...day.intervals, { from, to }] }
+      };
+    });
+  };
+
+  const handleRemoveInterval = (dayKey, index) => {
+    setSchedule(prev => ({
+      ...prev,
+      [dayKey]: {
+        ...prev[dayKey],
+        intervals: prev[dayKey].intervals.filter((_, i) => i !== index)
+      }
     }));
   };
 
@@ -81,28 +134,65 @@ const DoctorSchedule = () => {
       if (day.active) {
         activeDaysCount++;
         slotDuration = day.slotDuration;
-        const [fromH, fromM] = day.from.split(':').map(Number);
-        const [toH, toM] = day.to.split(':').map(Number);
-        const diffInMinutes = (toH * 60 + toM) - (fromH * 60 + fromM);
-        if (diffInMinutes > 0) {
-          totalHours += diffInMinutes / 60;
-        }
+        day.intervals.forEach(iv => {
+          const diffInMinutes = toMinutes(iv.to) - toMinutes(iv.from);
+          if (diffInMinutes > 0) totalHours += diffInMinutes / 60;
+        });
       }
     });
 
     return { activeDays: activeDaysCount, totalHours: totalHours.toFixed(1), slotDuration };
   }, [schedule]);
 
+  const validateSchedule = () => {
+    for (const d of DAYS_ORDER) {
+      const day = schedule[d.key];
+      if (!day.active) continue;
+      const sorted = [...day.intervals].sort((a, b) => toMinutes(a.from) - toMinutes(b.from));
+      for (const iv of sorted) {
+        if (toMinutes(iv.to) <= toMinutes(iv.from)) {
+          toast.error(`${t(d.nameKey)}: ${t('doctorSchedule.invalidInterval')}`);
+          return false;
+        }
+      }
+      for (let i = 1; i < sorted.length; i++) {
+        if (toMinutes(sorted[i].from) < toMinutes(sorted[i - 1].to)) {
+          toast.error(`${t(d.nameKey)}: ${t('doctorSchedule.overlapError')}`);
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
   const handleSave = async () => {
+    if (!validateSchedule()) return;
     setSaving(true);
     try {
-      const payload = DAYS_ORDER.map(d => ({
-        dayOfWeek: d.dayOfWeek,
-        startTime: schedule[d.key].from + ':00',
-        endTime: schedule[d.key].to + ':00',
-        isActive: schedule[d.key].active,
-        slotDurationMinutes: schedule[d.key].slotDuration || 30
-      }));
+      const payload = [];
+      DAYS_ORDER.forEach(d => {
+        const day = schedule[d.key];
+        if (day.active) {
+          day.intervals.forEach(iv => {
+            payload.push({
+              dayOfWeek: d.dayOfWeek,
+              startTime: iv.from + ':00',
+              endTime: iv.to + ':00',
+              isActive: true,
+              slotDurationMinutes: day.slotDuration || 30
+            });
+          });
+        } else {
+          const iv = day.intervals[0] || { from: '09:00', to: '17:00' };
+          payload.push({
+            dayOfWeek: d.dayOfWeek,
+            startTime: iv.from + ':00',
+            endTime: iv.to + ':00',
+            isActive: false,
+            slotDurationMinutes: day.slotDuration || 30
+          });
+        }
+      });
 
       const { data } = await axiosInstance.post('/doctor/schedule/save', payload);
       if (data.succeeded) {
@@ -148,12 +238,13 @@ const DoctorSchedule = () => {
           <div className="lg:col-span-8 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700/80 rounded-2xl overflow-hidden shadow-xs">
             <div className="bg-[#ecf8fa] dark:bg-gray-900 px-6 py-4 border-b border-[#C3C6D6] dark:border-gray-700/50 text-right">
               <h3 className="text-base font-black text-[#0B1C30] dark:text-gray-200">{t('doctorSchedule.scheduleDays')}</h3>
+              <p className="text-xs font-bold text-gray-500 dark:text-gray-400 mt-1">{t('doctorSchedule.intervalsHint')}</p>
             </div>
             <div className="divide-y divide-[#C3C6D6]/40">
               {DAYS_ORDER.map((d) => {
                 const day = schedule[d.key];
                 return (
-                  <div key={d.key} className={`p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors ${day.active ? "bg-white" : "bg-slate-50 dark:bg-gray-900/50"}`}>
+                  <div key={d.key} className={`p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors ${day.active ? "bg-white dark:bg-gray-800" : "bg-slate-50 dark:bg-gray-900/50"}`}>
                     <div className="flex items-center justify-between sm:justify-start gap-4 w-full sm:w-auto">
                       <span className="text-base md:text-lg font-black text-[#0B1C30] dark:text-white min-w-[70px] text-right">{t(d.nameKey)}</span>
                       <label className="relative inline-flex items-center cursor-pointer select-none">
@@ -161,19 +252,40 @@ const DoctorSchedule = () => {
                         <div className="w-12 h-6 bg-zinc-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white dark:bg-gray-800 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#138C9F]"></div>
                       </label>
                     </div>
-                    <div className="w-full sm:w-auto flex items-center justify-center sm:justify-end">
+                    <div className="w-full sm:w-auto flex flex-col gap-2 items-stretch sm:items-end">
                       {day.active ? (
-                        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
-                          <div className="relative flex-1 sm:flex-none">
-                            <input type="time" value={day.from} onChange={(e) => handleTimeChange(d.key, "from", e.target.value)}
-                              className="w-full sm:w-32 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
-                          </div>
-                          <span className="text-xs font-bold text-gray-400 dark:text-gray-500 px-2">{t('doctorSchedule.to')}</span>
-                          <div className="relative flex-1 sm:flex-none">
-                            <input type="time" value={day.to} onChange={(e) => handleTimeChange(d.key, "to", e.target.value)}
-                              className="w-full sm:w-32 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
-                          </div>
-                        </div>
+                        <>
+                          {day.intervals.map((iv, idx) => (
+                            <div key={idx} className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+                              <div className="relative flex-1 sm:flex-none">
+                                <input type="time" value={iv.from} onChange={(e) => handleIntervalChange(d.key, idx, "from", e.target.value)}
+                                  className="w-full sm:w-28 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
+                              </div>
+                              <span className="text-xs font-bold text-gray-400 dark:text-gray-500 px-1">{t('doctorSchedule.to')}</span>
+                              <div className="relative flex-1 sm:flex-none">
+                                <input type="time" value={iv.to} onChange={(e) => handleIntervalChange(d.key, idx, "to", e.target.value)}
+                                  className="w-full sm:w-28 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
+                              </div>
+                              {day.intervals.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemoveInterval(d.key, idx)}
+                                  aria-label={t('doctorSchedule.removeInterval')}
+                                  className="w-9 h-11 shrink-0 rounded-xl border border-red-200 dark:border-red-900/60 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 font-black text-sm transition-colors cursor-pointer"
+                                >
+                                  ✕
+                                </button>
+                              )}
+                            </div>
+                          ))}
+                          <button
+                            type="button"
+                            onClick={() => handleAddInterval(d.key)}
+                            className="h-9 px-3 rounded-xl border border-dashed border-[#138C9F]/50 text-[#138C9F] hover:bg-[#138C9F]/10 text-xs font-black transition-colors cursor-pointer w-full sm:w-auto"
+                          >
+                            + {t('doctorSchedule.addInterval')}
+                          </button>
+                        </>
                       ) : (
                         <div className="text-center sm:text-right py-1">
                           <span className="text-sm font-black text-gray-400 dark:text-gray-500 block">{t('doctorSchedule.notAvailable')}</span>
