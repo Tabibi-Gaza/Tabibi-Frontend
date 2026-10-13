@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
@@ -58,7 +58,7 @@ const Cart = () => {
           <>
             <div className="space-y-4 mb-8">
               {cartItems.map(item => (
-                <div key={item.id} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 flex items-center gap-4 hover:shadow-md transition-all">
+                <div key={item.id} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-4 sm:p-5 flex flex-wrap items-center gap-3 sm:gap-4 hover:shadow-md transition-all">
                   <div className="w-16 h-16 rounded-xl bg-[#138C9F]/10 flex items-center justify-center shrink-0 overflow-hidden">
                     {item.image ? (
                       <img loading="lazy" decoding="async" width="120" height="120" src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -66,21 +66,21 @@ const Cart = () => {
                       <span className="text-[#138C9F] text-lg font-bold">{item.name?.[0]}</span>
                     )}
                   </div>
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0 basis-[calc(100%-5rem)] sm:basis-auto sm:flex-1">
                     <h3 className="text-sm font-black text-[#1e293b] dark:text-white truncate">{item.name}</h3>
                     <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs truncate">{item.description || item.specialty}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
-                      className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer text-sm"
+                      className="w-9 h-9 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer text-sm"
                     >
                       -
                     </button>
                     <span className="text-sm font-bold w-6 text-center dark:text-white">{item.quantity || 1}</span>
                     <button
                       onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
-                      className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer text-sm"
+                      className="w-9 h-9 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer text-sm"
                     >
                       +
                     </button>
@@ -90,7 +90,7 @@ const Cart = () => {
                   </div>
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="p-1.5 rounded-lg hover:bg-red-50 transition-colors shrink-0"
+                    className="p-2.5 rounded-lg hover:bg-red-50 transition-colors shrink-0"
                   >
                     <svg className="w-4 h-4 text-red-400 hover:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../api/axiosInstance';
@@ -338,7 +338,7 @@ const RegisterAsDoctor = () => {
                                         className="w-full h-12 ps-16 pe-4 border border-[#bcd3ee] dark:border-gray-600 rounded-xl text-sm outline-none focus:border-[#118fa6] text-start bg-white dark:bg-gray-700 dark:text-white"
                                         dir="ltr"
                                     />
-                                    <span className="absolute start-3 top-3.5 text-xs font-bold text-gray-400">ILS</span>
+                                    <span className="absolute left-3 top-3.5 text-xs font-bold text-gray-400">ILS</span>
                                 </div>
                             </div>
                         </div>

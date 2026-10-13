@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDoctors } from "../hooks/doctors/useDoctors";
 import { useSpecializations } from "../hooks/specializations/useSpecializations";
@@ -286,11 +286,11 @@ if (isError)
 
       {/* نظام الـ Pagination */}
       {!isDoctorsLoading && totalPages > 1 && (
-        <div className="flex items-center justify-center gap-1.5 mt-10 text-xs font-bold text-gray-500 dark:text-gray-400 select-none">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 mt-10 text-xs font-bold text-gray-500 dark:text-gray-400 select-none">
           <button
             onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
             disabled={activePage === 1}
-            className={`p-1 px-2 rounded-md transition-all ${activePage === 1 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"}`}
+            className={`min-w-9 min-h-9 flex items-center justify-center p-1 px-2.5 rounded-md transition-all ${activePage === 1 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"}`}
           >
             ‹
           </button>
@@ -303,7 +303,7 @@ if (isError)
                 onClick={() => {
                   setCurrentPage(pageNumber);
                 }}
-                className={`w-7 h-7 flex items-center justify-center rounded-lg transition-all cursor-pointer ${
+                className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all cursor-pointer ${
                   activePage === pageNumber
                     ? "bg-[#138C9F] text-white shadow-xs font-black"
                     : "hover:bg-gray-100 dark:bg-gray-800 text-gray-500 dark:hover:bg-gray-700 dark:text-gray-400"
@@ -319,7 +319,7 @@ if (isError)
               currentPage < totalPages && setCurrentPage(currentPage + 1)
             }
             disabled={activePage === totalPages}
-            className={`p-1 px-2 rounded-md transition-all ${activePage === totalPages ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"}`}
+            className={`min-w-9 min-h-9 flex items-center justify-center p-1 px-2.5 rounded-md transition-all ${activePage === totalPages ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"}`}
           >
             ›
           </button>

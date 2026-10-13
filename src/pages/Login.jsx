@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
@@ -249,10 +249,10 @@ const Login = () => {
 
   return (
     <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center" dir="rtl">
-      <div className="w-full h-screen flex flex-row overflow-hidden shadow-xl">
+      <div className="w-full h-dvh flex flex-row overflow-hidden shadow-xl">
         
         {/* النصف الأيمن: النماذج */}
-        <div className="w-full md:w-1/2 h-screen overflow-y-auto p-6 md:p-12 bg-white dark:bg-gray-800">
+        <div className="w-full md:w-1/2 h-dvh overflow-y-auto p-6 md:p-12 bg-white dark:bg-gray-800">
           <form onSubmit={onSubmitHandler} className="w-full space-y-6">
             
             {/* 1. واجهة تسجيل الدخول الرئيسية */}
@@ -310,7 +310,7 @@ const Login = () => {
                         />
                         <button
                           type="button"
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 dark:text-gray-400 transition-colors"
+                          className="absolute left-1 top-1/2 -translate-y-1/2 p-2.5 text-[#138C9F] hover:text-slate-600 dark:text-gray-400 transition-colors"
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
@@ -344,7 +344,7 @@ const Login = () => {
                           theme="outline"
                           size="large"
                           shape="rectangular"
-                          width="320"
+                          width={Math.min(320, Math.max(240, (typeof window !== 'undefined' ? window.innerWidth : 1024) - 64))}
                         />
                       </div>
                     </>
@@ -428,7 +428,7 @@ const Login = () => {
                     />
                     <button
                       type="button"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-[#138C9F] hover:text-slate-600 dark:text-gray-400 transition-colors"
+                      className="absolute left-1 top-1/2 -translate-y-1/2 p-2.5 text-[#138C9F] hover:text-slate-600 dark:text-gray-400 transition-colors"
                       onClick={() => setShowRegPassword(!showRegPassword)}
                     >
                       <FontAwesomeIcon icon={showRegPassword ? faEyeSlash : faEye} />

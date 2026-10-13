@@ -101,7 +101,7 @@ const OtpInput = ({ length = 6, onComplete, onResend, email }) => {
 
   return (
     <div className="w-full" dir="rtl">
-      <div className="flex justify-center gap-3 mb-6">
+      <div className="flex justify-center gap-1.5 sm:gap-3 mb-6">
         {otp.map((digit, i) => (
           <input
             key={i}
@@ -114,7 +114,7 @@ const OtpInput = ({ length = 6, onComplete, onResend, email }) => {
             onKeyDown={(e) => handleKeyDown(i, e)}
             onPaste={handlePaste}
             onFocus={() => setActiveIndex(i)}
-            className={`w-12 h-14 text-center text-xl font-black rounded-xl border-2 transition-all outline-none
+            className={`w-10 sm:w-12 h-14 text-center text-xl font-black rounded-xl border-2 transition-all outline-none
               ${
                 activeIndex === i
                   ? "border-[#138C9F] bg-[#ecf8fa] dark:bg-gray-700 text-[#138C9F] shadow-md"

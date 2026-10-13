@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const PrivacyPolicy = () => {
@@ -41,11 +41,11 @@ const PrivacyPolicy = () => {
             <main className="max-w-152.5 w-full mx-auto px-5 sm:px-0 py-10 md:py-11 pb-15">
 
                 {/* صف زر العودة */}
-                <div className="text-right sm:translate-x-5">
+                <div className="text-right">
                     <a
                         href="/"
                         onClick={handleBack}
-                        className="inline-flex items-center gap-2 flex-row-reverse text-[#4B5563] text-lg font-semibold leading-7 hover:text-[#1e293b] dark:text-white transition-colors duration-200"
+                        className="inline-flex items-center gap-2 py-2 flex-row-reverse text-[#4B5563] text-lg font-semibold leading-7 hover:text-[#1e293b] dark:text-white transition-colors duration-200"
                     >
                         <span className="text-right">العودة للرئيسية</span>
 

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const FAQs = () => {
@@ -73,7 +73,7 @@ const FAQs = () => {
           <div className="flex justify-start mb-10">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 h-6 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] dark:text-white transition-colors duration-200"
+              className="flex items-center gap-2 py-2.5 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] dark:text-white transition-colors duration-200"
             >
               <span className="w-6 h-6 rounded-lg bg-[#e8edf5] flex items-center justify-center text-[#64748b]">
                 <svg className="w-3.75 h-3.75" viewBox="0 0 24 24" fill="none">

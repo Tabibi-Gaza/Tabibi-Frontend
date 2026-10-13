@@ -64,7 +64,7 @@ const Contact = () => {
             <div className="mb-12.5">
               <div className="flex gap-5 items-center mb-3.75">
                 <div
-                  className="w-7.5 h-7.5 rounded-[5px] flex justify-center items-center cursor-pointer"
+                  className="w-10 h-10 rounded-[5px] flex justify-center items-center cursor-pointer"
                   onClick={() => navigate("/about")}
                 >
                   <FontAwesomeIcon

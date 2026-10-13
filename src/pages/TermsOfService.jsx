@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TermsOfService = () => {
@@ -56,7 +56,7 @@ const TermsOfService = () => {
                 <div className="flex justify-end mb-10">
                     <button
                         onClick={() => navigate('/')}
-                        className="flex items-center gap-2 h-6 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] dark:text-white transition-colors duration-200"
+                        className="flex items-center gap-2 py-2.5 text-[#64748b] text-base font-extrabold cursor-pointer hover:text-[#1e293b] dark:text-white transition-colors duration-200"
                     >
                         <span>العودة للرئيسية</span>
                         <span className="w-6 h-6 rounded-lg bg-[#e8edf5] flex items-center justify-center text-[#64748b]">
