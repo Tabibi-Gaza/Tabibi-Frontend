@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { CreditCard, Plus, Edit2, Trash2, CheckCircle, XCircle, Eye, X, Loader2, Building2, Wallet, ToggleLeft, ToggleRight, Clock, Users, DollarSign, AlertCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
@@ -189,7 +189,7 @@ export default function AdminPaymentMethods() {
                 <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">{t('adminPaymentMethods.title')}</h2>
             </div>
 
-            <div className="flex gap-2 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-1 w-fit">
+            <div className="flex gap-2 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-1 w-full sm:w-fit overflow-x-auto">
                 <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'}`}>{t('adminPaymentMethods.paymentMethods')}</button>
                 <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'}`}>
                     مدفوعات الاشتراكات

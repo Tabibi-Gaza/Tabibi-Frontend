@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Send, Search, ArrowRight, Loader2, MessageSquare, UserPlus, X, Paperclip, Image, FileText, Trash2, Pin } from "lucide-react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -249,7 +249,7 @@ export default function AdminChats() {
     >
       <div className="w-full flex-1 p-2 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-4 md:gap-6">
         {/* Sidebar */}
-        <div className={`bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm flex flex-col overflow-hidden h-full ${showChatOnMobile ? "hidden md:flex" : "flex"}`}>
+        <div className={`bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm flex flex-col overflow-hidden h-[calc(100dvh-200px)] min-h-[560px] ${showChatOnMobile ? "hidden md:flex" : "flex"}`}>
           <div className="p-4 flex flex-col gap-3 border-b border-[#e9eff6]">
             <div className="flex items-center justify-between">
               <h2 className="text-[20px] font-extrabold text-[#138C9F] text-right">{t('adminChats.title')}</h2>
@@ -330,7 +330,7 @@ export default function AdminChats() {
         </div>
 
         {/* Chat Area */}
-        <div className={`bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm flex flex-col overflow-hidden h-full ${!showChatOnMobile ? "hidden md:flex" : "flex"}`}>
+        <div className={`bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm flex flex-col overflow-hidden h-[calc(100dvh-200px)] min-h-[560px] ${!showChatOnMobile ? "hidden md:flex" : "flex"}`}>
           {activeConversation ? (
             <>
               <div className="p-4 border-b border-[#e9eff6] dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">

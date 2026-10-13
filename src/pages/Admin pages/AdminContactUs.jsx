@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     FiSearch, FiEye, FiCornerUpLeft, FiTrash2,
     FiX, FiSend, FiCheckCircle, FiAlertCircle,
@@ -281,7 +281,7 @@ export default function AdminContactUs() {
             </div>
 
             {totalPages > 1 && (
-                <div className="flex justify-center items-center gap-2 mt-4" style={{ direction: 'ltr' }}>
+                <div className="flex flex-wrap justify-center items-center gap-2 mt-4" style={{ direction: 'ltr' }}>
                     <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
                         className="px-3 py-1 rounded border border-[#C3C6D6] dark:border-gray-700 text-[#434654] disabled:opacity-50 hover:bg-[#ecf8fa] dark:bg-gray-900 text-sm">{t('common.previous')}</button>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (

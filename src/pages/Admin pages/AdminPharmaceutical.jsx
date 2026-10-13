@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, ChevronRight, ChevronLeft, X, Pill } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -184,7 +184,7 @@ export default function AdminPharmaceutical() {
                 </div>
 
                 {/* SECTION 3: Dynamic Pagination Footer */}
-                <div className="bg-white dark:bg-gray-800 border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex flex-row justify-between items-center h-[73px]">
+                <div className="bg-white dark:bg-gray-800 border-t border-[#C3C6D6] dark:border-gray-700 px-6 py-4 flex flex-row flex-wrap justify-between items-center gap-3 min-h-[73px]">
   {/* جملة العرض الإحصائي السفلي */}
                     <div className="text-[14px] text-[#526069] dark:text-gray-400 font-bold">
                         عرض {totalItems === 0 ? 0 : indexOfFirstItem + 1} - {Math.min(indexOfLastItem, totalItems)} من إجمالي {totalItems} دواء
