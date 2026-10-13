@@ -137,8 +137,8 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
 
       <aside
         className={`
-          fixed top-[86.26px] right-0 z-48
-          w-72 h-[calc(100vh-86.26px)] bg-[#e2f4f7] dark:bg-gray-800 border-l border-slate-200 dark:border-gray-700
+          fixed top-16 md:top-[86.26px] right-0 z-48
+          w-72 h-[calc(100vh-64px)] md:h-[calc(100vh-86.26px)] bg-[#e2f4f7] dark:bg-gray-800 border-l border-slate-200 dark:border-gray-700
           flex flex-col justify-between
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}

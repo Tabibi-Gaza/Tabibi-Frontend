@@ -20,7 +20,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
           {/* زر الهامبرغر التفاعلي للهواتف */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden transition-colors"
+            className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden transition-colors"
             aria-label="Toggle Sidebar"
           >
             {sidebarOpen ? (

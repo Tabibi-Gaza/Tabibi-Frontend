@@ -28,7 +28,7 @@ const AdminLayout = () => {
           sidebarOpen={sidebarOpen}
         />
 
-        <div className="flex flex-1 w-full relative overflow-hidden">
+        <div className="flex flex-1 w-full relative">
           <AdminSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
@@ -41,7 +41,7 @@ const AdminLayout = () => {
             />
           )}
 
-          <main className="flex-1 p-4 md:p-8 overflow-y-auto md:max-h-[calc(100vh-86px)] text-right w-full md:w-auto">
+          <main className="flex-1 p-4 md:p-8 text-right w-full md:w-auto">
             <Outlet />
           </main>
         </div>

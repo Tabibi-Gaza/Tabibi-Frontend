@@ -14,6 +14,10 @@ export default function ScrollReveal({ children, animation = 'fadeUp', delay = 0
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      setVisible(true);
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -21,7 +25,7 @@ export default function ScrollReveal({ children, animation = 'fadeUp', delay = 0
           obs.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: '0px 0px -8% 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -36,6 +40,7 @@ export default function ScrollReveal({ children, animation = 'fadeUp', delay = 0
         transition: `all ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms`,
         transform: visible ? a.end : a.start,
         opacity: visible ? 1 : 0,
+        overflowX: 'hidden',
       }}
     >
       {children}

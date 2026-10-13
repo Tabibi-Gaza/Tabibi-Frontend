@@ -25,7 +25,7 @@ const DoctorLayout = () => {
             <div className="flex flex-1 relative">
                 <DoctorSidebar isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
-                <main className="flex-1 p-4 md:p-8 md:pr-72 min-h-[calc(100vh-86.26px)] text-right transition-all duration-300 overflow-x-hidden">
+                <main className="flex-1 p-4 md:p-8 md:pr-72 min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-86.26px)] text-right transition-all duration-300">
                     <Outlet />
                 </main>
             </div>

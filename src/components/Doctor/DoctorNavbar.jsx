@@ -132,7 +132,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
       <div className="flex items-center gap-3 shrink-0">
         <button
           onClick={onMenuToggle}
-          className="p-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden transition-colors"
+          className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden transition-colors"
           aria-label="Toggle Sidebar"
         >
           {isMenuOpen ? (

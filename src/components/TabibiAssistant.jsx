@@ -372,7 +372,7 @@ const TabibiAssistant = () => {
       {open && (
         <div
           dir="rtl"
-          className="fixed left-3 bottom-32 z-[9998] w-[calc(100vw-1.5rem)] max-w-[420px] h-[min(600px,calc(100dvh-9rem))] rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl flex flex-col overflow-hidden"
+          className="fixed left-3 bottom-32 z-[45] w-[calc(100vw-1.5rem)] max-w-[420px] h-[min(600px,calc(100dvh-9rem))] rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl flex flex-col overflow-hidden"
         >
           <div className="flex items-center gap-3 px-4 py-3.5 border-b border-gray-100 dark:border-gray-700 shrink-0">
             <div dir="ltr" className="relative w-11 h-11 rounded-full bg-[#E8F7F9] dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-1 shrink-0">
@@ -424,7 +424,7 @@ const TabibiAssistant = () => {
                   key={q}
                   type="button"
                   onClick={() => send(q)}
-                  className="text-xs font-bold px-3.5 py-2 rounded-full border border-[#138C9F]/40 text-[#138C9F] hover:bg-[#138C9F]/10 transition-colors cursor-pointer"
+                  className="text-xs font-bold px-3.5 py-2.5 rounded-full border border-[#138C9F]/40 text-[#138C9F] hover:bg-[#138C9F]/10 transition-colors cursor-pointer"
                 >
                   {q}
                 </button>
@@ -469,7 +469,7 @@ const TabibiAssistant = () => {
         </div>
       )}
 
-      <div dir="ltr" className="fixed left-3 bottom-6 z-[9999] flex items-end gap-2">
+      <div dir="ltr" className="fixed left-3 bottom-6 z-[45] flex items-end gap-2">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}

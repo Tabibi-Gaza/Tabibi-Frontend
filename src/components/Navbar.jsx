@@ -75,7 +75,7 @@ const Navbar = () => {
         </div>
 
         {/* ---- القائمة المركزية للشاشات الكبيرة والمتوسطة ---- */}
-        <ul className="hidden md:flex items-center gap-6 lg:gap-8 font-medium text-gray-800 dark:text-gray-200 text-sm lg:text-base">
+        <ul className="hidden lg:flex items-center gap-6 lg:gap-8 font-medium text-gray-800 dark:text-gray-200 text-sm lg:text-base">
           {displayLinks.map((link, index) => (
             <li key={index}>
               <NavLink
@@ -127,7 +127,7 @@ const Navbar = () => {
           {/* زر تبديل اللغة */}
           <button
             onClick={toggleLang}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 font-bold text-xs cursor-pointer"
+            className="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 font-bold text-xs cursor-pointer"
             title={t('common.language')}
           >
             {lang === 'ar' ? 'EN' : 'ع'}
@@ -136,7 +136,7 @@ const Navbar = () => {
           {/* زر Dark Mode */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 cursor-pointer"
+            className="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 cursor-pointer"
             title={theme === 'dark' ? t('common.lightMode') : t('common.darkMode')}
           >
             {theme === 'dark' ? (
@@ -160,7 +160,7 @@ const Navbar = () => {
                     setShowProfileMenu(false);
                     markAllAsRead();
                   }}
-                  className="p-1.5 sm:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 relative focus:outline-none"
+                  className="p-2 sm:p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 relative focus:outline-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -178,10 +178,10 @@ const Navbar = () => {
                   </svg>
                   {unreadCount > 0 && (
                     <span
-                      className="absolute top-1 right-1 bg-red-500 text-white text-[9px] sm:text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold animate-pulse"
+                      className="absolute top-1 right-1 bg-red-500 text-white text-[9px] sm:text-[10px] min-w-4 h-4 px-0.5 rounded-full flex items-center justify-center font-bold animate-pulse"
                       style={{ direction: "ltr" }}
                     >
-                      {unreadCount}
+                      {unreadCount > 99 ? "99+" : unreadCount}
                     </span>
                   )}
                 </button>
@@ -190,7 +190,7 @@ const Navbar = () => {
                 {showNotifMenu && (
                   <>
                     <div
-                      className="fixed inset-0 bg-black/5 z-40 md:hidden"
+                      className="fixed inset-0 bg-black/5 z-40 lg:hidden"
                       onClick={() => setShowNotifMenu(false)}
                     />
 
@@ -304,7 +304,7 @@ const Navbar = () => {
 
                 {/* الحاوية المنبثقة الذكية للملف الشخصي */}
                 {showProfileMenu && (
-                  <div className="absolute left-0 mt-3 min-w-48 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 shadow-xl rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col p-2 whitespace-nowrap z-50 transition-all duration-200">
+                  <div className="absolute left-0 mt-3 min-w-48 max-w-[calc(100vw-2rem)] max-h-[70vh] overflow-y-auto bg-white dark:bg-gray-800 shadow-xl rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col p-2 z-50 transition-all duration-200">
                     {isAdmin && (
                       <>
                         <p
@@ -447,7 +447,7 @@ const Navbar = () => {
               setShowNotifMenu(false);
               setShowProfileMenu(false);
             }}
-            className="p-1.5 rounded-xl md:hidden hover:bg-gray-100 dark:hover:bg-gray-700 active:scale-95 transition-all focus:outline-none shrink-0 flex items-center justify-center"
+            className="p-2 rounded-xl lg:hidden hover:bg-gray-100 dark:hover:bg-gray-700 active:scale-95 transition-all focus:outline-none shrink-0 flex items-center justify-center"
           >
             <img
               loading="lazy"
@@ -474,7 +474,7 @@ const Navbar = () => {
       {/* ---- القائمة الجانبية لشاشات الموبايل (Responsive Drawer) ---- */}
       {/* تم سحبها برة div النافبار (اللي كان عليه z-[50]) عشان متبقاش محبوسة جوه الـ stacking context بتاعه */}
       <div
-        className={`md:hidden rounded-l-2xl fixed top-0 right-0 h-screen z-[70] bg-white dark:bg-gray-900 transition-all duration-300 ease-in-out flex flex-col shadow-2xl border-l border-gray-200 dark:border-gray-700 overflow-hidden ${
+        className={`lg:hidden rounded-l-2xl fixed top-0 right-0 h-screen z-[70] bg-white dark:bg-gray-900 transition-all duration-300 ease-in-out flex flex-col shadow-2xl border-l border-gray-200 dark:border-gray-700 overflow-hidden ${
           showMenu
             ? "w-full sm:w-80 opacity-100 pointer-events-auto"
             : "w-0 opacity-0 pointer-events-none"

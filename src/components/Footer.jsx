@@ -22,9 +22,9 @@ const Footer = () => {
   ];
 
   return (
-    <div className='w-full bg-[#f3f4f6] dark:bg-gray-900 grid grid-cols-1 lg:grid-cols-12 border-gray-100 dark:border-gray-700 mt-20' dir='rtl'>
+    <div className='w-full bg-[#f3f4f6] dark:bg-gray-900 grid grid-cols-1 lg:grid-cols-12 border-gray-100 dark:border-gray-700 mt-20 pb-24 sm:pb-16 lg:pb-6' dir='rtl'>
       {/* الجزء الأيمن (الشعار والتعريف) - متجاوب بالكامل في الانحناءات والمساحات */}
-      <div className='col-span-1 lg:col-span-4 bg-white dark:bg-gray-800 p-8 md:p-12 lg:p-16 flex flex-col justify-between items-center lg:items-start relative z-10 border-none rounded-b-[100px] sm:rounded-b-[100px] lg:rounded-b-none lg:rounded-l-[150px] xl:rounded-l-[250px] shadow-sm'>
+      <div className='col-span-1 lg:col-span-4 bg-white dark:bg-gray-800 p-8 md:p-12 lg:p-16 flex flex-col justify-between items-center lg:items-start relative z-10 border-none rounded-b-[48px] sm:rounded-b-[80px] lg:rounded-b-none lg:rounded-l-[150px] xl:rounded-l-[250px] shadow-sm'>
         <div className='flex flex-col gap-6 w-full mt-4 text-center lg:text-right'>
           <Link 
             className='block transform hover:scale-105 transition-transform duration-300 mx-auto lg:mx-0 w-fit' 
@@ -49,7 +49,7 @@ const Footer = () => {
               href='https://www.instagram.com/tabibi_gaza/'
               target='_blank'
               rel='noopener noreferrer'
-              className='w-8 h-8 rounded-full bg-[#E4405F] text-white flex items-center justify-center hover:opacity-80 transition-all duration-300'
+              className='w-10 h-10 rounded-full bg-[#E4405F] text-white flex items-center justify-center hover:opacity-80 transition-all duration-300'
               aria-label='Instagram'
             >
               <svg className='w-4 h-4' fill='currentColor' viewBox='0 0 24 24'>
@@ -60,7 +60,7 @@ const Footer = () => {
               href='https://www.linkedin.com/company/tabibi-gaza/'
               target='_blank'
               rel='noopener noreferrer'
-              className='w-8 h-8 rounded-full bg-[#0A66C2] text-white flex items-center justify-center hover:opacity-80 transition-all duration-300'
+              className='w-10 h-10 rounded-full bg-[#0A66C2] text-white flex items-center justify-center hover:opacity-80 transition-all duration-300'
               aria-label='LinkedIn'
             >
               <svg className='w-4 h-4' fill='currentColor' viewBox='0 0 24 24'>

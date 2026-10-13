@@ -29,7 +29,15 @@
 }
 
 .active hr { @apply block }
-::-webkit-scrollbar { @apply hidden }
+/* Scrollbars: thin and visible so scrollable areas (tables, lists) stay discoverable on desktop */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+html { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+.dark html, html.dark { scrollbar-color: #475569 transparent; }
 
 .terms-card p,
 .terms-card h2 {
