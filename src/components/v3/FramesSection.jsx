@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faChevronDown, faAngleDown, faGlobe } from "@fortawesome/free-solid-svg-icons";
@@ -8,9 +9,29 @@ function FramesSection() {
   const [speciality, setSpeciality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const isEn = i18n.language === "en";
   const { data: specs, isLoading } = useSpecializations();
   const videoRef = useRef(null);
   const [videoSrc, setVideoSrc] = useState(undefined);
+
+  const L = isEn ? {
+    eyebrow: "— Tabibi healthcare platform —",
+    title: "Your health journey starts",
+    subtitle: "Right here — the latest technology and the most skilled doctors",
+    loading: "Loading specialties...",
+    placeholder: "Search for the medical specialty you need...",
+    allSpecialties: "All medical specialties",
+    searchBtn: "Quick search",
+  } : {
+    eyebrow: "— منصة طبيبي للخدمات الصحية —",
+    title: "رحلة صحتك تبدأ",
+    subtitle: "من هنا — أحدث التقنيات وأمهر الأطباء",
+    loading: "جاري تحميل التخصصات...",
+    placeholder: "ابحث عن تخصص الطبيب المطلوب...",
+    allSpecialties: "جميع التخصصات الطبية",
+    searchBtn: "بحث سريع",
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -49,7 +70,7 @@ function FramesSection() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir="rtl">
+    <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir={isEn ? "ltr" : "rtl"}>
       <video
         ref={videoRef}
         autoPlay
@@ -66,13 +87,13 @@ function FramesSection() {
       <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6" style={{ zIndex: 2 }}>
         <div className="w-full max-w-4xl text-center mb-8 md:mb-10">
           <span className="text-white/60 text-xs sm:text-sm font-bold tracking-widest block mb-4 drop-shadow">
-            — منصة طبيبي للخدمات الصحية —
+            {L.eyebrow}
           </span>
           <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
-            رحلة صحتك تبدأ
+            {L.title}
           </h1>
           <p className="text-sm sm:text-lg md:text-xl text-[#b3e5e8] font-bold mt-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
-            من هنا — أحدث التقنيات وأمهر الأطباء
+            {L.subtitle}
           </p>
         </div>
 
@@ -87,13 +108,13 @@ function FramesSection() {
               >
                 <div className="flex items-center gap-3 select-none overflow-hidden">
                   <FontAwesomeIcon icon={faSearch} className="text-[#138C9F] text-lg shrink-0" />
-                  <span className={`font-extrabold text-right tracking-wide text-xs sm:text-sm md:text-base truncate ${
+                  <span className={`font-extrabold text-start tracking-wide text-xs sm:text-sm md:text-base truncate ${
                     speciality ? "text-slate-900" : "text-slate-400"
                   }`}>
-                    {isLoading ? "جاري تحميل التخصصات..." : selected?.label || "ابحث عن تخصص الطبيب المطلوب..."}
+                    {isLoading ? L.loading : selected?.label || L.placeholder}
                   </span>
                 </div>
-                <FontAwesomeIcon icon={faChevronDown} className={`text-xs mr-2 shrink-0 transition-transform duration-300 text-slate-400 ${isOpen ? "rotate-180 text-[#138C9F]" : ""}`} />
+                <FontAwesomeIcon icon={faChevronDown} className={`text-xs ms-2 shrink-0 transition-transform duration-300 text-slate-400 ${isOpen ? "rotate-180 text-[#138C9F]" : ""}`} />
               </div>
 
               {isOpen && (
@@ -104,9 +125,9 @@ function FramesSection() {
                     }`}>
                     <div className="flex items-center gap-2.5">
                       <FontAwesomeIcon icon={faGlobe} className="text-base text-slate-500" />
-                      <span>جميع التخصصات الطبية</span>
+                      <span>{L.allSpecialties}</span>
                     </div>
-                    {speciality === "" && <span className="text-slate-900 font-black text-xs ml-1">✓</span>}
+                    {speciality === "" && <span className="text-slate-900 font-black text-xs ms-1">✓</span>}
                   </div>
                   {options.map((opt) => (
                     <div key={opt.id} onClick={() => { setSpeciality(opt.id); setIsOpen(false); }}
@@ -114,7 +135,7 @@ function FramesSection() {
                         speciality === opt.id ? "bg-[#138C9F] text-white" : "text-slate-700 hover:bg-slate-50 hover:text-[#138C9F]"
                       }`}>
                       <span className="font-extrabold truncate">{opt.label}</span>
-                      {speciality === opt.id && <span className="text-white font-black text-xs ml-1 shrink-0">✓</span>}
+                      {speciality === opt.id && <span className="text-white font-black text-xs ms-1 shrink-0">✓</span>}
                     </div>
                   ))}
                 </div>
@@ -122,7 +143,7 @@ function FramesSection() {
             </div>
             <button type="submit" disabled={isLoading}
               className="w-full md:w-auto bg-[#138C9F] text-white font-black text-sm md:text-base px-10 py-3.5 rounded-xl md:rounded-full hover:bg-[#0f7282] hover:shadow-lg hover:shadow-[#138C9F]/20 transition-all duration-200 active:scale-[0.98] whitespace-nowrap shrink-0 disabled:opacity-50 cursor-pointer">
-              بحث سريع
+              {L.searchBtn}
             </button>
           </form>
         </div>

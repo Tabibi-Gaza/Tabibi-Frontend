@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faArrowLeft, faArrowRight, faQuoteRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../../api/axiosInstance";
 import { resolveImageUrl } from "../../utils/imageUrl";
+import { translateText } from "../../utils/translate";
 
-const FILES_URL = import.meta.env.VITE_Files_URL || "";
-
-function TextWithMore({ text, onShowMore }) {
+function TextWithMore({ text, onShowMore, moreLabel }) {
   const displayRef = useRef(null);
   const measureRef = useRef(null);
   const [overflow, setOverflow] = useState(false);
@@ -27,13 +27,13 @@ function TextWithMore({ text, onShowMore }) {
       <p ref={displayRef} className="text-slate-700 dark:text-gray-300 text-sm md:text-base leading-relaxed font-bold line-clamp-2">
         "{text}"
       </p>
-      <p ref={measureRef} className="text-slate-700 dark:text-gray-300 text-sm md:text-base leading-relaxed font-bold absolute top-0 right-0 pointer-events-none opacity-0" aria-hidden="true">
+      <p ref={measureRef} className="text-slate-700 dark:text-gray-300 text-sm md:text-base leading-relaxed font-bold absolute top-0 start-0 pointer-events-none opacity-0" aria-hidden="true">
         "{text}"
       </p>
       <div className="h-[18px] md:h-[20px]">
         {overflow && (
           <button onClick={onShowMore} className="text-[#138C9F] text-xs font-bold mt-0.5 hover:underline cursor-pointer">
-            عرض المزيد
+            {moreLabel}
           </button>
         )}
       </div>
@@ -42,7 +42,10 @@ function TextWithMore({ text, onShowMore }) {
 }
 
 function ReviewsGrid() {
+  const { i18n } = useTranslation();
+  const isEn = i18n.language === "en";
   const [reviews, setReviews] = useState([]);
+  const [translated, setTranslated] = useState({});
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [perPage, setPerPage] = useState(window.innerWidth < 640 ? 1 : 2);
@@ -63,6 +66,49 @@ function ReviewsGrid() {
     };
     fetchReviews();
   }, []);
+
+  useEffect(() => {
+    if (!isEn || reviews.length === 0) {
+      setTranslated({});
+      return;
+    }
+    let alive = true;
+    (async () => {
+      const map = {};
+      await Promise.all(reviews.map(async (r, i) => {
+        const comment = await translateText(r.comment);
+        const spec = await translateText(r.specializationName);
+        map[i] = { comment, spec };
+      }));
+      if (alive) setTranslated(map);
+    })();
+    return () => { alive = false; };
+  }, [isEn, reviews]);
+
+  const L = isEn ? {
+    badge: "What our patients say",
+    title1: "Real success stories from ",
+    title2: "our patients",
+    sub: "More than 1,000 patients trusted Tabibi to book their medical appointments",
+    more: "Show more",
+    empty: "No reviews available yet",
+    prev: "Previous page",
+    next: "Next page",
+    rated: "reviewed their appointment",
+  } : {
+    badge: "ماذا يقول مرضانا",
+    title1: "قصص نجاح حقيقية من ",
+    title2: "مرضانا",
+    sub: "أكثر من 1,000 مريض وثقوا في طبيبي لحجز مواعيدهم الطبية",
+    more: "عرض المزيد",
+    empty: "لا توجد تقييمات متاحة حالياً",
+    prev: "الصفحة السابقة",
+    next: "الصفحة التالية",
+    rated: "قيّم مواعده",
+  };
+
+  const getComment = (review, idx) => (isEn && translated[idx]?.comment) ? translated[idx].comment : review.comment;
+  const getSpec = (review, idx) => (isEn && translated[idx]?.spec) ? translated[idx].spec : review.specializationName;
 
   const totalPages = Math.ceil(reviews.length / perPage);
 
@@ -93,18 +139,22 @@ function ReviewsGrid() {
 
   const visible = reviews.slice(page * perPage, (page + 1) * perPage);
 
+  const doctorAvatar = (review) =>
+    resolveImageUrl(review.doctorImage) ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(review.doctorName || review.clinicName || "Doctor")}&background=138C9F&color=fff&size=80`;
+
   return (
-    <section className="bg-gradient-to-b from-white to-slate-50 dark:from-gray-800 dark:to-gray-900 py-14 md:py-28" dir="rtl">
+    <section className="bg-gradient-to-b from-white to-slate-50 dark:from-gray-800 dark:to-gray-900 py-14 md:py-28" dir={isEn ? "ltr" : "rtl"}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide mb-4">
-            ماذا يقول مرضانا
+            {L.badge}
           </span>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 dark:text-gray-200 leading-tight">
-            قصص نجاح حقيقية من <span className="text-[#138C9F]">مرضانا</span>
+            {L.title1}<span className="text-[#138C9F]">{L.title2}</span>
           </h2>
           <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base mt-4 max-w-2xl mx-auto font-bold">
-            أكثر من 1,000 مريض وثقوا في طبيبي لحجز مواعيدهم الطبية
+            {L.sub}
           </p>
         </div>
 
@@ -121,13 +171,15 @@ function ReviewsGrid() {
             ))}
           </div>
         ) : reviews.length === 0 ? (
-          <p className="text-center text-slate-400 dark:text-gray-500 font-bold text-sm py-10">لا توجد تقييمات متاحة حالياً</p>
+          <p className="text-center text-slate-400 dark:text-gray-500 font-bold text-sm py-10">{L.empty}</p>
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-7xl items-stretch">
-              {visible.map((review, i) => (
+              {visible.map((review, i) => {
+                const idx = page * perPage + i;
+                return (
                 <motion.div
-                  key={page * perPage + i}
+                  key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.1 }}
@@ -142,12 +194,12 @@ function ReviewsGrid() {
                             <FontAwesomeIcon key={s} icon={faStar} className="text-amber-400 text-xs md:text-sm" />
                           ))}
                         </div>
-                        <TextWithMore text={review.comment} onShowMore={() => setPopupReview(review)} />
+                        <TextWithMore text={getComment(review, idx)} moreLabel={L.more} onShowMore={() => setPopupReview({ review, idx })} />
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between gap-3 pt-4 border-t border-slate-100 dark:border-gray-700">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
                       <img
                         loading="lazy"
                         decoding="async"
@@ -160,23 +212,40 @@ function ReviewsGrid() {
                         alt={review.patientName}
                         className="w-10 h-10 md:w-11 md:h-11 rounded-xl object-cover shrink-0"
                       />
-                      <div className="text-right flex-1 min-w-0">
-                        <h3 className="font-black text-slate-900 dark:text-gray-200 text-sm">{review.patientName}</h3>
-                        <span className="text-[11px] font-bold text-[#138C9F]/60 bg-[#138C9F]/5 px-2 py-0.5 rounded-full">{review.specializationName}</span>
+                      <div className="text-start flex-1 min-w-0">
+                        <h3 className="font-black text-slate-900 dark:text-gray-200 text-sm truncate">{review.patientName}</h3>
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-gray-500">{L.rated}</span>
                       </div>
                     </div>
-                    <div className="text-left text-[10px] text-slate-400 dark:text-gray-500 font-bold shrink-0">
-                      {review.clinicName}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <div className="text-end min-w-0 max-w-[150px]">
+                        <p className="text-[11px] font-black text-slate-600 dark:text-gray-300 truncate">{review.clinicName}</p>
+                        {getSpec(review, idx) && (
+                          <span className="inline-block text-[10px] font-bold text-[#138C9F]/80 bg-[#138C9F]/10 px-2 py-0.5 rounded-full mt-0.5">
+                            {getSpec(review, idx)}
+                          </span>
+                        )}
+                      </div>
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        width="40"
+                        height="40"
+                        src={doctorAvatar(review)}
+                        alt={review.doctorName || review.clinicName}
+                        className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-cover shrink-0 border border-slate-100 dark:border-gray-700"
+                      />
                     </div>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
 
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-3 md:gap-4 mt-8 md:mt-10">
-                <button onClick={prevPage} aria-label="الصفحة السابقة" className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
-                  <FontAwesomeIcon icon={faArrowRight} className="text-xs md:text-sm" />
+                <button onClick={prevPage} aria-label={L.prev} className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
+                  <FontAwesomeIcon icon={isEn ? faArrowLeft : faArrowRight} className="text-xs md:text-sm" />
                 </button>
                 <div className="flex items-center gap-2">
                   {Array.from({ length: totalPages }).map((_, i) => (
@@ -184,7 +253,7 @@ function ReviewsGrid() {
                       key={i}
                       type="button"
                       onClick={() => setPage(i)}
-                      aria-label={`الصفحة ${i + 1}`}
+                      aria-label={`${L.prev} ${i + 1}`}
                       aria-current={i === page ? "page" : undefined}
                       className="relative flex items-center justify-center px-2 py-2 -mx-2 -my-2 cursor-pointer"
                     >
@@ -192,8 +261,8 @@ function ReviewsGrid() {
                     </button>
                   ))}
                 </div>
-                <button onClick={nextPage} aria-label="الصفحة التالية" className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
-                  <FontAwesomeIcon icon={faArrowLeft} className="text-xs md:text-sm" />
+                <button onClick={nextPage} aria-label={L.next} className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:bg-[#138C9F] hover:text-white hover:border-[#138C9F] transition-all duration-300 shadow-sm cursor-pointer">
+                  <FontAwesomeIcon icon={isEn ? faArrowRight : faArrowLeft} className="text-xs md:text-sm" />
                 </button>
               </div>
             )}
@@ -202,7 +271,7 @@ function ReviewsGrid() {
       </div>
 
       {popupReview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8" dir="rtl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8" dir={isEn ? "ltr" : "rtl"}>
           <div className="absolute inset-0 bg-black/50" onClick={() => setPopupReview(null)} />
           <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto p-6 md:p-8">
             <button onClick={() => setPopupReview(null)} className="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-gray-700 flex items-center justify-center text-slate-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors cursor-pointer">
@@ -215,28 +284,44 @@ function ReviewsGrid() {
                 width="48"
                 height="48"
                 src={
-                  resolveImageUrl(popupReview.patientImage) ||
-                  `https://ui-avatars.com/api/?name=${encodeURIComponent(popupReview.patientName)}&background=138C9F&color=fff&size=96`
+                  resolveImageUrl(popupReview.review.patientImage) ||
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(popupReview.review.patientName)}&background=138C9F&color=fff&size=96`
                 }
-                alt={popupReview.patientName}
+                alt={popupReview.review.patientName}
                 className="w-12 h-12 rounded-xl object-cover shrink-0"
               />
               <div>
-                <h3 className="font-black text-slate-900 dark:text-gray-200">{popupReview.patientName}</h3>
-                <span className="text-xs font-bold text-[#138C9F]/60">{popupReview.specializationName}</span>
+                <h3 className="font-black text-slate-900 dark:text-gray-200">{popupReview.review.patientName}</h3>
+                <span className="text-xs font-bold text-slate-400 dark:text-gray-500">{L.rated}</span>
               </div>
             </div>
             <div className="flex items-center gap-1 mb-4" dir="ltr">
-              {[...Array(popupReview.rating)].map((_, s) => (
+              {[...Array(popupReview.review.rating)].map((_, s) => (
                 <FontAwesomeIcon key={s} icon={faStar} className="text-amber-400" />
               ))}
             </div>
             <p className="text-slate-700 dark:text-gray-300 text-base leading-relaxed font-bold">
-              "{popupReview.comment}"
+              "{getComment(popupReview.review, popupReview.idx)}"
             </p>
-            {popupReview.clinicName && (
-              <p className="text-xs text-slate-400 dark:text-gray-500 font-bold mt-4">{popupReview.clinicName}</p>
-            )}
+            <div className="flex items-center gap-2 mt-4">
+              <img
+                loading="lazy"
+                decoding="async"
+                width="36"
+                height="36"
+                src={doctorAvatar(popupReview.review)}
+                alt={popupReview.review.doctorName || popupReview.review.clinicName}
+                className="w-9 h-9 rounded-lg object-cover shrink-0"
+              />
+              <div>
+                {popupReview.review.clinicName && (
+                  <p className="text-xs font-black text-slate-600 dark:text-gray-300">{popupReview.review.clinicName}</p>
+                )}
+                {getSpec(popupReview.review, popupReview.idx) && (
+                  <span className="text-[11px] font-bold text-[#138C9F]/70">{getSpec(popupReview.review, popupReview.idx)}</span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}

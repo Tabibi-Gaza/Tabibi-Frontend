@@ -1,5 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useSpecializations } from "../../hooks/specializations/useSpecializations";
 import { AppContext } from "../../context/AppContext";
 import axiosInstance from "../../api/axiosInstance";
@@ -24,22 +25,77 @@ const keywordMap = [
   { keywords: ["باطنة", "سكري", "ضغط", "الغدة", "هرمون", "دموية", "سرطان", "التهاب", "تشخيص"], specialty: "طب الباطنة", icon: "🏥" },
 ];
 
-const initialMessages = [
+const getInitialMessages = (isEn) => isEn ? [
+  { type: "bot", text: "Hello! I'm your smart medical assistant 🩺" },
+  { type: "bot", text: "Tell me your symptoms and I'll guide you to the right specialty." },
+] : [
   { type: "bot", text: "مرحباً! أنا مساعد طبي ذكي 🩺" },
   { type: "bot", text: "أخبرني عن أعراضك وأنا أوجهك للتخصص المناسب." },
 ];
 
 const AIAssistant = () => {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const isEn = i18n.language === "en";
   const { data: specializationsList = [] } = useSpecializations();
   const { userData } = useContext(AppContext);
-  const [messages, setMessages] = useState(initialMessages);
+  const [messages, setMessages] = useState(() => getInitialMessages(i18n.language === "en"));
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [result, setResult] = useState(null);
   const [matchedDoctors, setMatchedDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(false);
   const chatContainerRef = useRef(null);
+
+  const L = isEn ? {
+    badge: "Smart medical assistant",
+    h1: "Enter your symptoms",
+    h2: "and we'll guide you",
+    h3: "to the right",
+    h4: "medical specialty",
+    intro: "With our smart assistant you can find the right medical specialty for your case — and we'll search for the specialized doctors for you.",
+    matchMsg: "Based on your symptoms, I suggest the following specialty:",
+    noMatch: "I couldn't identify the right specialty. Try describing your symptoms more clearly, e.g.: headache, toothache, sinus, skin problem...",
+    typing: "Analyzing your symptoms...",
+    placeholder: "Type your symptoms... (e.g. sinus, headache, toothache)",
+    send: "Send",
+    emptyResult: "The recommended specialty will appear",
+    emptyResult2: "here after you describe your symptoms",
+    recommended: "Recommended specialty",
+    bookNow: "Book an appointment now",
+    reset: "Start over",
+    searching: "Searching for available doctors...",
+    doctorsIn: (loc) => `Doctors available in ${loc}`,
+    doctorsAvailable: "Available doctors",
+    bookBtn: "Book now",
+    noDoctors: (loc) => `No doctors available in ${loc} right now`,
+    noDoctorsAny: "No doctors available right now",
+    viewAll: "View all doctors",
+  } : {
+    badge: "مساعد طبي ذكي",
+    h1: "أدخل أعراضك",
+    h2: "وسنوجهك",
+    h3: "للتخصص الطبي",
+    h4: "الصحيح",
+    intro: "بمساعدتنا ننصحك، يمكنك الآن معرفة التخصص الطبي المناسب لحالتك ونوجهك عليه ونبحث لك عن الأطباء المتخصصين.",
+    matchMsg: "بناءً على أعراضك، أقترح عليك التخصص التالي:",
+    noMatch: "لم أتمكن من تحديد التخصص المناسب. حاول وصف أعراضك بشكل أوضح، مثل: صداع، ألم أسنان، جيوب أنفية، مشكلة في الجلد...",
+    typing: "يُحلّل أعراضك...",
+    placeholder: "اكتب أعراضك هنا... (مثال: جيوب أنفية، صداع، ألم أسنان)",
+    send: "أرسل",
+    emptyResult: "سيظهر التخصص الطبي المناسب",
+    emptyResult2: "هنا بعد وصف الأعراض",
+    recommended: "التخصص الموصى به",
+    bookNow: "احجز موعد الآن",
+    reset: "إعادة التحديد",
+    searching: "جاري البحث عن أطباء متاحين...",
+    doctorsIn: (loc) => `أطباء متوفرون في ${loc}`,
+    doctorsAvailable: "أطباء متوفرون",
+    bookBtn: "احجز الآن",
+    noDoctors: (loc) => `لم نجد أطباء متوفرين في ${loc} حالياً`,
+    noDoctorsAny: "لم نجد أطباء متوفرين حالياً",
+    viewAll: "عرض جميع الأطباء",
+  };
 
   const patientLocation = userData?.address?.line1 || "";
 
@@ -107,14 +163,14 @@ const AIAssistant = () => {
       if (match) {
         setMessages((prev) => [
           ...prev,
-          { type: "bot", text: `بناءً على أعراضك، أقترح عليك التخصص التالي:` },
+          { type: "bot", text: L.matchMsg },
         ]);
         setResult(match);
         fetchMatchingDoctors(match.name);
       } else {
         setMessages((prev) => [
           ...prev,
-          { type: "bot", text: "لم أتمكن من تحديد التخصص المناسب. حاول وصف أعراضك بشكل أوضح، مثل: صداع، ألم أسنان، جيوب أنفية، مشكلة في الجلد..." },
+          { type: "bot", text: L.noMatch },
         ]);
       }
       setIsTyping(false);
@@ -137,14 +193,14 @@ const AIAssistant = () => {
   };
 
   const handleReset = () => {
-    setMessages(initialMessages);
+    setMessages(getInitialMessages(isEn));
     setResult(null);
     setMatchedDoctors([]);
     setInput("");
   };
 
   return (
-    <div className="relative py-16 px-4 dark:bg-gray-900" dir="rtl">
+    <div className="relative py-16 px-4 dark:bg-gray-900" dir={isEn ? "ltr" : "rtl"}>
       <div className="max-w-6xl mx-auto">
         <div className="bg-[#0B1437] dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
@@ -153,25 +209,25 @@ const AIAssistant = () => {
             <div className="p-8 lg:p-12 flex flex-col min-h-[500px]">
               <div className="flex justify-end mb-6">
                 <span className="bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2">
-                  <span className="text-lg">🩺</span> مساعد طبي ذكي
+                  <span className="text-lg">🩺</span> {L.badge}
                 </span>
               </div>
 
               <h2 className="text-3xl lg:text-4xl font-black text-white leading-tight mb-4">
-                أدخل أعراضك
+                {L.h1}
                 <br />
-                وسنوجهك
+                {L.h2}
                 <br />
-                <span className="text-[#4FC3F7]">للتخصص الطبي</span>
+                <span className="text-[#4FC3F7]">{L.h3}</span>
                 <br />
-                <span className="text-[#4FC3F7]">الصحيح</span>
+                <span className="text-[#4FC3F7]">{L.h4}</span>
               </h2>
 
               <p className="text-slate-300 text-sm font-medium mb-6 max-w-md">
-                بمساعدتنا ننصحك، يمكنك الآن معرفة التخصص الطبي المناسب لحالتك ونوجهك عليه ونبحث لك عن الأطباء المتخصصين.
+                {L.intro}
               </p>
 
-              <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-3 mb-4 max-h-[250px] pr-2">
+              <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-3 mb-4 max-h-[250px] pe-2">
                 {messages.map((msg, i) => (
                   <div key={i} className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}>
                     <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm font-medium ${
@@ -186,7 +242,7 @@ const AIAssistant = () => {
                 {isTyping && (
                   <div className="flex justify-start">
                     <div className="bg-white/10 text-white px-4 py-3 rounded-2xl rounded-br-sm text-sm">
-                      <span className="animate-pulse">يُحلّل أعراضك...</span>
+                      <span className="animate-pulse">{L.typing}</span>
                     </div>
                   </div>
                 )}
@@ -198,7 +254,7 @@ const AIAssistant = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="اكتب أعراضك هنا... (مثال: جيوب أنفية، صداع، ألم أسنان)"
+                  placeholder={L.placeholder}
                   className="flex-1 bg-white/10 text-white placeholder-slate-400 text-sm font-medium px-4 py-3 rounded-xl border border-white/10 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent outline-none transition-all"
                 />
                 <button
@@ -206,7 +262,7 @@ const AIAssistant = () => {
                   disabled={!input.trim() || isTyping}
                   className="bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold px-6 py-3 rounded-xl transition-all text-sm cursor-pointer disabled:opacity-40"
                 >
-                  أرسل
+                  {L.send}
                 </button>
               </div>
             </div>
@@ -219,9 +275,9 @@ const AIAssistant = () => {
                     <span className="text-5xl opacity-30">🩺</span>
                   </div>
                   <p className="text-slate-400 text-sm font-medium">
-                    سيظهر التخصص الطبي المناسب
+                    {L.emptyResult}
                     <br />
-                    هنا بعد وصف الأعراض
+                    {L.emptyResult2}
                   </p>
                 </div>
               ) : (
@@ -230,7 +286,7 @@ const AIAssistant = () => {
                     <div className="w-16 h-16 mx-auto bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-4">
                       <span className="text-3xl">{result.icon}</span>
                     </div>
-                    <p className="text-xs text-[#138C9F] font-bold text-center mb-1">التخصص الموصى به</p>
+                    <p className="text-xs text-[#138C9F] font-bold text-center mb-1">{L.recommended}</p>
                     <h3 className="text-lg font-black text-slate-800 dark:text-gray-200 text-center mb-4">
                       {result.name}
                     </h3>
@@ -238,26 +294,26 @@ const AIAssistant = () => {
                       onClick={handleBook}
                       className="w-full bg-[#1a237e] hover:bg-[#0d1452] text-white font-bold py-3 rounded-xl transition-all text-sm cursor-pointer mb-3"
                     >
-                      احجز موعد الآن
+                      {L.bookNow}
                     </button>
                     <button
                       onClick={handleReset}
                       className="w-full text-slate-400 hover:text-slate-600 font-bold text-xs transition-all cursor-pointer"
                     >
-                      إعادة التحديد
+                      {L.reset}
                     </button>
                   </div>
 
                   {loadingDoctors && (
                     <div className="bg-white/10 rounded-2xl p-4 text-center">
-                      <span className="text-white/60 text-sm animate-pulse">جاري البحث عن أطباء متاحين...</span>
+                      <span className="text-white/60 text-sm animate-pulse">{L.searching}</span>
                     </div>
                   )}
 
                   {!loadingDoctors && matchedDoctors.length > 0 && (
                     <div className="space-y-2">
                       <p className="text-white/60 text-xs font-bold text-center">
-                        {patientLocation ? `أطباء متوفرون في ${patientLocation}` : "أطباء متوفرون"}
+                        {patientLocation ? L.doctorsIn(patientLocation) : L.doctorsAvailable}
                       </p>
                       {matchedDoctors.map((doc) => (
                         <div
@@ -286,7 +342,7 @@ const AIAssistant = () => {
                               onClick={(e) => { e.stopPropagation(); navigate(`/appointment/${doc.id}`); window.scrollTo(0, 0); }}
                               className="bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-all cursor-pointer whitespace-nowrap"
                             >
-                              احجز الآن
+                              {L.bookBtn}
                             </button>
                           </div>
                         </div>
@@ -298,14 +354,14 @@ const AIAssistant = () => {
                     <div className="bg-white/5 rounded-2xl p-4 text-center">
                       <p className="text-white/40 text-xs">
                         {patientLocation
-                          ? `لم نجد أطباء متوفرين في ${patientLocation} حالياً`
-                          : "لم نجد أطباء متوفرين حالياً"}
+                          ? L.noDoctors(patientLocation)
+                          : L.noDoctorsAny}
                       </p>
                       <button
                         onClick={handleBook}
                         className="mt-2 text-[#4FC3F7] text-xs font-bold hover:underline cursor-pointer"
                       >
-                        عرض جميع الأطباء
+                        {L.viewAll}
                       </button>
                     </div>
                   )}
