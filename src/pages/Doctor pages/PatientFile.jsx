@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { formatDate } from '../../utils/dateFormatter';
 
@@ -20,7 +20,7 @@ const PatientFile = () => {
 
     return (
         <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 p-6" dir="rtl">
-            <main className="max-w-[1000px] mx-auto space-y-6">
+            <div className="max-w-[1000px] mx-auto space-y-6">
                 <div className="flex justify-between items-center">
                     <div className="text-right">
                         <h1 className="text-2xl font-black text-[#138C9F]">السجل المرضي الشخصي</h1> 
@@ -105,7 +105,7 @@ const PatientFile = () => {
                         <p className="text-sm font-black text-[#0B1C30] dark:text-white leading-relaxed">{patientData.smoking}</p> 
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };

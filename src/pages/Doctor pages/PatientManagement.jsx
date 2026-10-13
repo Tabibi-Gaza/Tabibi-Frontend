@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     FiSliders,
@@ -90,17 +90,17 @@ export default function PatientManagement() {
 
     if (loading) {
         return (
-            <div className="w-full bg-gray-50 dark:bg-gray-900/50 pb-8 pr-4 flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full bg-gray-50 dark:bg-gray-900/50 pb-8 flex items-center justify-center h-64" dir="rtl">
                 <p className="text-gray-400 dark:text-gray-500 font-bold">{t('patientManagement.loading')}</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full bg-gray-50 dark:bg-gray-900/50  pb-8 pr-4" dir="rtl">
+      <div className="w-full bg-gray-50 dark:bg-gray-900/50  pb-8" dir="rtl">
         {/* العناوين والإحصائيات */}
         {/*    <div
-        className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative"
+        className="space-y-6 md:space-y-8 w-full pb-8 relative"
         dir="rtl"
       >
         {/* قسم الترحيب - تم ضبط المسافة الجانبية هنا لمنع التداخل 
@@ -311,7 +311,7 @@ export default function PatientManagement() {
               {t('patientManagement.ofTotal', { count: filteredPatients.length })}
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { QRCodeCanvas } from 'qrcode.react';
@@ -389,7 +389,7 @@ const MedicalExamination = () => {
     return (
         <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex" dir="rtl">
             <div className="flex-1 flex flex-col min-w-0">
-                <main className="p-4 md:p-8 max-w-[1240px] w-full mx-auto space-y-6 overflow-y-auto">
+                <div className="p-4 md:p-8 max-w-[1240px] w-full mx-auto space-y-6 overflow-y-auto">
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h1 className="text-2xl md:text-3xl font-black text-[#138C9F]">
@@ -897,7 +897,7 @@ const MedicalExamination = () => {
                             </div>
                         </div>
                     )}
-                </main>
+                </div>
             </div>
         </div>
     );

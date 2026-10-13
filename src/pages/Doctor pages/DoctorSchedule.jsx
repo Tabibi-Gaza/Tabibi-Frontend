@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiSave } from "react-icons/fi";
 import { toast } from 'react-toastify';
@@ -216,7 +216,7 @@ const DoctorSchedule = () => {
   }
 
   return (
-    <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
+    <div className="space-y-6 md:space-y-8 w-full pb-8 relative" dir="rtl">
       <div className="space-y-6 text-right">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pb-2 border-b border-[#C3C6D6] dark:border-gray-700/30 sm:border-none">
           <h1 className="text-2xl md:text-3xl font-black text-[#138C9F] tracking-wide w-full text-center sm:text-right">
@@ -257,12 +257,12 @@ const DoctorSchedule = () => {
                         <>
                           {day.intervals.map((iv, idx) => (
                             <div key={idx} className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
-                              <div className="relative flex-1 sm:flex-none">
+                              <div className="relative flex-1 sm:flex-none min-w-0">
                                 <input type="time" value={iv.from} onChange={(e) => handleIntervalChange(d.key, idx, "from", e.target.value)}
                                   className="w-full sm:w-28 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
                               </div>
                               <span className="text-xs font-bold text-gray-400 dark:text-gray-500 px-1">{t('doctorSchedule.to')}</span>
-                              <div className="relative flex-1 sm:flex-none">
+                              <div className="relative flex-1 sm:flex-none min-w-0">
                                 <input type="time" value={iv.to} onChange={(e) => handleIntervalChange(d.key, idx, "to", e.target.value)}
                                   className="w-full sm:w-28 h-11 px-3 bg-[#EBF3F5] dark:bg-gray-800/60 border border-[#C3C6D6] dark:border-gray-700/70 rounded-xl text-sm font-bold text-[#0B1C30] dark:text-white focus:outline-hidden focus:border-[#138C9F] text-center" />
                               </div>

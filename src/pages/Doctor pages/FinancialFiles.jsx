@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
     FiSearch, FiTrendingUp, FiClock, FiCheckCircle,
     FiAlertCircle, FiSmartphone, FiCreditCard, FiDollarSign, FiInfo,
@@ -187,14 +187,14 @@ const FinancialFiles = () => {
 
     if (loading) {
         return (
-            <div className="w-full pr-4 bg-slate-50 dark:bg-gray-900/30 flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full bg-slate-50 dark:bg-gray-900/30 flex items-center justify-center h-64" dir="rtl">
                 <p className="text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.loading')}</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full pr-4 bg-slate-50 dark:bg-gray-900/30 space-y-6" dir="rtl">
+      <div className="w-full bg-slate-50 dark:bg-gray-900/30 space-y-6" dir="rtl">
           <div className="text-right">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">{t('financialFiles.title')}</h1>
             <p className="text-xs sm:text-sm text-gray-500">{t('financialFiles.description')}</p>

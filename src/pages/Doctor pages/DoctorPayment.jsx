@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     FiPlus, FiInfo, FiCreditCard, FiSmartphone,
     FiEdit3, FiClock, FiCheck, FiX, FiCopy, FiChevronDown, FiAlertCircle,
@@ -309,7 +309,7 @@ const DoctorPayment = () => {
     }
 
     return (
-        <div className="w-full bg-slate-50 dark:bg-gray-900/50 space-y-6 md:space-y-8 pb-8 pr-4" dir="rtl">
+        <div className="w-full bg-slate-50 dark:bg-gray-900/50 space-y-6 md:space-y-8 pb-8" dir="rtl">
             <div className="bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700 shadow-xs overflow-hidden">
 
                 {error && (

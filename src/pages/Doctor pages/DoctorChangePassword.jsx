@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppContext } from '../../context/AppContext';
@@ -57,7 +57,7 @@ const DoctorChangePassword = () => {
     };
 
     return (
-        <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6" dir="rtl">
+        <div className="pt-28 pb-16 px-4 sm:px-6" dir="rtl">
             <div className="max-w-lg mx-auto">
                 <button
                     onClick={() => navigate(-1)}

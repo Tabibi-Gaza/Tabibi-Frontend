@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiSearch, FiSend, FiArrowRight } from 'react-icons/fi';
 import { Send, Loader2, MessageSquare, Paperclip, FileText, X, Trash2, Pin } from 'lucide-react';
@@ -189,7 +189,7 @@ export default function DoctorChats() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #9fb0b8; }
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
       `}</style>
-      <div className="w-full pr-4 bg-slate-50 dark:bg-gray-900/30 flex justify-center items-start" dir="rtl">
+      <div className="w-full bg-slate-50 dark:bg-gray-900/30 flex justify-center items-start" dir="rtl">
         <div className="w-full bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] min-h-[600px] h-[calc(100vh-180px)] md:h-[700px] overflow-hidden">
 
           {/* Sidebar */}
@@ -234,7 +234,7 @@ export default function DoctorChats() {
                         {!conv.isAdmin && (
                           <button
                             onClick={(e) => handleDeleteConversation(e, conv)}
-                            className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 dark:text-gray-500 hover:text-red-500 transition-all duration-200"
+                            className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-2 sm:p-1 text-gray-300 dark:text-gray-500 hover:text-red-500 transition-all duration-200"
                             title={t('doctorChats.deleteChat')}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -316,7 +316,7 @@ export default function DoctorChats() {
                       {sendMutation.isPending || uploadMutation.isPending ? <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" /> : <FiSend className="w-4 h-4 md:w-5 md:h-5 transform rotate-180" />}
                     </button>
                     <input type="file" ref={fileInputRef} onChange={handleFileSelect} className="hidden" accept="image/*,.pdf,.doc,.docx" />
-                    <button type="button" onClick={() => fileInputRef.current?.click()} className="text-gray-400 dark:text-gray-500 hover:text-[#1b8b99] transition-colors cursor-pointer shrink-0">
+                    <button type="button" onClick={() => fileInputRef.current?.click()} className="p-2 -m-1 text-gray-400 dark:text-gray-500 hover:text-[#1b8b99] transition-colors cursor-pointer shrink-0">
                       <Paperclip className="w-5 h-5" />
                     </button>
                     <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder={t('doctorChats.typeMessage')} className="flex-1 bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right" />

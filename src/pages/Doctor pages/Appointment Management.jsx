@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     FiCalendar, FiClock, FiCheckCircle,
@@ -159,7 +159,7 @@ const AppointmentManagement = () => {
     };
 
     return (
-      <div className="space-y-6 md:space-y-8 w-full pb-8 pr-4 relative" dir="rtl">
+      <div className="space-y-6 md:space-y-8 w-full pb-8 relative" dir="rtl">
         <div className="space-y-6 text-right">
           <div className="text-right space-y-1">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#112240]">{t('appointmentManagement.title')}</h1>
@@ -336,7 +336,7 @@ const AppointmentManagement = () => {
               </>
             )}
 
-            <div className="border-t border-slate-100 dark:border-gray-700 px-4 sm:px-6 py-4 flex items-center justify-between flex-row-reverse">
+            <div className="border-t border-slate-100 dark:border-gray-700 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3 flex-row-reverse">
               <p className="text-xs sm:text-sm font-bold text-gray-500">{t('appointmentManagement.showing')}<span className="text-gray-700 dark:text-gray-300">{appointments.length}</span>{t('appointmentManagement.ofTotal')}<span className="text-gray-700 dark:text-gray-300">{totalCount}</span>{t('appointmentManagement.appointment')}</p>
               <div className="flex items-center gap-1.5" dir="ltr">
                 <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
