@@ -70,7 +70,7 @@ function FramesSection() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#0a2540]" dir={isEn ? "ltr" : "rtl"}>
+    <section className="relative h-[100dvh] min-h-[560px] w-full bg-[#0a2540]" dir={isEn ? "ltr" : "rtl"}>
       <video
         ref={videoRef}
         autoPlay
@@ -142,7 +142,7 @@ function FramesSection() {
               )}
             </div>
             <button type="submit" disabled={isLoading}
-              className="w-full md:w-auto bg-[#138C9F] text-white font-black text-sm md:text-base px-10 py-3.5 rounded-xl md:rounded-full hover:bg-[#0f7282] hover:shadow-lg hover:shadow-[#138C9F]/20 transition-all duration-200 active:scale-[0.98] whitespace-nowrap shrink-0 disabled:opacity-50 cursor-pointer">
+              className="w-full md:w-auto bg-[#138C9F] text-white font-black text-sm md:text-base px-6 sm:px-10 py-3.5 rounded-xl md:rounded-full hover:bg-[#0f7282] hover:shadow-lg hover:shadow-[#138C9F]/20 transition-all duration-200 active:scale-[0.98] whitespace-nowrap shrink-0 disabled:opacity-50 cursor-pointer">
               {L.searchBtn}
             </button>
           </form>

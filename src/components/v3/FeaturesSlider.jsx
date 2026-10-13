@@ -165,7 +165,7 @@ function FeaturesSlider() {
             key={i}
             type="button"
             onClick={() => jumpTo(i)}
-            className="relative flex items-center justify-center px-2 py-2 md:px-2.5 md:py-2.5 -mx-2 -my-2 md:-mx-2.5 md:-my-2.5 cursor-pointer"
+            className="relative flex items-center justify-center px-3 py-3 -mx-2 -my-2 md:-mx-2.5 md:-my-2.5 cursor-pointer"
             aria-label={isEn ? `Go to slide ${i + 1}` : `اضغط للانتقال إلى الشريحة ${i + 1}`}
           >
             <span

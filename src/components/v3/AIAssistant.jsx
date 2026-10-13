@@ -206,7 +206,7 @@ const AIAssistant = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
 
             {/* Right Side - Chat */}
-            <div className="p-8 lg:p-12 flex flex-col min-h-[500px]">
+            <div className="p-5 sm:p-8 lg:p-12 flex flex-col min-h-[420px] sm:min-h-[500px]">
               <div className="flex justify-end mb-6">
                 <span className="bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2">
                   <span className="text-lg">🩺</span> {L.badge}
@@ -248,19 +248,19 @@ const AIAssistant = () => {
                 )}
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 min-w-0">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder={L.placeholder}
-                  className="flex-1 bg-white/10 text-white placeholder-slate-400 text-sm font-medium px-4 py-3 rounded-xl border border-white/10 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent outline-none transition-all"
+                  className="flex-1 min-w-0 bg-white/10 text-white placeholder-slate-400 text-sm font-medium px-4 py-3 rounded-xl border border-white/10 focus:ring-2 focus:ring-[#138C9F] focus:border-transparent outline-none transition-all"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isTyping}
-                  className="bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold px-6 py-3 rounded-xl transition-all text-sm cursor-pointer disabled:opacity-40"
+                  className="bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold px-4 sm:px-6 py-3 rounded-xl transition-all text-sm cursor-pointer disabled:opacity-40"
                 >
                   {L.send}
                 </button>
@@ -268,7 +268,7 @@ const AIAssistant = () => {
             </div>
 
             {/* Left Side - Result */}
-            <div className="bg-[#0a1030] dark:bg-gray-900 p-8 lg:p-12 flex items-center justify-center min-h-[500px]">
+            <div className="bg-[#0a1030] dark:bg-gray-900 p-5 sm:p-8 lg:p-12 flex items-center justify-center min-h-[420px] sm:min-h-[500px]">
               {!result ? (
                 <div className="text-center space-y-4">
                   <div className="w-24 h-24 mx-auto bg-white/5 rounded-full flex items-center justify-center">

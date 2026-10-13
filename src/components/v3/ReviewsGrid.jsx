@@ -48,7 +48,7 @@ function ReviewsGrid() {
   const [translated, setTranslated] = useState({});
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(window.innerWidth < 640 ? 1 : 2);
+  const [perPage, setPerPage] = useState(window.innerWidth < 768 ? 1 : 2);
   const [popupReview, setPopupReview] = useState(null);
 
   useEffect(() => {
@@ -94,7 +94,6 @@ function ReviewsGrid() {
     empty: "No reviews available yet",
     prev: "Previous page",
     next: "Next page",
-    rated: "reviewed their appointment",
   } : {
     badge: "ماذا يقول مرضانا",
     title1: "قصص نجاح حقيقية من ",
@@ -104,7 +103,6 @@ function ReviewsGrid() {
     empty: "لا توجد تقييمات متاحة حالياً",
     prev: "الصفحة السابقة",
     next: "الصفحة التالية",
-    rated: "قيّم مواعده",
   };
 
   const getComment = (review, idx) => (isEn && translated[idx]?.comment) ? translated[idx].comment : review.comment;
@@ -117,7 +115,7 @@ function ReviewsGrid() {
 
   useEffect(() => {
     const handleResize = () => {
-      const newPerPage = window.innerWidth < 640 ? 1 : 2;
+      const newPerPage = window.innerWidth < 768 ? 1 : 2;
       setPerPage(newPerPage);
       setPage(0);
     };
@@ -214,7 +212,6 @@ function ReviewsGrid() {
                       />
                       <div className="text-start flex-1 min-w-0">
                         <h3 className="font-black text-slate-900 dark:text-gray-200 text-sm truncate">{review.patientName}</h3>
-                        <span className="text-[10px] font-bold text-slate-400 dark:text-gray-500">{L.rated}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
@@ -292,7 +289,6 @@ function ReviewsGrid() {
               />
               <div>
                 <h3 className="font-black text-slate-900 dark:text-gray-200">{popupReview.review.patientName}</h3>
-                <span className="text-xs font-bold text-slate-400 dark:text-gray-500">{L.rated}</span>
               </div>
             </div>
             <div className="flex items-center gap-1 mb-4" dir="ltr">

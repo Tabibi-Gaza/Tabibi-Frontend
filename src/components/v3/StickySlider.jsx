@@ -4,11 +4,22 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
   const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [isNarrow, setIsNarrow] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 640 : false
+  );
 
-  const itemsPerView = 1.2;
+  const itemsPerView = isNarrow ? 1 : 1.2;
   const totalItems = items.length;
   const visibleCount = Math.ceil(itemsPerView);
   const totalSlides = totalItems - visibleCount + 1;
+  const pinVh = parseInt(pinHeight, 10) || 400;
+  const effectivePinHeight = `${isNarrow ? Math.min(pinVh, 250) : pinVh}vh`;
+
+  useEffect(() => {
+    const onResize = () => setIsNarrow(window.innerWidth < 640);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -50,10 +61,10 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
 
   return (
     <section className="relative">
-      <div ref={containerRef} className="w-full" style={{ height: pinHeight }}>
-        <div className="sticky top-0 h-screen w-full bg-white dark:bg-gray-800 flex flex-col">
-          <div className="flex-1 flex flex-col items-center justify-center px-4 pt-24 pb-8">
-            <div className="text-center max-w-3xl mb-10">
+      <div ref={containerRef} className="w-full" style={{ height: effectivePinHeight }}>
+        <div className="sticky top-0 h-screen w-full bg-white dark:bg-gray-800 flex flex-col overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col items-center justify-center px-4 pt-20 md:pt-24 pb-4">
+            <div className="text-center max-w-3xl mb-6 md:mb-10">
               <span className="text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full inline-block tracking-wide mb-4">
                 {title}
               </span>
@@ -67,7 +78,7 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
                 <div
                   className="flex gap-5 transition-transform duration-500 ease-out"
                   style={{
-                    transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
+                    transform: `translateX(calc(${currentIndex} * (-${100 / itemsPerView}% - 1.25rem)))`,
                   }}
                 >
                   {items.map((item, i) => (
@@ -78,13 +89,13 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2 mt-8">
+              <div className="flex items-center justify-center gap-2 mt-4 md:mt-8">
                 {Array.from({ length: totalSlides }).map((_, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => goToSlide(i)}
-                    className="relative flex items-center justify-center px-2 py-2 -mx-2 -my-2 cursor-pointer"
+                    className="relative flex items-center justify-center px-3 py-3 -mx-2 -my-2 cursor-pointer"
                     aria-label={`الانتقال للشريحة ${i + 1}`}
                   >
                     <span className={`block h-2 rounded-full transition-all duration-300 ${
@@ -94,7 +105,7 @@ function StickySlider({ title, subtitle, items, renderItem, pinHeight = "350vh" 
                 ))}
               </div>
 
-              <div className="flex items-center justify-center gap-4 mt-6">
+              <div className="flex items-center justify-center gap-4 mt-4 md:mt-6">
                 <button
                   onClick={prevSlide}
                   disabled={currentIndex === 0}

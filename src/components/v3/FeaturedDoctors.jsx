@@ -99,9 +99,9 @@ function FeaturedDoctors() {
             <div
               key={item.id || index}
               onClick={() => { navigate(`/appointment/${item.id}`); window.scrollTo(0, 0); }}
-              className="group bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-3xl overflow-hidden cursor-pointer shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:border-[#138C9F]/30 hover:shadow-[0_20px_40px_rgba(58,150,183,0.07)] md:hover:-translate-y-2 transition-all duration-500 flex flex-row md:flex-col h-full"
+              className="group bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-3xl overflow-hidden cursor-pointer shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:border-[#138C9F]/30 hover:shadow-[0_20px_40px_rgba(58,150,183,0.07)] md:hover:-translate-y-2 transition-all duration-500 flex flex-row sm:flex-col h-full"
             >
-              <div className="bg-linear-to-b from-slate-50 to-white dark:from-gray-700 dark:to-gray-800 overflow-hidden w-28 sm:w-36 md:w-full aspect-square md:h-56 shrink-0 flex items-center justify-center relative border-s border-slate-100 dark:border-gray-700 md:border-s-0 md:border-b">
+              <div className="bg-linear-to-b from-slate-50 to-white dark:from-gray-700 dark:to-gray-800 overflow-hidden w-28 sm:w-full aspect-square sm:h-56 shrink-0 flex items-center justify-center relative border-s border-slate-100 dark:border-gray-700 sm:border-s-0 sm:border-b">
                 <img
                   loading="lazy"
                   decoding="async"

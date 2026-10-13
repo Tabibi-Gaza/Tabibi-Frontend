@@ -94,9 +94,11 @@ const TestimonialsSlider = () => {
                         <button
                             key={index}
                             onClick={() => setCurrentIndex(index)}
-                            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === index ? 'w-8 bg-[#138C9F]' : 'w-2 bg-slate-200 dark:bg-gray-600 hover:bg-slate-300 dark:hover:bg-gray-500'}`}
+                            className='flex items-center justify-center py-3 px-2 -mx-1 cursor-pointer'
                             title={`الانتقال للمراجعة ${index + 1}`}
-                        />
+                        >
+                            <span className={`block h-2 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-8 bg-[#138C9F]' : 'w-2 bg-slate-200 dark:bg-gray-600 hover:bg-slate-300 dark:hover:bg-gray-500'}`} />
+                        </button>
                     ))}
                 </div>
 
