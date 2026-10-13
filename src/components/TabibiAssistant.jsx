@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import axiosInstance from '../api/axiosInstance';
 
 const WA_NUMBER = '972597081983';
 const WA_DISPLAY = '0597081983';
@@ -28,9 +29,8 @@ const KB = [
     a: 'تسجيل الدخول من زر «تسجيل الدخول»: أدخل بريدك وكلمة مرورك، أو اضغط «المتابعة بحساب جوجل» وتدخل بضغطة واحدة بدون كلمة مرور.',
   },
   {
-    keys: ['نسيت كلمه المرور', 'نسيت كلمه السر', 'نسيت السر', 'استعاده كلمه المرور', 'استرجاع كلمه المرور', 'تغيير كلمه المرور', 'كلمه مرور جديده', 'كود التحقق'],
-    a: 'اضغط «نسيت كلمة المرور؟» في صفحة الدخول، أدخل بريدك ويوصلك كود تحقق تحدّد منه كلمة مرور جديدة. وإذا كنت داخل حسابك وتبي تغيّرها مباشرة تواصل مع الدعم ونساعدك.',
-    support: true,
+    keys: ['نسيت كلمه المرور', 'نسيت كلمه السر', 'نسيت السر', 'استعاده كلمه المرور', 'استرجاع كلمه المرور', 'تغيير كلمه المرور', 'كلمه مرور جديده', 'كود التحقق', 'forgot password', 'reset password'],
+    a: 'اضغط «نسيت كلمة المرور؟» في صفحة الدخول، أدخل بريدك ويوصلك كود تحقق تحدّد منه كلمة مرور جديدة — بدون أي تواصل مع الدعم.',
   },
   {
     keys: ['انشاء حساب', 'تسجيل جديد', 'حساب جديد', 'سجل حساب', 'حساب مريض', 'كيف اسجل', 'جديد بالمنصه'],
@@ -57,9 +57,8 @@ const KB = [
     a: 'نعم، تقدر تلغي حجزك من صفحة «حجوزاتي» قبل الموعد بوقت كافٍ ووفق شروط الطبيب (موضحة في «شروط الاستخدام»).',
   },
   {
-    keys: ['تعديل موعد', 'تغيير موعد', 'تغيير الوقت', 'تغيير الموعد'],
-    a: 'لتغيير موعدك: ألغي الحجز الحالي من «حجوزاتي» ثم احجز موعداً جديداً بالوقت الذي يناسبك، أو تواصل مع الدعم ونساعدك.',
-    support: true,
+    keys: ['تعديل موعد', 'تغيير موعد', 'تغيير الوقت', 'تغيير الموعد', 'reschedule'],
+    a: 'لتغيير موعدك: ألغي الحجز الحالي من «حجوزاتي» ثم احجز موعداً جديداً بالوقت الذي يناسبك — الإلغاء والحجز الجديد بضغطتين من نفس الصفحة.',
   },
   {
     keys: ['حجوزاتي', 'مواعيدي', 'حاله الحجز', 'حاله الموعد', 'موافقه الطبيب', 'الحجز معلق', 'تتبع الحجز', 'وين حجوزاتي'],
@@ -70,8 +69,8 @@ const KB = [
     a: 'صفحة «وصفاتي» فيها كل الوصفات الطبية اللي كتبها لك الأطباء مع تفاصيلها وتواريخها، وتقدر ترجع لها في أي وقت.',
   },
   {
-    keys: ['ملفي الطبي', 'الملف الطبي', 'التاريخ المرضي', 'امراضي', 'حساسياتي', 'سجل طبي', 'الملف الصحي', 'معلوماتي الصحيه'],
-    a: 'من «ملفي الطبي» توثق أمراضك وحساسياتك وأدويتك ومعلوماتك الصحية، وبكده بيشوفها طبيبك وقت الكشف ويعرف سوابقك.',
+    keys: ['ملفي الطبي', 'الملف الطبي', 'التاريخ المرضي', 'امراضي', 'حساسياتي', 'سجل طبي', 'الملف الصحي', 'معلوماتي الصحيه', 'سجل مرضي', 'تاريخ مرضي', 'medical record', 'health record'],
+    a: 'من «ملفي الطبي» توثق أمراضك وحساسياتك وأدويتك ومعلوماتك الصحية — هذا السجل يشوفه طبيبك وقت الكشف ويعرف سوابقك قبل الوصفة.',
   },
   {
     keys: ['محادثه', 'دردشه', 'راسل الطبيب', 'مراسله'],
@@ -98,7 +97,7 @@ const KB = [
     a: 'افتح صفحة «الأطباء» وفلتر حسب التخصص والمكان، أو اكتب عرضك في «المساعد الطبي الذكي» بالصفحة الرئيسية وسأرشح لك التخصص المناسب.',
   },
   {
-    keys: ['امان', 'امنيه', 'خصوصيه', 'حمايه بيانات', 'سربيه', 'الخصوصيه', 'تشفير'],
+    keys: ['امان', 'امنيه', 'خصوصيه', 'حمايه بيانات', 'سربيه', 'الخصوصيه', 'تشفير', 'privacy', 'security', 'my data'],
     a: 'بياناتك الطبية محفوظة بسرية تامة على المنصة ولا تُشارك مع أحد إلا بموافقتك، ولمزيد من التفاصيل راجع «سياسة الخصوصية».',
   },
   {
@@ -108,7 +107,6 @@ const KB = [
   {
     keys: ['اشتراكي', 'اشتراكك', 'تجديد الاشتراك', 'اشتراك الطبيب', 'الاشتراك المنتهي', 'اشتراك', 'الاشتراك'],
     a: 'الأطباء يديرون اشتراكاتهم من صفحة «اشتراكي» داخل لوحة الطبيب: يختارون الباقة وطريقة الدفع ويرفعون الإيصال. ولتسجيل طبيب جديد: «التسجيل كطبيب».',
-    support: true,
   },
   {
     keys: ['حذف حساب', 'الغاء حساب', 'مسح حساب', 'ازاله الحساب', 'احذف بياناتي', 'مسح بياناتي', 'حذف البيانات'],
@@ -121,12 +119,12 @@ const KB = [
     support: true,
   },
   {
-    keys: ['لغه', 'انجليزي', 'وضع ليلي', 'الغامق', 'تبديل اللغه'],
+    keys: ['لغه', 'انجليزي', 'وضع ليلي', 'الغامق', 'تبديل اللغه', 'english', 'dark mode'],
     a: 'تبدّل اللغة بين العربية والإنجليزية من زر (EN/ع) في الشريط العلوي، وتفعّل الوضع الليلي من أيقونة القمر بجانبه.',
   },
   {
-    keys: ['شكرا', 'مشكور', 'تسلم', 'جزاك', 'تسلمي'],
-    a: 'على الرحب والسعة 🌼 أي وقت أسئلة تانية اسألني، وإلا تواصل مع الدعم عبر واتساب.',
+    keys: ['شكرا', 'مشكور', 'تسلم', 'جزاك', 'تسلمي', 'thanks', 'thank you'],
+    a: 'على الرحب والسعة 🌼 أي وقت أسئلة تانية اسألني.',
   },
   {
     keys: ['كيف حالك', 'اخبارك', 'شلونك', 'كيفك', 'احوالك'],
@@ -135,6 +133,11 @@ const KB = [
   {
     keys: ['qr', 'باركود', 'رمز سريع'],
     a: 'المنصة توفّر رموز QR تُستخدم داخل العيادة للوصول السريع للملف الطبي عبر مسح الرمز.',
+  },
+  {
+    keys: ['كم طبيب', 'عدد الاطباء', 'كم عدد الاطباء', 'كل الاطباء', 'how many doctors', 'doctor count'],
+    dynamic: 'docCount',
+    a: '',
   },
 ];
 
@@ -259,6 +262,8 @@ const TabibiAssistant = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
+  const [docCount, setDocCount] = useState(null);
+  const countTried = useRef(false);
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -266,6 +271,23 @@ const TabibiAssistant = () => {
     () => KB.map((e) => ({ ...e, nk: e.keys.map(norm) })),
     []
   );
+
+  useEffect(() => {
+    if (!open || countTried.current) return;
+    countTried.current = true;
+    (async () => {
+      try {
+        const { data } = await axiosInstance.get('/Doctors/get-all-doctors', { params: { PageSize: 1 } });
+        const d = data?.data;
+        const total =
+          d?.totalCount ?? d?.totalItems ?? d?.total ??
+          (Array.isArray(d?.items) ? d.items.length : null);
+        if (typeof total === 'number' && total > 0) setDocCount(total);
+      } catch (e) {
+        // network error → نبقى على الرسالة الاحتياطية بدون رقم
+      }
+    })();
+  }, [open]);
 
   useEffect(() => {
     if (open && messages.length === 0) setMessages(WELCOME);
@@ -317,9 +339,19 @@ const TabibiAssistant = () => {
     setTyping(true);
     window.setTimeout(() => {
       const hit = findAnswer(text);
+      let reply = null;
+      if (hit) {
+        if (hit.dynamic === 'docCount') {
+          reply = docCount
+            ? `منصة طبيبي تضم أكثر من ${docCount} طبيب مسجّل في مختلف التخصصات — افتح صفحة «الأطباء» وفلتر حسب التخصص والمكان.`
+            : 'منصة طبيبي تضم شبكة واسعة من الأطباء المسجّلين في مختلف التخصصات — افتح صفحة «الأطباء» وفلتر حسب التخصص والمكان.';
+        } else {
+          reply = hit.a;
+        }
+      }
       setMessages((m) => [
         ...m,
-        hit ? { from: 'bot', text: hit.a, support: !!hit.support } : fallbackMessage(),
+        hit ? { from: 'bot', text: reply, support: !!hit.support } : fallbackMessage(),
       ]);
       setTyping(false);
     }, 550);
@@ -340,7 +372,7 @@ const TabibiAssistant = () => {
       {open && (
         <div
           dir="rtl"
-          className="fixed left-3 bottom-32 z-[9998] w-[calc(100vw-1.5rem)] max-w-[420px] h-[min(78vh,600px)] rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl flex flex-col overflow-hidden"
+          className="fixed left-3 bottom-32 z-[9998] w-[calc(100vw-1.5rem)] max-w-[420px] h-[min(600px,calc(100dvh-9rem))] rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl flex flex-col overflow-hidden"
         >
           <div className="flex items-center gap-3 px-4 py-3.5 border-b border-gray-100 dark:border-gray-700 shrink-0">
             <div dir="ltr" className="relative w-11 h-11 rounded-full bg-[#E8F7F9] dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-1 shrink-0">
