@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
@@ -251,7 +251,7 @@ const MyPrescriptions = () => {
                                     )}
                                 </div>
 
-                                <div className="px-5 pb-4 flex items-center gap-2">
+                                <div className="px-5 pb-4 flex flex-wrap items-center gap-2">
                                     <button
                                         onClick={() => setSelectedRx(rx)}
                                         className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-[#138C9F] text-[#138C9F] text-xs font-bold hover:bg-[#138C9F]/5 transition-all cursor-pointer">

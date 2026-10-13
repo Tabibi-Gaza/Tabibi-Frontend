@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
 import { formatDate } from '../utils/dateFormatter';
@@ -142,7 +142,7 @@ const FinancialTransactions = () => {
                             />
                         </div>
                         <div className="lg:col-span-2 flex flex-col sm:flex-row items-center gap-3 w-full justify-end" dir="ltr">
-                            <div className="w-full sm:w-auto flex items-center gap-2">
+                            <div className="w-full sm:w-auto flex flex-wrap items-center gap-2">
                                 <input
                                     type="date"
                                     value={dateFrom}

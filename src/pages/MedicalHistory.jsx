@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { AppContext } from '../context/AppContext';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
@@ -797,7 +797,7 @@ const MedicalHistory = () => {
               </div>
 
               {/* أزرار الحفظ والإلغاء النهائية */}
-              <div className="flex items-center justify-end gap-3 border-t border-gray-50 pt-5 mt-2">
+              <div className="flex flex-wrap items-center justify-end gap-3 border-t border-gray-50 pt-5 mt-2">
                 <button
                   type="button"
                   onClick={() => setIsEditing(false)}

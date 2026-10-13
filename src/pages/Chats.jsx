@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiSearch, FiSend, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { Send, Loader2, MessageSquare, Paperclip, FileText, X, Trash2, Pin, Reply, CornerUpRight } from 'lucide-react';
@@ -322,8 +322,8 @@ export default function Chats() {
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
         .msg-swipe { transition: transform 0.15s ease; touch-action: pan-y; user-select: none; }
       `}</style>
-      <div className="w-full pt-16 px-2 sm:px-3 pb-4 bg-slate-50 dark:bg-gray-900/30 flex justify-center items-start min-h-screen">
-        <div className="w-full max-w-5xl bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] h-[calc(100dvh-72px)] overflow-hidden relative">
+      <div className="w-full pt-32 sm:pt-36 px-2 sm:px-3 pb-4 bg-slate-50 dark:bg-gray-900/30 flex justify-center items-start min-h-screen">
+        <div className="w-full max-w-5xl bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] h-[calc(100dvh-144px)] sm:h-[calc(100dvh-160px)] overflow-hidden relative">
 
           {/* Sidebar */}
           <div className={`flex flex-col min-h-0 bg-white dark:bg-gray-800 md:border-l border-[#e9eff6] dark:border-gray-700 h-full ${showChatList ? 'absolute inset-0 z-30 md:relative md:z-auto flex' : 'hidden md:flex'}`}>
@@ -365,7 +365,7 @@ export default function Chats() {
                         )}
                         <button
                           onClick={(e) => handleDeleteConversation(e, conv)}
-                          className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 dark:text-gray-500 hover:text-red-500 transition-all duration-200"
+                          className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-2 sm:p-1 text-gray-300 dark:text-gray-500 hover:text-red-500 transition-all duration-200"
                           title="حذف المحادثة"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -411,7 +411,7 @@ export default function Chats() {
 
                 <div
                   ref={messagesContainerRef}
-                  className="flex-1 min-h-0 p-4 md:p-6 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-gray-900/40 flex flex-col gap-4 pb-24"
+                  className="flex-1 min-h-0 p-4 md:p-6 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-gray-900/40 flex flex-col gap-4 pb-4"
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
                 >
@@ -428,7 +428,7 @@ export default function Chats() {
                       return (
                         <div key={msg.id} className={`flex w-full ${msg.isMine ? 'justify-start' : 'justify-end'}`}>
                           <div
-                            className={`msg-swipe relative max-w-full max-w-md flex-shrink-0 ${msg.isMine ? '' : ''}`}
+                            className={`msg-swipe relative max-w-[78%] md:max-w-md flex-shrink-0 ${msg.isMine ? '' : ''}`}
                             style={{ transform: swipeState === 'left' ? 'translateX(-60px)' : swipeState === 'right' ? 'translateX(60px)' : 'translateX(0)' }}
                             onTouchStart={(e) => handleTouchStart(e, msg)}
                             onTouchEnd={(e) => handleTouchEnd(e, msg)}

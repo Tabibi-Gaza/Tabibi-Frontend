@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faClock, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -47,14 +47,14 @@ const Favorites = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-8 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
+        <div className="flex gap-2 mb-8 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl overflow-x-auto">
           {TABS.map(tab => {
             const count = favorites[tab.key]?.length || 0;
             return (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+                className={`flex-1 shrink-0 whitespace-nowrap py-3 px-4 rounded-xl text-sm font-bold transition-all cursor-pointer ${
                   activeTab === tab.key
                     ? 'bg-[#138C9F] text-white shadow-md'
                     : 'bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:text-gray-500'

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     FiSearch, FiCalendar, FiUser, FiActivity, FiFileText,
     FiSliders, FiRotateCcw, FiStar, FiArrowLeft, FiArrowRight, FiSend, FiX, FiDownload
@@ -259,7 +259,7 @@ const PatientMedicalFile = () => {
                                             <p className="text-xs text-gray-400 dark:text-gray-500 font-medium mt-0.5">{visit.specializationName}</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2.5 self-start sm:self-auto">
+                                    <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
                                         <span className="bg-teal-50 text-[#1b8b99] text-xs font-bold px-3 py-1 rounded-full">
                                             {STATUS_MAP[visit.appointmentStatus] || visit.appointmentStatus}
                                         </span>
@@ -373,7 +373,7 @@ const PatientMedicalFile = () => {
             {/* نافذة التقييم المنبثقة */}
             {isModalOpen && selectedVisit && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs transition-all animate-fadeIn">
-                    <div className="bg-white dark:bg-gray-800 rounded-3xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden relative transform transition-all scale-100">
+                    <div className="bg-white dark:bg-gray-800 rounded-3xl w-full max-w-md max-h-[85vh] shadow-2xl border border-slate-100 dark:border-gray-700 overflow-y-auto overflow-x-hidden relative transform transition-all scale-100">
                         <div className="p-4 bg-white dark:bg-gray-800 border-b border-slate-50 flex items-center justify-between relative">
                             {modalStep === 2 && (
                                 <button
