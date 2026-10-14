@@ -32,7 +32,7 @@ const buildDefaultSchedule = () => {
     s[d.key] = {
       active: false,
       intervals: [{ from: '09:00', to: '17:00' }],
-      slotDuration: 30,
+      slotDuration: 20,
       note: d.key === 'friday' ? 'doctorSchedule.weekendNote' : ''
     };
   });
@@ -58,16 +58,17 @@ const DoctorSchedule = () => {
             const from = day.startTime?.substring(0, 5) || '09:00';
             const to = day.endTime?.substring(0, 5) || '17:00';
             if (day.isActive) {
+              if (!entry.loaded) { entry.intervals = []; entry.loaded = true; }
               entry.active = true;
               entry.intervals.push({ from, to });
-              entry.slotDuration = day.slotDurationMinutes || 30;
-            } else if (entry.intervals.length === 1 && entry.intervals[0].from === '09:00' && entry.intervals[0].to === '17:00') {
+              entry.slotDuration = day.slotDurationMinutes || 20;
+            } else if (!entry.loaded) {
+              entry.loaded = true;
               entry.intervals = [{ from, to }];
             }
           });
           DAYS_ORDER.forEach(d => {
             const entry = newSchedule[d.key];
-            if (!entry.active && entry.intervals.length > 1) entry.intervals = [entry.intervals[0]];
             if (entry.intervals.length === 0) entry.intervals = [{ from: '09:00', to: '17:00' }];
           });
           setSchedule(newSchedule);
