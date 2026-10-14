@@ -69,6 +69,13 @@ const DoctorSchedule = () => {
           });
           DAYS_ORDER.forEach(d => {
             const entry = newSchedule[d.key];
+            const seen = new Set();
+            entry.intervals = entry.intervals.filter(iv => {
+              const k = `${iv.from}-${iv.to}`;
+              if (seen.has(k)) return false;
+              seen.add(k);
+              return true;
+            });
             if (entry.intervals.length === 0) entry.intervals = [{ from: '09:00', to: '17:00' }];
           });
           setSchedule(newSchedule);
@@ -180,7 +187,7 @@ const DoctorSchedule = () => {
               startTime: iv.from + ':00',
               endTime: iv.to + ':00',
               isActive: true,
-              slotDurationMinutes: day.slotDuration || 30
+              slotDurationMinutes: 20
             });
           });
         } else {
@@ -190,7 +197,7 @@ const DoctorSchedule = () => {
             startTime: iv.from + ':00',
             endTime: iv.to + ':00',
             isActive: false,
-            slotDurationMinutes: day.slotDuration || 30
+            slotDurationMinutes: 20
           });
         }
       });
