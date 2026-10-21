@@ -14,6 +14,7 @@ import {
   Lock,
 } from 'lucide-react';
 import { AppContext } from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
 
 const PERMISSION_MANAGE_APPOINTMENTS = 1;
 const PERMISSION_MANAGE_PATIENTS = 2;
@@ -52,6 +53,7 @@ const SidebarSection = ({ title, children }) => (
 
 const DoctorSidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { setToken, hasPermission, secretaryPermissions } = useContext(AppContext);
 
   const userStr = localStorage.getItem('user');
@@ -69,43 +71,43 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
 
   const allMenuItems = [
     {
-      name: 'لوحة التحكم',
+      name: t('doctorNav.dashboard'),
       path: '/doctor-dashboard',
       icon: <LayoutDashboard size={20} strokeWidth={1.75} />,
       permission: null,
     },
     {
-      name: 'إدارة المواعيد',
+      name: t('doctorNav.appointments'),
       path: '/doctor/appointments',
       icon: <Calendar size={20} strokeWidth={1.75} />,
       permission: PERMISSION_MANAGE_APPOINTMENTS,
     },
     {
-      name: 'إدارة ساعات العمل',
+      name: t('doctorNav.schedule'),
       path: '/doctor/schedule',
       icon: <Clock size={20} strokeWidth={1.75} />,
       permission: PERMISSION_MANAGE_SCHEDULES,
     },
     {
-      name: 'إدارة طرق الدفع',
+      name: t('doctorNav.paymentMethods'),
       path: '/doctor/payments',
       icon: <CreditCard size={20} strokeWidth={1.75} />,
       permission: PERMISSION_MANAGE_PAYMENTS,
     },
     {
-      name: 'إدارة المرضى',
+      name: t('doctorNav.patients'),
       path: '/doctor/patients',
       icon: <Users size={20} strokeWidth={1.75} />,
       permission: PERMISSION_MANAGE_PATIENTS,
     },
     {
-      name: 'المحادثات',
+      name: t('doctorNav.chats'),
       path: '/doctor/chats',
       icon: <MessageSquare size={20} strokeWidth={1.75} />,
       permission: PERMISSION_VIEW_CHATS,
     },
     {
-      name: 'اشتراكي',
+      name: t('doctorNav.subscription'),
       path: '/doctor/subscription',
       icon: <FileText size={20} strokeWidth={1.75} />,
       permission: null,
@@ -117,13 +119,13 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
     : allMenuItems;
 
   const financialMenuItems = isSecretary
-    ? [{ name: 'السجلات المالية', path: '/doctor/financials', icon: <Wallet size={20} strokeWidth={1.75} />, permission: PERMISSION_MANAGE_PAYMENTS }]
+    ? [{ name: t('doctorNav.financials'), path: '/doctor/financials', icon: <Wallet size={20} strokeWidth={1.75} />, permission: PERMISSION_MANAGE_PAYMENTS }]
         .filter(item => hasPermission(item.permission))
-    : [{ name: 'السجلات المالية', path: '/doctor/financials', icon: <Wallet size={20} strokeWidth={1.75} /> }];
+    : [{ name: t('doctorNav.financials'), path: '/doctor/financials', icon: <Wallet size={20} strokeWidth={1.75} /> }];
 
   const doctorOnlyItems = !isSecretary ? [
-    { name: 'إدارة السكرتير', path: '/doctor/secretary-management', icon: <UserCheck size={20} strokeWidth={1.75} /> },
-    { name: 'تغيير كلمة المرور', path: '/doctor/change-password', icon: <Lock size={20} strokeWidth={1.75} /> },
+    { name: t('doctorNav.secretary'), path: '/doctor/secretary-management', icon: <UserCheck size={20} strokeWidth={1.75} /> },
+    { name: t('doctorNav.changePassword'), path: '/doctor/change-password', icon: <Lock size={20} strokeWidth={1.75} /> },
   ] : [];
 
   return (
@@ -160,7 +162,7 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
           {doctorOnlyItems.length > 0 && (
             <>
               <div className="my-3 mx-4 border-t border-slate-200 dark:border-gray-700" />
-              <SidebarSection title="الإعدادات">
+              <SidebarSection title={t('doctorNav.settings')}>
                 {doctorOnlyItems.map((item, index) => (
                   <NavItem
                     key={index}
@@ -176,7 +178,7 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
 
           <div className="my-3 mx-4 border-t border-slate-200 dark:border-gray-700" />
 
-          <SidebarSection title="المالية">
+          <SidebarSection title={t('doctorNav.finance')}>
             {financialMenuItems.map((item, index) => (
               <NavItem
                 key={index}
@@ -196,7 +198,7 @@ const DoctorSidebar = ({ isOpen, onClose }) => {
             className="flex items-center gap-3 px-4 py-2.5 w-full rounded-xl text-[15px] text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 cursor-pointer"
           >
             <LogOut size={20} strokeWidth={1.75} />
-            <span className="font-medium">تسجيل الخروج</span>
+            <span className="font-medium">{t('doctorNav.logout')}</span>
           </button>
         </div>
       </aside>

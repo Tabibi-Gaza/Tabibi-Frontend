@@ -7,6 +7,8 @@ import { FiX, FiMenu } from 'react-icons/fi';
 import { FiBell } from 'react-icons/fi';
 import axiosInstance from '../../api/axiosInstance';
 import { Calendar, Wallet, MessageSquare, Info, CheckCheck, ChevronLeft } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const FILES_URL = import.meta.env.VITE_Files_URL || '';
 
@@ -17,7 +19,7 @@ const getDoctorImageUrl = (image) => {
   return `${FILES_URL}/${image}`;
 };
 
-const getRelativeTime = (dateStr) => {
+const getRelativeTime = (dateStr, t) => {
   if (!dateStr) return '';
   const date = new Date(dateStr);
   if (isNaN(date.getTime())) return dateStr;
@@ -27,10 +29,10 @@ const getRelativeTime = (dateStr) => {
   const diffHr = Math.floor(diffMin / 60);
   const diffDay = Math.floor(diffHr / 24);
 
-  if (diffMin < 1) return 'الآن';
-  if (diffMin < 60) return `منذ ${diffMin} دقيقة`;
-  if (diffHr < 24) return `منذ ${diffHr} ساعة`;
-  if (diffDay < 7) return `منذ ${diffDay} يوم`;
+  if (diffMin < 1) return t('doctorNav.justNow');
+  if (diffMin < 60) return t('doctorNav.agoMin', { n: diffMin });
+  if (diffHr < 24) return t('doctorNav.agoHour', { n: diffHr });
+  if (diffDay < 7) return t('doctorNav.agoDay', { n: diffDay });
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
@@ -53,6 +55,8 @@ const getNotificationConfig = (type) => {
 
 const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { theme, lang, toggleTheme, toggleLang } = useTheme();
 
   const { doctorData } = useContext(AppContext);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -64,7 +68,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
   const isSecretary = user?.roles?.includes('Secretary');
 
   const { secretaryDoctorInfo } = useContext(AppContext);
-  const doctorName = isSecretary ? (secretaryDoctorInfo?.doctorName || user?.fullName || 'الطبيب') : '';
+  const doctorName = isSecretary ? (secretaryDoctorInfo?.doctorName || user?.fullName || t('doctorNav.doctorFallback')) : '';
 
   const fetchUnreadCount = async () => {
     try {
@@ -119,7 +123,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
   const handleProfileClick = () => {
     setShowDropdown(false);
     if (isSecretary) {
-      toast.error(`${doctorName} لم يمنحك صلاحية الاطلاع على الملف الشخصي`);
+      toast.error(t('doctorNav.profileDenied', { name: doctorName }));
       return;
     }
     navigate("/doctor/profile");
@@ -151,11 +155,34 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
           onClick={() => navigate("/doctor-dashboard")}
         />
         <span className="bg-[#e2f4f7] dark:bg-gray-700 text-[#138C9F] dark:text-teal-300 text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-[#138C9F]/20 dark:border-teal-400/20 whitespace-nowrap">
-          {isSecretary ? 'بوابة السكرتير' : 'بوابة الطبيب'}
+          {isSecretary ? t('doctorNav.gateSecretary') : t('doctorNav.gateDoctor')}
         </span>
       </div>
 
       <div className="flex items-center gap-3 sm:gap-6">
+        <button
+          onClick={toggleLang}
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 font-bold text-xs cursor-pointer"
+          title={t('common.language')}
+        >
+          {lang === 'ar' ? 'EN' : 'عربي'}
+        </button>
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 cursor-pointer"
+          title={theme === 'dark' ? t('common.lightMode') : t('common.darkMode')}
+        >
+          {theme === 'dark' ? (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          )}
+        </button>
+
         <div className="relative">
           <div
             onClick={() => setShowDropdown(!showDropdown)}
@@ -187,7 +214,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                     onClick={handleGoToNotificationsPage}
                     className="text-sm font-black text-[#0B1C30] dark:text-gray-200 cursor-pointer hover:text-[#138C9F]"
                   >
-                    الإشعارات {unreadCount > 0 && <span className="text-[#138C9F]">({unreadCount})</span>}
+                    {t('doctorNav.notifications')} {unreadCount > 0 && <span className="text-[#138C9F]">({unreadCount})</span>}
                   </h3>
                   <div className="flex items-center gap-2">
                     {unreadCount > 0 && (
@@ -196,14 +223,14 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                         className="text-[11px] font-bold text-[#138C9F] hover:bg-[#e2f4f7] px-2 py-1 rounded-lg transition-all cursor-pointer flex items-center gap-1"
                       >
                         <CheckCheck size={13} />
-                        تحديد الكل
+                        {t('doctorNav.markAll')}
                       </button>
                     )}
                     <button
                       onClick={() => setShowDropdown(false)}
                       className="text-xs font-bold text-gray-400 hover:text-gray-600 cursor-pointer"
                     >
-                      إغلاق
+                      {t('doctorNav.close')}
                     </button>
                   </div>
                 </div>
@@ -214,7 +241,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                     <div className="w-12 h-12 bg-slate-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-3">
                       <FiBell className="w-5 h-5 text-gray-300 dark:text-gray-500" />
                     </div>
-                    <p className="text-sm font-bold text-gray-400 dark:text-gray-500">لا توجد إشعارات</p>
+                    <p className="text-sm font-bold text-gray-400 dark:text-gray-500">{t('doctorNav.noNotifications')}</p>
                   </div>
                 ) : (() => {
                   const groups = {};
@@ -259,7 +286,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                             </div>
                             <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5 truncate">{group.message}</p>
                             <span className="text-[10px] text-gray-400 dark:text-gray-500 font-semibold mt-1 block">
-                              {getRelativeTime(group.latestDate)}
+                              {getRelativeTime(group.latestDate, t)}
                             </span>
                           </div>
                           {/* Arrow */}
@@ -277,7 +304,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                     className="p-3 text-center border-t border-gray-100 cursor-pointer hover:bg-slate-50 transition-all"
                   >
                     <span className="text-xs font-bold text-[#138C9F] flex items-center justify-center gap-1">
-                      عرض الكل
+                      {t('doctorNav.viewAll')}
                       <ChevronLeft size={14} />
                     </span>
                   </div>
@@ -292,8 +319,8 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
           onClick={handleProfileClick}
         >
           <div
-            className="w-9 h-9 md:w-11 md:h-11 rounded-full border border-[#C3C6D6] dark:border-gray-600 bg-slate-100 dark:bg-gray-700 overflow-hidden relative group transition-all duration-300 hover:border-[#138C9F] shadow-sm shrink-0 flex items-center justify-center"
-            title="عرض الملف الشخصي"
+              className="w-9 h-9 md:w-11 md:h-11 rounded-full border border-[#C3C6D6] dark:border-gray-600 bg-slate-100 dark:bg-gray-700 overflow-hidden relative group transition-all duration-300 hover:border-[#138C9F] shadow-sm shrink-0 flex items-center justify-center"
+              title={t('doctorNav.profileTitle')}
           >
             {doctorData && getDoctorImageUrl(doctorData.image) ? (
               <img
@@ -315,7 +342,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
             <p className="text-xs md:text-sm font-black text-[#138C9F] dark:text-teal-300 whitespace-nowrap">
               {doctorData
                 ? `${doctorData.firstname} ${doctorData.lastname}`
-                : "الطبيب"}
+                : t('doctorNav.doctorFallback')}
             </p>
             <p className="text-[10px] md:text-[11px] font-bold text-slate-500 dark:text-gray-400">
               {doctorData.email ? doctorData.email : "doctor@example.com"}

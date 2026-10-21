@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets_frontend/assets';
 import { FiMenu, FiX, FiBell } from "react-icons/fi"; // استيراد أيقونات التحكم
+import { useTheme } from '../../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
+    const { theme, lang, toggleTheme, toggleLang } = useTheme();
     const { notifications, groupedNotifications, markAllAsRead, userData } = useContext(AppContext);
     const [showNotifMenu, setShowNotifMenu] = useState(false);
 
@@ -40,12 +44,35 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
             onClick={() => navigate("/admin-dashboard")}
           />
           <span className="bg-[#e2f4f7] dark:bg-gray-700 text-[#138C9F] dark:text-teal-300 text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-[#138C9F]/20 dark:border-teal-400/20 whitespace-nowrap">
-            بوابة المسؤول
+            {t('adminNav.gateAdmin')}
           </span>
         </div>
 
         {/* 🟨 جهة اليسار: الإشعارات والبروفايل */}
         <div className="flex items-center gap-3 md:gap-6">
+          <button
+            onClick={toggleLang}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 font-bold text-xs cursor-pointer"
+            title={t('common.language')}
+          >
+            {lang === 'ar' ? 'EN' : 'عربي'}
+          </button>
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 cursor-pointer"
+            title={theme === 'dark' ? t('common.lightMode') : t('common.darkMode')}
+          >
+            {theme === 'dark' ? (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            )}
+          </button>
+
           {/* 🔔 زر وقائمة الإشعارات المنسدلة */}
           <div className="relative">
             <button
@@ -69,13 +96,13 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
               <div className="absolute left-[-50px] sm:left-0 mt-3 w-72 md:w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-xl py-2 z-50 text-right">
                 <div className="px-4 py-2 border-b border-gray-50 dark:border-gray-700 flex justify-between items-center bg-gray-50/50 dark:bg-gray-700/50 rounded-t-2xl">
                   <span className="font-bold text-gray-800 dark:text-gray-200 text-sm">
-                    إشعارات النظام
+                    {t('adminNav.notifications')}
                   </span>
                   <span
                     className="text-xs text-[#138C9F] cursor-pointer hover:underline"
                     onClick={() => setShowNotifMenu(false)}
                   >
-                    إغلاق
+                    {t('adminNav.close')}
                   </span>
                 </div>
                 <div className="max-h-64 overflow-y-auto">
@@ -110,7 +137,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
                     ))
                   ) : (
                     <p className="text-center py-6 text-xs text-gray-400">
-                      لا توجد إشعارات جديدة حالياً
+                      {t('adminNav.noNotifications')}
                     </p>
                   )}
                   {notifications && notifications.length > 5 && (
@@ -118,7 +145,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
                       onClick={() => { navigate("/admin/notifications"); setShowNotifMenu(false); }}
                       className="px-4 py-2.5 text-center text-xs font-bold text-[#138C9F] hover:bg-[#138C9F]/5 cursor-pointer transition-colors"
                     >
-                      عرض الكل ({notifications.length})
+                      {t('adminNav.viewAll', { n: notifications.length })}
                     </div>
                   )}
                 </div>
@@ -131,7 +158,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
             <div
               
               className="w-9 h-9 md:w-11 md:h-11 rounded-full border border-[#C3C6D6] dark:border-gray-600 bg-slate-100 dark:bg-gray-700 overflow-hidden cursor-pointer relative group transition-all duration-300 hover:border-[#138C9F] shadow-sm shrink-0 flex items-center justify-center"
-              title="عرض الملف الشخصي"
+              title={t('adminNav.profileTitle')}
             >
               {userData && userData.image ? (
                 // 1. إذا كانت الصورة موجودة، تملأ الدائرة بالكامل بدون حدود داخلية مكررة
@@ -155,7 +182,7 @@ const AdminNavbar = ({ setSidebarOpen, sidebarOpen }) => {
               <p className="text-xs md:text-sm font-black text-[#138C9F] dark:text-teal-300 whitespace-nowrap">
                 {userData
                   ? `${userData.firstname} ${userData.lastname}`
-                  : "المسؤول"}
+                  : t('adminNav.adminFallback')}
               </p>
               <p className="text-[10px] md:text-[11px] font-bold text-slate-500 dark:text-gray-400">
                 {userData.email ? userData.email : "admin@example.com"}

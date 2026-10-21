@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard,
   Users,
@@ -44,6 +45,7 @@ const SidebarSection = ({ title, children }) => (
 
 const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { setToken } = useContext(AppContext);
 
   const handleLogout = () => {
@@ -56,7 +58,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const mainMenuItems = [
     {
-      name: 'لوحة التحكم',
+      name: t('adminNav.dashboard'),
       path: '/admin-dashboard',
       icon: <LayoutDashboard size={20} strokeWidth={1.75} />,
     },
@@ -64,22 +66,22 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const managementMenuItems = [
     {
-      name: 'المستخدمين',
+      name: t('adminNav.users'),
       path: '/admin/users-management',
       icon: <Users size={20} strokeWidth={1.75} />,
     },
     {
-      name: 'الأقسام',
+      name: t('adminNav.departments'),
       path: '/admin/departments-management',
       icon: <Layers size={20} strokeWidth={1.75} />,
     },
     {
-      name: 'طلبات الإنضمام',
+      name: t('adminNav.joinRequests'),
       path: '/admin/join-requests',
       icon: <FileText size={20} strokeWidth={1.75} />,
     },
     {
-      name: 'المحادثات',
+      name: t('adminNav.chats'),
       path: '/admin/chats',
       icon: <MessageSquare size={20} strokeWidth={1.75} />,
     },
@@ -87,17 +89,17 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const financialMenuItems = [
     {
-      name: 'التقارير المالية',
+      name: t('adminNav.financialReports'),
       path: '/admin/financial-transactions',
       icon: <TrendingUp size={20} strokeWidth={1.75} />,
     },
     {
-      name: 'طرق الدفع والاشتراكات',
+      name: t('adminNav.paymentSubs'),
       path: '/admin/payment-methods',
       icon: <CreditCard size={20} strokeWidth={1.75} />,
     },
     {
-      name: 'تواصل معنا',
+      name: t('adminNav.contactUs'),
       path: '/admin/contact-us',
       icon: <Mail size={20} strokeWidth={1.75} />,
     },
@@ -125,7 +127,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
         <div className="my-3 mx-4 border-t border-slate-200 dark:border-gray-700" />
 
-        <SidebarSection title="الإدارة">
+        <SidebarSection title={t('adminNav.management')}>
           {managementMenuItems.map((item, index) => (
             <NavItem
               key={index}
@@ -137,7 +139,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
         <div className="my-3 mx-4 border-t border-slate-200 dark:border-gray-700" />
 
-        <SidebarSection title="المالية والتواصل">
+        <SidebarSection title={t('adminNav.financeContact')}>
           {financialMenuItems.map((item, index) => (
             <NavItem
               key={index}
@@ -155,7 +157,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           className="flex items-center gap-3 px-4 py-2.5 w-full rounded-xl text-[15px] text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 cursor-pointer"
         >
           <LogOut size={20} strokeWidth={1.75} />
-          <span className="font-medium">تسجيل خروج</span>
+          <span className="font-medium">{t('adminNav.logout')}</span>
         </button>
       </div>
     </aside>
