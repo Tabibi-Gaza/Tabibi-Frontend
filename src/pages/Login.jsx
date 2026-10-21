@@ -39,6 +39,7 @@ const Login = () => {
   const resetToken = searchParams.get('token') || '';
 
   const [state, setState] = useState("Login");
+  const [registerRole, setRegisterRole] = useState(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,7 +78,7 @@ const Login = () => {
 
   useEffect(() => {
     if (searchParams.get('view') === 'register') {
-      setState("RegisterPatient");
+      setState("RegisterChooser");
     }
   }, [searchParams]);
 
@@ -90,8 +91,9 @@ const Login = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleStateChange = (newState) => {
+  const handleStateChange = (newState, role = null) => {
     setState(newState);
+    setRegisterRole(role);
     setEmail('');
     setPassword('');
     setFirstName('');
@@ -168,7 +170,11 @@ const Login = () => {
           localStorage.setItem('user', JSON.stringify(user));
           setToken(accessToken);
           toast.success(t('login.registerSuccess'));
-          navigate('/');
+          if (registerRole === 'doctor') {
+            navigate('/register-doctor');
+          } else {
+            navigate('/');
+          }
         } else {
           const errorCode = data.errors?.[0]?.code;
           const errorMsg = data.errors?.[0]?.message || data.message || t('login.registerFailed');
@@ -246,6 +252,74 @@ const Login = () => {
 
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const isGoogleEnabled = Boolean(googleClientId) && googleClientId !== 'YOUR_GOOGLE_CLIENT_ID';
+
+  const registerRoles = [
+    {
+      key: 'patient',
+      title: t('login.rolePatient'),
+      desc: t('login.rolePatientDesc'),
+      selectable: true,
+      onClick: () => handleStateChange('RegisterPatient', 'patient'),
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      ),
+    },
+    {
+      key: 'doctor',
+      title: t('login.roleDoctor'),
+      desc: t('login.roleDoctorDesc'),
+      selectable: true,
+      onClick: () => handleStateChange('RegisterPatient', 'doctor'),
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          <path d="M12 17.5v-2.25M10.875 16.375h2.25" />
+        </svg>
+      ),
+    },
+    {
+      key: 'pharmacy',
+      title: t('login.rolePharmacy'),
+      desc: t('login.rolePharmacyDesc'),
+      selectable: false,
+      onClick: undefined,
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <g transform="rotate(-45 12 12)">
+            <rect x="3" y="8" width="18" height="8" rx="4" />
+            <path d="M12 8v8" />
+          </g>
+        </svg>
+      ),
+    },
+    {
+      key: 'lab',
+      title: t('login.roleLab'),
+      desc: t('login.roleLabDesc'),
+      selectable: false,
+      onClick: undefined,
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M9 3h6M10 3v6l-5 8a2 2 0 001.7 3h10.6a2 2 0 001.7-3l-5-8V3" />
+          <path d="M7.5 15h9" />
+        </svg>
+      ),
+    },
+    {
+      key: 'center',
+      title: t('login.roleCenter'),
+      desc: t('login.roleCenterDesc'),
+      selectable: false,
+      onClick: undefined,
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21M12 7.5v3M10.5 9h3" />
+        </svg>
+      ),
+    },
+  ];
 
   return (
     <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center" dir="rtl">
@@ -354,7 +428,7 @@ const Login = () => {
                   {t('login.noAccount')}{" "}
                   <span
                     className="text-[#138C9F] underline cursor-pointer"
-                    onClick={() => handleStateChange("RegisterPatient")}
+                    onClick={() => handleStateChange("RegisterChooser")}
                   >
                     {t('login.createAccount')}
                   </span>
@@ -362,10 +436,78 @@ const Login = () => {
               </>
             )}
 
+            {/* 1.5 واجهة اختيار نوع الحساب */}
+            {state === "RegisterChooser" && (
+              <div className="space-y-5">
+                <div className="text-center">
+                  <img
+                    decoding="async"
+                    width="80"
+                    height="80"
+                    onClick={() => navigate('/')}
+                    className="h-28 w-auto mx-auto object-contain mb-3 cursor-pointer transform hover:scale-105 transition-all duration-300"
+                    src={assets.logo}
+                    alt={t('login.logoAlt')}
+                  />
+                  <h2 className="text-xl font-black text-[#138C9F] mb-2">{t('login.chooseAccountType')}</h2>
+                  <p className="text-sm text-slate-400 dark:text-gray-500 font-bold">
+                    {t('login.chooseAccountTypeDesc')}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {registerRoles.map((role) => (
+                    <button
+                      key={role.key}
+                      type="button"
+                      disabled={!role.selectable}
+                      onClick={role.onClick}
+                      className={`text-start flex items-center gap-3 p-4 rounded-2xl border transition-all ${
+                        role.selectable
+                          ? 'border-slate-200 dark:border-gray-700 hover:border-[#138C9F] hover:shadow-md hover:bg-[#f0fafb] dark:hover:bg-gray-700 cursor-pointer'
+                          : 'border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 opacity-70 cursor-not-allowed'
+                      }`}
+                    >
+                      <div className="w-11 h-11 rounded-xl bg-[#e6f4f6] text-[#138C9F] flex items-center justify-center shrink-0">
+                        {role.icon}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-sm font-black text-slate-800 dark:text-gray-100">{role.title}</h3>
+                        <p className="text-xs text-slate-500 dark:text-gray-400 font-bold mt-1 leading-relaxed">{role.desc}</p>
+                      </div>
+                      {role.selectable && (
+                        <svg className="w-4 h-4 shrink-0 text-[#138C9F]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                <p className="text-sm text-center font-bold text-slate-600 dark:text-gray-200">
+                  {t('login.hasAccount')}
+                  <span
+                    className="text-[#138C9F] underline cursor-pointer"
+                    onClick={() => handleStateChange("Login")}
+                  >
+                    {t('login.loginHere')}
+                  </span>
+                </p>
+              </div>
+            )}
+
             {/* 2. واجهة التسجيل كمريض */}
             {state === "RegisterPatient" && (
               <div className="space-y-4 overflow-y-scroll px-1 scrollbar-thin">
                 <div className="text-center">
+                  <button
+                    type="button"
+                    onClick={() => handleStateChange("RegisterChooser")}
+                    className="flex items-center gap-1.5 text-sm font-bold text-slate-500 dark:text-gray-400 hover:text-[#138C9F] transition-colors cursor-pointer mb-1"
+                  >
+                    <FontAwesomeIcon icon={faArrowLeft} className="text-xs rotate-180" />
+                    {t('login.backToRoles')}
+                  </button>
                   <img
                     decoding="async"
                     width="80"
@@ -595,7 +737,7 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all"
                 >
-                  {t('login.registerBtn')}
+                  {registerRole === 'doctor' ? t('login.next') : t('login.registerBtn')}
                 </button>
 
                 <p className="text-sm text-center font-bold text-slate-600 dark:text-gray-200">
@@ -811,6 +953,7 @@ const Login = () => {
           <div className="relative z-10 flex flex-col items-center justify-center h-full">
             <h2 className="text-4xl font-black text-center mb-6 leading-tight text-white drop-shadow-lg">
               {state === "Login" && t('login.smartHealthcare')}
+              {state === "RegisterChooser" && t('login.chooseAccountType')}
               {state === "RegisterPatient" && t('login.yourFileSecure')}
               {state === "ForgotPassword" && t('login.accountSecurity')}
               {state === "OTPVerification" && t('login.verifyIdentity')}
@@ -819,13 +962,14 @@ const Login = () => {
 
             <p className="text-base text-slate-100 text-center font-medium max-w-lg leading-relaxed drop-shadow-md mb-8">
               {state === "Login" && t('login.healthcareDescription')}
+              {state === "RegisterChooser" && t('login.chooseAccountTypeDescLeft')}
               {state === "RegisterPatient" && t('login.registerDescriptionLeft')}
               {state === "ForgotPassword" && t('login.forgotPasswordDescriptionLeft')}
               {state === "OTPVerification" && t('login.otpDescriptionLeft')}
               {state === "ResetPassword" && t('login.resetPasswordDescriptionLeft')}
             </p>
 
-            {(state === "Login" || state === "RegisterPatient") && (
+            {(state === "Login" || state === "RegisterPatient" || state === "RegisterChooser") && (
               <div className="grid grid-cols-2 gap-6 w-full">
                 <div className="bg-white/90 dark:bg-gray-800/15 backdrop-blur-xl p-8 rounded-3xl border border-white/30 text-center shadow-xl">
                   <h5 className="text-5xl font-black text-[#0f7282] dark:text-white mb-2">50+</h5>
