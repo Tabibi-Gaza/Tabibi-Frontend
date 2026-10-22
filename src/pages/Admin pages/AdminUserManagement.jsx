@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
-import { Eye, Trash2, Users, UserCheck, UserPlus, Ban, ChevronRight, ChevronLeft, X, User, Briefcase, Award, Download, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Eye, Trash2, Users, UserCheck, UserPlus, Ban, ChevronRight, ChevronLeft, X, User, Briefcase, Award, Download, ToggleLeft, ToggleRight, Stethoscope, Pill, Building2, FlaskConical } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
 import axiosInstance from '../../api/axiosInstance';
@@ -21,7 +21,7 @@ export default function AdminUserManagement() {
     const [totalCount, setTotalCount] = useState(0);
     const usersPerPage = 4;
 
-    const [stats, setStats] = useState({ totalUsers: 0, totalDoctors: 0, totalActiveDoctors: 0, totalPatients: 0, totalInactiveUsers: 0 });
+    const [stats, setStats] = useState({ totalDoctors: 0, totalPharmacies: 0, totalLabs: 0, totalMedicalCenters: 0, totalActiveAccounts: 0, totalInactiveUsers: 0 });
 
     const [selectedUser, setSelectedUser] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -175,27 +175,41 @@ export default function AdminUserManagement() {
                 </h2>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full">
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
                         <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalDoctors')}</span>
                         <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalDoctors}</span>
                     </div>
-                    <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Users size={16} /></div>
+                    <div className="w-[30px] h-[30px] bg-[#DAE2FF] rounded-full flex items-center justify-center text-[#003D9B]"><Stethoscope size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.activeDoctors')}</span>
-                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalActiveDoctors}</span>
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalPharmacies')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalPharmacies}</span>
+                    </div>
+                    <div className="w-[30px] h-[30px] bg-[#DCFCE7] rounded-full flex items-center justify-center text-[#166534]"><Pill size={16} /></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                    <div className="flex flex-col">
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalMedicalCenters')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalMedicalCenters}</span>
+                    </div>
+                    <div className="w-[30px] h-[30px] bg-[#DBEAFE] rounded-full flex items-center justify-center text-[#1D4ED8]"><Building2 size={16} /></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                    <div className="flex flex-col">
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalLabs')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalLabs}</span>
+                    </div>
+                    <div className="w-[30px] h-[30px] bg-[#FCE7F3] rounded-full flex items-center justify-center text-[#BE185D]"><FlaskConical size={16} /></div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
+                    <div className="flex flex-col">
+                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.activeAccounts')}</span>
+                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalActiveAccounts}</span>
                     </div>
                     <div className="w-[30px] h-[30px] bg-[#6BFF8F]/30 rounded-full flex items-center justify-center text-[#004F20]"><UserCheck size={16} /></div>
-                </div>
-                <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
-                    <div className="flex flex-col">
-                        <span className="font-semibold text-[12px] leading-[16px] tracking-[0.6px] text-[#526069] dark:text-gray-400">{t('adminUserManagement.totalUsers')}</span>
-                        <span className="font-semibold text-[20px] leading-[28px] text-[#0B1C30] dark:text-gray-200">{stats.totalUsers}</span>
-                    </div>
-                    <div className="w-[30px] h-[30px] bg-[#D6E5EF] rounded-full flex items-center justify-center text-[#526069] dark:text-gray-400"><UserPlus size={16} /></div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">

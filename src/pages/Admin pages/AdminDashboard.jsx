@@ -28,6 +28,21 @@ const AdminDashboard = () => {
     const [selectedDetails, setSelectedDetails] = useState(null);
     const [showRejectModal, setShowRejectModal] = useState(false);
     const [rejectReasonInput, setRejectReasonInput] = useState('');
+    const [facilityRequests, setFacilityRequests] = useState([]);
+    const [facilityActionLoading, setFacilityActionLoading] = useState(null);
+    const [processedFacilityIds, setProcessedFacilityIds] = useState([]);
+    const [rejectTargetType, setRejectTargetType] = useState('doctor');
+
+    const fetchFacilityRequests = async () => {
+        try {
+            const { data } = await axiosInstance.get('/admin/facility-applications/pending', { params: { PageSize: 5 } });
+            if (data.succeeded && data.data?.items) {
+                setFacilityRequests(data.data.items);
+            }
+        } catch (error) {
+            // silently keep empty list
+        }
+    };
 
     useEffect(() => {
         const fetchDashboard = async () => {
@@ -58,9 +73,11 @@ const AdminDashboard = () => {
             }
         };
         fetchSubscriptionStats();
+        fetchFacilityRequests();
     }, [token]);
 
     const localDoctorRequests = (dashboardData?.doctorRequests || []).filter(req => !processedDoctorIds.includes(req.id));
+    const visibleFacilityRequests = facilityRequests.filter(req => !processedFacilityIds.includes(req.id));
 
     const handleAction = async (doctorId, status) => {
         setActionLoading(doctorId);
@@ -114,6 +131,34 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleFacilityAction = async (facilityId, status) => {
+        setFacilityActionLoading(facilityId);
+        try {
+            const approved = status === 'approved';
+            const endpoint = approved ? '/admin/facility-applications/approve' : '/admin/facility-applications/reject';
+            const body = approved ? { Id: facilityId } : { Id: facilityId, Reason: 'مرفوض من الإدارة' };
+            const { data } = await axiosInstance.post(endpoint, body);
+            if (data.succeeded) {
+                toast.success(data.message || t('adminDashboard.requestUpdated'));
+                setProcessedFacilityIds(prev => [...prev, facilityId]);
+                fetchFacilityRequests();
+            } else {
+                toast.error(data.errors?.[0]?.message || data.message || t('adminDashboard.actionFailed'));
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.errors?.[0]?.message || t('adminDashboard.actionFailed'));
+        } finally {
+            setFacilityActionLoading(null);
+        }
+    };
+
+    const openFacilityRejectFlow = (req) => {
+        setSelectedRequest(req);
+        setRejectTargetType('facility');
+        setRejectReasonInput('');
+        setShowRejectModal(true);
+    };
+
     const handleConfirmReject = async () => {
         if (!rejectReasonInput.trim()) {
             toast.error(t('adminDashboard.writeRejectionReason'));
@@ -124,7 +169,10 @@ const AdminDashboard = () => {
         if (!currentId) return;
         setActionLoading(currentId);
         try {
-            const { data } = await axiosInstance.post('/admin/doctor-applications/reject', {
+            const endpoint = rejectTargetType === 'facility'
+                ? '/admin/facility-applications/reject'
+                : '/admin/doctor-applications/reject';
+            const { data } = await axiosInstance.post(endpoint, {
                 Id: currentId,
                 Reason: rejectReasonInput
             });
@@ -133,11 +181,16 @@ const AdminDashboard = () => {
                 setShowRejectModal(false);
                 setSelectedRequest(null);
                 setSelectedDetails(null);
-                setProcessedDoctorIds(prev => [...prev, currentId]);
-                try {
-                    await loadDashboardData();
-                } catch (e) {
-                    // silently handle refresh error
+                if (rejectTargetType === 'facility') {
+                    setProcessedFacilityIds(prev => [...prev, currentId]);
+                    fetchFacilityRequests();
+                } else {
+                    setProcessedDoctorIds(prev => [...prev, currentId]);
+                    try {
+                        await loadDashboardData();
+                    } catch (e) {
+                        // silently handle refresh error
+                    }
                 }
             } else {
                 toast.error(data.errors?.[0]?.message || data.message || t('adminDashboard.rejectFailed'));
@@ -204,6 +257,30 @@ const AdminDashboard = () => {
             valueColor: 'text-amber-600', borderHover: 'hover:border-amber-400/40',
             isRevenue: true,
             growthIcon: statsData.revenueGrowth >= 0 ? <FiTrendingUp size={12} /> : <FiTrendingDown size={12} />,
+        },
+        {
+            id: 5, title: t('adminDashboard.totalPharmacies'), value: statsData.totalPharmacies || 0,
+            badge: t('adminDashboard.active'), badgeBg: 'bg-emerald-50', badgeText: 'text-emerald-700',
+            icon: <FiUserCheck size={20} />, iconBg: 'bg-green-50', iconColor: 'text-green-600',
+            valueColor: 'text-green-600', borderHover: 'hover:border-green-400/40',
+        },
+        {
+            id: 6, title: t('adminDashboard.totalLabs'), value: statsData.totalLabs || 0,
+            badge: t('adminDashboard.active'), badgeBg: 'bg-pink-50', badgeText: 'text-pink-700',
+            icon: <FiUsers size={20} />, iconBg: 'bg-pink-50', iconColor: 'text-pink-600',
+            valueColor: 'text-pink-600', borderHover: 'hover:border-pink-400/40',
+        },
+        {
+            id: 7, title: t('adminDashboard.totalMedicalCenters'), value: statsData.totalMedicalCenters || 0,
+            badge: t('adminDashboard.active'), badgeBg: 'bg-blue-50', badgeText: 'text-blue-700',
+            icon: <FiBriefcase size={20} />, iconBg: 'bg-blue-50', iconColor: 'text-blue-600',
+            valueColor: 'text-blue-600', borderHover: 'hover:border-blue-400/40',
+        },
+        {
+            id: 8, title: t('adminDashboard.pendingTotal'), value: (statsData.pendingRequests || 0) + (statsData.pendingFacilityRequests || 0),
+            badge: t('adminDashboard.requestCount'), badgeBg: 'bg-orange-50', badgeText: 'text-orange-700',
+            icon: <FiClock size={20} />, iconBg: 'bg-orange-50', iconColor: 'text-orange-600',
+            valueColor: 'text-orange-600', borderHover: 'hover:border-orange-400/40',
         },
     ];
 
@@ -381,6 +458,62 @@ const AdminDashboard = () => {
                         )}
                     </div>
                 </div>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 shadow-xs">
+                <div className="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-gray-700 mb-4">
+                    <h3 className="font-bold text-[15px] text-[#138C9F]">{t('adminDashboard.newFacilityRequests')}</h3>
+                    <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold bg-[#138C9F]/10 text-[#138C9F] px-2 py-0.5 rounded-full">
+                            {visibleFacilityRequests.length} {t('adminDashboard.requestCount')}
+                        </span>
+                        <button
+                            onClick={() => navigate('/admin/join-requests')}
+                            className="text-[11px] font-bold text-[#138C9F] hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                            {t('adminDashboard.viewAllRequests')}
+                            <FiExternalLink size={11} />
+                        </button>
+                    </div>
+                </div>
+
+                {visibleFacilityRequests.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                        {visibleFacilityRequests.map((req) => (
+                            <div key={req.id} className="bg-[#ecf8fa] dark:bg-gray-900 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-3.5 flex items-center gap-3 transition-all hover:shadow-xs">
+                                <div className="w-10 h-10 rounded-full bg-[#138C9F]/10 text-[#138C9F] flex items-center justify-center font-bold text-[13px] shrink-0">
+                                    {req.facilityName ? req.facilityName.slice(0, 2) : '??'}
+                                </div>
+                                <div className="text-right flex-1 min-w-0">
+                                    <h4 className="font-bold text-[13px] text-[#0B1C30] dark:text-white truncate">{req.facilityName}</h4>
+                                    <p className="text-[11px] font-semibold text-[#138C9F] truncate">
+                                        {req.facilityType === 'Pharmacy' ? t('adminFacilityRequests.typePharmacy') : req.facilityType === 'Lab' ? t('adminFacilityRequests.typeLab') : t('adminFacilityRequests.typeCenter')} — {req.area}
+                                    </p>
+                                </div>
+                                <div className="flex items-center gap-2 shrink-0">
+                                    <button
+                                        disabled={facilityActionLoading === req.id}
+                                        onClick={() => handleFacilityAction(req.id, 'approved')}
+                                        className="h-8 rounded-lg bg-[#138C9F] text-white text-xs font-bold hover:bg-[#107585] transition-colors cursor-pointer disabled:opacity-50 px-3"
+                                    >
+                                        {facilityActionLoading === req.id ? '...' : t('adminDashboard.accept')}
+                                    </button>
+                                    <button
+                                        disabled={facilityActionLoading === req.id}
+                                        onClick={() => openFacilityRejectFlow(req)}
+                                        className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50 px-3"
+                                    >
+                                        {t('adminDashboard.reject')}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="h-24 flex flex-col items-center justify-center text-gray-300 dark:text-gray-500 gap-2">
+                        <p className="text-xs font-semibold text-gray-400">{t('adminDashboard.noPendingFacilityRequests')}</p>
+                    </div>
+                )}
             </div>
 
             <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-5 shadow-xs">

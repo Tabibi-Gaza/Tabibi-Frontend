@@ -296,7 +296,7 @@ const Login = () => {
       title: t('login.rolePharmacy'),
       desc: t('login.rolePharmacyDesc'),
       selectable: true,
-      onClick: () => handleStateChange('RegisterPatient', 'pharmacy'),
+      onClick: () => navigate('/register-facility?type=pharmacy'),
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <g transform="rotate(-45 12 12)">
@@ -311,7 +311,7 @@ const Login = () => {
       title: t('login.roleLab'),
       desc: t('login.roleLabDesc'),
       selectable: true,
-      onClick: () => handleStateChange('RegisterPatient', 'lab'),
+      onClick: () => navigate('/register-facility?type=lab'),
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <path d="M9 3h6M10 3v6l-5 8a2 2 0 001.7 3h10.6a2 2 0 001.7-3l-5-8V3" />
@@ -324,7 +324,7 @@ const Login = () => {
       title: t('login.roleCenter'),
       desc: t('login.roleCenterDesc'),
       selectable: true,
-      onClick: () => handleStateChange('RegisterPatient', 'center'),
+      onClick: () => navigate('/register-facility?type=medicalCenter'),
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21M12 7.5v3M10.5 9h3" />

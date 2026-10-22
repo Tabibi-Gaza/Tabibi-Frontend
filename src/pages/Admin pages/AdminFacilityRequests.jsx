@@ -3,7 +3,6 @@ import { RefreshCw, ChevronRight, ChevronLeft, FileText, Building2, MapPin, Phon
 import { FiEye, FiX, FiAlertTriangle, FiDownload } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
-import { resolveImageUrl } from '../../utils/imageUrl';
 import { useTranslation } from 'react-i18next';
 
 const TYPE_LABEL_KEYS = {
@@ -95,9 +94,24 @@ export default function AdminFacilityRequests() {
         }
     };
 
-    const openLicenseDoc = (path) => {
-        if (!path) return;
-        window.open(resolveImageUrl(path), '_blank');
+    const handleDownloadLicense = async (id, facilityName) => {
+        try {
+            const response = await axiosInstance.get(`/admin/facility-applications/${id}/download-license`, { responseType: 'blob' });
+            const blob = new Blob([response.data]);
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            const disposition = response.headers?.['content-disposition'] || '';
+            const match = disposition.match(/filename\*?=(?:UTF-8'')?["']?([^"';]+)["']?/i);
+            link.download = match ? decodeURIComponent(match[1]) : `License_${facilityName || 'document'}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            toast.success(t('adminFacilityRequests.downloadSuccess'));
+        } catch (error) {
+            toast.error(t('adminFacilityRequests.downloadFailed'));
+        }
     };
 
     const typeFilters = [
@@ -320,11 +334,11 @@ export default function AdminFacilityRequests() {
 
                             {selectedRequest.licenseDocumentPath && (
                                 <button
-                                    onClick={() => openLicenseDoc(selectedRequest.licenseDocumentPath)}
+                                    onClick={() => handleDownloadLicense(selectedRequest.id, selectedRequest.facilityName)}
                                     className="h-12 border border-[#138C9F] text-[#138C9F] bg-white dark:bg-gray-800 rounded-[8px] text-[13px] font-bold hover:bg-[#138C9F]/5 transition-colors cursor-pointer flex items-center justify-center gap-2"
                                 >
                                     <FiDownload size={14} />
-                                    {t('adminFacilityRequests.viewLicense')}
+                                    {t('adminFacilityRequests.downloadLicense')}
                                 </button>
                             )}
                         </div>
