@@ -817,8 +817,8 @@
     "fetchFailed": "Failed to load user data"
   },
   "adminJoinRequests": {
-    "title": "Doctor Join Requests",
-    "description": "Manage and review accreditation requests for new doctors on the platform.",
+    "title": "Join Requests",
+    "description": "Manage and review join requests for doctors and medical facilities (pharmacies, labs, medical centers).",
     "totalPending": "Total Pending Requests",
     "advancedFilter": "Advanced Filter",
     "pending": "Pending",
@@ -874,7 +874,96 @@
     "rejectError": "An error occurred while rejecting the request",
     "downloadSuccess": "File downloaded successfully",
     "downloadFailed": "Failed to download file",
-    "year": "year"
+    "year": "year",
+    "tabDoctors": "Doctors",
+    "tabFacilities": "Facilities"
+  },
+  "adminFacilityRequests": {
+    "fullName": "Applicant Name",
+    "facilityType": "Facility Type",
+    "facilityName": "Facility Name",
+    "licenseNumber": "License Number",
+    "area": "Area",
+    "actions": "Actions",
+    "viewDetails": "View Details",
+    "approve": "Approve",
+    "reject": "Reject",
+    "typePharmacy": "Pharmacy",
+    "typeLab": "Lab",
+    "typeCenter": "Medical Center",
+    "allTypes": "All",
+    "totalPending": "Pending Facility Requests",
+    "loading": "Loading data...",
+    "noResults": "There are no pending requests right now.",
+    "showing": "Showing {{from}} - {{to}} of {{total}} total requests",
+    "fetchFailed": "Failed to fetch requests",
+    "approveSuccess": "Request approved and account activated successfully",
+    "approveFailed": "Failed to approve request",
+    "rejectSuccess": "Request rejected successfully",
+    "rejectFailed": "Failed to reject request",
+    "facilityDetails": "Facility Details",
+    "detailedAddress": "Detailed Address",
+    "description": "Description",
+    "applicantInfo": "Applicant Info",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "requestDate": "Request Date",
+    "viewLicense": "View License Document",
+    "close": "Close",
+    "approveAndActivate": "Approve & Activate",
+    "processing": "Processing...",
+    "rejectionReasonTitle": "Rejection Reason",
+    "rejectionReasonDescription": "Please explain why this facility request is being rejected so the applicant can be notified.",
+    "reasonDetails": "Reason Details",
+    "reasonPlaceholder": "Write the rejection details here...",
+    "cancel": "Cancel",
+    "confirmRejection": "Confirm Rejection"
+  },
+  "facilityNav": {
+    "gate": {
+      "pharmacy": "Pharmacy Gate",
+      "lab": "Lab Gate",
+      "medicalCenter": "Medical Center Gate"
+    },
+    "dashboard": "Dashboard",
+    "management": "Management",
+    "soon": "Coming soon",
+    "logout": "Logout",
+    "profileTitle": "Current account",
+    "facilityFallback": "Facility",
+    "items": {
+      "pharmacy": {
+        "i1": "Medicines & Products",
+        "i2": "Orders",
+        "i3": "Inventory"
+      },
+      "lab": {
+        "i1": "Tests",
+        "i2": "Results",
+        "i3": "Orders"
+      },
+      "medicalCenter": {
+        "i1": "Doctors",
+        "i2": "Appointments",
+        "i3": "Services"
+      }
+    }
+  },
+  "facilityDashboard": {
+    "welcome": "Welcome, {{name}}",
+    "subtitles": {
+      "pharmacy": "Manage your pharmacy, products, and service areas",
+      "lab": "Manage your lab, tests, and results",
+      "medicalCenter": "Manage your medical center, doctors, and services"
+    },
+    "stats": {
+      "orders": "Orders",
+      "products": "Products / Services",
+      "reviews": "Reviews",
+      "soon": "Coming soon"
+    },
+    "comingSoonTitle": "Dashboard Under Construction",
+    "comingSoonBody": "We are building full management tools for your facility: products, orders, tests, reports, and more. Stay tuned!"
   },
   "adminDepartments": {
     "title": "Department Management",

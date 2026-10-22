@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Filter, RefreshCw, ChevronRight, ChevronLeft, FileText } from 'lucide-react';
+import { Filter, RefreshCw, ChevronRight, ChevronLeft, FileText, Stethoscope, Building2 } from 'lucide-react';
 import { FiEye, FiX, FiDownload, FiAlertTriangle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
@@ -8,6 +8,7 @@ import { specializationKeys } from '../../queries/specializations/specialization
 import { doctorKeys } from '../../queries/doctors/doctorKeys';
 import { resolveImageUrl } from '../../utils/imageUrl';
 import { useTranslation } from 'react-i18next';
+import AdminFacilityRequests from './AdminFacilityRequests';
 
 const STATUS_MAP = {
     'Pending': 'pending',
@@ -33,6 +34,7 @@ export default function AdminJoinRequests() {
 
     const [showAdvancedFilterModal, setShowAdvancedFilterModal] = useState(false);
     const [searchName, setSearchName] = useState('');
+    const [requestTab, setRequestTab] = useState('doctors');
     const itemsPerPage = 5;
 
     const statusToApi = { pending: 1, accepted: 2, rejected: 3 };
@@ -78,8 +80,10 @@ export default function AdminJoinRequests() {
     }, [currentPage, activeFilter, searchName]);
 
     useEffect(() => {
-        fetchApplications();
-    }, [fetchApplications]);
+        if (requestTab === 'doctors') {
+            fetchApplications();
+        }
+    }, [fetchApplications, requestTab]);
 
     const handleAccept = async (id) => {
         setActionLoading(true);
@@ -188,6 +192,25 @@ export default function AdminJoinRequests() {
                     <p className="text-[14px] md:text-[16px] font-semibold text-[#434654] mt-1">{t('adminJoinRequests.description')}</p>
                 </div>
 
+                <div className="flex flex-row gap-2 w-full sm:w-auto">
+                    <button
+                        onClick={() => setRequestTab('doctors')}
+                        className={`h-[42px] px-5 md:px-6 rounded-full text-[14px] md:text-[15px] font-bold transition-all flex items-center gap-2 ${requestTab === 'doctors' ? 'bg-[#138C9F] text-white' : 'bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 text-[#434654] dark:text-gray-300'}`}
+                    >
+                        <Stethoscope className="w-4 h-4" />
+                        {t('adminJoinRequests.tabDoctors')}
+                    </button>
+                    <button
+                        onClick={() => setRequestTab('facilities')}
+                        className={`h-[42px] px-5 md:px-6 rounded-full text-[14px] md:text-[15px] font-bold transition-all flex items-center gap-2 ${requestTab === 'facilities' ? 'bg-[#138C9F] text-white' : 'bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 text-[#434654] dark:text-gray-300'}`}
+                    >
+                        <Building2 className="w-4 h-4" />
+                        {t('adminJoinRequests.tabFacilities')}
+                    </button>
+                </div>
+
+                {requestTab === 'doctors' && (
+                    <>
                 <div className="w-full flex flex-col sm:flex-row gap-4 md:gap-6">
                     <div className="flex-1 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-[12px] p-4 md:p-6 flex flex-row-reverse justify-between items-center shadow-sm">
                         <div className="w-[48px] h-[48px] bg-blue-50 rounded-[8px] flex items-center justify-center text-[#138C9F] shrink-0">
@@ -345,10 +368,14 @@ export default function AdminJoinRequests() {
                         </div>
                     </div>
                 </div>
+                    </>
+                )}
+
+                {requestTab === 'facilities' && <AdminFacilityRequests />}
             </div>
 
             {/* Advanced Filter Modal */}
-            {showAdvancedFilterModal && (
+            {requestTab === 'doctors' && showAdvancedFilterModal && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all">
                     <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[460px] bg-white dark:bg-gray-800 rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 flex flex-col text-right">
                         <div className="h-[60px] bg-[#e2f4f7] dark:bg-gray-800 px-6 flex items-center justify-between border-b border-[#C3C6D6]">
@@ -389,7 +416,7 @@ export default function AdminJoinRequests() {
             )}
 
             {/* Detail Modal — identical to AdminDashboard */}
-            {selectedRequest && (
+            {requestTab === 'doctors' && selectedRequest && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
                     <div className="w-full max-w-[650px] max-h-[90vh] bg-white dark:bg-gray-800 rounded-[16px] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 text-right flex flex-col">
                         {/* Header */}
@@ -539,7 +566,7 @@ export default function AdminJoinRequests() {
             )}
 
             {/* Reject Modal */}
-            {showRejectModal && (
+            {requestTab === 'doctors' && showRejectModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                     <div className="w-full max-w-[calc(100%-2rem)] sm:max-w-[440px] bg-white dark:bg-gray-800 rounded-[16px] p-4 sm:p-6 shadow-2xl border border-gray-100 dark:border-gray-700 text-center text-right">
                         <div className="w-[56px] h-[56px] bg-red-50 text-[#BA1A1A] rounded-full flex items-center justify-center mx-auto mb-4">

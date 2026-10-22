@@ -10,6 +10,7 @@ import './i18n';
 
 const AdminLayout = lazy(() => import('./components/Admin/AdminLayout'));
 const DoctorLayout = lazy(() => import('./components/Doctor/DoctorLayout'));
+const FacilityLayout = lazy(() => import('./components/Facility/FacilityLayout'));
 const SecretaryProtectedRoute = lazy(() => import('./components/Doctor/SecretaryProtectedRoute'));
 
 class ErrorBoundary extends Component {
@@ -89,6 +90,8 @@ const SecretaryManagement = lazy(() => import('./pages/Doctor pages/SecretaryMan
 const DoctorSubscription = lazy(() => import('./pages/Doctor pages/DoctorSubscription'))
 const DoctorChangePassword = lazy(() => import('./pages/Doctor pages/DoctorChangePassword'))
 const RegisterAsDoctor = lazy(() => import('./pages/RegisterAsDoctor'))
+const RegisterFacility = lazy(() => import('./pages/RegisterFacility'))
+const FacilityDashboard = lazy(() => import('./pages/Facility pages/FacilityDashboard'))
 const Pharmacies = lazy(() => import('./pages/Pharmacies'))
 const MedicalCenters = lazy(() => import('./pages/MedicalCenters'))
 const Labs = lazy(() => import('./pages/Labs'))
@@ -135,6 +138,9 @@ const UserLayout = () => {
 
   if (roles.includes("Doctor") || roles.includes("Secretary")) return <Navigate to="/doctor-dashboard" />;
   if (roles.includes("Admin")) return <Navigate to="/admin-dashboard" />;
+  if (roles.includes("Pharmacy")) return <Navigate to="/pharmacy-dashboard" />;
+  if (roles.includes("Lab")) return <Navigate to="/lab-dashboard" />;
+  if (roles.includes("MedicalCenter")) return <Navigate to="/medical-center-dashboard" />;
 
   return (
     <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
@@ -165,6 +171,7 @@ const UserLayout = () => {
           <Route path='/my-appointment' element={<MyAppointment />} />
           <Route path='/my-profile' element={<Myprofile />} />
           <Route path='/register-doctor' element={<RegisterAsDoctor />} />
+          <Route path='/register-facility' element={<RegisterFacility />} />
           <Route path='/medical-files' element={<PatientMedicalFile />} />
           <Route path='/my-prescriptions' element={<MyPrescriptions />} />
           <Route path='/appointment/:docId' element={<Appointment />} />
@@ -219,6 +226,16 @@ const App = () => {
             <Route path="/doctor/secretary-management" element={<SecretaryManagement />} />
             <Route path="/doctor/change-password" element={<DoctorChangePassword />} />
             <Route path="/doctor/subscription" element={<DoctorSubscription />} />
+          </Route>
+
+          <Route element={<FacilityLayout type="pharmacy" />}>
+            <Route path="/pharmacy-dashboard" element={<FacilityDashboard type="pharmacy" />} />
+          </Route>
+          <Route element={<FacilityLayout type="lab" />}>
+            <Route path="/lab-dashboard" element={<FacilityDashboard type="lab" />} />
+          </Route>
+          <Route element={<FacilityLayout type="medicalCenter" />}>
+            <Route path="/medical-center-dashboard" element={<FacilityDashboard type="medicalCenter" />} />
           </Route>
 
           <Route path="/qr/:token" element={<QrScanPage />} />

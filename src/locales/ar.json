@@ -817,8 +817,8 @@
     "fetchFailed": "فشل في تحميل بيانات المستخدمين"
   },
   "adminJoinRequests": {
-    "title": "طلبات انضمام الأطباء",
-    "description": "إدارة ومراجعة طلبات الاعتماد للأطباء الجدد في المنصة.",
+    "title": "طلبات الانضمام",
+    "description": "إدارة ومراجعة طلبات الانضمام للأطباء والمنشآت الطبية (الصيدليات، المختبرات، المراكز الطبية).",
     "totalPending": "إجمالي الطلبات المعلقة",
     "advancedFilter": "تصفية متقدمة",
     "pending": "المعلقة",
@@ -874,7 +874,96 @@
     "rejectError": "حدث خطأ أثناء رفض الطلب",
     "downloadSuccess": "تم تحميل الملف بنجاح",
     "downloadFailed": "فشل في تحميل الملف",
-    "year": "سنة"
+    "year": "سنة",
+    "tabDoctors": "الأطباء",
+    "tabFacilities": "المنشآت"
+  },
+  "adminFacilityRequests": {
+    "fullName": "اسم مقدم الطلب",
+    "facilityType": "نوع المنشأة",
+    "facilityName": "اسم المنشأة",
+    "licenseNumber": "رقم الترخيص",
+    "area": "المنطقة",
+    "actions": "الإجراءات",
+    "viewDetails": "عرض التفاصيل",
+    "approve": "قبول",
+    "reject": "رفض",
+    "typePharmacy": "صيدلية",
+    "typeLab": "مختبر",
+    "typeCenter": "مركز طبي",
+    "allTypes": "الكل",
+    "totalPending": "طلبات المنشآت المعلقة",
+    "loading": "جاري تحميل البيانات...",
+    "noResults": "لا توجد طلبات معلقة حالياً.",
+    "showing": "عرض {{from}} - {{to}} من إجمالي {{total}} طلب",
+    "fetchFailed": "فشل في جلب بيانات الطلبات",
+    "approveSuccess": "تم قبول الطلب وتفعيل الحساب بنجاح",
+    "approveFailed": "فشل في قبول الطلب",
+    "rejectSuccess": "تم رفض الطلب بنجاح",
+    "rejectFailed": "فشل في رفض الطلب",
+    "facilityDetails": "تفاصيل المنشأة",
+    "detailedAddress": "العنوان بالتفصيل",
+    "description": "النبذة",
+    "applicantInfo": "معلومات مقدم الطلب",
+    "email": "البريد الإلكتروني",
+    "phoneNumber": "رقم الهاتف",
+    "requestDate": "تاريخ الطلب",
+    "viewLicense": "عرض وثيقة الترخيص",
+    "close": "إغلاق",
+    "approveAndActivate": "قبول وتفعيل الحساب",
+    "processing": "جاري...",
+    "rejectionReasonTitle": "سبب الرفض",
+    "rejectionReasonDescription": "يرجى توضيح سبب رفض طلب انضمام المنشأة ليتم إبلاغ صاحب الطلب.",
+    "reasonDetails": "تفاصيل السبب",
+    "reasonPlaceholder": "اكتب هنا تفاصيل الرفض بدقة...",
+    "cancel": "إلغاء",
+    "confirmRejection": "تأكيد الرفض"
+  },
+  "facilityNav": {
+    "gate": {
+      "pharmacy": "بوابة الصيدلية",
+      "lab": "بوابة المختبر",
+      "medicalCenter": "بوابة المركز الطبي"
+    },
+    "dashboard": "لوحة التحكم",
+    "management": "الإدارة",
+    "soon": "قريباً",
+    "logout": "تسجيل الخروج",
+    "profileTitle": "الحساب الحالي",
+    "facilityFallback": "المنشأة",
+    "items": {
+      "pharmacy": {
+        "i1": "الأدوية والمنتجات",
+        "i2": "الطلبات",
+        "i3": "المخزون"
+      },
+      "lab": {
+        "i1": "الفحوصات",
+        "i2": "النتائج",
+        "i3": "الطلبات"
+      },
+      "medicalCenter": {
+        "i1": "الأطباء",
+        "i2": "المواعيد",
+        "i3": "الخدمات"
+      }
+    }
+  },
+  "facilityDashboard": {
+    "welcome": "مرحباً، {{name}}",
+    "subtitles": {
+      "pharmacy": "إدارة صيدليتك ومنتجاتها ومناطق الخدمة",
+      "lab": "إدارة مختبرك وفحوصاتك ونتائجك",
+      "medicalCenter": "إدارة مركزك الطبي وأطبائك وخدماتك"
+    },
+    "stats": {
+      "orders": "الطلبات",
+      "products": "المنتجات / الخدمات",
+      "reviews": "التقييمات",
+      "soon": "قريباً"
+    },
+    "comingSoonTitle": "لوحة التحكم قيد الإنشاء",
+    "comingSoonBody": "نعمل حالياً على تجهيز أدوات إدارة كاملة لمنشأتك: المنتجات، الطلبات، الفحوصات، التقارير والمزيد. تبقَ معنا!"
   },
   "adminDepartments": {
     "title": "إدارة الأقسام",

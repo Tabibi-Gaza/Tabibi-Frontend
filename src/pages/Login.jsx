@@ -124,6 +124,12 @@ const Login = () => {
         localStorage.setItem('doctorId', user.id);
       }
       navigate('/doctor-dashboard');
+    } else if (roles.includes("Pharmacy")) {
+      navigate('/pharmacy-dashboard');
+    } else if (roles.includes("Lab")) {
+      navigate('/lab-dashboard');
+    } else if (roles.includes("MedicalCenter")) {
+      navigate('/medical-center-dashboard');
     } else {
       navigate('/');
     }
@@ -172,6 +178,12 @@ const Login = () => {
           toast.success(t('login.registerSuccess'));
           if (registerRole === 'doctor') {
             navigate('/register-doctor');
+          } else if (registerRole === 'pharmacy') {
+            navigate('/register-facility?type=pharmacy');
+          } else if (registerRole === 'lab') {
+            navigate('/register-facility?type=lab');
+          } else if (registerRole === 'center') {
+            navigate('/register-facility?type=medicalCenter');
           } else {
             navigate('/');
           }
@@ -283,8 +295,8 @@ const Login = () => {
       key: 'pharmacy',
       title: t('login.rolePharmacy'),
       desc: t('login.rolePharmacyDesc'),
-      selectable: false,
-      onClick: undefined,
+      selectable: true,
+      onClick: () => handleStateChange('RegisterPatient', 'pharmacy'),
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <g transform="rotate(-45 12 12)">
@@ -298,8 +310,8 @@ const Login = () => {
       key: 'lab',
       title: t('login.roleLab'),
       desc: t('login.roleLabDesc'),
-      selectable: false,
-      onClick: undefined,
+      selectable: true,
+      onClick: () => handleStateChange('RegisterPatient', 'lab'),
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <path d="M9 3h6M10 3v6l-5 8a2 2 0 001.7 3h10.6a2 2 0 001.7-3l-5-8V3" />
@@ -311,8 +323,8 @@ const Login = () => {
       key: 'center',
       title: t('login.roleCenter'),
       desc: t('login.roleCenterDesc'),
-      selectable: false,
-      onClick: undefined,
+      selectable: true,
+      onClick: () => handleStateChange('RegisterPatient', 'center'),
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
           <path d="M3 21h18M5 21V7l7-4 7 4v14M9.5 21v-4.5h5V21M12 7.5v3M10.5 9h3" />
@@ -737,7 +749,7 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all"
                 >
-                  {registerRole === 'doctor' ? t('login.next') : t('login.registerBtn')}
+                  {registerRole && registerRole !== 'patient' ? t('login.next') : t('login.registerBtn')}
                 </button>
 
                 <p className="text-sm text-center font-bold text-slate-600 dark:text-gray-200">
