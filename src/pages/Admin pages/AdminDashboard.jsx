@@ -116,7 +116,8 @@ const AdminDashboard = () => {
                 : `/admin/doctor-applications/${applicationId}/download-id-document`;
 
             const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
-            const blob = new Blob([response.data]);
+            const contentType = response.headers['content-type'] || (type === 'cv' ? 'application/pdf' : 'image/jpeg');
+            const blob = new Blob([response.data], { type: contentType });
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;

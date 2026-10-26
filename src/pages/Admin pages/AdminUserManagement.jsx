@@ -154,7 +154,8 @@ export default function AdminUserManagement() {
                 : `/admin/users/doctors/${doctorId}/download-id`;
 
             const response = await axiosInstance.get(endpoint, { responseType: 'blob' });
-            const blob = new Blob([response.data]);
+            const contentType = response.headers['content-type'] || (type === 'cv' ? 'application/pdf' : 'image/jpeg');
+            const blob = new Blob([response.data], { type: contentType });
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
@@ -424,11 +425,11 @@ export default function AdminUserManagement() {
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full mt-2 md:col-span-2">
-                                        <button onClick={() => handleDownload(selectedUser.id, 'id')} className="bg-[#003D9B]/10 text-[#003D9B] font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003D9B]/20 transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
+                                        <button onClick={() => handleDownload(selectedUser.userId, 'id')} className="bg-[#003D9B]/10 text-[#003D9B] font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003D9B]/20 transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
                                             <Download size={20} />
                                             صورة الهوية / مزاولة المهنة
                                         </button>
-                                        <button onClick={() => handleDownload(selectedUser.id, 'cv')} className="bg-[#138C9F] text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#0f7282] transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
+                                        <button onClick={() => handleDownload(selectedUser.userId, 'cv')} className="bg-[#138C9F] text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#0f7282] transition-colors w-full sm:w-auto justify-center cursor-pointer text-[15px]">
                                             <Award size={20} />
                                             تنزيل السيرة الذاتية (CV)
                                         </button>
