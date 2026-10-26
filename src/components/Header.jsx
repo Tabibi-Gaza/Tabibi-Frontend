@@ -61,7 +61,6 @@ const Header = () => {
       style={{
         backgroundImage: `url(${assets.header_img})`,
       }}
-      dir="rtl"
     >
       {/* حاوية الصندوق الزجاجي */}
       <div           className="w-full max-w-4xl flex flex-col items-center text-center gap-6 md:gap-8 z-20 bg-white/40 dark:bg-gray-800/40 backdrop-blur-md p-4 sm:p-10 rounded-2xl md:rounded-3xl border border-white/40 dark:border-gray-700/40 shadow-lg animate-fadeIn">

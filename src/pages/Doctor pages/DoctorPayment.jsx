@@ -297,7 +297,7 @@ const DoctorPayment = () => {
 
     if (loading) {
         return (
-            <div className="w-full bg-slate-50 dark:bg-gray-900/50" dir="rtl">
+            <div className="w-full bg-slate-50 dark:bg-gray-900/50">
                 <div className="bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700 shadow-xs p-8">
                     <div className="flex items-center justify-center gap-3 text-[#1b8b99]">
                         <FiLoader className="w-6 h-6 animate-spin" />
@@ -309,7 +309,7 @@ const DoctorPayment = () => {
     }
 
     return (
-        <div className="w-full bg-slate-50 dark:bg-gray-900/50 space-y-6 md:space-y-8 pb-8" dir="rtl">
+        <div className="w-full bg-slate-50 dark:bg-gray-900/50 space-y-6 md:space-y-8 pb-8">
             <div className="bg-white dark:bg-gray-800 rounded-2xl border border-slate-100 dark:border-gray-700 shadow-xs overflow-hidden">
 
                 {error && (
@@ -397,12 +397,12 @@ const DoctorPayment = () => {
                                                 onClick={() => {
                                                     setDeleteConfirm({ id: bankDetail.id, type: 'Bank', name: bankDetail.bankName });
                                                 }}
-                                                className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all"
+                                                className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all dark:hover:bg-gray-700"
                                             >
                                                 <FiTrash2 className="w-3 h-3" />{t('doctorPayment.delete')}</button>
                                             <button
                                                 onClick={() => openEditBank(bankDetail)}
-                                                className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all"
+                                                className="flex items-center gap-1.5 text-xs font-bold bg-white dark:bg-gray-800/20 hover:bg-white dark:bg-gray-800/30 px-3 py-1 rounded-lg transition-all dark:hover:bg-gray-700"
                                             >
                                                 <FiEdit3 className="w-3 h-3" />{t('doctorPayment.editData')}</button>
                                         </div>
@@ -453,7 +453,7 @@ const DoctorPayment = () => {
                                                 <div className="flex items-center gap-2">
                                                     <button
                                                         onClick={() => setDeleteConfirm({ id: wallet.id, type: 'Wallet', name: wallet.providerName })}
-                                                        className="text-xs text-white/80 hover:text-red-200 p-1.5 rounded-lg hover:bg-white dark:bg-gray-800/10 transition-colors"
+                                                        className="text-xs text-white/80 hover:text-red-200 p-1.5 rounded-lg hover:bg-white dark:bg-gray-800/10 transition-colors dark:hover:bg-gray-700"
                                                     >
                                                         <FiTrash2 className="w-3.5 h-3.5" />
                                                     </button>
@@ -556,7 +556,7 @@ const DoctorPayment = () => {
                                             value={bankForm.accountHolderName}
                                             onChange={(e) => setBankForm({ ...bankForm, accountHolderName: e.target.value })}
                                             placeholder={t('doctorPayment.accountHolderPlaceholder')}
-                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all"
+                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all dark:focus:bg-gray-700"
                                         />
                                     </div>
                                     <div className="space-y-1.5">
@@ -567,7 +567,7 @@ const DoctorPayment = () => {
                                             onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setBankForm({ ...bankForm, phoneNumber: val }); }}
                                             placeholder="059XXXXXXXX"
                                             maxLength={10}
-                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all text-right"
+                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all text-right dark:focus:bg-gray-700"
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-1.5">
@@ -587,7 +587,7 @@ const DoctorPayment = () => {
                                             }}
                                             placeholder={getBankPlaceholder(bankForm.bankId)}
                                             maxLength={29}
-                                            className={`w-full border rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:bg-white dark:bg-gray-800 transition-all text-right ${
+                                            className={`w-full border rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 transition-all text-right ${
                                                 ibanError ? 'border-red-300 focus:border-red-400' : 'border-slate-200 dark:border-gray-700 focus:border-[#1b8b99]'
                                             }`}
                                         />
@@ -620,7 +620,7 @@ const DoctorPayment = () => {
                                             value={walletForm.accountHolderName}
                                             onChange={(e) => setWalletForm({ ...walletForm, accountHolderName: e.target.value })}
                                             placeholder={t('doctorPayment.walletHolderPlaceholder')}
-                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all"
+                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all dark:focus:bg-gray-700"
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-1.5">
@@ -631,7 +631,7 @@ const DoctorPayment = () => {
                                             onChange={(e) => { const val = e.target.value.replace(/\D/g, '').slice(0, 10); setWalletForm({ ...walletForm, phoneNumber: val }); }}
                                             placeholder="059XXXXXXXX"
                                             maxLength={10}
-                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all text-right"
+                                            className="w-full border border-slate-200 dark:border-gray-700 rounded-xl px-4 bg-slate-50 dark:bg-gray-900 h-12 text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 font-mono outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all text-right dark:focus:bg-gray-700"
                                         />
                                         <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1">{t('doctorPayment.walletPhoneNote')}</p>
                                     </div>
@@ -649,7 +649,7 @@ const DoctorPayment = () => {
                                 </button>
                                 <button
                                     onClick={() => { setViewMode("list"); setError(''); }}
-                                    className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm"
+                                    className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm dark:hover:bg-gray-800"
                                 >{t('common.cancel')}</button>
                             </div>
                         </div>
@@ -719,7 +719,7 @@ const DoctorPayment = () => {
                                         حفظ التغييرات
                                     </button>
                                     <button onClick={() => { setViewMode("list"); setEditData(null); }}
-                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm">{t('common.cancel')}</button>
+                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm dark:hover:bg-gray-800">{t('common.cancel')}</button>
                                 </div>
                             </div>
                         </div>
@@ -779,7 +779,7 @@ const DoctorPayment = () => {
                                         حفظ التغييرات
                                     </button>
                                     <button onClick={() => { setViewMode("list"); setEditData(null); }}
-                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm">{t('common.cancel')}</button>
+                                        className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-6 rounded-xl transition-all cursor-pointer text-sm dark:hover:bg-gray-800">{t('common.cancel')}</button>
                                 </div>
                             </div>
                         </div>
@@ -804,7 +804,7 @@ const DoctorPayment = () => {
                                 </button>
                                 <button
                                     onClick={() => setDeleteConfirm(null)}
-                                    className="flex-1 bg-slate-100 dark:bg-gray-800 hover:bg-slate-200 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold py-2.5 px-4 rounded-xl text-sm transition-colors"
+                                    className="flex-1 bg-slate-100 dark:bg-gray-800 hover:bg-slate-200 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold py-2.5 px-4 rounded-xl text-sm transition-colors dark:hover:bg-gray-700"
                                 >{t('common.cancel')}</button>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
     FiSearch, FiEye, FiCornerUpLeft, FiTrash2,
     FiX, FiSend, FiCheckCircle, FiAlertCircle,
@@ -107,8 +107,13 @@ export default function AdminContactUs() {
         }
     };
 
+    const [isSending, setIsSending] = useState(false);
+    const sendReplyRef = useRef(false);
     const handleSendReply = async (e) => {
         e.preventDefault();
+        if (sendReplyRef.current) return;
+        sendReplyRef.current = true;
+        setIsSending(true);
         try {
             const { data } = await axiosInstance.post('/admin/contact-messages/reply', {
                 messageId: selectedMessage.id,
@@ -127,6 +132,9 @@ export default function AdminContactUs() {
             }
         } catch (error) {
             toast.error(t('adminContactUs.replyFailed'));
+        } finally {
+            sendReplyRef.current = false;
+            setIsSending(false);
         }
     };
 
@@ -254,7 +262,7 @@ export default function AdminContactUs() {
                             ) : filteredMessages.map((msg) => {
                                 const badge = getStatusBadge(msg.isReplied);
                                 return (
-                                <tr key={msg.id} className="border-b border-[#C3C6D6] dark:border-gray-700 last:border-none hover:bg-slate-50 dark:bg-gray-900 transition-colors">
+                                <tr key={msg.id} className="border-b border-[#C3C6D6] dark:border-gray-700 last:border-none hover:bg-slate-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800">
                                     <td className="p-3 md:p-4 font-bold text-base text-[#138C9F]">{msg.fullName}</td>
                                     <td className="p-3 md:p-4 font-semibold text-sm text-[#434654]">{msg.email}</td>
                                     <td className="p-3 md:p-4 font-semibold text-sm text-[#0B1C30] dark:text-gray-200">{msg.subject || t('adminContactUs.noSubject')}</td>
@@ -364,7 +372,7 @@ export default function AdminContactUs() {
                         </div>
                         <div className="p-4 border-t border-gray-100 dark:border-gray-700 flex items-center justify-end gap-3 bg-gray-50">
                             <button type="button" onClick={() => setIsReplyOpen(false)}
-                                className="px-5 py-2 border border-gray-300 rounded-lg text-gray-600 dark:text-gray-400 dark:text-gray-500 font-semibold text-sm hover:bg-gray-100 dark:bg-gray-800 transition-colors">{t('common.cancel')}</button>
+                                className="px-5 py-2 border border-gray-300 rounded-lg text-gray-600 dark:text-gray-400 dark:text-gray-500 font-semibold text-sm hover:bg-gray-100 dark:bg-gray-800 transition-colors dark:hover:bg-gray-700">{t('common.cancel')}</button>
                             <button type="submit"
                                 className="bg-[#138C9F] text-white px-6 py-2 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-[#117a8c] transition-colors">
                                 <FiSend size={14} /><span>{t('adminContactUs.sendReply')}</span>

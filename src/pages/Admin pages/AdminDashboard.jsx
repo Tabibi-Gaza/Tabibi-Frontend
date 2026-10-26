@@ -204,7 +204,7 @@ const AdminDashboard = () => {
 
     if (loading) {
         return (
-            <div className="w-full flex flex-col gap-8 text-right animate-pulse" dir="rtl">
+            <div className="w-full flex flex-col gap-8 text-right animate-pulse">
                 <div className="h-10 bg-gray-200 rounded-xl w-64 mb-2"></div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {[1, 2, 3, 4].map((i) => (
@@ -294,7 +294,7 @@ const AdminDashboard = () => {
     const CustomTooltip = ({ active, payload, label }) => {
         if (!active || !payload?.length) return null;
         return (
-            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl shadow-lg p-3 text-right" dir="rtl">
+            <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl shadow-lg p-3 text-right">
                 <p className="text-xs font-bold text-[#0B1C30] dark:text-white mb-1">{label}</p>
                 {payload.map((entry, i) => (
                     <p key={i} className="text-[11px] font-semibold" style={{ color: entry.color }}>
@@ -306,7 +306,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="w-full flex flex-col gap-7 text-right" dir="rtl">
+        <div className="w-full flex flex-col gap-7 text-right">
 
             <div>
                 <h1 className="text-2xl md:text-[28px] font-extrabold text-[#138C9F] tracking-tight">{t('adminDashboard.dashboard')}</h1>
@@ -384,7 +384,7 @@ const AdminDashboard = () => {
                                         <button
                                             disabled={actionLoading === req.id}
                                             onClick={() => { setSelectedRequest(req); setShowRejectModal(true); setRejectReasonInput(''); }}
-                                            className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50"
+                                            className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50 dark:hover:bg-gray-700"
                                         >
                                             {t('adminDashboard.reject')}
                                         </button>
@@ -501,7 +501,7 @@ const AdminDashboard = () => {
                                     <button
                                         disabled={facilityActionLoading === req.id}
                                         onClick={() => openFacilityRejectFlow(req)}
-                                        className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50 px-3"
+                                        className="h-8 rounded-lg border border-[#C3C6D6] dark:border-gray-700 text-[#526069] dark:text-gray-400 text-xs font-bold hover:bg-slate-100 dark:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50 px-3 dark:hover:bg-gray-700"
                                     >
                                         {t('adminDashboard.reject')}
                                     </button>
@@ -541,7 +541,7 @@ const AdminDashboard = () => {
                                 displayedAppointments.map((appt, index) => {
                                     const statusLabel = appt.cancelled ? t('adminDashboard.cancelled') : appt.isCompleted ? t('adminDashboard.completed') : t('adminDashboard.confirmed');
                                     return (
-                                        <tr key={appt.id || index} className="hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-12">
+                                        <tr key={appt.id || index} className="hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-12 dark:hover:bg-gray-800">
                                             <td className="px-4 text-[#0B1C30] dark:text-white font-bold text-[13px]">{appt.patient}</td>
                                             <td className="px-4 text-[#138C9F] font-semibold text-[13px]">{appt.doctor}</td>
                                             <td className="px-4 text-slate-500 dark:text-gray-400 text-[12px] hidden md:table-cell">{appt.specialty || '-'}</td>
@@ -582,7 +582,7 @@ const AdminDashboard = () => {
                         ) : (
                             <button
                                 onClick={() => setVisibleAppointmentsCount(5)}
-                                className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-slate-600 dark:text-gray-400 text-xs font-bold hover:bg-slate-200 transition-all duration-200 cursor-pointer"
+                                className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-slate-600 dark:text-gray-400 text-xs font-bold hover:bg-slate-200 transition-all duration-200 cursor-pointer dark:hover:bg-gray-700"
                             >
                                 <FiChevronUp size={14} /> عرض أقل
                             </button>
@@ -598,7 +598,7 @@ const AdminDashboard = () => {
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white dark:bg-gray-800/20 text-white flex items-center justify-center hover:bg-white dark:bg-gray-800/30"
+                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white dark:bg-gray-800/20 text-white flex items-center justify-center hover:bg-white dark:bg-gray-800/30 dark:hover:bg-gray-700"
                             >
                                 <FiX size={16} />
                             </button>
@@ -718,7 +718,7 @@ const AdminDashboard = () => {
                         <div className="px-6 md:px-8 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700 flex items-center justify-end gap-3 shrink-0 flex-wrap sm:flex-nowrap">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto"
+                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto dark:hover:bg-gray-800"
                             >
                                 {t('adminDashboard.close')}
                             </button>
@@ -768,7 +768,7 @@ const AdminDashboard = () => {
                         <div className="flex items-center gap-3 mt-6">
                             <button
                                 onClick={() => setShowRejectModal(false)}
-                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50"
+                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:hover:bg-gray-800"
                             >
                                 إلغاء
                             </button>

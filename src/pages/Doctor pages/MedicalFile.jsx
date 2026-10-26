@@ -53,7 +53,7 @@ const MedicalFile = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center">
                 <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">جاري تحميل السجل المرضي...</p>
             </div>
         );
@@ -61,7 +61,7 @@ const MedicalFile = () => {
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center">
                 <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">لم يتم العثور على بيانات المريض</p>
             </div>
         );
@@ -71,7 +71,7 @@ const MedicalFile = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 pr-6" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 pr-6">
             <div className="space-y-6">
 
                 <div className="flex flex-col gap-1 text-right">

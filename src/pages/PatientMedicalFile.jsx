@@ -163,7 +163,7 @@ const PatientMedicalFile = () => {
 
     if (loading) {
         return (
-            <div className="w-full min-h-screen p-3 pt-40" dir="rtl">
+            <div className="w-full min-h-screen p-3 pt-40">
                 <div className="max-w-5xl mx-auto flex items-center justify-center h-64">
                     <Loader2 className="w-8 h-8 animate-spin text-[#1b8b99]" />
                 </div>
@@ -173,14 +173,14 @@ const PatientMedicalFile = () => {
 
     if (error) {
         return (
-            <div className="w-full min-h-screen p-3 pt-40" dir="rtl">
+            <div className="w-full min-h-screen p-3 pt-40">
                 <div className="max-w-5xl mx-auto text-center text-red-500 py-20 text-sm font-bold">{error}</div>
             </div>
         );
     }
 
     return (
-        <div className="w-full min-h-screen p-3 pt-40" dir="rtl">
+        <div className="w-full min-h-screen p-3 pt-40">
             <div className="max-w-5xl mx-auto space-y-6">
 
                 {/* الهيدر العلوي للسجل الطبي */}
@@ -227,7 +227,7 @@ const PatientMedicalFile = () => {
                             </button>
                             <button
                                 onClick={handleResetFilters}
-                                className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-4 rounded-xl transition-all cursor-pointer text-sm"
+                                className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-bold h-11 px-4 rounded-xl transition-all cursor-pointer text-sm dark:hover:bg-gray-800"
                             >
                                 <FiRotateCcw className="w-4 h-4" />
                                 {t('patientMedicalFile.resetFilters')}
@@ -423,7 +423,7 @@ const PatientMedicalFile = () => {
                                         onChange={(e) => setPlatformComment(e.target.value)}
                                         placeholder={t('patientMedicalFile.writeNotes')}
                                         rows={4}
-                                        className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right"
+                                        className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right dark:focus:bg-gray-700"
                                     />
                                 </div>
                                 <div className="space-y-2.5 pt-2">
@@ -436,7 +436,7 @@ const PatientMedicalFile = () => {
                                     </button>
                                     <button
                                         onClick={() => setModalStep(2)}
-                                        className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
+                                        className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm dark:hover:bg-gray-800"
                                     >
                                         {t('patientMedicalFile.skip')}
                                     </button>
@@ -491,7 +491,7 @@ const PatientMedicalFile = () => {
                                         onChange={(e) => setDoctorComment(e.target.value)}
                                         placeholder={t('patientMedicalFile.writeNotes')}
                                         rows={4}
-                                        className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right"
+                                        className="w-full border border-slate-200 dark:border-gray-700 rounded-2xl p-3.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 bg-slate-50 dark:bg-gray-900/50 outline-none focus:border-[#1b8b99] focus:bg-white dark:bg-gray-800 transition-all resize-none text-right dark:focus:bg-gray-700"
                                     />
                                 </div>
                                 <div className="space-y-2.5 pt-2">
@@ -507,7 +507,7 @@ const PatientMedicalFile = () => {
                                     </button>
                                     <button
                                         onClick={() => setIsModalOpen(false)}
-                                        className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm"
+                                        className="w-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold h-11 rounded-xl transition-all cursor-pointer text-sm dark:hover:bg-gray-800"
                                     >
                                         {t('patientMedicalFile.close')}
                                     </button>
@@ -520,7 +520,7 @@ const PatientMedicalFile = () => {
 
             {/* Hidden div for visit PDF generation */}
             {pdfVisit && (
-                <div className="fixed -left-[9999px] top-0" dir="rtl">
+                <div className="fixed -left-[9999px] top-0">
                     <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
                         {/* Watermark — full page */}
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.07, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-35deg)' }}>

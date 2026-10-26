@@ -224,7 +224,7 @@ export default function AdminFacilityRequests() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
-                            className="p-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="p-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:hover:bg-gray-800"
                         >
                             <ChevronRight className="w-4 h-4" />
                         </button>
@@ -234,7 +234,7 @@ export default function AdminFacilityRequests() {
                                 <button
                                     key={pageNumber}
                                     onClick={() => setCurrentPage(pageNumber)}
-                                    className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] transition-colors ${currentPage === pageNumber ? 'bg-[#138C9F] text-white font-extrabold' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50'}`}
+                                    className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] transition-colors ${currentPage === pageNumber ? 'bg-[#138C9F] text-white font-extrabold' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50'} dark:hover:bg-gray-800`}
                                 >
                                     {pageNumber}
                                 </button>
@@ -243,7 +243,7 @@ export default function AdminFacilityRequests() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages || totalPages === 0}
-                            className="p-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="p-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:hover:bg-gray-800"
                         >
                             <ChevronLeft className="w-4 h-4" />
                         </button>
@@ -269,7 +269,7 @@ export default function AdminFacilityRequests() {
                             </div>
                             <button
                                 onClick={() => setSelectedRequest(null)}
-                                className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30"
+                                className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 dark:hover:bg-gray-700"
                             >
                                 <FiX size={16} />
                             </button>

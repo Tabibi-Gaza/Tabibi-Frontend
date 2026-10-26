@@ -151,7 +151,7 @@ const PaymentPage = () => {
   const wallets = allMethods.filter(m => m.type === 'Wallet')
 
   return (
-    <div className="w-full p-4 pt-40 max-w-4xl mx-auto text-right mb-16" dir="rtl">
+    <div className="w-full p-4 pt-40 max-w-4xl mx-auto text-right mb-16">
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-[#138C9F] mb-6 transition-colors"

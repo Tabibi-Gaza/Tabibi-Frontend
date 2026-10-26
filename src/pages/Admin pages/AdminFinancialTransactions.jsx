@@ -91,7 +91,7 @@ export default function AdminFinancialTransactions() {
     };
 
     return (
-        <div className="w-full bg-[#ecf8fa]" dir="rtl">
+        <div className="w-full bg-[#ecf8fa]">
             <div className="mx-auto flex flex-col gap-6">
                 <div className="text-right">
                     <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">{t('adminFinancialTransactions.title')}</h1>
@@ -153,7 +153,7 @@ export default function AdminFinancialTransactions() {
                                                 setVisibleCount(INITIAL_VISIBLE_COUNT);
                                                 setIsOpenFilter(false);
                                             }}
-                                            className={`w-full text-right px-4 py-2 text-sm font-medium transition-colors ${filterStatus === status ? 'bg-[#e2f4f7] dark:bg-gray-800 text-[#138C9F]' : 'text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900'}`}
+                                            className={`w-full text-right px-4 py-2 text-sm font-medium transition-colors ${filterStatus === status ? 'bg-[#e2f4f7] dark:bg-gray-800 text-[#138C9F]' : 'text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900'} dark:hover:bg-gray-800`}
                                         >
                                             {status}
                                         </button>
@@ -183,7 +183,7 @@ export default function AdminFinancialTransactions() {
                                         </td>
                                     </tr>
                                 ) : displayedTransactions.map((item) => (
-                                    <tr key={item.id} className="border-t border-[#C3C6D6] dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-[65px]">
+                                    <tr key={item.id} className="border-t border-[#C3C6D6] dark:border-gray-700 hover:bg-slate-50 dark:bg-gray-900/50 transition-colors h-[65px] dark:hover:bg-gray-800">
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black dark:text-white">{item.doctorName}</td>
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-semibold text-black dark:text-white">{item.amount} ₪</td>
                                         <td className="p-3 md:p-4 px-6 text-[14px] font-normal text-[#434654] hidden md:table-cell">{formatDate(item.date)}</td>

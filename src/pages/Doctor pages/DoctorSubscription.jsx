@@ -126,7 +126,7 @@ export default function DoctorSubscription() {
     const wallets = adminMethods.filter(m => m.methodType === 'Wallet');
 
     return (
-        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6">
             <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">{t('doctorSubscription.title')}</h2>
 
             <div className={`bg-white dark:bg-gray-800 border rounded-2xl p-6 shadow-sm ${isTrial ? 'border-yellow-300' : isActive ? 'border-green-300' : 'border-red-200'}`}>
@@ -185,7 +185,7 @@ export default function DoctorSubscription() {
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="font-bold text-[20px] text-[#0B1C30] dark:text-gray-200">{t('doctorSubscription.confirmAndPay')}</h3>
-                        <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
+                        <button onClick={() => setShowPaymentForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"><X size={20} /></button>
                     </div>
 
                     <div className="bg-[#ecf8fa] dark:bg-gray-900 rounded-xl p-4 mb-6 border border-[#C3C6D6]">

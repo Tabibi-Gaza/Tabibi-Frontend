@@ -24,7 +24,6 @@ const Notifications = () => {
     return (
       <div
         className="w-full font-sans p-6 pt-40 max-w-4xl mx-auto text-right min-h-[70vh]"
-        dir="rtl"
       >
         {/* ---- زر العودة العلوي - متموضع في اليمين تماماً ---- */}
         <div className="flex justify-start mb-8">

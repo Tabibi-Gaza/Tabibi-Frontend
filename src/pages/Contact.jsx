@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faHouseMedicalCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
@@ -30,8 +30,11 @@ const Contact = () => {
         }));
     };
 
+    const isSubmittingRef = useRef(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isSubmittingRef.current) return;
+        isSubmittingRef.current = true;
         setLoading(true);
         try {
             const { data } = await axiosInstance.post('/contact', {
@@ -49,6 +52,7 @@ const Contact = () => {
         } catch {
             toast.error('حدث خطأ أثناء الإرسال');
         } finally {
+            isSubmittingRef.current = false;
             setLoading(false);
         }
     };

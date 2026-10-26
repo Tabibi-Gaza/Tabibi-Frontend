@@ -87,7 +87,7 @@ export default function AdminPharmaceutical() {
     };
 
     return (
-        <div className="w-full  flex flex-col gap-[32px] text-right relative" dir="rtl">
+        <div className="w-full  flex flex-col gap-[32px] text-right relative">
 
             {/* SECTION 1: Summary Statistics Card */}
                 <div className="w-full bg-white dark:bg-gray-800/80 border border-[#C3C6D6] dark:border-gray-700 backdrop-blur-[4px] rounded-[12px] p-4 md:p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
@@ -148,7 +148,7 @@ export default function AdminPharmaceutical() {
                                         </td>
 
                                         {/* عمود الإجراءات (تعديل / حذف) */}
-                                        <td className="p-2" dir="rtl">
+                                        <td className="p-2">
                                             <div className="flex justify-center items-center gap-4">
                                                 {/* زر التعديل بالقلم */}
                                                 <button
@@ -197,7 +197,7 @@ export default function AdminPharmaceutical() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
-                            className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed dark:hover:bg-gray-800"
                         >
                             <ChevronRight className="w-4 h-4 text-[#6B7280]" />
                         </button>
@@ -220,7 +220,7 @@ export default function AdminPharmaceutical() {
 <button
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages || totalPages === 0}
-                            className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed dark:hover:bg-gray-800"
                         >
                             <ChevronLeft className="w-4 h-4 text-[#6B7280]" />
                         </button> 
@@ -284,7 +284,7 @@ export default function AdminPharmaceutical() {
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-6 h-[44px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3"
+                                    className="px-6 h-[44px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3 dark:hover:bg-gray-800"
                                 >
                                     إلغاء
                                 </button>

@@ -90,7 +90,7 @@ export default function AdminDepartmentsManagement() {
     const handleSearch = (e) => { setSearchQuery(e.target.value); setCurrentPage(1); };
 
     return (
-      <div className="w-full relative" dir="rtl">
+      <div className="w-full relative">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div className="flex flex-col gap-1.5 text-right w-full md:w-auto">
             <h2 className="text-[26px] md:text-[32px] font-extrabold leading-tight text-[#138C9F]">{t('adminDepartments.title')}</h2>
@@ -150,7 +150,7 @@ export default function AdminDepartmentsManagement() {
                       </td>
                       <td className="p-3 md:p-4 text-center">
                         <div className="flex justify-center items-center gap-2">
-                          <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'}`} title={dept.isActive ? t('adminDepartments.deactivate') : t('adminDepartments.activate')}>
+                          <button onClick={() => handleToggleActivation(dept.id)} className={`p-2 rounded transition-colors ${dept.isActive ? 'text-[#004F20] hover:bg-green-50' : 'text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'} dark:hover:bg-gray-800`} title={dept.isActive ? t('adminDepartments.deactivate') : t('adminDepartments.activate')}>
                             {dept.isActive ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                           </button>
                           <button onClick={() => openEditModal(dept)} className="p-2 text-[#003D9B] hover:bg-blue-50 rounded transition-colors" title="تعديل">
@@ -175,17 +175,17 @@ export default function AdminDepartmentsManagement() {
               عرض {totalItems === 0 ? 0 : indexOfFirstItem + 1} - {Math.min(indexOfFirstItem + itemsPerPage, totalItems)} من إجمالي {totalItems} قسم
             </div>
             <div className="flex items-center gap-1.5">
-              <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronRight className="w-4 h-4" /></button>
+              <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronRight className="w-4 h-4 dark:hover:bg-gray-800" /></button>
               {Array.from({ length: totalPages }, (_, index) => {
                 const pageNumber = index + 1;
                 return (
                   <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)}
-                    className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? "bg-[#138C9F] text-white font-extrabold" : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50"}`}>
+                    className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? "bg-[#138C9F] text-white font-extrabold" : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50"} dark:hover:bg-gray-800`}>
                     {pageNumber}
                   </button>
                 );
               })}
-              <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0} className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronLeft className="w-4 h-4" /></button>
+              <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0} className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"><ChevronLeft className="w-4 h-4 dark:hover:bg-gray-800" /></button>
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@ export default function AdminDepartmentsManagement() {
                     className="w-full h-[50px] px-4 border border-[#C3C6D6] dark:border-gray-700 rounded-xl focus:outline-none focus:border-[#138C9F] font-semibold text-[#0B1C30] dark:text-white placeholder-gray-300 text-right" required />
                 </div>
                 <div className="flex items-center justify-end gap-3 pt-2">
-                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3 text-center">إلغاء</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors w-1/3 text-center dark:hover:bg-gray-800">إلغاء</button>
                   <button type="submit" disabled={createMut.isPending || updateMut.isPending} className="px-6 h-[46px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 flex-1 disabled:opacity-50">
                     {(createMut.isPending || updateMut.isPending) && <Loader2 className="w-5 h-5 animate-spin" />}
                     <span>{modalMode === "add" ? t('adminDepartments.addDepartment') : t('adminDepartments.saveChanges')}</span>

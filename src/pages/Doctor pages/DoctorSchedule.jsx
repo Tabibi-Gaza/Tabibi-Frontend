@@ -224,7 +224,7 @@ const DoctorSchedule = () => {
   }
 
   return (
-    <div className="space-y-6 md:space-y-8 w-full pb-8 relative" dir="rtl">
+    <div className="space-y-6 md:space-y-8 w-full pb-8 relative">
       <div className="space-y-6 text-right">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pb-2 border-b border-[#C3C6D6] dark:border-gray-700/30 sm:border-none">
           <h1 className="text-2xl md:text-3xl font-black text-[#138C9F] tracking-wide w-full text-center sm:text-right">

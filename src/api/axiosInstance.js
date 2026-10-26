@@ -1,4 +1,6 @@
 import axios from "axios";
+import i18n from "../i18n";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -7,6 +9,19 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// تنبيه موحّد لانقطاع الاتصال (بحد أقصى مرة كل 5 ثواني لتفادي الازدحام)
+let lastOfflineToastAt = 0;
+export const notifyOffline = () => {
+  const now = Date.now();
+  if (now - lastOfflineToastAt < 5000) return;
+  lastOfflineToastAt = now;
+  const msg = i18n.language === "en"
+    ? "No internet connection — please check your network."
+    : "لا يوجد اتصال بالإنترنت — تحقق من شبكتك.";
+  toast.error(msg);
+};
+export const isNetworkError = (error) => !error?.response;
 
 let onAuthFailure = null;
 export const setOnAuthFailure = (cb) => { onAuthFailure = cb; };
@@ -73,6 +88,12 @@ axiosInstance.interceptors.response.use(
         else window.location.href = "/login";
         return Promise.reject(error);
       } catch (refreshError) {
+        // انقطاع الاتصال أثناء تجديد الرمز → لا تمسح الجلسة، اجعل الطلب يفشل (سيظهر تنبيه offline)
+        if (!refreshError?.response) {
+          processQueue(refreshError, null);
+          isRefreshing = false;
+          return Promise.reject(refreshError);
+        }
         processQueue(refreshError, null);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
@@ -82,6 +103,11 @@ axiosInstance.interceptors.response.use(
       } finally {
         isRefreshing = false;
       }
+    }
+
+    if (!error.response) {
+      // انقطاع الاتصال / timeout — لا تمسح الجلسة، أظهر تنبيهاً موحّداً
+      notifyOffline();
     }
 
     return Promise.reject(error);

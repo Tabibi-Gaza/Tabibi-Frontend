@@ -185,7 +185,7 @@ export default function AdminJoinRequests() {
     const totalPending = activeFilter === 'pending' ? totalCount : requests.length;
 
     return (
-        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col items-start relative text-right" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col items-start relative text-right">
             <div className="w-full flex flex-col gap-6 md:gap-8">
                 <div className="text-right">
                     <h2 className="text-[26px] md:text-[32px] font-extrabold text-[#138C9F] leading-tight">{t('adminJoinRequests.title')}</h2>
@@ -273,7 +273,7 @@ export default function AdminJoinRequests() {
                                     </tr>
                                 ) : filteredRequests.length > 0 ? (
                                     filteredRequests.map((req) => (
-                                        <tr key={req.id} className="h-[75px] border-b border-[#C3C6D6] dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-slate-50 dark:bg-gray-900 transition-colors">
+                                        <tr key={req.id} className="h-[75px] border-b border-[#C3C6D6] dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-slate-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800">
                                              <td className="p-3 md:p-4 ps-8">
                                                 <div className="flex flex-row items-center gap-3">
                                                     {req.photoPath ? (
@@ -339,7 +339,7 @@ export default function AdminJoinRequests() {
                             <button
                                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                                 disabled={currentPage === 1}
-                                className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed dark:hover:bg-gray-800"
                             >
                                 <ChevronRight className="w-4 h-4" />
                             </button>
@@ -349,7 +349,7 @@ export default function AdminJoinRequests() {
                                     <button
                                         key={pageNumber}
                                         onClick={() => setCurrentPage(pageNumber)}
-                                        className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? 'bg-[#138C9F] text-white font-extrabold' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'}`}
+                                        className={`w-9 h-9 md:w-10 md:h-10 font-bold rounded flex items-center justify-center text-[15px] md:text-[16px] transition-colors ${currentPage === pageNumber ? 'bg-[#138C9F] text-white font-extrabold' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900'} dark:hover:bg-gray-800`}
                                     >
                                         {pageNumber}
                                     </button>
@@ -358,7 +358,7 @@ export default function AdminJoinRequests() {
                             <button
                                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                                 disabled={currentPage === totalPages || totalPages === 0}
-                                className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed dark:hover:bg-gray-800"
                             >
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
@@ -399,7 +399,7 @@ export default function AdminJoinRequests() {
                         <div className="px-6 pb-6 pt-2 flex items-center gap-3">
                             <button
                                 onClick={resetAdvancedFilters}
-                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 flex items-center justify-center gap-2"
+                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 flex items-center justify-center gap-2 dark:hover:bg-gray-800"
                             >
                                 <RefreshCw className="w-4 h-4" />
                                 <span>إعادة تعيين</span>
@@ -423,7 +423,7 @@ export default function AdminJoinRequests() {
                         <div className="w-full bg-[#138C9F] relative flex items-end justify-between px-6 pb-4 shrink-0">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white dark:bg-gray-800/20 text-white flex items-center justify-center hover:bg-white dark:bg-gray-800/30"
+                                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white dark:bg-gray-800/20 text-white flex items-center justify-center hover:bg-white dark:bg-gray-800/30 dark:hover:bg-gray-700"
                             >
                                 <FiX size={16} />
                             </button>
@@ -537,7 +537,7 @@ export default function AdminJoinRequests() {
                         <div className="px-6 md:px-8 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700 flex items-center justify-end gap-3 shrink-0 flex-wrap sm:flex-nowrap">
                             <button
                                 onClick={() => { setSelectedRequest(null); setSelectedDetails(null); }}
-                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto"
+                                className="px-5 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:bg-gray-900 w-full sm:w-auto dark:hover:bg-gray-800"
                             >
                                 إغلاق
                             </button>
@@ -586,7 +586,7 @@ export default function AdminJoinRequests() {
                         <div className="flex items-center gap-3 mt-6">
                             <button
                                 onClick={() => setShowRejectModal(false)}
-                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50"
+                                className="flex-1 h-[42px] border border-gray-300 rounded-[8px] text-[14px] font-bold text-[#434654] hover:bg-gray-50 dark:hover:bg-gray-800"
                             >
                                 إلغاء
                             </button>

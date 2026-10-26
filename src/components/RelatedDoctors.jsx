@@ -15,7 +15,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
     }, [doctors, speciality, docId])
 
     return (
-        <div className='flex flex-col items-center gap-3 my-12 text-gray-900 text-right' dir='rtl'>
+        <div className='flex flex-col items-center gap-3 my-12 text-gray-900 text-right'>
             <div className='text-center mb-4'>
                 <h2 className='text-2xl font-bold text-gray-800 dark:text-gray-200'>أطباء ذو صلة</h2>
                 <p className='text-xs text-gray-400 mt-1'>تصفح قائمة الأطباء الموثوقين لدينا في نفس التخصص.</p>

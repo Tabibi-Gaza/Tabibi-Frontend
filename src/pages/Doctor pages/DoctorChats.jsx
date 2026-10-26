@@ -189,7 +189,7 @@ export default function DoctorChats() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #9fb0b8; }
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #c7d2d8 transparent; }
       `}</style>
-      <div className="w-full bg-slate-50 dark:bg-gray-900/30 flex justify-center items-start" dir="rtl">
+      <div className="w-full bg-slate-50 dark:bg-gray-900/30 flex justify-center items-start">
         <div className="w-full bg-white dark:bg-gray-800 border border-[#e9eff6] dark:border-gray-700 rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-[1.2fr_2.5fr] min-h-[600px] h-[calc(100vh-180px)] md:h-[700px] overflow-hidden">
 
           {/* Sidebar */}
@@ -208,7 +208,7 @@ export default function DoctorChats() {
                 filteredConversations.map((conv) => {
                   const isSelected = activeConversationId === conv.conversationId;
                   return (
-                    <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100 dark:bg-gray-800/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50 dark:bg-gray-900/50'}`}>
+                    <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100 dark:bg-gray-800/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50 dark:bg-gray-900/50'} dark:hover:bg-gray-800`}>
                       <div className="relative shrink-0">
                         {conv.participantImageUrl ? (
                             <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 h-12 rounded-full object-cover border border-gray-100" src={resolveImageUrl(conv.participantImageUrl)} alt={conv.participantName} />
@@ -347,7 +347,7 @@ export default function DoctorChats() {
             <div className="flex border-t border-gray-100">
               <button
                 onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(''); }}
-                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors"
+                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800"
               >
                 {t('doctorChats.cancel')}
               </button>

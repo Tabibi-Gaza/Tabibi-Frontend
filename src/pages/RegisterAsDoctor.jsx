@@ -367,7 +367,7 @@ const RegisterAsDoctor = () => {
                                 {/* إرفاق الهوية */}
                                 <div>
                                     <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">{L.idUpload}</label>
-                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50 dark:bg-gray-900/40 text-center relative hover:bg-slate-50 dark:bg-gray-900 cursor-pointer">
+                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50 dark:bg-gray-900/40 text-center relative hover:bg-slate-50 dark:bg-gray-900 cursor-pointer dark:hover:bg-gray-800">
                                         <input
                                             type="file"
                                             accept="image/*"
@@ -387,7 +387,7 @@ const RegisterAsDoctor = () => {
                                 {/* إرفاق السيرة الذاتية */}
                                 <div>
                                     <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-2">{L.cvUpload}</label>
-                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50 dark:bg-gray-900/40 text-center relative hover:bg-slate-50 dark:bg-gray-900 cursor-pointer">
+                                    <div className="border border-dashed border-[#bcd3ee] rounded-xl p-4 bg-slate-50 dark:bg-gray-900/40 text-center relative hover:bg-slate-50 dark:bg-gray-900 cursor-pointer dark:hover:bg-gray-800">
                                         <input
                                             type="file"
                                             accept=".pdf,application/pdf"
@@ -443,7 +443,7 @@ const RegisterAsDoctor = () => {
                         <button
                             type="button"
                             onClick={() => window.history.back()}
-                            className="w-full sm:w-1/3 h-12 border border-[#bcd3ee] bg-white dark:bg-gray-800 text-[#118fa6] font-bold rounded-xl text-base hover:bg-slate-50 dark:bg-gray-900 transition-colors order-2 sm:order-1"
+                            className="w-full sm:w-1/3 h-12 border border-[#bcd3ee] bg-white dark:bg-gray-800 text-[#118fa6] font-bold rounded-xl text-base hover:bg-slate-50 dark:bg-gray-900 transition-colors order-2 sm:order-1 dark:hover:bg-gray-800"
                         >
                             {L.back}
                         </button>

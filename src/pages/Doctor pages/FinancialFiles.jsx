@@ -164,7 +164,7 @@ const FinancialFiles = () => {
         const win = window.open('', '_blank');
         const doc = win.document;
         doc.open();
-        doc.write(`<!DOCTYPE html><html dir="rtl"><head><title>فاتورة - طبيبي</title><style>body{font-family:'Tajawal',Arial,sans-serif;padding:40px;color:#333}.header{text-align:center;border-bottom:2px solid #1b8b99;padding-bottom:20px;margin-bottom:20px}.header h1{color:#1b8b99;margin:0;font-size:24px}.header p{color:#666;margin:5px 0 0;font-size:12px}.info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}.info-row .label{font-weight:bold;color:#1b8b99}.total{font-size:20px;font-weight:bold;color:#1b8b99;text-align:center;margin-top:20px;padding:15px;border:2px solid #1b8b99;border-radius:10px}.footer{text-align:center;margin-top:30px;font-size:11px;color:#999}</style></head><body></body></html>`);
+        doc.write(`<!DOCTYPE html><html><head><title>فاتورة - طبيبي</title><style>body{font-family:'Tajawal',Arial,sans-serif;padding:40px;color:#333}.header{text-align:center;border-bottom:2px solid #1b8b99;padding-bottom:20px;margin-bottom:20px}.header h1{color:#1b8b99;margin:0;font-size:24px}.header p{color:#666;margin:5px 0 0;font-size:12px}.info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}.info-row .label{font-weight:bold;color:#1b8b99}.total{font-size:20px;font-weight:bold;color:#1b8b99;text-align:center;margin-top:20px;padding:15px;border:2px solid #1b8b99;border-radius:10px}.footer{text-align:center;margin-top:30px;font-size:11px;color:#999}</style></head><body></body></html>`);
         doc.close();
         doc.body.appendChild(printContent.cloneNode(true));
         win.print();
@@ -187,14 +187,14 @@ const FinancialFiles = () => {
 
     if (loading) {
         return (
-            <div className="w-full bg-slate-50 dark:bg-gray-900/30 flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full bg-slate-50 dark:bg-gray-900/30 flex items-center justify-center h-64">
                 <p className="text-gray-400 dark:text-gray-500 font-bold">{t('financialFiles.loading')}</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full bg-slate-50 dark:bg-gray-900/30 space-y-6" dir="rtl">
+      <div className="w-full bg-slate-50 dark:bg-gray-900/30 space-y-6">
           <div className="text-right">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#1b8b99]">{t('financialFiles.title')}</h1>
             <p className="text-xs sm:text-sm text-gray-500">{t('financialFiles.description')}</p>
@@ -272,7 +272,7 @@ const FinancialFiles = () => {
                       <FiSearch className="w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none shrink-0" />
                       <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t('financialFiles.searchPlaceholder')} className="w-full bg-transparent border-none outline-none text-xs sm:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 pr-2 h-full text-right" />
                     </div>
-                    <button onClick={() => setShowFilters(!showFilters)} className={`h-10 px-3 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${showFilters ? 'bg-[#1b8b99] text-white border-[#1b8b99]' : 'border-slate-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900'}`}>
+                    <button onClick={() => setShowFilters(!showFilters)} className={`h-10 px-3 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${showFilters ? 'bg-[#1b8b99] text-white border-[#1b8b99]' : 'border-slate-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900'} dark:hover:bg-gray-800`}>
                       <FiFilter className="w-3.5 h-3.5" />{t('financialFiles.filters')}</button>
                   </div>
                   <div className="flex items-center gap-2">
@@ -290,7 +290,7 @@ const FinancialFiles = () => {
                       <label className="text-[10px] font-bold text-gray-400">{t('financialFiles.dateRange')}</label>
                       <div className="flex gap-1">
                         {DATE_RANGES.map(d => (
-                          <button key={d.value} onClick={() => setDateFilter(d.value)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${dateFilter === d.value ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-200'}`}>{d.label}</button>
+                          <button key={d.value} onClick={() => setDateFilter(d.value)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${dateFilter === d.value ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-200'} dark:hover:bg-gray-700`}>{d.label}</button>
                         ))}
                       </div>
                     </div>
@@ -305,7 +305,7 @@ const FinancialFiles = () => {
                       <label className="text-[10px] font-bold text-gray-400">{t('financialFiles.paymentMethod')}</label>
                       <div className="flex gap-1 flex-wrap">
                         {PAYMENT_METHODS_FILTER.map(m => (
-                          <button key={m} onClick={() => setPaymentMethodFilter(m)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${paymentMethodFilter === m ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-200'}`}>{m}</button>
+                          <button key={m} onClick={() => setPaymentMethodFilter(m)} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${paymentMethodFilter === m ? 'bg-[#1b8b99] text-white' : 'bg-slate-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-200'} dark:hover:bg-gray-700`}>{m}</button>
                         ))}
                       </div>
                     </div>
@@ -328,7 +328,7 @@ const FinancialFiles = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {displayedTransactions.map((tx) => (
-                      <tr key={tx.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-16 text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <tr key={tx.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-16 text-sm font-medium text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
                         <td className="px-6">
                           <div className="flex items-center gap-3">
                             {tx.patientImageUrl ? (
@@ -369,7 +369,7 @@ const FinancialFiles = () => {
               {/* جول الموبايل */}
               <div className="block md:hidden divide-y divide-slate-100">
                 {displayedTransactions.map((tx) => (
-                  <div key={tx.id} className="p-4 space-y-3 hover:bg-slate-50 dark:bg-gray-900/30 transition-all text-right">
+                  <div key={tx.id} className="p-4 space-y-3 hover:bg-slate-50 dark:bg-gray-900/30 transition-all text-right dark:hover:bg-gray-800">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         {tx.patientImageUrl ? (
@@ -429,7 +429,7 @@ const FinancialFiles = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {expenses.map((exp) => (
-                      <tr key={exp.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-14 text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <tr key={exp.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors h-14 text-sm font-medium text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
                         <td className="px-6"><span className="bg-red-50 text-red-600 text-[11px] font-bold px-3 py-1 rounded-full">{exp.category}</span></td>
                         <td className="px-6"><span className="text-xs font-semibold text-gray-600 dark:text-gray-400">{formatDate(exp.date)}</span></td>
                         <td className="px-6"><span className="text-gray-700 dark:text-gray-300 dark:text-gray-500 text-xs">{exp.description || '—'}</span></td>
@@ -466,7 +466,7 @@ const FinancialFiles = () => {
               <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden">
                 <div className="p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                    <h3 className="text-base font-bold text-gray-800 dark:text-gray-200">{t('financialFiles.addNewExpense')}</h3>
-                  <button onClick={() => setExpenseModal(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5" /></button>
+                  <button onClick={() => setExpenseModal(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5 dark:hover:bg-gray-700" /></button>
                 </div>
                 <div className="p-5 space-y-4">
                   <div>
@@ -491,7 +491,7 @@ const FinancialFiles = () => {
                 </div>
                 <div className="p-5 border-t border-slate-100 dark:border-gray-700 flex gap-3">
                   <button onClick={handleAddExpense} disabled={!newExpense.category || !newExpense.amount} className="flex-1 h-11 bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold rounded-xl text-sm transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">{t('common.add')}</button>
-                  <button onClick={() => setExpenseModal(false)} className="flex-1 h-11 border border-slate-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer">{t('common.cancel')}</button>
+                  <button onClick={() => setExpenseModal(false)} className="flex-1 h-11 border border-slate-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer dark:hover:bg-gray-800">{t('common.cancel')}</button>
                 </div>
               </div>
             </div>
@@ -503,7 +503,7 @@ const FinancialFiles = () => {
               <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 dark:border-gray-700 overflow-hidden">
                 <div className="p-5 border-b border-slate-100 dark:border-gray-700 flex items-center justify-between">
                    <h3 className="text-base font-bold text-gray-800 dark:text-gray-200">{t('financialFiles.invoicePreview')}</h3>
-                  <button onClick={() => setInvoiceModal(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5" /></button>
+                  <button onClick={() => setInvoiceModal(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-pointer"><FiX className="w-5 h-5 dark:hover:bg-gray-700" /></button>
                 </div>
                 <div className="p-5">
                   <div ref={invoiceRef} className="border border-slate-200 dark:border-gray-700 rounded-xl p-5 text-right">
@@ -533,7 +533,7 @@ const FinancialFiles = () => {
                 <div className="p-5 border-t border-slate-100 dark:border-gray-700 flex gap-3">
                   <button onClick={handlePrintInvoice} className="flex-1 h-11 bg-[#1b8b99] hover:bg-[#15727e] text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
                     <FiPrinter className="w-4 h-4" />{t('financialFiles.print')}</button>
-                  <button onClick={() => setInvoiceModal(null)} className="flex-1 h-11 border border-slate-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer">{t('common.close')}</button>
+                  <button onClick={() => setInvoiceModal(null)} className="flex-1 h-11 border border-slate-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-bold rounded-xl text-sm hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer dark:hover:bg-gray-800">{t('common.close')}</button>
                 </div>
               </div>
             </div>

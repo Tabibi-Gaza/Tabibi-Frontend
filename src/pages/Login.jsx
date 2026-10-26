@@ -48,6 +48,7 @@ const Login = () => {
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [gender, setGender] = useState('');
   const [address, setAddress] = useState('');
 
@@ -137,9 +138,11 @@ const Login = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     if (state === 'RegisterPatient' && !agreeToTerms) {
       toast.error(t('login.termsRequired'));
+      setIsSubmitting(false);
       return;
     }
 
@@ -235,6 +238,8 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error.response?.data?.errors?.[0]?.message || error.response?.data?.message || error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -334,7 +339,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+    <div className="bg-slate-50 dark:bg-gray-900 flex items-center justify-center">
       <div className="w-full h-dvh flex flex-row overflow-hidden shadow-xl">
         
         {/* النصف الأيمن: النماذج */}
@@ -407,6 +412,7 @@ const Login = () => {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold py-3 rounded-xl shadow-md transition-all text-base cursor-pointer"
                   >
                     {t('login.loginBtn')}
@@ -653,7 +659,7 @@ const Login = () => {
                                   setPhone(c.code + phone.replace(selectedCountry.code, '').replace(/\D/g, ''));
                                   setShowCountries(false);
                                 }}
-                                className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive ? 'bg-[#e6f4f6] dark:bg-gray-800 text-[#138C9F] font-bold' : 'text-slate-700 dark:text-gray-300 hover:bg-slate-50 dark:bg-gray-900'}`}
+                                className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive ? 'bg-[#e6f4f6] dark:bg-gray-800 text-[#138C9F] font-bold' : 'text-slate-700 dark:text-gray-300 hover:bg-slate-50 dark:bg-gray-900'} dark:hover:bg-gray-800`}
                               >
                                 <img
                                   loading="lazy"
@@ -747,6 +753,7 @@ const Login = () => {
 
                 <button
                   type="submit"
+                    disabled={isSubmitting}
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all"
                 >
                   {registerRole && registerRole !== 'patient' ? t('login.next') : t('login.registerBtn')}
@@ -801,6 +808,7 @@ const Login = () => {
 
                 <button
                   type="submit"
+                    disabled={isSubmitting}
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-bold py-3 rounded-xl shadow-md transition-all text-base cursor-pointer"
                 >
                   {t('login.sendOtp')}
@@ -937,6 +945,7 @@ const Login = () => {
 
                 <button
                   type="submit"
+                    disabled={isSubmitting}
                   className="w-full bg-[#138C9F] hover:bg-[#0f6c7a] text-white font-black py-3.5 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   {t('login.updatePassword')} <span><FontAwesomeIcon icon={faArrowLeft} className="transition-transform group-hover:-translate-x-1 text-lg" /></span>

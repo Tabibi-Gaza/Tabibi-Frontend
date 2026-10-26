@@ -112,14 +112,14 @@ const FinancialTransactions = () => {
 
     if (loading) {
         return (
-            <div className="bg-[#ecf8fa] dark:bg-gray-900 min-h-screen flex items-center justify-center" dir="rtl">
+            <div className="bg-[#ecf8fa] dark:bg-gray-900 min-h-screen flex items-center justify-center">
                 <Loader2 className="w-8 h-8 text-[#138C9F] animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="bg-[#ecf8fa] dark:bg-gray-900 min-h-screen pt-24 pb-6 px-4" dir="rtl">
+        <div className="bg-[#ecf8fa] dark:bg-gray-900 min-h-screen pt-24 pb-6 px-4">
             <div className="max-w-6xl mx-auto">
                 <section className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 md:p-8">
                     <div className="text-right mb-8">
@@ -182,7 +182,7 @@ const FinancialTransactions = () => {
                             </thead>
                             <tbody>
                                 {filteredTransactions.map((item) => (
-                                    <tr key={item.id} className="border-b border-[#C3C6D6] dark:border-gray-700/50 hover:bg-slate-50 dark:bg-gray-900/50 transition-colors">
+                                    <tr key={item.id} className="border-b border-[#C3C6D6] dark:border-gray-700/50 hover:bg-slate-50 dark:bg-gray-900/50 transition-colors dark:hover:bg-gray-800">
                                          <td className="px-4 py-5 text-center text-sm font-medium text-[#526069] dark:text-gray-400 align-middle">
                                             {formatDate(item.transactionDate)}
                                         </td>

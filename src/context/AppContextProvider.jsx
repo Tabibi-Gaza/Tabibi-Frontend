@@ -307,14 +307,17 @@ const AppContextProvider = (props) => {
             if (data.succeeded) {
                 toast.success("تم حفظ تعديلات المسؤول بنجاح");
                 await loadUserProfileData();
+                return true;
             } else {
                 toast.error(data.errors?.[0]?.message || data.message || "فشل حفظ التعديلات");
+                await loadUserProfileData();
+                return false;
             }
-            return true;
         } catch (error) {
-
+            // rollback التحديث المتفائل
+            await loadUserProfileData();
             toast.error(error.response?.data?.errors?.[0]?.message || error.message || "حدث خطأ أثناء الحفظ");
-            return true;
+            return false;
         }
     };
 
@@ -349,21 +352,26 @@ const AppContextProvider = (props) => {
                 else if (roles.includes("Admin")) endpoint = "/admin/profile";
                 const { data } = await axiosInstance.get(endpoint);
                 if (!data.succeeded) throw new Error();
-            } catch {
-                localStorage.removeItem("accessToken");
-                localStorage.removeItem("user");
-                localStorage.removeItem("doctorId");
-                setToken("");
-                setUserData({
-                    firstname: "",
-                    lastname: "",
-                    email: "",
-                    phone: "",
-                    gender: "",
-                    dob: "",
-                    address: { line1: "" },
-                    image: null,
-                });
+            } catch (error) {
+                // إصلاح: لا تمسح الجلسة عند انقطاع الاتصال أو خطأ 5xx — فقط عند 401/403
+                const status = error?.response?.status;
+                if (status === 401 || status === 403) {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("doctorId");
+                    setToken("");
+                    setUserData({
+                        firstname: "",
+                        lastname: "",
+                        email: "",
+                        phone: "",
+                        gender: "",
+                        dob: "",
+                        address: { line1: "" },
+                        image: null,
+                    });
+                    setDoctors([]);
+                }
             }
         };
         validateToken();

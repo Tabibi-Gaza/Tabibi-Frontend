@@ -87,7 +87,7 @@ const AdminProfile = () => {
     };
 
     return userData && (
-        <div className="w-full min-h-screen bg-[#ecf8fa] dark:bg-gray-900 py-10" dir="rtl">
+        <div className="w-full min-h-screen bg-[#ecf8fa] dark:bg-gray-900 py-10">
             <div className=" ">
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 

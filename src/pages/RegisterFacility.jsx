@@ -241,7 +241,7 @@ const RegisterFacility = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-24 pb-16 px-4" dir="rtl">
+        <div className="min-h-screen bg-slate-50 dark:bg-gray-900 pt-24 pb-16 px-4">
             <div className="max-w-2xl mx-auto">
                 <div className="text-center mb-8">
                     <div

@@ -100,7 +100,7 @@ const OtpInput = ({ length = 6, onComplete, onResend, email }) => {
   };
 
   return (
-    <div className="w-full" dir="rtl">
+    <div className="w-full">
       <div className="flex justify-center gap-1.5 sm:gap-3 mb-6">
         {otp.map((digit, i) => (
           <input

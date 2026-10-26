@@ -90,18 +90,17 @@ export default function PatientManagement() {
 
     if (loading) {
         return (
-            <div className="w-full bg-gray-50 dark:bg-gray-900/50 pb-8 flex items-center justify-center h-64" dir="rtl">
+            <div className="w-full bg-gray-50 dark:bg-gray-900/50 pb-8 flex items-center justify-center h-64">
                 <p className="text-gray-400 dark:text-gray-500 font-bold">{t('patientManagement.loading')}</p>
             </div>
         );
     }
 
     return (
-      <div className="w-full bg-gray-50 dark:bg-gray-900/50  pb-8" dir="rtl">
+      <div className="w-full bg-gray-50 dark:bg-gray-900/50  pb-8">
         {/* العناوين والإحصائيات */}
         {/*    <div
         className="space-y-6 md:space-y-8 w-full pb-8 relative"
-        dir="rtl"
       >
         {/* قسم الترحيب - تم ضبط المسافة الجانبية هنا لمنع التداخل 
          className="space-y-6 text-right */}
@@ -168,7 +167,7 @@ export default function PatientManagement() {
                   currentTableData.map((patient) => (
                     <tr
                       key={patient.id}
-                      className="hover:bg-gray-50 dark:bg-gray-900/70 transition-colors"
+                      className="hover:bg-gray-50 dark:bg-gray-900/70 transition-colors dark:hover:bg-gray-800"
                     >
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -315,7 +314,7 @@ export default function PatientManagement() {
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                className={`p-2 bg-white dark:bg-gray-800 rounded-lg transition-colors cursor-pointer ${currentPage === 1 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                className={`p-2 bg-white dark:bg-gray-800 rounded-lg transition-colors cursor-pointer ${currentPage === 1 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"} dark:hover:bg-gray-700`}
               >
                 <FiChevronRight className="w-4 h-4" />
               </button>
@@ -324,7 +323,7 @@ export default function PatientManagement() {
                 <button
                   key={index + 1}
                   onClick={() => setCurrentPage(index + 1)}
-                  className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${currentPage === index + 1 ? "bg-[#138C9F] text-white" : "bg-white dark:bg-gray-800 hover:bg-gray-100"}`}
+                  className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${currentPage === index + 1 ? "bg-[#138C9F] text-white" : "bg-white dark:bg-gray-800 hover:bg-gray-100"} dark:hover:bg-gray-700`}
                 >
                   {index + 1}
                 </button>
@@ -335,7 +334,7 @@ export default function PatientManagement() {
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
-                className={`p-2 bg-white dark:bg-gray-800 rounded-lg transition-colors cursor-pointer ${currentPage === totalPages ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                className={`p-2 bg-white dark:bg-gray-800 rounded-lg transition-colors cursor-pointer ${currentPage === totalPages ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-100"} dark:hover:bg-gray-700`}
               >
                 <FiChevronLeft className="w-4 h-4" />
               </button>

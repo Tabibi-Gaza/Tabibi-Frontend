@@ -301,7 +301,7 @@ const DoctorNavbar = ({ onMenuToggle, isMenuOpen }) => {
                 {recentNotifications.length > 0 && (
                   <div
                     onClick={handleGoToNotificationsPage}
-                    className="p-3 text-center border-t border-gray-100 cursor-pointer hover:bg-slate-50 transition-all"
+                    className="p-3 text-center border-t border-gray-100 cursor-pointer hover:bg-slate-50 transition-all dark:hover:bg-gray-800"
                   >
                     <span className="text-xs font-bold text-[#138C9F] flex items-center justify-center gap-1">
                       {t('doctorNav.viewAll')}

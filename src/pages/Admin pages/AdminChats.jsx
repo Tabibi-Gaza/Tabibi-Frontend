@@ -245,7 +245,6 @@ export default function AdminChats() {
   return (
     <div
       className="w-full flex flex-col items-start p-0 relative text-right"
-      dir="rtl"
     >
       <div className="w-full flex-1 p-2 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-4 md:gap-6">
         {/* Sidebar */}
@@ -290,7 +289,7 @@ export default function AdminChats() {
                   <div
                     key={conv.conversationId}
                     onClick={() => handleSelectChat(conv.conversationId)}
-                    className={`group p-4 flex items-start justify-between border-b border-gray-50 cursor-pointer transition-all duration-200 ${isSelected ? "bg-[#e2f4f7] dark:bg-gray-800 md:border-r-4 md:border-r-[#138C9F]" : "hover:bg-slate-50 dark:bg-gray-900/50"}`}
+                    className={`group p-4 flex items-start justify-between border-b border-gray-50 cursor-pointer transition-all duration-200 ${isSelected ? "bg-[#e2f4f7] dark:bg-gray-800 md:border-r-4 md:border-r-[#138C9F]" : "hover:bg-slate-50 dark:bg-gray-900/50"} dark:hover:bg-gray-800`}
                   >
                     <div className="flex items-center gap-3 min-w-0 text-right">
                       <div className="relative shrink-0">
@@ -334,7 +333,7 @@ export default function AdminChats() {
           {activeConversation ? (
             <>
               <div className="p-4 border-b border-[#e9eff6] dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">
-                <button onClick={() => setShowChatOnMobile(false)} className="block md:hidden p-2 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-100 dark:bg-gray-800 rounded-full transition-colors">
+                <button onClick={() => setShowChatOnMobile(false)} className="block md:hidden p-2 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-100 dark:bg-gray-800 rounded-full transition-colors dark:hover:bg-gray-700">
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <div className="flex items-center gap-3 text-right ml-auto">
@@ -402,7 +401,6 @@ export default function AdminChats() {
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder={t('adminChats.typeMessage')}
                     className="flex-1 bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 dark:text-gray-300 dark:text-gray-500 h-full text-right"
-                    dir="rtl"
                   />
                 </div>
               </form>
@@ -441,7 +439,7 @@ export default function AdminChats() {
                 doctors.map((doc) => {
                   const existingConv = conversations.find((c) => c.participantName === doc.fullName);
                   return (
-                    <div key={doc.id} onClick={() => handleStartChatWithDoctor(doc)} className="p-4 flex items-center gap-3 border-b border-gray-50 cursor-pointer hover:bg-slate-50 dark:bg-gray-900/50 transition-all duration-200">
+                    <div key={doc.id} onClick={() => handleStartChatWithDoctor(doc)} className="p-4 flex items-center gap-3 border-b border-gray-50 cursor-pointer hover:bg-slate-50 dark:bg-gray-900/50 transition-all duration-200 dark:hover:bg-gray-800">
                       <div className="relative shrink-0">
                         {doc.profileImageUrl ? (
                             <img loading="lazy" decoding="async" width="44" height="44" className="w-11 h-11 rounded-full object-cover border border-gray-100" src={resolveImageUrl(doc.profileImageUrl)} alt={doc.fullName} />
@@ -477,7 +475,7 @@ export default function AdminChats() {
             <div className="flex border-t border-gray-100">
               <button
                 onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(""); }}
-                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors"
+                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800"
               >
                 {t('common.cancel')}
               </button>

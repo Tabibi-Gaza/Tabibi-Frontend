@@ -39,7 +39,7 @@ const TopDoctors = () => {
     };
 
     return (
-        <div className='flex flex-col items-center gap-4 my-24 text-slate-900' dir='rtl'>
+        <div className='flex flex-col items-center gap-4 my-24 text-slate-900'>
             
             <span className='text-xs font-black text-[#138C9F] bg-[#138C9F]/10 px-4 py-2 rounded-full tracking-widest border border-[#138C9F]/10 select-none'>
                 نخبة الأطباء

@@ -56,7 +56,6 @@ const Navbar = () => {
     <>
       <div
         className='fixed left-1/2 -translate-x-1/2 top-4 w-[calc(100%-2rem)] sm:w-[calc(100%-1rem)]  z-[50] flex items-center justify-between text-base py-5 px-4 sm:px-6 md:px-10 bg-white/75 dark:bg-gray-900/75 border border-white/40 dark:border-gray-700/40 rounded-2xl shadow-xl shadow-black/[0.03] select-none backdrop-blur-md'
-        dir="rtl"
       >
         {/* ---- اللوجو ---- */}
         <div className="shrink-0 z-50">
@@ -338,7 +337,7 @@ const Navbar = () => {
                         navigate("/my-profile");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.myProfile')}
                     </p>
@@ -347,7 +346,7 @@ const Navbar = () => {
                         navigate("/my-appointment");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.myAppointments')}
                     </p>
@@ -356,7 +355,7 @@ const Navbar = () => {
                         navigate("/medical-history");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.personalMedicalHistory')}
                     </p>
@@ -365,7 +364,7 @@ const Navbar = () => {
                         navigate("/medical-files");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.medicalHistoryFull')}
                     </p>
@@ -374,7 +373,7 @@ const Navbar = () => {
                         navigate("/my-prescriptions");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.myPrescriptions')}
                     </p>
@@ -383,7 +382,7 @@ const Navbar = () => {
                         navigate("/chats");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.chats')}
                     </p>
@@ -392,7 +391,7 @@ const Navbar = () => {
                         navigate("/financial-transactions");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.financial')}
                     </p>
@@ -401,7 +400,7 @@ const Navbar = () => {
                         navigate("/favorites");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.favorites')}
                     </p>
@@ -410,7 +409,7 @@ const Navbar = () => {
                         navigate("/cart");
                         setShowProfileMenu(false);
                       }}
-                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm"
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
                     >
                       {t('nav.cart')}
                     </p>
@@ -479,7 +478,6 @@ const Navbar = () => {
             ? "w-full sm:w-80 opacity-100 pointer-events-auto"
             : "w-0 opacity-0 pointer-events-none"
         }`}
-        dir="rtl"
       >
         <div className="flex items-center justify-between px-5 py-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shrink-0 w-full">
           <img
@@ -492,7 +490,7 @@ const Navbar = () => {
           />
           <button
             onClick={() => setShowMenu(false)}
-            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none flex items-center justify-center"
+            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none flex items-center justify-center dark:hover:bg-gray-700"
           >
             <img
               loading="lazy"
@@ -513,7 +511,7 @@ const Navbar = () => {
               to={link.path}
               onClick={() => setShowMenu(false)}
               className={({ isActive }) =>
-                `w-full text-center rounded-xl transition-all ${isActive ? "bg-[#138C9F]/10 text-[#138C9F] font-bold" : "hover:bg-gray-50"}`
+                `w-full text-center rounded-xl transition-all ${isActive ? "bg-[#138C9F]/10 text-[#138C9F] font-bold" : "hover:bg-gray-50"} dark:hover:bg-gray-800`
               }
             >
               <p className="py-3 w-full">{link.name}</p>

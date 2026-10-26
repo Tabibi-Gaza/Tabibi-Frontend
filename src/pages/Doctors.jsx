@@ -91,7 +91,6 @@ if (isError)
   return (
     <div
       className="min-h-[60vh] flex items-center justify-center px-4 pt-40 dark:bg-gray-900 dark:text-gray-200"
-      dir="rtl"
     >
       <div className="bg-white dark:bg-gray-800 border border-red-100 shadow-sm rounded-3xl p-8 max-w-md w-full text-center dark:bg-gray-800 dark:border-gray-700">
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center">
@@ -121,7 +120,6 @@ if (isError)
   return (
     <div
       className="px-4 sm:px-6 lg:px-8 pt-30 my-8 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
-      dir="rtl"
     >
       {/* الجزء العلوي */}
       <div className="text-center mb-6">
@@ -151,7 +149,7 @@ if (isError)
           <div className="relative">
             <button
               onClick={() => { setShowSortMenu(!showSortMenu); setShowFilters(false); }}
-              className={`p-2.5 rounded-xl transition-all shadow-xs flex items-center gap-2 cursor-pointer text-xs font-bold ${sortBy ? "bg-[#138C9F] text-white" : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 hover:bg-gray-50"}`}
+              className={`p-2.5 rounded-xl transition-all shadow-xs flex items-center gap-2 cursor-pointer text-xs font-bold ${sortBy ? "bg-[#138C9F] text-white" : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 hover:bg-gray-50"} dark:hover:bg-gray-800`}
               title={t('doctors.sortDefault')}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -189,7 +187,7 @@ if (isError)
           <div className="flex flex-wrap items-center justify-center gap-2">
             <button
               onClick={() => handleSpecialityChange("/doctors")}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${!speciality ? "bg-[#138C9F] text-white" : "bg-gray-200/70 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"}`}
+              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${!speciality ? "bg-[#138C9F] text-white" : "bg-gray-200/70 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"} dark:hover:bg-gray-700`}
             >
               {t('doctors.all')}
             </button>
@@ -213,7 +211,7 @@ if (isError)
                           handleSpecialityChange(`/doctors/${spec.id}`);
                         }
                       }}
-                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${isSelected ? "bg-[#138C9F] text-white" : "bg-gray-200/70 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"}`}
+                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${isSelected ? "bg-[#138C9F] text-white" : "bg-gray-200/70 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"} dark:hover:bg-gray-700`}
                     >
                       {spec.name}
                     </button>

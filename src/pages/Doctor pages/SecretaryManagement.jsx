@@ -107,7 +107,7 @@ const SecretaryManagement = () => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-6" dir="rtl">
+        <div className="max-w-4xl mx-auto p-6">
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-[#1b8b99] mb-2 flex items-center gap-2">
                     <FontAwesomeIcon icon={faUserTie} />
@@ -237,7 +237,7 @@ const SecretaryManagement = () => {
                                             </button>
                                             <button
                                                 onClick={() => setEditingId(null)}
-                                                className="text-xs px-3 py-1.5 border border-gray-300 text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-lg hover:bg-gray-50"
+                                                className="text-xs px-3 py-1.5 border border-gray-300 text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
                                             >
                                                 إلغاء
                                             </button>

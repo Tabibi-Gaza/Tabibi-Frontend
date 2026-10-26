@@ -139,7 +139,7 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="space-y-6 md:space-y-8 w-full pb-8 px-4 relative" dir="rtl">
+    <div className="space-y-6 md:space-y-8 w-full pb-8 px-4 relative">
       <div className="space-y-1 text-right md:pl-4">
         <h2 className="text-2xl md:text-4xl font-black text-[#0B1C30] dark:text-white tracking-tight">
           {new Date().getHours() < 12 ? t('doctorDashboard.goodMorning') : t('doctorDashboard.goodEvening')} {doctorData?.firstname || ''} {doctorData?.lastname || ''}
@@ -213,7 +213,7 @@ const DoctorDashboard = () => {
                   const patientName = (appt.patientName || "").replace(/^undefined\s*/i, "").trim() || t('doctorDashboard.patient');
                   const patientImage = appt.patientImage || appt.patientImageUrl || "";
                   return (
-                  <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors">
+                  <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors dark:hover:bg-gray-800">
                     <td className="p-3 md:p-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         {patientImage && patientImage !== "undefined" ? (
@@ -295,7 +295,7 @@ const DoctorDashboard = () => {
                   const cleanName = (req.patientName || "").replace(/^undefined\s*/i, "").trim() || t('doctorDashboard.patient');
                   const imgUrl = req.patientImageUrl || "";
                   return (
-                  <tr key={req.appointmentId} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors">
+                  <tr key={req.appointmentId} className="hover:bg-slate-50 dark:bg-gray-900/40 transition-colors dark:hover:bg-gray-800">
                     <td className="p-3 md:p-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         {imgUrl && imgUrl !== "undefined" ? (
@@ -502,7 +502,7 @@ const DoctorDashboard = () => {
                 </button>
                 <button
                   onClick={() => { setIsPaymentModalOpen(false); setSelectedPayment(null); }}
-className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
+className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center dark:hover:bg-gray-800"
                 >
                   {t('doctorDashboard.cancel')}
                 </button>
@@ -537,7 +537,7 @@ className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 ho
               </button>
               <button
                 onClick={() => { setRejectModalOpen(false); setRejectionReason(""); }}
-                className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center"
+                className="px-4 min-h-[44px] border border-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 text-[#526069] dark:text-gray-400 font-bold rounded-xl text-sm transition-all cursor-pointer text-center dark:hover:bg-gray-800"
               >
                 إلغاء
               </button>

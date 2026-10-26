@@ -57,7 +57,7 @@ const DoctorChangePassword = () => {
     };
 
     return (
-        <div className="pt-28 pb-16 px-4 sm:px-6" dir="rtl">
+        <div className="pt-28 pb-16 px-4 sm:px-6">
             <div className="max-w-lg mx-auto">
                 <button
                     onClick={() => navigate(-1)}

@@ -103,7 +103,7 @@ function FramesSection() {
               <div
                 onClick={() => !isLoading && setIsOpen(!isOpen)}
                 className={`w-full text-slate-900 text-sm md:text-base px-5 py-3 md:py-3.5 rounded-xl md:rounded-full cursor-pointer flex items-center justify-between transition-all duration-200 ${
-                  isOpen ? "bg-slate-50" : "bg-transparent hover:bg-slate-50/50"
+                  isOpen ? "bg-slate-50" : "bg-transparent hover:bg-slate-50/50 dark:hover:bg-gray-800"
                 } ${isLoading ? "opacity-60 cursor-wait" : ""}`}
               >
                 <div className="flex items-center gap-3 select-none overflow-hidden">
@@ -121,7 +121,7 @@ function FramesSection() {
                 <div className="absolute top-[115%] left-0 right-0 bg-white dark:bg-gray-800 border border-slate-100 dark:border-gray-700 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-72 overflow-y-auto">
                   <div onClick={() => { setSpeciality(""); setIsOpen(false); }}
                     className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none sm:col-span-2 ${
-                      speciality === "" ? "bg-slate-100 text-slate-900 font-black" : "text-slate-500 hover:bg-slate-50"
+                      speciality === "" ? "bg-slate-100 text-slate-900 font-black" : "text-slate-500 hover:bg-slate-50 dark:hover:bg-gray-800"
                     }`}>
                     <div className="flex items-center gap-2.5">
                       <FontAwesomeIcon icon={faGlobe} className="text-base text-slate-500" />
@@ -132,7 +132,7 @@ function FramesSection() {
                   {options.map((opt) => (
                     <div key={opt.id} onClick={() => { setSpeciality(opt.id); setIsOpen(false); }}
                       className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer font-bold text-xs md:text-sm transition-all select-none ${
-                        speciality === opt.id ? "bg-[#138C9F] text-white" : "text-slate-700 hover:bg-slate-50 hover:text-[#138C9F]"
+                        speciality === opt.id ? "bg-[#138C9F] text-white" : "text-slate-700 hover:bg-slate-50 hover:text-[#138C9F] dark:hover:bg-gray-800"
                       }`}>
                       <span className="font-extrabold truncate">{opt.label}</span>
                       {speciality === opt.id && <span className="text-white font-black text-xs ms-1 shrink-0">✓</span>}

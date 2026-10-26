@@ -369,7 +369,7 @@ const MedicalExamination = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center">
                 <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">{t('medicalExamination.loadingPatientData')}</p>
             </div>
         );
@@ -377,7 +377,7 @@ const MedicalExamination = () => {
 
     if (!patient) {
         return (
-            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center" dir="rtl">
+            <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex items-center justify-center">
                 <p className="text-gray-400 dark:text-gray-500 font-bold text-lg">{t('medicalExamination.patientNotFound')}</p>
             </div>
         );
@@ -387,7 +387,7 @@ const MedicalExamination = () => {
     const patientAge = calculateAge(patient.dateOfBirthRaw);
 
     return (
-        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex" dir="rtl">
+        <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 flex">
             <div className="flex-1 flex flex-col min-w-0">
                 <div className="p-4 md:p-8 max-w-[1240px] w-full mx-auto space-y-6 overflow-y-auto">
 
@@ -734,7 +734,7 @@ const MedicalExamination = () => {
 
                                     {/* أزرار الحفظ والإلغاء */}
                                     <div className="flex items-center justify-end gap-3 border-t border-gray-50 pt-4">
-                                        <button type="button" onClick={() => setEditingMedicalHistory(false)} className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors cursor-pointer">{t('common.cancel')}</button>
+                                        <button type="button" onClick={() => setEditingMedicalHistory(false)} className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors cursor-pointer dark:hover:bg-gray-800">{t('common.cancel')}</button>
                                         <button type="button" onClick={handleSaveMedicalHistory} disabled={savingMedicalHistory} className="bg-[#138C9F] hover:bg-[#0f7282] disabled:bg-gray-300 text-white px-8 py-2.5 rounded-xl text-xs font-black shadow-xs transition-all duration-200 cursor-pointer">
                                             <FontAwesomeIcon icon={faFloppyDisk} />
                                             <span className="mr-1">{savingMedicalHistory ? t('medicalExamination.saving') : t('common.saveChanges')}</span>
@@ -764,7 +764,7 @@ const MedicalExamination = () => {
                                     </div>
                                     <div className="md:col-span-4 flex gap-3">
                                         <button type="button" className="flex-1 h-11 bg-[#138C9F] text-white font-bold rounded-xl text-sm shadow-xs cursor-pointer">{t('medicalExamination.applyFilters')}</button>
-                                        <button type="button" onClick={() => setHistoryFilter({ date: '', diagnosis: '' })} className="flex-1 h-11 border-2 border-[#138C9F] text-[#138C9F] font-bold rounded-xl text-sm hover:bg-gray-50 dark:bg-gray-900 cursor-pointer">{t('medicalExamination.resetFilters')}</button>
+                                        <button type="button" onClick={() => setHistoryFilter({ date: '', diagnosis: '' })} className="flex-1 h-11 border-2 border-[#138C9F] text-[#138C9F] font-bold rounded-xl text-sm hover:bg-gray-50 dark:bg-gray-900 cursor-pointer dark:hover:bg-gray-800">{t('medicalExamination.resetFilters')}</button>
                                     </div>
                                 </div>
                             </div>
@@ -892,7 +892,7 @@ const MedicalExamination = () => {
                                 <p className="text-[10px] text-gray-400 dark:text-gray-500 mb-4">صالح حتى: {formatDateDdMmYyyy(qrExpiry)}</p>
                                 <div className="flex gap-2">
                                     <button onClick={() => window.open(qrUrl, '_blank')} className="flex-1 bg-[#138C9F] hover:bg-[#0f7282] text-white py-2.5 rounded-xl text-xs font-black transition-colors">{t('medicalExamination.openLink')}</button>
-                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors">{t('common.close')}</button>
+                                    <button onClick={() => setShowQrModal(false)} className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors dark:hover:bg-gray-700">{t('common.close')}</button>
                                 </div>
                             </div>
                         </div>

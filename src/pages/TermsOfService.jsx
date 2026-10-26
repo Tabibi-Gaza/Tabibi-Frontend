@@ -49,7 +49,7 @@ const TermsOfService = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-800 antialiased text-[#1e293b] dark:text-white pb-16" dir="rtl">
+        <div className="min-h-screen bg-white dark:bg-gray-800 antialiased text-[#1e293b] dark:text-white pb-16">
             <main className="max-w-[935px] w-full mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white dark:bg-gray-800">
 
                 {/* زر العودة للرئيسية */}
@@ -114,7 +114,7 @@ const TermsOfService = () => {
                     <button
                         onClick={() => navigate('/contact')}
                         type="button"
-                        className="w-full md:w-auto px-10 h-13 rounded-xl bg-white dark:bg-gray-800 text-[#318CA9] text-base font-extrabold shadow-xs hover:bg-slate-50 dark:bg-gray-900 active:scale-[0.99] transition-all duration-200 cursor-pointer whitespace-nowrap order-2 md:order-1"
+                        className="w-full md:w-auto px-10 h-13 rounded-xl bg-white dark:bg-gray-800 text-[#318CA9] text-base font-extrabold shadow-xs hover:bg-slate-50 dark:bg-gray-900 active:scale-[0.99] transition-all duration-200 cursor-pointer whitespace-nowrap order-2 md:order-1 dark:hover:bg-gray-800"
                     >
                         تواصل معنا
                     </button>

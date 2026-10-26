@@ -168,7 +168,7 @@ export default function AdminUserManagement() {
     const totalCountDisplay = totalCount;
 
     return (
-        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6">
             <div className="flex justify-between items-center w-full flex-wrap gap-2">
                 <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">
                     {t('adminUserManagement.title')}
@@ -240,7 +240,7 @@ export default function AdminUserManagement() {
                             {loading ? (
                                 <tr><td colSpan="5" className="px-6 py-10 text-center text-[#526069] dark:text-gray-400">{t('common.loading')}</td></tr>
                             ) : users.map((user) => (
-                                <tr key={user.id} className="hover:bg-slate-50 dark:bg-gray-900 transition-colors">
+                                <tr key={user.id} className="hover:bg-slate-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800">
                                     <td className="px-6 py-3 whitespace-nowrap">
                                         <div className="flex items-center gap-3">
                                             {showImg(user) ? (
@@ -295,23 +295,23 @@ export default function AdminUserManagement() {
                     </span>
                     {totalPages > 1 && (
                         <div className="flex items-center gap-1.5" dir="ltr">
-                            <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="w-8 h-8 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronLeft size={16} /></button>
+                            <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="w-8 h-8 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer dark:hover:bg-gray-800"><ChevronLeft size={16} /></button>
                             {[...Array(totalPages)].map((_, index) => {
                                 const pageNumber = index + 1;
                                 return (
                                     <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)} className={`w-8 h-8 rounded flex items-center justify-center text-[14px] cursor-pointer transition-colors ${currentPage === pageNumber ? 'bg-[#003D9B] text-white font-bold' : 'border border-transparent hover:border-gray-200 dark:border-gray-700 text-[#0B1C30] dark:text-white font-semibold'}`}>{pageNumber}</button>
                                 );
                             })}
-                            <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="w-8 h-8 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronRight size={16} /></button>
+                            <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="w-8 h-8 rounded border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer dark:hover:bg-gray-800"><ChevronRight size={16} /></button>
                         </div>
                     )}
                 </div>
             </div>
 
             {isModalOpen && selectedUser && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-fade-in" dir="rtl">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-fade-in">
                     <div className="bg-[#ecf8fa] dark:bg-gray-900 border border-[#C3C6D6] dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-3xl p-8 relative max-h-[90vh] overflow-y-auto">
-                        <button onClick={() => { setIsModalOpen(false); setUserDetails(null); }} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 transition-colors cursor-pointer">
+                        <button onClick={() => { setIsModalOpen(false); setUserDetails(null); }} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 transition-colors cursor-pointer dark:hover:bg-gray-700">
                             <X size={20} />
                         </button>
 

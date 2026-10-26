@@ -341,7 +341,7 @@ export default function Chats() {
                 filteredConversations.map((conv) => {
                   const isSelected = activeConversationId === conv.conversationId;
                   return (
-                    <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100 dark:bg-gray-800/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50 dark:bg-gray-900/50'}`}>
+                    <div key={conv.conversationId} onClick={() => handleSelectChat(conv.conversationId)} className={`group p-4 flex items-center gap-3 cursor-pointer transition-all duration-200 ${isSelected ? 'bg-slate-100 dark:bg-gray-800/80 border-r-4 border-r-[#1b8b99]' : 'hover:bg-slate-50 dark:bg-gray-900/50'} dark:hover:bg-gray-800`}>
                       <div className="relative shrink-0">
                         {conv.participantImageUrl ? (
                             <img loading="lazy" decoding="async" width="48" height="48" className="w-11 h-11 md:w-12 md:h-12 rounded-full object-cover object-top border border-gray-100" src={resolveImageUrl(conv.participantImageUrl)} alt={conv.participantName} />
@@ -529,7 +529,7 @@ export default function Chats() {
             <div className="flex border-t border-gray-100">
               <button
                 onClick={() => { setDeleteConfirmId(null); setDeleteConfirmName(''); }}
-                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors"
+                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800"
               >
                 إلغاء
               </button>
@@ -559,7 +559,7 @@ export default function Chats() {
             <div className="flex border-t border-gray-100">
               <button
                 onClick={() => setDeleteMsgConfirmId(null)}
-                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors"
+                className="flex-1 py-3 text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 transition-colors dark:hover:bg-gray-800"
               >
                 إلغاء
               </button>

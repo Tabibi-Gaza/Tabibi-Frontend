@@ -124,14 +124,14 @@ const MyPrescriptions = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center pt-20" dir="rtl">
+            <div className="min-h-screen flex items-center justify-center pt-20">
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#1b8b99]"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6" dir="rtl">
+        <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6">
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
                     <h1 className="text-2xl sm:text-3xl font-black text-[#0B1C30] dark:text-gray-200">{t('myPrescriptions.title')}</h1>
@@ -284,7 +284,7 @@ const MyPrescriptions = () => {
                     <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
                         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 px-6 py-4 flex items-center justify-between z-10">
                             <h3 className="text-lg font-black text-[#0B1C30] dark:text-gray-200">{t('myPrescriptions.prescriptionDetails')}</h3>
-                            <button onClick={() => setSelectedRx(null)} className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 cursor-pointer transition-all">
+                            <button onClick={() => setSelectedRx(null)} className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 cursor-pointer transition-all dark:hover:bg-gray-700">
                                 <FiX className="w-4 h-4 text-gray-500" />
                             </button>
                         </div>
@@ -367,7 +367,7 @@ const MyPrescriptions = () => {
                             </button>
                             <button
                                 onClick={() => setSelectedRx(null)}
-                                className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 text-sm font-bold hover:bg-gray-50 dark:bg-gray-900 transition-all cursor-pointer">
+                                className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 text-sm font-bold hover:bg-gray-50 dark:bg-gray-900 transition-all cursor-pointer dark:hover:bg-gray-800">
                                 {t('myPrescriptions.close')}
                             </button>
                         </div>
@@ -377,7 +377,7 @@ const MyPrescriptions = () => {
 
             {/* Hidden div for PDF generation */}
             {selectedRx && (
-                <div className="fixed -left-[9999px] top-0" dir="rtl">
+                <div className="fixed -left-[9999px] top-0">
                     <div ref={printRef} style={{ width: '560px', padding: '25px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30', position: 'relative', overflow: 'hidden' }}>
                         {/* Watermark — full page */}
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.07, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: 'rotate(-35deg)' }}>

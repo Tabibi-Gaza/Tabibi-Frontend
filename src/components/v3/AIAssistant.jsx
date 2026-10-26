@@ -318,7 +318,7 @@ const AIAssistant = () => {
                       {matchedDoctors.map((doc) => (
                         <div
                           key={doc.id}
-                          className="bg-white/10 hover:bg-white/15 rounded-xl p-3 flex items-center gap-3 transition-all"
+                          className="bg-white/10 hover:bg-white/15 rounded-xl p-3 flex items-center gap-3 transition-all dark:hover:bg-gray-700"
                         >
                           <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0 overflow-hidden">
                             {doc.profileImageUrl ? (

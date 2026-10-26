@@ -159,7 +159,7 @@ const AppointmentManagement = () => {
     };
 
     return (
-      <div className="space-y-6 md:space-y-8 w-full pb-8 relative" dir="rtl">
+      <div className="space-y-6 md:space-y-8 w-full pb-8 relative">
         <div className="space-y-6 text-right">
           <div className="text-right space-y-1">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#112240]">{t('appointmentManagement.title')}</h1>
@@ -226,7 +226,7 @@ const AppointmentManagement = () => {
                   <button onClick={() => { setAppliedDate(customDate); setCurrentPage(1); }}
                     className="text-sm font-bold px-5 py-2 rounded-xl bg-[#1b8b99] text-white hover:bg-[#15727e] transition-all cursor-pointer shadow-xs">{t('appointmentManagement.applyFilter')}</button>
                   <button onClick={() => { setCustomDate(''); setAppliedDate(''); setCurrentPage(1); }}
-                    className="flex items-center gap-1.5 text-sm font-bold px-5 py-2 rounded-xl border border-slate-200 dark:border-gray-700 text-slate-600 dark:text-gray-400 hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer">
+                    className="flex items-center gap-1.5 text-sm font-bold px-5 py-2 rounded-xl border border-slate-200 dark:border-gray-700 text-slate-600 dark:text-gray-400 hover:bg-slate-50 dark:bg-gray-900 transition-all cursor-pointer dark:hover:bg-gray-800">
                     <FiRotateCcw className="w-3.5 h-3.5" />{t('appointmentManagement.reset')}</button>
                 </div>
               </div>
@@ -253,7 +253,7 @@ const AppointmentManagement = () => {
                         const canStart = appt.status === 'Confirmed' || appt.status === 'InProgress';
                         const dt = formatDateTime(appt.startTime);
                         return (
-                           <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/30 transition-colors h-20 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                           <tr key={appt.id} className="hover:bg-slate-50 dark:bg-gray-900/30 transition-colors h-20 text-sm font-semibold text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800">
                             <td className="px-6">
                               <div className="flex items-center gap-3">
                                 <div className="relative shrink-0">
@@ -295,7 +295,7 @@ const AppointmentManagement = () => {
                     const canStart = appt.status === 'Confirmed' || appt.status === 'InProgress';
                     const dt = formatDateTime(appt.startTime);
                     return (
-                      <div key={appt.id} className="p-4 space-y-4 hover:bg-slate-50 dark:bg-gray-900/20 transition-all text-right">
+                      <div key={appt.id} className="p-4 space-y-4 hover:bg-slate-50 dark:bg-gray-900/20 transition-all text-right dark:hover:bg-gray-800">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="relative shrink-0">
@@ -340,17 +340,17 @@ const AppointmentManagement = () => {
               <p className="text-xs sm:text-sm font-bold text-gray-500">{t('appointmentManagement.showing')}<span className="text-gray-700 dark:text-gray-300">{appointments.length}</span>{t('appointmentManagement.ofTotal')}<span className="text-gray-700 dark:text-gray-300">{totalCount}</span>{t('appointmentManagement.appointment')}</p>
               <div className="flex items-center gap-1.5" dir="ltr">
                 <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-                  className={`w-8 h-8 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900 transition-colors ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}>
+                  className={`w-8 h-8 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900 transition-colors ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} dark:hover:bg-gray-800`}>
                   <FiChevronLeft className="w-4 h-4" />
                 </button>
                 {[...Array(totalPages)].map((_, i) => (
                   <button key={i + 1} onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center transition-all cursor-pointer ${currentPage === i + 1 ? "bg-[#1b8b99] text-white" : "border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50"}`}>
+                    className={`w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center transition-all cursor-pointer ${currentPage === i + 1 ? "bg-[#1b8b99] text-white" : "border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50"} dark:hover:bg-gray-800`}>
                     {i + 1}
                   </button>
                 ))}
                 <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
-                  className={`w-8 h-8 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900 transition-colors ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}>
+                  className={`w-8 h-8 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-slate-50 dark:bg-gray-900 transition-colors ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} dark:hover:bg-gray-800`}>
                   <FiChevronRight className="w-4 h-4" />
                 </button>
               </div>

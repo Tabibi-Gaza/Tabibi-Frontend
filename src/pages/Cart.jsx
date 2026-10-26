@@ -32,7 +32,7 @@ const Cart = () => {
   const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-28 pb-16 px-4" dir="rtl">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-28 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-black text-[#1e293b] dark:text-white mb-3">السلة</h1>

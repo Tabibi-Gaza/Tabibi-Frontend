@@ -371,7 +371,6 @@ const TabibiAssistant = () => {
 
       {open && (
         <div
-          dir="rtl"
           className="fixed left-3 bottom-32 z-[45] w-[calc(100vw-1.5rem)] max-w-[420px] h-[min(600px,calc(100dvh-9rem))] rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl flex flex-col overflow-hidden"
         >
           <div className="flex items-center gap-3 px-4 py-3.5 border-b border-gray-100 dark:border-gray-700 shrink-0">

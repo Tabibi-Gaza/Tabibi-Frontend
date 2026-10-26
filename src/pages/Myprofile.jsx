@@ -127,7 +127,6 @@ const Myprofile = () => {
     currentData && (
       <div
         className="w-full bg-white dark:bg-gray-800 p-6 md:pb-10 md:pr-10 md:pl-10 pt-40 "
-        dir="rtl"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-4  items-start">
           {/* 1. الجهة اليمنى: الصورة وزر الرفع  */}
@@ -341,7 +340,7 @@ const Myprofile = () => {
                             }}
                             className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm cursor-pointer transition-colors duration-100 ${isActive
                               ? "bg-[#e6f4f6] dark:bg-gray-800 text-[#1b8b99] font-bold"
-                              : "text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50"}`}
+                              : "text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-50"} dark:hover:bg-gray-800`}
                           >
                             <span className="text-lg leading-none">
                               <img

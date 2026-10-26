@@ -150,7 +150,7 @@ const DoctorNotifications = () => {
   const grouped = groupNotifications(notifications);
 
   return (
-    <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 p-4 md:p-8" dir="rtl">
+    <div className="min-h-screen bg-[#ecf8fa] dark:bg-gray-900 p-4 md:p-8">
       <div className="max-w-[900px] mx-auto bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl shadow-xs overflow-hidden">
 
         {/* Header */}

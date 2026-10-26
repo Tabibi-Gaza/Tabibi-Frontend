@@ -237,7 +237,7 @@ const MedicalHistory = () => {
 
     if (loading) {
         return (
-            <div className='flex justify-center items-center min-h-100 pt-40' dir='rtl'>
+            <div className='flex justify-center items-center min-h-100 pt-40'>
                 <div className='animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#138C9F]'></div>
                 <p className='mr-3 text-sm font-bold text-gray-500 dark:text-gray-400 dark:text-gray-500'>{t('medicalHistory.loading')}</p>
             </div>
@@ -247,7 +247,6 @@ const MedicalHistory = () => {
     return (
       <div
         className='max-w-5xl mx-auto p-4 sm:p-6 mt-40'
-        dir="rtl"
       >
         {/* واجهة العرض الافتراضية (View Mode) */}
         {!isEditing && (
@@ -318,7 +317,7 @@ const MedicalHistory = () => {
               <div className="p-6 space-y-6">
                 {/* الصف الأول: المؤشرات الحيوية وفصيلة الدم */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50">
+                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50 dark:hover:bg-gray-800">
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.bloodType')}
                     </p>
@@ -326,7 +325,7 @@ const MedicalHistory = () => {
                       {recordData.bloodType || t('medicalHistory.notSpecified')}
                     </p>
                   </div>
-                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50">
+                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50 dark:hover:bg-gray-800">
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.bloodPressure')}
                     </p>
@@ -334,7 +333,7 @@ const MedicalHistory = () => {
                       {recordData.vitals?.bloodPressure || "--/--"}
                     </p>
                   </div>
-                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50">
+                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50 dark:hover:bg-gray-800">
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.bloodSugar')}
                     </p>
@@ -344,7 +343,7 @@ const MedicalHistory = () => {
                         : "--"}
                     </p>
                   </div>
-                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50">
+                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50 dark:hover:bg-gray-800">
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.weight')}
                     </p>
@@ -354,7 +353,7 @@ const MedicalHistory = () => {
                         : "--"}
                     </p>
                   </div>
-                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50">
+                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50 dark:hover:bg-gray-800">
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.height')}
                     </p>
@@ -364,7 +363,7 @@ const MedicalHistory = () => {
                         : "--"}
                     </p>
                   </div>
-                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50">
+                  <div className="bg-slate-50 dark:bg-gray-900/60 border border-slate-100 dark:border-gray-700 p-4 rounded-2xl text-center transition-hover hover:bg-slate-50 dark:hover:bg-gray-800">
                     <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1">
                       {t('medicalHistory.smokingStatus')}
                     </p>
@@ -449,7 +448,7 @@ const MedicalHistory = () => {
                           recordData.currentMedicines.map((med, idx) => (
                             <tr
                               key={idx}
-                              className="hover:bg-slate-50 dark:bg-gray-900/40 border-b border-gray-50/60 transition-colors"
+                              className="hover:bg-slate-50 dark:bg-gray-900/40 border-b border-gray-50/60 transition-colors dark:hover:bg-gray-800"
                             >
                               <td className="p-3 md:p-4 font-extrabold text-[#138C9F]">
                                 {med.name}
@@ -801,7 +800,7 @@ const MedicalHistory = () => {
                 <button
                   type="button"
                   onClick={() => setIsEditing(false)}
-                  className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors"
+                  className="px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:bg-gray-900 text-xs font-black transition-colors dark:hover:bg-gray-800"
                 >
                   {t('medicalHistory.cancelAndReturn')}
                 </button>
@@ -838,7 +837,7 @@ const MedicalHistory = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => setShowEditWarning(false)}
-                  className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors"
+                  className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors dark:hover:bg-gray-700"
                 >
                   {t('medicalHistory.cancelEdit')}
                 </button>
@@ -876,7 +875,7 @@ const MedicalHistory = () => {
                 </button>
                 <button
                   onClick={() => setShowQrModal(false)}
-                  className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors"
+                  className="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-300 dark:text-gray-500 py-2.5 rounded-xl text-xs font-black transition-colors dark:hover:bg-gray-700"
                 >
                   {t('medicalHistory.close')}
                 </button>
@@ -887,7 +886,7 @@ const MedicalHistory = () => {
 
         {/* Hidden PDF template */}
         {recordData && (
-          <div className="fixed -left-[9999px] top-0" dir="rtl">
+          <div className="fixed -left-[9999px] top-0">
             <div ref={pdfRef} style={{ width: '794px', padding: '40px', fontFamily: 'Tajawal, Arial, sans-serif', background: '#fff', color: '#0B1C30' }}>
               <div style={{ textAlign: 'center', borderBottom: '3px solid #138C9F', paddingBottom: '20px', marginBottom: '25px' }}>
                 <h1 style={{ fontSize: '22px', fontWeight: '900', color: '#138C9F', margin: 0 }}>السجل المرضي الشخصي</h1>

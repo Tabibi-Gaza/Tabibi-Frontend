@@ -284,7 +284,7 @@ const DoctorProfile = () => {
     }, [isEdit]);
 
     return doctorData && (
-        <div className="w-full min-h-screen bg-[#ecf8fa] dark:bg-gray-900 py-5" dir="rtl">
+        <div className="w-full min-h-screen bg-[#ecf8fa] dark:bg-gray-900 py-5">
             <div className=" mx-auto px-6">
                 <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-2xl p-6 md:p-10 shadow-xs flex flex-col md:flex-row justify-start items-start gap-10">
 
@@ -612,7 +612,7 @@ const DoctorProfile = () => {
                                                         <button
                                                             type="button"
                                                             onClick={clearSignature}
-                                                            className="flex-1 py-2 px-4 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 transition-all"
+                                                            className="flex-1 py-2 px-4 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-500 hover:bg-gray-200 transition-all dark:hover:bg-gray-700"
                                                             disabled={loading}
                                                         >
                                                             مسح الرسم

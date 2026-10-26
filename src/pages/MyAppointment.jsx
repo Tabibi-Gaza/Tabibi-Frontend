@@ -110,7 +110,7 @@ const MyAppointment = () => {
   const past = appointments.filter(a => a.status === 'Completed' || a.status === 'Rejected');
 
   return (
-    <div className="w-full p-4 pt-40 max-w-5xl mx-auto text-right mb-16" dir="rtl">
+    <div className="w-full p-4 pt-40 max-w-5xl mx-auto text-right mb-16">
       <div className="flex justify-between items-center mb-8 pb-4">
         <div>
           <h1 className="text-2xl mb-3 font-bold text-gray-800 dark:text-gray-200">{t('appointment.myAppointments')}</h1>
@@ -181,7 +181,7 @@ const MyAppointment = () => {
                         </span>
                         <button
                           onClick={() => navigate(`/medical-files`)}
-                          className="text-gray-400 dark:text-gray-500 hover:text-[#138c9f] p-2 rounded-lg hover:bg-gray-50 dark:bg-gray-900 transition-all"
+                          className="text-gray-400 dark:text-gray-500 hover:text-[#138c9f] p-2 rounded-lg hover:bg-gray-50 dark:bg-gray-900 transition-all dark:hover:bg-gray-800"
                           title={t('appointment.viewDetails')}
                         >
                           <FontAwesomeIcon icon={faEye} className="text-sm" />
@@ -227,7 +227,7 @@ const MyAppointment = () => {
                       <div className="flex items-center gap-2 w-full md:w-auto justify-end">
                         <button
                           onClick={() => navigate(`/medical-files`)}
-                          className="text-gray-400 dark:text-gray-500 hover:text-[#138c9f] p-2 rounded-lg hover:bg-gray-50 dark:bg-gray-900 transition-all"
+                          className="text-gray-400 dark:text-gray-500 hover:text-[#138c9f] p-2 rounded-lg hover:bg-gray-50 dark:bg-gray-900 transition-all dark:hover:bg-gray-800"
                           title={t('appointment.viewDetails')}
                         >
                           <FontAwesomeIcon icon={faEye} className="text-sm" />

@@ -184,14 +184,14 @@ export default function AdminPaymentMethods() {
     };
 
     return (
-        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6" dir="rtl">
+        <div className="w-full bg-[#ecf8fa] dark:bg-gray-900 flex flex-col gap-6">
             <div className="flex justify-between items-center">
                 <h2 className="font-extrabold text-[32px] leading-[40px] tracking-[-0.64px] text-[#138C9F]">{t('adminPaymentMethods.title')}</h2>
             </div>
 
             <div className="flex gap-2 bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 rounded-xl p-1 w-full sm:w-fit overflow-x-auto">
-                <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'}`}>{t('adminPaymentMethods.paymentMethods')}</button>
-                <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'}`}>
+                <button onClick={() => setActiveTab('methods')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'methods' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'} dark:hover:bg-gray-800`}>{t('adminPaymentMethods.paymentMethods')}</button>
+                <button onClick={() => setActiveTab('payments')} className={`px-6 py-2.5 rounded-lg text-[14px] font-bold transition-colors cursor-pointer ${activeTab === 'payments' ? 'bg-[#138C9F] text-white' : 'text-[#526069] dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-900'} dark:hover:bg-gray-800`}>
                     مدفوعات الاشتراكات
                     {pendingPayments.length > 0 && (
                         <span className="mr-2 bg-red-500 text-white text-[11px] px-2 py-0.5 rounded-full">{pendingPayments.length}</span>
@@ -277,7 +277,7 @@ export default function AdminPaymentMethods() {
                                     </tr></thead>
                                     <tbody className="divide-y divide-[#C3C6D6]">
                                         {pendingPayments.map((payment) => (
-                                            <tr key={payment.id} className="h-[60px] hover:bg-slate-50">
+                                            <tr key={payment.id} className="h-[60px] hover:bg-slate-50 dark:hover:bg-gray-800">
                                                 <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30] dark:text-gray-200">{payment.doctorName}</td>
                                                 <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
                                                 <td className="px-6 py-3 text-[13px] text-[#526069] dark:text-gray-400 hidden md:table-cell">{payment.adminPaymentMethodName || payment.adminPaymentMethodType}</td>
@@ -313,7 +313,7 @@ export default function AdminPaymentMethods() {
                                 </tr></thead>
                                 <tbody className="divide-y divide-[#C3C6D6]">
                                     {allPayments.map((payment) => (
-                                        <tr key={payment.id} className="h-[55px] hover:bg-slate-50">
+                                        <tr key={payment.id} className="h-[55px] hover:bg-slate-50 dark:hover:bg-gray-800">
                                             <td className="px-6 py-3 font-semibold text-[14px] text-[#0B1C30] dark:text-gray-200">{payment.doctorName}</td>
                                             <td className="px-6 py-3 font-bold text-[14px] text-[#138C9F]">{payment.amount} ₪</td>
                                             <td className="px-6 py-3">
@@ -337,7 +337,7 @@ export default function AdminPaymentMethods() {
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-lg p-8 relative">
-                        <button onClick={resetForm} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
+                        <button onClick={resetForm} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"><X size={20} /></button>
                         <h3 className="font-extrabold text-[20px] text-[#0B1C30] dark:text-white mb-6">{editMode ? t('adminPaymentMethods.editPaymentMethod') : t('adminPaymentMethods.addNewPaymentMethod')}</h3>
                         <form onSubmit={handleSave} className="space-y-4">
                             <div className="flex gap-3">
@@ -374,7 +374,7 @@ export default function AdminPaymentMethods() {
                             )}
 
                             <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={resetForm} className="flex-1 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors cursor-pointer">إلغاء</button>
+                                <button type="button" onClick={resetForm} className="flex-1 h-[46px] border border-[#138C9F] text-[#138C9F] rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 transition-colors cursor-pointer dark:hover:bg-gray-800">إلغاء</button>
                                 <button type="submit" disabled={submitting} className="flex-1 h-[46px] bg-[#138C9F] text-white rounded-xl font-bold hover:bg-[#0f7282] transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50">
                                     {submitting && <Loader2 size={16} className="animate-spin" />}
                                     {editMode ? 'حفظ التعديلات' : t('adminPaymentMethods.add')}
@@ -388,11 +388,11 @@ export default function AdminPaymentMethods() {
             {rejectModal.open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
                     <div className="bg-white dark:bg-gray-800 border border-[#C3C6D6] dark:border-gray-700 shadow-2xl rounded-2xl w-full max-w-md p-8 relative">
-                        <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer"><X size={20} /></button>
+                        <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="absolute top-4 left-4 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-full hover:bg-gray-100 dark:bg-gray-800 cursor-pointer dark:hover:bg-gray-700"><X size={20} /></button>
                         <h3 className="font-extrabold text-[20px] text-[#0B1C30] dark:text-white mb-4">{t('adminPaymentMethods.rejectPayment')}</h3>
                         <textarea value={rejectModal.reason} onChange={e => setRejectModal(p => ({ ...p, reason: e.target.value }))} className="w-full h-24 px-4 py-3 border border-[#C3C6D6] dark:border-gray-700 rounded-xl text-[14px] focus:outline-none focus:border-[#138C9F] text-[#0B1C30] dark:text-white resize-none" placeholder={t('adminPaymentMethods.rejectionReason')} required />
                         <div className="flex gap-3 mt-4">
-                            <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 cursor-pointer">إلغاء</button>
+                            <button onClick={() => setRejectModal({ open: false, paymentId: null, reason: '' })} className="flex-1 h-[42px] border border-gray-300 text-gray-600 dark:text-gray-400 dark:text-gray-500 rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-900 cursor-pointer dark:hover:bg-gray-800">إلغاء</button>
                             <button onClick={handleReject} className="flex-1 h-[42px] bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 cursor-pointer">{t('adminPaymentMethods.rejectPayment')}</button>
                         </div>
                     </div>

@@ -50,7 +50,6 @@ const PlatformStats = () => {
       <div
         id="speciality"
         className='py-16 bg-[#ecf8fa] dark:bg-gray-900 border-y border-slate-200/60 dark:border-gray-700'
-        dir="rtl"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
