@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Eye, Trash2, Users, UserCheck, UserPlus, Ban, ChevronRight, ChevronLeft, X, User, Briefcase, Award, Download, ToggleLeft, ToggleRight, Stethoscope, Pill, Building2, FlaskConical } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
@@ -12,6 +12,7 @@ const ADMIN_EMAILS = ['admin@tabibi.com', 'Mazen@gmail.com'];
 const genderMap = { Male: 'ذكر', Female: 'أنثى', PreferNotToSay: 'يفضل عدم القول' };
 
 export default function AdminUserManagement() {
+  const actionRef = useRef(false);
     const { t } = useTranslation();
     const queryClient = useQueryClient();
     const [users, setUsers] = useState([]);
@@ -98,6 +99,8 @@ export default function AdminUserManagement() {
 
     const handleDeleteUser = async (user) => {
         if (!window.confirm(t('adminUserManagement.deleteConfirm'))) return;
+        if (actionRef.current) return;
+        actionRef.current = true;
         try {
             const { data } = await axiosInstance.delete(`/admin/users/${user.userId}`);
             if (data.succeeded) {
@@ -110,12 +113,16 @@ export default function AdminUserManagement() {
             }
         } catch (error) {
             toast.error(error.response?.data?.errors?.[0]?.message || t('adminUserManagement.deleteError'));
+        } finally {
+            actionRef.current = false;
         }
     };
 
     const handleToggleActivation = async (user) => {
         const action = user.isActive ? t('adminUserManagement.deactivate') : t('adminUserManagement.activate');
         if (!window.confirm(t('adminUserManagement.toggleConfirm', { action }))) return;
+        if (actionRef.current) return;
+        actionRef.current = true;
         try {
             const { data } = await axiosInstance.post('/admin/users/toggle-activation', { userId: user.userId });
             if (data.succeeded) {
@@ -131,6 +138,8 @@ export default function AdminUserManagement() {
             }
         } catch (error) {
             toast.error(error.response?.data?.errors?.[0]?.message || t('common.errorOccurred'));
+        } finally {
+            actionRef.current = false;
         }
     };
 

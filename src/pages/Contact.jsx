@@ -60,7 +60,6 @@ const Contact = () => {
     return (
       <main
         className="min-h-screen pt-30 dark:bg-gray-900 dark:text-gray-200"
-        style={{ direction: "rtl" }}
       >
         <div className="w-full max-w-[90%] md:max-w-[85%] mx-auto px-3 md:px-4">
           <div className="py-8 md:py-10 px-4 md:px-7.5 mt-0">

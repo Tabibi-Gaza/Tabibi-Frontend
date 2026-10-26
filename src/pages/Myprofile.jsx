@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState, useEffect } from 'react'
+﻿import React, { useContext, useState, useEffect, useRef } from 'react'
 import { assets } from '../assets/assets_frontend/assets'
 import { AppContext } from '../context/AppContext'
 import axiosInstance from '../api/axiosInstance'
@@ -7,6 +7,7 @@ import { COUNTRIES, DEFAULT_COUNTRY, phonePattern, phoneTitle, toNational, toSto
 import { useTranslation } from 'react-i18next'
 
 const Myprofile = () => {
+  const saveRef = useRef(false);
   // جلب البيانات ودوال المزامنة من الـ AppContext
   const { userData, setUserData, loadUserProfileData } = useContext(AppContext)
   const { t } = useTranslation()
@@ -36,6 +37,8 @@ const Myprofile = () => {
 
   // دالة حفظ التعديلات وإرسالها للـ Backend ثم مزامنتها فوراً في كل الموقع
   const updateUserProfileData = async () => {
+    if (saveRef.current) return;
+    saveRef.current = true;
     try {
       if (!localUserData.gender) {
         toast.error(t('profile.genderRequired'))
@@ -109,6 +112,8 @@ const Myprofile = () => {
     } catch (error) {
 
       toast.error(error.response?.data?.errors?.[0]?.message || error.message || t('profile.updateError'))
+    } finally {
+      saveRef.current = false;
     }
   }
 

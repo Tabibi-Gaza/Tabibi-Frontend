@@ -104,7 +104,7 @@ const Appointment = () => {
 
   if (loadingFallback) {
     return (
-      <div className="text-center mt-10 pt-40 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-sans" style={{ direction: "rtl" }}>
+      <div className="text-center mt-10 pt-40 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-sans">
         جاري تحميل بيانات الطبيب...
       </div>
     );
@@ -112,7 +112,7 @@ const Appointment = () => {
 
   if (!docInfo) {
     return (
-      <div className="text-center mt-10 pt-40 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-sans" style={{ direction: "rtl" }}>
+      <div className="text-center mt-10 pt-40 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-sans">
         الطبيب غير موجود
       </div>
     );

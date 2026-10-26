@@ -148,7 +148,7 @@ export default function AdminContactUs() {
     const filteredMessages = messages;
 
     return (
-        <div className="w-full  bg-[#ecf8fa] dark:bg-gray-900/20 flex flex-col gap-6" style={{ direction: 'rtl' }}>
+        <div className="w-full  bg-[#ecf8fa] dark:bg-gray-900/20 flex flex-col gap-6">
             <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 w-full">
                 <div className="flex flex-col gap-1">
                     <h2 className="font-extrabold text-[32px] leading-10 text-[#138C9F]">

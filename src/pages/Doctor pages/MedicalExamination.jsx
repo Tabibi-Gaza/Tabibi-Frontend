@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { QRCodeCanvas } from 'qrcode.react';
@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 const FILES_URL = import.meta.env.VITE_Files_URL || "";
 
 const MedicalExamination = () => {
+  const saveRef = useRef(false);
     const { t } = useTranslation();
     const { id } = useParams();
     const navigate = useNavigate();
@@ -213,6 +214,8 @@ const MedicalExamination = () => {
     };
 
     const handleSaveExamination = async () => {
+        if (saveRef.current) return;
+        saveRef.current = true;
         try {
             const payload = {
                 patientId: id,
@@ -260,6 +263,8 @@ const MedicalExamination = () => {
         } catch (err) {
 
             toast.error(t('medicalExamination.saveError'));
+        } finally {
+            saveRef.current = false;
         }
     };
 

@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { secretaryService } from '../../services/secretaryService';
 import { faPlus, faTrash, faShieldHalved, faUserTie, faEnvelope, faToggleOn, faToggleOff, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ const PERMISSIONS_LIST = [
 ];
 
 const SecretaryManagement = () => {
+  const saveRef = useRef(false);
     const [secretaries, setSecretaries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState('');
@@ -76,6 +77,8 @@ const SecretaryManagement = () => {
     };
 
     const handleSavePermissions = async (secretaryId) => {
+        if (saveRef.current) return;
+        saveRef.current = true;
         try {
             const { data } = await secretaryService.updatePermissions(secretaryId, editPermissions);
             if (data.succeeded) {
@@ -85,6 +88,8 @@ const SecretaryManagement = () => {
             }
         } catch {
             toast.error('فشل تحديث الصلاحيات');
+        } finally {
+            saveRef.current = false;
         }
     };
 
