@@ -3,6 +3,7 @@ import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import TabibiAssistant from './components/TabibiAssistant'
+import SEOManager from './components/SEOManager'
 import { useNotificationSignalR } from './hooks/notifications/useNotificationSignalR'
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { setOnAuthFailure } from './api/axiosInstance';
@@ -194,6 +195,7 @@ const App = () => {
   
   return (
     <ErrorBoundary>
+    <SEOManager />
     <ThemeProvider>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
