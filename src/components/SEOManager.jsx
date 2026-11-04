@@ -77,7 +77,7 @@ const SEO_CONFIG = {
   },
 };
 
-const NOINDEX_PREFIXES = ['/admin', '/doctor', '/pharmacy-dashboard', '/lab-dashboard', '/medical-center-dashboard', '/my-', '/medical-history', '/chats', '/financial-transactions', '/favorites', '/cart', '/notifications', '/medical-files', '/my-prescriptions', '/appointment/', '/payment/', '/qr/'];
+const NOINDEX_PREFIXES = ['/admin', '/doctor', '/pharmacy-dashboard', '/lab-dashboard', '/medical-center-dashboard', '/my-', '/medical-history', '/chats', '/financial-transactions', '/favorites', '/cart', '/notifications', '/medical-files', '/my-prescriptions', '/appointment/', '/payment/', '/qr/', '/change-password'];
 
 function matchConfig(pathname) {
   if (SEO_CONFIG[pathname]) return SEO_CONFIG[pathname];

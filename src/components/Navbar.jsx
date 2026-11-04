@@ -413,6 +413,15 @@ const Navbar = () => {
                     >
                       {t('nav.cart')}
                     </p>
+                    <p
+                      onClick={() => {
+                        navigate("/change-password");
+                        setShowProfileMenu(false);
+                      }}
+                      className="hover:bg-gray-50 hover:text-[#138C9F] px-4 py-2 rounded-lg transition-colors cursor-pointer text-right text-xs sm:text-sm dark:hover:bg-gray-800"
+                    >
+                      {t('nav.changePassword')}
+                    </p>
                     <hr className="my-1 border-gray-100" />
                     <p
                       onClick={() => {

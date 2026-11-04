@@ -1,4 +1,4 @@
-{
+﻿{
   "doctorNav": {
     "dashboard": "Dashboard",
     "appointments": "Appointment Management",
@@ -30,6 +30,7 @@
   },
   "adminNav": {
     "dashboard": "Dashboard",
+    "changePassword": "Change Password",
     "users": "Users",
     "departments": "Departments",
     "joinRequests": "Join Requests",
@@ -54,6 +55,7 @@
     "about": "About",
     "contact": "Contact",
     "login": "Get Started",
+    "changePassword": "Change Password",
     "logout": "Logout",
     "profile": "My Profile",
     "appointments": "My Appointments",

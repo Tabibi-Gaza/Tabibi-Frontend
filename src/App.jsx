@@ -55,6 +55,7 @@ const Contact = lazy(() => import('./pages/Contact'))
 const MyAppointment = lazy(() => import('./pages/MyAppointment'))
 const MyPrescriptions = lazy(() => import('./pages/MyPrescriptions'))
 const Myprofile = lazy(() => import('./pages/Myprofile'))
+const PatientChangePassword = lazy(() => import('./pages/PatientChangePassword'))
 const Appointment = lazy(() => import('./pages/Appointment'))
 const PrivacyPolicy = lazy(() => import('./pages/privacyPolicy'))
 const TermsOfService = lazy(() => import('./pages/TermsOfService'))
@@ -74,6 +75,7 @@ const AdminChats = lazy(() => import('./pages/Admin pages/AdminChats'))
 const AdminFinancialTransactions = lazy(() => import('./pages/Admin pages/AdminFinancialTransactions'))
 const AdminPaymentMethods = lazy(() => import('./pages/Admin pages/AdminPaymentMethods'))
 const AdminContactUs = lazy(() => import('./pages/Admin pages/AdminContactUs'))
+const AdminChangePassword = lazy(() => import('./pages/Admin pages/AdminChangePassword'))
 const DoctorDashboard = lazy(() => import('./pages/Doctor pages/DoctorDashboard'))
 const DoctorNotifications = lazy(() => import('./components/Doctor/DoctorNotifications'))
 const DoctorProfile = lazy(() => import('./pages/Doctor pages/DoctorProfile'))
@@ -171,6 +173,7 @@ const UserLayout = () => {
           <Route path='/financial-transactions' element={<FinancialTransactions />} />
           <Route path='/my-appointment' element={<MyAppointment />} />
           <Route path='/my-profile' element={<Myprofile />} />
+          <Route path='/change-password' element={<PatientChangePassword />} />
           <Route path='/register-doctor' element={<RegisterAsDoctor />} />
           <Route path='/register-facility' element={<RegisterFacility />} />
           <Route path='/medical-files' element={<PatientMedicalFile />} />
@@ -202,6 +205,7 @@ const App = () => {
           <Route element={<AdminLayout />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/admin/profile" element={<AdminProfile />} />
+            <Route path="/admin/change-password" element={<AdminChangePassword />} />
             <Route path="/admin/notifications" element={<AdminNotifications />} />
             <Route path="/admin/users-management" element={<AdminUserManagement />} />
             <Route path="/admin/departments-management" element={<AdminDepartmentsManagement />} />

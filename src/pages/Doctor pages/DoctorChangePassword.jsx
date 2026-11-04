@@ -39,13 +39,12 @@ const DoctorChangePassword = () => {
         }
         setLoading(true);
         try {
-            const formData = new FormData();
-            formData.append('OldPassword', oldPassword);
-            formData.append('NewPassword', newPassword);
-            formData.append('ConfirmNewPassword', confirmPassword);
-
             const { default: axiosInstance } = await import('../../api/axiosInstance');
-            await axiosInstance.post('/doctor/profile/change-password', formData);
+            await axiosInstance.post('/doctor/profile/change-password', {
+                OldPassword: oldPassword,
+                NewPassword: newPassword,
+                ConfirmNewPassword: confirmPassword,
+            });
             toast.success(t('doctorChangePassword.changeSuccess'));
             navigate('/doctor/profile');
         } catch (err) {

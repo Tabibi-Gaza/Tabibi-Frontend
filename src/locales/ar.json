@@ -1,4 +1,4 @@
-{
+﻿{
   "doctorNav": {
     "dashboard": "لوحة التحكم",
     "appointments": "إدارة المواعيد",
@@ -30,6 +30,7 @@
   },
   "adminNav": {
     "dashboard": "لوحة التحكم",
+    "changePassword": "تغيير كلمة المرور",
     "users": "المستخدمين",
     "departments": "الأقسام",
     "joinRequests": "طلبات الإنضمام",
@@ -54,6 +55,7 @@
     "about": "من نحن",
     "contact": "تواصل معنا",
     "login": "ابدأ الآن",
+    "changePassword": "تغيير كلمة المرور",
     "logout": "تسجيل الخروج",
     "profile": "ملفي الشخصي",
     "appointments": "حجوزاتي",

@@ -11,6 +11,7 @@ import {
   MessageSquare,
   TrendingUp,
   Mail,
+  Lock,
   LogOut,
   CreditCard,
 } from 'lucide-react';
@@ -61,6 +62,11 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       name: t('adminNav.dashboard'),
       path: '/admin-dashboard',
       icon: <LayoutDashboard size={20} strokeWidth={1.75} />,
+    },
+    {
+      name: t('adminNav.changePassword'),
+      path: '/admin/change-password',
+      icon: <Lock size={20} strokeWidth={1.75} />,
     },
   ];
 
